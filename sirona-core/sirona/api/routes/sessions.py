@@ -128,6 +128,68 @@ async def fork_session(request: Request, session_id: str, message_id: int):
 
     return {"new_session_id": new_sess.id, "forked_from": session_id}
 
+class BranchSessionRequest(BaseModel):
+    through_message_id: Optional[int] = None
+    new_title: Optional[str] = None
+    reason: Optional[str] = "user_branch"
+
+class RewindSessionRequest(BaseModel):
+    to_message_id: int
+
+class CreateCheckpointRequest(BaseModel):
+    message_id: Optional[int] = None
+    summary: Optional[str] = None
+    state_data: Optional[str] = None
+
+@router.post("/api/sessions/{session_id}/branch")
+async def branch_session(request: Request, session_id: str, body: BranchSessionRequest):
+    repo = request.app.state.session_repo
+    child = await repo.branch_session(
+        source_session_id=session_id,
+        through_message_id=body.through_message_id,
+        new_title=body.new_title,
+        reason=body.reason
+    )
+    if not child:
+        raise HTTPException(status_code=404, detail="Source session not found")
+    return {"session": child}
+
+@router.post("/api/sessions/{session_id}/rewind")
+async def rewind_session(request: Request, session_id: str, body: RewindSessionRequest):
+    repo = request.app.state.session_repo
+    success = await repo.rewind_session(session_id=session_id, to_message_id=body.to_message_id)
+    if not success:
+        raise HTTPException(status_code=400, detail="Rewind failed or session not found")
+    return {"success": True, "session_id": session_id, "rewound_to": body.to_message_id}
+
+@router.get("/api/messages/search")
+async def search_messages(
+    request: Request,
+    q: str = Query(..., min_length=1),
+    session_id: Optional[str] = None,
+    limit: int = Query(50, ge=1, le=200)
+):
+    repo = request.app.state.message_repo
+    results = await repo.search_messages(query_text=q, session_id=session_id, limit=limit)
+    return {"results": results, "total": len(results)}
+
+@router.get("/api/sessions/{session_id}/checkpoints")
+async def list_checkpoints(request: Request, session_id: str):
+    repo = request.app.state.checkpoint_repo
+    checkpoints = await repo.get_checkpoints(session_id)
+    return {"checkpoints": checkpoints, "total": len(checkpoints)}
+
+@router.post("/api/sessions/{session_id}/checkpoints")
+async def create_checkpoint(request: Request, session_id: str, body: CreateCheckpointRequest):
+    repo = request.app.state.checkpoint_repo
+    checkpoint = await repo.create_checkpoint(
+        session_id=session_id,
+        message_id=body.message_id,
+        summary=body.summary,
+        state_data=body.state_data
+    )
+    return {"checkpoint": checkpoint}
+
 @router.post("/api/sessions/{session_id}/chat")
 async def chat_session(request: Request, session_id: str, body: ChatPromptRequest):
     from ..websocket.events import broadcaster

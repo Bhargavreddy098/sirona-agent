@@ -4,6 +4,8 @@ from .migrations import init_db
 from .sessions import SessionRepository
 from .messages import MessageRepository
 from .projects import ProjectRepository
+from .checkpoints import CheckpointRepository
+from .settings import SettingsRepository
 
 __all__ = [
     "DatabaseManager",
@@ -11,4 +13,6 @@ __all__ = [
     "SessionRepository",
     "MessageRepository",
     "ProjectRepository",
+    "CheckpointRepository",
+    "SettingsRepository",
 ]

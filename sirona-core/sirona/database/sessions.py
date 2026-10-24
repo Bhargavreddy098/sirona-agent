@@ -1,6 +1,6 @@
 import time
 import uuid
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Any, Dict
 from pydantic import BaseModel, Field
 from .connection import DatabaseManager
 
@@ -13,6 +13,7 @@ class SessionRecord(BaseModel):
     model_settings: Optional[str] = Field(default=None, alias="model_config")
     system_prompt: Optional[str] = None
     parent_session_id: Optional[str] = None
+    branch_point_id: Optional[str] = None
     cwd: Optional[str] = None
     git_branch: Optional[str] = None
     git_repo_root: Optional[str] = None
@@ -26,6 +27,12 @@ class SessionRecord(BaseModel):
     pinned: int = 0
     archived: int = 0
     hidden: int = 0
+    reasoning_effort: str = "medium"
+    project_id: Optional[str] = None
+    profile: str = "default"
+    revision: int = 1
+    deleted_at: Optional[float] = None
+    checkpoint_id: Optional[str] = None
 
 class SessionRepository:
     def __init__(self, db_mgr: DatabaseManager):
@@ -37,40 +44,56 @@ class SessionRepository:
         model: str = "gemini-2.5-flash",
         cwd: Optional[str] = None,
         parent_session_id: Optional[str] = None,
-        system_prompt: Optional[str] = None
+        branch_point_id: Optional[str] = None,
+        system_prompt: Optional[str] = None,
+        reasoning_effort: str = "medium",
+        project_id: Optional[str] = None,
+        profile: str = "default",
+        session_id: Optional[str] = None,
     ) -> SessionRecord:
-        session_id = f"sess_{uuid.uuid4().hex[:12]}"
+        sid = session_id or f"sess_{uuid.uuid4().hex[:12]}"
         now = time.time()
         record = SessionRecord(
-            id=session_id,
+            id=sid,
             title=title,
             model=model,
             cwd=cwd,
             parent_session_id=parent_session_id,
+            branch_point_id=branch_point_id,
             system_prompt=system_prompt,
+            reasoning_effort=reasoning_effort,
+            project_id=project_id,
+            profile=profile,
             started_at=now,
             last_activity_at=now,
+            revision=1,
         )
         async with self.db_mgr.acquire() as db:
             await db.execute(
                 """
                 INSERT INTO sessions (
-                    id, source, title, model, cwd, parent_session_id, system_prompt,
-                    started_at, last_activity_at, pinned, archived, hidden
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0)
+                    id, source, title, model, cwd, parent_session_id, branch_point_id,
+                    system_prompt, reasoning_effort, project_id, profile, started_at,
+                    last_activity_at, pinned, archived, hidden, revision
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 1)
                 """,
                 (
                     record.id, record.source, record.title, record.model, record.cwd,
-                    record.parent_session_id, record.system_prompt, record.started_at,
-                    record.last_activity_at
+                    record.parent_session_id, record.branch_point_id, record.system_prompt,
+                    record.reasoning_effort, record.project_id, record.profile,
+                    record.started_at, record.last_activity_at
                 )
             )
             await db.commit()
         return record
 
-    async def get_session(self, session_id: str) -> Optional[SessionRecord]:
+    async def get_session(self, session_id: str, include_deleted: bool = False) -> Optional[SessionRecord]:
+        query = "SELECT * FROM sessions WHERE id = ?"
+        if not include_deleted:
+            query += " AND deleted_at IS NULL"
+
         async with self.db_mgr.acquire() as db:
-            async with db.execute("SELECT * FROM sessions WHERE id = ?", (session_id,)) as cursor:
+            async with db.execute(query, (session_id,)) as cursor:
                 row = await cursor.fetchone()
                 if not row:
                     return None
@@ -83,10 +106,14 @@ class SessionRepository:
         pinned: Optional[bool] = None,
         archived: Optional[bool] = None,
         model: Optional[str] = None,
-        cwd: Optional[str] = None
+        cwd: Optional[str] = None,
+        reasoning_effort: Optional[str] = None,
+        project_id: Optional[str] = None,
+        checkpoint_id: Optional[str] = None,
+        expected_revision: Optional[int] = None,
     ) -> Optional[SessionRecord]:
         updates = []
-        params = []
+        params: List[Any] = []
         now = time.time()
 
         if title is not None:
@@ -104,104 +131,206 @@ class SessionRepository:
         if cwd is not None:
             updates.append("cwd = ?")
             params.append(cwd)
+        if reasoning_effort is not None:
+            updates.append("reasoning_effort = ?")
+            params.append(reasoning_effort)
+        if project_id is not None:
+            updates.append("project_id = ?")
+            params.append(project_id)
+        if checkpoint_id is not None:
+            updates.append("checkpoint_id = ?")
+            params.append(checkpoint_id)
 
         if not updates:
             return await self.get_session(session_id)
 
         updates.append("last_activity_at = ?")
         params.append(now)
+        updates.append("revision = revision + 1")
+
+        sql = f"UPDATE sessions SET {', '.join(updates)} WHERE id = ? AND deleted_at IS NULL"
         params.append(session_id)
 
-        query = f"UPDATE sessions SET {', '.join(updates)} WHERE id = ?"
+        if expected_revision is not None:
+            sql += " AND revision = ?"
+            params.append(expected_revision)
+
         async with self.db_mgr.acquire() as db:
-            await db.execute(query, params)
+            cursor = await db.execute(sql, tuple(params))
             await db.commit()
+            if cursor.rowcount == 0 and expected_revision is not None:
+                raise ValueError(f"Session CAS revision conflict: expected revision {expected_revision}")
 
         return await self.get_session(session_id)
 
-    async def list_sessions(
-        self,
-        limit: int = 50,
-        offset: int = 0,
-        pinned: Optional[bool] = None,
-        archived: Optional[bool] = None
-    ) -> Tuple[List[SessionRecord], int]:
-        filters = ["hidden = 0"]
-        params = []
-
-        if pinned is not None:
-            filters.append("pinned = ?")
-            params.append(1 if pinned else 0)
-        if archived is not None:
-            filters.append("archived = ?")
-            params.append(1 if archived else 0)
-
-        where_clause = f"WHERE {' AND '.join(filters)}"
-
+    async def delete_session(self, session_id: str, soft: bool = True) -> bool:
         async with self.db_mgr.acquire() as db:
-            count_query = f"SELECT COUNT(*) FROM sessions {where_clause}"
-            async with db.execute(count_query, params) as cursor:
-                total_row = await cursor.fetchone()
-                total = total_row[0] if total_row else 0
-
-            list_query = f"""
-                SELECT * FROM sessions {where_clause}
-                ORDER BY pinned DESC, last_activity_at DESC
-                LIMIT ? OFFSET ?
-            """
-            async with db.execute(list_query, (*params, limit, offset)) as cursor:
-                rows = await cursor.fetchall()
-                sessions = [SessionRecord(**dict(r)) for r in rows]
-
-        return sessions, total
-
-    async def delete_session(self, session_id: str) -> bool:
-        async with self.db_mgr.acquire() as db:
-            cursor = await db.execute("DELETE FROM sessions WHERE id = ?", (session_id,))
+            if soft:
+                cursor = await db.execute(
+                    "UPDATE sessions SET deleted_at = ? WHERE id = ? AND deleted_at IS NULL",
+                    (time.time(), session_id)
+                )
+            else:
+                cursor = await db.execute("DELETE FROM sessions WHERE id = ?", (session_id,))
             await db.commit()
             return cursor.rowcount > 0
 
+    async def list_sessions(
+        self,
+        pinned: Optional[bool] = None,
+        archived: Optional[bool] = None,
+        project_id: Optional[str] = None,
+        profile: Optional[str] = None,
+        search: Optional[str] = None,
+        limit: int = 50,
+        offset: int = 0
+    ) -> Tuple[List[SessionRecord], int]:
+        conditions = ["deleted_at IS NULL"]
+        params: List[Any] = []
+
+        if pinned is not None:
+            conditions.append("pinned = ?")
+            params.append(1 if pinned else 0)
+        if archived is not None:
+            conditions.append("archived = ?")
+            params.append(1 if archived else 0)
+        if project_id is not None:
+            conditions.append("project_id = ?")
+            params.append(project_id)
+        if profile is not None:
+            conditions.append("profile = ?")
+            params.append(profile)
+        if search:
+            conditions.append("(title LIKE ? OR id LIKE ?)")
+            params.append(f"%{search}%")
+            params.append(f"%{search}%")
+
+        where_clause = " WHERE " + " AND ".join(conditions)
+
+        async with self.db_mgr.acquire() as db:
+            # Count total
+            async with db.execute(f"SELECT COUNT(*) FROM sessions{where_clause}", tuple(params)) as c:
+                total_row = await c.fetchone()
+                total = total_row[0] if total_row else 0
+
+            # Fetch rows
+            query = f"""
+                SELECT * FROM sessions
+                {where_clause}
+                ORDER BY pinned DESC, last_activity_at DESC
+                LIMIT ? OFFSET ?
+            """
+            params.extend([limit, offset])
+            async with db.execute(query, tuple(params)) as cursor:
+                rows = await cursor.fetchall()
+                sessions = [SessionRecord(**dict(row)) for row in rows]
+
+        return sessions, total
+
     async def branch_session(
         self,
-        parent_id: str,
-        title: Optional[str] = None,
-        through_message_id: Optional[int] = None
+        source_session_id: str,
+        through_message_id: Optional[int] = None,
+        new_title: Optional[str] = None,
+        reason: Optional[str] = "user_branch"
     ) -> Optional[SessionRecord]:
-        parent = await self.get_session(parent_id)
-        if not parent:
+        source = await self.get_session(source_session_id)
+        if not source:
             return None
-        new_title = title or f"{parent.title} (fork)"
-        new_sess = await self.create_session(
-            title=new_title,
-            model=parent.model,
-            cwd=parent.cwd,
-            parent_session_id=parent_id,
-            system_prompt=parent.system_prompt
+
+        title = new_title or f"Branch: {source.title}"
+        branch_point_id = str(through_message_id) if through_message_id else None
+
+        child = await self.create_session(
+            title=title,
+            model=source.model,
+            cwd=source.cwd,
+            parent_session_id=source_session_id,
+            branch_point_id=branch_point_id,
+            system_prompt=source.system_prompt,
+            reasoning_effort=source.reasoning_effort,
+            project_id=source.project_id,
+            profile=source.profile,
         )
+
+        now = time.time()
         async with self.db_mgr.acquire() as db:
-            filter_clause = "AND id <= ?" if through_message_id else ""
-            query_params = (parent_id, through_message_id) if through_message_id else (parent_id,)
-            await db.execute(
-                f"""
-                INSERT INTO messages (
-                    session_id, role, content, tool_call_id, tool_calls, tool_name,
-                    timestamp, token_count, finish_reason, reasoning, active, compacted
-                )
-                SELECT ?, role, content, tool_call_id, tool_calls, tool_name,
-                       timestamp, token_count, finish_reason, reasoning, active, compacted
-                FROM messages
-                WHERE session_id = ? AND active = 1 {filter_clause}
-                ORDER BY timestamp ASC, id ASC
-                """,
-                (new_sess.id, *query_params)
-            )
+            # Record in lineage table
             await db.execute(
                 """
-                UPDATE sessions
-                SET message_count = (SELECT COUNT(*) FROM messages WHERE session_id = ?)
-                WHERE id = ?
+                INSERT INTO session_lineage (
+                    child_session_id, parent_session_id, branch_message_id, branch_reason, branched_at
+                ) VALUES (?, ?, ?, ?, ?)
                 """,
-                (new_sess.id, new_sess.id)
+                (child.id, source_session_id, through_message_id, reason, now)
+            )
+
+            # Copy messages up to through_message_id
+            if through_message_id:
+                await db.execute(
+                    """
+                    INSERT INTO messages (
+                        session_id, role, content, tool_call_id, tool_calls, tool_name,
+                        tool_args, tool_result, timestamp, token_count, finish_reason,
+                        reasoning, reasoning_content, api_content, display_kind, active, compacted
+                    )
+                    SELECT
+                        ?, role, content, tool_call_id, tool_calls, tool_name,
+                        tool_args, tool_result, timestamp, token_count, finish_reason,
+                        reasoning, reasoning_content, api_content, display_kind, active, compacted
+                    FROM messages
+                    WHERE session_id = ? AND id <= ? AND active = 1
+                    ORDER BY id ASC
+                    """,
+                    (child.id, source_session_id, through_message_id)
+                )
+            else:
+                await db.execute(
+                    """
+                    INSERT INTO messages (
+                        session_id, role, content, tool_call_id, tool_calls, tool_name,
+                        tool_args, tool_result, timestamp, token_count, finish_reason,
+                        reasoning, reasoning_content, api_content, display_kind, active, compacted
+                    )
+                    SELECT
+                        ?, role, content, tool_call_id, tool_calls, tool_name,
+                        tool_args, tool_result, timestamp, token_count, finish_reason,
+                        reasoning, reasoning_content, api_content, display_kind, active, compacted
+                    FROM messages
+                    WHERE session_id = ? AND active = 1
+                    ORDER BY id ASC
+                    """,
+                    (child.id, source_session_id)
+                )
+
+            # Update child message count
+            async with db.execute("SELECT COUNT(*) FROM messages WHERE session_id = ?", (child.id,)) as c:
+                row = await c.fetchone()
+                cnt = row[0] if row else 0
+
+            await db.execute("UPDATE sessions SET message_count = ? WHERE id = ?", (cnt, child.id))
+            await db.commit()
+
+        return await self.get_session(child.id)
+
+    async def rewind_session(self, session_id: str, to_message_id: int) -> bool:
+        now = time.time()
+        async with self.db_mgr.acquire() as db:
+            # Deactivate messages past to_message_id
+            cursor = await db.execute(
+                "UPDATE messages SET active = 0 WHERE session_id = ? AND id > ?",
+                (session_id, to_message_id)
+            )
+            # Recompute active count
+            async with db.execute(
+                "SELECT COUNT(*) FROM messages WHERE session_id = ? AND active = 1", (session_id,)
+            ) as c:
+                row = await c.fetchone()
+                cnt = row[0] if row else 0
+
+            await db.execute(
+                "UPDATE sessions SET message_count = ?, last_activity_at = ?, revision = revision + 1 WHERE id = ?",
+                (cnt, now, session_id)
             )
             await db.commit()
-        return await self.get_session(new_sess.id)
+            return cursor.rowcount > 0

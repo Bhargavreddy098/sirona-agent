@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS schema_version (
     applied_at REAL NOT NULL
 );
 
+-- Primary Sessions Table (65 Hermes-parity properties)
 CREATE TABLE IF NOT EXISTS sessions (
     id TEXT PRIMARY KEY,
     source TEXT NOT NULL DEFAULT 'desktop',
@@ -18,6 +19,7 @@ CREATE TABLE IF NOT EXISTS sessions (
     model_config TEXT,
     system_prompt TEXT,
     parent_session_id TEXT,
+    branch_point_id TEXT,
     cwd TEXT,
     git_branch TEXT,
     git_repo_root TEXT,
@@ -31,9 +33,20 @@ CREATE TABLE IF NOT EXISTS sessions (
     pinned INTEGER NOT NULL DEFAULT 0,
     archived INTEGER NOT NULL DEFAULT 0,
     hidden INTEGER NOT NULL DEFAULT 0,
+    reasoning_effort TEXT DEFAULT 'medium',
+    project_id TEXT,
+    profile TEXT DEFAULT 'default',
+    revision INTEGER NOT NULL DEFAULT 1,
+    deleted_at REAL,
+    checkpoint_id TEXT,
     FOREIGN KEY (parent_session_id) REFERENCES sessions(id) ON DELETE SET NULL
 );
 
+CREATE INDEX IF NOT EXISTS idx_sessions_active ON sessions(deleted_at, archived, last_activity_at DESC);
+CREATE INDEX IF NOT EXISTS idx_sessions_project ON sessions(project_id, deleted_at);
+CREATE INDEX IF NOT EXISTS idx_sessions_parent ON sessions(parent_session_id);
+
+-- Primary Messages Table
 CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     session_id TEXT NOT NULL REFERENCES sessions(id) ON DELETE CASCADE,
@@ -42,6 +55,8 @@ CREATE TABLE IF NOT EXISTS messages (
     tool_call_id TEXT,
     tool_calls TEXT,
     tool_name TEXT,
+    tool_args TEXT,
+    tool_result TEXT,
     timestamp REAL NOT NULL,
     token_count INTEGER DEFAULT 0,
     finish_reason TEXT,
@@ -50,10 +65,13 @@ CREATE TABLE IF NOT EXISTS messages (
     api_content TEXT,
     display_kind TEXT DEFAULT 'normal',
     active INTEGER NOT NULL DEFAULT 1,
-    compacted INTEGER NOT NULL DEFAULT 0
+    compacted INTEGER NOT NULL DEFAULT 0,
+    checkpoint_id TEXT,
+    metadata TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_messages_session ON messages(session_id, timestamp);
+CREATE INDEX IF NOT EXISTS idx_messages_active ON messages(session_id, active, timestamp);
 
 -- FTS5 Full-Text Search for Messages
 CREATE VIRTUAL TABLE IF NOT EXISTS messages_fts USING fts5(
@@ -101,6 +119,34 @@ CREATE TABLE IF NOT EXISTS project_folders (
     is_primary INTEGER NOT NULL DEFAULT 0,
     added_at REAL NOT NULL,
     PRIMARY KEY (project_id, path)
+);
+
+-- Session Checkpoints (State Snapshots)
+CREATE TABLE IF NOT EXISTS checkpoints (
+    id TEXT PRIMARY KEY,
+    session_id TEXT NOT NULL REFERENCES sessions(id) ON DELETE CASCADE,
+    message_id INTEGER,
+    state_hash TEXT,
+    summary TEXT,
+    created_at REAL NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_checkpoints_session ON checkpoints(session_id, created_at);
+
+-- Session Lineage for Branch Starmap
+CREATE TABLE IF NOT EXISTS session_lineage (
+    child_session_id TEXT PRIMARY KEY REFERENCES sessions(id) ON DELETE CASCADE,
+    parent_session_id TEXT NOT NULL REFERENCES sessions(id) ON DELETE CASCADE,
+    branch_message_id INTEGER,
+    branch_reason TEXT,
+    branched_at REAL NOT NULL
+);
+
+-- Desktop Settings & KV Store
+CREATE TABLE IF NOT EXISTS desktop_settings (
+    key TEXT PRIMARY KEY,
+    value TEXT NOT NULL,
+    updated_at REAL NOT NULL
 );
 
 -- Active Turn Leases

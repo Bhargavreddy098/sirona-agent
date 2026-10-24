@@ -116,6 +116,46 @@ export const api = {
       body: JSON.stringify({ tool_name: toolName, args }),
     }),
 
+  // Branch & Rewind (Hermes-parity lineage)
+  branchSession: (sessionId: string, throughMessageId?: number, newTitle?: string) =>
+    fetchJson<{ session: SessionSummary }>(`/api/sessions/${sessionId}/branch`, {
+      method: 'POST',
+      body: JSON.stringify({ through_message_id: throughMessageId, new_title: newTitle }),
+    }),
+  rewindSession: (sessionId: string, toMessageId: number) =>
+    fetchJson<{ success: boolean; session_id: string; rewound_to: number }>(
+      `/api/sessions/${sessionId}/rewind`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ to_message_id: toMessageId }),
+      }
+    ),
+
+  // Full-Text Search across message transcripts
+  searchMessages: (query: string, sessionId?: string, limit: number = 50) => {
+    const params = new URLSearchParams({ q: query, limit: String(limit) })
+    if (sessionId) params.append('session_id', sessionId)
+    return fetchJson<{
+      results: Array<{
+        message_id: number
+        session_id: string
+        role: string
+        content: string
+        snippet?: string
+      }>
+      total: number
+    }>(`/api/messages/search?${params}`)
+  },
+
+  // Checkpoints
+  listCheckpoints: (sessionId: string) =>
+    fetchJson<{ checkpoints: any[]; total: number }>(`/api/sessions/${sessionId}/checkpoints`),
+  createCheckpoint: (sessionId: string, messageId?: number, summary?: string, stateData?: string) =>
+    fetchJson<{ checkpoint: any }>(`/api/sessions/${sessionId}/checkpoints`, {
+      method: 'POST',
+      body: JSON.stringify({ message_id: messageId, summary, state_data: stateData }),
+    }),
+
   // Projects
   getProjects: () => fetchJson<{ projects: any[] }>('/api/projects'),
 }

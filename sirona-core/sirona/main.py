@@ -8,6 +8,8 @@ from .database.migrations import init_db
 from .database.sessions import SessionRepository
 from .database.messages import MessageRepository
 from .database.projects import ProjectRepository
+from .database.checkpoints import CheckpointRepository
+from .database.settings import SettingsRepository
 from .tools.registry import default_tool_registry
 from .tools.filesystem import read_file, write_file, edit_file, list_dir
 from .tools.terminal import run_shell
@@ -47,6 +49,8 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
     session_repo = SessionRepository(db_mgr)
     message_repo = MessageRepository(db_mgr)
     project_repo = ProjectRepository(db_mgr)
+    checkpoint_repo = CheckpointRepository(db_mgr)
+    settings_repo = SettingsRepository(db_mgr)
     approval_mgr = ApprovalManager()
     skills_mgr = SkillsManager()
     terminal_mgr = TerminalManager()
@@ -81,6 +85,8 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
     app.state.session_repo = session_repo
     app.state.message_repo = message_repo
     app.state.project_repo = project_repo
+    app.state.checkpoint_repo = checkpoint_repo
+    app.state.settings_repo = settings_repo
     app.state.approval_manager = approval_mgr
     app.state.skills_manager = skills_mgr
     app.state.terminal_manager = terminal_mgr

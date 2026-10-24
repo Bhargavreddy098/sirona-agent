@@ -100,3 +100,32 @@ export async function deleteSession(sessionId: string): Promise<void> {
     console.error('Failed to delete session', err)
   }
 }
+
+export async function branchCurrentSession(
+  throughMessageId?: number,
+  newTitle?: string
+): Promise<string | null> {
+  const currentId = $activeSessionId.get()
+  if (!currentId) return null
+  try {
+    const res = await api.branchSession(currentId, throughMessageId, newTitle)
+    $sessions.set([res.session, ...$sessions.get()])
+    openSessionInTab(res.session.id)
+    return res.session.id
+  } catch (err) {
+    console.error('Failed to branch session', err)
+    return null
+  }
+}
+
+export async function rewindCurrentSession(toMessageId: number): Promise<boolean> {
+  const currentId = $activeSessionId.get()
+  if (!currentId) return false
+  try {
+    await api.rewindSession(currentId, toMessageId)
+    return true
+  } catch (err) {
+    console.error('Failed to rewind session', err)
+    return false
+  }
+}
