@@ -80,6 +80,21 @@ export interface GitDiffResponse {
   error?: string
 }
 
+export interface DesktopSettings {
+  theme: 'light' | 'dark' | 'system'
+  interface_mode: 'studio' | 'focused'
+  default_model: string
+  default_reasoning_effort: string
+  auto_preview: boolean
+  stream_tokens: boolean
+  sound_enabled: boolean
+  gemini_api_key?: string
+  openai_api_key?: string
+  anthropic_api_key?: string
+  ollama_base_url?: string
+  [key: string]: any
+}
+
 export function getApiBaseUrl(): string {
   if (typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
     return ''
@@ -294,5 +309,27 @@ export const api = {
     fetchJson<{ success: boolean; path: string; error?: string }>('/api/git/worktree/remove', {
       method: 'POST',
       body: JSON.stringify({ path, force, cwd }),
+    }),
+
+  // Settings & Providers
+  getSettings: () => fetchJson<{ settings: DesktopSettings }>('/api/settings'),
+  saveSettings: (settings: Partial<DesktopSettings>) =>
+    fetchJson<{ success: boolean; saved_keys: string[] }>('/api/settings', {
+      method: 'POST',
+      body: JSON.stringify({ settings }),
+    }),
+  saveSingleSetting: (key: string, value: any) =>
+    fetchJson<{ success: boolean; key: string; value: any }>('/api/settings/single', {
+      method: 'POST',
+      body: JSON.stringify({ key, value }),
+    }),
+  deleteSetting: (key: string) =>
+    fetchJson<{ success: boolean; key: string }>(`/api/settings/${encodeURIComponent(key)}`, {
+      method: 'DELETE',
+    }),
+  testProvider: (provider: string, apiKey?: string, baseUrl?: string) =>
+    fetchJson<{ valid: boolean; provider: string; message: string }>('/api/providers/test', {
+      method: 'POST',
+      body: JSON.stringify({ provider, api_key: apiKey, base_url: baseUrl }),
     }),
 }

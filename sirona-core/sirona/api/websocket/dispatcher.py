@@ -255,10 +255,22 @@ async def dispatch_rpc(method: str, params: Dict[str, Any], app_state: Any) -> D
             return {"type": "exec", "operation": "plan", "output": "Implementation plan mode activated"}
         return {"type": "exec", "operation": operation, "output": f"Executed {operation}"}
 
-    elif method == "config.set":
+    elif method in ("config.set", "settings.set"):
         key = params.get("key")
         value = params.get("value")
+        if not key:
+            return {"error": "key required"}
+        await app_state.settings_repo.set_setting(key, value)
         return {"success": True, "key": key, "value": value}
+
+    elif method in ("config.get", "settings.get"):
+        key = params.get("key")
+        if key:
+            val = await app_state.settings_repo.get_setting(key)
+            return {"key": key, "value": val}
+        else:
+            all_settings = await app_state.settings_repo.list_settings()
+            return {"settings": all_settings}
 
     elif method == "complete.slash":
         commands = [
