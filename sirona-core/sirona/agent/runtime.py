@@ -9,6 +9,7 @@ from ..database.messages import MessageRepository
 from ..tools.registry import ToolRegistry
 from ..providers.base import LLMProvider, StreamChunk
 from .approvals import ApprovalManager
+from .clarify import ClarifyManager
 from .prompt_builder import PromptBuilder
 from .context_compressor import ContextCompressor
 from .turn_context import TurnContext
@@ -22,7 +23,8 @@ class AgentRuntime:
         approval_manager: ApprovalManager,
         provider: LLMProvider,
         prompt_builder: Optional[PromptBuilder] = None,
-        context_compressor: Optional[ContextCompressor] = None
+        context_compressor: Optional[ContextCompressor] = None,
+        clarify_manager: Optional[ClarifyManager] = None,
     ):
         self.session_repo = session_repo
         self.message_repo = message_repo
@@ -31,6 +33,7 @@ class AgentRuntime:
         self.provider = provider
         self.prompt_builder = prompt_builder or PromptBuilder()
         self.context_compressor = context_compressor or ContextCompressor()
+        self.clarify_manager = clarify_manager
 
     async def run_turn(
         self,
@@ -235,7 +238,21 @@ class AgentRuntime:
 
                 start_time = time.time()
                 try:
-                    if tool_def:
+                    if tool_name in ("ask_question", "clarify") and self.clarify_manager:
+                        raw_qs = tool_args.get("questions")
+                        if not raw_qs:
+                            raw_qs = [{
+                                "qid": "q1",
+                                "question": tool_args.get("question", "Clarification needed:"),
+                                "choices": tool_args.get("choices") or tool_args.get("options"),
+                                "multi_select": tool_args.get("multi_select", False)
+                            }]
+                        clarify_res = await self.clarify_manager.request_clarification(
+                            session_id=session_id,
+                            questions=raw_qs,
+                        )
+                        exec_res = clarify_res.get("answers") or "User skipped or provided no answer."
+                    elif tool_def:
                         if inspect.iscoroutinefunction(tool_def.func):
                             exec_res = await tool_def.func(**tool_args)
                         else:

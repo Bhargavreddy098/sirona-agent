@@ -17,6 +17,7 @@ from .tools.python_repl import execute_python
 from .tools.git import git_status, git_diff, git_log
 from .tools.web import web_scrape, web_search
 from .agent.approvals import ApprovalManager
+from .agent.clarify import ClarifyManager
 from .agent.runtime import AgentRuntime
 from .agent.scheduler import TurnScheduler
 from .skills.manager import SkillsManager
@@ -53,11 +54,17 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
     checkpoint_repo = CheckpointRepository(db_mgr)
     settings_repo = SettingsRepository(db_mgr)
     approval_mgr = ApprovalManager()
+    clarify_mgr = ClarifyManager()
     skills_mgr = SkillsManager()
     terminal_mgr = TerminalManager()
     
     # Register core tools into default_tool_registry
     tool_reg = default_tool_registry
+
+    async def ask_question(questions: list) -> str:
+        """Ask the user one or more clarifying or multiple-choice questions."""
+        return "Clarification request submitted to user."
+
     tool_reg.register("read_file", danger_level="safe")(read_file)
     tool_reg.register("write_file", danger_level="requires_approval")(write_file)
     tool_reg.register("edit_file", danger_level="requires_approval")(edit_file)
@@ -69,6 +76,7 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
     tool_reg.register("git_log", danger_level="safe")(git_log)
     tool_reg.register("web_scrape", danger_level="safe")(web_scrape)
     tool_reg.register("web_search", danger_level="safe")(web_search)
+    tool_reg.register("ask_question", danger_level="safe")(ask_question)
 
     mcp_mgr = McpManager(tool_registry=tool_reg)
     provider_router = ProviderRouter()
@@ -77,9 +85,10 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
         message_repo=message_repo,
         tool_registry=tool_reg,
         approval_manager=approval_mgr,
-        provider=provider_router.gemini
+        provider=provider_router.gemini,
+        clarify_manager=clarify_mgr,
     )
-    turn_scheduler = TurnScheduler(runtime=agent_runtime, approval_manager=approval_mgr)
+    turn_scheduler = TurnScheduler(runtime=agent_runtime, approval_manager=approval_mgr, clarify_manager=clarify_mgr)
 
     # Attach to app.state
     app.state.config = cfg
@@ -90,6 +99,7 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
     app.state.checkpoint_repo = checkpoint_repo
     app.state.settings_repo = settings_repo
     app.state.approval_manager = approval_mgr
+    app.state.clarify_manager = clarify_mgr
     app.state.skills_manager = skills_mgr
     app.state.terminal_manager = terminal_mgr
     app.state.tool_registry = tool_reg

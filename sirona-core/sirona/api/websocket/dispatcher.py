@@ -114,7 +114,7 @@ async def dispatch_rpc(method: str, params: Dict[str, Any], app_state: Any) -> D
         filtered = [m.model_dump() for m in messages if m.timestamp >= since]
         return {"events": filtered}
 
-    elif method in ("approval.respond", "clarify.respond"):
+    elif method in ("approval.respond", "approval.answer"):
         prompt_id = params.get("prompt_id") or params.get("request_id")
         choice = params.get("choice")
         approved = params.get("approved", True)
@@ -128,6 +128,25 @@ async def dispatch_rpc(method: str, params: Dict[str, Any], app_state: Any) -> D
             amendments=params.get("amendments") or params.get("edit")
         )
         return {"resolved": resolved, "prompt_id": prompt_id, "choice": choice}
+
+    elif method in ("clarify.respond", "clarify.answer"):
+        request_id = params.get("request_id") or params.get("prompt_id")
+        answers = params.get("answers") or params.get("answer") or params.get("choice") or params.get("responses")
+        clarify_mgr = getattr(app_state, "clarify_manager", None)
+        resolved = False
+        if clarify_mgr and request_id:
+            resolved = clarify_mgr.resolve_clarification(str(request_id), answers)
+        return {"resolved": resolved, "request_id": request_id}
+
+    elif method == "clarify.lock":
+        request_id = params.get("request_id")
+        qid = params.get("question_id") or params.get("qid")
+        answer = params.get("answer")
+        clarify_mgr = getattr(app_state, "clarify_manager", None)
+        resolved = False
+        if clarify_mgr and request_id:
+            resolved = clarify_mgr.resolve_clarification(str(request_id), {qid: answer})
+        return {"status": "locked" if resolved else "pending", "request_id": request_id}
 
     elif method == "prompt.submit":
         scheduler = app_state.turn_scheduler

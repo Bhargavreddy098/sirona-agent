@@ -19,6 +19,7 @@ import {
   resetReconnectAttempts,
 } from '../store/connectionStore'
 import { pushApproval } from '../store/approvalStore'
+import { pushClarifyRequest, normalizeClarifyQuestions } from '../store/clarifyStore'
 
 export function getGatewayWsUrl(): string {
   if (typeof window !== 'undefined' && window.location.protocol.startsWith('http') && window.location.host) {
@@ -130,6 +131,15 @@ export class SironaGatewayClient {
             created_at: Date.now(),
           })
         }
+        if (eventType === 'clarify_request' || eventType === 'clarify.request') {
+          const p = (event as any).payload || (event as any).params || event
+          pushClarifyRequest({
+            requestId: p.request_id || p.prompt_id || (event as any).id || String(Date.now()),
+            sessionId: p.session_id || event.session_id || '',
+            questions: normalizeClarifyQuestions(p.questions),
+            createdAt: p.created_at || Date.now(),
+          })
+        }
       })
 
       await this.client.connect(this.url)
@@ -157,6 +167,13 @@ export class SironaGatewayClient {
     }
 
     if (request.method === 'clarify.request' || request.method === 'clarify') {
+      const p = request.params as Record<string, any>
+      pushClarifyRequest({
+        requestId: request.id,
+        sessionId: p.session_id || '',
+        questions: normalizeClarifyQuestions(p.questions),
+        createdAt: Date.now(),
+      })
       this.dispatchCustom('clarify_request', request.params)
       return true
     }
@@ -261,11 +278,19 @@ export class SironaGatewayClient {
     )
   }
 
-  async respondClarify(sessionId: string, requestId: string, answer: string): Promise<any> {
+  async respondClarify(
+    sessionId: string,
+    requestId: string,
+    answers: Record<string, string | string[]> | string
+  ): Promise<any> {
+    const payload =
+      typeof answers === 'string'
+        ? { answer: answers }
+        : { answers, answer: JSON.stringify(answers) }
     return this.request('clarify.respond', {
       session_id: sessionId,
       request_id: requestId,
-      answer,
+      ...payload,
     })
   }
 

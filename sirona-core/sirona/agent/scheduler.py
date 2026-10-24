@@ -5,6 +5,7 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel
 from .runtime import AgentRuntime
 from .approvals import ApprovalManager
+from .clarify import ClarifyManager
 
 class TurnJob(BaseModel):
     turn_id: str
@@ -31,9 +32,15 @@ class ActiveTurn:
         self.status = "running"
 
 class TurnScheduler:
-    def __init__(self, runtime: AgentRuntime, approval_manager: ApprovalManager):
+    def __init__(
+        self,
+        runtime: AgentRuntime,
+        approval_manager: ApprovalManager,
+        clarify_manager: Optional[ClarifyManager] = None
+    ):
         self.runtime = runtime
         self.approval_manager = approval_manager
+        self.clarify_manager = clarify_manager
         self.active_turns: Dict[str, ActiveTurn] = {}
         self.queued_turns: Dict[str, List[TurnJob]] = {}
 
@@ -106,6 +113,8 @@ class TurnScheduler:
             active.task.cancel()
 
         self.approval_manager.cancel_pending_for_session(session_id)
+        if self.clarify_manager:
+            self.clarify_manager.cancel_pending_for_session(session_id)
         self.active_turns.pop(session_id, None)
 
         # Clear queue for this session upon explicit interrupt

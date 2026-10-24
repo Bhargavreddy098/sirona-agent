@@ -2,20 +2,23 @@ import React, { useEffect, useRef } from 'react'
 import { useStore } from '@nanostores/react'
 import { Sparkles } from 'lucide-react'
 import { $messages, $streamingState, $composerDraft } from '../../store/messageStore'
+import { $activeClarifyRequest } from '../../store/clarifyStore'
 import { UserMessageBubble } from './UserMessageBubble'
 import { AssistantMessage } from './AssistantMessage'
 import { ToolExecutionCard } from './ToolExecutionCard'
+import { ClarifyCard } from '../clarify/ClarifyCard'
 import { SuggestionGrid } from './SuggestionGrid'
 import { Loader } from '../ui/Loader'
 
 export const TranscriptCanvas: React.FC = () => {
   const messages = useStore($messages)
   const streaming = useStore($streamingState)
+  const activeClarify = useStore($activeClarifyRequest)
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages, streaming.currentTokens, streaming.currentReasoning, streaming.activeTool])
+  }, [messages, streaming.currentTokens, streaming.currentReasoning, streaming.activeTool, activeClarify])
 
   const handleSelectSuggestion = (promptText: string) => {
     $composerDraft.set(promptText)
@@ -111,6 +114,11 @@ export const TranscriptCanvas: React.FC = () => {
               </div>
             )}
           </div>
+        )}
+
+        {/* Active Clarification Request Card */}
+        {activeClarify && (
+          <ClarifyCard request={activeClarify} />
         )}
 
         <div ref={bottomRef} />
