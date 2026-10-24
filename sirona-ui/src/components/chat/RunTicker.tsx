@@ -13,7 +13,7 @@ export const RunTicker: React.FC<{ startedAt?: number }> = ({ startedAt }) => {
   }, [startedAt])
 
   return (
-    <div className="flex items-center gap-1.5 font-mono text-[11px] text-[#016a71]">
+    <div className="flex items-center gap-1.5 font-mono text-[11px] text-[var(--dt-primary)]">
       <Loader size="sm" />
       <span>{elapsed.toFixed(1)}s</span>
     </div>

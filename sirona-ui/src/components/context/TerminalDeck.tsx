@@ -186,9 +186,9 @@ export const TerminalDeck: React.FC = () => {
   }
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-[#181715] font-mono text-[12px] select-text overflow-hidden">
+    <div className="flex-1 flex flex-col h-full bg-[#0d1117] font-mono text-[12px] select-text overflow-hidden">
       {/* Tab Strip */}
-      <div className="flex items-center justify-between px-2 bg-[#121110] border-b border-[rgba(255,255,255,0.08)] h-9 shrink-0 select-none">
+      <div className="flex items-center justify-between px-2 bg-[#010409] border-b border-[rgba(255,255,255,0.08)] h-9 shrink-0 select-none">
         {/* Left Tabs */}
         <div className="flex items-center gap-1 overflow-x-auto max-w-[70%]">
           {tabs.map((tab) => {
@@ -199,17 +199,17 @@ export const TerminalDeck: React.FC = () => {
                 onClick={() => setActiveTerminalTab(tab.id)}
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-[6px] text-[11px] cursor-pointer transition-colors shrink-0 ${
                   isActive
-                    ? 'bg-[#252422] text-[#f5f3ef] font-medium'
-                    : 'text-[#92918b] hover:text-[#f5f3ef] hover:bg-[#1c1b18]'
+                    ? 'bg-[#161b22] text-[#f0f6fc] font-medium'
+                    : 'text-[#8b949e] hover:text-[#f0f6fc] hover:bg-[#161b22]/50'
                 }`}
               >
                 <span
                   className={`w-1.5 h-1.5 rounded-full ${
-                    tab.connected ? 'bg-[#10b981]' : 'bg-[#f59e0b]'
+                    tab.connected ? 'bg-[#238636]' : 'bg-[#d29922]'
                   }`}
                   title={tab.connected ? 'Connected' : 'Offline / Connecting'}
                 />
-                <TerminalIcon className="w-3 h-3 text-[#016a71]" />
+                <TerminalIcon className="w-3 h-3 text-[var(--dt-primary)]" />
                 <span className="truncate max-w-[90px]">{tab.title}</span>
                 <button
                   type="button"
@@ -217,7 +217,7 @@ export const TerminalDeck: React.FC = () => {
                     e.stopPropagation()
                     closeTerminalTab(tab.id)
                   }}
-                  className="p-0.5 hover:bg-[#343330] rounded text-[#72706b] hover:text-[#f5f3ef]"
+                  className="p-0.5 hover:bg-[#30363d] rounded text-[#8b949e] hover:text-[#f0f6fc]"
                   title="Close Terminal"
                 >
                   <X className="w-2.5 h-2.5" />
@@ -229,7 +229,7 @@ export const TerminalDeck: React.FC = () => {
           <button
             type="button"
             onClick={() => createTerminalTab()}
-            className="p-1 hover:bg-[#252422] rounded-[6px] text-[#92918b] hover:text-[#f5f3ef] cursor-pointer transition-colors"
+            className="p-1 hover:bg-[#161b22] rounded-[6px] text-[#8b949e] hover:text-[#f0f6fc] cursor-pointer transition-colors"
             title="New Terminal Tab"
           >
             <Plus className="w-3.5 h-3.5" />
@@ -241,7 +241,7 @@ export const TerminalDeck: React.FC = () => {
           <button
             type="button"
             onClick={handleSendInterrupt}
-            className="p-1 text-[#92918b] hover:text-[#ef4444] hover:bg-[#252422] rounded cursor-pointer transition-colors"
+            className="p-1 text-[#8b949e] hover:text-[#f85149] hover:bg-[#161b22] rounded cursor-pointer transition-colors"
             title="Send Ctrl+C (Interrupt)"
           >
             <Square className="w-3 h-3" />
@@ -249,15 +249,15 @@ export const TerminalDeck: React.FC = () => {
           <button
             type="button"
             onClick={handleCopyAll}
-            className="p-1 text-[#92918b] hover:text-[#f5f3ef] hover:bg-[#252422] rounded cursor-pointer transition-colors"
+            className="p-1 text-[#8b949e] hover:text-[#f0f6fc] hover:bg-[#161b22] rounded cursor-pointer transition-colors"
             title="Copy Terminal Output"
           >
-            {copied ? <Check className="w-3 h-3 text-[#10b981]" /> : <Copy className="w-3 h-3" />}
+            {copied ? <Check className="w-3 h-3 text-[#238636]" /> : <Copy className="w-3 h-3" />}
           </button>
           <button
             type="button"
             onClick={handleClear}
-            className="p-1 text-[#92918b] hover:text-[#ef4444] hover:bg-[#252422] rounded cursor-pointer transition-colors"
+            className="p-1 text-[#8b949e] hover:text-[#f85149] hover:bg-[#161b22] rounded cursor-pointer transition-colors"
             title="Clear Output"
           >
             <Trash2 className="w-3 h-3" />
@@ -265,7 +265,7 @@ export const TerminalDeck: React.FC = () => {
           <button
             type="button"
             onClick={handleReconnect}
-            className="p-1 text-[#92918b] hover:text-[#f5f3ef] hover:bg-[#252422] rounded cursor-pointer transition-colors"
+            className="p-1 text-[#8b949e] hover:text-[#f0f6fc] hover:bg-[#161b22] rounded cursor-pointer transition-colors"
             title="Reconnect Terminal Session"
           >
             <RotateCw className="w-3 h-3" />
@@ -274,11 +274,11 @@ export const TerminalDeck: React.FC = () => {
       </div>
 
       {/* Terminal Output */}
-      <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-0.5 text-[#f5f3ef]">
+      <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-0.5 text-[#c9d1d9]">
         {activeTab.lines.map((l, i) => {
           const spans = parseAnsiLine(l)
           return (
-            <div key={i} className="whitespace-pre-wrap leading-relaxed text-[#d1d1cd] text-[11px]">
+            <div key={i} className="whitespace-pre-wrap leading-relaxed text-[#c9d1d9] text-[11px]">
               {spans.map((s, si) => (
                 <span
                   key={si}
@@ -297,16 +297,16 @@ export const TerminalDeck: React.FC = () => {
       {/* Terminal Input Bar */}
       <form
         onSubmit={handleSend}
-        className="flex items-center px-3 py-2 border-t border-[rgba(255,255,255,0.08)] bg-[#121110] shrink-0"
+        className="flex items-center px-3 py-2 border-t border-[rgba(255,255,255,0.08)] bg-[#010409] shrink-0"
       >
-        <span className="text-[#016a71] mr-2 font-bold select-none text-[12px]">$</span>
+        <span className="text-[var(--dt-primary)] mr-2 font-bold select-none text-[12px]">$</span>
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Run command (Up/Down for history, Ctrl+C to cancel)..."
-          className="flex-1 bg-transparent text-[#faf8f5] outline-none font-mono text-[11px] placeholder:text-[#52504a]"
+          className="flex-1 bg-transparent text-[#f0f6fc] outline-none font-mono text-[11px] placeholder:text-[#484f58]"
           autoFocus
         />
       </form>

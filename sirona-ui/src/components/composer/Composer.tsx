@@ -41,7 +41,7 @@ export const Composer: React.FC = () => {
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto'
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 200)}px`
+      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 220)}px`
     }
   }, [prompt])
 
@@ -99,15 +99,14 @@ export const Composer: React.FC = () => {
   }
 
   return (
-    <div className="w-full bg-[#faf8f5] flex flex-col">
+    <div className="w-full bg-transparent flex flex-col pb-4 pt-1 z-20">
       <StatusDrawer />
 
-      {/* Centered Composer Container */}
-      <div className="w-full max-w-[900px] mx-auto px-4 pb-4 pt-1 flex flex-col">
+      {/* Floating Centered Composer Surface */}
+      <div className="w-full max-w-[800px] mx-auto px-4 flex flex-col">
         <DirectiveChips chips={chips} onRemove={(id) => setChips(chips.filter((c) => c.id !== id))} />
 
-        {/* Focal Artifact: Perplexity Style Search Box */}
-        <div className="w-full bg-[#ffffff] border border-[#d1d1cd] focus-within:border-[#016a71] rounded-[16px] shadow-[var(--shadow-subtle)] focus-within:shadow-[0_0_0_3px_rgba(1,106,113,0.12),var(--shadow-subtle)] transition-all p-3 flex flex-col">
+        <div className="w-full composer-glass-surface rounded-[18px] focus-within:border-[var(--dt-primary)] focus-within:ring-2 focus-within:ring-[var(--dt-primary)]/15 transition-all p-3 flex flex-col">
           <textarea
             ref={textareaRef}
             value={prompt}
@@ -115,20 +114,20 @@ export const Composer: React.FC = () => {
             onKeyDown={handleKeyDown}
             placeholder="Ask Sirona anything, inspect code, run commands... (Enter to send, Esc to stop)"
             rows={1}
-            className="w-full bg-transparent text-[15px] text-[#27251e] placeholder:text-[#72706b] outline-none resize-none font-normal leading-relaxed px-1"
+            className="w-full bg-transparent text-[14px] text-[var(--dt-foreground)] placeholder:text-[var(--dt-muted-foreground)] outline-none resize-none font-normal leading-relaxed px-1"
           />
 
-          {/* Bottom Controls inside the search input */}
-          <div className="flex items-center justify-between pt-2 mt-2 border-t border-[#f0eee9]">
+          {/* Bottom Controls inside the floating input */}
+          <div className="flex items-center justify-between pt-2 mt-2 border-t border-[var(--dt-border)]/50">
             {/* Pill chips: Model & Reasoning Effort */}
             <div className="flex items-center gap-2">
               <button
                 type="button"
-                className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#faf8f5] hover:bg-[#f5f3ef] border border-[#d1d1cd] text-[#27251e] text-[13px] font-normal transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--dt-card)] hover:bg-[var(--dt-background)] border border-[var(--dt-border)] text-[var(--dt-foreground)] text-[12px] font-normal transition-colors cursor-pointer"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#016a71]" />
+                <Sparkles className="w-3.5 h-3.5 text-[var(--dt-primary)]" />
                 <span>{model}</span>
-                <ChevronDown className="w-3 h-3 text-[#72706b]" />
+                <ChevronDown className="w-3 h-3 text-[var(--dt-muted-foreground)]" />
               </button>
 
               <button
@@ -136,11 +135,11 @@ export const Composer: React.FC = () => {
                 onClick={() =>
                   setEffort(effort === 'low' ? 'medium' : effort === 'medium' ? 'high' : 'low')
                 }
-                className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#faf8f5] hover:bg-[#f5f3ef] border border-[#d1d1cd] text-[#72706b] hover:text-[#27251e] text-[13px] font-normal transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[var(--dt-card)] hover:bg-[var(--dt-background)] border border-[var(--dt-border)] text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] text-[12px] font-normal transition-colors cursor-pointer"
               >
-                <Sliders className="w-3.5 h-3.5 text-[#72706b]" />
+                <Sliders className="w-3.5 h-3.5 text-[var(--dt-muted-foreground)]" />
                 <span>Effort:</span>
-                <span className="capitalize font-medium text-[#27251e]">{effort}</span>
+                <span className="capitalize font-medium text-[var(--dt-foreground)]">{effort}</span>
               </button>
             </div>
 
@@ -148,14 +147,14 @@ export const Composer: React.FC = () => {
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
-                className="p-1.5 text-[#72706b] hover:text-[#27251e] hover:bg-[#f5f3ef] rounded-[6px] transition-colors cursor-pointer"
+                className="p-1.5 text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] hover:bg-[var(--dt-muted)] rounded-[6px] transition-colors cursor-pointer"
                 title="Attach file"
               >
                 <Paperclip className="w-4 h-4" />
               </button>
               <button
                 type="button"
-                className="p-1.5 text-[#72706b] hover:text-[#27251e] hover:bg-[#f5f3ef] rounded-[6px] transition-colors cursor-pointer"
+                className="p-1.5 text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] hover:bg-[var(--dt-muted)] rounded-[6px] transition-colors cursor-pointer"
                 title="Voice input"
               >
                 <Mic className="w-4 h-4" />
@@ -165,24 +164,24 @@ export const Composer: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleInterrupt}
-                  className="flex items-center justify-center w-8 h-8 rounded-full bg-[#901300] hover:bg-[#730f00] text-white shadow-[var(--shadow-subtle)] transition-all cursor-pointer"
+                  className="flex items-center justify-center w-7 h-7 rounded-full bg-[var(--dt-destructive)] hover:brightness-110 text-white shadow-sm transition-all cursor-pointer"
                   title="Stop generation (Esc)"
                 >
-                  <Square className="w-3.5 h-3.5 fill-current" />
+                  <Square className="w-3 h-3 fill-current" />
                 </button>
               ) : (
                 <button
                   type="button"
                   onClick={handleSend}
                   disabled={!prompt.trim()}
-                  className={`flex items-center justify-center w-8 h-8 rounded-full transition-all cursor-pointer ${
+                  className={`flex items-center justify-center w-7 h-7 rounded-full transition-all cursor-pointer ${
                     prompt.trim()
-                      ? 'bg-[#016a71] text-white hover:bg-[#01585e] shadow-[var(--shadow-subtle)]'
-                      : 'bg-[#e2e2de] text-[#92918b] cursor-not-allowed opacity-60'
+                      ? 'bg-[var(--dt-primary)] text-white hover:brightness-110 shadow-sm'
+                      : 'bg-[var(--dt-border)] text-[var(--dt-muted-foreground)] cursor-not-allowed opacity-50'
                   }`}
-                  title="Send query"
+                  title="Send query (Enter)"
                 >
-                  <ArrowUp className="w-4 h-4" />
+                  <ArrowUp className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>

@@ -1,81 +1,152 @@
 :root {
-  /* Perplexity AI Colors — Scholar's parchment behind clean glass */
-  --color-parchment: #faf8f5;
-  --color-soft-paper: #fdfbfa;
-  --color-warm-mist: #d1d1cd;
-  --color-ash: #92918b;
-  --color-graphite: #72706b;
-  --color-ink: #27251e;
+  /* ==========================================================================
+     Hermes Canonical "Nous" Design Tokens (Light Theme)
+     Source: @hermes/shared theme-presets.ts & apps/desktop styles.css
+     ========================================================================== */
+  --dt-background: #ffffff;
+  --dt-foreground: #1f2328;
+  --dt-card: #f6f8fa;
+  --dt-card-foreground: #1f2328;
+  --dt-muted: #f6f8fa;
+  --dt-muted-foreground: #656d76;
+  --dt-popover: #ffffff;
+  --dt-popover-foreground: #1f2328;
+  --dt-primary: #0053fd;           /* Canonical Nous Electric Blue */
+  --dt-primary-foreground: #ffffff;
+  --dt-secondary: #deeaff;
+  --dt-secondary-foreground: #1f2328;
+  --dt-accent: #e3edff;
+  --dt-accent-foreground: #1f2328;
+  --dt-border: #d0d7de;
+  --dt-input: #ffffff;
+  --dt-ring: #0053fd;
+  --dt-destructive: #cf222e;
+  --dt-destructive-foreground: #ffffff;
+
+  --dt-sidebar: #f6f8fa;
+  --dt-sidebar-foreground: #1f2328;
+  --dt-sidebar-border: #d0d7de;
+  --dt-sidebar-accent: #deeaff;
+  --dt-sidebar-accent-foreground: #0053fd;
+
+  --dt-user-bubble: #dae7fd;
+  --dt-user-bubble-border: #c4d7f8;
+
+  /* Aliases to instantly upgrade existing prototype color variables */
+  --color-parchment: #ffffff;
+  --color-soft-paper: #f6f8fa;
+  --color-warm-mist: #d0d7de;
+  --color-ash: #8c959f;
+  --color-graphite: #656d76;
+  --color-ink: #1f2328;
   --color-pure-black: #000000;
-  --color-deep-teal: #016a71;
+  --color-deep-teal: #0053fd;      /* Canonical Electric Blue */
 
-  /* Semantic UI Aliases */
-  --ui-bg-base: var(--color-parchment);
-  --ui-bg-subtle: #f5f3ef;
-  --ui-bg-card: var(--color-soft-paper);
-  --ui-bg-active: var(--color-deep-teal);
+  --ui-bg-base: #ffffff;
+  --ui-bg-subtle: #f6f8fa;
+  --ui-bg-card: #f6f8fa;
+  --ui-bg-active: #0053fd;
+  --ui-text-primary: #1f2328;
+  --ui-text-secondary: #656d76;
+  --ui-text-tertiary: #8c959f;
+  --ui-accent: #0053fd;
+  --ui-stroke-primary: #d0d7de;
+  --ui-stroke-secondary: #e1e4e8;
 
-  --ui-text-primary: var(--color-ink);
-  --ui-text-secondary: var(--color-graphite);
-  --ui-text-tertiary: var(--color-ash);
-  --ui-accent: var(--color-deep-teal);
-
-  /* Hairline strokes and dividers (pencil lines on parchment) */
-  --ui-stroke-primary: var(--color-warm-mist);
-  --ui-stroke-secondary: #e2e2de;
-  --ui-stroke-tertiary: rgba(0, 0, 0, 0.07);
-  --stroke-nous: rgba(0, 0, 0, 0.05);
-
-  /* Typography — pplxSans geometric sans */
-  --font-pplxsans: 'pplxSans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Fonts */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", "SF Mono", Consolas, monospace;
+  --font-pplxsans: var(--font-sans);
 
   /* Typography Scale */
   --text-caption: 11px;
-  --leading-caption: 1.43;
   --text-body-sm: 12px;
-  --leading-body-sm: 1.43;
-  --text-body: 14px;
-  --leading-body: 1.43;
-  --text-body-lg: 16px;
-  --leading-body-lg: 1.43;
-
-  /* Typography Weights (400 - 500 only) */
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-
-  /* Spacing */
-  --spacing-4: 4px;
-  --spacing-8: 8px;
-  --spacing-12: 12px;
-  --spacing-16: 16px;
-  --spacing-32: 32px;
-
-  /* Layout */
-  --page-max-width: 900px;
-  --section-gap: 32px;
-  --card-padding: 16px;
-  --element-gap: 8px;
+  --text-body: 13.5px;
+  --text-body-lg: 15px;
 
   /* Border Radius */
-  --radius-buttons: 6px;
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+  --radius-buttons: 8px;
   --radius-inputs: 12px;
-  --radius-cards: 16px;
-  --radius-chips: 9999px;
+  --radius-cards: 14px;
 
-  /* Shadows (Only one subtle shadow across the entire system) */
-  --shadow-subtle: rgba(0, 0, 0, 0.08) 0px 1px 2px 0px;
-  --shadow-nous: rgba(0, 0, 0, 0.08) 0px 1px 3px 0px;
-  --shadow-composer: rgba(0, 0, 0, 0.06) 0px 1px 4px 0px;
+  /* Floating Elevation & Hairlines (Flat over boxed) */
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md:
+    0 0 0 1px rgba(31, 35, 40, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 16px 32px -24px rgba(0, 0, 0, 0.18);
+  /* --shadow-nous: 4-layer downward ambient falloff */
+  --shadow-nous:
+    0 2px 4px -2px rgba(0, 0, 0, 0.07),
+    0 8px 12px -6px rgba(0, 0, 0, 0.06),
+    0 20px 28px -14px rgba(0, 0, 0, 0.06),
+    0 36px 48px -28px rgba(0, 0, 0, 0.04);
+  /* --stroke-nous: hairline border pairing with --shadow-nous */
+  --stroke-nous: color-mix(in srgb, currentColor 6%, transparent);
+  --shadow-composer:
+    0 0 0 1px rgba(0, 83, 253, 0.08),
+    0 8px 24px -4px rgba(0, 83, 253, 0.06),
+    0 16px 32px -8px rgba(0, 0, 0, 0.08);
 
   /* Z-Index Hierarchy */
-  --z-modal-backdrop: 120;
-  --z-modal: 130;
-  --z-modal-popover: 140;
-  --z-over-modal: 200;
-  --z-over-modal-content: 210;
-  --z-switcher-backdrop: 219;
-  --z-switcher: 220;
-  --z-connecting: 300;
-  --z-onboarding: 310;
-  --z-crash: 320;
+  --z-base: 1;
+  --z-dock: 10;
+  --z-header: 20;
+  --z-drawer: 30;
+  --z-modal-backdrop: 100;
+  --z-modal: 110;
+  --z-popover: 120;
+}
+
+/* Dark Theme Overrides */
+.dark, [data-theme="dark"] {
+  --dt-background: #0d1117;
+  --dt-foreground: #e6edf3;
+  --dt-card: #010409;
+  --dt-card-foreground: #e6edf3;
+  --dt-muted: #161b22;
+  --dt-muted-foreground: #7d8590;
+  --dt-popover: #161b22;
+  --dt-popover-foreground: #e6edf3;
+  --dt-primary: #4a84fe;
+  --dt-primary-foreground: #0d1117;
+  --dt-secondary: #1d2e4f;
+  --dt-secondary-foreground: #e6edf3;
+  --dt-accent: #17243a;
+  --dt-accent-foreground: #e6edf3;
+  --dt-border: #30363d;
+  --dt-input: #0d1117;
+  --dt-ring: #4a84fe;
+  --dt-destructive: #f85149;
+  --dt-destructive-foreground: #ffffff;
+
+  --dt-sidebar: #010409;
+  --dt-sidebar-foreground: #e6edf3;
+  --dt-sidebar-border: #30363d;
+  --dt-sidebar-accent: #1d2e4f;
+  --dt-sidebar-accent-foreground: #4a84fe;
+
+  --dt-user-bubble: #07162c;
+  --dt-user-bubble-border: #1d2e4f;
+
+  --color-parchment: #0d1117;
+  --color-soft-paper: #010409;
+  --color-warm-mist: #30363d;
+  --color-ash: #6e7681;
+  --color-graphite: #7d8590;
+  --color-ink: #e6edf3;
+  --color-deep-teal: #4a84fe;
+
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-nous:
+    0 2px 4px -2px rgba(0, 0, 0, 0.4),
+    0 8px 12px -6px rgba(0, 0, 0, 0.35),
+    0 20px 28px -14px rgba(0, 0, 0, 0.35);
+  --stroke-nous: rgba(255, 255, 255, 0.08);
 }

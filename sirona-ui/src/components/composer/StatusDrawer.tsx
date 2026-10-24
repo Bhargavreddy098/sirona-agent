@@ -5,23 +5,23 @@ export const StatusDrawer: React.FC = () => {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="border-t border-[#d1d1cd] bg-[#faf8f5]">
+    <div className="border-t border-[var(--dt-border)] bg-[var(--dt-sidebar)]">
       {/* Center grip handle */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-center py-1 text-[11px] text-[#72706b] hover:text-[#27251e] transition-colors cursor-pointer"
+        className="w-full flex items-center justify-center py-1 text-[11px] text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] transition-colors cursor-pointer"
         title="Toggle Task Status"
       >
         {open ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
       </button>
 
       {open && (
-        <div className="px-4 py-2 flex items-center justify-between text-[12px] text-[#72706b] border-b border-[#d1d1cd] bg-[#fdfbfa]">
+        <div className="px-4 py-2 flex items-center justify-between text-[12px] text-[var(--dt-muted-foreground)] border-b border-[var(--dt-border)] bg-[var(--dt-card)]">
           <div className="flex items-center gap-2">
-            <CheckSquare className="w-3.5 h-3.5 text-[#016a71]" />
+            <CheckSquare className="w-3.5 h-3.5 text-[var(--dt-primary)]" />
             <span>Tasks: 0 pending</span>
           </div>
-          <div className="flex items-center gap-2 text-[#72706b]">
+          <div className="flex items-center gap-2 text-[var(--dt-muted-foreground)]">
             <Clock className="w-3.5 h-3.5" />
             <span>Idle</span>
           </div>

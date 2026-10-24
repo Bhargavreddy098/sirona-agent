@@ -32,33 +32,33 @@ export const ApprovalCard: React.FC<ApprovalCardProps> = ({
   }, [isTop, onApprove, onDeny])
 
   return (
-    <div className="w-[480px] p-4 rounded-[16px] bg-[#fdfbfa] border border-[#d1d1cd] shadow-[var(--shadow-subtle)] text-[13px] text-[#27251e]">
+    <div className="w-[480px] p-4 rounded-[12px] bg-[var(--dt-card)] border border-[var(--dt-border)] shadow-[var(--shadow-subtle)] text-[13px] text-[var(--dt-foreground)]">
       {/* Header */}
-      <div className="flex items-center gap-2 mb-2.5 text-[#b91c1c] font-medium">
-        <ShieldAlert className="w-4 h-4 text-[#b91c1c]" />
+      <div className="flex items-center gap-2 mb-2.5 text-[var(--dt-danger)] font-medium">
+        <ShieldAlert className="w-4 h-4 text-[var(--dt-danger)]" />
         <span>Action Approval Required</span>
       </div>
 
       {/* Tool details */}
-      <div className="mb-3 text-[#72706b]">
+      <div className="mb-3 text-[var(--dt-muted-foreground)]">
         <div>
-          Tool: <span className="font-mono font-medium text-[#27251e]">{approval.tool_name}</span>
+          Tool: <span className="font-mono font-medium text-[var(--dt-foreground)]">{approval.tool_name}</span>
         </div>
         <div className="mt-1.5">
           Arguments:
-          <pre className="mt-1 p-2.5 rounded-[12px] bg-[#faf8f5] border border-[#d1d1cd] text-[#27251e] font-mono text-[11px] overflow-x-auto whitespace-pre-wrap leading-relaxed">
+          <pre className="mt-1 p-2.5 rounded-[8px] bg-[var(--dt-card-subtle)] border border-[var(--dt-border)] text-[var(--dt-foreground)] font-mono text-[11px] overflow-x-auto whitespace-pre-wrap leading-relaxed">
             {JSON.stringify(approval.tool_args, null, 2)}
           </pre>
         </div>
       </div>
 
       {/* Action buttons with shortcuts */}
-      <div className="flex items-center justify-end gap-2.5 pt-2.5 border-t border-[#d1d1cd]">
+      <div className="flex items-center justify-end gap-2.5 pt-2.5 border-t border-[var(--dt-border)]">
         <Button variant="ghost" size="sm" onClick={onDeny}>
-          <X className="w-3.5 h-3.5 mr-1 text-[#b91c1c]" />
-          Deny <span className="text-[10px] text-[#92918b] ml-1">(Esc)</span>
+          <X className="w-3.5 h-3.5 mr-1 text-[var(--dt-danger)]" />
+          Deny <span className="text-[10px] text-[var(--dt-muted-foreground)] ml-1">(Esc)</span>
         </Button>
-        <Button variant="teal" size="sm" onClick={onApprove}>
+        <Button variant="primary" size="sm" onClick={onApprove}>
           <Check className="w-3.5 h-3.5 mr-1" />
           Approve <span className="text-[10px] text-white/80 ml-1">(↵)</span>
         </Button>

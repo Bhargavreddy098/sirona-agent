@@ -30,7 +30,7 @@ export const App: React.FC = () => {
   }, [activeSessionId])
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#faf8f5] text-[#27251e] select-none font-sans">
+    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[var(--dt-background)] text-[var(--dt-foreground)] select-none font-sans">
       <TitlebarChrome />
 
       {/* Main Workspace Body */}

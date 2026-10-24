@@ -83,33 +83,33 @@ export const SettingsModal: React.FC = () => {
   }
 
   return (
-    <div className="fixed inset-0 bg-black/45 z-50 flex items-center justify-center p-4 backdrop-blur-xs font-sans select-none animate-in fade-in duration-150">
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-xs font-sans select-none animate-in fade-in duration-150">
       <div
-        className="bg-[#faf8f5] border border-[#d1d1cd] rounded-[20px] shadow-2xl max-w-3xl w-full h-[580px] flex flex-col overflow-hidden select-text"
+        className="bg-[var(--dt-card)] border border-[var(--dt-border)] rounded-[20px] shadow-2xl max-w-3xl w-full h-[580px] flex flex-col overflow-hidden select-text text-[var(--dt-foreground)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#d1d1cd] bg-[#fdfbfa] shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--dt-border)] bg-[var(--dt-card)] shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-[10px] bg-[rgba(1,106,113,0.1)] flex items-center justify-center text-[#016a71]">
+            <div className="w-8 h-8 rounded-[10px] bg-[var(--dt-sidebar-accent)] flex items-center justify-center text-[var(--dt-primary)]">
               <Sliders className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-[15px] font-semibold text-[#27251e] tracking-tight">Sirona Settings</h2>
-              <p className="text-[11px] text-[#72706b]">Desktop configuration, AI model providers and environment</p>
+              <h2 className="text-[15px] font-semibold text-[var(--dt-foreground)] tracking-tight">Sirona Settings</h2>
+              <p className="text-[11px] text-[var(--dt-muted-foreground)]">Desktop configuration, AI model providers and environment</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             {saveToast && (
-              <span className="flex items-center gap-1 text-[11px] font-medium text-[#016a71] bg-[rgba(1,106,113,0.08)] px-2.5 py-1 rounded-[6px] animate-in fade-in">
+              <span className="flex items-center gap-1 text-[11px] font-medium text-[var(--dt-primary)] bg-[var(--dt-sidebar-accent)] px-2.5 py-1 rounded-[6px] animate-in fade-in">
                 <Check className="w-3.5 h-3.5" />
                 <span>Saved</span>
               </span>
             )}
             <button
               onClick={toggleSettings}
-              className="p-1.5 hover:bg-[#f0eee9] text-[#72706b] hover:text-[#27251e] rounded-[8px] transition-colors cursor-pointer"
+              className="p-1.5 hover:bg-[var(--dt-sidebar-accent)] text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] rounded-[8px] transition-colors cursor-pointer"
               title="Close Settings (Esc)"
             >
               <X className="w-4 h-4" />
@@ -120,7 +120,7 @@ export const SettingsModal: React.FC = () => {
         {/* Body Layout: Left Tab Rail + Right Settings Panel */}
         <div className="flex-1 flex overflow-hidden">
           {/* Left Vertical Tab Rail */}
-          <div className="w-52 border-r border-[#d1d1cd] bg-[#f5f3ef] p-3 flex flex-col gap-1 shrink-0">
+          <div className="w-52 border-r border-[var(--dt-border)] bg-[var(--dt-sidebar)] p-3 flex flex-col gap-1 shrink-0">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id
               return (
@@ -129,11 +129,11 @@ export const SettingsModal: React.FC = () => {
                   onClick={() => setActiveSettingsTab(tab.id)}
                   className={`flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-[13px] font-medium transition-colors cursor-pointer text-left ${
                     isActive
-                      ? 'bg-[#ffffff] text-[#016a71] shadow-sm border border-[#d1d1cd]'
-                      : 'text-[#72706b] hover:text-[#27251e] hover:bg-[#eae8e2]'
+                      ? 'bg-[var(--dt-card)] text-[var(--dt-primary)] shadow-sm border border-[var(--dt-border)]'
+                      : 'text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] hover:bg-[var(--dt-sidebar-accent)]'
                   }`}
                 >
-                  <span className={isActive ? 'text-[#016a71]' : 'text-[#92918b]'}>{tab.icon}</span>
+                  <span className={isActive ? 'text-[var(--dt-primary)]' : 'text-[var(--dt-muted-foreground)]'}>{tab.icon}</span>
                   <span>{tab.label}</span>
                 </button>
               )
@@ -148,7 +148,7 @@ export const SettingsModal: React.FC = () => {
                   notifySaved()
                 }
               }}
-              className="flex items-center gap-2 px-3 py-2 text-[11px] text-[#92918b] hover:text-[#b91c1c] hover:bg-[rgba(185,28,28,0.05)] rounded-[8px] transition-colors cursor-pointer"
+              className="flex items-center gap-2 px-3 py-2 text-[11px] text-[var(--dt-muted-foreground)] hover:text-[var(--dt-danger)] hover:bg-[var(--dt-danger)]/10 rounded-[8px] transition-colors cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset to Defaults</span>
@@ -156,13 +156,13 @@ export const SettingsModal: React.FC = () => {
           </div>
 
           {/* Right Panel View */}
-          <div className="flex-1 overflow-y-auto p-6 bg-[#faf8f5] space-y-6">
+          <div className="flex-1 overflow-y-auto p-6 bg-[var(--dt-card-subtle)] space-y-6">
             {/* Tab 1: General */}
             {activeTab === 'general' && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-[13px] font-semibold text-[#27251e] mb-1">Interface Mode</h3>
-                  <p className="text-[11px] text-[#72706b] mb-3">Choose the layout density and workspace panes.</p>
+                  <h3 className="text-[13px] font-semibold text-[var(--dt-foreground)] mb-1">Interface Mode</h3>
+                  <p className="text-[11px] text-[var(--dt-muted-foreground)] mb-3">Choose the layout density and workspace panes.</p>
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       onClick={() => {
@@ -171,15 +171,15 @@ export const SettingsModal: React.FC = () => {
                       }}
                       className={`p-3.5 rounded-[12px] border text-left cursor-pointer transition-all ${
                         settings.interface_mode === 'studio'
-                          ? 'border-[#016a71] bg-[#ffffff] shadow-sm ring-1 ring-[#016a71]'
-                          : 'border-[#d1d1cd] bg-[#fdfbfa] hover:bg-[#ffffff]'
+                          ? 'border-[var(--dt-primary)] bg-[var(--dt-card)] shadow-sm ring-1 ring-[var(--dt-primary)]'
+                          : 'border-[var(--dt-border)] bg-[var(--dt-card)] hover:border-[var(--dt-muted-foreground)]'
                       }`}
                     >
-                      <div className="font-semibold text-[13px] text-[#27251e] flex items-center justify-between mb-1">
+                      <div className="font-semibold text-[13px] text-[var(--dt-foreground)] flex items-center justify-between mb-1">
                         <span>Full Studio</span>
-                        {settings.interface_mode === 'studio' && <Check className="w-3.5 h-3.5 text-[#016a71]" />}
+                        {settings.interface_mode === 'studio' && <Check className="w-3.5 h-3.5 text-[var(--dt-primary)]" />}
                       </div>
-                      <p className="text-[11px] text-[#72706b] leading-relaxed">
+                      <p className="text-[11px] text-[var(--dt-muted-foreground)] leading-relaxed">
                         Developer workspace with tabs, git review, live file tree, sandboxed previews, and terminal deck.
                       </p>
                     </button>
@@ -191,23 +191,23 @@ export const SettingsModal: React.FC = () => {
                       }}
                       className={`p-3.5 rounded-[12px] border text-left cursor-pointer transition-all ${
                         settings.interface_mode === 'focused'
-                          ? 'border-[#016a71] bg-[#ffffff] shadow-sm ring-1 ring-[#016a71]'
-                          : 'border-[#d1d1cd] bg-[#fdfbfa] hover:bg-[#ffffff]'
+                          ? 'border-[var(--dt-primary)] bg-[var(--dt-card)] shadow-sm ring-1 ring-[var(--dt-primary)]'
+                          : 'border-[var(--dt-border)] bg-[var(--dt-card)] hover:border-[var(--dt-muted-foreground)]'
                       }`}
                     >
-                      <div className="font-semibold text-[13px] text-[#27251e] flex items-center justify-between mb-1">
+                      <div className="font-semibold text-[13px] text-[var(--dt-foreground)] flex items-center justify-between mb-1">
                         <span>Focused Chat</span>
-                        {settings.interface_mode === 'focused' && <Check className="w-3.5 h-3.5 text-[#016a71]" />}
+                        {settings.interface_mode === 'focused' && <Check className="w-3.5 h-3.5 text-[var(--dt-primary)]" />}
                       </div>
-                      <p className="text-[11px] text-[#72706b] leading-relaxed">
+                      <p className="text-[11px] text-[var(--dt-muted-foreground)] leading-relaxed">
                         Streamlined conversational view focused on prompts, answers, and artifacts without secondary rails.
                       </p>
                     </button>
                   </div>
                 </div>
 
-                <div className="border-t border-[#e5e5e0] pt-4">
-                  <h3 className="text-[13px] font-semibold text-[#27251e] mb-1">Theme Palette</h3>
+                <div className="border-t border-[var(--dt-border)] pt-4">
+                  <h3 className="text-[13px] font-semibold text-[var(--dt-foreground)] mb-1">Theme Palette</h3>
                   <div className="flex items-center gap-2 mt-2">
                     {(['light', 'dark', 'system'] as const).map((t) => (
                       <button
@@ -218,8 +218,8 @@ export const SettingsModal: React.FC = () => {
                         }}
                         className={`px-3 py-1.5 text-[12px] font-medium capitalize rounded-[8px] border transition-colors cursor-pointer ${
                           settings.theme === t
-                            ? 'bg-[#016a71] text-white border-[#016a71]'
-                            : 'bg-[#ffffff] text-[#72706b] border-[#d1d1cd] hover:text-[#27251e]'
+                            ? 'bg-[var(--dt-primary)] text-white border-[var(--dt-primary)]'
+                            : 'bg-[var(--dt-card)] text-[var(--dt-muted-foreground)] border-[var(--dt-border)] hover:text-[var(--dt-foreground)]'
                         }`}
                       >
                         {t}
@@ -228,12 +228,12 @@ export const SettingsModal: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="border-t border-[#e5e5e0] pt-4 space-y-3">
-                  <h3 className="text-[13px] font-semibold text-[#27251e]">Behavior & Features</h3>
-                  <label className="flex items-center justify-between p-3 rounded-[10px] bg-[#fdfbfa] border border-[#d1d1cd] cursor-pointer">
+                <div className="border-t border-[var(--dt-border)] pt-4 space-y-3">
+                  <h3 className="text-[13px] font-semibold text-[var(--dt-foreground)]">Behavior & Features</h3>
+                  <label className="flex items-center justify-between p-3 rounded-[10px] bg-[var(--dt-card)] border border-[var(--dt-border)] cursor-pointer">
                     <div>
-                      <span className="text-[12px] font-medium text-[#27251e] block">Live Token Delta Streaming</span>
-                      <span className="text-[11px] text-[#72706b]">Stream AI response tokens as they are generated by the model</span>
+                      <span className="text-[12px] font-medium text-[var(--dt-foreground)] block">Live Token Delta Streaming</span>
+                      <span className="text-[11px] text-[var(--dt-muted-foreground)]">Stream AI response tokens as they are generated by the model</span>
                     </div>
                     <input
                       type="checkbox"
@@ -242,14 +242,14 @@ export const SettingsModal: React.FC = () => {
                         updateSetting('stream_tokens', e.target.checked)
                         notifySaved()
                       }}
-                      className="w-4 h-4 rounded text-[#016a71] cursor-pointer"
+                      className="w-4 h-4 rounded text-[var(--dt-primary)] cursor-pointer"
                     />
                   </label>
 
-                  <label className="flex items-center justify-between p-3 rounded-[10px] bg-[#fdfbfa] border border-[#d1d1cd] cursor-pointer">
+                  <label className="flex items-center justify-between p-3 rounded-[10px] bg-[var(--dt-card)] border border-[var(--dt-border)] cursor-pointer">
                     <div>
-                      <span className="text-[12px] font-medium text-[#27251e] block">Auto-Open Preview Pane</span>
-                      <span className="text-[11px] text-[#72706b]">Automatically expand the right preview rail when an HTML/SVG artifact is received</span>
+                      <span className="text-[12px] font-medium text-[var(--dt-foreground)] block">Auto-Open Preview Pane</span>
+                      <span className="text-[11px] text-[var(--dt-muted-foreground)]">Automatically expand the right preview rail when an HTML/SVG artifact is received</span>
                     </div>
                     <input
                       type="checkbox"
@@ -258,7 +258,7 @@ export const SettingsModal: React.FC = () => {
                         updateSetting('auto_preview', e.target.checked)
                         notifySaved()
                       }}
-                      className="w-4 h-4 rounded text-[#016a71] cursor-pointer"
+                      className="w-4 h-4 rounded text-[var(--dt-primary)] cursor-pointer"
                     />
                   </label>
                 </div>
@@ -269,15 +269,15 @@ export const SettingsModal: React.FC = () => {
             {activeTab === 'providers' && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-[13px] font-semibold text-[#27251e] mb-1">Active Default Model</h3>
-                  <p className="text-[11px] text-[#72706b] mb-2">Default model used for new autonomous agent sessions.</p>
+                  <h3 className="text-[13px] font-semibold text-[var(--dt-foreground)] mb-1">Active Default Model</h3>
+                  <p className="text-[11px] text-[var(--dt-muted-foreground)] mb-2">Default model used for new autonomous agent sessions.</p>
                   <select
                     value={settings.default_model}
                     onChange={(e) => {
                       updateSetting('default_model', e.target.value)
                       notifySaved()
                     }}
-                    className="w-full px-3 py-2 text-[12px] bg-white border border-[#d1d1cd] rounded-[10px] outline-none font-mono text-[#27251e]"
+                    className="w-full px-3 py-2 text-[12px] bg-[var(--dt-card)] border border-[var(--dt-border)] rounded-[10px] outline-none font-mono text-[var(--dt-foreground)]"
                   >
                     {models.map((m) => (
                       <option key={m.id} value={m.id}>
@@ -288,17 +288,17 @@ export const SettingsModal: React.FC = () => {
                 </div>
 
                 {/* Google Gemini Card */}
-                <div className="p-4 rounded-[14px] bg-[#fdfbfa] border border-[#d1d1cd] space-y-3">
+                <div className="p-4 rounded-[14px] bg-[var(--dt-card)] border border-[var(--dt-border)] space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-[#016a71]" />
-                      <span className="text-[13px] font-semibold text-[#27251e]">Google Gemini</span>
+                      <Sparkles className="w-4 h-4 text-[var(--dt-primary)]" />
+                      <span className="text-[13px] font-semibold text-[var(--dt-foreground)]">Google Gemini</span>
                     </div>
                     <button
                       type="button"
                       disabled={testingProvider === 'gemini'}
                       onClick={() => handleTestProvider('gemini', settings.gemini_api_key)}
-                      className="text-[11px] font-medium text-[#016a71] hover:underline cursor-pointer"
+                      className="text-[11px] font-medium text-[var(--dt-primary)] hover:underline cursor-pointer"
                     >
                       {testingProvider === 'gemini' ? 'Testing...' : 'Test Connection'}
                     </button>
@@ -310,12 +310,12 @@ export const SettingsModal: React.FC = () => {
                       value={settings.gemini_api_key || ''}
                       onChange={(e) => updateSetting('gemini_api_key', e.target.value)}
                       onBlur={notifySaved}
-                      className="w-full px-3 py-2 text-[11px] font-mono bg-white border border-[#d1d1cd] rounded-[8px] outline-none pr-9 text-[#27251e]"
+                      className="w-full px-3 py-2 text-[11px] font-mono bg-[var(--dt-sidebar)] border border-[var(--dt-border)] rounded-[8px] outline-none pr-9 text-[var(--dt-foreground)]"
                     />
                     <button
                       type="button"
                       onClick={() => setShowGeminiKey(!showGeminiKey)}
-                      className="absolute right-2.5 top-2.5 text-[#72706b] hover:text-[#27251e]"
+                      className="absolute right-2.5 top-2.5 text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)]"
                     >
                       {showGeminiKey ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                     </button>
@@ -323,7 +323,7 @@ export const SettingsModal: React.FC = () => {
                   {testResults.gemini && (
                     <div
                       className={`text-[11px] p-2 rounded-[6px] flex items-center gap-1.5 ${
-                        testResults.gemini.valid ? 'bg-[rgba(1,106,113,0.08)] text-[#016a71]' : 'bg-[rgba(185,28,28,0.08)] text-[#b91c1c]'
+                        testResults.gemini.valid ? 'bg-[var(--dt-sidebar-accent)] text-[var(--dt-primary)]' : 'bg-[var(--dt-danger)]/10 text-[var(--dt-danger)]'
                       }`}
                     >
                       {testResults.gemini.valid ? <Check className="w-3.5 h-3.5 shrink-0" /> : <AlertCircle className="w-3.5 h-3.5 shrink-0" />}
@@ -333,17 +333,17 @@ export const SettingsModal: React.FC = () => {
                 </div>
 
                 {/* Anthropic Card */}
-                <div className="p-4 rounded-[14px] bg-[#fdfbfa] border border-[#d1d1cd] space-y-3">
+                <div className="p-4 rounded-[14px] bg-[var(--dt-card)] border border-[var(--dt-border)] space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Cpu className="w-4 h-4 text-[#d97706]" />
-                      <span className="text-[13px] font-semibold text-[#27251e]">Anthropic Claude</span>
+                      <Cpu className="w-4 h-4 text-[var(--dt-warning)]" />
+                      <span className="text-[13px] font-semibold text-[var(--dt-foreground)]">Anthropic Claude</span>
                     </div>
                     <button
                       type="button"
                       disabled={testingProvider === 'anthropic'}
                       onClick={() => handleTestProvider('anthropic', settings.anthropic_api_key)}
-                      className="text-[11px] font-medium text-[#016a71] hover:underline cursor-pointer"
+                      className="text-[11px] font-medium text-[var(--dt-primary)] hover:underline cursor-pointer"
                     >
                       {testingProvider === 'anthropic' ? 'Testing...' : 'Test Connection'}
                     </button>
@@ -355,12 +355,12 @@ export const SettingsModal: React.FC = () => {
                       value={settings.anthropic_api_key || ''}
                       onChange={(e) => updateSetting('anthropic_api_key', e.target.value)}
                       onBlur={notifySaved}
-                      className="w-full px-3 py-2 text-[11px] font-mono bg-white border border-[#d1d1cd] rounded-[8px] outline-none pr-9 text-[#27251e]"
+                      className="w-full px-3 py-2 text-[11px] font-mono bg-[var(--dt-sidebar)] border border-[var(--dt-border)] rounded-[8px] outline-none pr-9 text-[var(--dt-foreground)]"
                     />
                     <button
                       type="button"
                       onClick={() => setShowAnthropicKey(!showAnthropicKey)}
-                      className="absolute right-2.5 top-2.5 text-[#72706b] hover:text-[#27251e]"
+                      className="absolute right-2.5 top-2.5 text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)]"
                     >
                       {showAnthropicKey ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                     </button>
@@ -368,7 +368,7 @@ export const SettingsModal: React.FC = () => {
                   {testResults.anthropic && (
                     <div
                       className={`text-[11px] p-2 rounded-[6px] flex items-center gap-1.5 ${
-                        testResults.anthropic.valid ? 'bg-[rgba(1,106,113,0.08)] text-[#016a71]' : 'bg-[rgba(185,28,28,0.08)] text-[#b91c1c]'
+                        testResults.anthropic.valid ? 'bg-[var(--dt-sidebar-accent)] text-[var(--dt-primary)]' : 'bg-[var(--dt-danger)]/10 text-[var(--dt-danger)]'
                       }`}
                     >
                       {testResults.anthropic.valid ? <Check className="w-3.5 h-3.5 shrink-0" /> : <AlertCircle className="w-3.5 h-3.5 shrink-0" />}
@@ -378,17 +378,17 @@ export const SettingsModal: React.FC = () => {
                 </div>
 
                 {/* OpenAI Card */}
-                <div className="p-4 rounded-[14px] bg-[#fdfbfa] border border-[#d1d1cd] space-y-3">
+                <div className="p-4 rounded-[14px] bg-[var(--dt-card)] border border-[var(--dt-border)] space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <Cpu className="w-4 h-4 text-[#10a37f]" />
-                      <span className="text-[13px] font-semibold text-[#27251e]">OpenAI</span>
+                      <span className="text-[13px] font-semibold text-[var(--dt-foreground)]">OpenAI</span>
                     </div>
                     <button
                       type="button"
                       disabled={testingProvider === 'openai'}
                       onClick={() => handleTestProvider('openai', settings.openai_api_key)}
-                      className="text-[11px] font-medium text-[#016a71] hover:underline cursor-pointer"
+                      className="text-[11px] font-medium text-[var(--dt-primary)] hover:underline cursor-pointer"
                     >
                       {testingProvider === 'openai' ? 'Testing...' : 'Test Connection'}
                     </button>
@@ -400,12 +400,12 @@ export const SettingsModal: React.FC = () => {
                       value={settings.openai_api_key || ''}
                       onChange={(e) => updateSetting('openai_api_key', e.target.value)}
                       onBlur={notifySaved}
-                      className="w-full px-3 py-2 text-[11px] font-mono bg-white border border-[#d1d1cd] rounded-[8px] outline-none pr-9 text-[#27251e]"
+                      className="w-full px-3 py-2 text-[11px] font-mono bg-[var(--dt-sidebar)] border border-[var(--dt-border)] rounded-[8px] outline-none pr-9 text-[var(--dt-foreground)]"
                     />
                     <button
                       type="button"
                       onClick={() => setShowOpenAiKey(!showOpenAiKey)}
-                      className="absolute right-2.5 top-2.5 text-[#72706b] hover:text-[#27251e]"
+                      className="absolute right-2.5 top-2.5 text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)]"
                     >
                       {showOpenAiKey ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                     </button>
@@ -413,7 +413,7 @@ export const SettingsModal: React.FC = () => {
                   {testResults.openai && (
                     <div
                       className={`text-[11px] p-2 rounded-[6px] flex items-center gap-1.5 ${
-                        testResults.openai.valid ? 'bg-[rgba(1,106,113,0.08)] text-[#016a71]' : 'bg-[rgba(185,28,28,0.08)] text-[#b91c1c]'
+                        testResults.openai.valid ? 'bg-[var(--dt-sidebar-accent)] text-[var(--dt-primary)]' : 'bg-[var(--dt-danger)]/10 text-[var(--dt-danger)]'
                       }`}
                     >
                       {testResults.openai.valid ? <Check className="w-3.5 h-3.5 shrink-0" /> : <AlertCircle className="w-3.5 h-3.5 shrink-0" />}
@@ -423,17 +423,17 @@ export const SettingsModal: React.FC = () => {
                 </div>
 
                 {/* Local Ollama Card */}
-                <div className="p-4 rounded-[14px] bg-[#fdfbfa] border border-[#d1d1cd] space-y-3">
+                <div className="p-4 rounded-[14px] bg-[var(--dt-card)] border border-[var(--dt-border)] space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Server className="w-4 h-4 text-[#27251e]" />
-                      <span className="text-[13px] font-semibold text-[#27251e]">Local / Ollama Endpoint</span>
+                      <Server className="w-4 h-4 text-[var(--dt-foreground)]" />
+                      <span className="text-[13px] font-semibold text-[var(--dt-foreground)]">Local / Ollama Endpoint</span>
                     </div>
                     <button
                       type="button"
                       disabled={testingProvider === 'ollama'}
                       onClick={() => handleTestProvider('ollama', undefined, settings.ollama_base_url)}
-                      className="text-[11px] font-medium text-[#016a71] hover:underline cursor-pointer"
+                      className="text-[11px] font-medium text-[var(--dt-primary)] hover:underline cursor-pointer"
                     >
                       {testingProvider === 'ollama' ? 'Testing...' : 'Test Connection'}
                     </button>
@@ -444,12 +444,12 @@ export const SettingsModal: React.FC = () => {
                     value={settings.ollama_base_url || ''}
                     onChange={(e) => updateSetting('ollama_base_url', e.target.value)}
                     onBlur={notifySaved}
-                    className="w-full px-3 py-2 text-[11px] font-mono bg-white border border-[#d1d1cd] rounded-[8px] outline-none text-[#27251e]"
+                    className="w-full px-3 py-2 text-[11px] font-mono bg-[var(--dt-sidebar)] border border-[var(--dt-border)] rounded-[8px] outline-none text-[var(--dt-foreground)]"
                   />
                   {testResults.ollama && (
                     <div
                       className={`text-[11px] p-2 rounded-[6px] flex items-center gap-1.5 ${
-                        testResults.ollama.valid ? 'bg-[rgba(1,106,113,0.08)] text-[#016a71]' : 'bg-[rgba(185,28,28,0.08)] text-[#b91c1c]'
+                        testResults.ollama.valid ? 'bg-[var(--dt-sidebar-accent)] text-[var(--dt-primary)]' : 'bg-[var(--dt-danger)]/10 text-[var(--dt-danger)]'
                       }`}
                     >
                       {testResults.ollama.valid ? <Check className="w-3.5 h-3.5 shrink-0" /> : <AlertCircle className="w-3.5 h-3.5 shrink-0" />}
@@ -464,8 +464,8 @@ export const SettingsModal: React.FC = () => {
             {activeTab === 'reasoning' && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-[13px] font-semibold text-[#27251e] mb-1">Default Reasoning Effort</h3>
-                  <p className="text-[11px] text-[#72706b] mb-3">Controls the depth of internal chain-of-thought exploration.</p>
+                  <h3 className="text-[13px] font-semibold text-[var(--dt-foreground)] mb-1">Default Reasoning Effort</h3>
+                  <p className="text-[11px] text-[var(--dt-muted-foreground)] mb-3">Controls the depth of internal chain-of-thought exploration.</p>
                   <div className="grid grid-cols-3 gap-3">
                     {[
                       { id: 'low', label: 'Low', desc: 'Fast, minimal internal thinking tokens' },
@@ -480,43 +480,43 @@ export const SettingsModal: React.FC = () => {
                         }}
                         className={`p-3 rounded-[12px] border text-left cursor-pointer transition-all ${
                           settings.default_reasoning_effort === effort.id
-                            ? 'border-[#016a71] bg-white ring-1 ring-[#016a71] shadow-sm'
-                            : 'border-[#d1d1cd] bg-[#fdfbfa] hover:bg-white'
+                            ? 'border-[var(--dt-primary)] bg-[var(--dt-card)] ring-1 ring-[var(--dt-primary)] shadow-sm'
+                            : 'border-[var(--dt-border)] bg-[var(--dt-card)] hover:border-[var(--dt-muted-foreground)]'
                         }`}
                       >
-                        <div className="font-semibold text-[13px] text-[#27251e] flex items-center justify-between mb-1">
+                        <div className="font-semibold text-[13px] text-[var(--dt-foreground)] flex items-center justify-between mb-1">
                           <span>{effort.label}</span>
                           {settings.default_reasoning_effort === effort.id && (
-                            <Check className="w-3.5 h-3.5 text-[#016a71]" />
+                            <Check className="w-3.5 h-3.5 text-[var(--dt-primary)]" />
                           )}
                         </div>
-                        <p className="text-[10px] text-[#72706b] leading-tight">{effort.desc}</p>
+                        <p className="text-[10px] text-[var(--dt-muted-foreground)] leading-tight">{effort.desc}</p>
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div className="border-t border-[#e5e5e0] pt-4">
-                  <h3 className="text-[13px] font-semibold text-[#27251e] mb-1">Execution Safety Guardrails</h3>
-                  <p className="text-[11px] text-[#72706b] mb-3">
+                <div className="border-t border-[var(--dt-border)] pt-4">
+                  <h3 className="text-[13px] font-semibold text-[var(--dt-foreground)] mb-1">Execution Safety Guardrails</h3>
+                  <p className="text-[11px] text-[var(--dt-muted-foreground)] mb-3">
                     Actions marked as requires_approval pause for explicit user confirmation in the CardStack before execution.
                   </p>
-                  <div className="p-3.5 bg-[#fdfbfa] border border-[#d1d1cd] rounded-[12px] text-[12px] space-y-2">
+                  <div className="p-3.5 bg-[var(--dt-card)] border border-[var(--dt-border)] rounded-[12px] text-[12px] space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="font-medium text-[#27251e]">File Modifications (write_file, edit_file)</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[rgba(245,158,11,0.15)] text-[#b45309]">
+                      <span className="font-medium text-[var(--dt-foreground)]">File Modifications (write_file, edit_file)</span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[var(--dt-warning)]/15 text-[var(--dt-warning)]">
                         requires_approval
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="font-medium text-[#27251e]">Shell Execution (run_shell, bash)</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[rgba(245,158,11,0.15)] text-[#b45309]">
+                      <span className="font-medium text-[var(--dt-foreground)]">Shell Execution (run_shell, bash)</span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[var(--dt-warning)]/15 text-[var(--dt-warning)]">
                         requires_approval
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="font-medium text-[#27251e]">Read & Inspection (read_file, git_status, tree)</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[rgba(1,106,113,0.1)] text-[#016a71]">
+                      <span className="font-medium text-[var(--dt-foreground)]">Read & Inspection (read_file, git_status, tree)</span>
+                      <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[var(--dt-sidebar-accent)] text-[var(--dt-primary)]">
                         autonomous
                       </span>
                     </div>
@@ -529,8 +529,8 @@ export const SettingsModal: React.FC = () => {
             {activeTab === 'shortcuts' && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-[13px] font-semibold text-[#27251e] mb-2">Global Keyboard Shortcuts</h3>
-                  <div className="border border-[#d1d1cd] rounded-[12px] bg-[#fdfbfa] overflow-hidden text-[12px] divide-y divide-[#f0eee9]">
+                  <h3 className="text-[13px] font-semibold text-[var(--dt-foreground)] mb-2">Global Keyboard Shortcuts</h3>
+                  <div className="border border-[var(--dt-border)] rounded-[12px] bg-[var(--dt-card)] overflow-hidden text-[12px] divide-y divide-[var(--dt-border)]">
                     {[
                       { key: '⌘K / Ctrl+K', action: 'Open Command / Slash Palette' },
                       { key: '⌘B / Ctrl+B', action: 'Toggle Sidebar' },
@@ -540,8 +540,8 @@ export const SettingsModal: React.FC = () => {
                       { key: 'Esc', action: 'Interrupt turn or dismiss active modal' },
                     ].map((sc, i) => (
                       <div key={i} className="flex items-center justify-between px-3.5 py-2">
-                        <span className="text-[#27251e]">{sc.action}</span>
-                        <kbd className="px-2 py-0.5 text-[10px] font-mono bg-[#faf8f5] text-[#72706b] rounded border border-[#d1d1cd]">
+                        <span className="text-[var(--dt-foreground)]">{sc.action}</span>
+                        <kbd className="px-2 py-0.5 text-[10px] font-mono bg-[var(--dt-sidebar)] text-[var(--dt-muted-foreground)] rounded border border-[var(--dt-border)]">
                           {sc.key}
                         </kbd>
                       </div>
@@ -549,24 +549,24 @@ export const SettingsModal: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="border-t border-[#e5e5e0] pt-4">
-                  <h3 className="text-[13px] font-semibold text-[#27251e] mb-2">System Telemetry & Architecture</h3>
-                  <div className="p-3 bg-[#fdfbfa] border border-[#d1d1cd] rounded-[12px] text-[11px] font-mono space-y-1.5 text-[#72706b]">
+                <div className="border-t border-[var(--dt-border)] pt-4">
+                  <h3 className="text-[13px] font-semibold text-[var(--dt-foreground)] mb-2">System Telemetry & Architecture</h3>
+                  <div className="p-3 bg-[var(--dt-card)] border border-[var(--dt-border)] rounded-[12px] text-[11px] font-mono space-y-1.5 text-[var(--dt-muted-foreground)]">
                     <div className="flex justify-between">
                       <span>Gateway Core:</span>
-                      <span className="text-[#27251e]">http://127.0.0.1:8000</span>
+                      <span className="text-[var(--dt-foreground)]">http://127.0.0.1:8000</span>
                     </div>
                     <div className="flex justify-between">
                       <span>WebSocket Transport:</span>
-                      <span className="text-[#016a71]">JSON-RPC 2.0 (Bidirectional)</span>
+                      <span className="text-[var(--dt-primary)]">JSON-RPC 2.0 (Bidirectional)</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Database Engine:</span>
-                      <span className="text-[#27251e]">SQLite WAL Mode (65-col parity)</span>
+                      <span className="text-[var(--dt-foreground)]">SQLite WAL Mode (65-col parity)</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Client Architecture:</span>
-                      <span className="text-[#27251e]">Electron + React 19 + Nanostores</span>
+                      <span className="text-[var(--dt-foreground)]">Electron + React 19 + Nanostores</span>
                     </div>
                   </div>
                 </div>
@@ -576,15 +576,15 @@ export const SettingsModal: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3 border-t border-[#d1d1cd] bg-[#fdfbfa] flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-1.5 text-[11px] text-[#72706b]">
-            <HelpCircle className="w-3.5 h-3.5 text-[#016a71]" />
+        <div className="px-6 py-3 border-t border-[var(--dt-border)] bg-[var(--dt-card)] flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-1.5 text-[11px] text-[var(--dt-muted-foreground)]">
+            <HelpCircle className="w-3.5 h-3.5 text-[var(--dt-primary)]" />
             <span>Settings are automatically persisted to SQLite in real-time.</span>
           </div>
           <button
             onClick={toggleSettings}
             disabled={isSaving}
-            className="px-4 py-1.5 text-[12px] font-medium bg-[#016a71] text-white rounded-[8px] hover:bg-[#015257] disabled:opacity-50 cursor-pointer transition-colors shadow-sm"
+            className="px-4 py-1.5 text-[12px] font-medium bg-[var(--dt-primary)] text-white rounded-[8px] hover:bg-[var(--dt-primary-hover)] disabled:opacity-50 cursor-pointer transition-colors shadow-sm"
           >
             {isSaving ? 'Saving...' : 'Done'}
           </button>

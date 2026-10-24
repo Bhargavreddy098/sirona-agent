@@ -45,7 +45,7 @@ export const CommandPalette: React.FC = () => {
     {
       id: 'new-chat',
       title: 'New Chat Session',
-      icon: <Plus className="w-4 h-4 text-[#016a71]" />,
+      icon: <Plus className="w-4 h-4 text-[var(--dt-primary)]" />,
       category: 'Actions',
       run: () => {
         createNewSession()
@@ -55,7 +55,7 @@ export const CommandPalette: React.FC = () => {
     {
       id: 'terminal',
       title: 'Toggle Terminal Deck',
-      icon: <Terminal className="w-4 h-4 text-[#016a71]" />,
+      icon: <Terminal className="w-4 h-4 text-[var(--dt-primary)]" />,
       category: 'Views',
       run: () => {
         toggleTerminalDeck()
@@ -65,7 +65,7 @@ export const CommandPalette: React.FC = () => {
     {
       id: 'diffs',
       title: 'Review Git Working Tree Diffs',
-      icon: <GitCompare className="w-4 h-4 text-[#016a71]" />,
+      icon: <GitCompare className="w-4 h-4 text-[var(--dt-primary)]" />,
       category: 'Views',
       run: () => {
         setActiveContextTab('review')
@@ -75,7 +75,7 @@ export const CommandPalette: React.FC = () => {
     {
       id: 'files',
       title: 'Browse Project Files Explorer',
-      icon: <FolderTree className="w-4 h-4 text-[#016a71]" />,
+      icon: <FolderTree className="w-4 h-4 text-[var(--dt-primary)]" />,
       category: 'Views',
       run: () => {
         setActiveContextTab('files')
@@ -85,7 +85,7 @@ export const CommandPalette: React.FC = () => {
     {
       id: 'settings',
       title: 'Open Settings & Model Providers',
-      icon: <Settings className="w-4 h-4 text-[#016a71]" />,
+      icon: <Settings className="w-4 h-4 text-[var(--dt-primary)]" />,
       category: 'Settings',
       run: () => {
         toggleSettings()
@@ -95,7 +95,7 @@ export const CommandPalette: React.FC = () => {
     {
       id: 'model-gemini',
       title: 'Set Model: Gemini 2.5 Flash',
-      icon: <Sparkles className="w-4 h-4 text-[#016a71]" />,
+      icon: <Sparkles className="w-4 h-4 text-[var(--dt-primary)]" />,
       category: 'Models',
       run: () => {
         toggleCommandPalette()
@@ -104,7 +104,7 @@ export const CommandPalette: React.FC = () => {
     {
       id: 'model-claude',
       title: 'Set Model: Claude 3.5 Sonnet',
-      icon: <Sparkles className="w-4 h-4 text-[#016a71]" />,
+      icon: <Sparkles className="w-4 h-4 text-[var(--dt-primary)]" />,
       category: 'Models',
       run: () => {
         toggleCommandPalette()
@@ -121,32 +121,32 @@ export const CommandPalette: React.FC = () => {
   )
 
   return (
-    <div className="fixed inset-0 z-[220] bg-black/40 backdrop-blur-xs flex items-start justify-center pt-20 px-4 animate-in fade-in duration-150">
-      <div className="w-full max-w-xl bg-[#fdfbfa] border border-[#d1d1cd] rounded-[16px] shadow-[var(--shadow-subtle)] overflow-hidden flex flex-col font-sans select-none">
+    <div className="fixed inset-0 z-[220] bg-black/50 backdrop-blur-xs flex items-start justify-center pt-20 px-4 animate-in fade-in duration-150">
+      <div className="w-full max-w-xl bg-[var(--dt-card)] border border-[var(--dt-border)] rounded-[16px] shadow-2xl overflow-hidden flex flex-col font-sans select-none text-[var(--dt-foreground)]">
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 py-3 border-b border-[#d1d1cd] bg-[#ffffff]">
-          <Search className="w-4 h-4 text-[#72706b] mr-3 shrink-0" />
+        <div className="flex items-center px-4 py-3 border-b border-[var(--dt-border)] bg-[var(--dt-card)]">
+          <Search className="w-4 h-4 text-[var(--dt-muted-foreground)] mr-3 shrink-0" />
           <input
             autoFocus
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Type a command or search sessions..."
-            className="flex-1 bg-transparent text-[15px] text-[#27251e] placeholder:text-[#72706b] outline-none font-normal"
+            className="flex-1 bg-transparent text-[15px] text-[var(--dt-foreground)] placeholder:text-[var(--dt-muted-foreground)] outline-none font-normal"
           />
           <button
             onClick={toggleCommandPalette}
-            className="p-1 text-[#72706b] hover:text-[#27251e] rounded transition-colors"
+            className="p-1 text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] rounded transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Results List */}
-        <div className="max-h-96 overflow-y-auto p-2 flex flex-col gap-1">
+        <div className="max-h-96 overflow-y-auto p-2 flex flex-col gap-1 bg-[var(--dt-card-subtle)]">
           {sessionMatches.length > 0 && (
             <div className="mb-2">
-              <div className="px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-[#72706b]">
+              <div className="px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-[var(--dt-muted-foreground)]">
                 Sessions
               </div>
               {sessionMatches.map((s) => (
@@ -156,13 +156,13 @@ export const CommandPalette: React.FC = () => {
                     openSessionInTab(s.id)
                     toggleCommandPalette()
                   }}
-                  className="flex items-center justify-between px-3 py-2 rounded-[8px] hover:bg-[#f5f3ef] cursor-pointer text-[13px] text-[#27251e] transition-colors"
+                  className="flex items-center justify-between px-3 py-2 rounded-[8px] hover:bg-[var(--dt-sidebar-accent)] cursor-pointer text-[13px] text-[var(--dt-foreground)] transition-colors"
                 >
                   <div className="flex items-center gap-2.5 truncate">
-                    <MessageSquare className="w-4 h-4 text-[#016a71] shrink-0" />
+                    <MessageSquare className="w-4 h-4 text-[var(--dt-primary)] shrink-0" />
                     <span className="truncate">{s.title || 'Untitled Session'}</span>
                   </div>
-                  <span className="text-[11px] text-[#92918b] font-mono">{s.model}</span>
+                  <span className="text-[11px] text-[var(--dt-muted-foreground)] font-mono">{s.model}</span>
                 </div>
               ))}
             </div>
@@ -170,18 +170,18 @@ export const CommandPalette: React.FC = () => {
 
           {actionMatches.length > 0 && (
             <div>
-              <div className="px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-[#72706b]">
+              <div className="px-3 py-1 text-[11px] font-medium uppercase tracking-wider text-[var(--dt-muted-foreground)]">
                 Commands
               </div>
               {actionMatches.map((a) => (
                 <div
                   key={a.id}
                   onClick={a.run}
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-[8px] hover:bg-[#f5f3ef] cursor-pointer text-[13px] text-[#27251e] transition-colors"
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-[8px] hover:bg-[var(--dt-sidebar-accent)] cursor-pointer text-[13px] text-[var(--dt-foreground)] transition-colors"
                 >
                   {a.icon}
                   <span className="flex-1">{a.title}</span>
-                  <span className="text-[10px] text-[#92918b] uppercase tracking-wider font-mono">
+                  <span className="text-[10px] text-[var(--dt-muted-foreground)] uppercase tracking-wider font-mono">
                     {a.category}
                   </span>
                 </div>
@@ -190,16 +190,16 @@ export const CommandPalette: React.FC = () => {
           )}
 
           {sessionMatches.length === 0 && actionMatches.length === 0 && (
-            <div className="py-8 text-center text-[13px] text-[#72706b]">
+            <div className="py-8 text-center text-[13px] text-[var(--dt-muted-foreground)]">
               No commands or sessions match "{query}"
             </div>
           )}
         </div>
 
         {/* Footer */}
-        <div className="px-4 py-2 bg-[#faf8f5] border-t border-[#d1d1cd] flex items-center justify-between text-[11px] text-[#72706b]">
+        <div className="px-4 py-2 bg-[var(--dt-card)] border-t border-[var(--dt-border)] flex items-center justify-between text-[11px] text-[var(--dt-muted-foreground)]">
           <span>Navigate with arrows, Enter to select</span>
-          <kbd className="px-1.5 py-0.5 rounded bg-[#fdfbfa] border border-[#d1d1cd] font-mono text-[10px]">
+          <kbd className="px-1.5 py-0.5 rounded bg-[var(--dt-sidebar)] border border-[var(--dt-border)] font-mono text-[10px]">
             ESC to close
           </kbd>
         </div>

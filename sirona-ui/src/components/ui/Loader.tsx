@@ -13,7 +13,7 @@ export const Loader: React.FC<{ size?: 'sm' | 'md' }> = ({ size = 'sm' }) => {
 
   return (
     <span
-      className={`font-mono text-[#016a71] ${
+      className={`font-mono text-[var(--dt-primary)] ${
         size === 'sm' ? 'text-xs' : 'text-sm'
       } inline-block animate-pulse select-none`}
     >

@@ -12,11 +12,11 @@ export const DirectiveChips: React.FC<DirectiveChipsProps> = ({ chips, onRemove 
   const getIcon = (type: string) => {
     switch (type) {
       case 'file':
-        return <FileCode className="w-3.5 h-3.5 text-[#016a71]" />
+        return <FileCode className="w-3.5 h-3.5 text-[var(--dt-primary)]" />
       case 'slash':
-        return <Slash className="w-3.5 h-3.5 text-[#016a71]" />
+        return <Slash className="w-3.5 h-3.5 text-[var(--dt-primary)]" />
       case 'shell':
-        return <Terminal className="w-3.5 h-3.5 text-[#016a71]" />
+        return <Terminal className="w-3.5 h-3.5 text-[var(--dt-primary)]" />
       default:
         return null
     }
@@ -27,13 +27,13 @@ export const DirectiveChips: React.FC<DirectiveChipsProps> = ({ chips, onRemove 
       {chips.map((chip) => (
         <span
           key={chip.id}
-          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-mono bg-[#fdfbfa] border border-[#d1d1cd] text-[#27251e] shadow-[var(--shadow-subtle)]"
+          className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[12px] font-mono bg-[var(--dt-card-subtle)] border border-[var(--dt-border)] text-[var(--dt-foreground)] shadow-[var(--shadow-subtle)]"
         >
           {getIcon(chip.type)}
           <span>{chip.label}</span>
           <button
             onClick={() => onRemove(chip.id)}
-            className="hover:text-[#ef4444] text-[#72706b] transition-colors ml-1 cursor-pointer"
+            className="hover:text-[var(--dt-danger)] text-[var(--dt-muted-foreground)] transition-colors ml-1 cursor-pointer"
           >
             <X className="w-3 h-3" />
           </button>

@@ -29,13 +29,13 @@ export const TranscriptCanvas: React.FC = () => {
       <div className="max-w-[900px] w-full mx-auto flex-1 flex flex-col justify-start">
         {messages.length === 0 && !streaming.isStreaming && (
           <div className="flex-1 flex flex-col items-center justify-center text-center select-none py-12">
-            <div className="w-12 h-12 rounded-[16px] bg-[#fdfbfa] border border-[#d1d1cd] flex items-center justify-center mb-4 shadow-[var(--shadow-subtle)]">
-              <Sparkles className="w-6 h-6 text-[#016a71]" />
+            <div className="w-12 h-12 rounded-[14px] bg-[var(--dt-card)] border border-[var(--dt-border)] flex items-center justify-center mb-4 shadow-sm">
+              <Sparkles className="w-6 h-6 text-[var(--dt-primary)]" />
             </div>
-            <h2 className="text-[24px] font-normal text-[#27251e] mb-2 tracking-tight">
+            <h2 className="text-[22px] font-semibold text-[var(--dt-foreground)] mb-2 tracking-tight">
               What do you want to explore?
             </h2>
-            <p className="text-[14px] text-[#72706b] max-w-md font-normal leading-relaxed mb-6">
+            <p className="text-[13.5px] text-[var(--dt-muted-foreground)] max-w-md font-normal leading-relaxed mb-6">
               Sirona is your autonomous developer agent. Inspect schemas, review git diffs, execute sandboxed tests, and automate code migrations.
             </p>
 
@@ -108,9 +108,9 @@ export const TranscriptCanvas: React.FC = () => {
                 sessionId={streaming.sessionId || undefined}
               />
             ) : (
-              <div className="flex items-center gap-2 text-[13px] text-[#016a71] my-3 px-1">
+              <div className="flex items-center gap-2 text-[13px] text-[var(--dt-primary)] my-3 px-1">
                 <Loader />
-                <span className="text-[#72706b] font-normal">Sirona is researching...</span>
+                <span className="text-[var(--dt-muted-foreground)] font-normal">Sirona is researching...</span>
               </div>
             )}
           </div>

@@ -24,10 +24,10 @@ export const Tip: React.FC<TipProps> = ({ label, shortcut, children }) => {
     <div className="relative inline-flex" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {children}
       {visible && (
-        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 text-[11px] font-medium text-[#27251e] bg-[#fdfbfa] border border-[#d1d1cd] rounded-[6px] shadow-[var(--shadow-subtle)] whitespace-nowrap z-[200] pointer-events-none flex items-center gap-1.5">
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 text-[11px] font-medium text-[var(--dt-foreground)] bg-[var(--dt-card)] border border-[var(--dt-border)] rounded-[6px] shadow-[var(--shadow-subtle)] whitespace-nowrap z-[200] pointer-events-none flex items-center gap-1.5">
           <span>{label}</span>
           {shortcut && (
-            <kbd className="px-1 py-0.5 text-[9px] font-mono bg-[#faf8f5] text-[#72706b] rounded border border-[#d1d1cd]">
+            <kbd className="px-1 py-0.5 text-[9px] font-mono bg-[var(--dt-card-subtle)] text-[var(--dt-muted-foreground)] rounded border border-[var(--dt-border)]">
               {shortcut}
             </kbd>
           )}

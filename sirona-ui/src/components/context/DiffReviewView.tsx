@@ -199,36 +199,36 @@ export const DiffReviewView: React.FC = () => {
   const totalChanges = stagedCount + unstagedCount + untrackedCount
 
   return (
-    <div className="flex-1 overflow-hidden bg-[#faf8f5] flex flex-col font-sans select-text">
+    <div className="flex-1 overflow-hidden bg-[var(--dt-sidebar)] flex flex-col font-sans select-text">
       {/* Top Action Bar */}
-      <div className="px-3 py-2 border-b border-[#d1d1cd] bg-[#fdfbfa] flex items-center justify-between shrink-0">
+      <div className="px-3 py-2 border-b border-[var(--dt-border)] bg-[var(--dt-card)] flex items-center justify-between shrink-0">
         {/* Branch pill with switcher */}
         <div className="relative">
           <button
             onClick={() => setBranchDropdownOpen(!branchDropdownOpen)}
-            className="flex items-center gap-1.5 px-2.5 py-1 text-[12px] font-mono bg-[#f5f3ef] hover:bg-[#eae8e2] border border-[#d1d1cd] rounded-[8px] text-[#27251e] cursor-pointer transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1 text-[12px] font-mono bg-[var(--dt-sidebar)] hover:bg-[var(--dt-sidebar-accent)] border border-[var(--dt-border)] rounded-[8px] text-[var(--dt-foreground)] cursor-pointer transition-colors"
           >
-            <GitBranchIcon className="w-3.5 h-3.5 text-[#016a71]" />
+            <GitBranchIcon className="w-3.5 h-3.5 text-[var(--dt-primary)]" />
             <span className="font-semibold max-w-[130px] truncate">
               {repoStatus?.branch || 'main'}
             </span>
             {(repoStatus?.ahead ?? 0) > 0 && (
-              <span className="text-[10px] text-[#016a71] font-bold">↑{repoStatus?.ahead}</span>
+              <span className="text-[10px] text-[var(--dt-primary)] font-bold">↑{repoStatus?.ahead}</span>
             )}
             {(repoStatus?.behind ?? 0) > 0 && (
-              <span className="text-[10px] text-[#b91c1c] font-bold">↓{repoStatus?.behind}</span>
+              <span className="text-[10px] text-[var(--dt-danger)] font-bold">↓{repoStatus?.behind}</span>
             )}
-            <ChevronDown className="w-3 h-3 text-[#72706b]" />
+            <ChevronDown className="w-3 h-3 text-[var(--dt-muted-foreground)]" />
           </button>
 
           {/* Branch dropdown */}
           {branchDropdownOpen && (
-            <div className="absolute left-0 mt-1 w-64 bg-[#fdfbfa] border border-[#d1d1cd] rounded-[10px] shadow-lg z-50 p-2 text-[12px]">
-              <div className="flex items-center justify-between mb-2 pb-1 border-b border-[#e5e5e0]">
-                <span className="font-medium text-[#72706b]">Branches</span>
+            <div className="absolute left-0 mt-1 w-64 bg-[var(--dt-card)] border border-[var(--dt-border)] rounded-[10px] shadow-lg z-50 p-2 text-[12px]">
+              <div className="flex items-center justify-between mb-2 pb-1 border-b border-[var(--dt-border)]">
+                <span className="font-medium text-[var(--dt-muted-foreground)]">Branches</span>
                 <button
                   onClick={() => setIsCreatingBranch(!isCreatingBranch)}
-                  className="text-[11px] text-[#016a71] hover:underline cursor-pointer flex items-center gap-1"
+                  className="text-[11px] text-[var(--dt-primary)] hover:underline cursor-pointer flex items-center gap-1"
                 >
                   <Plus className="w-3 h-3" />
                   {isCreatingBranch ? 'Cancel' : 'New Branch'}
@@ -236,19 +236,19 @@ export const DiffReviewView: React.FC = () => {
               </div>
 
               {isCreatingBranch && (
-                <div className="mb-2 p-1.5 bg-[#f5f3ef] rounded-[6px]">
+                <div className="mb-2 p-1.5 bg-[var(--dt-sidebar)] rounded-[6px]">
                   <input
                     type="text"
                     placeholder="branch-name"
                     value={newBranchInput}
                     onChange={(e) => setNewBranchInput(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleCreateBranch()}
-                    className="w-full px-2 py-1 text-[11px] bg-white border border-[#d1d1cd] rounded outline-none font-mono"
+                    className="w-full px-2 py-1 text-[11px] bg-[var(--dt-card)] border border-[var(--dt-border)] rounded outline-none font-mono text-[var(--dt-foreground)]"
                     autoFocus
                   />
                   <button
                     onClick={handleCreateBranch}
-                    className="mt-1 w-full py-1 text-[11px] bg-[#016a71] text-white rounded font-medium cursor-pointer"
+                    className="mt-1 w-full py-1 text-[11px] bg-[var(--dt-primary)] hover:bg-[var(--dt-primary-hover)] text-white rounded font-medium cursor-pointer"
                   >
                     Create & Switch
                   </button>
@@ -262,12 +262,12 @@ export const DiffReviewView: React.FC = () => {
                     onClick={() => handleSwitchBranch(b.name)}
                     className={`w-full text-left px-2 py-1 rounded-[6px] font-mono text-[11px] flex items-center justify-between cursor-pointer ${
                       b.is_current
-                        ? 'bg-[rgba(1,106,113,0.1)] text-[#016a71] font-semibold'
-                        : 'hover:bg-[#f5f3ef] text-[#27251e]'
+                        ? 'bg-[var(--dt-sidebar-accent)] text-[var(--dt-primary)] font-semibold'
+                        : 'hover:bg-[var(--dt-sidebar-accent)] text-[var(--dt-foreground)]'
                     }`}
                   >
                     <span className="truncate">{b.name}</span>
-                    {b.is_current && <Check className="w-3 h-3 shrink-0 text-[#016a71]" />}
+                    {b.is_current && <Check className="w-3 h-3 shrink-0 text-[var(--dt-primary)]" />}
                   </button>
                 ))}
               </div>
@@ -279,17 +279,17 @@ export const DiffReviewView: React.FC = () => {
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => setWorktreeModalOpen(true)}
-            className="flex items-center gap-1 px-2 py-1 text-[11px] text-[#72706b] hover:text-[#27251e] bg-[#f5f3ef] hover:bg-[#eae8e2] rounded-[6px] border border-[#d1d1cd] cursor-pointer transition-colors"
+            className="flex items-center gap-1 px-2 py-1 text-[11px] text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] bg-[var(--dt-sidebar)] hover:bg-[var(--dt-sidebar-accent)] rounded-[6px] border border-[var(--dt-border)] cursor-pointer transition-colors"
             title="Manage Git Worktrees"
           >
-            <FolderGit2 className="w-3.5 h-3.5 text-[#016a71]" />
+            <FolderGit2 className="w-3.5 h-3.5 text-[var(--dt-primary)]" />
             <span>Worktrees ({worktrees.length})</span>
           </button>
 
           <button
             onClick={handleRefresh}
             disabled={isLoading}
-            className="p-1.5 text-[#72706b] hover:text-[#27251e] hover:bg-[#f5f3ef] rounded-[6px] cursor-pointer transition-colors"
+            className="p-1.5 text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] hover:bg-[var(--dt-sidebar-accent)] rounded-[6px] cursor-pointer transition-colors"
             title="Refresh Git Status"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
@@ -298,7 +298,7 @@ export const DiffReviewView: React.FC = () => {
       </div>
 
       {/* Scope Switcher & Filter */}
-      <div className="flex items-center justify-between px-3 py-1.5 border-b border-[#d1d1cd] bg-[#faf8f5] text-[11px]">
+      <div className="flex items-center justify-between px-3 py-1.5 border-b border-[var(--dt-border)] bg-[var(--dt-card-subtle)] text-[11px]">
         <div className="flex items-center gap-1">
           {(['all', 'staged', 'unstaged'] as DiffScope[]).map((scope) => (
             <button
@@ -306,8 +306,8 @@ export const DiffReviewView: React.FC = () => {
               onClick={() => setActiveDiffScope(scope)}
               className={`px-2 py-0.5 rounded-[5px] transition-colors cursor-pointer capitalize ${
                 activeScope === scope
-                  ? 'bg-[#016a71] text-white font-medium'
-                  : 'text-[#72706b] hover:text-[#27251e] hover:bg-[#f0eee9]'
+                  ? 'bg-[var(--dt-primary)] text-white font-medium'
+                  : 'text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] hover:bg-[var(--dt-sidebar-accent)]'
               }`}
             >
               {scope === 'all' ? `All (${totalChanges})` : scope === 'staged' ? `Staged (${stagedCount})` : `Unstaged (${unstagedCount + untrackedCount})`}
@@ -318,7 +318,7 @@ export const DiffReviewView: React.FC = () => {
         {selectedFile && (
           <button
             onClick={() => setSelectedDiffFile(null)}
-            className="text-[10px] text-[#016a71] hover:underline cursor-pointer flex items-center gap-0.5"
+            className="text-[10px] text-[var(--dt-primary)] hover:underline cursor-pointer flex items-center gap-0.5"
             title="View whole repository diff"
           >
             <span>Whole Diff</span>
@@ -330,16 +330,16 @@ export const DiffReviewView: React.FC = () => {
       {/* Main Content: Split List and Diff View */}
       <div className="flex-1 flex flex-col min-h-0 overflow-y-auto">
         {/* Changed Files Rail */}
-        <div className="border-b border-[#d1d1cd] bg-[#fdfbfa] shrink-0 max-h-48 overflow-y-auto divide-y divide-[#f0eee9]">
+        <div className="border-b border-[var(--dt-border)] bg-[var(--dt-card)] shrink-0 max-h-48 overflow-y-auto divide-y divide-[var(--dt-border)]">
           {/* Staged Section */}
           {stagedCount > 0 && (
             <div>
               <div
                 onClick={() => setStagedExpanded(!stagedExpanded)}
-                className="flex items-center justify-between px-3 py-1 bg-[#f5f3ef] cursor-pointer text-[11px] font-medium text-[#27251e] hover:bg-[#eceae4]"
+                className="flex items-center justify-between px-3 py-1 bg-[var(--dt-card-subtle)] cursor-pointer text-[11px] font-medium text-[var(--dt-foreground)] hover:bg-[var(--dt-sidebar-accent)]"
               >
                 <div className="flex items-center gap-1.5">
-                  {stagedExpanded ? <ChevronDown className="w-3 h-3 text-[#72706b]" /> : <ChevronRight className="w-3 h-3 text-[#72706b]" />}
+                  {stagedExpanded ? <ChevronDown className="w-3 h-3 text-[var(--dt-muted-foreground)]" /> : <ChevronRight className="w-3 h-3 text-[var(--dt-muted-foreground)]" />}
                   <span>Staged Changes ({stagedCount})</span>
                 </div>
                 <button
@@ -347,7 +347,7 @@ export const DiffReviewView: React.FC = () => {
                     e.stopPropagation()
                     unstageFile()
                   }}
-                  className="text-[10px] text-[#72706b] hover:text-[#b91c1c] cursor-pointer"
+                  className="text-[10px] text-[var(--dt-muted-foreground)] hover:text-[var(--dt-danger)] cursor-pointer"
                   title="Unstage all files"
                 >
                   Unstage All
@@ -355,17 +355,17 @@ export const DiffReviewView: React.FC = () => {
               </div>
 
               {stagedExpanded && (
-                <div className="divide-y divide-[#f5f3ef]">
+                <div className="divide-y divide-[var(--dt-border)]">
                   {repoStatus?.staged.map((f) => (
                     <div
                       key={`staged-${f.path}`}
                       onClick={() => setSelectedDiffFile(f.path)}
                       className={`flex items-center justify-between px-3 py-1 text-[11px] font-mono cursor-pointer transition-colors ${
-                        selectedFile === f.path ? 'bg-[rgba(1,106,113,0.08)] text-[#016a71]' : 'hover:bg-[#faf8f5] text-[#27251e]'
+                        selectedFile === f.path ? 'bg-[var(--dt-sidebar-accent)] text-[var(--dt-primary)] font-medium' : 'hover:bg-[var(--dt-sidebar-accent)] text-[var(--dt-foreground)]'
                       }`}
                     >
                       <div className="flex items-center gap-2 truncate">
-                        <span className="w-3.5 h-3.5 rounded bg-[rgba(1,106,113,0.15)] text-[#016a71] text-[9px] font-bold flex items-center justify-center shrink-0">
+                        <span className="w-3.5 h-3.5 rounded bg-[var(--dt-sidebar-accent)] text-[var(--dt-primary)] text-[9px] font-bold flex items-center justify-center shrink-0">
                           {f.status}
                         </span>
                         <span className="truncate">{f.path}</span>
@@ -376,7 +376,7 @@ export const DiffReviewView: React.FC = () => {
                             e.stopPropagation()
                             unstageFile(f.path)
                           }}
-                          className="p-1 hover:bg-[#e5e3de] rounded text-[#72706b] hover:text-[#b91c1c]"
+                          className="p-1 hover:bg-[var(--dt-sidebar-accent)] rounded text-[var(--dt-muted-foreground)] hover:text-[var(--dt-danger)]"
                           title="Unstage file"
                         >
                           <Minus className="w-3 h-3" />
@@ -394,10 +394,10 @@ export const DiffReviewView: React.FC = () => {
             <div>
               <div
                 onClick={() => setUnstagedExpanded(!unstagedExpanded)}
-                className="flex items-center justify-between px-3 py-1 bg-[#f5f3ef] cursor-pointer text-[11px] font-medium text-[#27251e] hover:bg-[#eceae4]"
+                className="flex items-center justify-between px-3 py-1 bg-[var(--dt-card-subtle)] cursor-pointer text-[11px] font-medium text-[var(--dt-foreground)] hover:bg-[var(--dt-sidebar-accent)]"
               >
                 <div className="flex items-center gap-1.5">
-                  {unstagedExpanded ? <ChevronDown className="w-3 h-3 text-[#72706b]" /> : <ChevronRight className="w-3 h-3 text-[#72706b]" />}
+                  {unstagedExpanded ? <ChevronDown className="w-3 h-3 text-[var(--dt-muted-foreground)]" /> : <ChevronRight className="w-3 h-3 text-[var(--dt-muted-foreground)]" />}
                   <span>Changes ({unstagedCount})</span>
                 </div>
                 <button
@@ -405,7 +405,7 @@ export const DiffReviewView: React.FC = () => {
                     e.stopPropagation()
                     stageFile()
                   }}
-                  className="text-[10px] text-[#016a71] hover:underline cursor-pointer"
+                  className="text-[10px] text-[var(--dt-primary)] hover:underline cursor-pointer"
                   title="Stage all files"
                 >
                   Stage All
@@ -413,17 +413,17 @@ export const DiffReviewView: React.FC = () => {
               </div>
 
               {unstagedExpanded && (
-                <div className="divide-y divide-[#f5f3ef]">
+                <div className="divide-y divide-[var(--dt-border)]">
                   {repoStatus?.unstaged.map((f) => (
                     <div
                       key={`unstaged-${f.path}`}
                       onClick={() => setSelectedDiffFile(f.path)}
                       className={`flex items-center justify-between px-3 py-1 text-[11px] font-mono cursor-pointer transition-colors ${
-                        selectedFile === f.path ? 'bg-[rgba(1,106,113,0.08)] text-[#016a71]' : 'hover:bg-[#faf8f5] text-[#27251e]'
+                        selectedFile === f.path ? 'bg-[var(--dt-sidebar-accent)] text-[var(--dt-primary)] font-medium' : 'hover:bg-[var(--dt-sidebar-accent)] text-[var(--dt-foreground)]'
                       }`}
                     >
                       <div className="flex items-center gap-2 truncate">
-                        <span className="w-3.5 h-3.5 rounded bg-[rgba(245,158,11,0.15)] text-[#b45309] text-[9px] font-bold flex items-center justify-center shrink-0">
+                        <span className="w-3.5 h-3.5 rounded bg-[var(--dt-warning)]/15 text-[var(--dt-warning)] text-[9px] font-bold flex items-center justify-center shrink-0">
                           {f.status}
                         </span>
                         <span className="truncate">{f.path}</span>
@@ -434,7 +434,7 @@ export const DiffReviewView: React.FC = () => {
                             e.stopPropagation()
                             stageFile(f.path)
                           }}
-                          className="p-1 hover:bg-[#e5e3de] rounded text-[#72706b] hover:text-[#016a71]"
+                          className="p-1 hover:bg-[var(--dt-sidebar-accent)] rounded text-[var(--dt-muted-foreground)] hover:text-[var(--dt-primary)]"
                           title="Stage file"
                         >
                           <Plus className="w-3 h-3" />
@@ -444,7 +444,7 @@ export const DiffReviewView: React.FC = () => {
                             e.stopPropagation()
                             discardChanges(f.path)
                           }}
-                          className="p-1 hover:bg-[#e5e3de] rounded text-[#72706b] hover:text-[#b91c1c]"
+                          className="p-1 hover:bg-[var(--dt-sidebar-accent)] rounded text-[var(--dt-muted-foreground)] hover:text-[var(--dt-danger)]"
                           title="Discard changes"
                         >
                           <RotateCcw className="w-3 h-3" />
@@ -462,10 +462,10 @@ export const DiffReviewView: React.FC = () => {
             <div>
               <div
                 onClick={() => setUntrackedExpanded(!untrackedExpanded)}
-                className="flex items-center justify-between px-3 py-1 bg-[#f5f3ef] cursor-pointer text-[11px] font-medium text-[#27251e] hover:bg-[#eceae4]"
+                className="flex items-center justify-between px-3 py-1 bg-[var(--dt-card-subtle)] cursor-pointer text-[11px] font-medium text-[var(--dt-foreground)] hover:bg-[var(--dt-sidebar-accent)]"
               >
                 <div className="flex items-center gap-1.5">
-                  {untrackedExpanded ? <ChevronDown className="w-3 h-3 text-[#72706b]" /> : <ChevronRight className="w-3 h-3 text-[#72706b]" />}
+                  {untrackedExpanded ? <ChevronDown className="w-3 h-3 text-[var(--dt-muted-foreground)]" /> : <ChevronRight className="w-3 h-3 text-[var(--dt-muted-foreground)]" />}
                   <span>Untracked Files ({untrackedCount})</span>
                 </div>
                 <button
@@ -473,7 +473,7 @@ export const DiffReviewView: React.FC = () => {
                     e.stopPropagation()
                     stageFile()
                   }}
-                  className="text-[10px] text-[#016a71] hover:underline cursor-pointer"
+                  className="text-[10px] text-[var(--dt-primary)] hover:underline cursor-pointer"
                   title="Stage all untracked"
                 >
                   Stage All
@@ -481,17 +481,17 @@ export const DiffReviewView: React.FC = () => {
               </div>
 
               {untrackedExpanded && (
-                <div className="divide-y divide-[#f5f3ef]">
+                <div className="divide-y divide-[var(--dt-border)]">
                   {repoStatus?.untracked.map((path) => (
                     <div
                       key={`untracked-${path}`}
                       onClick={() => setSelectedDiffFile(path)}
                       className={`flex items-center justify-between px-3 py-1 text-[11px] font-mono cursor-pointer transition-colors ${
-                        selectedFile === path ? 'bg-[rgba(1,106,113,0.08)] text-[#016a71]' : 'hover:bg-[#faf8f5] text-[#27251e]'
+                        selectedFile === path ? 'bg-[var(--dt-sidebar-accent)] text-[var(--dt-primary)] font-medium' : 'hover:bg-[var(--dt-sidebar-accent)] text-[var(--dt-foreground)]'
                       }`}
                     >
                       <div className="flex items-center gap-2 truncate">
-                        <span className="w-3.5 h-3.5 rounded bg-[rgba(59,130,246,0.15)] text-[#2563eb] text-[9px] font-bold flex items-center justify-center shrink-0">
+                        <span className="w-3.5 h-3.5 rounded bg-[var(--dt-primary)]/15 text-[var(--dt-primary)] text-[9px] font-bold flex items-center justify-center shrink-0">
                           ?
                         </span>
                         <span className="truncate">{path}</span>
@@ -502,7 +502,7 @@ export const DiffReviewView: React.FC = () => {
                             e.stopPropagation()
                             stageFile(path)
                           }}
-                          className="p-1 hover:bg-[#e5e3de] rounded text-[#72706b] hover:text-[#016a71]"
+                          className="p-1 hover:bg-[var(--dt-sidebar-accent)] rounded text-[var(--dt-muted-foreground)] hover:text-[var(--dt-primary)]"
                           title="Stage file"
                         >
                           <Plus className="w-3 h-3" />
@@ -512,7 +512,7 @@ export const DiffReviewView: React.FC = () => {
                             e.stopPropagation()
                             discardChanges(path, true)
                           }}
-                          className="p-1 hover:bg-[#e5e3de] rounded text-[#72706b] hover:text-[#b91c1c]"
+                          className="p-1 hover:bg-[var(--dt-sidebar-accent)] rounded text-[var(--dt-muted-foreground)] hover:text-[var(--dt-danger)]"
                           title="Delete untracked file"
                         >
                           <RotateCcw className="w-3 h-3" />
@@ -526,36 +526,36 @@ export const DiffReviewView: React.FC = () => {
           )}
 
           {totalChanges === 0 && (
-            <div className="py-4 text-center text-[12px] text-[#72706b] flex flex-col items-center gap-1">
-              <Check className="w-4 h-4 text-[#016a71]" />
+            <div className="py-4 text-center text-[12px] text-[var(--dt-muted-foreground)] flex flex-col items-center gap-1">
+              <Check className="w-4 h-4 text-[var(--dt-primary)]" />
               <span>Working tree clean</span>
             </div>
           )}
         </div>
 
         {/* Diff Content Box */}
-        <div className="flex-1 overflow-auto p-2 bg-[#faf8f5]">
+        <div className="flex-1 overflow-auto p-2 bg-[var(--dt-sidebar)]">
           {diffLines.length > 0 ? (
-            <div className="rounded-[12px] border border-[#d1d1cd] bg-[#fdfbfa] shadow-[var(--shadow-subtle)] overflow-hidden font-mono text-[11px]">
+            <div className="rounded-[12px] border border-[var(--dt-border)] bg-[var(--dt-card)] shadow-[var(--shadow-subtle)] overflow-hidden font-mono text-[11px]">
               {diffLines.map((line, idx) => {
-                let rowStyle = 'border-l-2 border-transparent text-[#72706b]'
+                let rowStyle = 'border-l-2 border-transparent text-[var(--dt-muted-foreground)]'
                 if (line.kind === 'add') {
-                  rowStyle = 'border-l-2 border-[#016a71] bg-[rgba(1,106,113,0.06)] text-[#016a71]'
+                  rowStyle = 'border-l-2 border-[var(--dt-primary)] bg-[var(--dt-primary)]/10 text-[var(--dt-primary)]'
                 } else if (line.kind === 'remove') {
-                  rowStyle = 'border-l-2 border-[#b91c1c] bg-[rgba(185,28,28,0.06)] text-[#991b1b]'
+                  rowStyle = 'border-l-2 border-[var(--dt-danger)] bg-[var(--dt-danger)]/10 text-[var(--dt-danger)]'
                 } else if (line.kind === 'header') {
-                  rowStyle = 'border-l-2 border-[#92918b] bg-[#f0eee9] text-[#27251e] font-semibold'
+                  rowStyle = 'border-l-2 border-[var(--dt-border)] bg-[var(--dt-card-subtle)] text-[var(--dt-foreground)] font-semibold'
                 }
 
                 return (
                   <div
                     key={idx}
-                    className={`flex items-start px-2 py-0.5 leading-relaxed hover:bg-[rgba(0,0,0,0.02)] ${rowStyle}`}
+                    className={`flex items-start px-2 py-0.5 leading-relaxed hover:bg-[var(--dt-sidebar-accent)]/50 ${rowStyle}`}
                   >
-                    <span className="w-7 shrink-0 text-right pr-2 text-[10px] text-[#92918b] select-none font-mono">
+                    <span className="w-7 shrink-0 text-right pr-2 text-[10px] text-[var(--dt-muted-foreground)] select-none font-mono">
                       {line.oldNo ?? ''}
                     </span>
-                    <span className="w-7 shrink-0 text-right pr-3 text-[10px] text-[#92918b] select-none font-mono">
+                    <span className="w-7 shrink-0 text-right pr-3 text-[10px] text-[var(--dt-muted-foreground)] select-none font-mono">
                       {line.newNo ?? ''}
                     </span>
                     <span className="w-4 shrink-0 text-[11px] select-none font-bold">
@@ -567,20 +567,20 @@ export const DiffReviewView: React.FC = () => {
               })}
             </div>
           ) : (
-            <div className="h-full flex flex-col items-center justify-center text-center p-4 text-[#92918b]">
-              <FileText className="w-8 h-8 text-[#d1d1cd] mb-2" />
+            <div className="h-full flex flex-col items-center justify-center text-center p-4 text-[var(--dt-muted-foreground)]">
+              <FileText className="w-8 h-8 text-[var(--dt-border)] mb-2" />
               <p className="text-[12px]">No diff to display</p>
-              <p className="text-[11px] text-[#72706b] mt-1">Select a changed file or modify files to view git diff.</p>
+              <p className="text-[11px] text-[var(--dt-muted-foreground)] mt-1">Select a changed file or modify files to view git diff.</p>
             </div>
           )}
         </div>
       </div>
 
       {/* Commit & Ship Bar */}
-      <div className="p-3 border-t border-[#d1d1cd] bg-[#fdfbfa] shrink-0 flex flex-col gap-2">
+      <div className="p-3 border-t border-[var(--dt-border)] bg-[var(--dt-card)] shrink-0 flex flex-col gap-2">
         {commitStatus && (
-          <div className="flex items-center gap-1.5 text-[11px] px-2 py-1 rounded bg-[#f5f3ef] border border-[#d1d1cd] text-[#27251e]">
-            <AlertCircle className="w-3.5 h-3.5 text-[#016a71] shrink-0" />
+          <div className="flex items-center gap-1.5 text-[11px] px-2 py-1 rounded bg-[var(--dt-sidebar)] border border-[var(--dt-border)] text-[var(--dt-foreground)]">
+            <AlertCircle className="w-3.5 h-3.5 text-[var(--dt-primary)] shrink-0" />
             <span className="truncate">{commitStatus}</span>
           </div>
         )}
@@ -592,12 +592,12 @@ export const DiffReviewView: React.FC = () => {
             value={commitMsg}
             onChange={(e) => setGitCommitMessage(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleCommit(false)}
-            className="flex-1 px-3 py-1.5 text-[12px] bg-[#faf8f5] border border-[#d1d1cd] rounded-[8px] outline-none focus:border-[#016a71] text-[#27251e] placeholder:text-[#92918b]"
+            className="flex-1 px-3 py-1.5 text-[12px] bg-[var(--dt-sidebar)] border border-[var(--dt-border)] rounded-[8px] outline-none focus:border-[var(--dt-primary)] text-[var(--dt-foreground)] placeholder:text-[var(--dt-muted-foreground)]"
           />
           <button
             onClick={() => handleCommit(false)}
             disabled={!commitMsg.trim() || totalChanges === 0}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-[#016a71] text-white rounded-[8px] hover:bg-[#015257] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors shadow-sm shrink-0"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-[var(--dt-primary)] text-white rounded-[8px] hover:bg-[var(--dt-primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors shadow-sm shrink-0"
             title="Commit staged changes"
           >
             <GitCommit className="w-3.5 h-3.5" />
@@ -606,7 +606,7 @@ export const DiffReviewView: React.FC = () => {
           <button
             onClick={() => handleCommit(true)}
             disabled={!commitMsg.trim() || totalChanges === 0}
-            className="flex items-center gap-1 px-2.5 py-1.5 text-[12px] font-medium bg-[#27251e] text-white rounded-[8px] hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors shadow-sm shrink-0"
+            className="flex items-center gap-1 px-2.5 py-1.5 text-[12px] font-medium bg-[var(--dt-foreground)] text-[var(--dt-background)] rounded-[8px] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors shadow-sm shrink-0"
             title="Commit & Push to Remote"
           >
             <Send className="w-3.5 h-3.5" />
@@ -617,15 +617,15 @@ export const DiffReviewView: React.FC = () => {
       {/* Worktrees Management Drawer/Modal */}
       {worktreeModalOpen && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-[#fdfbfa] border border-[#d1d1cd] rounded-[16px] shadow-2xl max-w-lg w-full p-4 flex flex-col font-sans">
-            <div className="flex items-center justify-between pb-3 border-b border-[#e5e5e0]">
+          <div className="bg-[var(--dt-card)] border border-[var(--dt-border)] rounded-[16px] shadow-2xl max-w-lg w-full p-4 flex flex-col font-sans">
+            <div className="flex items-center justify-between pb-3 border-b border-[var(--dt-border)]">
               <div className="flex items-center gap-2">
-                <FolderGit2 className="w-4 h-4 text-[#016a71]" />
-                <h3 className="text-[14px] font-semibold text-[#27251e]">Git Worktrees</h3>
+                <FolderGit2 className="w-4 h-4 text-[var(--dt-primary)]" />
+                <h3 className="text-[14px] font-semibold text-[var(--dt-foreground)]">Git Worktrees</h3>
               </div>
               <button
                 onClick={() => setWorktreeModalOpen(false)}
-                className="p-1 hover:bg-[#f0eee9] rounded text-[#72706b] hover:text-[#27251e] cursor-pointer"
+                className="p-1 hover:bg-[var(--dt-sidebar-accent)] rounded text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -636,20 +636,20 @@ export const DiffReviewView: React.FC = () => {
               {worktrees.map((wt) => (
                 <div
                   key={wt.path}
-                  className="flex items-center justify-between p-2 rounded-[8px] bg-[#f5f3ef] border border-[#d1d1cd] text-[12px]"
+                  className="flex items-center justify-between p-2 rounded-[8px] bg-[var(--dt-sidebar)] border border-[var(--dt-border)] text-[12px]"
                 >
                   <div className="flex flex-col truncate pr-2">
-                    <span className="font-mono font-medium truncate text-[#27251e]">{wt.path}</span>
-                    <div className="flex items-center gap-2 text-[10px] text-[#72706b] font-mono mt-0.5">
+                    <span className="font-mono font-medium truncate text-[var(--dt-foreground)]">{wt.path}</span>
+                    <div className="flex items-center gap-2 text-[10px] text-[var(--dt-muted-foreground)] font-mono mt-0.5">
                       <span>branch: {wt.branch || '(detached)'}</span>
-                      {wt.is_main && <span className="text-[#016a71] font-semibold">main</span>}
-                      {wt.locked && <span className="text-[#b45309]">locked</span>}
+                      {wt.is_main && <span className="text-[var(--dt-primary)] font-semibold">main</span>}
+                      {wt.locked && <span className="text-[var(--dt-warning)]">locked</span>}
                     </div>
                   </div>
                   {!wt.is_main && (
                     <button
                       onClick={() => removeWorktree(wt.path, false)}
-                      className="text-[11px] text-[#b91c1c] hover:underline cursor-pointer shrink-0"
+                      className="text-[11px] text-[var(--dt-danger)] hover:underline cursor-pointer shrink-0"
                     >
                       Remove
                     </button>
@@ -659,15 +659,15 @@ export const DiffReviewView: React.FC = () => {
             </div>
 
             {/* Add New Worktree Form */}
-            <form onSubmit={handleAddWorktree} className="pt-3 border-t border-[#e5e5e0] space-y-2">
-              <span className="text-[12px] font-medium text-[#27251e]">Add Worktree</span>
+            <form onSubmit={handleAddWorktree} className="pt-3 border-t border-[var(--dt-border)] space-y-2">
+              <span className="text-[12px] font-medium text-[var(--dt-foreground)]">Add Worktree</span>
               <div className="grid grid-cols-2 gap-2">
                 <input
                   type="text"
                   placeholder="Relative path (e.g. ../feature-wt)"
                   value={wtPath}
                   onChange={(e) => setWtPath(e.target.value)}
-                  className="px-2.5 py-1.5 text-[11px] bg-white border border-[#d1d1cd] rounded-[6px] outline-none font-mono"
+                  className="px-2.5 py-1.5 text-[11px] bg-[var(--dt-card)] border border-[var(--dt-border)] rounded-[6px] outline-none font-mono text-[var(--dt-foreground)]"
                   required
                 />
                 <input
@@ -675,22 +675,22 @@ export const DiffReviewView: React.FC = () => {
                   placeholder="Branch name (e.g. feat/wt-1)"
                   value={wtBranch}
                   onChange={(e) => setWtBranch(e.target.value)}
-                  className="px-2.5 py-1.5 text-[11px] bg-white border border-[#d1d1cd] rounded-[6px] outline-none font-mono"
+                  className="px-2.5 py-1.5 text-[11px] bg-[var(--dt-card)] border border-[var(--dt-border)] rounded-[6px] outline-none font-mono text-[var(--dt-foreground)]"
                 />
               </div>
               <div className="flex items-center justify-between pt-1">
-                <label className="flex items-center gap-1.5 text-[11px] text-[#72706b] cursor-pointer">
+                <label className="flex items-center gap-1.5 text-[11px] text-[var(--dt-muted-foreground)] cursor-pointer">
                   <input
                     type="checkbox"
                     checked={wtNewBranch}
                     onChange={(e) => setWtNewBranch(e.target.checked)}
-                    className="rounded text-[#016a71]"
+                    className="rounded text-[var(--dt-primary)]"
                   />
                   <span>Create new branch (-b)</span>
                 </label>
                 <button
                   type="submit"
-                  className="px-3 py-1 text-[11px] bg-[#016a71] text-white rounded-[6px] font-medium hover:bg-[#015257] cursor-pointer"
+                  className="px-3 py-1 text-[11px] bg-[var(--dt-primary)] text-white rounded-[6px] font-medium hover:bg-[var(--dt-primary-hover)] cursor-pointer"
                 >
                   Add Worktree
                 </button>

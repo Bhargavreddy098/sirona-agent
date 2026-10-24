@@ -45,28 +45,28 @@ export const ContextPane: React.FC = () => {
 
   return (
     <aside
-      className={`h-full flex flex-col bg-[#faf8f5] border-l border-[#d1d1cd] select-none z-10 transition-[width] duration-150 ${
+      className={`h-full flex flex-col bg-[var(--dt-sidebar)] border-l border-[var(--dt-sidebar-border)] select-none z-10 transition-[width] duration-150 ${
         isWide ? 'w-[520px] max-w-[50vw] min-w-[380px]' : 'w-80'
       }`}
     >
       {/* Tab strip */}
-      <div className="flex items-center px-3 border-b border-[#d1d1cd] bg-[#faf8f5] h-10 shrink-0">
+      <div className="flex items-center px-3 border-b border-[var(--dt-sidebar-border)] bg-[var(--dt-sidebar)] h-10 shrink-0">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id
           return (
             <button
               key={tab.id}
               onClick={() => setActiveContextTab(tab.id)}
-              className={`flex items-center gap-1.5 px-3 py-2 text-[13px] border-b-2 transition-colors cursor-pointer ${
+              className={`flex items-center gap-1.5 px-3 py-2 text-[12.5px] border-b-2 transition-colors cursor-pointer ${
                 isActive
-                  ? 'border-[#016a71] text-[#016a71] font-medium'
-                  : 'border-transparent text-[#72706b] hover:text-[#27251e] font-normal'
+                  ? 'border-[var(--dt-primary)] text-[var(--dt-primary)] font-medium'
+                  : 'border-transparent text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] font-normal'
               }`}
             >
               {tab.icon}
               <span>{tab.label}</span>
               {tab.badge !== undefined && (
-                <span className="ml-0.5 text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-[#016a71] text-white">
+                <span className="ml-0.5 text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-[var(--dt-primary)] text-white">
                   {tab.badge}
                 </span>
               )}
@@ -76,7 +76,7 @@ export const ContextPane: React.FC = () => {
       </div>
 
       {/* Tab Content */}
-      <div className="flex-1 overflow-hidden flex flex-col bg-[#faf8f5]">
+      <div className="flex-1 overflow-hidden flex flex-col bg-[var(--dt-background)]">
         {activeTab === 'files' && <FileTreeExplorer />}
         {activeTab === 'review' && <DiffReviewView />}
         {activeTab === 'terminal' && <TerminalDeck />}

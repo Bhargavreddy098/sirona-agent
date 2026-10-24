@@ -17,7 +17,7 @@ export const CardStack: React.FC = () => {
         {/* Silhouette shadow card behind when multiple */}
         {hasMultiple && (
           <div
-            className="absolute inset-0 -top-[8px] scale-[0.96] rounded-[16px] bg-[#f5f3ef] border border-[#d1d1cd] opacity-70 pointer-events-none transition-all duration-200"
+            className="absolute inset-0 -top-[8px] scale-[0.96] rounded-[12px] bg-[var(--dt-sidebar)] border border-[var(--dt-border)] opacity-70 pointer-events-none transition-all duration-200"
           />
         )}
 

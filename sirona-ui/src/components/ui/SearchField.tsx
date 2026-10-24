@@ -12,11 +12,11 @@ export const SearchField: React.FC<SearchFieldProps> = ({
 }) => {
   return (
     <div className={`relative flex items-center w-full ${className}`}>
-      <Search className="absolute left-3 w-3.5 h-3.5 text-[#72706b] pointer-events-none" />
+      <Search className="absolute left-2.5 w-3.5 h-3.5 text-[var(--dt-muted-foreground)] pointer-events-none" />
       <input
         type="text"
         placeholder={placeholder}
-        className="w-full pl-9 pr-3 py-1.5 text-[13px] text-[#27251e] bg-[#fdfbfa] border border-[#d1d1cd] rounded-[12px] focus:outline-none focus:border-[#016a71] transition-colors placeholder:text-[#72706b] font-normal"
+        className="w-full pl-8 pr-3 py-1.5 text-[12px] text-[var(--dt-foreground)] bg-[var(--dt-background)] border border-[var(--dt-border)] rounded-[8px] focus:outline-none focus:border-[var(--dt-primary)] focus:ring-1 focus:ring-[var(--dt-primary)] transition-all placeholder:text-[var(--dt-muted-foreground)] font-normal shadow-xs"
         {...props}
       />
     </div>

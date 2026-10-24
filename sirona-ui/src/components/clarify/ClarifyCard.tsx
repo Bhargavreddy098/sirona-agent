@@ -94,19 +94,19 @@ export const ClarifyCard: React.FC<ClarifyCardProps> = ({ request }) => {
     <div
       data-testid="clarify-card"
       data-request-id={request.requestId}
-      className="my-4 border border-[#016a71] bg-[#ffffff] rounded-[16px] shadow-[0_4px_16px_rgba(1,106,113,0.08),var(--shadow-subtle)] overflow-hidden transition-all"
+      className="my-3 border border-[var(--dt-border)] bg-[var(--dt-card)] rounded-[14px] shadow-[var(--shadow-subtle)] overflow-hidden transition-all"
     >
       {/* Header bar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-[#f0f7f7] border-b border-[#cce5e5]">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-[var(--dt-card)] border-b border-[var(--dt-border)]">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-[8px] bg-[#016a71] text-white flex items-center justify-center shadow-xs">
-            <HelpCircle className="w-4 h-4" />
+          <div className="w-6 h-6 rounded-[6px] bg-[var(--dt-primary)] text-white flex items-center justify-center shadow-xs">
+            <HelpCircle className="w-3.5 h-3.5" />
           </div>
           <div>
-            <h4 className="text-[13px] font-medium text-[#014f54] leading-tight">
+            <h4 className="text-[12.5px] font-semibold text-[var(--dt-foreground)] leading-tight">
               Clarification Requested
             </h4>
-            <span className="text-[11px] text-[#558285]">
+            <span className="text-[11px] text-[var(--dt-muted-foreground)]">
               {request.questions.length === 1
                 ? '1 question requires your guidance'
                 : `${request.questions.length} questions require your guidance`}
@@ -117,7 +117,7 @@ export const ClarifyCard: React.FC<ClarifyCardProps> = ({ request }) => {
         <button
           type="button"
           onClick={handleSkip}
-          className="text-[12px] text-[#72706b] hover:text-[#27251e] px-2.5 py-1 rounded-[6px] hover:bg-[#e4efef] transition-colors flex items-center gap-1 cursor-pointer"
+          className="text-[11.5px] text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] px-2 py-1 rounded-[6px] hover:bg-[var(--dt-border)]/30 transition-colors flex items-center gap-1 cursor-pointer"
           title="Skip question (Esc)"
         >
           <X className="w-3.5 h-3.5" />
@@ -126,28 +126,28 @@ export const ClarifyCard: React.FC<ClarifyCardProps> = ({ request }) => {
       </div>
 
       {/* Questions list */}
-      <div className="p-4 space-y-5 bg-[#ffffff]">
+      <div className="p-4 space-y-4 bg-[var(--dt-card)]">
         {request.questions.map((q, idx) => {
           const currentAnswer = answers[q.qid]
           const isMulti = q.multiSelect
 
           return (
-            <div key={q.qid} className="space-y-2.5">
+            <div key={q.qid} className="space-y-2">
               <div className="flex items-start justify-between gap-2">
-                <span className="text-[14px] font-medium text-[#27251e] leading-snug">
+                <span className="text-[13px] font-medium text-[var(--dt-foreground)] leading-snug">
                   {request.questions.length > 1 && (
-                    <span className="text-[#016a71] font-mono mr-1.5">{idx + 1}.</span>
+                    <span className="text-[var(--dt-primary)] font-mono mr-1.5">{idx + 1}.</span>
                   )}
                   {q.question}
                 </span>
-                <span className="text-[11px] text-[#92918b] font-mono shrink-0">
+                <span className="text-[10.5px] text-[var(--dt-muted-foreground)] font-mono shrink-0">
                   {isMulti ? 'Multiple choice' : 'Single choice'}
                 </span>
               </div>
 
               {/* Options pills/cards */}
               {q.choices && q.choices.length > 0 && (
-                <div className="grid grid-cols-1 gap-2 pt-1">
+                <div className="grid grid-cols-1 gap-1.5 pt-1">
                   {q.choices.map((choice) => {
                     const clean = bareChoice(choice)
                     const recommended = isRecommended(choice)
@@ -159,29 +159,29 @@ export const ClarifyCard: React.FC<ClarifyCardProps> = ({ request }) => {
                       <div
                         key={choice}
                         onClick={() => handleSelectChoice(q, choice)}
-                        className={`flex items-center justify-between p-2.5 rounded-[10px] border transition-all cursor-pointer select-none text-[13px] ${
+                        className={`flex items-center justify-between p-2.5 rounded-[8px] border transition-all cursor-pointer select-none text-[12.5px] ${
                           isSelected
-                            ? 'border-[#016a71] bg-[#f0f7f7] text-[#014f54] font-medium shadow-xs'
-                            : 'border-[#e2e2de] bg-[#fdfbfa] hover:bg-[#f5f3ef] text-[#27251e]'
+                            ? 'border-[var(--dt-primary)] bg-[var(--dt-secondary)] text-[var(--dt-foreground)] font-medium shadow-xs'
+                            : 'border-[var(--dt-border)] bg-[var(--dt-background)] hover:bg-[var(--dt-muted)] text-[var(--dt-foreground)]'
                         }`}
                       >
                         <div className="flex items-center gap-2.5">
                           {isMulti ? (
                             isSelected ? (
-                              <CheckSquare className="w-4 h-4 text-[#016a71]" />
+                              <CheckSquare className="w-4 h-4 text-[var(--dt-primary)]" />
                             ) : (
-                              <Square className="w-4 h-4 text-[#92918b]" />
+                              <Square className="w-4 h-4 text-[var(--dt-muted-foreground)]" />
                             )
                           ) : isSelected ? (
-                            <CheckCircle2 className="w-4 h-4 text-[#016a71]" />
+                            <CheckCircle2 className="w-4 h-4 text-[var(--dt-primary)]" />
                           ) : (
-                            <Circle className="w-4 h-4 text-[#92918b]" />
+                            <Circle className="w-4 h-4 text-[var(--dt-muted-foreground)]" />
                           )}
                           <span>{clean}</span>
                         </div>
 
                         {recommended && (
-                          <span className="flex items-center gap-1 text-[10px] font-medium font-sans px-2 py-0.5 rounded-full bg-[#e6f4f1] text-[#016a71] border border-[#b2ded7]">
+                          <span className="flex items-center gap-1 text-[10px] font-medium font-sans px-2 py-0.5 rounded-full bg-[var(--dt-secondary)] text-[var(--dt-primary)] border border-[var(--dt-border)]">
                             <Sparkles className="w-3 h-3" />
                             Recommended
                           </span>
@@ -199,7 +199,7 @@ export const ClarifyCard: React.FC<ClarifyCardProps> = ({ request }) => {
                   value={customDrafts[q.qid] || ''}
                   onChange={(e) => handleCustomChange(q.qid, e.target.value)}
                   placeholder="Or type custom answer here..."
-                  className="w-full bg-[#faf8f5] border border-[#d1d1cd] focus:border-[#016a71] focus:bg-[#ffffff] rounded-[8px] px-3 py-1.5 text-[12px] text-[#27251e] placeholder:text-[#92918b] outline-none transition-all font-mono"
+                  className="w-full bg-[var(--dt-background)] border border-[var(--dt-border)] focus:border-[var(--dt-primary)] focus:ring-1 focus:ring-[var(--dt-primary)] rounded-[8px] px-3 py-1.5 text-[12px] text-[var(--dt-foreground)] placeholder:text-[var(--dt-muted-foreground)] outline-none transition-all font-mono"
                 />
               </div>
             </div>
@@ -208,17 +208,17 @@ export const ClarifyCard: React.FC<ClarifyCardProps> = ({ request }) => {
       </div>
 
       {/* Footer bar */}
-      <div className="flex items-center justify-between px-4 py-3 bg-[#faf8f5] border-t border-[#e2e2de]">
-        <span className="text-[11px] text-[#72706b] flex items-center gap-1">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-[var(--dt-sidebar)] border-t border-[var(--dt-sidebar-border)]">
+        <span className="text-[11px] text-[var(--dt-muted-foreground)] flex items-center gap-1">
           <CornerDownLeft className="w-3 h-3" />
-          <span>Press Enter to confirm</span>
+          <span>Press Cmd+Enter to confirm</span>
         </span>
 
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={handleSkip}
-            className="px-3 py-1.5 text-[12px] text-[#72706b] hover:text-[#27251e] transition-colors rounded-[8px] cursor-pointer"
+            className="px-3 py-1.5 text-[12px] text-[var(--dt-muted-foreground)] hover:text-[var(--dt-foreground)] transition-colors rounded-[8px] cursor-pointer"
           >
             Skip
           </button>
@@ -226,7 +226,7 @@ export const ClarifyCard: React.FC<ClarifyCardProps> = ({ request }) => {
             type="button"
             onClick={handleConfirm}
             disabled={submitting}
-            className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[#016a71] text-white hover:bg-[#01585e] transition-colors text-[13px] font-medium shadow-[var(--shadow-subtle)] cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-[var(--dt-primary)] text-white hover:brightness-110 transition-colors text-[12.5px] font-medium shadow-sm cursor-pointer"
           >
             <Check className="w-3.5 h-3.5" />
             <span>{submitting ? 'Submitting...' : 'Confirm & Continue'}</span>
