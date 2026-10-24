@@ -20,6 +20,7 @@ from .agent.approvals import ApprovalManager
 from .agent.clarify import ClarifyManager
 from .agent.runtime import AgentRuntime
 from .agent.scheduler import TurnScheduler
+from .agent.turn_lease import SessionTurnLeaseRegistry
 from .skills.manager import SkillsManager
 from .mcp.manager import McpManager
 from .terminal.manager import TerminalManager
@@ -80,6 +81,7 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
 
     mcp_mgr = McpManager(tool_registry=tool_reg)
     provider_router = ProviderRouter()
+    turn_lease_registry = SessionTurnLeaseRegistry(db_mgr=db_mgr)
     agent_runtime = AgentRuntime(
         session_repo=session_repo,
         message_repo=message_repo,
@@ -87,8 +89,14 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
         approval_manager=approval_mgr,
         provider=provider_router.gemini,
         clarify_manager=clarify_mgr,
+        lease_registry=turn_lease_registry,
     )
-    turn_scheduler = TurnScheduler(runtime=agent_runtime, approval_manager=approval_mgr, clarify_manager=clarify_mgr)
+    turn_scheduler = TurnScheduler(
+        runtime=agent_runtime,
+        approval_manager=approval_mgr,
+        clarify_manager=clarify_mgr,
+        lease_registry=turn_lease_registry,
+    )
 
     # Attach to app.state
     app.state.config = cfg
@@ -106,6 +114,7 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
     app.state.mcp_manager = mcp_mgr
     app.state.agent_runtime = agent_runtime
     app.state.turn_scheduler = turn_scheduler
+    app.state.turn_lease_registry = turn_lease_registry
     app.state.started_at = time.time()
 
     # Mount routers

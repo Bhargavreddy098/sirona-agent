@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from .runtime import AgentRuntime
 from .approvals import ApprovalManager
 from .clarify import ClarifyManager
+from .turn_lease import SessionTurnLeaseRegistry
 
 class TurnJob(BaseModel):
     turn_id: str
@@ -14,6 +15,7 @@ class TurnJob(BaseModel):
     attachments: Optional[List[Dict[str, Any]]] = None
     reasoning_effort: str = "medium"
     created_at: float
+    user_message_id: Optional[int] = None
 
 class ActiveTurn:
     def __init__(
@@ -36,17 +38,23 @@ class TurnScheduler:
         self,
         runtime: AgentRuntime,
         approval_manager: ApprovalManager,
-        clarify_manager: Optional[ClarifyManager] = None
+        clarify_manager: Optional[ClarifyManager] = None,
+        lease_registry: Optional[SessionTurnLeaseRegistry] = None,
     ):
         self.runtime = runtime
         self.approval_manager = approval_manager
         self.clarify_manager = clarify_manager
+        self.lease_registry = lease_registry or getattr(runtime, "lease_registry", None)
         self.active_turns: Dict[str, ActiveTurn] = {}
         self.queued_turns: Dict[str, List[TurnJob]] = {}
 
     def is_session_busy(self, session_id: str) -> bool:
         active = self.active_turns.get(session_id)
-        return active is not None and active.status == "running"
+        if active is not None and active.status == "running":
+            return True
+        if self.lease_registry and self.lease_registry.is_held(session_id):
+            return True
+        return False
 
     def get_active_turn(self, session_id: str) -> Optional[ActiveTurn]:
         return self.active_turns.get(session_id)
@@ -59,13 +67,25 @@ class TurnScheduler:
         reasoning_effort: str = "medium"
     ) -> Dict[str, Any]:
         turn_id = f"turn_{uuid.uuid4().hex[:10]}"
+
+        # Pre-flight message durability (adopt_submit_user_row pattern)
+        # Commit user message to SQLite BEFORE turn construction or queueing
+        user_msg = await self.runtime.message_repo.add_message(
+            session_id=session_id,
+            role="user",
+            content=prompt,
+            metadata={"turn_id": turn_id, "submission_status": "submitted"}
+        )
+        user_message_id = user_msg.id
+
         job = TurnJob(
             turn_id=turn_id,
             session_id=session_id,
             prompt=prompt,
             attachments=attachments,
             reasoning_effort=reasoning_effort,
-            created_at=time.time()
+            created_at=time.time(),
+            user_message_id=user_message_id
         )
 
         if self.is_session_busy(session_id):
@@ -76,6 +96,7 @@ class TurnScheduler:
                 "accepted": True,
                 "turn_id": turn_id,
                 "session_id": session_id,
+                "message_id": user_message_id,
                 "queued": True,
                 "queue_position": len(self.queued_turns[session_id]),
             }
@@ -95,8 +116,10 @@ class TurnScheduler:
             "accepted": True,
             "turn_id": turn_id,
             "session_id": session_id,
+            "message_id": user_message_id,
             "queued": False,
         }
+
 
     async def interrupt_turn(self, session_id: str) -> Dict[str, Any]:
         active = self.active_turns.get(session_id)
@@ -144,7 +167,8 @@ class TurnScheduler:
                 attachments=job.attachments,
                 reasoning_effort=job.reasoning_effort,
                 cancel_token=cancel_event,
-                turn_id=job.turn_id
+                turn_id=job.turn_id,
+                user_message_id=job.user_message_id,
             ):
                 if cancel_event.is_set():
                     break

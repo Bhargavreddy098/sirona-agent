@@ -12,7 +12,7 @@ import { $sessions, openSessionInTab, createNewSession } from './sessionStore'
 import { $fileTree, openFile, type FileTreeNode } from './fileStore'
 import { stageFile, refreshGitStatus } from './gitStore'
 
-export type CommandCategory = 'Slash Commands' | 'Sessions' | 'Files' | 'Git' | 'Views' | 'Settings'
+export type CommandCategory = 'Slash Commands' | 'Sessions' | 'Files' | 'Git' | 'Views' | 'Settings' | 'Messages & FTS'
 
 export interface PaletteItem {
   id: string
@@ -26,6 +26,7 @@ export interface PaletteItem {
 
 export const $paletteQuery = atom<string>('')
 export const $selectedIndex = atom<number>(0)
+export const $ftsResults = atom<PaletteItem[]>([])
 
 export function setPaletteQuery(q: string): void {
   $paletteQuery.set(q)
@@ -37,6 +38,52 @@ export function openPaletteWithQuery(q = ''): void {
   $selectedIndex.set(0)
   $commandPaletteOpen.set(true)
 }
+
+let ftsDebounceTimer: ReturnType<typeof setTimeout> | null = null
+
+export async function searchTranscriptFts(query: string): Promise<void> {
+  const trimmed = query.trim()
+  if (!trimmed || trimmed.length < 2 || trimmed.startsWith('/')) {
+    $ftsResults.set([])
+    return
+  }
+
+  try {
+    const res = await fetch(`http://127.0.0.1:8000/api/search?q=${encodeURIComponent(trimmed)}&limit=15`)
+    if (!res.ok) {
+      $ftsResults.set([])
+      return
+    }
+    const data = await res.json()
+    const results = data.results || []
+    const items: PaletteItem[] = results.map((r: { message_id: number; session_id: string; role: string; content: string; snippet?: string }) => {
+      const cleanSnippet = r.snippet ? r.snippet.replace(/<[^>]+>/g, '') : r.content
+      const preview = cleanSnippet.length > 80 ? cleanSnippet.slice(0, 77) + '...' : cleanSnippet
+      return {
+        id: `fts-${r.message_id}`,
+        title: preview,
+        subtitle: `${r.role === 'user' ? 'User' : 'Assistant'} · session ${r.session_id.slice(0, 8)}...`,
+        category: 'Messages & FTS',
+        iconType: 'sparkle',
+        action: () => {
+          openSessionInTab(r.session_id)
+          toggleCommandPalette()
+        },
+      }
+    })
+    $ftsResults.set(items)
+  } catch {
+    $ftsResults.set([])
+  }
+}
+
+$paletteQuery.subscribe((q) => {
+  if (ftsDebounceTimer) clearTimeout(ftsDebounceTimer)
+  ftsDebounceTimer = setTimeout(() => {
+    searchTranscriptFts(q)
+  }, 180)
+})
+
 
 // Flatten file tree nodes into simple list
 function flattenFiles(nodes: FileTreeNode[], acc: Array<{ path: string; name: string }> = []): Array<{ path: string; name: string }> {
@@ -216,8 +263,8 @@ export function fuzzyMatch(pattern: string, text: string): number {
 
 // Computed combined items filtered by active query
 export const $filteredItems = computed(
-  [$paletteQuery, $sessions, $fileTree],
-  (query, sessions, fileTree) => {
+  [$paletteQuery, $sessions, $fileTree, $ftsResults],
+  (query, sessions, fileTree, ftsItems) => {
     const q = query.trim()
     const baseItems = getBaseCommands()
 
@@ -249,7 +296,8 @@ export const $filteredItems = computed(
       },
     }))
 
-    const all = [...baseItems, ...sessionItems, ...fileItems]
+    const all = [...baseItems, ...sessionItems, ...fileItems, ...ftsItems]
+
 
     if (!q) {
       return all

@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import {
   $selectedIndex,
   $filteredItems,
+  $ftsResults,
   setPaletteQuery,
   selectNext,
   selectPrev,
@@ -113,5 +114,25 @@ describe('commandStore & Command Palette Fuzzy Matching', () => {
     // Terminal deck should have opened and command palette closed
     expect($terminalDeckOpen.get()).toBe(true)
     expect($commandPaletteOpen.get()).toBe(false)
+  })
+
+  it('incorporates messages from FTS full-text search', () => {
+    $ftsResults.set([
+      {
+        id: 'fts-42',
+        title: 'Fix SQLite WAL mode concurrency issue',
+        subtitle: 'User in session sess-1',
+        category: 'Messages & FTS',
+        iconType: 'sparkle',
+        action: () => {},
+      },
+    ])
+
+    setPaletteQuery('concurrency')
+    const items = $filteredItems.get()
+    const ftsItem = items.find((i) => i.id === 'fts-42')
+    expect(ftsItem).toBeDefined()
+    expect(ftsItem?.category).toBe('Messages & FTS')
+    expect(ftsItem?.iconType).toBe('sparkle')
   })
 })

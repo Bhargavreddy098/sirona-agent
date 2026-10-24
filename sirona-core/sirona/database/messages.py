@@ -229,3 +229,44 @@ class MessageRepository:
             timestamp=now,
             display_kind="compacted_summary",
         )
+
+    async def get_message_by_id(self, message_id: int) -> Optional[MessageRecord]:
+        async with self.db_mgr.acquire() as db:
+            async with db.execute("SELECT * FROM messages WHERE id = ?", (message_id,)) as cursor:
+                row = await cursor.fetchone()
+                if not row:
+                    return None
+                return MessageRecord(**dict(row))
+
+    async def find_recent_unadopted_user_message(
+        self,
+        session_id: str,
+        content: str,
+        within_seconds: float = 15.0
+    ) -> Optional[MessageRecord]:
+        cutoff = time.time() - within_seconds
+        async with self.db_mgr.acquire() as db:
+            query = """
+                SELECT * FROM messages
+                WHERE session_id = ? AND role = 'user' AND content = ? AND timestamp >= ? AND active = 1
+                ORDER BY timestamp DESC, id DESC
+                LIMIT 1
+            """
+            async with db.execute(query, (session_id, content, cutoff)) as cursor:
+                row = await cursor.fetchone()
+                if not row:
+                    return None
+                return MessageRecord(**dict(row))
+
+    async def adopt_message(self, message_id: int, turn_id: str) -> None:
+        async with self.db_mgr.acquire() as db:
+            await db.execute(
+                """
+                UPDATE messages
+                SET metadata = json_set(COALESCE(metadata, '{}'), '$.adopted_turn_id', ?, '$.adoption_status', 'adopted')
+                WHERE id = ?
+                """,
+                (turn_id, message_id)
+            )
+            await db.commit()
+

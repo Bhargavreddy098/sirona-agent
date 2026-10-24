@@ -74,6 +74,7 @@ async def system_status(request: Request):
         "pid": os.getpid(),
         "threads": threading.active_count(),
         "active_runs": getattr(request.app.state, "active_runs", 0),
+        "active_leases": len(request.app.state.turn_lease_registry.get_active_leases()) if getattr(request.app.state, "turn_lease_registry", None) else 0,
         "uptime": round(time.time() - getattr(request.app.state, "started_at", time.time()), 1),
         "timestamp": time.time(),
     }

@@ -1,6 +1,6 @@
 # Sirona: complete Hermes desktop migration plan
 
-Prepared 24 October 2026 (Asia/Kolkata). Status: planning and static investigation complete; implementation has not started.
+Prepared 24 October 2026 (Asia/Kolkata). Historical initial migration plan. The workspace now contains fifteen implementation-stage commits. Its current plan/acceptance assessment is [Plan quality and fifteen-stage strength review](../hermes-reconstruction/plan-quality-and-15-stage-strength-review.md); the exhaustive behavioral investigation remains incomplete.
 
 The objective is to replace Sirona's current frontend with the actual Hermes desktop frontend and reproduce its non-bot behavior end to end: routes, components, layouts, native windows, tools, shell execution, questions, approvals, persistence, and recovery. This is a source port, not a visual approximation. Every discovered source item must have an explicit disposition and every retained user action must reach a working implementation.
 
@@ -52,7 +52,7 @@ The recorded inventory contains 4,313 files, including 613 TSX modules and 1,826
 
 Hermes has three authorities: Electron owns native capabilities; React owns presentation and window interaction state; the agent backend owns sessions, model calls, tools and durable work. Its renderer imports `@hermes/shared`, uses a substantial typed native bridge and adapts canonical gateway behavior in `src/api/client.ts` plus `canonical-*.ts` siblings.
 
-Sirona currently has one React shell without equivalent page routing. Its providers and MCP include placeholders; approval events disagree between layers; its gateway blocks reading control messages while awaiting a whole turn; run endpoints acknowledge work without scheduling it; and terminal output is ordinary subprocess pipes rather than a PTY. Details and paths are in the audit document. Existing mock tests do not establish parity.
+The initial scaffold audit identified one React shell without equivalent page routing, placeholder providers/MCP, mismatched approvals, blocking prompt processing, unscheduled run acknowledgements and pipe-based terminals. Subsequent stage commits added background scheduling and clarification handling, along with other features. Providers/MCP, true PTY, packaging and several contracts still have gaps. Use the linked current review and stage cross-check for present-tense findings. Existing mock tests do not establish full parity.
 
 Therefore the recommended implementation ports the real desktop and the runtime contracts together. Hand-reimplementing thousands of source modules against the tiny current core would increase the chance of missing behavior and preserving broken seams.
 
@@ -215,4 +215,4 @@ Use `not-started → ported → wired → behavior-verified → visually-verifie
 | Questions during conversation | Actual contracts/state lifecycle identified | Full question/approval/sensitive-input scenario suite passes |
 | Everything except bots | Explicit scope and dependency-aware removal planned | No bot registration/ingress remains; local agents continue working |
 
-Planning is complete at this level. Exhaustive behavior discovery and runtime/visual verification remain scheduled work, and implementation has not begun. The next concrete implementation milestone is Phase 0 closure plus a reproducible source-preserving desktop build; the final target remains full retained-feature parity.
+This document is an initial roadmap, not a closed implementation specification. Fifteen implementation-stage commits now exist; their acceptance remains subject to the current strength review. Exhaustive behavior discovery, contract closure, runtime/visual verification and standalone packaging remain outstanding. Preserve the existing implementation and complete its missing gates toward full retained-feature parity.

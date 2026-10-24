@@ -310,6 +310,22 @@ async def dispatch_rpc(method: str, params: Dict[str, Any], app_state: Any) -> D
         filtered = [c for c in commands if q in c["name"].lower()]
         return {"matches": filtered}
 
+    elif method in ("search.messages", "messages.search", "session.search"):
+        q = params.get("query") or params.get("q", "")
+        session_id = params.get("session_id")
+        limit = params.get("limit", 50)
+        results = await app_state.message_repo.search_messages(query_text=q, session_id=session_id, limit=limit)
+        return {
+            "query": q,
+            "total": len(results),
+            "results": [r.model_dump() for r in results]
+        }
+
+    elif method in ("turn.leases", "session.leases", "leases.list"):
+        registry = getattr(app_state, "turn_lease_registry", None)
+        leases = registry.get_active_leases() if registry else []
+        return {"leases": leases, "total": len(leases)}
+
     elif method == "tools.list":
         tools = app_state.tool_registry.list_tools()
         return {"tools": [t.name for t in tools]}
