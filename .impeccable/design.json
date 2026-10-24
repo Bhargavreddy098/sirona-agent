@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-24T15:12:00.000Z",
+  "title": "Design System: Sirona",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Stark Ink",
+        "canonical": "#1f2328",
+        "tonalRamp": ["#090a0c", "#131619", "#1f2328", "#333942", "#525c68", "#818c99", "#b3bac1", "#e6edf3"]
+      },
+      "primary-foreground": {
+        "role": "primary-foreground",
+        "displayName": "Pure White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#6e7681", "#8c959f", "#afb8c1", "#d0d7de", "#e1e4e8", "#eaeef2", "#f6f8fa", "#ffffff"]
+      },
+      "neutral-bg": {
+        "role": "neutral",
+        "displayName": "Pure Canvas",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#24292f", "#424a53", "#6e7681", "#8c959f", "#afb8c1", "#d0d7de", "#f6f8fa", "#ffffff"]
+      },
+      "neutral-fg": {
+        "role": "neutral-fg",
+        "displayName": "Stark Ink",
+        "canonical": "#1f2328",
+        "tonalRamp": ["#090a0c", "#131619", "#1f2328", "#333942", "#525c68", "#818c99", "#b3bac1", "#e6edf3"]
+      },
+      "surface-card": {
+        "role": "surface",
+        "displayName": "Muted Mist",
+        "canonical": "#f6f8fa",
+        "tonalRamp": ["#1f2328", "#32383f", "#57606a", "#8c959f", "#afb8c1", "#d0d7de", "#e1e4e8", "#f6f8fa"]
+      },
+      "surface-border": {
+        "role": "border",
+        "displayName": "Hairline Stroke",
+        "canonical": "#d0d7de",
+        "tonalRamp": ["#1f2328", "#32383f", "#57606a", "#8c959f", "#afb8c1", "#d0d7de", "#e1e4e8", "#f6f8fa"]
+      },
+      "status-danger": {
+        "role": "danger",
+        "displayName": "Destructive Crimson",
+        "canonical": "#cf222e",
+        "tonalRamp": ["#4c0004", "#82071e", "#a40e26", "#cf222e", "#e5534b", "#fa7970", "#ffaba8", "#ffebe9"]
+      },
+      "status-success": {
+        "role": "success",
+        "displayName": "Verified Emerald",
+        "canonical": "#1a7f37",
+        "tonalRamp": ["#04260f", "#0e4429", "#116329", "#1a7f37", "#2da44e", "#4ac26b", "#7ee787", "#aff5b4"]
+      },
+      "status-warning": {
+        "role": "warning",
+        "displayName": "Caution Amber",
+        "canonical": "#9a6700",
+        "tonalRamp": ["#3b2300", "#5c3d00", "#7d5200", "#9a6700", "#b08800", "#d4a72c", "#eac54f", "#fbeea7"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Modal headers and major greetings." },
+      "headline": { "displayName": "Headline", "purpose": "Panel titles and section dividers." },
+      "title": { "displayName": "Title", "purpose": "Card titles and session names." },
+      "body": { "displayName": "Body", "purpose": "All conversational messages and explanations (max 75ch)." },
+      "label": { "displayName": "Label", "purpose": "Timestamps, shortcut keycaps, and telemetry metadata." }
+    },
+    "shadows": [
+      {
+        "name": "shadow-subtle",
+        "value": "0 1px 2px rgba(0, 0, 0, 0.05)",
+        "purpose": "Resting cards and buttons."
+      },
+      {
+        "name": "shadow-nous",
+        "value": "0 2px 4px -2px rgba(0, 0, 0, 0.07), 0 8px 12px -6px rgba(0, 0, 0, 0.06), 0 20px 28px -14px rgba(0, 0, 0, 0.06), 0 36px 48px -28px rgba(0, 0, 0, 0.04)",
+        "purpose": "Multi-stage ambient downward diffusion."
+      },
+      {
+        "name": "shadow-composer",
+        "value": "0 0 0 1px rgba(31, 35, 40, 0.08), 0 8px 24px -4px rgba(0, 0, 0, 0.06), 0 16px 32px -8px rgba(0, 0, 0, 0.08)",
+        "purpose": "Elevated frosted composer container."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Snappy desktop layout transitions."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid stark action button for confirmations, submissions, and key actions.",
+      "html": "<button class=\"ds-btn-primary\">Run Plan</button>",
+      "css": ".ds-btn-primary { background: #1f2328; color: #ffffff; padding: 6px 12px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; border: none; border-radius: 8px; cursor: pointer; transition: all 0.15s ease; box-shadow: 0 1px 2px rgba(0,0,0,0.05); } .ds-btn-primary:hover { filter: brightness(1.15); transform: translateY(-0.5px); } .ds-btn-primary:active { transform: translateY(0); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Bordered resting button for alternate choices and tool toggles.",
+      "html": "<button class=\"ds-btn-secondary\">Inspect Diff</button>",
+      "css": ".ds-btn-secondary { background: #f6f8fa; color: #1f2328; padding: 6px 12px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; border: 1px solid #d0d7de; border-radius: 8px; cursor: pointer; transition: all 0.15s ease; } .ds-btn-secondary:hover { background: #ffffff; border-color: #8c959f; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Low-emphasis icon button or toolbar toggle without persistent borders.",
+      "html": "<button class=\"ds-btn-ghost\">Cancel</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #656d76; padding: 6px 12px; font-size: 13px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; border: none; border-radius: 8px; cursor: pointer; transition: all 0.15s ease; } .ds-btn-ghost:hover { background: #f6f8fa; color: #1f2328; }"
+    },
+    {
+      "name": "Search Input Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Standardized search and jump field with inset icon.",
+      "html": "<div class=\"ds-search-box\"><input class=\"ds-search-input\" type=\"text\" placeholder=\"Search or jump to... (Cmd+K)\" /></div>",
+      "css": ".ds-search-box { position: relative; width: 100%; } .ds-search-input { width: 100%; padding: 6px 12px 6px 30px; font-size: 12px; color: #1f2328; background: #ffffff; border: 1px solid #d0d7de; border-radius: 8px; outline: none; transition: all 0.15s ease; box-shadow: 0 1px 2px rgba(0,0,0,0.02); } .ds-search-input:focus { border-color: #1f2328; box-shadow: 0 0 0 2px rgba(31, 35, 40, 0.1); }"
+    },
+    {
+      "name": "Floating Frosted Composer",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Floating glassmorphic composer container for prompt input.",
+      "html": "<div class=\"ds-composer\"><textarea class=\"ds-composer-textarea\" placeholder=\"Ask Sirona anything...\"></textarea><div class=\"ds-composer-footer\"><span class=\"ds-model-chip\">gemini-2.5-flash</span><button class=\"ds-send-btn\">↑</button></div></div>",
+      "css": ".ds-composer { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid #d0d7de; border-radius: 18px; padding: 12px; box-shadow: 0 0 0 1px rgba(31, 35, 40, 0.08), 0 8px 24px -4px rgba(0, 0, 0, 0.06), 0 16px 32px -8px rgba(0, 0, 0, 0.08); display: flex; flex-direction: column; width: 100%; max-width: 800px; } .ds-composer-textarea { width: 100%; background: transparent; border: none; outline: none; font-size: 14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; resize: none; color: #1f2328; line-height: 1.5; } .ds-composer-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(208, 215, 222, 0.5); } .ds-model-chip { font-size: 11px; font-family: 'JetBrains Mono', monospace; background: #f6f8fa; border: 1px solid #d0d7de; padding: 2px 8px; border-radius: 9999px; color: #656d76; } .ds-send-btn { width: 28px; height: 28px; border-radius: 9999px; background: #1f2328; color: #ffffff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; }"
+    },
+    {
+      "name": "Tool Execution Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Collapsible card detailing tool name, status ticker, args, and output.",
+      "html": "<div class=\"ds-tool-card\"><div class=\"ds-tool-header\"><span class=\"ds-tool-name\">read_file</span><span class=\"ds-tool-status\">completed · 14ms</span></div></div>",
+      "css": ".ds-tool-card { background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 14px; padding: 12px 14px; width: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; } .ds-tool-header { display: flex; align-items: center; justify-content: space-between; } .ds-tool-name { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 600; color: #1f2328; } .ds-tool-status { font-size: 11px; color: #1a7f37; font-weight: 500; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lucid Cockpit",
+    "overview": "Sirona is an autonomous developer agent desktop studio designed around the feeling of a quiet, hyper-focused, unhurried instrument cockpit. Where conventional developer tools overwhelm users with dense terminal logs, erratic font weights, and chaotic layouts, Sirona brings absolute visual clarity: complex agentic workflows—such as multi-turn reasoning chains, tool execution loops, and git diff trees—are structured into legible, transparent visual controls.\n\nThe interface prioritizes high-contrast typography, ample tranquil negative space, and disciplined layout rhythm. Built for non-technical power users as well as experienced engineers, the system translates low-level system events into plain-language summaries and intuitive visual affordances.",
+    "keyCharacteristics": [
+      "Chromatic Rarity: A stark, intentional monochrome foundation where color is never decorative and is strictly reserved for operational status and safety gates.",
+      "Layered Ambient Depth: Elevation achieved through 0.5–1px hairline borders and multi-layer downward ambient diffusion rather than harsh heavy dropshadows.",
+      "Frosted Glass Focal Point: A floating, translucent composer pinned to the viewport bottom that commands attention while letting chat history drift cleanly underneath.",
+      "Precision Squircles: A unified radius hierarchy ranging from 6px badges to 18px composer shells.",
+      "Zero-Flicker Streaming: Smooth Nanostores reactivity rendering tokens and reasoning deltas without jarring layout shifts."
+    ],
+    "rules": [
+      {
+        "name": "The Chromatic Rarity Rule",
+        "body": "Color is never decorative. Chromatic hues appear on ≤3% of any viewport, strictly signaling operational state (danger, success, connection heartbeat). Everything else lives in stark monochrome.",
+        "section": "colors"
+      },
+      {
+        "name": "The Contrast Floor Rule",
+        "body": "All text elements must achieve a minimum 4.5:1 contrast ratio against their immediate background; secondary metadata must not drop below 3.5:1.",
+        "section": "colors"
+      },
+      {
+        "name": "The Monospace Legibility Rule",
+        "body": "Code blocks, token counts, file paths, tool names, execution durations, and timestamps must always render in monospace with explicit tabular numbers (font-variant-numeric: tabular-nums).",
+        "section": "typography"
+      },
+      {
+        "name": "The Centered Focus Rule",
+        "body": "The primary conversation thread and composer must always stay centered within the available main canvas with an 800px maximum constraint, while side rails dock flush to the window perimeters.",
+        "section": "layout"
+      },
+      {
+        "name": "The Ambient Separation Rule",
+        "body": "Surfaces separate from the background primarily through a 1px hairline border (var(--dt-border)) reinforced by soft ambient falloff. Heavy 3D bevels, colored drop shadows, and high-opacity borders are strictly prohibited.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Radius Hierarchy Rule",
+        "body": "Interactive inner controls must have a smaller radius than their containing parent card (e.g., an 8px button sits inside a 14px card, never vice versa).",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do wrap every code snippet, file path, command, and timestamp in monospace typography.",
+      "Do provide an explicit plain-language summary before displaying tool execution results or code diffs.",
+      "Do confine transcript and composer widths to 800px to maintain optimal line-length legibility.",
+      "Do preserve 1px hairline borders (var(--dt-border)) between panels and split panes.",
+      "Do bind clear keyboard shortcuts (Enter, Esc, ⌘K, ⌘B) to all modals and approval dialogs.",
+      "Do respect system reduced-motion preferences (prefers-reduced-motion) by collapsing animations to 0.01ms."
+    ],
+    "donts": [
+      "Don't use colored backgrounds for message containers or cards; keep surfaces in pure paper or muted mist.",
+      "Don't apply bright chromatic accent colors (blues, greens, purples) to non-status UI elements.",
+      "Don't use heavy, opaque drop shadows or thick 2px borders.",
+      "Don't display raw JSON dumps or terminal exceptions to users without an accompanying friendly explanation.",
+      "Don't auto-scroll the conversation transcript when the user has scrolled up to inspect history.",
+      "Don't allow long message lines to stretch across the full width of wide displays."
+    ]
+  }
+}
