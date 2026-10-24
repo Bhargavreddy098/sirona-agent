@@ -1,6 +1,6 @@
 import { atom } from 'nanostores'
 
-export type ContextTab = 'files' | 'review' | 'terminal'
+export type ContextTab = 'files' | 'review' | 'terminal' | 'preview'
 export type LayoutPreset = 'default' | 'focus' | 'terminal-deck'
 
 export const $sidebarOpen = atom<boolean>(true)

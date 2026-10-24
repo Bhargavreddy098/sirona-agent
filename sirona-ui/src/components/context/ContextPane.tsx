@@ -1,5 +1,5 @@
 import React from 'react'
-import { FolderTree, GitCompare, Terminal as TerminalIcon } from 'lucide-react'
+import { FolderTree, GitCompare, Terminal as TerminalIcon, Eye } from 'lucide-react'
 import { useStore } from '@nanostores/react'
 import {
   $contextPaneOpen,
@@ -7,26 +7,41 @@ import {
   setActiveContextTab,
   type ContextTab,
 } from '../../store/layoutStore'
+import { $artifacts } from '../../store/artifactStore'
 import { FileTreeExplorer } from './FileTreeExplorer'
 import { DiffReviewView } from './DiffReviewView'
 import { TerminalDeck } from './TerminalDeck'
+import { PreviewPane } from './PreviewPane'
 
 export const ContextPane: React.FC = () => {
   const isOpen = useStore($contextPaneOpen)
   const activeTab = useStore($activeContextTab)
+  const artifacts = useStore($artifacts)
 
   if (!isOpen) return null
 
-  const tabs: Array<{ id: ContextTab; label: string; icon: React.ReactNode }> = [
+  const tabs: Array<{ id: ContextTab; label: string; icon: React.ReactNode; badge?: number }> = [
     { id: 'files', label: 'Files', icon: <FolderTree className="w-3.5 h-3.5" /> },
     { id: 'review', label: 'Review', icon: <GitCompare className="w-3.5 h-3.5" /> },
     { id: 'terminal', label: 'Terminal', icon: <TerminalIcon className="w-3.5 h-3.5" /> },
+    {
+      id: 'preview',
+      label: 'Preview',
+      icon: <Eye className="w-3.5 h-3.5" />,
+      badge: artifacts.length > 0 ? artifacts.length : undefined,
+    },
   ]
 
+  const isWide = activeTab === 'preview' || activeTab === 'review'
+
   return (
-    <aside className="w-80 h-full flex flex-col bg-[#faf8f5] border-l border-[#d1d1cd] select-none z-10">
+    <aside
+      className={`h-full flex flex-col bg-[#faf8f5] border-l border-[#d1d1cd] select-none z-10 transition-[width] duration-150 ${
+        isWide ? 'w-[520px] max-w-[50vw] min-w-[380px]' : 'w-80'
+      }`}
+    >
       {/* Tab strip */}
-      <div className="flex items-center px-3 border-b border-[#d1d1cd] bg-[#faf8f5] h-10">
+      <div className="flex items-center px-3 border-b border-[#d1d1cd] bg-[#faf8f5] h-10 shrink-0">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id
           return (
@@ -41,6 +56,11 @@ export const ContextPane: React.FC = () => {
             >
               {tab.icon}
               <span>{tab.label}</span>
+              {tab.badge !== undefined && (
+                <span className="ml-0.5 text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-[#016a71] text-white">
+                  {tab.badge}
+                </span>
+              )}
             </button>
           )
         })}
@@ -51,6 +71,7 @@ export const ContextPane: React.FC = () => {
         {activeTab === 'files' && <FileTreeExplorer />}
         {activeTab === 'review' && <DiffReviewView />}
         {activeTab === 'terminal' && <TerminalDeck />}
+        {activeTab === 'preview' && <PreviewPane />}
       </div>
     </aside>
   )

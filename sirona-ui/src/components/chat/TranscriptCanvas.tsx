@@ -61,6 +61,7 @@ export const TranscriptCanvas: React.FC = () => {
                 content={m.content || ''}
                 reasoning={m.reasoning}
                 interrupted={m.interrupted}
+                sessionId={m.session_id}
               />
             )
           }
@@ -101,6 +102,7 @@ export const TranscriptCanvas: React.FC = () => {
                 reasoning={streaming.currentReasoning}
                 isStreaming={true}
                 isReasoningStreaming={streaming.isReasoningStreaming}
+                sessionId={streaming.sessionId || undefined}
               />
             ) : (
               <div className="flex items-center gap-2 text-[13px] text-[#016a71] my-3 px-1">
