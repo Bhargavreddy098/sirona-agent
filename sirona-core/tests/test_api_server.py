@@ -68,3 +68,32 @@ async def test_session_api_crud(app_client):
     chat_res = await app_client.post(f"/api/sessions/{sess_id}/chat", json={"prompt": "Hello Sirona"})
     assert chat_res.status_code == 200
     assert "response" in chat_res.json()
+
+    # Test Branch API
+    branch_res = await app_client.post(f"/api/sessions/{sess_id}/branch", json={"new_title": "Branched API Session"})
+    assert branch_res.status_code == 200
+    branched_sess = branch_res.json()["session"]
+    branched_id = branched_sess["id"]
+    assert branched_sess["parent_session_id"] == sess_id
+
+    # Test Lineage API
+    lineage_res = await app_client.get(f"/api/sessions/{branched_id}/lineage")
+    assert lineage_res.status_code == 200
+    lineage_data = lineage_res.json()
+    assert lineage_data["session"]["id"] == branched_id
+    assert any(a["id"] == sess_id for a in lineage_data["ancestors"])
+
+    # Test Topology API
+    topo_res = await app_client.get("/api/sessions/topology")
+    assert topo_res.status_code == 200
+    topo_data = topo_res.json()
+    assert "nodes" in topo_data
+    assert "edges" in topo_data
+    node_ids = [n["id"] for n in topo_data["nodes"]]
+    assert sess_id in node_ids
+    assert branched_id in node_ids
+
+    # Test Rewind API
+    rewind_res = await app_client.post(f"/api/sessions/{sess_id}/rewind", json={"to_message_id": 0})
+    assert rewind_res.status_code == 200
+    assert rewind_res.json()["success"] is True

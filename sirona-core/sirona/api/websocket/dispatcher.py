@@ -42,11 +42,11 @@ async def dispatch_rpc(method: str, params: Dict[str, Any], app_state: Any) -> D
         parent_id = params.get("session_id") or params.get("parent_id")
         if not parent_id:
             return {"error": "session_id required"}
-        title = params.get("title")
+        title = params.get("title") or params.get("new_title")
         through_id = params.get("through_message_id")
         branched = await app_state.session_repo.branch_session(
-            parent_id=parent_id,
-            title=title,
+            source_session_id=parent_id,
+            new_title=title,
             through_message_id=through_id
         )
         if not branched:
@@ -56,6 +56,31 @@ async def dispatch_rpc(method: str, params: Dict[str, Any], app_state: Any) -> D
             "branched_session_id": branched.id,
             "session": branched.model_dump()
         }
+
+    elif method == "session.rewind":
+        session_id = params.get("session_id")
+        to_message_id = params.get("to_message_id")
+        if not session_id or to_message_id is None:
+            return {"error": "session_id and to_message_id required"}
+        success = await app_state.session_repo.rewind_session(session_id=session_id, to_message_id=to_message_id)
+        return {"success": success, "session_id": session_id, "rewound_to": to_message_id}
+
+    elif method in ("session.lineage", "lineage.get"):
+        session_id = params.get("session_id")
+        if not session_id:
+            return {"error": "session_id required"}
+        res = await app_state.session_repo.get_lineage(session_id)
+        session_obj = res["session"].model_dump() if res.get("session") else None
+        ancestors_list = [a.model_dump() for a in res.get("ancestors", [])]
+        children_list = [c.model_dump() for c in res.get("children", [])]
+        return {
+            "session": session_obj,
+            "ancestors": ancestors_list,
+            "children": children_list
+        }
+
+    elif method in ("session.topology", "topology.get", "starmap.topology"):
+        return await app_state.session_repo.get_topology()
 
     elif method in ("session.cwd.set", "session.workspace.move"):
         session_id = params.get("session_id") or params.get("session")

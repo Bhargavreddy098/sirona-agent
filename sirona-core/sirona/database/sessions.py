@@ -334,3 +334,73 @@ class SessionRepository:
             )
             await db.commit()
             return cursor.rowcount > 0
+
+    async def get_lineage(self, session_id: str) -> Dict[str, Any]:
+        """Fetch lineage for a specific session: ancestors, self, and children."""
+        async with self.db_mgr.acquire() as db:
+            target = await self.get_session(session_id)
+            if not target:
+                return {"session": None, "ancestors": [], "children": []}
+
+            ancestors = []
+            curr_parent_id = target.parent_session_id
+            while curr_parent_id:
+                async with db.execute("SELECT * FROM sessions WHERE id = ?", (curr_parent_id,)) as c:
+                    row = await c.fetchone()
+                    if not row:
+                        break
+                    p = SessionRecord(**dict(row))
+                    ancestors.append(p)
+                    curr_parent_id = p.parent_session_id
+
+            async with db.execute(
+                "SELECT * FROM sessions WHERE parent_session_id = ? AND deleted_at IS NULL ORDER BY started_at ASC",
+                (session_id,)
+            ) as c:
+                rows = await c.fetchall()
+                children = [SessionRecord(**dict(r)) for r in rows]
+
+            return {
+                "session": target,
+                "ancestors": ancestors,
+                "children": children
+            }
+
+    async def get_topology(self) -> Dict[str, Any]:
+        """Fetch full tree topology (nodes and edges) for all active sessions."""
+        async with self.db_mgr.acquire() as db:
+            async with db.execute(
+                "SELECT * FROM sessions WHERE deleted_at IS NULL ORDER BY started_at ASC"
+            ) as c:
+                rows = await c.fetchall()
+                sessions = [SessionRecord(**dict(r)) for r in rows]
+
+            nodes = []
+            edges = []
+            for s in sessions:
+                nodes.append({
+                    "id": s.id,
+                    "title": s.title,
+                    "model": s.model,
+                    "started_at": s.started_at,
+                    "message_count": s.message_count,
+                    "parent_session_id": s.parent_session_id,
+                    "branch_point_id": s.branch_point_id,
+                })
+                if s.parent_session_id:
+                    edges.append({
+                        "source": s.parent_session_id,
+                        "target": s.id,
+                        "branch_point_id": s.branch_point_id,
+                    })
+
+            # Checkpoints
+            async with db.execute("SELECT * FROM checkpoints ORDER BY created_at ASC") as c:
+                cp_rows = await c.fetchall()
+                checkpoints = [dict(r) for r in cp_rows]
+
+            return {
+                "nodes": nodes,
+                "edges": edges,
+                "checkpoints": checkpoints
+            }

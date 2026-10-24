@@ -273,3 +273,58 @@ async def test_soft_delete_and_filtering(db_manager):
     sessions, _ = await session_repo.list_sessions()
     assert not any(s.id == sess.id for s in sessions)
 
+@pytest.mark.asyncio
+async def test_session_lineage_and_topology(db_manager):
+    session_repo = SessionRepository(db_manager)
+    msg_repo = MessageRepository(db_manager)
+
+    root = await session_repo.create_session(title="Root Session")
+    m1 = await msg_repo.add_message(session_id=root.id, role="user", content="Turn 1")
+    m2 = await msg_repo.add_message(session_id=root.id, role="assistant", content="Answer 1")
+
+    # Create Branch 1 from root at m2
+    branch1 = await session_repo.branch_session(
+        source_session_id=root.id,
+        through_message_id=m2.id,
+        new_title="Branch 1"
+    )
+    assert branch1 is not None
+    assert branch1.parent_session_id == root.id
+
+    # Create Branch 2 from Branch 1
+    m3 = await msg_repo.add_message(session_id=branch1.id, role="user", content="Turn 2")
+    branch2 = await session_repo.branch_session(
+        source_session_id=branch1.id,
+        through_message_id=m3.id,
+        new_title="Branch 2"
+    )
+    assert branch2 is not None
+    assert branch2.parent_session_id == branch1.id
+
+    # Check lineage for Branch 2 (should have ancestors branch1 and root)
+    lineage = await session_repo.get_lineage(branch2.id)
+    assert lineage["session"].id == branch2.id
+    ancestor_ids = [a.id for a in lineage["ancestors"]]
+    assert branch1.id in ancestor_ids
+    assert root.id in ancestor_ids
+
+    # Check lineage for root (should have child branch1)
+    root_lineage = await session_repo.get_lineage(root.id)
+    child_ids = [c.id for c in root_lineage["children"]]
+    assert branch1.id in child_ids
+
+    # Check full topology
+    topology = await session_repo.get_topology()
+    assert "nodes" in topology
+    assert "edges" in topology
+    node_ids = [n["id"] for n in topology["nodes"]]
+    assert root.id in node_ids
+    assert branch1.id in node_ids
+    assert branch2.id in node_ids
+
+    # Edge from root -> branch1
+    edge_pairs = [(e["source"], e["target"]) for e in topology["edges"]]
+    assert (root.id, branch1.id) in edge_pairs
+    assert (branch1.id, branch2.id) in edge_pairs
+
+

@@ -47,6 +47,12 @@ async def create_session(request: Request, body: CreateSessionRequest):
     )
     return {"session": sess}
 
+@router.get("/api/sessions/topology")
+async def get_sessions_topology(request: Request):
+    repo = request.app.state.session_repo
+    topology = await repo.get_topology()
+    return topology
+
 @router.get("/api/sessions/{session_id}")
 async def get_session(request: Request, session_id: str):
     repo = request.app.state.session_repo
@@ -54,6 +60,14 @@ async def get_session(request: Request, session_id: str):
     if not sess:
         raise HTTPException(status_code=404, detail="Session not found")
     return {"session": sess}
+
+@router.get("/api/sessions/{session_id}/lineage")
+async def get_session_lineage(request: Request, session_id: str):
+    repo = request.app.state.session_repo
+    lineage = await repo.get_lineage(session_id)
+    if not lineage.get("session"):
+        raise HTTPException(status_code=404, detail="Session not found")
+    return lineage
 
 @router.patch("/api/sessions/{session_id}")
 async def patch_session(request: Request, session_id: str, body: UpdateSessionRequest):

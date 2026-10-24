@@ -95,6 +95,43 @@ export interface DesktopSettings {
   [key: string]: any
 }
 
+export interface SessionTopologyNode {
+  id: string
+  title: string
+  model: string
+  started_at: number
+  message_count: number
+  parent_session_id?: string
+  branch_point_id?: string
+}
+
+export interface SessionTopologyEdge {
+  source: string
+  target: string
+  branch_point_id?: string
+}
+
+export interface SessionCheckpoint {
+  id: string
+  session_id: string
+  message_id?: number
+  summary?: string
+  state_data?: string
+  created_at: number
+}
+
+export interface SessionTopologyResponse {
+  nodes: SessionTopologyNode[]
+  edges: SessionTopologyEdge[]
+  checkpoints: SessionCheckpoint[]
+}
+
+export interface SessionLineageResponse {
+  session: SessionSummary
+  ancestors: SessionSummary[]
+  children: SessionSummary[]
+}
+
 export function getApiBaseUrl(): string {
   if (typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
     return ''
@@ -195,6 +232,9 @@ export const api = {
         body: JSON.stringify({ to_message_id: toMessageId }),
       }
     ),
+  getSessionTopology: () => fetchJson<SessionTopologyResponse>('/api/sessions/topology'),
+  getSessionLineage: (sessionId: string) =>
+    fetchJson<SessionLineageResponse>(`/api/sessions/${encodeURIComponent(sessionId)}/lineage`),
 
   // Full-Text Search across message transcripts
   searchMessages: (query: string, sessionId?: string, limit: number = 50) => {
