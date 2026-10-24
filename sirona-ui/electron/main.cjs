@@ -133,6 +133,15 @@ async function ensureBackendRunning() {
 }
 
 async function resolveAppUrl() {
+  // If not explicitly launched in dev mode, prefer the built production dist bundle
+  const isDevMode = process.argv.includes('--dev') || Boolean(process.env.ELECTRON_DEV)
+  if (!isDevMode) {
+    const distPath = path.join(__dirname, '../dist/index.html')
+    if (fs.existsSync(distPath)) {
+      return null
+    }
+  }
+
   for (const url of DEV_URLS) {
     if (await checkHttp(url)) {
       return url
@@ -183,7 +192,8 @@ async function createWindow() {
     minWidth: 980,
     minHeight: 640,
     title: 'Sirona',
-    backgroundColor: '#faf8f5',
+    backgroundColor: '#ffffff',
+    icon: path.join(__dirname, '../public/icon.svg'),
     titleBarStyle: 'default',
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'),

@@ -6,6 +6,9 @@
     "electron:dev": "npm --prefix sirona-ui run electron:dev",
     "dev": "npm --prefix sirona-ui run dev",
     "build": "npm --prefix sirona-ui run build",
+    "pack": "npm --prefix sirona-ui run pack",
+    "package": "npm --prefix sirona-ui run package",
+    "dist": "npm --prefix sirona-ui run dist",
     "test": "npm --prefix sirona-ui test"
   }
 }
