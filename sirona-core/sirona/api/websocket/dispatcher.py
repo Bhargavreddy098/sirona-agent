@@ -88,59 +88,60 @@ async def dispatch_rpc(method: str, params: Dict[str, Any], app_state: Any) -> D
             "summary": summary
         }
 
-    elif method == "session.interrupt":
+    elif method in ("session.interrupt", "prompt.cancel"):
         session_id = params.get("session_id")
-        return {"status": "interrupted", "session_id": session_id}
+        if not session_id:
+            return {"error": "session_id required"}
+        scheduler = app_state.turn_scheduler
+        return await scheduler.interrupt_turn(session_id)
+
+    elif method in ("turn.status", "session.turn.status"):
+        session_id = params.get("session_id")
+        scheduler = app_state.turn_scheduler
+        busy = scheduler.is_session_busy(session_id) if session_id else False
+        active = scheduler.get_active_turn(session_id) if session_id else None
+        return {
+            "busy": busy,
+            "session_id": session_id,
+            "turn_id": active.turn_id if active else None,
+            "status": active.status if active else "idle"
+        }
 
     elif method == "session.events.since":
         session_id = params.get("session_id")
         since = float(params.get("since", 0))
-        messages = await app_state.message_repo.get_messages_since(session_id, since_timestamp=since)
-        return {"events": [m.model_dump() for m in messages]}
+        messages = await app_state.message_repo.get_messages(session_id, limit=params.get("limit", 100))
+        filtered = [m.model_dump() for m in messages if m.timestamp >= since]
+        return {"events": filtered}
 
     elif method in ("approval.respond", "clarify.respond"):
         prompt_id = params.get("prompt_id") or params.get("request_id")
+        choice = params.get("choice")
         approved = params.get("approved", True)
-        if "choice" in params:
-            approved = (params["choice"] in ("approve", "allow", "yes"))
+        if choice is not None:
+            approved = (choice in ("once", "always", "approve", "allow", "yes"))
         approval_mgr = app_state.approval_manager
         resolved = approval_mgr.resolve_approval(
             prompt_id=str(prompt_id),
             approved=approved,
+            choice=choice,
             amendments=params.get("amendments") or params.get("edit")
         )
-        return {"resolved": resolved, "prompt_id": prompt_id}
+        return {"resolved": resolved, "prompt_id": prompt_id, "choice": choice}
 
     elif method == "prompt.submit":
-        from .events import broadcaster
+        scheduler = app_state.turn_scheduler
         session_id = params["session_id"]
         prompt = params["prompt"]
         effort = params.get("reasoning_effort", "medium")
-        runtime = app_state.agent_runtime
-
-        final_response = ""
-        tool_calls = []
-
-        async for event in runtime.run_turn(
+        attachments = params.get("attachments")
+        result = await scheduler.submit_turn(
             session_id=session_id,
             prompt=prompt,
-            attachments=params.get("attachments"),
+            attachments=attachments,
             reasoning_effort=effort
-        ):
-            await broadcaster.broadcast(event.get("type", "stream.event"), event)
-            if event.get("type") == "stream.token":
-                final_response += event.get("token", "")
-            elif event.get("type") == "tool_complete":
-                tool_calls.append(event)
-            elif event.get("type") == "message_complete":
-                final_response = event.get("content", final_response)
-
-        return {
-            "success": True,
-            "session_id": session_id,
-            "response": final_response,
-            "tool_calls": tool_calls
-        }
+        )
+        return result
 
     elif method == "slash.exec":
         operation = params.get("operation")

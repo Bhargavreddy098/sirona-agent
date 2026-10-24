@@ -25,12 +25,16 @@ class SteerRunRequest(BaseModel):
 
 @router.post("/v1/runs")
 async def create_run(request: Request, body: CreateRunRequest):
-    run_id = f"run_{uuid.uuid4().hex[:12]}"
-    # Register run in state
+    scheduler = request.app.state.turn_scheduler
+    res = await scheduler.submit_turn(
+        session_id=body.session_id,
+        prompt=body.prompt,
+        reasoning_effort=body.reasoning_effort or "medium"
+    )
     return {
-        "run_id": run_id,
+        "run_id": res["turn_id"],
         "session_id": body.session_id,
-        "status": "queued"
+        "status": "queued" if res.get("queued") else "running"
     }
 
 @router.get("/v1/runs/{run_id}")
@@ -71,5 +75,13 @@ async def steer_run(run_id: str, body: SteerRunRequest):
     return {"success": True, "run_id": run_id, "instruction": body.instruction}
 
 @router.post("/v1/runs/{run_id}/stop")
-async def stop_run(run_id: str):
-    return {"success": True, "run_id": run_id, "status": "stopped"}
+async def stop_run(request: Request, run_id: str):
+    scheduler = request.app.state.turn_scheduler
+    # If run_id is a session_id or matches an active turn
+    session_id = run_id
+    for sid, active in list(scheduler.active_turns.items()):
+        if active.turn_id == run_id:
+            session_id = sid
+            break
+    res = await scheduler.interrupt_turn(session_id)
+    return {"success": True, "run_id": run_id, "status": "stopped", "details": res}

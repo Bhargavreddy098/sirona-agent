@@ -37,12 +37,19 @@ class AgentRuntime:
         session_id: str,
         prompt: str,
         attachments: Optional[List[Dict[str, Any]]] = None,
-        reasoning_effort: str = "medium"
+        reasoning_effort: str = "medium",
+        cancel_token: Optional[asyncio.Event] = None,
+        turn_id: Optional[str] = None
     ) -> AsyncIterator[Dict[str, Any]]:
-        turn_id = f"turn_{uuid.uuid4().hex[:10]}"
+        tid = turn_id or f"turn_{uuid.uuid4().hex[:10]}"
         session = await self.session_repo.get_session(session_id)
         if not session:
             yield {"type": "error", "error": f"Session {session_id} not found"}
+            return
+
+        # Check early cancellation
+        if cancel_token and cancel_token.is_set():
+            yield {"type": "turn.interrupted", "turn_id": tid, "session_id": session_id}
             return
 
         # 1. Save user message to database
@@ -51,28 +58,38 @@ class AgentRuntime:
             role="user",
             content=prompt
         )
-        yield {"type": "user_message", "message_id": user_msg.id, "content": prompt}
+        yield {
+            "type": "user_message",
+            "message_id": user_msg.id,
+            "content": prompt,
+            "session_id": session_id,
+            "turn_id": tid
+        }
 
         step_count = 0
         max_steps = 15
 
         while step_count < max_steps:
+            if cancel_token and cancel_token.is_set():
+                yield {"type": "turn.interrupted", "turn_id": tid, "session_id": session_id}
+                return
+
             step_count += 1
-            
+
             # Fetch message history
             history_records = await self.message_repo.get_messages(session_id, limit=50)
             formatted_messages = [
                 {"role": r.role, "content": r.content or ""}
                 for r in history_records
             ]
-            
+
             # Inject system prompt
             system_prompt = self.prompt_builder.build_system_prompt(session.system_prompt)
             full_context = [{"role": "system", "content": system_prompt}] + formatted_messages
             compressed_context = self.context_compressor.compact_messages(full_context)
 
             tools_schema = self.tool_registry.export_schemas()
-            
+
             tool_call_pending = None
             assistant_text = ""
             reasoning_text = ""
@@ -83,12 +100,38 @@ class AgentRuntime:
                 tools=tools_schema,
                 reasoning_effort=reasoning_effort
             ):
+                if cancel_token and cancel_token.is_set():
+                    yield {"type": "turn.interrupted", "turn_id": tid, "session_id": session_id}
+                    return
+
                 if chunk.type == "text" and chunk.content:
                     assistant_text += chunk.content
-                    yield {"type": "stream.token", "token": chunk.content, "turn_id": turn_id}
+                    yield {
+                        "type": "stream.token",
+                        "token": chunk.content,
+                        "turn_id": tid,
+                        "session_id": session_id,
+                    }
+                    yield {
+                        "type": "message.delta",
+                        "delta": chunk.content,
+                        "turn_id": tid,
+                        "session_id": session_id,
+                    }
                 elif chunk.type == "reasoning" and chunk.content:
                     reasoning_text += chunk.content
-                    yield {"type": "stream.reasoning", "token": chunk.content, "turn_id": turn_id}
+                    yield {
+                        "type": "stream.reasoning",
+                        "token": chunk.content,
+                        "turn_id": tid,
+                        "session_id": session_id,
+                    }
+                    yield {
+                        "type": "reasoning.delta",
+                        "delta": chunk.content,
+                        "turn_id": tid,
+                        "session_id": session_id,
+                    }
                 elif chunk.type == "tool_call":
                     tool_call_pending = chunk
 
@@ -102,32 +145,55 @@ class AgentRuntime:
                     "type": "tool_start",
                     "tool_name": tool_name,
                     "tool_call_id": call_id,
-                    "args": tool_args
+                    "args": tool_args,
+                    "session_id": session_id,
+                    "turn_id": tid,
                 }
 
                 tool_def = self.tool_registry.get_tool(tool_name)
-                
+
                 # Approval check
                 if tool_def and tool_def.danger_level == "requires_approval":
+                    prompt_id = f"appr_{uuid.uuid4().hex[:10]}"
                     yield {
                         "type": "approval.request",
+                        "prompt_id": prompt_id,
                         "tool_name": tool_name,
                         "tool_args": tool_args,
-                        "danger_level": tool_def.danger_level
+                        "danger_level": tool_def.danger_level,
+                        "session_id": session_id,
+                        "turn_id": tid,
+                    }
+                    yield {
+                        "type": "approval_request",
+                        "prompt_id": prompt_id,
+                        "tool_name": tool_name,
+                        "args": tool_args,
+                        "danger_level": tool_def.danger_level,
+                        "session_id": session_id,
+                        "turn_id": tid,
                     }
                     approval_res = await self.approval_manager.request_approval(
                         session_id=session_id,
                         tool_name=tool_name,
                         tool_args=tool_args,
-                        danger_level=tool_def.danger_level
+                        danger_level=tool_def.danger_level,
+                        prompt_id=prompt_id,
                     )
+
+                    if cancel_token and cancel_token.is_set():
+                        yield {"type": "turn.interrupted", "turn_id": tid, "session_id": session_id}
+                        return
+
                     if not approval_res.get("approved"):
                         tool_result = "Execution Denied by User."
                         yield {
                             "type": "tool_complete",
                             "tool_call_id": call_id,
                             "result": tool_result,
-                            "approved": False
+                            "approved": False,
+                            "session_id": session_id,
+                            "turn_id": tid,
                         }
                         await self.message_repo.add_message(
                             session_id=session_id,
@@ -139,10 +205,13 @@ class AgentRuntime:
                         continue
 
                 # Execute tool
+                if cancel_token and cancel_token.is_set():
+                    yield {"type": "turn.interrupted", "turn_id": tid, "session_id": session_id}
+                    return
+
                 start_time = time.time()
                 try:
                     if tool_def:
-                        # Check if tool is async
                         if inspect.iscoroutinefunction(tool_def.func):
                             exec_res = await tool_def.func(**tool_args)
                         else:
@@ -159,7 +228,9 @@ class AgentRuntime:
                     "type": "tool_complete",
                     "tool_call_id": call_id,
                     "result": str_res,
-                    "duration_ms": duration_ms
+                    "duration_ms": duration_ms,
+                    "session_id": session_id,
+                    "turn_id": tid,
                 }
 
                 # Save tool response to transcript
@@ -170,7 +241,6 @@ class AgentRuntime:
                     tool_call_id=call_id,
                     tool_name=tool_name
                 )
-                # Next turn iteration to process tool output
                 continue
 
             # Final assistant response reached
@@ -185,6 +255,14 @@ class AgentRuntime:
                     "type": "message_complete",
                     "message_id": saved_msg.id,
                     "content": assistant_text,
-                    "turn_id": turn_id
+                    "turn_id": tid,
+                    "session_id": session_id,
+                }
+                yield {
+                    "type": "turn.complete",
+                    "response": assistant_text,
+                    "message_id": saved_msg.id,
+                    "turn_id": tid,
+                    "session_id": session_id,
                 }
                 break

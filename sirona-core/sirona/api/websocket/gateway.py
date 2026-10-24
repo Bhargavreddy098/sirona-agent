@@ -13,6 +13,7 @@ async def gateway_ws_endpoint(websocket: WebSocket):
     try:
         while True:
             data = await websocket.receive_text()
+            req_id = None
             try:
                 rpc_req = json.loads(data)
                 req_id = rpc_req.get("id")
@@ -20,7 +21,7 @@ async def gateway_ws_endpoint(websocket: WebSocket):
                 params = rpc_req.get("params", {})
 
                 result = await dispatch_rpc(method, params, app_state)
-                
+
                 resp = {
                     "jsonrpc": "2.0",
                     "id": req_id,
@@ -30,7 +31,7 @@ async def gateway_ws_endpoint(websocket: WebSocket):
             except Exception as exc:
                 err_resp = {
                     "jsonrpc": "2.0",
-                    "id": None,
+                    "id": req_id,
                     "error": {"code": -32603, "message": str(exc)}
                 }
                 await websocket.send_text(json.dumps(err_resp))

@@ -3,6 +3,7 @@ from .approvals import ApprovalManager, ApprovalRequest
 from .prompt_builder import PromptBuilder
 from .context_compressor import ContextCompressor
 from .runtime import AgentRuntime
+from .scheduler import TurnScheduler, TurnJob, ActiveTurn
 
 __all__ = [
     "ApprovalManager",
@@ -10,4 +11,7 @@ __all__ = [
     "PromptBuilder",
     "ContextCompressor",
     "AgentRuntime",
+    "TurnScheduler",
+    "TurnJob",
+    "ActiveTurn",
 ]

@@ -18,6 +18,7 @@ from .tools.git import git_status, git_diff, git_log
 from .tools.web import web_scrape, web_search
 from .agent.approvals import ApprovalManager
 from .agent.runtime import AgentRuntime
+from .agent.scheduler import TurnScheduler
 from .skills.manager import SkillsManager
 from .mcp.manager import McpManager
 from .terminal.manager import TerminalManager
@@ -78,6 +79,7 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
         approval_manager=approval_mgr,
         provider=provider_router.gemini
     )
+    turn_scheduler = TurnScheduler(runtime=agent_runtime, approval_manager=approval_mgr)
 
     # Attach to app.state
     app.state.config = cfg
@@ -93,6 +95,7 @@ def create_app(config: Optional[SironaConfig] = None, db_path: Optional[str] = N
     app.state.tool_registry = tool_reg
     app.state.mcp_manager = mcp_mgr
     app.state.agent_runtime = agent_runtime
+    app.state.turn_scheduler = turn_scheduler
     app.state.started_at = time.time()
 
     # Mount routers
