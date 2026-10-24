@@ -26,7 +26,7 @@ export const TranscriptCanvas: React.FC = () => {
 
   return (
     <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col justify-start">
-      <div className="max-w-[900px] w-full mx-auto flex-1 flex flex-col justify-start">
+      <div className="max-w-[800px] w-full mx-auto flex-1 flex flex-col justify-start">
         {messages.length === 0 && !streaming.isStreaming && (
           <div className="flex-1 flex flex-col items-center justify-center text-center select-none py-12">
             <div className="w-12 h-12 rounded-[14px] bg-[var(--dt-card)] border border-[var(--dt-border)] flex items-center justify-center mb-4 shadow-sm">

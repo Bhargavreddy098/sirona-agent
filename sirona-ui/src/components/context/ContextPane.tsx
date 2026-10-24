@@ -46,7 +46,7 @@ export const ContextPane: React.FC = () => {
   return (
     <aside
       className={`h-full flex flex-col bg-[var(--dt-sidebar)] border-l border-[var(--dt-sidebar-border)] select-none z-10 transition-[width] duration-150 ${
-        isWide ? 'w-[520px] max-w-[50vw] min-w-[380px]' : 'w-80'
+        isWide ? 'w-[520px] max-w-[calc(100vw-528px)] min-w-[360px]' : 'w-80 max-w-[calc(100vw-528px)]'
       }`}
     >
       {/* Tab strip */}

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useStore } from '@nanostores/react'
-import { $sidebarOpen } from './store/layoutStore'
+import { $sidebarOpen, handleWindowResize } from './store/layoutStore'
 import { $activeSessionId, loadSessions } from './store/sessionStore'
 import { loadMessages } from './store/messageStore'
 import { gateway } from './api/gateway'
@@ -22,6 +22,15 @@ export const App: React.FC = () => {
   useEffect(() => {
     loadSessions()
     gateway.connect()
+  }, [])
+
+  useEffect(() => {
+    const onResize = () => {
+      handleWindowResize(window.innerWidth)
+    }
+    window.addEventListener('resize', onResize)
+    handleWindowResize(window.innerWidth)
+    return () => window.removeEventListener('resize', onResize)
   }, [])
 
   useEffect(() => {

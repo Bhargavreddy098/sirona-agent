@@ -11,7 +11,7 @@ export const MainCanvas: React.FC = () => {
   const terminalDeckOpen = useStore($terminalDeckOpen)
 
   return (
-    <main className="flex-1 h-full flex flex-col bg-[var(--dt-background)] relative overflow-hidden text-[var(--dt-foreground)]">
+    <main className="flex-1 min-w-[480px] h-full flex flex-col bg-[var(--dt-background)] relative overflow-hidden text-[var(--dt-foreground)]">
       {/* 1. Multi-Tab Session Bar */}
       <SessionTabs />
 
