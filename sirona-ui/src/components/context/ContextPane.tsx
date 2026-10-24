@@ -8,6 +8,7 @@ import {
   type ContextTab,
 } from '../../store/layoutStore'
 import { $artifacts } from '../../store/artifactStore'
+import { $repoStatus } from '../../store/gitStore'
 import { FileTreeExplorer } from './FileTreeExplorer'
 import { DiffReviewView } from './DiffReviewView'
 import { TerminalDeck } from './TerminalDeck'
@@ -17,12 +18,20 @@ export const ContextPane: React.FC = () => {
   const isOpen = useStore($contextPaneOpen)
   const activeTab = useStore($activeContextTab)
   const artifacts = useStore($artifacts)
+  const repoStatus = useStore($repoStatus)
 
   if (!isOpen) return null
 
+  const changedCount = repoStatus?.total_changed ?? 0
+
   const tabs: Array<{ id: ContextTab; label: string; icon: React.ReactNode; badge?: number }> = [
     { id: 'files', label: 'Files', icon: <FolderTree className="w-3.5 h-3.5" /> },
-    { id: 'review', label: 'Review', icon: <GitCompare className="w-3.5 h-3.5" /> },
+    {
+      id: 'review',
+      label: 'Review',
+      icon: <GitCompare className="w-3.5 h-3.5" />,
+      badge: changedCount > 0 ? changedCount : undefined,
+    },
     { id: 'terminal', label: 'Terminal', icon: <TerminalIcon className="w-3.5 h-3.5" /> },
     {
       id: 'preview',

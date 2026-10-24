@@ -194,6 +194,55 @@ async def dispatch_rpc(method: str, params: Dict[str, Any], app_state: Any) -> D
         limit = params.get("limit", 50)
         return await search_workspace_files(query=query, path=path, limit=limit)
 
+    elif method in ("git.status", "repo.status"):
+        from ..routes.git import get_repo_status
+        cwd = params.get("cwd") or params.get("path")
+        return await get_repo_status(cwd=cwd)
+
+    elif method in ("git.diff", "repo.diff"):
+        from ..routes.git import get_repo_diff
+        path = params.get("path") or params.get("file")
+        staged = params.get("staged", False)
+        scope = params.get("scope")
+        cwd = params.get("cwd")
+        return await get_repo_diff(path=path, staged=staged, scope=scope, cwd=cwd)
+
+    elif method in ("git.stage", "repo.stage"):
+        from ..routes.git import stage_file, StageRequest
+        path = params.get("path") or params.get("file")
+        cwd = params.get("cwd")
+        return await stage_file(StageRequest(path=path, cwd=cwd))
+
+    elif method in ("git.unstage", "repo.unstage"):
+        from ..routes.git import unstage_file, UnstageRequest
+        path = params.get("path") or params.get("file")
+        cwd = params.get("cwd")
+        return await unstage_file(UnstageRequest(path=path, cwd=cwd))
+
+    elif method in ("git.discard", "repo.discard", "git.revert"):
+        from ..routes.git import discard_changes, DiscardRequest
+        path = params.get("path") or params.get("file", "")
+        untracked = params.get("untracked", False)
+        cwd = params.get("cwd")
+        return await discard_changes(DiscardRequest(path=path, untracked=untracked, cwd=cwd))
+
+    elif method in ("git.commit", "repo.commit"):
+        from ..routes.git import commit_changes, CommitRequest
+        message = params.get("message", "")
+        push = params.get("push", False)
+        cwd = params.get("cwd")
+        return await commit_changes(CommitRequest(message=message, push=push, cwd=cwd))
+
+    elif method in ("git.branches", "repo.branches"):
+        from ..routes.git import get_branches
+        cwd = params.get("cwd")
+        return await get_branches(cwd=cwd)
+
+    elif method in ("git.worktrees", "repo.worktrees"):
+        from ..routes.git import list_worktrees
+        cwd = params.get("cwd")
+        return await list_worktrees(cwd=cwd)
+
     elif method == "slash.exec":
         operation = params.get("operation")
         payload = params.get("payload", {})

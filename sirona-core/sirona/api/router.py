@@ -10,6 +10,7 @@ from .routes.projects import router as projects_router
 from .routes.config import router as config_router
 from .routes.preview import router as preview_router
 from .routes.files import router as files_router
+from .routes.git import router as git_router
 
 api_router = APIRouter()
 
@@ -24,3 +25,4 @@ api_router.include_router(projects_router)
 api_router.include_router(config_router)
 api_router.include_router(preview_router)
 api_router.include_router(files_router)
+api_router.include_router(git_router)

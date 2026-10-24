@@ -1,8 +1,50 @@
-import React, { useState, useEffect } from 'react'
-import { FileCode, Check, GitCommit, RefreshCw } from 'lucide-react'
-import { api } from '../../api/client'
+import React, { useEffect, useState } from 'react'
+import {
+  GitCommit,
+  GitBranch as GitBranchIcon,
+  RefreshCw,
+  Plus,
+  Minus,
+  RotateCcw,
+  Check,
+  FolderGit2,
+  ChevronDown,
+  ChevronRight,
+  FileText,
+  Send,
+  AlertCircle,
+  X,
+} from 'lucide-react'
+import { useStore } from '@nanostores/react'
+import {
+  $repoStatus,
+  $branches,
+  $worktrees,
+  $selectedDiffFile,
+  $activeDiffScope,
+  $currentDiff,
+  $isGitLoading,
+  $gitCommitMessage,
+  $worktreeModalOpen,
+  refreshGitStatus,
+  refreshBranches,
+  refreshWorktrees,
+  fetchDiff,
+  stageFile,
+  unstageFile,
+  discardChanges,
+  commitChanges,
+  switchBranch,
+  addWorktree,
+  removeWorktree,
+  setSelectedDiffFile,
+  setActiveDiffScope,
+  setGitCommitMessage,
+  setWorktreeModalOpen,
+  type DiffScope,
+} from '../../store/gitStore'
 
-export type DiffKind = 'add' | 'context' | 'remove'
+export type DiffKind = 'add' | 'context' | 'remove' | 'header'
 
 export interface ParsedDiffLine {
   kind: DiffKind
@@ -11,21 +53,9 @@ export interface ParsedDiffLine {
   newNo?: number
 }
 
-const FALLBACK_DIFF = `diff --git a/sirona/database/connection.py b/sirona/database/connection.py
-index 48a2bc1..9d04ef2 100644
---- a/sirona/database/connection.py
-+++ b/sirona/database/connection.py
-@@ -14,7 +14,8 @@ class DatabaseManager:
-     def initialize(self):
--        self.conn.execute("PRAGMA journal_mode = DELETE;")
-+        # Enable Write-Ahead Logging for high concurrent read performance
-+        self.conn.execute("PRAGMA journal_mode = WAL;")
-+        self.conn.execute("PRAGMA synchronous = NORMAL;")
-         self.conn.execute("PRAGMA foreign_keys = ON;")
-         self.conn.execute("PRAGMA busy_timeout = 5000;")
-`
-
 export function parseUnifiedDiff(rawDiff: string): ParsedDiffLine[] {
+  if (!rawDiff || !rawDiff.trim()) return []
+
   const lines = rawDiff.split('\n')
   const result: ParsedDiffLine[] = []
   let oldLine = 0
@@ -37,8 +67,12 @@ export function parseUnifiedDiff(rawDiff: string): ParsedDiffLine[] {
       line.startsWith('diff --git') ||
       line.startsWith('index ') ||
       line.startsWith('--- ') ||
-      line.startsWith('+++ ')
+      line.startsWith('+++ ') ||
+      line.startsWith('new file mode') ||
+      line.startsWith('deleted file mode')
     ) {
+      result.push({ kind: 'header', text: line })
+      inHunk = false
       continue
     }
 
@@ -49,10 +83,14 @@ export function parseUnifiedDiff(rawDiff: string): ParsedDiffLine[] {
         oldLine = parseInt(match[1], 10)
         newLine = parseInt(match[2], 10)
       }
+      result.push({ kind: 'header', text: line })
       continue
     }
 
-    if (!inHunk) continue
+    if (!inHunk) {
+      result.push({ kind: 'header', text: line })
+      continue
+    }
 
     if (line.startsWith('+')) {
       result.push({
@@ -66,7 +104,7 @@ export function parseUnifiedDiff(rawDiff: string): ParsedDiffLine[] {
         text: line.slice(1),
         oldNo: oldLine++,
       })
-    } else if (line.startsWith(' ') || line === '') {
+    } else {
       result.push({
         kind: 'context',
         text: line.startsWith(' ') ? line.slice(1) : line,
@@ -80,107 +118,587 @@ export function parseUnifiedDiff(rawDiff: string): ParsedDiffLine[] {
 }
 
 export const DiffReviewView: React.FC = () => {
-  const [rawDiff, setRawDiff] = useState<string>(FALLBACK_DIFF)
-  const [statusText, setStatusText] = useState<string>('Working Tree')
-  const [loading, setLoading] = useState(false)
+  const repoStatus = useStore($repoStatus)
+  const branches = useStore($branches)
+  const worktrees = useStore($worktrees)
+  const selectedFile = useStore($selectedDiffFile)
+  const activeScope = useStore($activeDiffScope)
+  const rawDiff = useStore($currentDiff)
+  const isLoading = useStore($isGitLoading)
+  const commitMsg = useStore($gitCommitMessage)
+  const worktreeModalOpen = useStore($worktreeModalOpen)
 
-  const fetchDiff = async () => {
-    setLoading(true)
-    try {
-      const res = await api.executeTool('git_diff')
-      if (res.success && res.result?.diff?.trim()) {
-        setRawDiff(res.result.diff)
-        setStatusText('Working Tree Unstaged Changes')
-      } else {
-        const stagedRes = await api.executeTool('git_diff', { staged: true })
-        if (stagedRes.success && stagedRes.result?.diff?.trim()) {
-          setRawDiff(stagedRes.result.diff)
-          setStatusText('Staged Changes')
-        } else {
-          setRawDiff(FALLBACK_DIFF)
-          setStatusText('Working Tree Clean (Showing Reference Patch)')
-        }
-      }
-    } catch (e) {
-      // Fallback
-    } finally {
-      setLoading(false)
+  const [stagedExpanded, setStagedExpanded] = useState(true)
+  const [unstagedExpanded, setUnstagedExpanded] = useState(true)
+  const [untrackedExpanded, setUntrackedExpanded] = useState(true)
+  const [branchDropdownOpen, setBranchDropdownOpen] = useState(false)
+  const [newBranchInput, setNewBranchInput] = useState('')
+  const [isCreatingBranch, setIsCreatingBranch] = useState(false)
+  const [commitStatus, setCommitStatus] = useState<string | null>(null)
+
+  // Worktree form state
+  const [wtPath, setWtPath] = useState('')
+  const [wtBranch, setWtBranch] = useState('')
+  const [wtNewBranch, setWtNewBranch] = useState(true)
+
+  useEffect(() => {
+    refreshGitStatus()
+    refreshBranches()
+    refreshWorktrees()
+    fetchDiff(null, 'all')
+  }, [])
+
+  const handleRefresh = async () => {
+    await refreshGitStatus()
+    await refreshBranches()
+    await refreshWorktrees()
+    await fetchDiff(selectedFile, activeScope)
+  }
+
+  const handleCommit = async (push = false) => {
+    if (!commitMsg.trim()) return
+    setCommitStatus('Committing...')
+    // If no staged changes but unstaged exist, stage all first
+    if ((repoStatus?.staged.length ?? 0) === 0 && (repoStatus?.unstaged.length ?? 0) > 0) {
+      await stageFile()
+    }
+    const res = await commitChanges(commitMsg, push)
+    if (res.success) {
+      setCommitStatus(push ? 'Committed and pushed successfully' : `Committed ${res.commit_hash}`)
+      setTimeout(() => setCommitStatus(null), 4000)
+    } else {
+      setCommitStatus(`Error: ${res.error}`)
     }
   }
 
-  useEffect(() => {
-    fetchDiff()
-  }, [])
+  const handleSwitchBranch = async (branchName: string) => {
+    setBranchDropdownOpen(false)
+    await switchBranch(branchName)
+  }
+
+  const handleCreateBranch = async () => {
+    if (!newBranchInput.trim()) return
+    await switchBranch(newBranchInput.trim(), true)
+    setNewBranchInput('')
+    setIsCreatingBranch(false)
+    setBranchDropdownOpen(false)
+  }
+
+  const handleAddWorktree = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!wtPath.trim()) return
+    await addWorktree(wtPath.trim(), wtBranch.trim() || undefined, undefined, wtNewBranch)
+    setWtPath('')
+    setWtBranch('')
+  }
 
   const diffLines = parseUnifiedDiff(rawDiff)
+  const stagedCount = repoStatus?.staged.length ?? 0
+  const unstagedCount = repoStatus?.unstaged.length ?? 0
+  const untrackedCount = repoStatus?.untracked.length ?? 0
+  const totalChanges = stagedCount + unstagedCount + untrackedCount
 
   return (
-    <div className="flex-1 overflow-y-auto p-3 bg-[#faf8f5] flex flex-col font-sans select-text">
-      {/* File header pill */}
-      <div className="flex items-center justify-between mb-3 px-3 py-2 bg-[#fdfbfa] border border-[#d1d1cd] rounded-[12px] shadow-[var(--shadow-subtle)]">
-        <div className="flex items-center gap-2">
-          <FileCode className="w-4 h-4 text-[#016a71]" />
-          <span className="font-mono text-[12px] font-medium text-[#27251e] truncate">
-            Working Tree Diff
-          </span>
-        </div>
-        <button
-          onClick={fetchDiff}
-          disabled={loading}
-          className="p-1 hover:bg-[#f5f3ef] rounded text-[#72706b] hover:text-[#27251e] transition-colors cursor-pointer"
-          title="Refresh Git Diff"
-        >
-          <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
-        </button>
-      </div>
+    <div className="flex-1 overflow-hidden bg-[#faf8f5] flex flex-col font-sans select-text">
+      {/* Top Action Bar */}
+      <div className="px-3 py-2 border-b border-[#d1d1cd] bg-[#fdfbfa] flex items-center justify-between shrink-0">
+        {/* Branch pill with switcher */}
+        <div className="relative">
+          <button
+            onClick={() => setBranchDropdownOpen(!branchDropdownOpen)}
+            className="flex items-center gap-1.5 px-2.5 py-1 text-[12px] font-mono bg-[#f5f3ef] hover:bg-[#eae8e2] border border-[#d1d1cd] rounded-[8px] text-[#27251e] cursor-pointer transition-colors"
+          >
+            <GitBranchIcon className="w-3.5 h-3.5 text-[#016a71]" />
+            <span className="font-semibold max-w-[130px] truncate">
+              {repoStatus?.branch || 'main'}
+            </span>
+            {(repoStatus?.ahead ?? 0) > 0 && (
+              <span className="text-[10px] text-[#016a71] font-bold">↑{repoStatus?.ahead}</span>
+            )}
+            {(repoStatus?.behind ?? 0) > 0 && (
+              <span className="text-[10px] text-[#b91c1c] font-bold">↓{repoStatus?.behind}</span>
+            )}
+            <ChevronDown className="w-3 h-3 text-[#72706b]" />
+          </button>
 
-      {/* Unified Diff Box (Cursor / Hermes style 2px gutter accents) */}
-      <div className="rounded-[16px] border border-[#d1d1cd] bg-[#fdfbfa] shadow-[var(--shadow-subtle)] overflow-hidden font-mono text-[12px]">
-        <div className="overflow-x-auto">
-          {diffLines.map((line, idx) => {
-            let rowStyle = 'border-l-2 border-transparent text-[#72706b]'
-            if (line.kind === 'add') {
-              rowStyle = 'border-l-2 border-[#016a71] bg-[rgba(1,106,113,0.06)] text-[#016a71]'
-            } else if (line.kind === 'remove') {
-              rowStyle = 'border-l-2 border-[#b91c1c] bg-[rgba(185,28,28,0.06)] text-[#991b1b]'
-            }
-
-            return (
-              <div
-                key={idx}
-                className={`flex items-start px-2 py-0.5 leading-relaxed hover:bg-[rgba(0,0,0,0.02)] ${rowStyle}`}
-              >
-                {/* Line numbers column */}
-                <span className="w-8 shrink-0 text-right pr-2 text-[10px] text-[#92918b] select-none font-mono">
-                  {line.oldNo ?? ''}
-                </span>
-                <span className="w-8 shrink-0 text-right pr-3 text-[10px] text-[#92918b] select-none font-mono">
-                  {line.newNo ?? ''}
-                </span>
-
-                {/* Diff kind marker prefix */}
-                <span className="w-4 shrink-0 text-[11px] select-none font-bold">
-                  {line.kind === 'add' ? '+' : line.kind === 'remove' ? '-' : ' '}
-                </span>
-
-                {/* Diff content line */}
-                <span className="flex-1 whitespace-pre">{line.text || ' '}</span>
+          {/* Branch dropdown */}
+          {branchDropdownOpen && (
+            <div className="absolute left-0 mt-1 w-64 bg-[#fdfbfa] border border-[#d1d1cd] rounded-[10px] shadow-lg z-50 p-2 text-[12px]">
+              <div className="flex items-center justify-between mb-2 pb-1 border-b border-[#e5e5e0]">
+                <span className="font-medium text-[#72706b]">Branches</span>
+                <button
+                  onClick={() => setIsCreatingBranch(!isCreatingBranch)}
+                  className="text-[11px] text-[#016a71] hover:underline cursor-pointer flex items-center gap-1"
+                >
+                  <Plus className="w-3 h-3" />
+                  {isCreatingBranch ? 'Cancel' : 'New Branch'}
+                </button>
               </div>
-            )
-          })}
+
+              {isCreatingBranch && (
+                <div className="mb-2 p-1.5 bg-[#f5f3ef] rounded-[6px]">
+                  <input
+                    type="text"
+                    placeholder="branch-name"
+                    value={newBranchInput}
+                    onChange={(e) => setNewBranchInput(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleCreateBranch()}
+                    className="w-full px-2 py-1 text-[11px] bg-white border border-[#d1d1cd] rounded outline-none font-mono"
+                    autoFocus
+                  />
+                  <button
+                    onClick={handleCreateBranch}
+                    className="mt-1 w-full py-1 text-[11px] bg-[#016a71] text-white rounded font-medium cursor-pointer"
+                  >
+                    Create & Switch
+                  </button>
+                </div>
+              )}
+
+              <div className="max-h-48 overflow-y-auto space-y-0.5">
+                {branches.map((b) => (
+                  <button
+                    key={b.name}
+                    onClick={() => handleSwitchBranch(b.name)}
+                    className={`w-full text-left px-2 py-1 rounded-[6px] font-mono text-[11px] flex items-center justify-between cursor-pointer ${
+                      b.is_current
+                        ? 'bg-[rgba(1,106,113,0.1)] text-[#016a71] font-semibold'
+                        : 'hover:bg-[#f5f3ef] text-[#27251e]'
+                    }`}
+                  >
+                    <span className="truncate">{b.name}</span>
+                    {b.is_current && <Check className="w-3 h-3 shrink-0 text-[#016a71]" />}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Right tools: Worktrees & Refresh */}
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={() => setWorktreeModalOpen(true)}
+            className="flex items-center gap-1 px-2 py-1 text-[11px] text-[#72706b] hover:text-[#27251e] bg-[#f5f3ef] hover:bg-[#eae8e2] rounded-[6px] border border-[#d1d1cd] cursor-pointer transition-colors"
+            title="Manage Git Worktrees"
+          >
+            <FolderGit2 className="w-3.5 h-3.5 text-[#016a71]" />
+            <span>Worktrees ({worktrees.length})</span>
+          </button>
+
+          <button
+            onClick={handleRefresh}
+            disabled={isLoading}
+            className="p-1.5 text-[#72706b] hover:text-[#27251e] hover:bg-[#f5f3ef] rounded-[6px] cursor-pointer transition-colors"
+            title="Refresh Git Status"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
+          </button>
         </div>
       </div>
 
-      <div className="flex items-center justify-between mt-3 px-2 text-[11px] text-[#72706b]">
-        <div className="flex items-center gap-1.5">
-          <GitCommit className="w-3.5 h-3.5 text-[#016a71]" />
-          <span>{statusText}</span>
+      {/* Scope Switcher & Filter */}
+      <div className="flex items-center justify-between px-3 py-1.5 border-b border-[#d1d1cd] bg-[#faf8f5] text-[11px]">
+        <div className="flex items-center gap-1">
+          {(['all', 'staged', 'unstaged'] as DiffScope[]).map((scope) => (
+            <button
+              key={scope}
+              onClick={() => setActiveDiffScope(scope)}
+              className={`px-2 py-0.5 rounded-[5px] transition-colors cursor-pointer capitalize ${
+                activeScope === scope
+                  ? 'bg-[#016a71] text-white font-medium'
+                  : 'text-[#72706b] hover:text-[#27251e] hover:bg-[#f0eee9]'
+              }`}
+            >
+              {scope === 'all' ? `All (${totalChanges})` : scope === 'staged' ? `Staged (${stagedCount})` : `Unstaged (${unstagedCount + untrackedCount})`}
+            </button>
+          ))}
         </div>
-        <div className="flex items-center gap-1 text-[#016a71]">
-          <Check className="w-3.5 h-3.5" />
-          <span>Synchronized</span>
+
+        {selectedFile && (
+          <button
+            onClick={() => setSelectedDiffFile(null)}
+            className="text-[10px] text-[#016a71] hover:underline cursor-pointer flex items-center gap-0.5"
+            title="View whole repository diff"
+          >
+            <span>Whole Diff</span>
+            <X className="w-2.5 h-2.5" />
+          </button>
+        )}
+      </div>
+
+      {/* Main Content: Split List and Diff View */}
+      <div className="flex-1 flex flex-col min-h-0 overflow-y-auto">
+        {/* Changed Files Rail */}
+        <div className="border-b border-[#d1d1cd] bg-[#fdfbfa] shrink-0 max-h-48 overflow-y-auto divide-y divide-[#f0eee9]">
+          {/* Staged Section */}
+          {stagedCount > 0 && (
+            <div>
+              <div
+                onClick={() => setStagedExpanded(!stagedExpanded)}
+                className="flex items-center justify-between px-3 py-1 bg-[#f5f3ef] cursor-pointer text-[11px] font-medium text-[#27251e] hover:bg-[#eceae4]"
+              >
+                <div className="flex items-center gap-1.5">
+                  {stagedExpanded ? <ChevronDown className="w-3 h-3 text-[#72706b]" /> : <ChevronRight className="w-3 h-3 text-[#72706b]" />}
+                  <span>Staged Changes ({stagedCount})</span>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    unstageFile()
+                  }}
+                  className="text-[10px] text-[#72706b] hover:text-[#b91c1c] cursor-pointer"
+                  title="Unstage all files"
+                >
+                  Unstage All
+                </button>
+              </div>
+
+              {stagedExpanded && (
+                <div className="divide-y divide-[#f5f3ef]">
+                  {repoStatus?.staged.map((f) => (
+                    <div
+                      key={`staged-${f.path}`}
+                      onClick={() => setSelectedDiffFile(f.path)}
+                      className={`flex items-center justify-between px-3 py-1 text-[11px] font-mono cursor-pointer transition-colors ${
+                        selectedFile === f.path ? 'bg-[rgba(1,106,113,0.08)] text-[#016a71]' : 'hover:bg-[#faf8f5] text-[#27251e]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 truncate">
+                        <span className="w-3.5 h-3.5 rounded bg-[rgba(1,106,113,0.15)] text-[#016a71] text-[9px] font-bold flex items-center justify-center shrink-0">
+                          {f.status}
+                        </span>
+                        <span className="truncate">{f.path}</span>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0 ml-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            unstageFile(f.path)
+                          }}
+                          className="p-1 hover:bg-[#e5e3de] rounded text-[#72706b] hover:text-[#b91c1c]"
+                          title="Unstage file"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Unstaged Section */}
+          {unstagedCount > 0 && (
+            <div>
+              <div
+                onClick={() => setUnstagedExpanded(!unstagedExpanded)}
+                className="flex items-center justify-between px-3 py-1 bg-[#f5f3ef] cursor-pointer text-[11px] font-medium text-[#27251e] hover:bg-[#eceae4]"
+              >
+                <div className="flex items-center gap-1.5">
+                  {unstagedExpanded ? <ChevronDown className="w-3 h-3 text-[#72706b]" /> : <ChevronRight className="w-3 h-3 text-[#72706b]" />}
+                  <span>Changes ({unstagedCount})</span>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    stageFile()
+                  }}
+                  className="text-[10px] text-[#016a71] hover:underline cursor-pointer"
+                  title="Stage all files"
+                >
+                  Stage All
+                </button>
+              </div>
+
+              {unstagedExpanded && (
+                <div className="divide-y divide-[#f5f3ef]">
+                  {repoStatus?.unstaged.map((f) => (
+                    <div
+                      key={`unstaged-${f.path}`}
+                      onClick={() => setSelectedDiffFile(f.path)}
+                      className={`flex items-center justify-between px-3 py-1 text-[11px] font-mono cursor-pointer transition-colors ${
+                        selectedFile === f.path ? 'bg-[rgba(1,106,113,0.08)] text-[#016a71]' : 'hover:bg-[#faf8f5] text-[#27251e]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 truncate">
+                        <span className="w-3.5 h-3.5 rounded bg-[rgba(245,158,11,0.15)] text-[#b45309] text-[9px] font-bold flex items-center justify-center shrink-0">
+                          {f.status}
+                        </span>
+                        <span className="truncate">{f.path}</span>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0 ml-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            stageFile(f.path)
+                          }}
+                          className="p-1 hover:bg-[#e5e3de] rounded text-[#72706b] hover:text-[#016a71]"
+                          title="Stage file"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            discardChanges(f.path)
+                          }}
+                          className="p-1 hover:bg-[#e5e3de] rounded text-[#72706b] hover:text-[#b91c1c]"
+                          title="Discard changes"
+                        >
+                          <RotateCcw className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Untracked Section */}
+          {untrackedCount > 0 && (
+            <div>
+              <div
+                onClick={() => setUntrackedExpanded(!untrackedExpanded)}
+                className="flex items-center justify-between px-3 py-1 bg-[#f5f3ef] cursor-pointer text-[11px] font-medium text-[#27251e] hover:bg-[#eceae4]"
+              >
+                <div className="flex items-center gap-1.5">
+                  {untrackedExpanded ? <ChevronDown className="w-3 h-3 text-[#72706b]" /> : <ChevronRight className="w-3 h-3 text-[#72706b]" />}
+                  <span>Untracked Files ({untrackedCount})</span>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    stageFile()
+                  }}
+                  className="text-[10px] text-[#016a71] hover:underline cursor-pointer"
+                  title="Stage all untracked"
+                >
+                  Stage All
+                </button>
+              </div>
+
+              {untrackedExpanded && (
+                <div className="divide-y divide-[#f5f3ef]">
+                  {repoStatus?.untracked.map((path) => (
+                    <div
+                      key={`untracked-${path}`}
+                      onClick={() => setSelectedDiffFile(path)}
+                      className={`flex items-center justify-between px-3 py-1 text-[11px] font-mono cursor-pointer transition-colors ${
+                        selectedFile === path ? 'bg-[rgba(1,106,113,0.08)] text-[#016a71]' : 'hover:bg-[#faf8f5] text-[#27251e]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 truncate">
+                        <span className="w-3.5 h-3.5 rounded bg-[rgba(59,130,246,0.15)] text-[#2563eb] text-[9px] font-bold flex items-center justify-center shrink-0">
+                          ?
+                        </span>
+                        <span className="truncate">{path}</span>
+                      </div>
+                      <div className="flex items-center gap-1 shrink-0 ml-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            stageFile(path)
+                          }}
+                          className="p-1 hover:bg-[#e5e3de] rounded text-[#72706b] hover:text-[#016a71]"
+                          title="Stage file"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            discardChanges(path, true)
+                          }}
+                          className="p-1 hover:bg-[#e5e3de] rounded text-[#72706b] hover:text-[#b91c1c]"
+                          title="Delete untracked file"
+                        >
+                          <RotateCcw className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {totalChanges === 0 && (
+            <div className="py-4 text-center text-[12px] text-[#72706b] flex flex-col items-center gap-1">
+              <Check className="w-4 h-4 text-[#016a71]" />
+              <span>Working tree clean</span>
+            </div>
+          )}
+        </div>
+
+        {/* Diff Content Box */}
+        <div className="flex-1 overflow-auto p-2 bg-[#faf8f5]">
+          {diffLines.length > 0 ? (
+            <div className="rounded-[12px] border border-[#d1d1cd] bg-[#fdfbfa] shadow-[var(--shadow-subtle)] overflow-hidden font-mono text-[11px]">
+              {diffLines.map((line, idx) => {
+                let rowStyle = 'border-l-2 border-transparent text-[#72706b]'
+                if (line.kind === 'add') {
+                  rowStyle = 'border-l-2 border-[#016a71] bg-[rgba(1,106,113,0.06)] text-[#016a71]'
+                } else if (line.kind === 'remove') {
+                  rowStyle = 'border-l-2 border-[#b91c1c] bg-[rgba(185,28,28,0.06)] text-[#991b1b]'
+                } else if (line.kind === 'header') {
+                  rowStyle = 'border-l-2 border-[#92918b] bg-[#f0eee9] text-[#27251e] font-semibold'
+                }
+
+                return (
+                  <div
+                    key={idx}
+                    className={`flex items-start px-2 py-0.5 leading-relaxed hover:bg-[rgba(0,0,0,0.02)] ${rowStyle}`}
+                  >
+                    <span className="w-7 shrink-0 text-right pr-2 text-[10px] text-[#92918b] select-none font-mono">
+                      {line.oldNo ?? ''}
+                    </span>
+                    <span className="w-7 shrink-0 text-right pr-3 text-[10px] text-[#92918b] select-none font-mono">
+                      {line.newNo ?? ''}
+                    </span>
+                    <span className="w-4 shrink-0 text-[11px] select-none font-bold">
+                      {line.kind === 'add' ? '+' : line.kind === 'remove' ? '-' : ' '}
+                    </span>
+                    <span className="flex-1 whitespace-pre overflow-x-auto">{line.text || ' '}</span>
+                  </div>
+                )
+              })}
+            </div>
+          ) : (
+            <div className="h-full flex flex-col items-center justify-center text-center p-4 text-[#92918b]">
+              <FileText className="w-8 h-8 text-[#d1d1cd] mb-2" />
+              <p className="text-[12px]">No diff to display</p>
+              <p className="text-[11px] text-[#72706b] mt-1">Select a changed file or modify files to view git diff.</p>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Commit & Ship Bar */}
+      <div className="p-3 border-t border-[#d1d1cd] bg-[#fdfbfa] shrink-0 flex flex-col gap-2">
+        {commitStatus && (
+          <div className="flex items-center gap-1.5 text-[11px] px-2 py-1 rounded bg-[#f5f3ef] border border-[#d1d1cd] text-[#27251e]">
+            <AlertCircle className="w-3.5 h-3.5 text-[#016a71] shrink-0" />
+            <span className="truncate">{commitStatus}</span>
+          </div>
+        )}
+
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            placeholder="Commit message (e.g. feat: add new feature)..."
+            value={commitMsg}
+            onChange={(e) => setGitCommitMessage(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleCommit(false)}
+            className="flex-1 px-3 py-1.5 text-[12px] bg-[#faf8f5] border border-[#d1d1cd] rounded-[8px] outline-none focus:border-[#016a71] text-[#27251e] placeholder:text-[#92918b]"
+          />
+          <button
+            onClick={() => handleCommit(false)}
+            disabled={!commitMsg.trim() || totalChanges === 0}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-[#016a71] text-white rounded-[8px] hover:bg-[#015257] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors shadow-sm shrink-0"
+            title="Commit staged changes"
+          >
+            <GitCommit className="w-3.5 h-3.5" />
+            <span>Commit</span>
+          </button>
+          <button
+            onClick={() => handleCommit(true)}
+            disabled={!commitMsg.trim() || totalChanges === 0}
+            className="flex items-center gap-1 px-2.5 py-1.5 text-[12px] font-medium bg-[#27251e] text-white rounded-[8px] hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors shadow-sm shrink-0"
+            title="Commit & Push to Remote"
+          >
+            <Send className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Worktrees Management Drawer/Modal */}
+      {worktreeModalOpen && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
+          <div className="bg-[#fdfbfa] border border-[#d1d1cd] rounded-[16px] shadow-2xl max-w-lg w-full p-4 flex flex-col font-sans">
+            <div className="flex items-center justify-between pb-3 border-b border-[#e5e5e0]">
+              <div className="flex items-center gap-2">
+                <FolderGit2 className="w-4 h-4 text-[#016a71]" />
+                <h3 className="text-[14px] font-semibold text-[#27251e]">Git Worktrees</h3>
+              </div>
+              <button
+                onClick={() => setWorktreeModalOpen(false)}
+                className="p-1 hover:bg-[#f0eee9] rounded text-[#72706b] hover:text-[#27251e] cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Existing Worktrees */}
+            <div className="my-3 space-y-2 max-h-48 overflow-y-auto">
+              {worktrees.map((wt) => (
+                <div
+                  key={wt.path}
+                  className="flex items-center justify-between p-2 rounded-[8px] bg-[#f5f3ef] border border-[#d1d1cd] text-[12px]"
+                >
+                  <div className="flex flex-col truncate pr-2">
+                    <span className="font-mono font-medium truncate text-[#27251e]">{wt.path}</span>
+                    <div className="flex items-center gap-2 text-[10px] text-[#72706b] font-mono mt-0.5">
+                      <span>branch: {wt.branch || '(detached)'}</span>
+                      {wt.is_main && <span className="text-[#016a71] font-semibold">main</span>}
+                      {wt.locked && <span className="text-[#b45309]">locked</span>}
+                    </div>
+                  </div>
+                  {!wt.is_main && (
+                    <button
+                      onClick={() => removeWorktree(wt.path, false)}
+                      className="text-[11px] text-[#b91c1c] hover:underline cursor-pointer shrink-0"
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Add New Worktree Form */}
+            <form onSubmit={handleAddWorktree} className="pt-3 border-t border-[#e5e5e0] space-y-2">
+              <span className="text-[12px] font-medium text-[#27251e]">Add Worktree</span>
+              <div className="grid grid-cols-2 gap-2">
+                <input
+                  type="text"
+                  placeholder="Relative path (e.g. ../feature-wt)"
+                  value={wtPath}
+                  onChange={(e) => setWtPath(e.target.value)}
+                  className="px-2.5 py-1.5 text-[11px] bg-white border border-[#d1d1cd] rounded-[6px] outline-none font-mono"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Branch name (e.g. feat/wt-1)"
+                  value={wtBranch}
+                  onChange={(e) => setWtBranch(e.target.value)}
+                  className="px-2.5 py-1.5 text-[11px] bg-white border border-[#d1d1cd] rounded-[6px] outline-none font-mono"
+                />
+              </div>
+              <div className="flex items-center justify-between pt-1">
+                <label className="flex items-center gap-1.5 text-[11px] text-[#72706b] cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={wtNewBranch}
+                    onChange={(e) => setWtNewBranch(e.target.checked)}
+                    className="rounded text-[#016a71]"
+                  />
+                  <span>Create new branch (-b)</span>
+                </label>
+                <button
+                  type="submit"
+                  className="px-3 py-1 text-[11px] bg-[#016a71] text-white rounded-[6px] font-medium hover:bg-[#015257] cursor-pointer"
+                >
+                  Add Worktree
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

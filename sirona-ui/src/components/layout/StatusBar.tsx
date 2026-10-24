@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Cpu, ShieldCheck, Gauge } from 'lucide-react'
+import { Cpu, ShieldCheck, Gauge, GitBranch } from 'lucide-react'
 import { useStore } from '@nanostores/react'
 import { api, type SystemStatus } from '../../api/client'
 import { $connectionState, $reconnectAttempts } from '../../store/connectionStore'
+import { $repoStatus, refreshGitStatus } from '../../store/gitStore'
+import { $contextPaneOpen, toggleContextPane, setActiveContextTab } from '../../store/layoutStore'
 
 export const StatusBar: React.FC = () => {
   const [status, setStatus] = useState<SystemStatus | null>(null)
   const connectionState = useStore($connectionState)
   const reconnectAttempts = useStore($reconnectAttempts)
+  const repoStatus = useStore($repoStatus)
 
   useEffect(() => {
     const fetchStatus = async () => {
@@ -19,7 +22,11 @@ export const StatusBar: React.FC = () => {
       }
     }
     fetchStatus()
-    const timer = setInterval(fetchStatus, 5000)
+    refreshGitStatus()
+    const timer = setInterval(() => {
+      fetchStatus()
+      refreshGitStatus()
+    }, 5000)
     return () => clearInterval(timer)
   }, [])
 
@@ -64,6 +71,22 @@ export const StatusBar: React.FC = () => {
     <footer className="h-7 w-full flex items-center justify-between px-4 bg-[#faf8f5] border-t border-[#d1d1cd] text-[11px] text-[#72706b] font-mono select-none z-30">
       <div className="flex items-center gap-4">
         {renderConnectionBadge()}
+        {repoStatus?.is_repo && (
+          <button
+            onClick={() => {
+              setActiveContextTab('review')
+              if (!$contextPaneOpen.get()) toggleContextPane()
+            }}
+            className="flex items-center gap-1.5 text-[#27251e] hover:text-[#016a71] transition-colors cursor-pointer"
+            title="Open Git Review Tab"
+          >
+            <GitBranch className="w-3.5 h-3.5 text-[#016a71]" />
+            <span>{repoStatus.branch}</span>
+            {!repoStatus.is_clean && (
+              <span className="w-1.5 h-1.5 rounded-full bg-[#f59e0b]" title="Dirty working tree" />
+            )}
+          </button>
+        )}
         <div className="flex items-center gap-1 text-[#72706b]">
           <ShieldCheck className="w-3.5 h-3.5 text-[#016a71]" />
           <span>Security: Supervised</span>

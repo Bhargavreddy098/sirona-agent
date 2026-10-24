@@ -33,6 +33,53 @@ export interface SystemStatus {
   active_runs: number
 }
 
+export interface GitStatusFile {
+  path: string
+  status: string
+}
+
+export interface GitStatusResponse {
+  is_repo: boolean
+  branch: string
+  ahead: number
+  behind: number
+  is_clean: boolean
+  staged: GitStatusFile[]
+  unstaged: GitStatusFile[]
+  untracked: string[]
+  total_changed: number
+  error?: string
+}
+
+export interface GitBranch {
+  name: string
+  is_current: boolean
+  upstream: string
+  is_remote: boolean
+}
+
+export interface GitBranchesResponse {
+  current: string
+  branches: GitBranch[]
+  error?: string
+}
+
+export interface GitWorktree {
+  path: string
+  branch: string
+  is_main: boolean
+  detached: boolean
+  locked: boolean
+}
+
+export interface GitDiffResponse {
+  success: boolean
+  diff: string
+  path?: string
+  staged: boolean
+  error?: string
+}
+
 export function getApiBaseUrl(): string {
   if (typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
     return ''
@@ -181,5 +228,71 @@ export const api = {
     fetchJson<{ revealed: boolean; path: string }>('/api/files/reveal', {
       method: 'POST',
       body: JSON.stringify({ path }),
+    }),
+
+  // Git & Worktrees
+  getGitStatus: (cwd?: string) => {
+    const params = new URLSearchParams()
+    if (cwd) params.append('cwd', cwd)
+    return fetchJson<GitStatusResponse>(`/api/git/status?${params}`)
+  },
+  getGitDiff: (options: { path?: string; staged?: boolean; scope?: string; cwd?: string } = {}) => {
+    const params = new URLSearchParams()
+    if (options.path) params.append('path', options.path)
+    if (options.staged) params.append('staged', 'true')
+    if (options.scope) params.append('scope', options.scope)
+    if (options.cwd) params.append('cwd', options.cwd)
+    return fetchJson<GitDiffResponse>(`/api/git/diff?${params}`)
+  },
+  getGitBranches: (cwd?: string) => {
+    const params = new URLSearchParams()
+    if (cwd) params.append('cwd', cwd)
+    return fetchJson<GitBranchesResponse>(`/api/git/branches?${params}`)
+  },
+  switchGitBranch: (branch: string, create = false, base?: string, cwd?: string) =>
+    fetchJson<{ success: boolean; branch: string; error?: string }>('/api/git/branch/switch', {
+      method: 'POST',
+      body: JSON.stringify({ branch, create, base, cwd }),
+    }),
+  stageGitFile: (path?: string, cwd?: string) =>
+    fetchJson<{ success: boolean; error?: string }>('/api/git/stage', {
+      method: 'POST',
+      body: JSON.stringify({ path, cwd }),
+    }),
+  unstageGitFile: (path?: string, cwd?: string) =>
+    fetchJson<{ success: boolean; error?: string }>('/api/git/unstage', {
+      method: 'POST',
+      body: JSON.stringify({ path, cwd }),
+    }),
+  discardGitChanges: (path: string, untracked = false, cwd?: string) =>
+    fetchJson<{ success: boolean; error?: string }>('/api/git/discard', {
+      method: 'POST',
+      body: JSON.stringify({ path, untracked, cwd }),
+    }),
+  commitGitChanges: (message: string, push = false, cwd?: string) =>
+    fetchJson<{ success: boolean; commit_hash: string; pushed: boolean; push_error?: string; error?: string }>(
+      '/api/git/commit',
+      {
+        method: 'POST',
+        body: JSON.stringify({ message, push, cwd }),
+      }
+    ),
+  getGitWorktrees: (cwd?: string) => {
+    const params = new URLSearchParams()
+    if (cwd) params.append('cwd', cwd)
+    return fetchJson<{ worktrees: GitWorktree[]; error?: string }>(`/api/git/worktrees?${params}`)
+  },
+  addGitWorktree: (path: string, branch?: string, base?: string, new_branch = false, cwd?: string) =>
+    fetchJson<{ success: boolean; path: string; branch?: string; error?: string }>(
+      '/api/git/worktree/add',
+      {
+        method: 'POST',
+        body: JSON.stringify({ path, branch, base, new_branch, cwd }),
+      }
+    ),
+  removeGitWorktree: (path: string, force = false, cwd?: string) =>
+    fetchJson<{ success: boolean; path: string; error?: string }>('/api/git/worktree/remove', {
+      method: 'POST',
+      body: JSON.stringify({ path, force, cwd }),
     }),
 }
