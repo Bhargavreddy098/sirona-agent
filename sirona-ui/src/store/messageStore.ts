@@ -56,6 +56,11 @@ export async function loadMessages(sessionId: string): Promise<void> {
   }
 }
 
+export function clearSessionMessages(_sessionId?: string): void {
+  $messages.set([])
+  resetStreamingState()
+}
+
 export function appendUserMessage(sessionId: string, content: string): MessageRecord {
   const msg: MessageRecord = {
     id: Date.now(),
