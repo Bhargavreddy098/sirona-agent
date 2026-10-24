@@ -1,0 +1,11 @@
+{
+  "name": "sirona-workspace",
+  "private": true,
+  "scripts": {
+    "electron": "npm --prefix sirona-ui run electron",
+    "electron:dev": "npm --prefix sirona-ui run electron:dev",
+    "dev": "npm --prefix sirona-ui run dev",
+    "build": "npm --prefix sirona-ui run build",
+    "test": "npm --prefix sirona-ui test"
+  }
+}
