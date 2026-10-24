@@ -9,6 +9,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@sirona/shared': path.resolve(__dirname, '../sirona-shared/src'),
+      '@hermes/shared': path.resolve(__dirname, '../sirona-shared/src'),
     },
   },
   server: {

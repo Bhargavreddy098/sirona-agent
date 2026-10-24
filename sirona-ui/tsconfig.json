@@ -18,7 +18,11 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@sirona/shared": ["../sirona-shared/src/index.ts"],
+      "@sirona/shared/*": ["../sirona-shared/src/*"],
+      "@hermes/shared": ["../sirona-shared/src/index.ts"],
+      "@hermes/shared/*": ["../sirona-shared/src/*"]
     }
   },
   "include": ["src"]
