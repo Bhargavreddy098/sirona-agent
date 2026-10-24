@@ -17,9 +17,12 @@ export interface MessageRecord {
   content?: string
   tool_call_id?: string
   tool_name?: string
+  tool_args?: Record<string, any>
+  duration_ms?: number
   timestamp: number
   reasoning?: string
   compacted?: number
+  interrupted?: boolean
 }
 
 export interface SystemStatus {

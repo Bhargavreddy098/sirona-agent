@@ -16,7 +16,16 @@ class EventBroadcaster:
     async def broadcast(self, event_type: str, payload: Dict[str, Any]) -> None:
         if not self._clients:
             return
-        msg = json.dumps({"type": event_type, **payload})
+        event_body = {"type": event_type, **payload}
+        # JSON-RPC 2.0 notification frame
+        frame = {
+            "jsonrpc": "2.0",
+            "method": "event",
+            "params": event_body,
+            "type": event_type,
+            **payload
+        }
+        msg = json.dumps(frame)
         stale = set()
         for ws in self._clients:
             try:

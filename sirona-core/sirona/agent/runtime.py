@@ -94,6 +94,14 @@ class AgentRuntime:
             assistant_text = ""
             reasoning_text = ""
 
+            # Notify message start
+            yield {
+                "type": "message.start",
+                "role": "assistant",
+                "turn_id": tid,
+                "session_id": session_id,
+            }
+
             # Stream from model
             async for chunk in self.provider.stream_chat(
                 messages=compressed_context,
@@ -142,6 +150,14 @@ class AgentRuntime:
                 call_id = tool_call_pending.tool_call_id or f"call_{uuid.uuid4().hex[:8]}"
 
                 yield {
+                    "type": "tool.start",
+                    "tool_name": tool_name,
+                    "tool_call_id": call_id,
+                    "args": tool_args,
+                    "session_id": session_id,
+                    "turn_id": tid,
+                }
+                yield {
                     "type": "tool_start",
                     "tool_name": tool_name,
                     "tool_call_id": call_id,
@@ -188,6 +204,14 @@ class AgentRuntime:
                     if not approval_res.get("approved"):
                         tool_result = "Execution Denied by User."
                         yield {
+                            "type": "tool.complete",
+                            "tool_call_id": call_id,
+                            "result": tool_result,
+                            "approved": False,
+                            "session_id": session_id,
+                            "turn_id": tid,
+                        }
+                        yield {
                             "type": "tool_complete",
                             "tool_call_id": call_id,
                             "result": tool_result,
@@ -224,6 +248,14 @@ class AgentRuntime:
                 duration_ms = int((time.time() - start_time) * 1000)
                 str_res = str(exec_res) if not isinstance(exec_res, (dict, list)) else json.dumps(exec_res)
 
+                yield {
+                    "type": "tool.complete",
+                    "tool_call_id": call_id,
+                    "result": str_res,
+                    "duration_ms": duration_ms,
+                    "session_id": session_id,
+                    "turn_id": tid,
+                }
                 yield {
                     "type": "tool_complete",
                     "tool_call_id": call_id,

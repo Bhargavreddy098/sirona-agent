@@ -1,10 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { ArrowUp, Paperclip, ChevronDown, Sparkles, Mic, Sliders } from 'lucide-react'
+import { ArrowUp, Paperclip, ChevronDown, Sparkles, Mic, Sliders, Square } from 'lucide-react'
 import { useStore } from '@nanostores/react'
 import { $activeSessionId } from '../../store/sessionStore'
 import {
   appendUserMessage,
   appendAssistantMessage,
+  startStreaming,
+  finishStreaming,
+  resetStreamingState,
   $streamingState,
   $composerDraft,
 } from '../../store/messageStore'
@@ -16,6 +19,7 @@ import { DirectiveChips } from './DirectiveChips'
 export const Composer: React.FC = () => {
   const activeSessionId = useStore($activeSessionId)
   const composerDraft = useStore($composerDraft)
+  const streaming = useStore($streamingState)
   const [prompt, setPrompt] = useState('')
   const [model] = useState('gemini-2.5-flash')
   const [effort, setEffort] = useState<'low' | 'medium' | 'high'>('medium')
@@ -41,53 +45,56 @@ export const Composer: React.FC = () => {
     }
   }, [prompt])
 
+  const handleInterrupt = async () => {
+    if (!activeSessionId) return
+    try {
+      await gateway.interruptSession(activeSessionId)
+    } catch (err) {
+      console.warn('Failed to interrupt session', err)
+    }
+  }
+
   const handleSend = async () => {
-    if (!prompt.trim() || !activeSessionId) return
+    if (!prompt.trim() || !activeSessionId || streaming.isStreaming) return
     const currentPrompt = prompt
     setPrompt('')
     if (textareaRef.current) textareaRef.current.style.height = 'auto'
 
     // Add user message optimistically
     appendUserMessage(activeSessionId, currentPrompt)
-    $streamingState.set({
-      isStreaming: true,
-      currentTokens: '',
-      currentReasoning: '',
-      activeToolName: null,
-      activeToolArgs: null,
-    })
+    startStreaming(activeSessionId)
 
     try {
       // Primary: Send over live WebSocket Gateway (JSON-RPC 2.0)
-      const res = await gateway.call('prompt.submit', {
-        session_id: activeSessionId,
-        prompt: currentPrompt,
+      const res = await gateway.submitPrompt(activeSessionId, currentPrompt, {
         reasoning_effort: effort,
+        model,
       }).catch(async () => {
         // Fallback: REST API
         return await api.sendPrompt(activeSessionId, currentPrompt, effort)
       })
 
+      // If REST fallback answered synchronously
       if (res && res.response) {
-        appendAssistantMessage(activeSessionId, res.response)
+        finishStreaming(res.response)
       }
     } catch (e: any) {
-      appendAssistantMessage(activeSessionId, `Error: ${e.message || 'Failed to complete turn'}`)
-    } finally {
-      $streamingState.set({
-        isStreaming: false,
-        currentTokens: '',
-        currentReasoning: '',
-        activeToolName: null,
-        activeToolArgs: null,
-      })
+      appendAssistantMessage(activeSessionId, `Error: ${e.message || 'Failed to submit prompt'}`)
+      resetStreamingState()
     }
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Escape' && streaming.isStreaming) {
+      e.preventDefault()
+      handleInterrupt()
+      return
+    }
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
-      handleSend()
+      if (!streaming.isStreaming) {
+        handleSend()
+      }
     }
   }
 
@@ -106,7 +113,7 @@ export const Composer: React.FC = () => {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask Sirona anything, inspect code, run commands... (Enter to send)"
+            placeholder="Ask Sirona anything, inspect code, run commands... (Enter to send, Esc to stop)"
             rows={1}
             className="w-full bg-transparent text-[15px] text-[#27251e] placeholder:text-[#72706b] outline-none resize-none font-normal leading-relaxed px-1"
           />
@@ -137,7 +144,7 @@ export const Composer: React.FC = () => {
               </button>
             </div>
 
-            {/* Right controls: Attach, Voice, Send */}
+            {/* Right controls: Attach, Voice, Send / Stop */}
             <div className="flex items-center gap-1.5">
               <button
                 type="button"
@@ -153,19 +160,31 @@ export const Composer: React.FC = () => {
               >
                 <Mic className="w-4 h-4" />
               </button>
-              <button
-                type="button"
-                onClick={handleSend}
-                disabled={!prompt.trim()}
-                className={`flex items-center justify-center w-8 h-8 rounded-full transition-all cursor-pointer ${
-                  prompt.trim()
-                    ? 'bg-[#016a71] text-white hover:bg-[#01585e] shadow-[var(--shadow-subtle)]'
-                    : 'bg-[#e2e2de] text-[#92918b] cursor-not-allowed opacity-60'
-                }`}
-                title="Send query"
-              >
-                <ArrowUp className="w-4 h-4" />
-              </button>
+
+              {streaming.isStreaming ? (
+                <button
+                  type="button"
+                  onClick={handleInterrupt}
+                  className="flex items-center justify-center w-8 h-8 rounded-full bg-[#901300] hover:bg-[#730f00] text-white shadow-[var(--shadow-subtle)] transition-all cursor-pointer"
+                  title="Stop generation (Esc)"
+                >
+                  <Square className="w-3.5 h-3.5 fill-current" />
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleSend}
+                  disabled={!prompt.trim()}
+                  className={`flex items-center justify-center w-8 h-8 rounded-full transition-all cursor-pointer ${
+                    prompt.trim()
+                      ? 'bg-[#016a71] text-white hover:bg-[#01585e] shadow-[var(--shadow-subtle)]'
+                      : 'bg-[#e2e2de] text-[#92918b] cursor-not-allowed opacity-60'
+                  }`}
+                  title="Send query"
+                >
+                  <ArrowUp className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
         </div>

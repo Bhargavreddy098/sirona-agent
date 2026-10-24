@@ -15,7 +15,7 @@ export const TranscriptCanvas: React.FC = () => {
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages, streaming.currentTokens])
+  }, [messages, streaming.currentTokens, streaming.currentReasoning, streaming.activeTool])
 
   const handleSelectSuggestion = (promptText: string) => {
     $composerDraft.set(promptText)
@@ -48,7 +48,10 @@ export const TranscriptCanvas: React.FC = () => {
               <ToolExecutionCard
                 key={m.id}
                 toolName={m.tool_name || 'tool'}
+                toolCallId={m.tool_call_id}
+                args={m.tool_args}
                 result={m.content}
+                durationMs={m.duration_ms}
               />
             )
           } else {
@@ -57,6 +60,7 @@ export const TranscriptCanvas: React.FC = () => {
                 key={m.id}
                 content={m.content || ''}
                 reasoning={m.reasoning}
+                interrupted={m.interrupted}
               />
             )
           }
@@ -65,18 +69,38 @@ export const TranscriptCanvas: React.FC = () => {
         {/* Live streaming bubble if active */}
         {streaming.isStreaming && (
           <div className="flex flex-col my-4">
-            {streaming.activeToolName && (
+            {/* Completed tool executions in this turn */}
+            {streaming.completedTools.map((tool) => (
               <ToolExecutionCard
-                toolName={streaming.activeToolName}
-                args={streaming.activeToolArgs}
+                key={tool.toolCallId}
+                toolName={tool.toolName}
+                toolCallId={tool.toolCallId}
+                args={tool.args}
+                result={tool.result}
+                durationMs={tool.durationMs}
+                status={tool.status}
+                isRunning={false}
+              />
+            ))}
+
+            {/* Currently running tool */}
+            {streaming.activeTool && (
+              <ToolExecutionCard
+                toolName={streaming.activeTool.toolName}
+                toolCallId={streaming.activeTool.toolCallId}
+                args={streaming.activeTool.args}
+                startedAt={streaming.activeTool.startedAt}
+                status="running"
                 isRunning={true}
               />
             )}
 
-            {streaming.currentTokens ? (
+            {streaming.currentTokens || streaming.currentReasoning ? (
               <AssistantMessage
                 content={streaming.currentTokens}
                 reasoning={streaming.currentReasoning}
+                isStreaming={true}
+                isReasoningStreaming={streaming.isReasoningStreaming}
               />
             ) : (
               <div className="flex items-center gap-2 text-[13px] text-[#016a71] my-3 px-1">
