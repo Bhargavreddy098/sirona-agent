@@ -26,11 +26,17 @@ export interface MessageRecord {
 }
 
 export interface SystemStatus {
+  status?: string
   cpu_pct: number
   mem_pct: number
   mem_available_mb: number
   gateway: string
+  db?: boolean
+  pid?: number
+  threads?: number
   active_runs: number
+  uptime?: number
+  timestamp?: number
 }
 
 export interface GitStatusFile {

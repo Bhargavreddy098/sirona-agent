@@ -13,6 +13,7 @@ import { StatusBar } from './components/layout/StatusBar'
 import { CommandPalette } from './components/modals/CommandPalette'
 import { SettingsModal } from './components/modals/SettingsModal'
 import { StarmapModal } from './components/modals/StarmapModal'
+import { DiagnosticsModal } from './components/telemetry/DiagnosticsModal'
 
 export const App: React.FC = () => {
   const sidebarOpen = useStore($sidebarOpen)
@@ -52,6 +53,7 @@ export const App: React.FC = () => {
       <CommandPalette />
       <SettingsModal />
       <StarmapModal />
+      <DiagnosticsModal />
     </div>
   )
 }

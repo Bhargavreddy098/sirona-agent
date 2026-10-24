@@ -39,6 +39,8 @@ async def health_detailed(request: Request):
 @router.get("/api/status")
 @router.get("/api/system/status")
 async def system_status(request: Request):
+    import os
+    import threading
     import psutil
     try:
         cpu_pct = psutil.cpu_percent(interval=None)
@@ -50,11 +52,28 @@ async def system_status(request: Request):
         mem_pct = 25.0
         mem_avail = 8192
 
+    # Check database health
+    db_healthy = True
+    db_mgr = getattr(request.app.state, "db_mgr", None)
+    if db_mgr:
+        try:
+            async with db_mgr.acquire() as db:
+                async with db.execute("SELECT 1") as cursor:
+                    row = await cursor.fetchone()
+                    db_healthy = row[0] == 1
+        except Exception:
+            db_healthy = False
+
     return {
+        "status": "ok",
         "cpu_pct": cpu_pct,
         "mem_pct": mem_pct,
         "mem_available_mb": mem_avail,
         "gateway": "ready",
-        "active_runs": 0,
-        "uptime": time.time() - getattr(request.app.state, "started_at", time.time())
+        "db": db_healthy,
+        "pid": os.getpid(),
+        "threads": threading.active_count(),
+        "active_runs": getattr(request.app.state, "active_runs", 0),
+        "uptime": round(time.time() - getattr(request.app.state, "started_at", time.time()), 1),
+        "timestamp": time.time(),
     }
