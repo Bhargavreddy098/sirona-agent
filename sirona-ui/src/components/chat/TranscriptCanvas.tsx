@@ -1,0 +1,94 @@
+import React, { useEffect, useRef } from 'react'
+import { useStore } from '@nanostores/react'
+import { Sparkles } from 'lucide-react'
+import { $messages, $streamingState, $composerDraft } from '../../store/messageStore'
+import { UserMessageBubble } from './UserMessageBubble'
+import { AssistantMessage } from './AssistantMessage'
+import { ToolExecutionCard } from './ToolExecutionCard'
+import { SuggestionGrid } from './SuggestionGrid'
+import { Loader } from '../ui/Loader'
+
+export const TranscriptCanvas: React.FC = () => {
+  const messages = useStore($messages)
+  const streaming = useStore($streamingState)
+  const bottomRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, streaming.currentTokens])
+
+  const handleSelectSuggestion = (promptText: string) => {
+    $composerDraft.set(promptText)
+  }
+
+  return (
+    <div className="flex-1 overflow-y-auto py-6 px-4 flex flex-col justify-start">
+      <div className="max-w-[900px] w-full mx-auto flex-1 flex flex-col justify-start">
+        {messages.length === 0 && !streaming.isStreaming && (
+          <div className="flex-1 flex flex-col items-center justify-center text-center select-none py-12">
+            <div className="w-12 h-12 rounded-[16px] bg-[#fdfbfa] border border-[#d1d1cd] flex items-center justify-center mb-4 shadow-[var(--shadow-subtle)]">
+              <Sparkles className="w-6 h-6 text-[#016a71]" />
+            </div>
+            <h2 className="text-[24px] font-normal text-[#27251e] mb-2 tracking-tight">
+              What do you want to explore?
+            </h2>
+            <p className="text-[14px] text-[#72706b] max-w-md font-normal leading-relaxed mb-6">
+              Sirona is your autonomous developer agent. Inspect schemas, review git diffs, execute sandboxed tests, and automate code migrations.
+            </p>
+
+            <SuggestionGrid onSelectSuggestion={handleSelectSuggestion} />
+          </div>
+        )}
+
+        {messages.map((m) => {
+          if (m.role === 'user') {
+            return <UserMessageBubble key={m.id} content={m.content || ''} timestamp={m.timestamp} />
+          } else if (m.role === 'tool') {
+            return (
+              <ToolExecutionCard
+                key={m.id}
+                toolName={m.tool_name || 'tool'}
+                result={m.content}
+              />
+            )
+          } else {
+            return (
+              <AssistantMessage
+                key={m.id}
+                content={m.content || ''}
+                reasoning={m.reasoning}
+              />
+            )
+          }
+        })}
+
+        {/* Live streaming bubble if active */}
+        {streaming.isStreaming && (
+          <div className="flex flex-col my-4">
+            {streaming.activeToolName && (
+              <ToolExecutionCard
+                toolName={streaming.activeToolName}
+                args={streaming.activeToolArgs}
+                isRunning={true}
+              />
+            )}
+
+            {streaming.currentTokens ? (
+              <AssistantMessage
+                content={streaming.currentTokens}
+                reasoning={streaming.currentReasoning}
+              />
+            ) : (
+              <div className="flex items-center gap-2 text-[13px] text-[#016a71] my-3 px-1">
+                <Loader />
+                <span className="text-[#72706b] font-normal">Sirona is researching...</span>
+              </div>
+            )}
+          </div>
+        )}
+
+        <div ref={bottomRef} />
+      </div>
+    </div>
+  )
+}

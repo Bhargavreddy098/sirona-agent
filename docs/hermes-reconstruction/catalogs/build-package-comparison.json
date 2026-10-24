@@ -1,0 +1,37 @@
+[
+  {
+    "source_build": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\dist\\electron-main.mjs",
+    "shipped_unpacked": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\release\\win-unpacked\\resources\\app.asar.unpacked\\dist\\electron-main.mjs",
+    "source_build_sha256": "9f5176d85f16548b938d6bb8d658d4e952b4c9aca59820188ba7373e7889234a",
+    "shipped_sha256": "9f5176d85f16548b938d6bb8d658d4e952b4c9aca59820188ba7373e7889234a",
+    "same_bytes": true
+  },
+  {
+    "source_build": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\dist\\electron-preload.js",
+    "shipped_unpacked": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\release\\win-unpacked\\resources\\app.asar.unpacked\\dist\\electron-preload.js",
+    "source_build_sha256": "e7131cc46f8b014b9d19f569a6c7c7183767adba80477cb240ef3a4e2e05ebd9",
+    "shipped_sha256": "e7131cc46f8b014b9d19f569a6c7c7183767adba80477cb240ef3a4e2e05ebd9",
+    "same_bytes": true
+  },
+  {
+    "source_build": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\dist\\index.html",
+    "shipped_unpacked": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\release\\win-unpacked\\resources\\app.asar.unpacked\\dist\\index.html",
+    "source_build_sha256": "68f5ef646fcceb4e1757ed20b025a7199bd1e35eeeddf1641f2a08f39e5ffc92",
+    "shipped_sha256": "68f5ef646fcceb4e1757ed20b025a7199bd1e35eeeddf1641f2a08f39e5ffc92",
+    "same_bytes": true
+  },
+  {
+    "source_build": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\dist\\hermes-build.json",
+    "shipped_unpacked": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\release\\win-unpacked\\resources\\app.asar.unpacked\\dist\\hermes-build.json",
+    "source_build_sha256": "89345ad859983149173dd38f6c41e5af7f3db984502eaa20d0c3520cdc9d2732",
+    "shipped_sha256": "89345ad859983149173dd38f6c41e5af7f3db984502eaa20d0c3520cdc9d2732",
+    "same_bytes": true
+  },
+  {
+    "source_build": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\dist\\preview-guest-preload.js",
+    "shipped_unpacked": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\release\\win-unpacked\\resources\\app.asar.unpacked\\dist\\preview-guest-preload.js",
+    "source_build_sha256": "56924d2384877dc851a947a86e38f286a557857aeb47bbdc0c9e22e689e41706",
+    "shipped_sha256": "56924d2384877dc851a947a86e38f286a557857aeb47bbdc0c9e22e689e41706",
+    "same_bytes": true
+  }
+]

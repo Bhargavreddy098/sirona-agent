@@ -1,0 +1,304 @@
+{
+  "evidence_id": "ev_9877d7a4bf487c0b456e6a476449271d4af861b401d1e226fa91db1838a4fd2b",
+  "subject": {
+    "name": "dist",
+    "digest": {
+      "sha256": "c481dadb9714859f944a6ae6b31e64d04153973980aba8f07485a004bdaa98e8"
+    },
+    "local_path": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\dist",
+    "format": "directory",
+    "architecture": null
+  },
+  "provider": {
+    "id": "rea-analysis-view",
+    "name": "REA analysis view projection",
+    "version": "1"
+  },
+  "analysis_profile": null,
+  "predicate_type": "rea.analysis-view",
+  "operation": "inspect_analysis_view",
+  "parameters": {
+    "parent_evidence_id": "ev_acfed8efe6602327936be2a37e619312bbbd3460ebab758e8317822829346023",
+    "view": {
+      "kind": "summary"
+    }
+  },
+  "raw_result": null,
+  "normalized_result": {
+    "kind": "summary",
+    "view": {
+      "kind": "summary"
+    },
+    "parent_evidence_id": "ev_acfed8efe6602327936be2a37e619312bbbd3460ebab758e8317822829346023",
+    "parent_operation": "analyze_javascript_application",
+    "parent_digest": "acfed8efe6602327936be2a37e619312bbbd3460ebab758e8317822829346023",
+    "view_digest": "88683362cf4a64ca4232125a3258ff7d01399b8001ed697b6e624b426f4355c4",
+    "artifact": {
+      "path": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\dist",
+      "sha256": "c481dadb9714859f944a6ae6b31e64d04153973980aba8f07485a004bdaa98e8"
+    },
+    "coverage": {
+      "status": "complete-within-view",
+      "examined": 1667,
+      "total": 4578,
+      "next_offset": null,
+      "exhausted": true
+    },
+    "limitations": [
+      "Boundary extraction covers unshadowed JSON/global coercions plus parse and validation method candidates.",
+      "Caller-selected source analysis leaves 1003 inventoried files outside analysis scope. Inventory identity covers the complete artifact; relationships through unselected sources remain unknown.",
+      "Child-process extraction covers asynchronous node:child_process creation, literal argv/env/stdio options, exit/error listeners, and kill signals.",
+      "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+      "Configuration extraction covers process.env, process.argv, node:fs reads, and direct logical defaults.",
+      "Dynamic IPC channel expressions remain unresolved and are never paired by textual similarity.",
+      "Electron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.",
+      "Electron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.",
+      "Event extraction covers EventEmitter-style literal registrations, removals, and dispatch candidates; dynamic names remain unknown.",
+      "Function fingerprints are static candidates; equal digests can remain ambiguous and do not prove behavioral equivalence.",
+      "Graph coverage is incomplete; unavailable facts remain explicit and must not be read as absence.",
+      "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+      "Local data flow does not claim control-flow-sensitive reaching definitions or arbitrary dynamic property resolution.",
+      "Promise ownership covers explicit unshadowed Promise construction, static factories, aggregation, chaining, and await syntax only.",
+      "Request extraction covers fetch, WebSocket, node:http/node:https construction, direct option fields, and exact local response consumers.",
+      "Resource extraction covers built-in filesystem/network acquisition and exact local close/destroy/end handles.",
+      "Sender, frame, URL, and origin checks are observations only; REA does not claim that they enforce a complete authorization policy.",
+      "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+      "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+      "The semantic graph contains static syntax observations and conservative relationship candidates; it does not claim runtime execution.",
+      "Timer extraction covers global or node:timers scheduling and exact local-handle cancellation.",
+      "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.",
+      "index.html has 1 inline JavaScript body starting at line 12 that was not analyzed; endpoints, storage, imports and other facts in it are absent from the evidence."
+    ],
+    "unknowns": [
+      "1004 application graph unknowns remain in the parent Evidence.",
+      "72514 semantic graph unknowns remain in the parent Evidence.",
+      "Boundary extraction covers unshadowed JSON/global coercions plus parse and validation method candidates.",
+      "Caller-selected source analysis leaves 1003 inventoried files outside analysis scope. Inventory identity covers the complete artifact; relationships through unselected sources remain unknown.",
+      "Child-process extraction covers asynchronous node:child_process creation, literal argv/env/stdio options, exit/error listeners, and kill signals.",
+      "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+      "Configuration extraction covers process.env, process.argv, node:fs reads, and direct logical defaults.",
+      "Dynamic IPC channel expressions remain unresolved and are never paired by textual similarity.",
+      "Electron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.",
+      "Electron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.",
+      "Event extraction covers EventEmitter-style literal registrations, removals, and dispatch candidates; dynamic names remain unknown.",
+      "Function fingerprints are static candidates; equal digests can remain ambiguous and do not prove behavioral equivalence.",
+      "Graph coverage is incomplete; unavailable facts remain explicit and must not be read as absence.",
+      "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+      "Local data flow does not claim control-flow-sensitive reaching definitions or arbitrary dynamic property resolution.",
+      "Promise ownership covers explicit unshadowed Promise construction, static factories, aggregation, chaining, and await syntax only.",
+      "Request extraction covers fetch, WebSocket, node:http/node:https construction, direct option fields, and exact local response consumers.",
+      "Resource extraction covers built-in filesystem/network acquisition and exact local close/destroy/end handles.",
+      "Sender, frame, URL, and origin checks are observations only; REA does not claim that they enforce a complete authorization policy.",
+      "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+      "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+      "The semantic graph contains static syntax observations and conservative relationship candidates; it does not claim runtime execution.",
+      "Timer extraction covers global or node:timers scheduling and exact local-handle cancellation.",
+      "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.",
+      "graph.coverage.status is partial",
+      "index.html has 1 inline JavaScript body starting at line 12 that was not analyzed; endpoints, storage, imports and other facts in it are absent from the evidence.",
+      "semantic_graph.coverage.status is partial"
+    ],
+    "summary": {
+      "input_path": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\dist",
+      "format": "directory",
+      "root_artifact_sha256": "c481dadb9714859f944a6ae6b31e64d04153973980aba8f07485a004bdaa98e8",
+      "source_selection": {
+        "requested_paths": [
+          "index.html",
+          "electron-main.mjs",
+          "electron-preload.js",
+          "preview-guest-preload.js",
+          "hermes-build.json"
+        ],
+        "unselected_files": 1003
+      },
+      "statistics": {
+        "relevant_files": 1008,
+        "nested_asar_containers": 0,
+        "text_bytes_read": 3171582,
+        "invalid_utf8_files": 0,
+        "parsed_javascript_files": 3,
+        "visited_ast_nodes": 421371,
+        "findings": 1797,
+        "modules": 608,
+        "parse_failures": 0
+      },
+      "electron": {
+        "browser_windows": 11,
+        "explicit_web_preferences": 22,
+        "preload_entrypoints": 0,
+        "context_bridge_apis": 1,
+        "exposed_api_members": 298,
+        "ipc": {
+          "operations": 516,
+          "literal_channels": 260,
+          "dynamic_channel_operations": 6,
+          "renderer_transmissions": 223,
+          "renderer_listeners": 90,
+          "main_handlers": 203,
+          "paired_renderer_transmissions": 200,
+          "ambiguous_renderer_transmissions": 0,
+          "unpaired_literal_renderer_transmissions": 22
+        },
+        "sender_validation_observations": 4,
+        "utility_processes": 0,
+        "resolved_utility_entrypoints": 0,
+        "native_addon_bindings": 0,
+        "resolved_native_addon_bindings": 0
+      },
+      "coverage": {
+        "application": {
+          "status": "partial",
+          "truncated": false,
+          "omitted_count": null,
+          "limits": []
+        },
+        "semantic": {
+          "status": "partial",
+          "truncated": true,
+          "omitted_nodes": null,
+          "omitted_relations": null,
+          "limits": [
+            {
+              "name": "semantic_graph_file_node_ceiling",
+              "value": 3000,
+              "unit": "items"
+            },
+            {
+              "name": "semantic_graph_node_ceiling",
+              "value": 8000,
+              "unit": "items"
+            }
+          ],
+          "families": [
+            {
+              "family": "boundary",
+              "status": "partial",
+              "retained_relations": 0,
+              "omitted_relations": null,
+              "unknown_count": 993
+            },
+            {
+              "family": "call-flow",
+              "status": "partial",
+              "retained_relations": 226,
+              "omitted_relations": null,
+              "unknown_count": 23699
+            },
+            {
+              "family": "child-process",
+              "status": "partial",
+              "retained_relations": 0,
+              "omitted_relations": null,
+              "unknown_count": 993
+            },
+            {
+              "family": "closure",
+              "status": "partial",
+              "retained_relations": 422,
+              "omitted_relations": null,
+              "unknown_count": 993
+            },
+            {
+              "family": "configuration",
+              "status": "partial",
+              "retained_relations": 0,
+              "omitted_relations": null,
+              "unknown_count": 993
+            },
+            {
+              "family": "data-flow",
+              "status": "partial",
+              "retained_relations": 1570,
+              "omitted_relations": null,
+              "unknown_count": 1385
+            },
+            {
+              "family": "event",
+              "status": "partial",
+              "retained_relations": 0,
+              "omitted_relations": null,
+              "unknown_count": 993
+            },
+            {
+              "family": "object-flow",
+              "status": "partial",
+              "retained_relations": 11,
+              "omitted_relations": null,
+              "unknown_count": 38475
+            },
+            {
+              "family": "promise-ownership",
+              "status": "partial",
+              "retained_relations": 0,
+              "omitted_relations": null,
+              "unknown_count": 993
+            },
+            {
+              "family": "request",
+              "status": "partial",
+              "retained_relations": 0,
+              "omitted_relations": null,
+              "unknown_count": 993
+            },
+            {
+              "family": "resource-lifecycle",
+              "status": "partial",
+              "retained_relations": 0,
+              "omitted_relations": null,
+              "unknown_count": 993
+            },
+            {
+              "family": "timer",
+              "status": "partial",
+              "retained_relations": 0,
+              "omitted_relations": null,
+              "unknown_count": 1011
+            }
+          ]
+        },
+        "application_unknowns": 1004,
+        "semantic_unknowns": 72514
+      },
+      "limitation_count": 12
+    }
+  },
+  "confidence": "derived",
+  "authority": "shipped-artifact",
+  "environment": null,
+  "limitations": [
+    "Boundary extraction covers unshadowed JSON/global coercions plus parse and validation method candidates.",
+    "Caller-selected source analysis leaves 1003 inventoried files outside analysis scope. Inventory identity covers the complete artifact; relationships through unselected sources remain unknown.",
+    "Child-process extraction covers asynchronous node:child_process creation, literal argv/env/stdio options, exit/error listeners, and kill signals.",
+    "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+    "Configuration extraction covers process.env, process.argv, node:fs reads, and direct logical defaults.",
+    "Dynamic IPC channel expressions remain unresolved and are never paired by textual similarity.",
+    "Electron API identity follows proven lexical module aliases and structurally verified module-namespace interop. Other reassignments, dynamic selections, and visibly overwritten namespace members are unresolved; missing findings do not establish absence. Arbitrary call side effects and runtime registration are not evaluated.",
+    "Electron relationships are derived from inert syntax; runtime registration, reachability, defaults, and enforcement remain unproven.",
+    "Event extraction covers EventEmitter-style literal registrations, removals, and dispatch candidates; dynamic names remain unknown.",
+    "Function fingerprints are static candidates; equal digests can remain ambiguous and do not prove behavioral equivalence.",
+    "Graph coverage is incomplete; unavailable facts remain explicit and must not be read as absence.",
+    "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+    "Local data flow does not claim control-flow-sensitive reaching definitions or arbitrary dynamic property resolution.",
+    "Promise ownership covers explicit unshadowed Promise construction, static factories, aggregation, chaining, and await syntax only.",
+    "Request extraction covers fetch, WebSocket, node:http/node:https construction, direct option fields, and exact local response consumers.",
+    "Resource extraction covers built-in filesystem/network acquisition and exact local close/destroy/end handles.",
+    "Sender, frame, URL, and origin checks are observations only; REA does not claim that they enforce a complete authorization policy.",
+    "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+    "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+    "The semantic graph contains static syntax observations and conservative relationship candidates; it does not claim runtime execution.",
+    "Timer extraction covers global or node:timers scheduling and exact local-handle cancellation.",
+    "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code.",
+    "index.html has 1 inline JavaScript body starting at line 12 that was not analyzed; endpoints, storage, imports and other facts in it are absent from the evidence."
+  ],
+  "relationship_coverage": null,
+  "locations": [
+    {
+      "kind": "artifact-path",
+      "path": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\apps\\desktop\\dist"
+    }
+  ],
+  "evidence_links": [
+    "ev_acfed8efe6602327936be2a37e619312bbbd3460ebab758e8317822829346023"
+  ]
+}

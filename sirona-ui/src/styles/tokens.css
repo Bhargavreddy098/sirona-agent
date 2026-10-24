@@ -1,0 +1,81 @@
+:root {
+  /* Perplexity AI Colors — Scholar's parchment behind clean glass */
+  --color-parchment: #faf8f5;
+  --color-soft-paper: #fdfbfa;
+  --color-warm-mist: #d1d1cd;
+  --color-ash: #92918b;
+  --color-graphite: #72706b;
+  --color-ink: #27251e;
+  --color-pure-black: #000000;
+  --color-deep-teal: #016a71;
+
+  /* Semantic UI Aliases */
+  --ui-bg-base: var(--color-parchment);
+  --ui-bg-subtle: #f5f3ef;
+  --ui-bg-card: var(--color-soft-paper);
+  --ui-bg-active: var(--color-deep-teal);
+
+  --ui-text-primary: var(--color-ink);
+  --ui-text-secondary: var(--color-graphite);
+  --ui-text-tertiary: var(--color-ash);
+  --ui-accent: var(--color-deep-teal);
+
+  /* Hairline strokes and dividers (pencil lines on parchment) */
+  --ui-stroke-primary: var(--color-warm-mist);
+  --ui-stroke-secondary: #e2e2de;
+  --ui-stroke-tertiary: rgba(0, 0, 0, 0.07);
+  --stroke-nous: rgba(0, 0, 0, 0.05);
+
+  /* Typography — pplxSans geometric sans */
+  --font-pplxsans: 'pplxSans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Typography Scale */
+  --text-caption: 11px;
+  --leading-caption: 1.43;
+  --text-body-sm: 12px;
+  --leading-body-sm: 1.43;
+  --text-body: 14px;
+  --leading-body: 1.43;
+  --text-body-lg: 16px;
+  --leading-body-lg: 1.43;
+
+  /* Typography Weights (400 - 500 only) */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  /* Spacing */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-32: 32px;
+
+  /* Layout */
+  --page-max-width: 900px;
+  --section-gap: 32px;
+  --card-padding: 16px;
+  --element-gap: 8px;
+
+  /* Border Radius */
+  --radius-buttons: 6px;
+  --radius-inputs: 12px;
+  --radius-cards: 16px;
+  --radius-chips: 9999px;
+
+  /* Shadows (Only one subtle shadow across the entire system) */
+  --shadow-subtle: rgba(0, 0, 0, 0.08) 0px 1px 2px 0px;
+  --shadow-nous: rgba(0, 0, 0, 0.08) 0px 1px 3px 0px;
+  --shadow-composer: rgba(0, 0, 0, 0.06) 0px 1px 4px 0px;
+
+  /* Z-Index Hierarchy */
+  --z-modal-backdrop: 120;
+  --z-modal: 130;
+  --z-modal-popover: 140;
+  --z-over-modal: 200;
+  --z-over-modal-content: 210;
+  --z-switcher-backdrop: 219;
+  --z-switcher: 220;
+  --z-connecting: 300;
+  --z-onboarding: 310;
+  --z-crash: 320;
+}

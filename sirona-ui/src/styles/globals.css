@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* Reset and base surface */
+body {
+  background-color: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--font-pplxsans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hairline Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-warm-mist);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ash);
+}
+
+/* Perplexity AI Card Surface */
+.perplexity-card {
+  background-color: var(--color-soft-paper);
+  border-radius: var(--radius-cards);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Perplexity AI Search Input Glow */
+.perplexity-search-glow {
+  box-shadow: 0 0 0 3px rgba(1, 106, 113, 0.12), var(--shadow-subtle);
+}
+
+/* Hairline dividers */
+.border-mist {
+  border-color: var(--color-warm-mist);
+}

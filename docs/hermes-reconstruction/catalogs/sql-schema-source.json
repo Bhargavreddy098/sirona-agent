@@ -1,0 +1,1059 @@
+[
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 778,
+    "end_line": 910,
+    "sql": "\nDROP TRIGGER IF EXISTS sessions_runtime_ledger_delete_guard;\nCREATE TRIGGER IF NOT EXISTS sessions_runtime_ledger_delete_guard\nBEFORE DELETE ON sessions\nWHEN EXISTS (SELECT 1 FROM session_admissions WHERE target_session_id = old.id)\n  OR EXISTS (SELECT 1 FROM worker_executions WHERE session_id = old.id)\nBEGIN\n    SELECT RAISE(ABORT, 'Refused to delete a session that has gateway runtime history: state.db was upgraded by a newer Hermes, and this older Hermes cannot delete such sessions. Downgrading is unsupported. Run hermes update to go back to the newer release, or restore the pre-update snapshot: https://hermes-agent.nousresearch.com/docs/getting-started/updating#rolling-back-to-an-older-release');\nEND;\nDROP TRIGGER IF EXISTS messages_transcript_revision_update;\nCREATE TRIGGER IF NOT EXISTS messages_transcript_revision_update\nAFTER UPDATE OF role, content, api_content, tool_calls, tool_call_id, tool_name, reasoning, reasoning_content,\n    reasoning_details ON messages\nBEGIN\n    -- An in-place rewrite (prompt expansion, multimodal context, a redaction) moves neither the\n    -- active row count nor the highest id; this write-side revision is what a transcript-derived\n    -- cache keys on (conversation_revision). Whoever wrote the row, old builds included.\n    UPDATE sessions SET transcript_revision = transcript_revision + 1 WHERE id = new.session_id;\nEND;\nCREATE INDEX IF NOT EXISTS idx_messages_session_active\n    ON messages(session_id, active, timestamp);\nCREATE INDEX IF NOT EXISTS idx_messages_display_page\n    ON messages(session_id, display_order, active DESC, id DESC)\n    WHERE active = 1 OR compacted = 1;\nCREATE INDEX IF NOT EXISTS idx_messages_display_backfill\n    ON messages(session_id) WHERE (display_order IS NULL OR display_identity IS NULL)\n    AND (active = 1 OR compacted = 1);\nCREATE INDEX IF NOT EXISTS idx_messages_display_identity\n    ON messages(session_id, display_identity, display_order)\n    WHERE display_identity IS NOT NULL AND (active = 1 OR compacted = 1);\nDROP TRIGGER IF EXISTS messages_message_uid_insert;\nCREATE TRIGGER IF NOT EXISTS messages_message_uid_insert\nAFTER INSERT ON messages WHEN new.message_uid IS NULL\nBEGIN\n    -- Every row carries a message_uid, whoever wrote it: a build that predates the column binds NULL, so\n    -- the store mints one on its behalf (the current build always binds a uid; this never fires for it).\n    -- The note lives inside the body: a comment before DROP/CREATE would defeat the settled-trigger skip.\n    UPDATE messages SET message_uid = lower(hex(randomblob(16))) WHERE id = new.id;\nEND;\nDROP TRIGGER IF EXISTS messages_display_order_insert;\nCREATE TRIGGER IF NOT EXISTS messages_display_order_insert\nAFTER INSERT ON messages WHEN new.display_order IS NULL\nBEGIN\n    UPDATE messages SET display_order = COALESCE((\n        SELECT display_order FROM messages\n        WHERE session_id = new.session_id AND id <> new.id\n          AND (active = 1 OR compacted = 1)\n          AND display_identity = new.display_identity AND display_order IS NOT NULL\n        ORDER BY display_order LIMIT 1\n    ), new.id) WHERE id = new.id;\nEND;\nDROP TRIGGER IF EXISTS messages_display_visibility_update;\nCREATE TRIGGER IF NOT EXISTS messages_display_visibility_update\nAFTER UPDATE OF active, compacted ON messages\nWHEN (new.active = 1 OR new.compacted = 1) <> (old.active = 1 OR old.compacted = 1)\nBEGIN\n    UPDATE messages SET display_order = MIN(new.id, COALESCE((\n        SELECT display_order FROM messages\n        WHERE session_id = new.session_id AND id <> new.id\n          AND (active = 1 OR compacted = 1)\n          AND display_identity = new.display_identity AND display_order IS NOT NULL\n        ORDER BY display_order LIMIT 1\n    ), new.id)) WHERE id = new.id\n      AND (new.active = 1 OR new.compacted = 1);\n    UPDATE messages SET display_order = (SELECT display_order FROM messages WHERE id = new.id)\n    WHERE session_id = new.session_id AND id <> new.id AND (active = 1 OR compacted = 1)\n      AND display_identity = new.display_identity\n      AND (new.active = 1 OR new.compacted = 1);\n    UPDATE messages SET display_order = (\n        SELECT MIN(peer.id) FROM messages AS peer\n        WHERE peer.session_id = old.session_id AND (peer.active = 1 OR peer.compacted = 1)\n          AND peer.display_identity = old.display_identity\n    ) WHERE session_id = old.session_id AND (active = 1 OR compacted = 1)\n      AND display_identity = old.display_identity\n      AND NOT (new.active = 1 OR new.compacted = 1);\nEND;\nDROP TRIGGER IF EXISTS messages_display_identity_update;\nCREATE TRIGGER IF NOT EXISTS messages_display_identity_update\nAFTER UPDATE OF role, content, timestamp, tool_call_id, tool_calls, tool_name,\n                display_kind ON messages\nWHEN new.role IS NOT old.role\n  OR new.content IS NOT old.content\n  OR new.timestamp IS NOT old.timestamp\n  OR new.tool_call_id IS NOT old.tool_call_id\n  OR new.tool_calls IS NOT old.tool_calls\n  OR new.tool_name IS NOT old.tool_name\n  OR new.display_kind IS NOT old.display_kind\nBEGIN\n    UPDATE messages SET display_identity = NULL, display_order = NULL\n    WHERE id = new.id OR (\n        session_id = old.session_id AND display_identity = old.display_identity\n        AND (active = 1 OR compacted = 1)\n    );\nEND;\nDROP TRIGGER IF EXISTS messages_display_identity_delete;\nCREATE TRIGGER IF NOT EXISTS messages_display_identity_delete\nAFTER DELETE ON messages WHEN old.active = 1 OR old.compacted = 1\nBEGIN\n    UPDATE messages SET display_order = (\n        SELECT MIN(peer.id) FROM messages AS peer\n        WHERE peer.session_id = old.session_id AND (peer.active = 1 OR peer.compacted = 1)\n          AND peer.display_identity = old.display_identity\n    ) WHERE session_id = old.session_id AND (active = 1 OR compacted = 1)\n      AND display_identity = old.display_identity;\nEND;\nCREATE INDEX IF NOT EXISTS idx_messages_active_null\n    ON messages(active) WHERE active IS NULL;\n-- Logical-identity recovery (agent.transcript_repair._active_logical_message_row) runs inside the write lock.\nCREATE INDEX IF NOT EXISTS idx_messages_session_uid\n    ON messages(session_id, message_uid) WHERE active = 1;\nCREATE INDEX IF NOT EXISTS idx_sessions_session_key\n    ON sessions(session_key, started_at DESC);\nCREATE INDEX IF NOT EXISTS idx_sessions_gateway_peer\n    ON sessions(source, user_id, chat_id, chat_type, thread_id, started_at DESC);\nCREATE INDEX IF NOT EXISTS idx_sessions_handoff_state\n    ON sessions(handoff_state, started_at);\nCREATE INDEX IF NOT EXISTS idx_sessions_system_prompt_hash\n    ON sessions(system_prompt_hash);\nCREATE INDEX IF NOT EXISTS idx_sessions_tool_names\n    ON sessions(tool_names);\n-- Recent-session browsing must never derive recency by scanning messages.\n-- This expression is the durable, indexable approximation used to preselect\n-- a small candidate set before compression-chain and preview hydration.\nCREATE INDEX IF NOT EXISTS idx_sessions_effective_activity\n    ON sessions(COALESCE(last_activity_at, started_at) DESC, started_at DESC);\n-- CLI/TUI listings match gateway rows stored as source='local' by created_source,\n-- before LIMIT. created_source is reconciled onto legacy DBs, so this index lives\n-- here rather than in SCHEMA_SQL. A source-only index would walk every local row\n-- (Desktop and TUI included) to find one surface.\nCREATE INDEX IF NOT EXISTS idx_sessions_local_created_started\n    ON sessions(created_source, started_at DESC)\n    WHERE source = 'local';\n"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 617,
+    "end_line": 770,
+    "sql": "';\nCREATE TABLE IF NOT EXISTS worker_executions (\n    execution_id TEXT PRIMARY KEY,\n    session_id TEXT NOT NULL REFERENCES sessions(id) ON DELETE RESTRICT,\n    kind TEXT NOT NULL CHECK (kind IN ('cron','child','compute','kanban')),\n    owner_epoch INTEGER NOT NULL,\n    generation INTEGER NOT NULL,\n    status TEXT NOT NULL CHECK (status IN ('registered','running','unknown','terminal')),\n    adoption_digest TEXT NOT NULL,\n    last_sequence INTEGER NOT NULL DEFAULT 0 CHECK (last_sequence >= 0)\n);\n-- Lineage-wide worker exclusion (claim/register/reset) probes every row of a conversation's lineage\n-- inside the write transaction; without this each probe scanned the whole (only-growing) table.\nCREATE INDEX IF NOT EXISTS idx_worker_executions_session_status\n    ON worker_executions(session_id, status);\nCREATE TABLE IF NOT EXISTS worker_receipts (\n    execution_id TEXT NOT NULL REFERENCES worker_executions(execution_id) ON DELETE RESTRICT,\n    sequence INTEGER NOT NULL CHECK (sequence > 0),\n    payload_digest TEXT NOT NULL,\n    result_json TEXT NOT NULL,\n    PRIMARY KEY (execution_id, sequence)\n);\n\nCREATE TABLE IF NOT EXISTS state_meta (\n    key TEXT PRIMARY KEY,\n    value TEXT\n);\n\nCREATE TABLE IF NOT EXISTS gateway_routing (\n    scope TEXT NOT NULL DEFAULT '',\n    session_key TEXT NOT NULL,\n    entry_json TEXT NOT NULL,\n    updated_at REAL NOT NULL,\n    PRIMARY KEY (scope, session_key)\n);\n\nCREATE TABLE IF NOT EXISTS gateway_hygiene_state (\n    session_key TEXT PRIMARY KEY,\n    failure_streak INTEGER NOT NULL DEFAULT 0\n);\n\n-- Monotonic conversation generation per routing peer (#96811).\n--\n-- A host-declared conversation key (X-Hermes-Session-Key / build_session_key)\n-- is per-CHAT and outlives any single conversation on it, so the prompt-cache\n-- affinity scope derived from it must be qualified by which conversation is\n-- currently live. Deriving that from the session rows themselves\n-- (COUNT/MAX over _RESET_END_REASONS boundaries) cannot prove non-reuse:\n-- delete_session() and bulk pruning remove ended rows, so an aggregate can\n-- return a pair it already emitted and hand a new conversation a retired\n-- affinity identity.\n--\n-- This counter lives outside prunable session history and only ever\n-- increments, once per boundary actually written, so a generation can never\n-- be reused for a peer even if every session row behind it is deleted.\n--\n-- These rows are deliberately NEVER garbage-collected, including when every\n-- session row for the peer is gone. Collecting one resets that peer to \"no\n-- generation\", so its next boundary writes generation = 1 again and re-issues\n-- a gwk_ scope a retired conversation already used — exactly the ABA this\n-- table exists to close. Do not add it to delete_session()'s cascade or to any\n-- prune sweep. One (TEXT, TEXT, INTEGER) row per routing peer is the intended,\n-- bounded cost.\nCREATE TABLE IF NOT EXISTS conversation_generations (\n    source TEXT NOT NULL,\n    session_key TEXT NOT NULL,\n    generation INTEGER NOT NULL DEFAULT 0,\n    PRIMARY KEY (source, session_key)\n);\n\n-- Per-backend liveness heartbeat (#94895). Each serve / tui_gateway process\n-- registers a row at startup and refreshes ``last_heartbeat`` periodically.\n-- The startup orphan sweep (sessions.startup_orphan_reap) consults this\n-- table to avoid reaping rows whose owning backend is still alive but\n-- just idle (multi-backend state.db shared by isolated serve processes).\n-- A backend whose ``last_heartbeat`` is older than the heartbeat staleness\n-- window is treated as dead; rows without ANY matching heartbeat fall back\n-- to the original staleness predicate so legacy deployments keep working.\nCREATE TABLE IF NOT EXISTS gateway_heartbeats (\n    backend_id TEXT PRIMARY KEY,\n    pid INTEGER NOT NULL,\n    started_at REAL NOT NULL,\n    last_heartbeat REAL NOT NULL,\n    profile TEXT NOT NULL DEFAULT '',\n    host TEXT NOT NULL DEFAULT ''\n);\n\nCREATE TABLE IF NOT EXISTS compression_locks (\n    session_id TEXT PRIMARY KEY,\n    holder TEXT NOT NULL,\n    acquired_at REAL NOT NULL,\n    expires_at REAL NOT NULL\n);\n\nCREATE TABLE IF NOT EXISTS session_turn_leases (\n    conversation_id TEXT PRIMARY KEY,\n    holder TEXT NOT NULL,\n    acquired_at REAL NOT NULL,\n    expires_at REAL NOT NULL\n);\n\nCREATE TABLE IF NOT EXISTS async_delegations (\n    delegation_id TEXT PRIMARY KEY,\n    origin_session TEXT NOT NULL,\n    origin_ui_session_id TEXT NOT NULL DEFAULT '',\n    parent_session_id TEXT,\n    state TEXT NOT NULL,\n    dispatched_at REAL NOT NULL,\n    completed_at REAL,\n    updated_at REAL NOT NULL,\n    event_json TEXT,\n    result_json TEXT,\n    delivery_state TEXT NOT NULL DEFAULT 'pending',\n    delivery_attempts INTEGER NOT NULL DEFAULT 0,\n    delivered_at REAL,\n    owner_pid INTEGER,\n    owner_started_at INTEGER,\n    task_json TEXT,\n    -- Owner-side execution fence (unified runtime).\n    owner_execution_id TEXT,\n    delivery_claim TEXT,\n    delivery_claimed_at REAL,\n    -- Mirrors the delegation tool's own CREATE TABLE (tools/async_delegation.py\n    -- _initialize_schema). Keeping the canonical fresh-install shape identical\n    -- to the tool's avoids a silent schema drift: the tool's lazy\n    -- ALTER TABLE ADD COLUMN used to be the only source of this column, so two\n    -- databases at the same schema_version had different\n    -- async_delegations shapes depending on whether the delegation tool had\n    -- ever run, breaking rebuild/replay pipelines that reconstruct state.db\n    -- from the canonical schema (#94691).\n    origin_session_id TEXT NOT NULL DEFAULT ''\n);\n\nCREATE INDEX IF NOT EXISTS idx_sessions_source ON sessions(source);\nCREATE INDEX IF NOT EXISTS idx_sessions_source_id ON sessions(source, id);\nCREATE INDEX IF NOT EXISTS idx_sessions_parent ON sessions(parent_session_id);\nCREATE INDEX IF NOT EXISTS idx_sessions_started ON sessions(started_at DESC);\nCREATE INDEX IF NOT EXISTS idx_messages_session ON messages(session_id, timestamp);\nCREATE INDEX IF NOT EXISTS idx_messages_session_id ON messages(session_id, id);\n-- Partial index for the Insights assistant tool-call scan\n-- (agent/insights.py _get_tool_usage / _get_skill_usage): those queries filter\n-- messages by role='assistant' AND tool_calls IS NOT NULL, a small fraction of\n-- rows on a large state.db. role and tool_calls are base columns, so this can\n-- live in SCHEMA_SQL rather than DEFERRED_INDEX_SQL.\nCREATE INDEX IF NOT EXISTS idx_messages_assistant_calls_by_session\n    ON messages(session_id)\n    WHERE role = 'assistant' AND tool_calls IS NOT NULL;\nCREATE INDEX IF NOT EXISTS idx_compression_locks_expires ON compression_locks(expires_at);\nCREATE INDEX IF NOT EXISTS idx_session_turn_leases_expires ON session_turn_leases(expires_at);\nCREATE INDEX IF NOT EXISTS idx_session_model_usage_session ON session_model_usage(session_id);\nCREATE INDEX IF NOT EXISTS idx_session_model_usage_model ON session_model_usage(model);\nCREATE INDEX IF NOT EXISTS idx_async_delegations_delivery\n    ON async_delegations(delivery_state, completed_at);\n"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 948,
+    "end_line": 970,
+    "sql": ")\n                ELSE content END AS content,\n           tool_name, tool_calls\n    FROM messages;\n\nCREATE VIRTUAL TABLE IF NOT EXISTS messages_fts USING fts5(\n    content,\n    tool_name,\n    tool_calls,\n    content='messages_fts_src',\n    content_rowid='id'\n);\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_insert AFTER INSERT ON messages\nWHEN (new.id > COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                         WHERE key = 'fts_rebuild_high_water'), -1)\n   OR new.id <= COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                          WHERE key = 'fts_rebuild_progress'), -1))\nBEGIN\n    INSERT INTO messages_fts(rowid, content, tool_name, tool_calls)\n    VALUES (\n        new.id,\n        "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 970,
+    "end_line": 986,
+    "sql": ",\n        new.tool_name,\n        new.tool_calls\n    );\nEND;\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_delete AFTER DELETE ON messages\nWHEN (old.id > COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                         WHERE key = 'fts_rebuild_high_water'), -1)\n   OR old.id <= COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                          WHERE key = 'fts_rebuild_progress'), -1))\nBEGIN\n    INSERT INTO messages_fts(messages_fts, rowid, content, tool_name, tool_calls)\n    VALUES (\n        'delete',\n        old.id,\n        "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 986,
+    "end_line": 1010,
+    "sql": ",\n        old.tool_name,\n        old.tool_calls\n    );\nEND;\n\n-- UPDATE OF skips the trigger entirely for non-content column writes\n-- (status/compacted/observed/etc.), which is stronger than the WHEN gate\n-- alone and avoids FTS I/O saturation on large state.db (#68858 / #73639).\nCREATE TRIGGER IF NOT EXISTS messages_fts_update\nAFTER UPDATE OF content, tool_name, tool_calls, role ON messages\nWHEN (old.content IS NOT new.content\n    OR old.tool_name IS NOT new.tool_name\n    OR old.tool_calls IS NOT new.tool_calls\n    OR old.role IS NOT new.role)\n   AND (old.id > COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                           WHERE key = 'fts_rebuild_high_water'), -1)\n     OR old.id <= COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                            WHERE key = 'fts_rebuild_progress'), -1))\nBEGIN\n    INSERT INTO messages_fts(messages_fts, rowid, content, tool_name, tool_calls)\n    VALUES (\n        'delete',\n        old.id,\n        "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 1071,
+    "end_line": 1084,
+    "sql": ";\n\nCREATE VIRTUAL TABLE IF NOT EXISTS messages_fts_trigram USING fts5(\n    content,\n    tool_name,\n    content='messages_fts_trigram_src',\n    content_rowid='id',\n    tokenize='trigram'\n);\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_trigram_insert AFTER INSERT ON messages\nWHEN new.role <> 'tool'\n   AND EXISTS (SELECT 1 FROM sessions\n               WHERE id = new.session_id AND "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 1084,
+    "end_line": 1097,
+    "sql": ")\n   AND (new.id > COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                           WHERE key = 'fts_rebuild_high_water'), -1)\n     OR new.id <= COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                            WHERE key = 'fts_rebuild_progress'), -1))\nBEGIN\n    INSERT INTO messages_fts_trigram(rowid, content, tool_name)\n    VALUES (new.id, new.content, new.tool_name);\nEND;\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_trigram_delete AFTER DELETE ON messages\nWHEN old.role <> 'tool'\n   AND EXISTS (SELECT 1 FROM sessions\n               WHERE id = old.session_id AND "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 1097,
+    "end_line": 1121,
+    "sql": ")\n   AND (old.id > COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                           WHERE key = 'fts_rebuild_high_water'), -1)\n     OR old.id <= COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                            WHERE key = 'fts_rebuild_progress'), -1))\nBEGIN\n    INSERT INTO messages_fts_trigram(messages_fts_trigram, rowid, content, tool_name)\n    VALUES ('delete', old.id, old.content, old.tool_name);\nEND;\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_trigram_update\nAFTER UPDATE OF content, tool_name, role ON messages\nWHEN (old.content IS NOT new.content\n    OR old.tool_name IS NOT new.tool_name\n    OR old.role IS NOT new.role)\n   AND (old.id > COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                           WHERE key = 'fts_rebuild_high_water'), -1)\n     OR old.id <= COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                            WHERE key = 'fts_rebuild_progress'), -1))\nBEGIN\n    INSERT INTO messages_fts_trigram(messages_fts_trigram, rowid, content, tool_name)\n    SELECT 'delete', old.id, old.content, old.tool_name\n    WHERE old.role <> 'tool'\n      AND EXISTS (SELECT 1 FROM sessions\n                  WHERE id = old.session_id AND "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 1155,
+    "end_line": 1163,
+    "sql": "\nCREATE VIRTUAL TABLE IF NOT EXISTS messages_fts USING fts5(\n    content\n);\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_insert AFTER INSERT ON messages BEGIN\n    INSERT INTO messages_fts(rowid, content) VALUES (\n        new.id,\n        COALESCE("
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 1163,
+    "end_line": 1177,
+    "sql": ", '')\n        || ' ' || COALESCE(new.tool_name, '') || ' ' || COALESCE(new.tool_calls, '')\n    );\nEND;\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_delete AFTER DELETE ON messages BEGIN\n    DELETE FROM messages_fts WHERE rowid = old.id;\nEND;\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_update\nAFTER UPDATE OF content, tool_name, tool_calls, role ON messages BEGIN\n    DELETE FROM messages_fts WHERE rowid = old.id;\n    INSERT INTO messages_fts(rowid, content) VALUES (\n        new.id,\n        COALESCE("
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 1184,
+    "end_line": 1193,
+    "sql": "\nCREATE VIRTUAL TABLE IF NOT EXISTS messages_fts_trigram USING fts5(\n    content,\n    tokenize='trigram'\n);\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_trigram_insert AFTER INSERT ON messages BEGIN\n    INSERT INTO messages_fts_trigram(rowid, content) VALUES (\n        new.id,\n        COALESCE("
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 1193,
+    "end_line": 1207,
+    "sql": ", '')\n        || ' ' || COALESCE(new.tool_name, '') || ' ' || COALESCE(new.tool_calls, '')\n    );\nEND;\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_trigram_delete AFTER DELETE ON messages BEGIN\n    DELETE FROM messages_fts_trigram WHERE rowid = old.id;\nEND;\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_trigram_update\nAFTER UPDATE OF content, tool_name, tool_calls, role ON messages BEGIN\n    DELETE FROM messages_fts_trigram WHERE rowid = old.id;\n    INSERT INTO messages_fts_trigram(rowid, content) VALUES (\n        new.id,\n        COALESCE("
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_common.py",
+    "relative": "hermes_state_common.py",
+    "line": 451,
+    "end_line": 617,
+    "sql": "\nCREATE TABLE IF NOT EXISTS schema_version (\n    version INTEGER NOT NULL\n);\n\nCREATE TABLE IF NOT EXISTS system_prompts (\n    hash TEXT PRIMARY KEY,\n    prompt TEXT NOT NULL\n);\n\nCREATE TABLE IF NOT EXISTS sessions (\n    id TEXT PRIMARY KEY,\n    runtime_revision INTEGER NOT NULL DEFAULT 0,\n    runtime_generation INTEGER NOT NULL DEFAULT 0,\n    source TEXT NOT NULL,\n    created_source TEXT,\n    user_id TEXT,\n    session_key TEXT,\n    chat_id TEXT,\n    chat_type TEXT,\n    thread_id TEXT,\n    display_name TEXT,\n    origin_json TEXT,\n    expiry_finalized INTEGER DEFAULT 0,\n    model TEXT,\n    model_config TEXT,\n    system_prompt TEXT,\n    system_prompt_hash TEXT,\n    parent_session_id TEXT,\n    started_at REAL NOT NULL,\n    ended_at REAL,\n    end_reason TEXT,\n    message_count INTEGER DEFAULT 0,\n    tool_call_count INTEGER DEFAULT 0,\n    input_tokens INTEGER DEFAULT 0,\n    output_tokens INTEGER DEFAULT 0,\n    cache_read_tokens INTEGER DEFAULT 0,\n    cache_write_tokens INTEGER DEFAULT 0,\n    reasoning_tokens INTEGER DEFAULT 0,\n    cwd TEXT,\n    git_branch TEXT,\n    git_repo_root TEXT,\n    git_metadata_generation INTEGER NOT NULL DEFAULT 0,\n    billing_provider TEXT,\n    billing_base_url TEXT,\n    billing_mode TEXT,\n    estimated_cost_usd REAL,\n    actual_cost_usd REAL,\n    cost_status TEXT,\n    cost_source TEXT,\n    pricing_version TEXT,\n    title TEXT,\n    title_source TEXT,\n    last_activity_at REAL,\n    last_activity_description TEXT,\n    last_activity_provenance TEXT,\n    api_call_count INTEGER DEFAULT 0,\n    handoff_state TEXT,\n    handoff_platform TEXT,\n    handoff_error TEXT,\n    compression_failure_cooldown_until REAL,\n    compression_failure_error TEXT,\n    compression_fallback_streak INTEGER NOT NULL DEFAULT 0,\n    compression_ineffective_count INTEGER NOT NULL DEFAULT 0,\n    compression_recovery_deadline REAL,\n    compression_overload_streak INTEGER NOT NULL DEFAULT 0,\n    profile_name TEXT,\n    transport_profile TEXT,\n    rewind_count INTEGER NOT NULL DEFAULT 0,\n    archived INTEGER NOT NULL DEFAULT 0,\n    auto_archived INTEGER NOT NULL DEFAULT 0,\n    pinned INTEGER NOT NULL DEFAULT 0,\n    hidden INTEGER NOT NULL DEFAULT 0,\n    last_read_at REAL,\n    tool_names TEXT,\n    transcript_revision INTEGER NOT NULL DEFAULT 0,\n    FOREIGN KEY (parent_session_id) REFERENCES sessions(id),\n    FOREIGN KEY (system_prompt_hash) REFERENCES system_prompts(hash)\n);\n\nCREATE TABLE IF NOT EXISTS messages (\n    id INTEGER PRIMARY KEY AUTOINCREMENT,\n    session_id TEXT NOT NULL REFERENCES sessions(id),\n    role TEXT NOT NULL,\n    content TEXT,\n    tool_call_id TEXT,\n    tool_calls TEXT,\n    tool_name TEXT,\n    effect_disposition TEXT,\n    timestamp REAL NOT NULL,\n    token_count INTEGER,\n    finish_reason TEXT,\n    reasoning TEXT,\n    reasoning_content TEXT,\n    reasoning_details TEXT,\n    codex_reasoning_items TEXT,\n    codex_message_items TEXT,\n    platform_message_id TEXT,\n    observed INTEGER DEFAULT 0,\n    _compressed_summary INTEGER NOT NULL DEFAULT 0,\n    active INTEGER NOT NULL DEFAULT 1,\n    compacted INTEGER NOT NULL DEFAULT 0,\n    api_content TEXT,\n    display_kind TEXT,\n    display_metadata TEXT,\n    display_identity BLOB,\n    display_order INTEGER,\n    message_uid TEXT,\n    absorbed_message_uids TEXT,\n    tool_call_uids TEXT,\n    tool_call_uid TEXT\n);\n\nCREATE TABLE IF NOT EXISTS session_model_usage (\n    session_id TEXT NOT NULL REFERENCES sessions(id) ON DELETE CASCADE,\n    model TEXT NOT NULL,\n    billing_provider TEXT NOT NULL DEFAULT '',\n    billing_base_url TEXT NOT NULL DEFAULT '',\n    billing_mode TEXT NOT NULL DEFAULT '',\n    task TEXT NOT NULL DEFAULT '',\n    api_call_count INTEGER NOT NULL DEFAULT 0,\n    input_tokens INTEGER NOT NULL DEFAULT 0,\n    output_tokens INTEGER NOT NULL DEFAULT 0,\n    cache_read_tokens INTEGER NOT NULL DEFAULT 0,\n    cache_write_tokens INTEGER NOT NULL DEFAULT 0,\n    reasoning_tokens INTEGER NOT NULL DEFAULT 0,\n    estimated_cost_usd REAL NOT NULL DEFAULT 0,\n    actual_cost_usd REAL NOT NULL DEFAULT 0,\n    cost_status TEXT,\n    cost_source TEXT,\n    first_seen REAL,\n    last_seen REAL,\n    PRIMARY KEY (session_id, model, billing_provider, billing_base_url, billing_mode, task)\n);\n\nCREATE TABLE IF NOT EXISTS runtime_epoch (\n    singleton INTEGER PRIMARY KEY CHECK (singleton = 1),\n    epoch INTEGER NOT NULL CHECK (epoch > 0),\n    instance_id TEXT NOT NULL\n);\nCREATE TABLE IF NOT EXISTS session_admissions (\n    seq INTEGER PRIMARY KEY AUTOINCREMENT,\n    admission_id TEXT NOT NULL UNIQUE,\n    request_id TEXT NOT NULL,\n    principal_id TEXT NOT NULL,\n    target_session_id TEXT NOT NULL REFERENCES sessions(id) ON DELETE RESTRICT,\n    lineage_json TEXT NOT NULL,\n    payload_json TEXT NOT NULL,\n    payload_digest TEXT NOT NULL,\n    intent TEXT NOT NULL CHECK (intent IN ('queue','steer','redirect')),\n    status TEXT NOT NULL CHECK (status IN ('queued','started','unknown','terminal')),\n    outcome TEXT,\n    owner_epoch INTEGER,\n    generation INTEGER,\n    UNIQUE (principal_id, target_session_id, request_id),\n    CHECK (status != 'started' OR (owner_epoch IS NOT NULL AND generation IS NOT NULL))\n);\nCREATE INDEX IF NOT EXISTS session_admissions_pending\n    ON session_admissions(target_session_id, status, seq);\n-- Cron run history finds a job's unified-runtime runs by the scheduler principal's request ids\n-- (``cron:<job>:<execution>``); without this a lookup walked\n-- every cron admission of every job. Partial: interactive turns, the bulk of admissions, pay\n-- nothing for it. The constant leading column gives the planner equality + range over a covering\n-- index, so it beats the UNIQUE autoindex's bare principal_id prefix even without ANALYZE stats.\n-- The WHERE is built from CRON_PRINCIPAL_ID, the literal the run queries inline, so they cannot drift.\nCREATE INDEX IF NOT EXISTS idx_session_admissions_cron_request\n    ON session_admissions(principal_id, request_id, target_session_id) WHERE principal_id = '"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 41,
+    "end_line": 55,
+    "sql": "\nCREATE VIEW IF NOT EXISTS messages_fts_cjk_src AS\n    SELECT id, role, content, tool_name, tool_calls\n    FROM messages\n    WHERE role <> 'tool';\n\nCREATE VIRTUAL TABLE IF NOT EXISTS messages_fts_cjk USING fts5(\n    content,\n    tool_name,\n    tool_calls,\n    content='messages_fts_cjk_src',\n    content_rowid='id',\n    tokenize='cjk_unicode61'\n);\n"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 57,
+    "end_line": 98,
+    "sql": "\nCREATE TRIGGER IF NOT EXISTS messages_fts_cjk_insert AFTER INSERT ON messages\nWHEN new.role <> 'tool'\n   AND (new.id > COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                           WHERE key = 'fts_cjk_rebuild_high_water'), -1)\n     OR new.id <= COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                            WHERE key = 'fts_cjk_rebuild_progress'), -1))\nBEGIN\n    INSERT INTO messages_fts_cjk(rowid, content, tool_name, tool_calls)\n    VALUES (new.id, new.content, new.tool_name, new.tool_calls);\nEND;\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_cjk_delete AFTER DELETE ON messages\nWHEN old.role <> 'tool'\n   AND (old.id > COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                           WHERE key = 'fts_cjk_rebuild_high_water'), -1)\n     OR old.id <= COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                            WHERE key = 'fts_cjk_rebuild_progress'), -1))\nBEGIN\n    INSERT INTO messages_fts_cjk(messages_fts_cjk, rowid, content, tool_name, tool_calls)\n    VALUES ('delete', old.id, old.content, old.tool_name, old.tool_calls);\nEND;\n\nCREATE TRIGGER IF NOT EXISTS messages_fts_cjk_update\nAFTER UPDATE OF content, tool_name, tool_calls, role ON messages\nWHEN (old.content IS NOT new.content\n    OR old.tool_name IS NOT new.tool_name\n    OR old.tool_calls IS NOT new.tool_calls\n    OR old.role IS NOT new.role)\n   AND (old.id > COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                           WHERE key = 'fts_cjk_rebuild_high_water'), -1)\n     OR old.id <= COALESCE((SELECT CAST(value AS INTEGER) FROM state_meta\n                            WHERE key = 'fts_cjk_rebuild_progress'), -1))\nBEGIN\n    INSERT INTO messages_fts_cjk(messages_fts_cjk, rowid, content, tool_name, tool_calls)\n    SELECT 'delete', old.id, old.content, old.tool_name, old.tool_calls\n    WHERE old.role <> 'tool';\n    INSERT INTO messages_fts_cjk(rowid, content, tool_name, tool_calls)\n    SELECT new.id, new.content, new.tool_name, new.tool_calls\n    WHERE new.role <> 'tool';\nEND;\n"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 135,
+    "end_line": 137,
+    "sql": "``sqlite_master.sql`` as compared here: whitespace collapsed, none kept around parentheses and commas (the\n    same definition written with different spacing is the same layout), and the object name unquoted (an ALTER\n    TABLE RENAME round trip stores it as ``\"name\"`` without changing the layout)."
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 161,
+    "end_line": 161,
+    "sql": "CREATE VIRTUAL TABLE messages_fts USING fts5(content,content=messages,content_rowid=id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 162,
+    "end_line": 162,
+    "sql": "CREATE VIRTUAL TABLE messages_fts USING fts5(content)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 163,
+    "end_line": 164,
+    "sql": "CREATE VIRTUAL TABLE messages_fts USING fts5(content,tool_name,tool_calls,content='messages',content_rowid='id')"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 165,
+    "end_line": 166,
+    "sql": "CREATE VIRTUAL TABLE messages_fts USING fts5(content,tool_name,tool_calls,content='messages_fts_src',content_rowid='id')"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 169,
+    "end_line": 170,
+    "sql": "CREATE VIRTUAL TABLE messages_fts_trigram USING fts5(content,content=messages,content_rowid=id,tokenize='trigram')"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 171,
+    "end_line": 171,
+    "sql": "CREATE VIRTUAL TABLE messages_fts_trigram USING fts5(content,tokenize='trigram')"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 172,
+    "end_line": 173,
+    "sql": "CREATE VIRTUAL TABLE messages_fts_trigram USING fts5(content,tool_name,tool_calls,content='messages_fts_trigram_src',content_rowid='id',tokenize='trigram')"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 174,
+    "end_line": 175,
+    "sql": "CREATE VIRTUAL TABLE messages_fts_trigram USING fts5(content,tool_name,content='messages_fts_trigram_src',content_rowid='id',tokenize='trigram')"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_fts.py",
+    "relative": "hermes_state_fts.py",
+    "line": 257,
+    "end_line": 258,
+    "sql": "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ? AND sql LIKE 'CREATE VIRTUAL TABLE%'"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 78,
+    "end_line": 98,
+    "sql": "CREATE TABLE session_model_usage (\n    session_id TEXT NOT NULL REFERENCES sessions(id) ON DELETE CASCADE,\n    model TEXT NOT NULL,\n    billing_provider TEXT NOT NULL DEFAULT '',\n    billing_base_url TEXT NOT NULL DEFAULT '',\n    billing_mode TEXT NOT NULL DEFAULT '',\n    task TEXT NOT NULL DEFAULT '',\n    api_call_count INTEGER NOT NULL DEFAULT 0,\n    input_tokens INTEGER NOT NULL DEFAULT 0,\n    output_tokens INTEGER NOT NULL DEFAULT 0,\n    cache_read_tokens INTEGER NOT NULL DEFAULT 0,\n    cache_write_tokens INTEGER NOT NULL DEFAULT 0,\n    reasoning_tokens INTEGER NOT NULL DEFAULT 0,\n    estimated_cost_usd REAL NOT NULL DEFAULT 0,\n    actual_cost_usd REAL NOT NULL DEFAULT 0,\n    cost_status TEXT,\n    cost_source TEXT,\n    first_seen REAL,\n    last_seen REAL,\n    PRIMARY KEY (session_id, model, billing_provider, billing_base_url, billing_mode, task)\n)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 136,
+    "end_line": 136,
+    "sql": "CREATE UNIQUE INDEX IF NOT EXISTS idx_sessions_title_unique ON sessions(title) WHERE title IS NOT NULL"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 75,
+    "end_line": 75,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_session_model_usage_session ON session_model_usage(session_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 76,
+    "end_line": 76,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_session_model_usage_model ON session_model_usage(model)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 1393,
+    "end_line": 1402,
+    "sql": "Bring a raw ``state.db`` connection to the canonical SCHEMA_SQL shape and commit.\n\n    Single durable-shape authority for callers that open ``state.db``\n    outside SessionDB. The async-delegation tool used to carry its own\n    CREATE TABLE and ALTER column list for ``async_delegations``; it drifted\n    from SCHEMA_SQL (same-name columns with different nullability/defaults\n    depending on which authority touched the database first, #94691). This\n    helper instead replays the canonical DDL (every statement is\n    IF NOT EXISTS/idempotent) through :func:`apply_declared_schema`.\n    "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 306,
+    "end_line": 314,
+    "sql": "Run *ddl* statement by statement, skipping each ``DROP TRIGGER IF EXISTS x`` /\n        ``CREATE TRIGGER IF NOT EXISTS x …`` pair whose trigger already exists with the same body.\n\n        ``DROP TRIGGER IF EXISTS`` on an existing trigger takes SQLite's write lock (the\n        ``CREATE … IF NOT EXISTS`` forms do not), so the unconditional drop+recreate that lets a\n        changed trigger body roll out would otherwise block every open of a settled database\n        behind a sibling process's transaction. ``sqlite_master.sql`` stores the CREATE text\n        verbatim minus ``IF NOT EXISTS`` and the ``;``, so an exact comparison decides.\n        "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 820,
+    "end_line": 829,
+    "sql": "RENAME *table* to *legacy_name*, CREATE it fresh from *ddl*, copy rows back with\n        *copy_sql*, DROP the legacy copy, recreate *indexes* — as ONE write transaction.\n\n        The writer connection is autocommit (``isolation_level=None``), so without an explicit\n        BEGIN each statement commits on its own and a sibling process opening the same state.db\n        between RENAME and CREATE runs SCHEMA_SQL's ``CREATE TABLE IF NOT EXISTS`` first: our\n        CREATE then fails with \"table already exists\", every row is stranded in *legacy_name*\n        and the live table is empty. BEGIN IMMEDIATE holds the write lock for the whole rebuild\n        so the sibling blocks (and retries under its lock patience) instead of interleaving;\n        any failure rolls the RENAME back."
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 1249,
+    "end_line": 1252,
+    "sql": "Create/repair the FTS objects on an FTS5-capable runtime. The DDL runs even when the\n        vtable exists so CREATE TRIGGER IF NOT EXISTS repairs trigger-only degradation.\n        OPT-IN v23 boundary: a legacy v22 inline install keeps its inline schema + triggers\n        (the v23 DDL would create the trigram source VIEW and leave a mixed state)."
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 870,
+    "end_line": 876,
+    "sql": "CREATE TABLE gateway_routing (\n    scope TEXT NOT NULL DEFAULT '',\n    session_key TEXT NOT NULL,\n    entry_json TEXT NOT NULL,\n    updated_at REAL NOT NULL,\n    PRIMARY KEY (scope, session_key)\n)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 215,
+    "end_line": 215,
+    "sql": "CREATE VIRTUAL TABLE temp._hermes_fts5_probe USING fts5(x)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 327,
+    "end_line": 327,
+    "sql": "CREATE TRIGGER IF NOT EXISTS "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 844,
+    "end_line": 844,
+    "sql": "ALTER TABLE "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 977,
+    "end_line": 978,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_messages_platform_msg_id ON messages(session_id, platform_message_id) WHERE platform_message_id IS NOT NULL"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 711,
+    "end_line": 711,
+    "sql": "CREATE VIRTUAL TABLE "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_schema.py",
+    "relative": "hermes_state_schema.py",
+    "line": 789,
+    "end_line": 789,
+    "sql": "ALTER TABLE \""
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_search.py",
+    "relative": "hermes_state_search.py",
+    "line": 573,
+    "end_line": 574,
+    "sql": "DELETE FROM sqlite_master WHERE type = 'table' AND name IN ('messages_fts', 'messages_fts_trigram') AND sql LIKE 'CREATE VIRTUAL TABLE%'"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_search.py",
+    "relative": "hermes_state_search.py",
+    "line": 568,
+    "end_line": 569,
+    "sql": "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name IN ('messages_fts', 'messages_fts_trigram') AND sql LIKE 'CREATE VIRTUAL TABLE%' LIMIT 1"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_search.py",
+    "relative": "hermes_state_search.py",
+    "line": 588,
+    "end_line": 588,
+    "sql": "ALTER TABLE "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_telegram.py",
+    "relative": "hermes_state_telegram.py",
+    "line": 150,
+    "end_line": 151,
+    "sql": "CREATE UNIQUE INDEX IF NOT EXISTS idx_telegram_dm_topic_bindings_session ON telegram_dm_topic_bindings(session_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_telegram.py",
+    "relative": "hermes_state_telegram.py",
+    "line": 154,
+    "end_line": 155,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_telegram_dm_topic_bindings_user ON telegram_dm_topic_bindings(profile_name, user_id, chat_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_telegram.py",
+    "relative": "hermes_state_telegram.py",
+    "line": 131,
+    "end_line": 131,
+    "sql": "CREATE TABLE IF NOT EXISTS "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_state_telegram.py",
+    "relative": "hermes_state_telegram.py",
+    "line": 145,
+    "end_line": 145,
+    "sql": "CREATE TABLE "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\agent\\verification_evidence.py",
+    "relative": "agent/verification_evidence.py",
+    "line": 53,
+    "end_line": 58,
+    "sql": "\n        CREATE TABLE IF NOT EXISTS meta (\n            key TEXT PRIMARY KEY,\n            value TEXT NOT NULL\n        )\n        "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\agent\\verification_evidence.py",
+    "relative": "agent/verification_evidence.py",
+    "line": 59,
+    "end_line": 74,
+    "sql": "\n        CREATE TABLE IF NOT EXISTS verification_events (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            created_at TEXT NOT NULL,\n            session_id TEXT NOT NULL,\n            cwd TEXT NOT NULL,\n            root TEXT NOT NULL,\n            command TEXT NOT NULL,\n            canonical_command TEXT NOT NULL,\n            kind TEXT NOT NULL,\n            scope TEXT NOT NULL,\n            status TEXT NOT NULL,\n            exit_code INTEGER NOT NULL,\n            output_summary TEXT NOT NULL\n        )\n        "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\agent\\verification_evidence.py",
+    "relative": "agent/verification_evidence.py",
+    "line": 75,
+    "end_line": 84,
+    "sql": "\n        CREATE TABLE IF NOT EXISTS verification_state (\n            session_id TEXT NOT NULL,\n            root TEXT NOT NULL,\n            last_event_id INTEGER,\n            last_edit_at TEXT,\n            changed_paths_json TEXT NOT NULL DEFAULT '[]',\n            PRIMARY KEY (session_id, root)\n        )\n        "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\agent\\verification_evidence.py",
+    "relative": "agent/verification_evidence.py",
+    "line": 85,
+    "end_line": 88,
+    "sql": "\n        CREATE INDEX IF NOT EXISTS idx_verification_events_session_root\n        ON verification_events(session_id, root, id DESC)\n        "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\delivery_queue.py",
+    "relative": "cron/delivery_queue.py",
+    "line": 110,
+    "end_line": 123,
+    "sql": "CREATE TABLE IF NOT EXISTS deliveries (\n             execution_id TEXT PRIMARY KEY,\n             job_json TEXT NOT NULL,\n             content TEXT NOT NULL,\n             for_failure INTEGER NOT NULL DEFAULT 0,\n             status TEXT NOT NULL CHECK(status IN\n               ('pending','delivering','delivered','failed','unknown','suppressed')),\n             owner_process_id TEXT,\n             owner_pid INTEGER,\n             owner_started_at INTEGER,\n             created_at TEXT NOT NULL,\n             finished_at TEXT,\n             error TEXT\n           )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\delivery_queue.py",
+    "relative": "cron/delivery_queue.py",
+    "line": 126,
+    "end_line": 131,
+    "sql": "CREATE TABLE IF NOT EXISTS delivery_tombstones (\n             execution_id TEXT PRIMARY KEY,\n             terminal_status TEXT NOT NULL CHECK(terminal_status IN\n               ('delivered','failed','unknown','suppressed')),\n             finished_at TEXT\n           )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\delivery_queue.py",
+    "relative": "cron/delivery_queue.py",
+    "line": 99,
+    "end_line": 99,
+    "sql": "ALTER TABLE "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\executions.py",
+    "relative": "cron/executions.py",
+    "line": 60,
+    "end_line": 75,
+    "sql": "CREATE TABLE IF NOT EXISTS executions (\n             id TEXT PRIMARY KEY,\n             job_id TEXT NOT NULL,\n             source TEXT NOT NULL,\n             process_id TEXT NOT NULL,\n             pid INTEGER NOT NULL,\n             process_started_at INTEGER,\n             status TEXT NOT NULL CHECK(status IN\n               ('claimed','running','completed','failed','unknown')),\n             handoff_pending INTEGER NOT NULL DEFAULT 0,\n             handoff_started_at REAL,\n             claimed_at TEXT NOT NULL,\n             started_at TEXT,\n             finished_at TEXT,\n             error TEXT\n           )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\executions.py",
+    "relative": "cron/executions.py",
+    "line": 85,
+    "end_line": 86,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_executions_job_claimed ON executions(job_id, claimed_at DESC, id DESC)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\executions.py",
+    "relative": "cron/executions.py",
+    "line": 89,
+    "end_line": 90,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_executions_status_claimed ON executions(status, claimed_at DESC, id DESC)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\executions.py",
+    "relative": "cron/executions.py",
+    "line": 96,
+    "end_line": 97,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_executions_occurrence ON executions(job_id, scheduled_instant) WHERE status='completed'"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\incidents.py",
+    "relative": "cron/incidents.py",
+    "line": 79,
+    "end_line": 92,
+    "sql": "CREATE TABLE IF NOT EXISTS cron_incidents (\n             id            TEXT PRIMARY KEY,\n             job_id        TEXT NOT NULL,\n             error_sig     TEXT NOT NULL,\n             state         TEXT NOT NULL,\n             failure_type  TEXT NOT NULL DEFAULT 'unknown',\n             first_seen_at TEXT NOT NULL,\n             last_seen_at  TEXT NOT NULL,\n             acked_at      TEXT,\n             alerted_at    TEXT,\n             closed_at     TEXT,\n             error         TEXT NOT NULL,\n             output_file   TEXT\n           )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\incidents.py",
+    "relative": "cron/incidents.py",
+    "line": 97,
+    "end_line": 98,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_cron_incidents_job ON cron_incidents(job_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\incidents.py",
+    "relative": "cron/incidents.py",
+    "line": 101,
+    "end_line": 102,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_cron_incidents_state ON cron_incidents(state)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\cron\\notepad.py",
+    "relative": "cron/notepad.py",
+    "line": 50,
+    "end_line": 56,
+    "sql": "CREATE TABLE IF NOT EXISTS cron_notepad (\n             job_id TEXT NOT NULL,\n             key TEXT NOT NULL,\n             value TEXT NOT NULL,\n             updated_at TEXT NOT NULL,\n             PRIMARY KEY (job_id, key)\n           )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\delivery_ledger.py",
+    "relative": "gateway/delivery_ledger.py",
+    "line": 190,
+    "end_line": 205,
+    "sql": "CREATE TABLE IF NOT EXISTS delivery_obligations (\n            obligation_id TEXT PRIMARY KEY,\n            session_key TEXT NOT NULL,\n            platform TEXT NOT NULL,\n            chat_id TEXT NOT NULL,\n            thread_id TEXT,\n            content TEXT NOT NULL,\n            state TEXT NOT NULL,\n            attempts INTEGER NOT NULL DEFAULT 0,\n            created_at REAL NOT NULL,\n            updated_at REAL NOT NULL,\n            owner_pid INTEGER,\n            owner_started_at INTEGER,\n            last_error TEXT,\n            adapter_profile TEXT\n        )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 88,
+    "end_line": 100,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_rooms (\n            room_id TEXT PRIMARY KEY,\n            name TEXT NOT NULL,\n            members_json TEXT NOT NULL,\n            authority_gateway_id TEXT NOT NULL,\n            authority_epoch INTEGER NOT NULL DEFAULT 1 CHECK (authority_epoch >= 1),\n            next_seq INTEGER NOT NULL DEFAULT 1 CHECK (next_seq >= 1),\n            event_bytes INTEGER NOT NULL DEFAULT 0 CHECK (event_bytes >= 0),\n            revision INTEGER NOT NULL DEFAULT 1 CHECK (revision >= 1),\n            created_at REAL NOT NULL,\n            updated_at REAL NOT NULL,\n            disbanded_at REAL\n        )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 101,
+    "end_line": 113,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_events (\n            room_id TEXT NOT NULL,\n            seq INTEGER NOT NULL CHECK (seq >= 1),\n            event_id TEXT NOT NULL,\n            kind TEXT NOT NULL,\n            actor_json TEXT NOT NULL,\n            authority_epoch INTEGER CHECK (authority_epoch IS NULL OR authority_epoch >= 1),\n            payload_json TEXT NOT NULL,\n            created_at REAL NOT NULL,\n            PRIMARY KEY (room_id, seq),\n            UNIQUE (room_id, event_id),\n            FOREIGN KEY (room_id) REFERENCES hosted_rooms(room_id)\n        )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 114,
+    "end_line": 117,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_retired_ids (\n            room_id TEXT PRIMARY KEY,\n            retired_at REAL NOT NULL\n        )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 118,
+    "end_line": 131,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_links (\n            room_id TEXT NOT NULL,\n            member_id TEXT NOT NULL,\n            target_url TEXT NOT NULL,\n            target_profile TEXT NOT NULL,\n            grant TEXT NOT NULL,\n            catalog_json TEXT NOT NULL,\n            cancellation_scope_id TEXT NOT NULL,\n            trace_id TEXT NOT NULL,\n            transport_security TEXT NOT NULL,\n            status TEXT NOT NULL DEFAULT 'ready',\n            updated_at REAL NOT NULL,\n            PRIMARY KEY (room_id, member_id)\n        )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 132,
+    "end_line": 136,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_revoked_grants (\n            scope_key TEXT PRIMARY KEY,\n            expires_at REAL NOT NULL,\n            revoked_before REAL NOT NULL\n        )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 137,
+    "end_line": 148,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_peer_reservations (\n            room_id TEXT NOT NULL,\n            member_id TEXT NOT NULL,\n            target_profile TEXT NOT NULL,\n            authority_gateway_id TEXT NOT NULL,\n            authority_epoch INTEGER NOT NULL CHECK (authority_epoch >= 1),\n            expires_at REAL NOT NULL,\n            revoked_at REAL,\n            created_at REAL NOT NULL,\n            updated_at REAL NOT NULL,\n            PRIMARY KEY (room_id, member_id, target_profile)\n        )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 131,
+    "end_line": 131,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_remote_runs ("
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 339,
+    "end_line": 339,
+    "sql": "ALTER TABLE hosted_room_remote_runs_migrating RENAME TO hosted_room_remote_runs"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 388,
+    "end_line": 388,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_hosted_room_events_cursor ON hosted_room_events(room_id, seq)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 323,
+    "end_line": 323,
+    "sql": "CREATE TABLE hosted_room_remote_runs_migrating ("
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms.py",
+    "relative": "gateway/hosted_rooms.py",
+    "line": 373,
+    "end_line": 373,
+    "sql": "ALTER TABLE "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_rooms_legacy_import.py",
+    "relative": "gateway/hosted_rooms_legacy_import.py",
+    "line": 137,
+    "end_line": 137,
+    "sql": "CREATE TABLE IF NOT EXISTS "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_attachments.py",
+    "relative": "gateway/hosted_room_attachments.py",
+    "line": 357,
+    "end_line": 363,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_attachment_blobs (\n                blob_id TEXT PRIMARY KEY,\n                sha256 TEXT NOT NULL UNIQUE,\n                size INTEGER NOT NULL CHECK (size > 0),\n                ref_count INTEGER NOT NULL CHECK (ref_count > 0),\n                created_at REAL NOT NULL\n            )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_attachments.py",
+    "relative": "gateway/hosted_room_attachments.py",
+    "line": 366,
+    "end_line": 385,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_attachments (\n                attachment_id TEXT PRIMARY KEY,\n                upload_id TEXT NOT NULL,\n                room_id TEXT NOT NULL,\n                event_id TEXT,\n                kind TEXT NOT NULL,\n                name TEXT NOT NULL,\n                size INTEGER NOT NULL CHECK (size > 0),\n                mime TEXT NOT NULL,\n                sha256 TEXT NOT NULL,\n                blob_id TEXT NOT NULL,\n                recipient_member_ids_json TEXT NOT NULL DEFAULT '[]',\n                viewer_access INTEGER NOT NULL DEFAULT 0 CHECK (viewer_access IN (0, 1)),\n                state TEXT NOT NULL CHECK (state IN ('uploaded', 'committed', 'disbanded')),\n                created_at REAL NOT NULL,\n                updated_at REAL NOT NULL,\n                expires_at REAL,\n                UNIQUE (room_id, upload_id),\n                FOREIGN KEY (blob_id) REFERENCES hosted_room_attachment_blobs(blob_id)\n            )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_attachments.py",
+    "relative": "gateway/hosted_room_attachments.py",
+    "line": 405,
+    "end_line": 406,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_hosted_room_attachments_room_state\n               ON hosted_room_attachments(room_id, state, created_at)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_attachments.py",
+    "relative": "gateway/hosted_room_attachments.py",
+    "line": 409,
+    "end_line": 410,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_hosted_room_attachments_expiry\n               ON hosted_room_attachments(expires_at)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_attachments.py",
+    "relative": "gateway/hosted_room_attachments.py",
+    "line": 413,
+    "end_line": 414,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_hosted_room_attachments_event\n               ON hosted_room_attachments(room_id, event_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_attachments.py",
+    "relative": "gateway/hosted_room_attachments.py",
+    "line": 393,
+    "end_line": 394,
+    "sql": "ALTER TABLE hosted_room_attachments\n                   ADD COLUMN viewer_access INTEGER NOT NULL DEFAULT 0"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_attachments.py",
+    "relative": "gateway/hosted_room_attachments.py",
+    "line": 397,
+    "end_line": 397,
+    "sql": "ALTER TABLE hosted_room_attachments ADD COLUMN catalog_name TEXT"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_driver.py",
+    "relative": "gateway/hosted_room_driver.py",
+    "line": 52,
+    "end_line": 53,
+    "sql": "CREATE INDEX {if_not_exists}idx_hosted_room_driver_tasks_status\n           ON hosted_room_driver_tasks(room_id, status, source_event_seq, created_at, task_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_driver.py",
+    "relative": "gateway/hosted_room_driver.py",
+    "line": 244,
+    "end_line": 249,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_driver_leases (\n            room_id TEXT PRIMARY KEY, gateway_id TEXT NOT NULL,\n            authority_epoch INTEGER NOT NULL CHECK (authority_epoch >= 1), process_generation TEXT NOT NULL,\n            lease_generation INTEGER NOT NULL CHECK (lease_generation >= 1),\n            expires_at REAL NOT NULL, acquired_at REAL NOT NULL, updated_at REAL NOT NULL, released_at REAL,\n            FOREIGN KEY (room_id) REFERENCES hosted_rooms(room_id))"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_driver.py",
+    "relative": "gateway/hosted_room_driver.py",
+    "line": 286,
+    "end_line": 286,
+    "sql": "ALTER TABLE hosted_room_driver_tasks_next RENAME TO hosted_room_driver_tasks"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_driver.py",
+    "relative": "gateway/hosted_room_driver.py",
+    "line": 228,
+    "end_line": 228,
+    "sql": "CREATE TABLE IF NOT EXISTS "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_policy_checkpoint.py",
+    "relative": "gateway/hosted_room_policy_checkpoint.py",
+    "line": 28,
+    "end_line": 30,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_policy_cursors (\n        room_id TEXT PRIMARY KEY, through_seq INTEGER NOT NULL DEFAULT 0,\n        stopped_through_seq INTEGER NOT NULL DEFAULT 0, updated_at REAL NOT NULL DEFAULT 0)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_policy_checkpoint.py",
+    "relative": "gateway/hosted_room_policy_checkpoint.py",
+    "line": 31,
+    "end_line": 34,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_policy_threads (\n        room_id TEXT NOT NULL, thread_id TEXT NOT NULL, discussion_event_id TEXT NOT NULL,\n        latest_user_seq INTEGER NOT NULL, completed INTEGER NOT NULL DEFAULT 0,\n        PRIMARY KEY(room_id, thread_id))"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_policy_checkpoint.py",
+    "relative": "gateway/hosted_room_policy_checkpoint.py",
+    "line": 35,
+    "end_line": 36,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_hosted_room_policy_pending\n        ON hosted_room_policy_threads(room_id, completed, latest_user_seq, thread_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_policy_checkpoint.py",
+    "relative": "gateway/hosted_room_policy_checkpoint.py",
+    "line": 37,
+    "end_line": 39,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_policy_events (\n        room_id TEXT NOT NULL, thread_id TEXT NOT NULL, discussion_event_id TEXT NOT NULL,\n        seq INTEGER NOT NULL, event_json TEXT NOT NULL, PRIMARY KEY(room_id, seq))"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_policy_checkpoint.py",
+    "relative": "gateway/hosted_room_policy_checkpoint.py",
+    "line": 40,
+    "end_line": 41,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_hosted_room_policy_events_active\n        ON hosted_room_policy_events(room_id, discussion_event_id, seq)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_policy_checkpoint.py",
+    "relative": "gateway/hosted_room_policy_checkpoint.py",
+    "line": 42,
+    "end_line": 44,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_policy_watermarks (\n        room_id TEXT NOT NULL, thread_id TEXT NOT NULL, member_id TEXT NOT NULL,\n        seen_through_seq INTEGER NOT NULL, PRIMARY KEY(room_id, thread_id, member_id))"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_policy_checkpoint.py",
+    "relative": "gateway/hosted_room_policy_checkpoint.py",
+    "line": 45,
+    "end_line": 48,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_policy_publications (\n        room_id TEXT NOT NULL, task_id TEXT NOT NULL, kind TEXT NOT NULL,\n        execution_generation INTEGER NOT NULL DEFAULT 0, seq INTEGER NOT NULL,\n        PRIMARY KEY(room_id, task_id, kind, execution_generation))"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_policy_checkpoint.py",
+    "relative": "gateway/hosted_room_policy_checkpoint.py",
+    "line": 51,
+    "end_line": 53,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_policy_transcript (\n        room_id TEXT NOT NULL, thread_id TEXT NOT NULL, seq INTEGER NOT NULL,\n        kind TEXT NOT NULL, settled_seq INTEGER, PRIMARY KEY(room_id, thread_id, seq))"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_policy_checkpoint.py",
+    "relative": "gateway/hosted_room_policy_checkpoint.py",
+    "line": 54,
+    "end_line": 55,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_policy_transcript_state (\n        room_id TEXT PRIMARY KEY, schema_version INTEGER NOT NULL)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_policy_checkpoint.py",
+    "relative": "gateway/hosted_room_policy_checkpoint.py",
+    "line": 56,
+    "end_line": 58,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_hosted_room_user_thread\n       ON hosted_room_events(room_id, json_extract(payload_json, '$.thread_id'), seq)\n       WHERE kind='message.user'"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_replicas.py",
+    "relative": "gateway/hosted_room_replicas.py",
+    "line": 38,
+    "end_line": 45,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_replicas (\n            room_id TEXT PRIMARY KEY, name TEXT NOT NULL, members_json TEXT NOT NULL,\n            authority_gateway_id TEXT NOT NULL,\n            authority_epoch INTEGER NOT NULL CHECK (authority_epoch >= 1),\n            last_seq INTEGER NOT NULL DEFAULT 0 CHECK (last_seq >= 0),\n            latest_seq INTEGER NOT NULL DEFAULT 0, event_bytes INTEGER NOT NULL DEFAULT 0,\n            created_at REAL NOT NULL, updated_at REAL NOT NULL\n        )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_replicas.py",
+    "relative": "gateway/hosted_room_replicas.py",
+    "line": 46,
+    "end_line": 51,
+    "sql": "CREATE TABLE IF NOT EXISTS hosted_room_replica_events (\n            room_id TEXT NOT NULL, seq INTEGER NOT NULL CHECK (seq >= 1), event_id TEXT NOT NULL,\n            kind TEXT NOT NULL, actor_json TEXT NOT NULL, authority_epoch INTEGER,\n            payload_json TEXT NOT NULL, created_at REAL NOT NULL,\n            PRIMARY KEY (room_id, seq)\n        )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_work_storage.py",
+    "relative": "gateway/hosted_room_work_storage.py",
+    "line": 35,
+    "end_line": 35,
+    "sql": "CREATE TABLE IF NOT EXISTS "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_work_storage.py",
+    "relative": "gateway/hosted_room_work_storage.py",
+    "line": 144,
+    "end_line": 144,
+    "sql": "CREATE TRIGGER IF NOT EXISTS trg_work_pending_outcome_v2 BEFORE UPDATE ON "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_work_storage.py",
+    "relative": "gateway/hosted_room_work_storage.py",
+    "line": 149,
+    "end_line": 151,
+    "sql": "CREATE TRIGGER IF NOT EXISTS trg_work_authority_transition_v2\n        AFTER UPDATE OF authority_gateway_id,authority_epoch ON hosted_rooms BEGIN\n        UPDATE "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_work_storage.py",
+    "relative": "gateway/hosted_room_work_storage.py",
+    "line": 53,
+    "end_line": 53,
+    "sql": "CREATE TABLE IF NOT EXISTS "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_work_storage.py",
+    "relative": "gateway/hosted_room_work_storage.py",
+    "line": 125,
+    "end_line": 125,
+    "sql": "CREATE TRIGGER IF NOT EXISTS trg_"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_work_storage.py",
+    "relative": "gateway/hosted_room_work_storage.py",
+    "line": 132,
+    "end_line": 132,
+    "sql": "CREATE TRIGGER IF NOT EXISTS trg_"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_work_storage.py",
+    "relative": "gateway/hosted_room_work_storage.py",
+    "line": 139,
+    "end_line": 139,
+    "sql": "CREATE TRIGGER IF NOT EXISTS trg_"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_work_storage.py",
+    "relative": "gateway/hosted_room_work_storage.py",
+    "line": 245,
+    "end_line": 245,
+    "sql": "CREATE TRIGGER IF NOT EXISTS trg_work_invalid_"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\hosted_room_work_storage.py",
+    "relative": "gateway/hosted_room_work_storage.py",
+    "line": 120,
+    "end_line": 120,
+    "sql": "CREATE TRIGGER trg_"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\runtime_downgrade_exit.py",
+    "relative": "gateway/runtime_downgrade_exit.py",
+    "line": 31,
+    "end_line": 31,
+    "sql": "CREATE TABLE IF NOT EXISTS session_admissions"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\platforms\\api_server_response_store.py",
+    "relative": "gateway/platforms/api_server_response_store.py",
+    "line": 58,
+    "end_line": 59,
+    "sql": "CREATE TABLE IF NOT EXISTS responses (response_id TEXT PRIMARY KEY, data TEXT NOT NULL, accessed_at REAL NOT NULL)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\platforms\\api_server_response_store.py",
+    "relative": "gateway/platforms/api_server_response_store.py",
+    "line": 61,
+    "end_line": 61,
+    "sql": "CREATE TABLE IF NOT EXISTS conversations (name TEXT PRIMARY KEY, response_id TEXT NOT NULL)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\platforms\\api_server_response_store.py",
+    "relative": "gateway/platforms/api_server_response_store.py",
+    "line": 66,
+    "end_line": 66,
+    "sql": "CREATE TABLE IF NOT EXISTS response_keys (request_key TEXT PRIMARY KEY, fingerprint TEXT NOT NULL, created_at INTEGER NOT NULL)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\platforms\\api_server_response_store.py",
+    "relative": "gateway/platforms/api_server_response_store.py",
+    "line": 68,
+    "end_line": 68,
+    "sql": "CREATE TABLE IF NOT EXISTS response_admissions (request_key TEXT PRIMARY KEY, admission_id TEXT NOT NULL)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\platforms\\api_server_response_store.py",
+    "relative": "gateway/platforms/api_server_response_store.py",
+    "line": 69,
+    "end_line": 71,
+    "sql": "CREATE TABLE IF NOT EXISTS response_output_order (request_key TEXT NOT NULL, item_id TEXT NOT NULL, output_index INTEGER NOT NULL, PRIMARY KEY(request_key,item_id), UNIQUE(request_key,output_index))"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\platforms\\api_server_response_store.py",
+    "relative": "gateway/platforms/api_server_response_store.py",
+    "line": 76,
+    "end_line": 76,
+    "sql": "CREATE INDEX IF NOT EXISTS response_keys_settled ON response_keys(settled_at)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\platforms\\api_server_response_store.py",
+    "relative": "gateway/platforms/api_server_response_store.py",
+    "line": 77,
+    "end_line": 77,
+    "sql": "CREATE INDEX IF NOT EXISTS response_keys_response ON response_keys(response_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\platforms\\api_server_run_idempotency.py",
+    "relative": "gateway/platforms/api_server_run_idempotency.py",
+    "line": 88,
+    "end_line": 101,
+    "sql": "CREATE TABLE IF NOT EXISTS run_idempotency (\n                scope TEXT NOT NULL,\n                idempotency_key TEXT NOT NULL,\n                fingerprint TEXT NOT NULL,\n                run_id TEXT NOT NULL,\n                status_json TEXT NOT NULL,\n                owner_pid INTEGER NOT NULL DEFAULT 0,\n                owner_started INTEGER NOT NULL DEFAULT 0,\n                retention_until REAL NOT NULL DEFAULT 0,\n                acknowledged_at REAL,\n                created_at REAL NOT NULL,\n                updated_at REAL NOT NULL,\n                PRIMARY KEY (scope, idempotency_key)\n            )"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\gateway\\platforms\\api_server_run_idempotency.py",
+    "relative": "gateway/platforms/api_server_run_idempotency.py",
+    "line": 108,
+    "end_line": 108,
+    "sql": "CREATE UNIQUE INDEX IF NOT EXISTS run_idempotency_run_id ON run_idempotency(run_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\backup_restore.py",
+    "relative": "hermes_cli/backup_restore.py",
+    "line": 230,
+    "end_line": 232,
+    "sql": "CREATE TABLE IF NOT EXISTS runtime_epoch (\n                singleton INTEGER PRIMARY KEY CHECK (singleton = 1),\n                epoch INTEGER NOT NULL CHECK (epoch > 0), instance_id TEXT NOT NULL)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db.py",
+    "relative": "hermes_cli/kanban_db.py",
+    "line": 775,
+    "end_line": 982,
+    "sql": "\nCREATE TABLE IF NOT EXISTS tasks (\n    id                   TEXT PRIMARY KEY,\n    title                TEXT NOT NULL,\n    body                 TEXT,\n    assignee             TEXT,\n    status               TEXT NOT NULL,\n    priority             INTEGER DEFAULT 0,\n    created_by           TEXT,\n    created_at           INTEGER NOT NULL,\n    started_at           INTEGER,\n    completed_at         INTEGER,\n    workspace_kind       TEXT NOT NULL DEFAULT 'scratch',\n    workspace_path       TEXT,\n    branch_name          TEXT,\n    -- Optional link to a first-class Project (hermes_cli/projects_db). When set,\n    -- the task's worktree is anchored under the project's primary repo with a\n    -- deterministic branch name instead of a random wt/<task-id> fallback.\n    project_id           TEXT,\n    claim_lock           TEXT,\n    claim_expires        INTEGER,\n    tenant               TEXT,\n    result               TEXT,\n    idempotency_key      TEXT,\n    -- Unified consecutive-failure counter. Incremented on spawn\n    -- failure, timeout, or crash; reset only on successful completion.\n    -- The circuit breaker in _record_task_failure trips when this\n    -- exceeds DEFAULT_FAILURE_LIMIT consecutive non-successes.\n    consecutive_failures INTEGER NOT NULL DEFAULT 0,\n    worker_pid           INTEGER,\n    -- Restart-stable fingerprint of worker_pid (\"<boot/instantiation epoch>|<start time>\",\n    -- kanban_db_dispatch._process_fingerprint) recorded at spawn: liveness and kills require pid\n    -- AND fingerprint to agree, so a PID recycled after a reboot is never read as our worker or\n    -- signalled. NULL = legacy row (pre-fingerprint spawn); 'unverified' = capture failed at\n    -- spawn (held while live, never signalled). Column keeps its INTEGER affinity for the\n    -- start-time-only integer values older rows carry.\n    worker_started_at    INTEGER,\n    -- Short excerpt of the most recent failure's error text.\n    last_failure_error   TEXT,\n    max_runtime_seconds  INTEGER,\n    last_heartbeat_at    INTEGER,\n    -- Pointer into task_runs for the currently-active run (NULL if no\n    -- run is in-flight). Denormalised for cheap reads.\n    current_run_id       INTEGER,\n    -- Forward-compat for v2 workflow routing. In v1 the kernel writes\n    -- these when the task is opted into a template but otherwise ignores\n    -- them; the dispatcher doesn't consult them for routing yet.\n    workflow_template_id TEXT,\n    current_step_key     TEXT,\n    -- Force-loaded skills for the worker on this task, stored as JSON.\n    -- Passed to the worker via `--skills`. NULL or empty array = no extras.\n    skills               TEXT,\n    -- Per-task model override. When set, the dispatcher passes -m <model>\n    -- to the worker, overriding the profile's default model. NULL = use\n    -- the profile default.\n    model_override       TEXT,\n    -- Provider the model override belongs to. When set (alongside\n    -- model_override), the dispatcher passes --provider <name> so the\n    -- worker resolves the model against the right backend instead of the\n    -- profile's configured provider. NULL = profile provider.\n    provider_override    TEXT,\n    -- Per-task reasoning effort for the worker (minimal|low|medium|high|\n    -- xhigh|max|ultra, or 'none' for thinking off). When set, the dispatcher\n    -- passes --reasoning <level> so the worker runs at that depth regardless\n    -- of the profile's agent.reasoning_effort. NULL = profile setting.\n    reasoning_effort     TEXT,\n    -- Per-task override for the consecutive-failure circuit breaker.\n    -- The value is the failure count at which the breaker trips — e.g.\n    -- ``max_retries=1`` blocks on the first failure. NULL (the common\n    -- case) falls through to the dispatcher-level ``kanban.failure_limit``\n    -- config and then ``DEFAULT_FAILURE_LIMIT``.\n    max_retries          INTEGER,\n    -- When 1, the dispatched worker runs in a Ralph-style goal loop: an\n    -- auxiliary judge re-evaluates the worker's response against the\n    -- card title/body after each turn and feeds a continuation prompt\n    -- back into the SAME session until the judge agrees the work is done\n    -- or ``goal_max_turns`` is exhausted. NULL/0 = classic single-shot\n    -- worker (the default).\n    goal_mode            INTEGER NOT NULL DEFAULT 0,\n    -- Goal-loop turn budget for ``goal_mode`` workers. NULL = use the\n    -- goals-engine default.\n    goal_max_turns       INTEGER,\n    -- Originating chat/agent session id when the task was created from\n    -- inside an agent loop that propagated ``HERMES_SESSION_ID``. NULL\n    -- for tasks created from the CLI, dashboard, or any path that doesn't\n    -- set the env var, and for an id with no ``sessions`` row in this\n    -- profile's state.db (kanban_create verifies before stamping). Indexed\n    -- so per-session list queries stay cheap on larger boards.\n    session_id           TEXT,\n    -- Typed block reason set by ``block_task`` (one of VALID_BLOCK_KINDS, or\n    -- NULL for legacy/un-typed blocks). Drives routing: ``dependency`` never\n    -- sits in ``blocked`` (goes to ``todo`` for parent-gating); the others go\n    -- to ``blocked`` for a human. Preserved across unblock so a re-block for\n    -- the SAME kind can be recognised as a loop.\n    block_kind           TEXT,\n    -- Unblock-loop counter. Incremented each time a task is re-blocked for the\n    -- same truly-blocked reason after having been unblocked. When it reaches\n    -- BLOCK_RECURRENCE_LIMIT the task is routed to ``triage`` instead of\n    -- ``blocked`` so a cron can't spin it forever. Reset to 0 only on a\n    -- successful completion — NOT on unblock (resetting on unblock is exactly\n    -- the amnesia that let the loop run unbounded).\n    block_recurrences    INTEGER NOT NULL DEFAULT 0\n);\n\nCREATE TABLE IF NOT EXISTS task_links (\n    parent_id  TEXT NOT NULL,\n    child_id   TEXT NOT NULL,\n    PRIMARY KEY (parent_id, child_id)\n);\n\nCREATE TABLE IF NOT EXISTS task_comments (\n    id         INTEGER PRIMARY KEY AUTOINCREMENT,\n    task_id    TEXT NOT NULL,\n    author     TEXT NOT NULL,\n    body       TEXT NOT NULL,\n    created_at INTEGER NOT NULL\n);\n\nCREATE TABLE IF NOT EXISTS task_events (\n    id         INTEGER PRIMARY KEY AUTOINCREMENT,\n    task_id    TEXT NOT NULL,\n    run_id     INTEGER,\n    kind       TEXT NOT NULL,\n    payload    TEXT,\n    created_at INTEGER NOT NULL\n);\n\n-- Historical attempt record. Each time the dispatcher claims a task, a\n-- new row is created here; claim state, PID, heartbeat, runtime cap,\n-- and structured summary all live on the run, not the task. Multiple\n-- rows per task id when the task was retried after crash/timeout/block.\n-- v2 of the kanban schema will use ``step_key`` to drive per-stage\n-- workflow routing; in v1 the column is nullable and unused (kernel\n-- ignores it).\nCREATE TABLE IF NOT EXISTS task_runs (\n    id                  INTEGER PRIMARY KEY AUTOINCREMENT,\n    task_id             TEXT NOT NULL,\n    profile             TEXT,\n    step_key            TEXT,\n    status              TEXT NOT NULL,\n    -- status: running | done | blocked | crashed | timed_out | failed | released\n    claim_lock          TEXT,\n    claim_expires       INTEGER,\n    worker_pid          INTEGER,\n    -- Spawn-time start fingerprint of worker_pid (see tasks.worker_started_at). Retained with\n    -- worker_pid after the run ends so a worker that outlives its terminal transition can\n    -- still be found and reaped; NULL = legacy row, never signalled.\n    worker_started_at   INTEGER,\n    max_runtime_seconds INTEGER,\n    last_heartbeat_at   INTEGER,\n    started_at          INTEGER NOT NULL,\n    ended_at            INTEGER,\n    outcome             TEXT,\n    -- outcome: completed | blocked | crashed | timed_out | spawn_failed |\n    --          gave_up | reclaimed | (null while still running)\n    summary             TEXT,\n    metadata            TEXT,\n    error               TEXT\n);\n\n-- Files attached to a task (PDFs, images, source documents). The blob\n-- lives on disk under ``attachments_root(board)/<task_id>/<stored_name>``;\n-- this row carries metadata + the absolute ``stored_path`` so the\n-- dashboard can list/download and ``build_worker_context`` can surface\n-- the absolute path to the worker (which has full file-tool access). See\n-- #35338.\nCREATE TABLE IF NOT EXISTS task_attachments (\n    id           INTEGER PRIMARY KEY AUTOINCREMENT,\n    task_id      TEXT NOT NULL,\n    filename     TEXT NOT NULL,\n    stored_path  TEXT NOT NULL,\n    content_type TEXT,\n    size         INTEGER NOT NULL DEFAULT 0,\n    uploaded_by  TEXT,\n    created_at   INTEGER NOT NULL\n);\n\n-- Subscription from a gateway source (platform + chat + thread) to a\n-- task. The gateway's kanban-notifier watcher tails task_events and\n-- pushes ``completed`` / ``blocked`` / ``spawn_auto_blocked`` events to\n-- the original requester so human-in-the-loop workflows close the loop.\nCREATE TABLE IF NOT EXISTS kanban_notify_subs (\n    task_id       TEXT NOT NULL,\n    platform      TEXT NOT NULL,\n    chat_id       TEXT NOT NULL,\n    thread_id     TEXT NOT NULL DEFAULT '',\n    user_id       TEXT,\n    user_id_alt   TEXT,\n    chat_type     TEXT,\n    notifier_profile TEXT,\n    delivery_mode TEXT NOT NULL DEFAULT 'notify',\n    delivery_metadata TEXT,\n    created_at    INTEGER NOT NULL,\n    last_event_id INTEGER NOT NULL DEFAULT 0,\n    last_ping_event_id INTEGER NOT NULL DEFAULT 0,\n    PRIMARY KEY (task_id, platform, chat_id, thread_id)\n);\n\nCREATE INDEX IF NOT EXISTS idx_tasks_status          ON tasks(status);\nCREATE INDEX IF NOT EXISTS idx_links_child           ON task_links(child_id);\nCREATE INDEX IF NOT EXISTS idx_links_parent          ON task_links(parent_id);\nCREATE INDEX IF NOT EXISTS idx_comments_task         ON task_comments(task_id, created_at);\nCREATE INDEX IF NOT EXISTS idx_events_task           ON task_events(task_id, created_at);\nCREATE INDEX IF NOT EXISTS idx_runs_task             ON task_runs(task_id, started_at);\nCREATE INDEX IF NOT EXISTS idx_runs_status           ON task_runs(status);\nCREATE INDEX IF NOT EXISTS idx_attachments_task      ON task_attachments(task_id, created_at);\nCREATE INDEX IF NOT EXISTS idx_notify_task           ON kanban_notify_subs(task_id);\n"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 951,
+    "end_line": 951,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_tasks_assignee_status ON tasks(assignee, status)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 952,
+    "end_line": 952,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_tasks_tenant ON tasks(tenant)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 953,
+    "end_line": 953,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_tasks_idempotency ON tasks(idempotency_key)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 954,
+    "end_line": 954,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_tasks_session_id ON tasks(session_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 962,
+    "end_line": 962,
+    "sql": "CREATE INDEX IF NOT EXISTS idx_events_run ON task_events(run_id, id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1064,
+    "end_line": 1067,
+    "sql": "CREATE TABLE task_events ( id INTEGER PRIMARY KEY AUTOINCREMENT, task_id TEXT NOT NULL, run_id INTEGER, kind TEXT NOT NULL, payload TEXT, created_at INTEGER NOT NULL)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1074,
+    "end_line": 1077,
+    "sql": "CREATE TABLE task_comments ( id INTEGER PRIMARY KEY AUTOINCREMENT, task_id TEXT NOT NULL, author TEXT NOT NULL, body TEXT NOT NULL, created_at INTEGER NOT NULL)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1081,
+    "end_line": 1088,
+    "sql": "CREATE TABLE task_runs ( id INTEGER PRIMARY KEY AUTOINCREMENT, task_id TEXT NOT NULL, profile TEXT, step_key TEXT, status TEXT NOT NULL, claim_lock TEXT, claim_expires INTEGER, worker_pid INTEGER, worker_started_at INTEGER, max_runtime_seconds INTEGER, last_heartbeat_at INTEGER, started_at INTEGER NOT NULL, ended_at INTEGER, outcome TEXT, summary TEXT, metadata TEXT, error TEXT)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1095,
+    "end_line": 1103,
+    "sql": "CREATE TABLE kanban_notify_subs ( task_id TEXT NOT NULL, platform TEXT NOT NULL, chat_id TEXT NOT NULL, thread_id TEXT NOT NULL DEFAULT '', user_id TEXT, user_id_alt TEXT, chat_type TEXT, notifier_profile TEXT, delivery_mode TEXT NOT NULL DEFAULT 'notify', delivery_metadata TEXT, created_at INTEGER NOT NULL, last_event_id INTEGER NOT NULL DEFAULT 0, last_ping_event_id INTEGER NOT NULL DEFAULT 0, PRIMARY KEY (task_id, platform, chat_id, thread_id))"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1069,
+    "end_line": 1069,
+    "sql": "CREATE INDEX idx_events_task ON task_events(task_id, created_at)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1070,
+    "end_line": 1070,
+    "sql": "CREATE INDEX idx_events_run ON task_events(run_id, id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1078,
+    "end_line": 1078,
+    "sql": "CREATE INDEX idx_comments_task ON task_comments(task_id, created_at)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1090,
+    "end_line": 1090,
+    "sql": "CREATE INDEX idx_runs_task ON task_runs(task_id, started_at)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1091,
+    "end_line": 1091,
+    "sql": "CREATE INDEX idx_runs_status ON task_runs(status)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1104,
+    "end_line": 1104,
+    "sql": "CREATE INDEX idx_notify_task ON kanban_notify_subs(task_id)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\kanban_db_connect.py",
+    "relative": "hermes_cli/kanban_db_connect.py",
+    "line": 1147,
+    "end_line": 1147,
+    "sql": "ALTER TABLE "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\projects_db.py",
+    "relative": "hermes_cli/projects_db.py",
+    "line": 28,
+    "end_line": 67,
+    "sql": "\nCREATE TABLE IF NOT EXISTS projects (\n    id            TEXT PRIMARY KEY,\n    slug          TEXT NOT NULL UNIQUE,\n    name          TEXT NOT NULL,\n    description   TEXT,\n    icon          TEXT,\n    color         TEXT,\n    board_slug    TEXT,\n    primary_path  TEXT,\n    created_at    INTEGER NOT NULL,\n    archived      INTEGER NOT NULL DEFAULT 0\n);\n\nCREATE TABLE IF NOT EXISTS project_folders (\n    project_id  TEXT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,\n    path        TEXT NOT NULL,\n    label       TEXT,\n    is_primary  INTEGER NOT NULL DEFAULT 0,\n    added_at    INTEGER NOT NULL,\n    PRIMARY KEY (project_id, path)\n);\n\nCREATE INDEX IF NOT EXISTS idx_project_folders_path\n    ON project_folders(path);\n\nCREATE TABLE IF NOT EXISTS project_meta (\n    key    TEXT PRIMARY KEY,\n    value  TEXT\n);\n\n-- Git repos found by scanning the filesystem (desktop \"repo-first\" discovery).\n-- Cached here so the overview is instant after the first scan instead of\n-- re-walking the disk every time the Projects view opens.\nCREATE TABLE IF NOT EXISTS discovered_repos (\n    root          TEXT PRIMARY KEY,\n    label         TEXT,\n    last_seen     INTEGER NOT NULL\n);\n"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\projects_db.py",
+    "relative": "hermes_cli/projects_db.py",
+    "line": 115,
+    "end_line": 119,
+    "sql": "Open (and initialize if needed) the per-profile projects DB.\n\n    WAL with DELETE fallback for network filesystems (``hermes_state`` helper). Schema init is\n    idempotent (``CREATE TABLE IF NOT EXISTS`` + additive migrations) and cached per-path per-process.\n    "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\session_lost_and_found.py",
+    "relative": "hermes_cli/session_lost_and_found.py",
+    "line": 170,
+    "end_line": 170,
+    "sql": "CREATE TABLE t (x)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\session_recovery.py",
+    "relative": "hermes_cli/session_recovery.py",
+    "line": 1020,
+    "end_line": 1033,
+    "sql": "Flag systematic timestamp mis-mapping in a salvaged database.\n\n    Structural checks (integrity, FK, FTS, row counts) pass on mis-mapped\n    salvage because every row still inserts. Only semantics give it away:\n    the physical column order of a source upgraded via ALTER TABLE differs\n    from the destination template's declared order, so positional cell\n    mapping lands counters/strings where ``started_at``/``timestamp``\n    belong — and the NOT NULL substitutes turn gaps into 0.0. When every\n    mapped row violates the epoch floor, the mapping was wrong.\n\n    Stub rows written by ``stub_missing_parent_sessions`` legitimately carry\n    ``started_at = 0.0`` when no timestamped message survived, so they are\n    excluded from the denominator.\n    "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\session_schema_history.py",
+    "relative": "hermes_cli/session_schema_history.py",
+    "line": 1,
+    "end_line": 25,
+    "sql": "Physical column history of the state.db tables the page-level salvage lane maps.\n\n``_reconcile_columns()`` (hermes_state_schema.py) upgrades a live store with\n``ALTER TABLE ADD COLUMN``, which APPENDS each newly declared column. A store\ntherefore keeps its columns in the order they were *added*, which diverges\nfrom the order ``SCHEMA_SQL`` declares them whenever a later release inserts a\ncolumn mid-definition (#101409). SQLite never rewrites existing rows on ADD\nCOLUMN either, so a row written when the table had ``k`` columns carries\nexactly the first ``k`` physical names.\n\nA ``lost_and_found`` record carries no schema, so the salvage lane has to\nrecognise the physical layout that produced it. This module is the single\nsource of truth for that: the declared order of every table as first shipped\n(``base``) and, per release that changed it, the edits made to the\ndeclaration (``events``). Replaying the events reproduces every historical\ndeclared order, and every physical layout a real store can have is some\nprefix chain over those snapshots (created at snapshot ``i``, then each later\nupgrade appending the columns it had not seen yet).\n\n``tests/hermes_cli/test_session_schema_history.py`` asserts the replay ends\nat the current ``SCHEMA_SQL``. When that test fails you added or moved a\ncolumn: append an event at the END, labelled with the next sequence number,\ndescribing the edit (``(\"+\", column, after)`` / ``(\"-\", column)``) — do NOT\nrewrite or reorder older events, real stores were shaped by them.\n"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\sqlite_util.py",
+    "relative": "hermes_cli/sqlite_util.py",
+    "line": 83,
+    "end_line": 88,
+    "sql": "``ALTER TABLE <table> ADD COLUMN <ddl>``, idempotent across races: True when this call added\n    it, False on the ``duplicate column name`` a concurrent migrator caused.\n\n    ``column`` is the human-readable name for the call site; ``ddl`` carries the actual definition. See\n    #21708.\n    "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\sqlite_util.py",
+    "relative": "hermes_cli/sqlite_util.py",
+    "line": 90,
+    "end_line": 90,
+    "sql": "ALTER TABLE "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\update_downgrade_guard.py",
+    "relative": "hermes_cli/update_downgrade_guard.py",
+    "line": 20,
+    "end_line": 20,
+    "sql": "CREATE TABLE IF NOT EXISTS session_admissions"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\observability\\shared_metrics.py",
+    "relative": "hermes_cli/observability/shared_metrics.py",
+    "line": 51,
+    "end_line": 56,
+    "sql": "\n            CREATE TABLE IF NOT EXISTS telemetry_state (\n                key TEXT PRIMARY KEY,\n                value TEXT NOT NULL\n            )\n            "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\observability\\shared_metrics.py",
+    "relative": "hermes_cli/observability/shared_metrics.py",
+    "line": 57,
+    "end_line": 73,
+    "sql": "\n            CREATE TABLE IF NOT EXISTS counter_aggregates (\n                period_start TEXT NOT NULL,\n                metric_name TEXT NOT NULL,\n                hermes_version TEXT NOT NULL,\n                os_family TEXT NOT NULL,\n                architecture TEXT NOT NULL,\n                install_method TEXT NOT NULL,\n                dimensions_json TEXT NOT NULL,\n                value INTEGER NOT NULL,\n                packaged_value INTEGER NOT NULL DEFAULT 0,\n                PRIMARY KEY (\n                    period_start, metric_name, hermes_version, os_family, architecture,\n                    install_method, dimensions_json\n                )\n            )\n            "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\observability\\shared_metrics.py",
+    "relative": "hermes_cli/observability/shared_metrics.py",
+    "line": 74,
+    "end_line": 83,
+    "sql": "\n            CREATE TABLE IF NOT EXISTS package_outbox (\n                package_id TEXT PRIMARY KEY,\n                period_start TEXT NOT NULL,\n                period_end TEXT NOT NULL,\n                payload_json TEXT NOT NULL,\n                created_at TEXT NOT NULL,\n                exported_at TEXT\n            )\n            "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\observability\\shared_metrics.py",
+    "relative": "hermes_cli/observability/shared_metrics.py",
+    "line": 89,
+    "end_line": 95,
+    "sql": "\n            CREATE TABLE IF NOT EXISTS send_consent_windows (\n                opened_at TEXT NOT NULL,\n                last_confirmed_at TEXT NOT NULL,\n                closed_at TEXT\n            )\n            "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\observability\\shared_metrics.py",
+    "relative": "hermes_cli/observability/shared_metrics.py",
+    "line": 96,
+    "end_line": 101,
+    "sql": "\n            CREATE TABLE IF NOT EXISTS consent_marks (\n                name TEXT PRIMARY KEY CHECK (name IN ('obs', 'data')),\n                stamp TEXT NOT NULL\n            )\n            "
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\hermes_cli\\observability\\shared_metrics.py",
+    "relative": "hermes_cli/observability/shared_metrics.py",
+    "line": 105,
+    "end_line": 105,
+    "sql": "ALTER TABLE counter_aggregates RENAME TO counter_aggregates_v1"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\plugins\\memory\\retaindb\\__init__.py",
+    "relative": "plugins/memory/retaindb/__init__.py",
+    "line": 194,
+    "end_line": 195,
+    "sql": "CREATE TABLE IF NOT EXISTS pending (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id TEXT, session_id TEXT, messages_json TEXT, created_at TEXT, last_error TEXT)"
+  },
+  {
+    "file": "C:\\Users\\bharg\\AppData\\Local\\hermes\\hermes-agent\\plugins\\platforms\\discord\\recovery.py",
+    "relative": "plugins/platforms/discord/recovery.py",
+    "line": 58,
+    "end_line": 76,
+    "sql": "\n            CREATE TABLE IF NOT EXISTS discord_messages (\n                message_id TEXT PRIMARY KEY, channel_id TEXT, thread_id TEXT, parent_channel_id TEXT,\n                author_id TEXT, created_at TEXT, status TEXT NOT NULL,\n                replied INTEGER NOT NULL DEFAULT 0, emoji_ack INTEGER NOT NULL DEFAULT 0,\n                outage_response INTEGER NOT NULL DEFAULT 0, response_message_id TEXT,\n                attempts INTEGER NOT NULL DEFAULT 0, last_attempt_at TEXT, last_error TEXT,\n                updated_at TEXT NOT NULL\n            );\n            CREATE TABLE IF NOT EXISTS discord_recovery_scans (\n                scan_id TEXT PRIMARY KEY, started_at TEXT NOT NULL, completed_at TEXT, status TEXT NOT NULL,\n                channels TEXT NOT NULL, window_seconds REAL NOT NULL, limit_count INTEGER NOT NULL,\n                scanned INTEGER NOT NULL DEFAULT 0, missed INTEGER NOT NULL DEFAULT 0,\n                dispatched INTEGER NOT NULL DEFAULT 0, error TEXT\n            );\n            CREATE TABLE IF NOT EXISTS discord_recovery_cursors (\n                channel_id TEXT PRIMARY KEY, last_message_id TEXT NOT NULL, updated_at TEXT NOT NULL\n            );\n        "
+  }
+]

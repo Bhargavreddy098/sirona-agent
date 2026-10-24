@@ -1,0 +1,4343 @@
+[
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 29,
+    "end_line": 29,
+    "member": "hermesDesktop.glassSupported",
+    "definition": "glassSupported: translucencySupport?.glass === true",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 30,
+    "end_line": 30,
+    "member": "hermesDesktop.translucencySupported",
+    "definition": "translucencySupported: translucencySupport?.translucency === true",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 33,
+    "end_line": 33,
+    "member": "hermesDesktop.localModelsEnabled",
+    "definition": "localModelsEnabled: launchFlags?.localModels === true",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 36,
+    "end_line": 36,
+    "member": "hermesDesktop.assumeFreshInstall",
+    "definition": "assumeFreshInstall: launchFlags?.assumeFreshInstall === true",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 37,
+    "end_line": 37,
+    "member": "hermesDesktop.localSkin",
+    "definition": "localSkin: localSkin && typeof localSkin === 'object' ? localSkin : null",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 38,
+    "end_line": 38,
+    "member": "hermesDesktop.getConnection",
+    "definition": "getConnection: (profile, opts) => ipcRenderer.invoke('hermes:connection', profile, opts)",
+    "parameters": [
+      "profile",
+      "opts"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connection"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 40,
+    "end_line": 40,
+    "member": "hermesDesktop.getEmbedHostOrigin",
+    "definition": "getEmbedHostOrigin: () => ipcRenderer.invoke('hermes:embed-host:origin')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:embed-host:origin"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 42,
+    "end_line": 42,
+    "member": "hermesDesktop.getConnectionFor",
+    "definition": "getConnectionFor: payload => ipcRenderer.invoke('hermes:connection:for', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connection:for"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 43,
+    "end_line": 43,
+    "member": "hermesDesktop.getProfileRoutes",
+    "definition": "getProfileRoutes: profiles => ipcRenderer.invoke('hermes:plugin-profile-routes', profiles)",
+    "parameters": [
+      "profiles"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:plugin-profile-routes"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 44,
+    "end_line": 44,
+    "member": "hermesDesktop.revalidateConnection",
+    "definition": "revalidateConnection: () => ipcRenderer.invoke('hermes:connection:revalidate')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connection:revalidate"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 45,
+    "end_line": 45,
+    "member": "hermesDesktop.getGatewayWsUrl",
+    "definition": "getGatewayWsUrl: profile => ipcRenderer.invoke('hermes:gateway:ws-url', profile)",
+    "parameters": [
+      "profile"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:gateway:ws-url"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 48,
+    "end_line": 48,
+    "member": "hermesDesktop.getGatewayWsUrlFor",
+    "definition": "getGatewayWsUrlFor: payload => ipcRenderer.invoke('hermes:gateway:ws-url-for', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:gateway:ws-url-for"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 50,
+    "end_line": 50,
+    "member": "hermesDesktop.getPluginWsUrl",
+    "definition": "getPluginWsUrl: payload => ipcRenderer.invoke('hermes:plugin:ws-url', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:plugin:ws-url"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 52,
+    "end_line": 52,
+    "member": "hermesDesktop.getAgentRoster",
+    "definition": "getAgentRoster: () => ipcRenderer.invoke('hermes:agents:roster')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:agents:roster"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 53,
+    "end_line": 53,
+    "member": "hermesDesktop.openSessionWindow",
+    "definition": "openSessionWindow: (sessionId, opts) => ipcRenderer.invoke('hermes:window:openSession', sessionId, opts)",
+    "parameters": [
+      "sessionId",
+      "opts"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:window:openSession"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 54,
+    "end_line": 54,
+    "member": "hermesDesktop.openSessionInTerminal",
+    "definition": "openSessionInTerminal: (sessionId, opts) => ipcRenderer.invoke('hermes:window:openInTerminal', sessionId, opts)",
+    "parameters": [
+      "sessionId",
+      "opts"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:window:openInTerminal"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 55,
+    "end_line": 55,
+    "member": "hermesDesktop.openWindow",
+    "definition": "openWindow: (options?: DesktopProfileRoute) => ipcRenderer.invoke('hermes:window:openInstance', options)",
+    "parameters": [
+      "options?: DesktopProfileRoute"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:window:openInstance"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 56,
+    "end_line": 56,
+    "member": "hermesDesktop.openBrowserWindow",
+    "definition": "openBrowserWindow: tabId => ipcRenderer.invoke('hermes:window:openBrowser', tabId)",
+    "parameters": [
+      "tabId"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:window:openBrowser"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 58,
+    "end_line": 58,
+    "member": "hermesDesktop.windowRelay.send",
+    "definition": "send: payload => ipcRenderer.send('hermes:window:relay', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:window:relay"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 59,
+    "end_line": 64,
+    "member": "hermesDesktop.windowRelay.onMessage",
+    "definition": "onMessage: callback => {\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on('hermes:window:relay', listener)\n\n      return () => ipcRenderer.removeListener('hermes:window:relay', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:window:relay"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:window:relay"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 66,
+    "end_line": 71,
+    "member": "hermesDesktop.onBrowserPopoutClosed",
+    "definition": "onBrowserPopoutClosed: callback => {\n    const listener = (_event, tabId) => callback(tabId)\n    ipcRenderer.on('hermes:browser-popout:closed', listener)\n\n    return () => ipcRenderer.removeListener('hermes:browser-popout:closed', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:browser-popout:closed"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:browser-popout:closed"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 72,
+    "end_line": 72,
+    "member": "hermesDesktop.claimAmbientCue",
+    "definition": "claimAmbientCue: key => ipcRenderer.invoke('hermes:ambient:claim', key)",
+    "parameters": [
+      "key"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:ambient:claim"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 74,
+    "end_line": 74,
+    "member": "hermesDesktop.windowControls.custom",
+    "definition": "custom: customWindowControlsEnabled()",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 75,
+    "end_line": 75,
+    "member": "hermesDesktop.windowControls.minimize",
+    "definition": "minimize: () => ipcRenderer.send('hermes:window-control', 'minimize')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:window-control"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 76,
+    "end_line": 76,
+    "member": "hermesDesktop.windowControls.toggleMaximize",
+    "definition": "toggleMaximize: () => ipcRenderer.send('hermes:window-control', 'toggle-maximize')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:window-control"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 77,
+    "end_line": 77,
+    "member": "hermesDesktop.windowControls.close",
+    "definition": "close: () => ipcRenderer.send('hermes:window-control', 'close')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:window-control"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 80,
+    "end_line": 80,
+    "member": "hermesDesktop.wakeIndicator.getState",
+    "definition": "getState: () => ipcRenderer.invoke('hermes:wake-indicator:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:wake-indicator:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 81,
+    "end_line": 81,
+    "member": "hermesDesktop.wakeIndicator.setState",
+    "definition": "setState: state => ipcRenderer.send('hermes:wake-indicator:set', state)",
+    "parameters": [
+      "state"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:wake-indicator:set"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 82,
+    "end_line": 87,
+    "member": "hermesDesktop.wakeIndicator.onState",
+    "definition": "onState: callback => {\n      const listener = (_event, state) => callback(state)\n      ipcRenderer.on('hermes:wake-indicator:state', listener)\n\n      return () => ipcRenderer.removeListener('hermes:wake-indicator:state', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:wake-indicator:state"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:wake-indicator:state"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 90,
+    "end_line": 90,
+    "member": "hermesDesktop.chatOnboarding.size",
+    "definition": "size: mode => ipcRenderer.send('hermes:window:size', mode)",
+    "parameters": [
+      "mode"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:window:size"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 95,
+    "end_line": 95,
+    "member": "hermesDesktop.petOverlay.open",
+    "definition": "open: request => ipcRenderer.invoke('hermes:pet-overlay:open', request)",
+    "parameters": [
+      "request"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:pet-overlay:open"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 96,
+    "end_line": 96,
+    "member": "hermesDesktop.petOverlay.close",
+    "definition": "close: () => ipcRenderer.invoke('hermes:pet-overlay:close')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:pet-overlay:close"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 97,
+    "end_line": 97,
+    "member": "hermesDesktop.petOverlay.setBounds",
+    "definition": "setBounds: bounds => ipcRenderer.send('hermes:pet-overlay:set-bounds', bounds)",
+    "parameters": [
+      "bounds"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:pet-overlay:set-bounds"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 98,
+    "end_line": 98,
+    "member": "hermesDesktop.petOverlay.setIgnoreMouse",
+    "definition": "setIgnoreMouse: ignore => ipcRenderer.send('hermes:pet-overlay:ignore-mouse', ignore)",
+    "parameters": [
+      "ignore"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:pet-overlay:ignore-mouse"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 100,
+    "end_line": 100,
+    "member": "hermesDesktop.petOverlay.setFocusable",
+    "definition": "setFocusable: focusable => ipcRenderer.send('hermes:pet-overlay:set-focusable', focusable)",
+    "parameters": [
+      "focusable"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:pet-overlay:set-focusable"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 102,
+    "end_line": 102,
+    "member": "hermesDesktop.petOverlay.pushState",
+    "definition": "pushState: payload => ipcRenderer.send('hermes:pet-overlay:state', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:pet-overlay:state"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 104,
+    "end_line": 104,
+    "member": "hermesDesktop.petOverlay.control",
+    "definition": "control: payload => ipcRenderer.send('hermes:pet-overlay:control', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:pet-overlay:control"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 106,
+    "end_line": 111,
+    "member": "hermesDesktop.petOverlay.onState",
+    "definition": "onState: callback => {\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on('hermes:pet-overlay:state', listener)\n\n      return () => ipcRenderer.removeListener('hermes:pet-overlay:state', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:pet-overlay:state"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:pet-overlay:state"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 113,
+    "end_line": 118,
+    "member": "hermesDesktop.petOverlay.onControl",
+    "definition": "onControl: callback => {\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on('hermes:pet-overlay:control', listener)\n\n      return () => ipcRenderer.removeListener('hermes:pet-overlay:control', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:pet-overlay:control"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:pet-overlay:control"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 124,
+    "end_line": 124,
+    "member": "hermesDesktop.hud.nativeDrag",
+    "definition": "nativeDrag: hudNativeDrag",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 126,
+    "end_line": 126,
+    "member": "hermesDesktop.hud.windowing.clientPlacement",
+    "definition": "clientPlacement: hudWindowing?.clientPlacement !== false",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 127,
+    "end_line": 127,
+    "member": "hermesDesktop.hud.windowing.controlDrag",
+    "definition": "controlDrag: hudWindowing?.controlDrag === true",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 128,
+    "end_line": 128,
+    "member": "hermesDesktop.hud.windowing.nativeDrag",
+    "definition": "nativeDrag: hudNativeDrag",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 129,
+    "end_line": 129,
+    "member": "hermesDesktop.hud.windowing.solid",
+    "definition": "solid: hudWindowing?.solid === true",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 130,
+    "end_line": 130,
+    "member": "hermesDesktop.hud.windowing.workspaceTransfer",
+    "definition": "workspaceTransfer: hudWindowing?.workspaceTransfer === true",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 132,
+    "end_line": 132,
+    "member": "hermesDesktop.hud.open",
+    "definition": "open: request => ipcRenderer.invoke('hermes:hud:open', request)",
+    "parameters": [
+      "request"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:hud:open"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 133,
+    "end_line": 133,
+    "member": "hermesDesktop.hud.close",
+    "definition": "close: () => ipcRenderer.invoke('hermes:hud:close')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:hud:close"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 134,
+    "end_line": 134,
+    "member": "hermesDesktop.hud.setIgnoreMouse",
+    "definition": "setIgnoreMouse: ignore => ipcRenderer.send('hermes:hud:ignore-mouse', ignore)",
+    "parameters": [
+      "ignore"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:hud:ignore-mouse"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 135,
+    "end_line": 135,
+    "member": "hermesDesktop.hud.beginMove",
+    "definition": "beginMove: () => ipcRenderer.send('hermes:hud:begin-move')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:hud:begin-move"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 136,
+    "end_line": 136,
+    "member": "hermesDesktop.hud.endMove",
+    "definition": "endMove: () => ipcRenderer.send('hermes:hud:end-move')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:hud:end-move"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 137,
+    "end_line": 137,
+    "member": "hermesDesktop.hud.moveBy",
+    "definition": "moveBy: delta => ipcRenderer.send('hermes:hud:move-by', delta)",
+    "parameters": [
+      "delta"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:hud:move-by"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 138,
+    "end_line": 138,
+    "member": "hermesDesktop.hud.setWorkspaceTransfer",
+    "definition": "setWorkspaceTransfer: transferring => ipcRenderer.send('hermes:hud:workspace-transfer', transferring)",
+    "parameters": [
+      "transferring"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:hud:workspace-transfer"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 139,
+    "end_line": 139,
+    "member": "hermesDesktop.hud.setBounds",
+    "definition": "setBounds: bounds => ipcRenderer.send('hermes:hud:set-bounds', bounds)",
+    "parameters": [
+      "bounds"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:hud:set-bounds"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 140,
+    "end_line": 140,
+    "member": "hermesDesktop.hud.resetLayout",
+    "definition": "resetLayout: () => ipcRenderer.invoke('hermes:hud:reset-layout')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:hud:reset-layout"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 144,
+    "end_line": 144,
+    "member": "hermesDesktop.hud.setFrost",
+    "definition": "setFrost: showing => ipcRenderer.invoke('hermes:hud:frost', showing)",
+    "parameters": [
+      "showing"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:hud:frost"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 147,
+    "end_line": 147,
+    "member": "hermesDesktop.hud.setSession",
+    "definition": "setSession: sessionId => ipcRenderer.send('hermes:hud:session', sessionId)",
+    "parameters": [
+      "sessionId"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:hud:session"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 148,
+    "end_line": 153,
+    "member": "hermesDesktop.hud.onGoto",
+    "definition": "onGoto: callback => {\n      const listener = (_event, sessionId) => callback(sessionId)\n      ipcRenderer.on('hermes:hud:goto', listener)\n\n      return () => ipcRenderer.removeListener('hermes:hud:goto', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:hud:goto"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:hud:goto"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 154,
+    "end_line": 159,
+    "member": "hermesDesktop.hud.onChanged",
+    "definition": "onChanged: callback => {\n      const listener = (_event, state) => callback(state)\n      ipcRenderer.on('hermes:hud:changed', listener)\n\n      return () => ipcRenderer.removeListener('hermes:hud:changed', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:hud:changed"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:hud:changed"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 164,
+    "end_line": 169,
+    "member": "hermesDesktop.hud.onCursor",
+    "definition": "onCursor: callback => {\n      const listener = (_event, point) => callback(point)\n      ipcRenderer.on('hermes:hud:cursor', listener)\n\n      return () => ipcRenderer.removeListener('hermes:hud:cursor', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:hud:cursor"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:hud:cursor"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 173,
+    "end_line": 178,
+    "member": "hermesDesktop.hud.onGameOverlay",
+    "definition": "onGameOverlay: callback => {\n      const listener = (_event, state) => callback(state)\n      ipcRenderer.on('hermes:hud:game-overlay', listener)\n\n      return () => ipcRenderer.removeListener('hermes:hud:game-overlay', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:hud:game-overlay"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:hud:game-overlay"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 180,
+    "end_line": 190,
+    "member": "hermesDesktop.hudModifier",
+    "definition": "hudModifier: {\n    getSettings: () => ipcRenderer.invoke('hermes:hud-modifier:settings:get'),\n    setEnabled: enabled => ipcRenderer.invoke('hermes:hud-modifier:settings:set', enabled),\n    openPermissionSettings: () => ipcRenderer.invoke('hermes:hud-modifier:permission'),\n    onStatus: callback => {\n      const listener = (_event: Electron.IpcRendererEvent, status: HudModifierStatus) => callback(status)\n      ipcRenderer.on('hermes:hud-modifier:status', listener)\n\n      return () => ipcRenderer.removeListener('hermes:hud-modifier:status', listener)\n    }\n  } satisfies HudModifierApi",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:hud-modifier:settings:get"
+      },
+      {
+        "operation": "invoke",
+        "channel": "hermes:hud-modifier:settings:set"
+      },
+      {
+        "operation": "invoke",
+        "channel": "hermes:hud-modifier:permission"
+      },
+      {
+        "operation": "on",
+        "channel": "hermes:hud-modifier:status"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:hud-modifier:status"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 192,
+    "end_line": 224,
+    "member": "hermesDesktop.screenshot",
+    "definition": "screenshot:\n    process.platform === 'darwin'\n      ? {\n          getSettings: () => ipcRenderer.invoke('hermes:screenshot:settings:get'),\n          setEnabled: enabled => ipcRenderer.invoke('hermes:screenshot:settings:set', enabled),\n          openPermissionSettings: kind => ipcRenderer.invoke('hermes:screenshot:permission', kind),\n          capture: requestId => ipcRenderer.invoke('hermes:screenshot:capture', requestId),\n          onStatus: callback => {\n            const listener = (_event, status) => callback(status)\n            ipcRenderer.on('hermes:screenshot:status', listener)\n\n            return () => ipcRenderer.removeListener('hermes:screenshot:status', listener)\n          },\n          onRequest: callback => {\n            const channel = 'hermes:screenshot:request'\n            const listener = (_event, requestId) => callback(requestId)\n\n            if (ipcRenderer.listenerCount(channel) === 0) {\n              ipcRenderer.send('hermes:screenshot:subscribe', true)\n            }\n\n            ipcRenderer.on(channel, listener)\n\n            return () => {\n              ipcRenderer.removeListener(channel, listener)\n\n              if (ipcRenderer.listenerCount(channel) === 0) {\n                ipcRenderer.send('hermes:screenshot:subscribe', false)\n              }\n            }\n          }\n        }\n      : undefined",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:screenshot:settings:get"
+      },
+      {
+        "operation": "invoke",
+        "channel": "hermes:screenshot:settings:set"
+      },
+      {
+        "operation": "invoke",
+        "channel": "hermes:screenshot:permission"
+      },
+      {
+        "operation": "invoke",
+        "channel": "hermes:screenshot:capture"
+      },
+      {
+        "operation": "on",
+        "channel": "hermes:screenshot:status"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:screenshot:status"
+      },
+      {
+        "operation": "send",
+        "channel": "hermes:screenshot:subscribe"
+      },
+      {
+        "operation": "send",
+        "channel": "hermes:screenshot:subscribe"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 230,
+    "end_line": 230,
+    "member": "hermesDesktop.quickEntry.getSettings",
+    "definition": "getSettings: () => ipcRenderer.invoke('hermes:quick-entry:settings:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:quick-entry:settings:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 231,
+    "end_line": 231,
+    "member": "hermesDesktop.quickEntry.setSettings",
+    "definition": "setSettings: patch => ipcRenderer.invoke('hermes:quick-entry:settings:set', patch)",
+    "parameters": [
+      "patch"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:quick-entry:settings:set"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 233,
+    "end_line": 233,
+    "member": "hermesDesktop.quickEntry.submit",
+    "definition": "submit: payload => ipcRenderer.invoke('hermes:quick-entry:submit', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:quick-entry:submit"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 235,
+    "end_line": 235,
+    "member": "hermesDesktop.quickEntry.ackSubmit",
+    "definition": "ackSubmit: (correlationId, result) => ipcRenderer.send('hermes:quick-entry:ack', { correlationId, result })",
+    "parameters": [
+      "correlationId",
+      "result"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:quick-entry:ack"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 236,
+    "end_line": 236,
+    "member": "hermesDesktop.quickEntry.dismiss",
+    "definition": "dismiss: () => ipcRenderer.send('hermes:quick-entry:dismiss')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:quick-entry:dismiss"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 240,
+    "end_line": 240,
+    "member": "hermesDesktop.quickEntry.pushState",
+    "definition": "pushState: payload => ipcRenderer.send('hermes:quick-entry:state', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:quick-entry:state"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 242,
+    "end_line": 247,
+    "member": "hermesDesktop.quickEntry.onState",
+    "definition": "onState: callback => {\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on('hermes:quick-entry:state', listener)\n\n      return () => ipcRenderer.removeListener('hermes:quick-entry:state', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:quick-entry:state"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:quick-entry:state"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 249,
+    "end_line": 254,
+    "member": "hermesDesktop.quickEntry.onSubmit",
+    "definition": "onSubmit: callback => {\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on('hermes:quick-entry:submit', listener)\n\n      return () => ipcRenderer.removeListener('hermes:quick-entry:submit', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:quick-entry:submit"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:quick-entry:submit"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 256,
+    "end_line": 261,
+    "member": "hermesDesktop.quickEntry.onShown",
+    "definition": "onShown: callback => {\n      const listener = () => callback()\n      ipcRenderer.on('hermes:quick-entry:shown', listener)\n\n      return () => ipcRenderer.removeListener('hermes:quick-entry:shown', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:quick-entry:shown"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:quick-entry:shown"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 265,
+    "end_line": 270,
+    "member": "hermesDesktop.quickEntry.onLateResult",
+    "definition": "onLateResult: callback => {\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on('hermes:quick-entry:late-result', listener)\n\n      return () => ipcRenderer.removeListener('hermes:quick-entry:late-result', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:quick-entry:late-result"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:quick-entry:late-result"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 272,
+    "end_line": 272,
+    "member": "hermesDesktop.getBootProgress",
+    "definition": "getBootProgress: () => ipcRenderer.invoke('hermes:boot-progress:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:boot-progress:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 273,
+    "end_line": 273,
+    "member": "hermesDesktop.getConnectionConfig",
+    "definition": "getConnectionConfig: profile => ipcRenderer.invoke('hermes:connection-config:get', profile)",
+    "parameters": [
+      "profile"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connection-config:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 274,
+    "end_line": 274,
+    "member": "hermesDesktop.saveConnectionConfig",
+    "definition": "saveConnectionConfig: payload => ipcRenderer.invoke('hermes:connection-config:save', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connection-config:save"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 275,
+    "end_line": 275,
+    "member": "hermesDesktop.applyConnectionConfig",
+    "definition": "applyConnectionConfig: payload => ipcRenderer.invoke('hermes:connection-config:apply', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connection-config:apply"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 276,
+    "end_line": 276,
+    "member": "hermesDesktop.testConnectionConfig",
+    "definition": "testConnectionConfig: payload => ipcRenderer.invoke('hermes:connection-config:test', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connection-config:test"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 279,
+    "end_line": 279,
+    "member": "hermesDesktop.getSecretStorageEncryption",
+    "definition": "getSecretStorageEncryption: () => ipcRenderer.invoke('hermes:secret-storage:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:secret-storage:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 280,
+    "end_line": 280,
+    "member": "hermesDesktop.setSecretStorageEncryption",
+    "definition": "setSecretStorageEncryption: (on: boolean) => ipcRenderer.invoke('hermes:secret-storage:set', on)",
+    "parameters": [
+      "on: boolean"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:secret-storage:set"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 283,
+    "end_line": 283,
+    "member": "hermesDesktop.connections.list",
+    "definition": "list: () => ipcRenderer.invoke('hermes:connections:list')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connections:list"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 284,
+    "end_line": 284,
+    "member": "hermesDesktop.connections.save",
+    "definition": "save: payload => ipcRenderer.invoke('hermes:connections:save', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connections:save"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 285,
+    "end_line": 285,
+    "member": "hermesDesktop.connections.remove",
+    "definition": "remove: id => ipcRenderer.invoke('hermes:connections:remove', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connections:remove"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 286,
+    "end_line": 286,
+    "member": "hermesDesktop.connections.setPrimary",
+    "definition": "setPrimary: id => ipcRenderer.invoke('hermes:connections:set-primary', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connections:set-primary"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 287,
+    "end_line": 287,
+    "member": "hermesDesktop.connections.setLaunchMode",
+    "definition": "setLaunchMode: mode => ipcRenderer.invoke('hermes:connections:set-launch-mode', mode)",
+    "parameters": [
+      "mode"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connections:set-launch-mode"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 288,
+    "end_line": 288,
+    "member": "hermesDesktop.connections.setLastUsed",
+    "definition": "setLastUsed: id => ipcRenderer.invoke('hermes:connections:set-last-used', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connections:set-last-used"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 289,
+    "end_line": 289,
+    "member": "hermesDesktop.connections.test",
+    "definition": "test: id => ipcRenderer.invoke('hermes:connections:test', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connections:test"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 290,
+    "end_line": 290,
+    "member": "hermesDesktop.connections.updateManaged",
+    "definition": "updateManaged: id => ipcRenderer.invoke('hermes:connections:update-managed', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connections:update-managed"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 293,
+    "end_line": 293,
+    "member": "hermesDesktop.connections.updateAll",
+    "definition": "updateAll: options => ipcRenderer.invoke('hermes:connections:update-all', options)",
+    "parameters": [
+      "options"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connections:update-all"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 297,
+    "end_line": 302,
+    "member": "hermesDesktop.connections.onChanged",
+    "definition": "onChanged: callback => {\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on('hermes:connections:changed', listener)\n\n      return () => ipcRenderer.removeListener('hermes:connections:changed', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:connections:changed"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:connections:changed"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 304,
+    "end_line": 304,
+    "member": "hermesDesktop.sshConfigHosts",
+    "definition": "sshConfigHosts: () => ipcRenderer.invoke('hermes:ssh-config:hosts')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:ssh-config:hosts"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 305,
+    "end_line": 305,
+    "member": "hermesDesktop.sshResolveHost",
+    "definition": "sshResolveHost: host => ipcRenderer.invoke('hermes:ssh-config:resolve', host)",
+    "parameters": [
+      "host"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:ssh-config:resolve"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 306,
+    "end_line": 306,
+    "member": "hermesDesktop.probeConnectionConfig",
+    "definition": "probeConnectionConfig: remoteUrl => ipcRenderer.invoke('hermes:connection-config:probe', remoteUrl)",
+    "parameters": [
+      "remoteUrl"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connection-config:probe"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 311,
+    "end_line": 312,
+    "member": "hermesDesktop.oauthLoginConnectionConfig",
+    "definition": "oauthLoginConnectionConfig: (remoteUrl, options) =>\n    ipcRenderer.invoke('hermes:connection-config:oauth-login', remoteUrl, options)",
+    "parameters": [
+      "remoteUrl",
+      "options"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connection-config:oauth-login"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 313,
+    "end_line": 313,
+    "member": "hermesDesktop.oauthLogoutConnectionConfig",
+    "definition": "oauthLogoutConnectionConfig: remoteUrl => ipcRenderer.invoke('hermes:connection-config:oauth-logout', remoteUrl)",
+    "parameters": [
+      "remoteUrl"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:connection-config:oauth-logout"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 317,
+    "end_line": 317,
+    "member": "hermesDesktop.cloud.status",
+    "definition": "status: () => ipcRenderer.invoke('hermes:cloud:status')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:cloud:status"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 318,
+    "end_line": 318,
+    "member": "hermesDesktop.cloud.login",
+    "definition": "login: () => ipcRenderer.invoke('hermes:cloud:login')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:cloud:login"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 319,
+    "end_line": 319,
+    "member": "hermesDesktop.cloud.logout",
+    "definition": "logout: () => ipcRenderer.invoke('hermes:cloud:logout')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:cloud:logout"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 320,
+    "end_line": 320,
+    "member": "hermesDesktop.cloud.discover",
+    "definition": "discover: org => ipcRenderer.invoke('hermes:cloud:discover', org)",
+    "parameters": [
+      "org"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:cloud:discover"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 321,
+    "end_line": 321,
+    "member": "hermesDesktop.cloud.agentSignIn",
+    "definition": "agentSignIn: dashboardUrl => ipcRenderer.invoke('hermes:cloud:agent-sign-in', dashboardUrl)",
+    "parameters": [
+      "dashboardUrl"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:cloud:agent-sign-in"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 324,
+    "end_line": 324,
+    "member": "hermesDesktop.profile.getDefault",
+    "definition": "getDefault: () => ipcRenderer.invoke('hermes:profile:default:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:profile:default:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 325,
+    "end_line": 325,
+    "member": "hermesDesktop.profile.setDefault",
+    "definition": "setDefault: (route: DesktopProfileRoute) => ipcRenderer.invoke('hermes:profile:default:set', route)",
+    "parameters": [
+      "route: DesktopProfileRoute"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:profile:default:set"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 326,
+    "end_line": 331,
+    "member": "hermesDesktop.profile.onDefaultChanged",
+    "definition": "onDefaultChanged: (callback: (route: DesktopProfileRoute | null) => void) => {\n      const listener = (_event: Electron.IpcRendererEvent, route: DesktopProfileRoute | null) => callback(route)\n      ipcRenderer.on('hermes:profile:default:changed', listener)\n\n      return () => ipcRenderer.removeListener('hermes:profile:default:changed', listener)\n    }",
+    "parameters": [
+      "callback: (route: DesktopProfileRoute | null) => void"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:profile:default:changed"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:profile:default:changed"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 332,
+    "end_line": 332,
+    "member": "hermesDesktop.profile.get",
+    "definition": "get: () => ipcRenderer.invoke('hermes:profile:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:profile:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 333,
+    "end_line": 333,
+    "member": "hermesDesktop.profile.remember",
+    "definition": "remember: name => ipcRenderer.invoke('hermes:profile:remember', name)",
+    "parameters": [
+      "name"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:profile:remember"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 334,
+    "end_line": 334,
+    "member": "hermesDesktop.profile.set",
+    "definition": "set: name => ipcRenderer.invoke('hermes:profile:set', name)",
+    "parameters": [
+      "name"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:profile:set"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 339,
+    "end_line": 339,
+    "member": "hermesDesktop.api",
+    "definition": "api: request => ipcRenderer.invoke('hermes:api', request).then(unwrapExpectedNotFound)",
+    "parameters": [
+      "request"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:api"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 340,
+    "end_line": 340,
+    "member": "hermesDesktop.notify",
+    "definition": "notify: payload => ipcRenderer.invoke('hermes:notify', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:notify"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 341,
+    "end_line": 341,
+    "member": "hermesDesktop.claimStartupLatency",
+    "definition": "claimStartupLatency: () => ipcRenderer.invoke('hermes:startup-latency:claim')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:startup-latency:claim"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 342,
+    "end_line": 342,
+    "member": "hermesDesktop.requestMicrophoneAccess",
+    "definition": "requestMicrophoneAccess: () => ipcRenderer.invoke('hermes:requestMicrophoneAccess')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:requestMicrophoneAccess"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 343,
+    "end_line": 343,
+    "member": "hermesDesktop.readWindowBelow",
+    "definition": "readWindowBelow: () => ipcRenderer.invoke('hermes:window:readBelow')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:window:readBelow"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 344,
+    "end_line": 344,
+    "member": "hermesDesktop.readFileDataUrl",
+    "definition": "readFileDataUrl: filePath => ipcRenderer.invoke('hermes:readFileDataUrl', filePath)",
+    "parameters": [
+      "filePath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:readFileDataUrl"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 345,
+    "end_line": 345,
+    "member": "hermesDesktop.readFileDataUrlForAttach",
+    "definition": "readFileDataUrlForAttach: filePath => ipcRenderer.invoke('hermes:readFileDataUrlForAttach', filePath)",
+    "parameters": [
+      "filePath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:readFileDataUrlForAttach"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 347,
+    "end_line": 347,
+    "member": "hermesDesktop.dataUrlReadMax.get",
+    "definition": "get: () => ipcRenderer.invoke('hermes:data-url-read-max:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:data-url-read-max:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 348,
+    "end_line": 348,
+    "member": "hermesDesktop.dataUrlReadMax.set",
+    "definition": "set: maxMb => ipcRenderer.invoke('hermes:data-url-read-max:set', maxMb)",
+    "parameters": [
+      "maxMb"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:data-url-read-max:set"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 350,
+    "end_line": 350,
+    "member": "hermesDesktop.readFileText",
+    "definition": "readFileText: filePath => ipcRenderer.invoke('hermes:readFileText', filePath)",
+    "parameters": [
+      "filePath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:readFileText"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 351,
+    "end_line": 351,
+    "member": "hermesDesktop.readPluginSource",
+    "definition": "readPluginSource: (filePath: string) => ipcRenderer.invoke('hermes:readPluginSource', filePath)",
+    "parameters": [
+      "filePath: string"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:readPluginSource"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 352,
+    "end_line": 352,
+    "member": "hermesDesktop.selectPaths",
+    "definition": "selectPaths: options => ipcRenderer.invoke('hermes:selectPaths', options)",
+    "parameters": [
+      "options"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:selectPaths"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 353,
+    "end_line": 353,
+    "member": "hermesDesktop.selectSavePath",
+    "definition": "selectSavePath: options => ipcRenderer.invoke('hermes:selectSavePath', options)",
+    "parameters": [
+      "options"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:selectSavePath"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 354,
+    "end_line": 354,
+    "member": "hermesDesktop.saveTextFileAs",
+    "definition": "saveTextFileAs: request => ipcRenderer.invoke('hermes:saveTextFileAs', request)",
+    "parameters": [
+      "request"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:saveTextFileAs"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 355,
+    "end_line": 355,
+    "member": "hermesDesktop.writeClipboard",
+    "definition": "writeClipboard: text => ipcRenderer.invoke('hermes:writeClipboard', text)",
+    "parameters": [
+      "text"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:writeClipboard"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 356,
+    "end_line": 356,
+    "member": "hermesDesktop.readClipboard",
+    "definition": "readClipboard: () => ipcRenderer.invoke('hermes:readClipboard')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:readClipboard"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 357,
+    "end_line": 357,
+    "member": "hermesDesktop.saveGatewayFile",
+    "definition": "saveGatewayFile: payload => ipcRenderer.invoke('hermes:saveGatewayFile', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:saveGatewayFile"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 358,
+    "end_line": 358,
+    "member": "hermesDesktop.saveImageFromUrl",
+    "definition": "saveImageFromUrl: url => ipcRenderer.invoke('hermes:saveImageFromUrl', url)",
+    "parameters": [
+      "url"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:saveImageFromUrl"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 359,
+    "end_line": 359,
+    "member": "hermesDesktop.contextMenuEdit",
+    "definition": "contextMenuEdit: command => ipcRenderer.invoke('hermes:context-menu:edit', command)",
+    "parameters": [
+      "command"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:context-menu:edit"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 360,
+    "end_line": 360,
+    "member": "hermesDesktop.contextMenuCopyImage",
+    "definition": "contextMenuCopyImage: () => ipcRenderer.invoke('hermes:context-menu:copy-image')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:context-menu:copy-image"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 361,
+    "end_line": 361,
+    "member": "hermesDesktop.contextMenuSpellcheck",
+    "definition": "contextMenuSpellcheck: action => ipcRenderer.invoke('hermes:context-menu:spellcheck', action)",
+    "parameters": [
+      "action"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:context-menu:spellcheck"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 362,
+    "end_line": 362,
+    "member": "hermesDesktop.contextMenuGuestAddWord",
+    "definition": "contextMenuGuestAddWord: payload => ipcRenderer.invoke('hermes:context-menu:guest-add-word', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:context-menu:guest-add-word"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 363,
+    "end_line": 368,
+    "member": "hermesDesktop.onContextMenuSpellcheck",
+    "definition": "onContextMenuSpellcheck: callback => {\n    const listener = (_event, payload) => callback(payload)\n    ipcRenderer.on('hermes:context-menu-spellcheck', listener)\n\n    return () => ipcRenderer.removeListener('hermes:context-menu-spellcheck', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:context-menu-spellcheck"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:context-menu-spellcheck"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 369,
+    "end_line": 369,
+    "member": "hermesDesktop.saveImageBuffer",
+    "definition": "saveImageBuffer: (data, ext, name) => ipcRenderer.invoke('hermes:saveImageBuffer', { data, ext, name })",
+    "parameters": [
+      "data",
+      "ext",
+      "name"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:saveImageBuffer"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 370,
+    "end_line": 370,
+    "member": "hermesDesktop.capturePreview",
+    "definition": "capturePreview: payload => ipcRenderer.invoke('hermes:capturePreview', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:capturePreview"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 371,
+    "end_line": 371,
+    "member": "hermesDesktop.savePastedText",
+    "definition": "savePastedText: text => ipcRenderer.invoke('hermes:savePastedText', { text })",
+    "parameters": [
+      "text"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:savePastedText"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 372,
+    "end_line": 372,
+    "member": "hermesDesktop.saveClipboardImage",
+    "definition": "saveClipboardImage: () => ipcRenderer.invoke('hermes:saveClipboardImage')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:saveClipboardImage"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 373,
+    "end_line": 379,
+    "member": "hermesDesktop.getPathForFile",
+    "definition": "getPathForFile: file => {\n    try {\n      return webUtils.getPathForFile(file) || ''\n    } catch {\n      return ''\n    }\n  }",
+    "parameters": [
+      "file"
+    ],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 380,
+    "end_line": 380,
+    "member": "hermesDesktop.normalizePreviewTarget",
+    "definition": "normalizePreviewTarget: (target, baseDir) => ipcRenderer.invoke('hermes:normalizePreviewTarget', target, baseDir)",
+    "parameters": [
+      "target",
+      "baseDir"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:normalizePreviewTarget"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 381,
+    "end_line": 381,
+    "member": "hermesDesktop.watchPreviewFile",
+    "definition": "watchPreviewFile: url => ipcRenderer.invoke('hermes:watchPreviewFile', url)",
+    "parameters": [
+      "url"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:watchPreviewFile"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 382,
+    "end_line": 382,
+    "member": "hermesDesktop.watchDirectory",
+    "definition": "watchDirectory: dir => ipcRenderer.invoke('hermes:watchDirectory', dir)",
+    "parameters": [
+      "dir"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:watchDirectory"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 383,
+    "end_line": 383,
+    "member": "hermesDesktop.stopPreviewFileWatch",
+    "definition": "stopPreviewFileWatch: id => ipcRenderer.invoke('hermes:stopPreviewFileWatch', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:stopPreviewFileWatch"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 384,
+    "end_line": 384,
+    "member": "hermesDesktop.setActiveWork",
+    "definition": "setActiveWork: payload => ipcRenderer.send('hermes:active-work', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:active-work"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 385,
+    "end_line": 385,
+    "member": "hermesDesktop.setTitleBarTheme",
+    "definition": "setTitleBarTheme: payload => ipcRenderer.send('hermes:titlebar-theme', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:titlebar-theme"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 386,
+    "end_line": 386,
+    "member": "hermesDesktop.setNativeTheme",
+    "definition": "setNativeTheme: mode => ipcRenderer.send('hermes:native-theme', mode)",
+    "parameters": [
+      "mode"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:native-theme"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 387,
+    "end_line": 387,
+    "member": "hermesDesktop.setTranslucency",
+    "definition": "setTranslucency: payload => ipcRenderer.send('hermes:translucency', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:translucency"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 388,
+    "end_line": 388,
+    "member": "hermesDesktop.setKeepAwake",
+    "definition": "setKeepAwake: mode => ipcRenderer.send('hermes:keep-awake', mode)",
+    "parameters": [
+      "mode"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:keep-awake"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 390,
+    "end_line": 395,
+    "member": "hermesDesktop.onKeepAwakeOffer",
+    "definition": "onKeepAwakeOffer: callback => {\n    const listener = () => callback()\n    ipcRenderer.on('hermes:keep-awake-offer', listener)\n\n    return () => ipcRenderer.removeListener('hermes:keep-awake-offer', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:keep-awake-offer"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:keep-awake-offer"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 397,
+    "end_line": 397,
+    "member": "hermesDesktop.minimizeToTray.get",
+    "definition": "get: () => ipcRenderer.invoke('hermes:minimize-to-tray:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:minimize-to-tray:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 398,
+    "end_line": 398,
+    "member": "hermesDesktop.minimizeToTray.set",
+    "definition": "set: on => ipcRenderer.invoke('hermes:minimize-to-tray:set', on)",
+    "parameters": [
+      "on"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:minimize-to-tray:set"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 399,
+    "end_line": 404,
+    "member": "hermesDesktop.minimizeToTray.onChanged",
+    "definition": "onChanged: callback => {\n      const listener = (_event, status) => callback(status)\n      ipcRenderer.on('hermes:minimize-to-tray:changed', listener)\n\n      return () => ipcRenderer.removeListener('hermes:minimize-to-tray:changed', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:minimize-to-tray:changed"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:minimize-to-tray:changed"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 406,
+    "end_line": 406,
+    "member": "hermesDesktop.setDisableF12",
+    "definition": "setDisableF12: blocked => ipcRenderer.send('hermes:devtools:disable-f12', blocked)",
+    "parameters": [
+      "blocked"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:devtools:disable-f12"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 407,
+    "end_line": 407,
+    "member": "hermesDesktop.setF12ShortcutActive",
+    "definition": "setF12ShortcutActive: active => ipcRenderer.send('hermes:f12ShortcutActive', Boolean(active))",
+    "parameters": [
+      "active"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:f12ShortcutActive"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 408,
+    "end_line": 413,
+    "member": "hermesDesktop.onF12Shortcut",
+    "definition": "onF12Shortcut: callback => {\n    const listener = (_event, input) => callback(input)\n    ipcRenderer.on('hermes:f12-shortcut', listener)\n\n    return () => ipcRenderer.removeListener('hermes:f12-shortcut', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:f12-shortcut"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:f12-shortcut"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 414,
+    "end_line": 414,
+    "member": "hermesDesktop.setPreviewShortcutActive",
+    "definition": "setPreviewShortcutActive: active => ipcRenderer.send('hermes:previewShortcutActive', Boolean(active))",
+    "parameters": [
+      "active"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:previewShortcutActive"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 415,
+    "end_line": 416,
+    "member": "hermesDesktop.setPreviewGuestHidden",
+    "definition": "setPreviewGuestHidden: (webContentsId, hidden) =>\n    ipcRenderer.send('hermes:preview-guest-hidden', { webContentsId, hidden: Boolean(hidden) })",
+    "parameters": [
+      "webContentsId",
+      "hidden"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:preview-guest-hidden"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 417,
+    "end_line": 417,
+    "member": "hermesDesktop.openExternal",
+    "definition": "openExternal: url => ipcRenderer.invoke('hermes:openExternal', url)",
+    "parameters": [
+      "url"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:openExternal"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 421,
+    "end_line": 421,
+    "member": "hermesDesktop.freeTierChallenge.run",
+    "definition": "run: request => ipcRenderer.invoke('hermes:freeTierChallenge:run', request)",
+    "parameters": [
+      "request"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:freeTierChallenge:run"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 427,
+    "end_line": 427,
+    "member": "hermesDesktop.mcpOauth.listen",
+    "definition": "listen: () => ipcRenderer.invoke('hermes:mcp-oauth:listen')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:mcp-oauth:listen"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 428,
+    "end_line": 428,
+    "member": "hermesDesktop.mcpOauth.wait",
+    "definition": "wait: (id, timeoutMs) => ipcRenderer.invoke('hermes:mcp-oauth:wait', id, timeoutMs)",
+    "parameters": [
+      "id",
+      "timeoutMs"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:mcp-oauth:wait"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 429,
+    "end_line": 429,
+    "member": "hermesDesktop.mcpOauth.cancel",
+    "definition": "cancel: id => ipcRenderer.invoke('hermes:mcp-oauth:cancel', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:mcp-oauth:cancel"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 431,
+    "end_line": 431,
+    "member": "hermesDesktop.openPreviewInBrowser",
+    "definition": "openPreviewInBrowser: url => ipcRenderer.invoke('hermes:openPreviewInBrowser', url)",
+    "parameters": [
+      "url"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:openPreviewInBrowser"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 432,
+    "end_line": 432,
+    "member": "hermesDesktop.reachPreviewUrl",
+    "definition": "reachPreviewUrl: url => ipcRenderer.invoke('hermes:preview:reach', url)",
+    "parameters": [
+      "url"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:preview:reach"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 433,
+    "end_line": 433,
+    "member": "hermesDesktop.setActiveConnectionRoute",
+    "definition": "setActiveConnectionRoute: route => ipcRenderer.send('hermes:connection:active-route', route)",
+    "parameters": [
+      "route"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:connection:active-route"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 434,
+    "end_line": 434,
+    "member": "hermesDesktop.fetchLinkTitle",
+    "definition": "fetchLinkTitle: url => ipcRenderer.invoke('hermes:fetchLinkTitle', url)",
+    "parameters": [
+      "url"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fetchLinkTitle"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 435,
+    "end_line": 435,
+    "member": "hermesDesktop.resolveFavicon",
+    "definition": "resolveFavicon: url => ipcRenderer.invoke('hermes:resolveFavicon', url)",
+    "parameters": [
+      "url"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:resolveFavicon"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 436,
+    "end_line": 436,
+    "member": "hermesDesktop.sanitizeWorkspaceCwd",
+    "definition": "sanitizeWorkspaceCwd: cwd => ipcRenderer.invoke('hermes:workspace:sanitize', cwd)",
+    "parameters": [
+      "cwd"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:workspace:sanitize"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 438,
+    "end_line": 438,
+    "member": "hermesDesktop.settings.getDefaultProjectDir",
+    "definition": "getDefaultProjectDir: () => ipcRenderer.invoke('hermes:setting:defaultProjectDir:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:setting:defaultProjectDir:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 439,
+    "end_line": 439,
+    "member": "hermesDesktop.settings.setDefaultProjectDir",
+    "definition": "setDefaultProjectDir: dir => ipcRenderer.invoke('hermes:setting:defaultProjectDir:set', dir)",
+    "parameters": [
+      "dir"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:setting:defaultProjectDir:set"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 440,
+    "end_line": 440,
+    "member": "hermesDesktop.settings.pickDefaultProjectDir",
+    "definition": "pickDefaultProjectDir: () => ipcRenderer.invoke('hermes:setting:defaultProjectDir:pick')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:setting:defaultProjectDir:pick"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 443,
+    "end_line": 443,
+    "member": "hermesDesktop.preparedSubmissions.read",
+    "definition": "read: () => ipcRenderer.invoke('hermes:prepared-submissions:read')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:prepared-submissions:read"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 444,
+    "end_line": 444,
+    "member": "hermesDesktop.preparedSubmissions.update",
+    "definition": "update: (key, entry) => ipcRenderer.invoke('hermes:prepared-submissions:update', key, entry)",
+    "parameters": [
+      "key",
+      "entry"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:prepared-submissions:update"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 445,
+    "end_line": 446,
+    "member": "hermesDesktop.preparedSubmissions.compareAndSet",
+    "definition": "compareAndSet: (key, expected, entry) =>\n      ipcRenderer.invoke('hermes:prepared-submissions:compare-and-set', key, expected, entry)",
+    "parameters": [
+      "key",
+      "expected",
+      "entry"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:prepared-submissions:compare-and-set"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 450,
+    "end_line": 450,
+    "member": "hermesDesktop.zoom.get",
+    "definition": "get: () => ipcRenderer.invoke('hermes:zoom:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:zoom:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 453,
+    "end_line": 453,
+    "member": "hermesDesktop.zoom.factor",
+    "definition": "factor: () => webFrame.getZoomFactor()",
+    "parameters": [],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 454,
+    "end_line": 454,
+    "member": "hermesDesktop.zoom.setPercent",
+    "definition": "setPercent: percent => ipcRenderer.send('hermes:zoom:set-percent', percent)",
+    "parameters": [
+      "percent"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:zoom:set-percent"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 457,
+    "end_line": 462,
+    "member": "hermesDesktop.zoom.onChanged",
+    "definition": "onChanged: callback => {\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on('hermes:zoom:changed', listener)\n\n      return () => ipcRenderer.removeListener('hermes:zoom:changed', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:zoom:changed"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:zoom:changed"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 464,
+    "end_line": 464,
+    "member": "hermesDesktop.revealLogs",
+    "definition": "revealLogs: () => ipcRenderer.invoke('hermes:logs:reveal')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:logs:reveal"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 465,
+    "end_line": 465,
+    "member": "hermesDesktop.getRecentLogs",
+    "definition": "getRecentLogs: () => ipcRenderer.invoke('hermes:logs:recent')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:logs:recent"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 468,
+    "end_line": 468,
+    "member": "hermesDesktop.reportRendererError",
+    "definition": "reportRendererError: report => ipcRenderer.send('hermes:logs:renderer-error', report)",
+    "parameters": [
+      "report"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:logs:renderer-error"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 469,
+    "end_line": 469,
+    "member": "hermesDesktop.logLine",
+    "definition": "logLine: (line: string): void => ipcRenderer.send('hermes:logs:renderer-line', line)",
+    "parameters": [
+      "line: string"
+    ],
+    "channels": [
+      {
+        "operation": "send",
+        "channel": "hermes:logs:renderer-line"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 470,
+    "end_line": 470,
+    "member": "hermesDesktop.readDir",
+    "definition": "readDir: dirPath => ipcRenderer.invoke('hermes:fs:readDir', dirPath)",
+    "parameters": [
+      "dirPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fs:readDir"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 471,
+    "end_line": 471,
+    "member": "hermesDesktop.gitRoot",
+    "definition": "gitRoot: startPath => ipcRenderer.invoke('hermes:fs:gitRoot', startPath)",
+    "parameters": [
+      "startPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fs:gitRoot"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 472,
+    "end_line": 472,
+    "member": "hermesDesktop.revealPath",
+    "definition": "revealPath: targetPath => ipcRenderer.invoke('hermes:fs:reveal', targetPath)",
+    "parameters": [
+      "targetPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fs:reveal"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 473,
+    "end_line": 473,
+    "member": "hermesDesktop.openDir",
+    "definition": "openDir: dirPath => ipcRenderer.invoke('hermes:fs:openDir', dirPath)",
+    "parameters": [
+      "dirPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fs:openDir"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 474,
+    "end_line": 474,
+    "member": "hermesDesktop.desktopPluginsRoot",
+    "definition": "desktopPluginsRoot: () => ipcRenderer.invoke('hermes:fs:desktopPluginsRoot')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fs:desktopPluginsRoot"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 475,
+    "end_line": 475,
+    "member": "hermesDesktop.reconcileDesktopPlugins",
+    "definition": "reconcileDesktopPlugins: () => ipcRenderer.invoke('hermes:fs:reconcileDesktopPlugins')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fs:reconcileDesktopPlugins"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 476,
+    "end_line": 476,
+    "member": "hermesDesktop.logsRoot",
+    "definition": "logsRoot: (profile?: string) => ipcRenderer.invoke('hermes:fs:logsRoot', profile)",
+    "parameters": [
+      "profile?: string"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fs:logsRoot"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 477,
+    "end_line": 477,
+    "member": "hermesDesktop.renamePath",
+    "definition": "renamePath: (targetPath, newName) => ipcRenderer.invoke('hermes:fs:rename', targetPath, newName)",
+    "parameters": [
+      "targetPath",
+      "newName"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fs:rename"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 478,
+    "end_line": 478,
+    "member": "hermesDesktop.writeTextFile",
+    "definition": "writeTextFile: (filePath, content) => ipcRenderer.invoke('hermes:fs:writeText', filePath, content)",
+    "parameters": [
+      "filePath",
+      "content"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fs:writeText"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 479,
+    "end_line": 479,
+    "member": "hermesDesktop.trashPath",
+    "definition": "trashPath: targetPath => ipcRenderer.invoke('hermes:fs:trash', targetPath)",
+    "parameters": [
+      "targetPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:fs:trash"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 481,
+    "end_line": 481,
+    "member": "hermesDesktop.git.worktreeList",
+    "definition": "worktreeList: repoPath => ipcRenderer.invoke('hermes:git:worktreeList', repoPath)",
+    "parameters": [
+      "repoPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:worktreeList"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 482,
+    "end_line": 482,
+    "member": "hermesDesktop.git.worktreeAdd",
+    "definition": "worktreeAdd: (repoPath, options) => ipcRenderer.invoke('hermes:git:worktreeAdd', repoPath, options)",
+    "parameters": [
+      "repoPath",
+      "options"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:worktreeAdd"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 483,
+    "end_line": 484,
+    "member": "hermesDesktop.git.worktreeRemove",
+    "definition": "worktreeRemove: (repoPath, worktreePath, options) =>\n      ipcRenderer.invoke('hermes:git:worktreeRemove', repoPath, worktreePath, options)",
+    "parameters": [
+      "repoPath",
+      "worktreePath",
+      "options"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:worktreeRemove"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 485,
+    "end_line": 485,
+    "member": "hermesDesktop.git.branchSwitch",
+    "definition": "branchSwitch: (repoPath, branch) => ipcRenderer.invoke('hermes:git:branchSwitch', repoPath, branch)",
+    "parameters": [
+      "repoPath",
+      "branch"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:branchSwitch"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 486,
+    "end_line": 486,
+    "member": "hermesDesktop.git.branchList",
+    "definition": "branchList: repoPath => ipcRenderer.invoke('hermes:git:branchList', repoPath)",
+    "parameters": [
+      "repoPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:branchList"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 487,
+    "end_line": 487,
+    "member": "hermesDesktop.git.baseBranchList",
+    "definition": "baseBranchList: repoPath => ipcRenderer.invoke('hermes:git:baseBranchList', repoPath)",
+    "parameters": [
+      "repoPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:baseBranchList"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 488,
+    "end_line": 488,
+    "member": "hermesDesktop.git.repoStatus",
+    "definition": "repoStatus: repoPath => ipcRenderer.invoke('hermes:git:repoStatus', repoPath)",
+    "parameters": [
+      "repoPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:repoStatus"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 489,
+    "end_line": 489,
+    "member": "hermesDesktop.git.fileDiff",
+    "definition": "fileDiff: (repoPath, filePath) => ipcRenderer.invoke('hermes:git:fileDiff', repoPath, filePath)",
+    "parameters": [
+      "repoPath",
+      "filePath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:fileDiff"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 490,
+    "end_line": 490,
+    "member": "hermesDesktop.git.scanRepos",
+    "definition": "scanRepos: (roots, options) => ipcRenderer.invoke('hermes:git:scanRepos', roots, options)",
+    "parameters": [
+      "roots",
+      "options"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:scanRepos"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 492,
+    "end_line": 492,
+    "member": "hermesDesktop.git.review.list",
+    "definition": "list: (repoPath, scope, baseRef) => ipcRenderer.invoke('hermes:git:review:list', repoPath, scope, baseRef)",
+    "parameters": [
+      "repoPath",
+      "scope",
+      "baseRef"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:list"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 493,
+    "end_line": 494,
+    "member": "hermesDesktop.git.review.diff",
+    "definition": "diff: (repoPath, filePath, scope, baseRef, staged) =>\n        ipcRenderer.invoke('hermes:git:review:diff', repoPath, filePath, scope, baseRef, staged)",
+    "parameters": [
+      "repoPath",
+      "filePath",
+      "scope",
+      "baseRef",
+      "staged"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:diff"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 495,
+    "end_line": 495,
+    "member": "hermesDesktop.git.review.stage",
+    "definition": "stage: (repoPath, filePath) => ipcRenderer.invoke('hermes:git:review:stage', repoPath, filePath)",
+    "parameters": [
+      "repoPath",
+      "filePath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:stage"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 496,
+    "end_line": 496,
+    "member": "hermesDesktop.git.review.unstage",
+    "definition": "unstage: (repoPath, filePath) => ipcRenderer.invoke('hermes:git:review:unstage', repoPath, filePath)",
+    "parameters": [
+      "repoPath",
+      "filePath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:unstage"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 497,
+    "end_line": 497,
+    "member": "hermesDesktop.git.review.revert",
+    "definition": "revert: (repoPath, filePath) => ipcRenderer.invoke('hermes:git:review:revert', repoPath, filePath)",
+    "parameters": [
+      "repoPath",
+      "filePath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:revert"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 498,
+    "end_line": 498,
+    "member": "hermesDesktop.git.review.revParse",
+    "definition": "revParse: (repoPath, ref) => ipcRenderer.invoke('hermes:git:review:revParse', repoPath, ref)",
+    "parameters": [
+      "repoPath",
+      "ref"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:revParse"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 499,
+    "end_line": 499,
+    "member": "hermesDesktop.git.review.commit",
+    "definition": "commit: (repoPath, message, push) => ipcRenderer.invoke('hermes:git:review:commit', repoPath, message, push)",
+    "parameters": [
+      "repoPath",
+      "message",
+      "push"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:commit"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 500,
+    "end_line": 500,
+    "member": "hermesDesktop.git.review.commitContext",
+    "definition": "commitContext: repoPath => ipcRenderer.invoke('hermes:git:review:commitContext', repoPath)",
+    "parameters": [
+      "repoPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:commitContext"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 501,
+    "end_line": 501,
+    "member": "hermesDesktop.git.review.push",
+    "definition": "push: repoPath => ipcRenderer.invoke('hermes:git:review:push', repoPath)",
+    "parameters": [
+      "repoPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:push"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 502,
+    "end_line": 502,
+    "member": "hermesDesktop.git.review.shipInfo",
+    "definition": "shipInfo: repoPath => ipcRenderer.invoke('hermes:git:review:shipInfo', repoPath)",
+    "parameters": [
+      "repoPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:shipInfo"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 503,
+    "end_line": 504,
+    "member": "hermesDesktop.git.review.prList",
+    "definition": "prList: (repoPath, branches, numbers) =>\n        ipcRenderer.invoke('hermes:git:review:prList', repoPath, branches, numbers)",
+    "parameters": [
+      "repoPath",
+      "branches",
+      "numbers"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:prList"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 505,
+    "end_line": 505,
+    "member": "hermesDesktop.git.review.createPr",
+    "definition": "createPr: repoPath => ipcRenderer.invoke('hermes:git:review:createPr', repoPath)",
+    "parameters": [
+      "repoPath"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:git:review:createPr"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 509,
+    "end_line": 509,
+    "member": "hermesDesktop.terminal.attach",
+    "definition": "attach: id => ipcRenderer.invoke('hermes:terminal:attach', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:terminal:attach"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 510,
+    "end_line": 510,
+    "member": "hermesDesktop.terminal.cwd",
+    "definition": "cwd: id => ipcRenderer.invoke('hermes:terminal:cwd', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:terminal:cwd"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 511,
+    "end_line": 511,
+    "member": "hermesDesktop.terminal.dispose",
+    "definition": "dispose: id => ipcRenderer.invoke('hermes:terminal:dispose', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:terminal:dispose"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 512,
+    "end_line": 512,
+    "member": "hermesDesktop.terminal.resize",
+    "definition": "resize: (id, size) => ipcRenderer.invoke('hermes:terminal:resize', id, size)",
+    "parameters": [
+      "id",
+      "size"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:terminal:resize"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 513,
+    "end_line": 513,
+    "member": "hermesDesktop.terminal.start",
+    "definition": "start: options => ipcRenderer.invoke('hermes:terminal:start', options)",
+    "parameters": [
+      "options"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:terminal:start"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 514,
+    "end_line": 514,
+    "member": "hermesDesktop.terminal.write",
+    "definition": "write: (id, data) => ipcRenderer.invoke('hermes:terminal:write', id, data)",
+    "parameters": [
+      "id",
+      "data"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:terminal:write"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 515,
+    "end_line": 521,
+    "member": "hermesDesktop.terminal.onData",
+    "definition": "onData: (id, callback) => {\n      const channel = `hermes:terminal:${id}:data`\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on(channel, listener)\n\n      return () => ipcRenderer.removeListener(channel, listener)\n    }",
+    "parameters": [
+      "id",
+      "callback"
+    ],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 522,
+    "end_line": 528,
+    "member": "hermesDesktop.terminal.onExit",
+    "definition": "onExit: (id, callback) => {\n      const channel = `hermes:terminal:${id}:exit`\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on(channel, listener)\n\n      return () => ipcRenderer.removeListener(channel, listener)\n    }",
+    "parameters": [
+      "id",
+      "callback"
+    ],
+    "channels": []
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 530,
+    "end_line": 535,
+    "member": "hermesDesktop.onClosePreviewRequested",
+    "definition": "onClosePreviewRequested: callback => {\n    const listener = () => callback()\n    ipcRenderer.on('hermes:close-preview-requested', listener)\n\n    return () => ipcRenderer.removeListener('hermes:close-preview-requested', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:close-preview-requested"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:close-preview-requested"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 536,
+    "end_line": 541,
+    "member": "hermesDesktop.onPreviewNav",
+    "definition": "onPreviewNav: callback => {\n    const listener = (_event, command) => callback(command)\n    ipcRenderer.on('hermes:preview-nav', listener)\n\n    return () => ipcRenderer.removeListener('hermes:preview-nav', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:preview-nav"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:preview-nav"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 542,
+    "end_line": 547,
+    "member": "hermesDesktop.onOpenFolderRequested",
+    "definition": "onOpenFolderRequested: callback => {\n    const listener = () => callback()\n    ipcRenderer.on('hermes:open-folder-requested', listener)\n\n    return () => ipcRenderer.removeListener('hermes:open-folder-requested', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:open-folder-requested"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:open-folder-requested"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 548,
+    "end_line": 553,
+    "member": "hermesDesktop.onOpenUpdatesRequested",
+    "definition": "onOpenUpdatesRequested: callback => {\n    const listener = () => callback()\n    ipcRenderer.on('hermes:open-updates', listener)\n\n    return () => ipcRenderer.removeListener('hermes:open-updates', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:open-updates"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:open-updates"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 554,
+    "end_line": 559,
+    "member": "hermesDesktop.onDeepLink",
+    "definition": "onDeepLink: callback => {\n    const listener = (_event, payload) => callback(payload)\n    ipcRenderer.on('hermes:deep-link', listener)\n\n    return () => ipcRenderer.removeListener('hermes:deep-link', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:deep-link"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:deep-link"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 560,
+    "end_line": 560,
+    "member": "hermesDesktop.signalDeepLinkReady",
+    "definition": "signalDeepLinkReady: () => ipcRenderer.invoke('hermes:deep-link-ready')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:deep-link-ready"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 561,
+    "end_line": 561,
+    "member": "hermesDesktop.probePluginRepo",
+    "definition": "probePluginRepo: payload => ipcRenderer.invoke('hermes:plugin:probe', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:plugin:probe"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 562,
+    "end_line": 562,
+    "member": "hermesDesktop.installDesktopPlugin",
+    "definition": "installDesktopPlugin: payload => ipcRenderer.invoke('hermes:plugin:installDesktop', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:plugin:installDesktop"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 563,
+    "end_line": 563,
+    "member": "hermesDesktop.removeDesktopPlugin",
+    "definition": "removeDesktopPlugin: payload => ipcRenderer.invoke('hermes:plugin:removeDesktop', payload)",
+    "parameters": [
+      "payload"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:plugin:removeDesktop"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 564,
+    "end_line": 569,
+    "member": "hermesDesktop.onWindowStateChanged",
+    "definition": "onWindowStateChanged: callback => {\n    const listener = (_event, payload) => callback(payload)\n    ipcRenderer.on('hermes:window-state-changed', listener)\n\n    return () => ipcRenderer.removeListener('hermes:window-state-changed', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:window-state-changed"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:window-state-changed"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 570,
+    "end_line": 575,
+    "member": "hermesDesktop.onFocusSession",
+    "definition": "onFocusSession: callback => {\n    const listener = (_event, sessionId) => callback(sessionId)\n    ipcRenderer.on('hermes:focus-session', listener)\n\n    return () => ipcRenderer.removeListener('hermes:focus-session', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:focus-session"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:focus-session"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 576,
+    "end_line": 581,
+    "member": "hermesDesktop.onNotificationAction",
+    "definition": "onNotificationAction: callback => {\n    const listener = (_event, payload) => callback(payload)\n    ipcRenderer.on('hermes:notification-action', listener)\n\n    return () => ipcRenderer.removeListener('hermes:notification-action', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:notification-action"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:notification-action"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 582,
+    "end_line": 587,
+    "member": "hermesDesktop.onNotificationActivate",
+    "definition": "onNotificationActivate: callback => {\n    const listener = (_event, payload) => callback(payload)\n    ipcRenderer.on('hermes:notification-activate', listener)\n\n    return () => ipcRenderer.removeListener('hermes:notification-activate', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:notification-activate"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:notification-activate"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 588,
+    "end_line": 593,
+    "member": "hermesDesktop.onExternalOpenFailed",
+    "definition": "onExternalOpenFailed: callback => {\n    const listener = (_event, payload) => callback(payload)\n    ipcRenderer.on('hermes:external-open-failed', listener)\n\n    return () => ipcRenderer.removeListener('hermes:external-open-failed', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:external-open-failed"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:external-open-failed"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 594,
+    "end_line": 599,
+    "member": "hermesDesktop.onPreviewFileChanged",
+    "definition": "onPreviewFileChanged: callback => {\n    const listener = (_event, payload) => callback(payload)\n    ipcRenderer.on('hermes:preview-file-changed', listener)\n\n    return () => ipcRenderer.removeListener('hermes:preview-file-changed', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:preview-file-changed"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:preview-file-changed"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 600,
+    "end_line": 605,
+    "member": "hermesDesktop.onBackendExit",
+    "definition": "onBackendExit: callback => {\n    const listener = (_event, payload) => callback(payload)\n    ipcRenderer.on('hermes:backend-exit', listener)\n\n    return () => ipcRenderer.removeListener('hermes:backend-exit', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:backend-exit"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:backend-exit"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 608,
+    "end_line": 613,
+    "member": "hermesDesktop.onConnectionApplied",
+    "definition": "onConnectionApplied: callback => {\n    const listener = () => callback()\n    ipcRenderer.on('hermes:connection:applied', listener)\n\n    return () => ipcRenderer.removeListener('hermes:connection:applied', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:connection:applied"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:connection:applied"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 614,
+    "end_line": 619,
+    "member": "hermesDesktop.onPowerResume",
+    "definition": "onPowerResume: callback => {\n    const listener = () => callback()\n    ipcRenderer.on('hermes:power-resume', listener)\n\n    return () => ipcRenderer.removeListener('hermes:power-resume', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:power-resume"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:power-resume"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 621,
+    "end_line": 621,
+    "member": "hermesDesktop.getOnBattery",
+    "definition": "getOnBattery: () => ipcRenderer.invoke('hermes:power-battery:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:power-battery:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 622,
+    "end_line": 627,
+    "member": "hermesDesktop.onBatteryChanged",
+    "definition": "onBatteryChanged: callback => {\n    const listener = (_event, onBattery) => callback(Boolean(onBattery))\n    ipcRenderer.on('hermes:power-battery', listener)\n\n    return () => ipcRenderer.removeListener('hermes:power-battery', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:power-battery"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:power-battery"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 628,
+    "end_line": 633,
+    "member": "hermesDesktop.onBootProgress",
+    "definition": "onBootProgress: callback => {\n    const listener = (_event, payload) => callback(payload)\n    ipcRenderer.on('hermes:boot-progress', listener)\n\n    return () => ipcRenderer.removeListener('hermes:boot-progress', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:boot-progress"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:boot-progress"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 639,
+    "end_line": 639,
+    "member": "hermesDesktop.getBootstrapState",
+    "definition": "getBootstrapState: () => ipcRenderer.invoke('hermes:bootstrap:get')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:bootstrap:get"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 640,
+    "end_line": 640,
+    "member": "hermesDesktop.probeLocalBackend",
+    "definition": "probeLocalBackend: () => ipcRenderer.invoke('hermes:local-backend:probe')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:local-backend:probe"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 641,
+    "end_line": 641,
+    "member": "hermesDesktop.continueBootstrapLocal",
+    "definition": "continueBootstrapLocal: () => ipcRenderer.invoke('hermes:bootstrap:continue-local')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:bootstrap:continue-local"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 642,
+    "end_line": 642,
+    "member": "hermesDesktop.recycleBackend",
+    "definition": "recycleBackend: profile => ipcRenderer.invoke('hermes:backend:recycle', profile)",
+    "parameters": [
+      "profile"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:backend:recycle"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 643,
+    "end_line": 643,
+    "member": "hermesDesktop.resetBootstrap",
+    "definition": "resetBootstrap: () => ipcRenderer.invoke('hermes:bootstrap:reset')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:bootstrap:reset"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 645,
+    "end_line": 645,
+    "member": "hermesDesktop.updateHold.recheck",
+    "definition": "recheck: () => ipcRenderer.invoke('hermes:update-hold:recheck')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:update-hold:recheck"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 646,
+    "end_line": 646,
+    "member": "hermesDesktop.updateHold.quit",
+    "definition": "quit: () => ipcRenderer.invoke('hermes:update-hold:quit')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:update-hold:quit"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 647,
+    "end_line": 648,
+    "member": "hermesDesktop.updateHold.startAnyway",
+    "definition": "startAnyway: (request: { holdId: string; confirmed: true }) =>\n      ipcRenderer.invoke('hermes:update-hold:start-anyway', request)",
+    "parameters": [
+      "request: { holdId: string; confirmed: true }"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:update-hold:start-anyway"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 650,
+    "end_line": 650,
+    "member": "hermesDesktop.repairBootstrap",
+    "definition": "repairBootstrap: () => ipcRenderer.invoke('hermes:bootstrap:repair')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:bootstrap:repair"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 651,
+    "end_line": 651,
+    "member": "hermesDesktop.cancelBootstrap",
+    "definition": "cancelBootstrap: () => ipcRenderer.invoke('hermes:bootstrap:cancel')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:bootstrap:cancel"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 652,
+    "end_line": 657,
+    "member": "hermesDesktop.onBootstrapEvent",
+    "definition": "onBootstrapEvent: callback => {\n    const listener = (_event, payload) => callback(payload)\n    ipcRenderer.on('hermes:bootstrap:event', listener)\n\n    return () => ipcRenderer.removeListener('hermes:bootstrap:event', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:bootstrap:event"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:bootstrap:event"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 658,
+    "end_line": 658,
+    "member": "hermesDesktop.getVersion",
+    "definition": "getVersion: () => ipcRenderer.invoke('hermes:version')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:version"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 659,
+    "end_line": 659,
+    "member": "hermesDesktop.relaunchApp",
+    "definition": "relaunchApp: () => ipcRenderer.invoke('hermes:app:relaunch')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:app:relaunch"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 660,
+    "end_line": 660,
+    "member": "hermesDesktop.getMachineProfile",
+    "definition": "getMachineProfile: () => ipcRenderer.invoke('hermes:machine:profile')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:machine:profile"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 661,
+    "end_line": 661,
+    "member": "hermesDesktop.getRemoteDisplayReason",
+    "definition": "getRemoteDisplayReason: () => ipcRenderer.invoke('hermes:get-remote-display-reason')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:get-remote-display-reason"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 663,
+    "end_line": 663,
+    "member": "hermesDesktop.uninstall.summary",
+    "definition": "summary: () => ipcRenderer.invoke('hermes:uninstall:summary')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:uninstall:summary"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 664,
+    "end_line": 664,
+    "member": "hermesDesktop.uninstall.run",
+    "definition": "run: mode => ipcRenderer.invoke('hermes:uninstall:run', { mode })",
+    "parameters": [
+      "mode"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:uninstall:run"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 665,
+    "end_line": 665,
+    "member": "hermesDesktop.uninstall.openAppsSettings",
+    "definition": "openAppsSettings: () => ipcRenderer.invoke('hermes:uninstall:openAppsSettings')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:uninstall:openAppsSettings"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 668,
+    "end_line": 668,
+    "member": "hermesDesktop.updates.check",
+    "definition": "check: opts => ipcRenderer.invoke('hermes:updates:check', opts)",
+    "parameters": [
+      "opts"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:updates:check"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 669,
+    "end_line": 669,
+    "member": "hermesDesktop.updates.apply",
+    "definition": "apply: opts => ipcRenderer.invoke('hermes:updates:apply', opts)",
+    "parameters": [
+      "opts"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:updates:apply"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 670,
+    "end_line": 670,
+    "member": "hermesDesktop.updates.setChannel",
+    "definition": "setChannel: name => ipcRenderer.invoke('hermes:updates:channel:set', name)",
+    "parameters": [
+      "name"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:updates:channel:set"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 671,
+    "end_line": 676,
+    "member": "hermesDesktop.updates.onProgress",
+    "definition": "onProgress: callback => {\n      const listener = (_event, payload) => callback(payload)\n      ipcRenderer.on('hermes:updates:progress', listener)\n\n      return () => ipcRenderer.removeListener('hermes:updates:progress', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:updates:progress"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:updates:progress"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 677,
+    "end_line": 677,
+    "member": "hermesDesktop.updates.takePendingRun",
+    "definition": "takePendingRun: () => ipcRenderer.invoke('hermes:updates:metric:take')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:updates:metric:take"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 678,
+    "end_line": 678,
+    "member": "hermesDesktop.updates.ackPendingRun",
+    "definition": "ackPendingRun: sent => ipcRenderer.invoke('hermes:updates:metric:ack', sent)",
+    "parameters": [
+      "sent"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:updates:metric:ack"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 679,
+    "end_line": 684,
+    "member": "hermesDesktop.updates.onPendingRun",
+    "definition": "onPendingRun: callback => {\n      const listener = () => callback()\n      ipcRenderer.on('hermes:updates:metric:pending', listener)\n\n      return () => ipcRenderer.removeListener('hermes:updates:metric:pending', listener)\n    }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:updates:metric:pending"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:updates:metric:pending"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 687,
+    "end_line": 687,
+    "member": "hermesDesktop.desktopMetrics.setEnabled",
+    "definition": "setEnabled: (on, profile) => ipcRenderer.invoke('hermes:desktop-metrics:set-enabled', on, profile)",
+    "parameters": [
+      "on",
+      "profile"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:desktop-metrics:set-enabled"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 688,
+    "end_line": 688,
+    "member": "hermesDesktop.desktopMetrics.takeRendererCrashes",
+    "definition": "takeRendererCrashes: () => ipcRenderer.invoke('hermes:desktop-metrics:crash:take')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:desktop-metrics:crash:take"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 689,
+    "end_line": 689,
+    "member": "hermesDesktop.desktopMetrics.ackRendererCrashes",
+    "definition": "ackRendererCrashes: sent => ipcRenderer.invoke('hermes:desktop-metrics:crash:ack', sent)",
+    "parameters": [
+      "sent"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:desktop-metrics:crash:ack"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 692,
+    "end_line": 692,
+    "member": "hermesDesktop.themes.fetchMarketplace",
+    "definition": "fetchMarketplace: id => ipcRenderer.invoke('hermes:vscode-theme:fetch', id)",
+    "parameters": [
+      "id"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:vscode-theme:fetch"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 693,
+    "end_line": 693,
+    "member": "hermesDesktop.themes.searchMarketplace",
+    "definition": "searchMarketplace: query => ipcRenderer.invoke('hermes:vscode-theme:search', query)",
+    "parameters": [
+      "query"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:vscode-theme:search"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 701,
+    "end_line": 701,
+    "member": "hermesDesktop.findInPage",
+    "definition": "findInPage: (query, options) => ipcRenderer.invoke('hermes:find-in-page', query, options)",
+    "parameters": [
+      "query",
+      "options"
+    ],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:find-in-page"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 702,
+    "end_line": 702,
+    "member": "hermesDesktop.stopFindInPage",
+    "definition": "stopFindInPage: () => ipcRenderer.invoke('hermes:stop-find-in-page')",
+    "parameters": [],
+    "channels": [
+      {
+        "operation": "invoke",
+        "channel": "hermes:stop-find-in-page"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 703,
+    "end_line": 708,
+    "member": "hermesDesktop.onFoundInPage",
+    "definition": "onFoundInPage: callback => {\n    const listener = (_event, result) => callback(result)\n    ipcRenderer.on('hermes:found-in-page', listener)\n\n    return () => ipcRenderer.removeListener('hermes:found-in-page', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:found-in-page"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:found-in-page"
+      }
+    ]
+  },
+  {
+    "file": "C:/Users/bharg/AppData/Local/hermes/hermes-agent/apps/desktop/electron/preload.ts",
+    "line": 712,
+    "end_line": 717,
+    "member": "hermesDesktop.onOpenFindBarRequested",
+    "definition": "onOpenFindBarRequested: callback => {\n    const listener = () => callback()\n    ipcRenderer.on('hermes:open-find-bar', listener)\n\n    return () => ipcRenderer.removeListener('hermes:open-find-bar', listener)\n  }",
+    "parameters": [
+      "callback"
+    ],
+    "channels": [
+      {
+        "operation": "on",
+        "channel": "hermes:open-find-bar"
+      },
+      {
+        "operation": "removeListener",
+        "channel": "hermes:open-find-bar"
+      }
+    ]
+  }
+]

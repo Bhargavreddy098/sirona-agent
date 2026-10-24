@@ -1,0 +1,11 @@
+{
+  "modules": 2593,
+  "functions": 47145,
+  "contracts": 399,
+  "models": 902,
+  "rpc_handlers": 146,
+  "http_routes": 359,
+  "sql_fragments": 151,
+  "parse_errors": [],
+  "limits": "Inert AST across repository Python excluding presentation/tests/deps/skills/output. Static candidates and source ranges do not establish runtime reachability or full dynamic dependency resolution."
+}

@@ -1,0 +1,21 @@
+{
+  "generated_at": "2026-10-24T09:20:30.495Z",
+  "root": "C:/Users/bharg/AppData/Local/hermes/hermes-agent",
+  "modules": 3892,
+  "components": 1411,
+  "stores": 878,
+  "calls": 2203,
+  "ipc": 526,
+  "ipc_literal_channels": 261,
+  "bridge_members": 270,
+  "types": 4364,
+  "parse_errors": 0,
+  "limitations": [
+    "AST syntax observations, not runtime reachability",
+    "JSX child sets are lexical nesting, not a mounted instance tree",
+    "Store consumers matched by identifier, not resolved symbol identity",
+    "Dynamic channels/call targets recorded but not resolved",
+    "Callback payload and policy semantics require linked source review",
+    "No analyzed target modules were executed"
+  ]
+}
