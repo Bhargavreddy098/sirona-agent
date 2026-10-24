@@ -161,4 +161,25 @@ export const api = {
 
   // Projects
   getProjects: () => fetchJson<{ projects: any[] }>('/api/projects'),
+
+  // Workspace Files
+  getFileTree: (path = '.', maxDepth = 4) =>
+    fetchJson<{ root: string; name: string; tree: any[] }>(`/api/files/tree?path=${encodeURIComponent(path)}&max_depth=${maxDepth}`),
+  readWorkspaceFile: (path: string, offset = 0, limit?: number) => {
+    const params = new URLSearchParams({ path, offset: String(offset) })
+    if (limit) params.append('limit', String(limit))
+    return fetchJson<{ path: string; name: string; content: string; total_lines: number; size: number; language: string }>(`/api/files/read?${params}`)
+  },
+  writeWorkspaceFile: (path: string, content: string, overwrite = true) =>
+    fetchJson<{ success: boolean; path: string; bytes_written: number }>('/api/files/write', {
+      method: 'POST',
+      body: JSON.stringify({ path, content, overwrite }),
+    }),
+  searchFiles: (query: string, path = '.', limit = 50) =>
+    fetchJson<{ query: string; matches: any[]; total: number }>(`/api/files/search?query=${encodeURIComponent(query)}&path=${encodeURIComponent(path)}&limit=${limit}`),
+  revealFile: (path: string) =>
+    fetchJson<{ revealed: boolean; path: string }>('/api/files/reveal', {
+      method: 'POST',
+      body: JSON.stringify({ path }),
+    }),
 }

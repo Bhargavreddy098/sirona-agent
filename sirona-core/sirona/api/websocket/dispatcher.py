@@ -162,6 +162,38 @@ async def dispatch_rpc(method: str, params: Dict[str, Any], app_state: Any) -> D
         )
         return result
 
+    elif method in ("files.tree", "workspace.tree"):
+        from ..routes.files import get_file_tree
+        path = params.get("path", ".")
+        max_depth = params.get("max_depth", 4)
+        include_hidden = params.get("include_hidden", False)
+        return await get_file_tree(path=path, max_depth=max_depth, include_hidden=include_hidden)
+
+    elif method in ("files.read", "workspace.read"):
+        from ..routes.files import read_workspace_file
+        path = params.get("path")
+        if not path:
+            return {"error": "path required"}
+        offset = params.get("offset", 0)
+        limit = params.get("limit")
+        return await read_workspace_file(path=path, offset=offset, limit=limit)
+
+    elif method in ("files.write", "workspace.write"):
+        from ..routes.files import write_workspace_file, WriteFileRequest
+        path = params.get("path")
+        content = params.get("content", "")
+        overwrite = params.get("overwrite", True)
+        if not path:
+            return {"error": "path required"}
+        return await write_workspace_file(WriteFileRequest(path=path, content=content, overwrite=overwrite))
+
+    elif method in ("files.search", "workspace.search"):
+        from ..routes.files import search_workspace_files
+        query = params.get("query", "")
+        path = params.get("path", ".")
+        limit = params.get("limit", 50)
+        return await search_workspace_files(query=query, path=path, limit=limit)
+
     elif method == "slash.exec":
         operation = params.get("operation")
         payload = params.get("payload", {})
