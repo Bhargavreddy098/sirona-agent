@@ -1,2 +1,0 @@
-npm notice run sirona-next@0.1.0 check
-npm notice run tsc -b

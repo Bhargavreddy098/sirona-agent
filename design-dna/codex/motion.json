@@ -1,5 +1,0 @@
-{
-  "tabSwitch": "120ms ease-out",
-  "diffExpand": "180ms cubic-bezier(0.2, 0, 0, 1)",
-  "agentPulse": "1.2s ease-in-out infinite"
-}

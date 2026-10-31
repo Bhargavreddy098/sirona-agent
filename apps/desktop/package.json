@@ -1,0 +1,21 @@
+{
+  "name": "@sirona/desktop",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/main.cjs",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "start": "electron src/main.cjs",
+    "dev": "electron src/main.cjs"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.0",
+    "electron": "^43.0.0",
+    "typescript": "^5.7.0"
+  }
+}

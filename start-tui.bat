@@ -4,5 +4,5 @@ echo ==========================================================
 echo        Starting Sirona Interactive Terminal UI (TUI)
 echo ==========================================================
 
-cd tooling\sirona
+cd apps\cli
 npm start -- tui

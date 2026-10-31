@@ -1,4 +1,0 @@
-{
-  "live": true,
-  "ready": true
-}

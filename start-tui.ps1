@@ -2,5 +2,5 @@ Write-Host "==========================================================" -Foregro
 Write-Host "      Starting Sirona Interactive Terminal UI (TUI)       " -ForegroundColor Cyan
 Write-Host "==========================================================" -ForegroundColor Cyan
 
-Set-Location "$PSScriptRoot\tooling\sirona"
+Set-Location "$PSScriptRoot\apps\cli"
 npm start -- tui

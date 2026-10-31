@@ -4,5 +4,5 @@ echo ==========================================================
 echo       Starting Sirona PostgreSQL Backend (Node.js)
 echo ==========================================================
 
-cd backend
+cd apps\server
 npm run dev

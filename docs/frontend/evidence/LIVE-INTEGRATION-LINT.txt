@@ -1,2 +1,0 @@
-npm notice run sirona@0.1.0 lint
-npm notice run oxlint

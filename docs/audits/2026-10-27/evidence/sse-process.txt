@@ -1,7 +1,0 @@
-{"level":30,"time":1793090100592,"event":"backend.starting"}
-{"level":30,"time":1793090100672,"event":"dependency.ready","category":"database"}
-{"level":30,"time":1793090100679,"event":"dependency.ready","category":"cache"}
-{"level":30,"time":1793090101296,"event":"backend.listening"}
-{"status":200,"liveRead":"TIMEOUT_NO_LIVE_EVENT","reconnect":true,"invalidCursorStatus":410}
-{"level":30,"time":1793090104157,"event":"backend.stopping"}
-{"level":30,"time":1793090108150,"event":"backend.stopped"}

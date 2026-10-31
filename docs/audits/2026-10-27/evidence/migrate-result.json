@@ -1,6 +1,0 @@
-{
-  "command": "node migrations/runMigrations.js",
-  "database": "sirona_audit_20261027_bc556755",
-  "exitCode": 0,
-  "durationMs": 4284
-}

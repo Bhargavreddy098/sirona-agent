@@ -1,9 +1,0 @@
-{
-  "appliedAt": "2026-10-28T15:16:45.107Z",
-  "target": "sirona_workspace_p0_test_20261028",
-  "file": "022_execution_reliability.sql",
-  "checksum": "26b54d78a4b6f0fc65dbcd4fb4c0dc9af6b5c83978a979146799ab5e15f63f01",
-  "result": "passed",
-  "approval": "Explicit owner approval: migration 022 on isolated test database only",
-  "workingSironaMigrated": false
-}

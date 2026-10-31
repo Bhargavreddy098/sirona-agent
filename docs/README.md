@@ -29,3 +29,10 @@ Use the [external-agent guide](SIRONA-EXTERNAL-AGENT-GUIDE.md). For P5, use the 
 [Supporting documentation](../sironadocs/README.md) contains the normative architecture/security/API library as well as clearly separated historical material. Root AGENTS.md still determines which normative documents must be read. Archives are not current assignments.
 
 Non-Markdown evidence, guarded runners, JSON contracts and private rollback material remain in their original folders so their executable paths and accepted proof are preserved. Older embedded paths in immutable evidence resolve through [the relocation map](../sironadocs/relocation-map.json). Never overwrite accepted evidence simply to repair a historical path.
+
+
+## Per-feature end-to-end engineering workflow (documentation proposal)
+
+For a new feature or route, start with [the complete end-to-end feature workflow](FEATURE-END-TO-END-WORKFLOW.md), copy [the feature specification template](FEATURE-SPEC-TEMPLATE.md) into `docs/features/`, and use [the agent inspection/implementation prompts](FEATURE-AGENT-EXECUTION-PROMPT.md) only with the required explicit approval. For reliable discovery, see the [proposed root AGENTS.md integration](FEATURE-ROOT-AGENTS-INTEGRATION.md) and manually reconcile it with your actual root instructions. A [worked Run verification summary example](features/FEATURE-EXAMPLE-VERIFICATION-SUMMARY.md) traces UI → typed client → backend route/service → canonical state → UI.
+
+These added guides **do not change** any P0–P8 approvals or current STOP, do not grant authority to modify source or data, and do not resolve the reported SQLite/PostgreSQL database-owner conflict. The current `AGENTS.md`, handoff, owner decisions, and live source still govern. The example is not a requested implementation.

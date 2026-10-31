@@ -18,7 +18,10 @@ release/
 
 # Local third-party agent tooling; pinned setup lives beside the checkout.
 /tooling/agent-scripts/
+/scripts/agent-scripts/
 
 # Audited source archive contains local environment configuration; never commit it.
 /backend.zip
+.tmp/
+docs.zip
 

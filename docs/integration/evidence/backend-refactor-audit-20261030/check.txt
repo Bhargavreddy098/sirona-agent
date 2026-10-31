@@ -1,5 +1,0 @@
-
-> sirona-backend@1.0.0 check
-> node scripts/checkSyntax.js
-
-{ event: 'syntax.checked', files: 231, failed: 0 }

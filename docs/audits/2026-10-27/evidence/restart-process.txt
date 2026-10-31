@@ -1,7 +1,0 @@
-{"level":30,"time":1793089858937,"event":"backend.starting"}
-{"level":30,"time":1793089859031,"event":"dependency.ready","category":"database"}
-{"level":30,"time":1793089859047,"event":"dependency.ready","category":"cache"}
-{"level":30,"time":1793089860534,"event":"backend.listening"}
-[{"method":"POST","path":"/api/v1/session/bootstrap","status":200},{"method":"POST","path":"/api/v1/runs/a173e0e5-5f76-4787-becf-c9a3275e75bd/pause","status":202,"state":"paused"},{"method":"GET","path":"/health/ready","status":200},{"method":"GET","path":"/api/v1/session","status":200},{"method":"GET","path":"/api/v1/projects/2811619b-95bf-409f-8a7c-7062018212d8","status":200},{"method":"GET","path":"/api/v1/runs/a173e0e5-5f76-4787-becf-c9a3275e75bd","status":200,"state":"paused"},{"method":"POST","path":"/api/v1/session/bootstrap","status":400},{"method":"POST","path":"/api/v1/runs/a173e0e5-5f76-4787-becf-c9a3275e75bd/resume","status":202,"state":"running"},{"method":"POST","path":"/api/v1/runs/a173e0e5-5f76-4787-becf-c9a3275e75bd/cancel","status":202,"state":"cancelled"},{"method":"POST","path":"/api/v1/runs/a173e0e5-5f76-4787-becf-c9a3275e75bd/resume","status":409}]
-{"level":30,"time":1793089860754,"event":"backend.stopping"}
-{"level":30,"time":1793089860759,"event":"backend.stopped"}

@@ -1,6 +1,8 @@
 # Sirona Frontend Route Coverage Manifest
 
-This document records the exact reconciliation between the 170 backend routes across 16 domains and their frontend API client, type definitions, user experience surface, and operational status.
+> **Authoritative Inventory Reconciliation:** The live backend checkout exposes **148 registered routes** (3 health routes + 145 v1 routes across 13 mounted domains), verified via `backend/tests/routeInventory.js` and `backend/tests/admission.test.js`. 34 obsolete intent and contract planning routes have been decommissioned and unmounted, reducing the surface from the historical 170 endpoints.
+
+This document records the exact reconciliation between the live backend routes and their frontend API client, type definitions, user experience surface, and operational status.
 
 ## Status Classification Taxonomy
 
@@ -212,3 +214,13 @@ This document records the exact reconciliation between the 170 backend routes ac
 * **`indirect-orchestrated`**: **8 routes** (Turn leases, budget reservation, tool receipts; invoked internally by backend coordinators).
 * **`backend-only/webhook`**: **1 route** (`POST /webhooks/:triggerId` — External webhook ingress handler).
 * **Total Reconciled Endpoints**: **170 routes**. Zero unclassified or orphaned endpoints.
+
+---
+
+## Post-Simplification Route Status (146 Active Endpoints)
+
+Following the removal of obsolete workspace, managed project CRUD, goal, requirement, and build-contract systems:
+* **Retired & Removed**: **34 endpoints** (Identity workspace, managed projects CRUD, intent/goals/requirements, planning/contracts).
+* **Added Conversation Runs**: **2 endpoints** (`POST /api/v1/conversations/:id/runs`, `GET /api/v1/conversations/:id/runs`).
+* **Active Production Endpoints**: **146 routes** fully mapped and operating on the minimal loop:
+  `Conversation → AI Agent → Tools/Coding → Conditional Approval → Verification → Response`.

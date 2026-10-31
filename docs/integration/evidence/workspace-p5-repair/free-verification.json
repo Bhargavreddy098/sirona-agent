@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-30T09:58:37.672Z",
+  "timestamp": "2026-10-31T11:21:17.503Z",
   "database": "sirona_workspace_p0_test_20261028",
   "groups": [
     "graphCheckpoint",
@@ -13,7 +13,7 @@
     "orchestrationCanonicalJourney",
     "orchestrationModelRecovery"
   ],
-  "exitCode": 0,
+  "exitCode": 1,
   "runnerError": null,
   "inferenceCalls": 0,
   "migrationsApplied": 0,

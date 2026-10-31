@@ -7,11 +7,11 @@ echo ==========================================================
 netstat -ano | findstr :8000 | findstr LISTENING >nul
 if %errorlevel% neq 0 (
     echo [Sirona] Starting local backend service on port 8000...
-    start /b "" node "%~dp0backend\server.js"
+    start /b "" node "%~dp0apps\server\server.js"
     timeout /t 2 /nobreak >nul
 ) else (
     echo [Sirona] Local backend service active on port 8000.
 )
 
-cd "%~dp0frontend\sirona-next"
-npm run desktop
+cd "%~dp0apps\desktop"
+npm start

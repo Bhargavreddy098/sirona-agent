@@ -1,7 +1,0 @@
-{
-  "filename": "023_provider_credential_references.sql",
-  "sha256": "867db99fbb8b4940b15f23dd6e2698d1c946aa6bd7509793465f63d0ce3aaebd",
-  "target": "sirona_workspace_p0_test_20261028",
-  "appliedAt": "2026-10-29T01:16:03.000Z",
-  "status": "applied_isolated_only"
-}

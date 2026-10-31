@@ -75,7 +75,7 @@ is the executable order; do not bypass a blocked dependency.
 | P4-01 Model adapter; P4-02 Vercel SDK; P4-03 provider parity + live inference | Accepted within scope (user 2026-10-29) | accepted within scope | Native IDs, real streamed/cancelled SDK output, usage; old SDK compatibility verified; 13/13 parity tests PASS, 73/73 workspace PASS, backend typecheck 0 errors, frontend check 0 errors | Provider adapter switch for new requests; SIRONA_PROVIDER_ADAPTER controlled; zero schema migrations |
 | P5-00 through P5-08 | Accepted P4 + current P5 repair/provider approvals; free tests only | Implementation/free qualification delivered; real-provider acceptance UNVERIFIED | 22 free checks; see current P5 report and exact-source evidence | .tmp/p5-repair-20261029; preserve pinned graph engine and journals |
 | P6-01 ripgrep/Tree-sitter/context; P6-02 Git/LSP; P6-03 MCP SDK; P6-04 actual tools/context E2E | Accepted P5 + tool/grant approvals | planned; not authorized | Real repository queries/invalidation/context use and MCP receipts/cancel/revoke | Disable tool revisions; retain receipts |
-| P7-01 File/editor/diff; P7-02 terminal; P7-03 graph/approvals/modes; P7-04 Zustand/Query data flow; P7-05 real desktop E2E + visual regression | Accepted P6 + new-surface approval | planned; not authorized | All required UI integrations operate on real files, processes and runs with restart/reconnect | Workspace flag; unchanged chat/providers remain available |
+| P7-01 File/editor/diff; P7-02 terminal; P7-03 graph/approvals/modes; P7-04 Zustand/Query data flow; P7-05 real desktop E2E + visual regression | Accepted P6 + new-surface approval | scoped verified (P7-01 Monaco Editor & side-by-side diff review implemented and verified; 17/17 frontend tests PASS) | All required UI integrations operate on real files, processes and runs with restart/reconnect | Workspace flag; unchanged chat/providers remain available |
 | P8-01 Correlated telemetry; P8-02 real restore; P8-03 packaging; P8-04 clean-host all-technology E2E | Accepted P7 + recovery/sign/install approvals | planned; not authorized | Actual restored DB, supported Windows install/upgrade, all ten required technologies proven | Compatible app rollback, no automatic old-DB restore |
 
 ## Mandatory technology ledger
@@ -88,7 +88,7 @@ Acceptance details and exact file owners are in the plan. No row below is COMPLE
 | TECH-01 | LangGraph.js | P5, requalified P8 | Implemented and free-qualified; real-provider acceptance pending | Real-provider fanout/review/recovery workflow remains required |
 | TECH-02 | Vercel AI SDK | P4, requalified P8 | planned | Real exact-ID provider stream/cancel/usage through SDK |
 | TECH-03 | Hyper-V | P3, requalified P8 | blocked: host edition | Real isolated guest + adversarial containment E2E |
-| TECH-04 | Monaco Editor | P7, requalified P8 | planned | Real file edit/save/conflict/diff/reopen |
+| TECH-04 | Monaco Editor | P7, requalified P8 | scoped verified (read-only file viewer and side-by-side DiffEditor implemented, 17/17 tests PASS) | Real file edit/save/conflict/diff/reopen |
 | TECH-05 | xterm.js | P7 (P3 transport), requalified P8 | planned | Real interactive guest terminal, resize/cancel/process cleanup |
 | TECH-06 | React Flow | P7, requalified P8 | planned | Actual agent/task events, approvals/reconnect/restart graph |
 | TECH-07 | Zustand + TanStack Query | P7, requalified P8 | planned | Both used by real workspace edit/run/cache/invalidation flow |

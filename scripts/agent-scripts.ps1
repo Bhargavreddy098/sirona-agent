@@ -8,7 +8,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$checkout = Join-Path (Split-Path $PSScriptRoot -Parent) 'tooling/agent-scripts'
+$checkout = Join-Path $PSScriptRoot 'agent-scripts'
 $revision = '1159adf26ad007df38b87debb107d3946008d38b'
 $remote = 'https://github.com/steipete/agent-scripts.git'
 
