@@ -7,7 +7,10 @@ export function useWorkspace() {
   const [initializing, setInitializing] = useState(true);
   const [error, setError] = useState('');
   const [conversations, setConversations] = useState<Conversation[]>([]);
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [attachedFolder, setAttachedFolder] = useState<{ name: string; path?: string } | null>(null);
+  const projects: Project[] = attachedFolder
+    ? [{ id: attachedFolder.name, name: attachedFolder.name, primaryPath: attachedFolder.path, status: 'active', createdAt: '', updatedAt: '' } as Project]
+    : [];
   const [models, setModels] = useState<Model[]>([]);
   const [settings, setSettings] = useState<Settings>();
   const [active, setActive] = useState<Conversation>();
@@ -38,9 +41,8 @@ export function useWorkspace() {
   }, []);
 
   const loadHistory = useCallback(async () => {
-    const [history, projectList] = await Promise.all([api.conversations(), api.projects()]);
+    const history = await api.conversations();
     setConversations(history.sessions);
-    setProjects(projectList.projects);
   }, []);
 
   const connect = useCallback(async () => {
@@ -144,7 +146,7 @@ export function useWorkspace() {
     let conversation = activeRef.current;
     try {
       if (!conversation) {
-        conversation = (await api.create(prompt.trim().slice(0, 80), modelId, projectId)).conversation;
+        conversation = (await api.create(prompt.trim().slice(0, 80), modelId)).conversation;
         activeRef.current = conversation;
         setActive(conversation);
         await loadHistory();
@@ -205,24 +207,27 @@ export function useWorkspace() {
     }
   };
 
+  const attachFolder = (name: string, path?: string) => {
+    setAttachedFolder({ name, path });
+    setProjectId(name);
+  };
+
+  const detachFolder = () => {
+    setAttachedFolder(null);
+    setProjectId(undefined);
+  };
+
   const attachProject = (id: string) => {
-    if (busy.current) return;
-    setProjectId(id);
-    if (activeRef.current && activeRef.current.project_id !== id) newChat(id);
+    attachFolder(id);
   };
 
   const detachProject = () => {
-    if (busy.current) return;
-    setProjectId(undefined);
-    if (activeRef.current?.project_id) newChat(undefined);
+    detachFolder();
   };
 
-  const createProject = async (name: string, primaryPath?: string, description?: string) => {
-    const { project } = await api.createProject(name, primaryPath, description);
-    await loadHistory();
-    setProjectId(project.id);
-    if (activeRef.current && activeRef.current.project_id !== project.id) newChat(project.id);
-    return project;
+  const createProject = async (name: string, primaryPath?: string) => {
+    attachFolder(name, primaryPath);
+    return { id: name, name, primaryPath, status: 'active', createdAt: '', updatedAt: '' } as Project;
   };
 
   return {
@@ -236,6 +241,9 @@ export function useWorkspace() {
     settings,
     active,
     projectId,
+    attachedFolder,
+    attachFolder,
+    detachFolder,
     messages,
     modelId,
     setModelId: chooseModel,

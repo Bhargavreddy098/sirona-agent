@@ -1,15 +1,21 @@
-import { lazy, Suspense } from 'react';
-import { Terminal as TerminalIcon, X, Maximize2, Minimize2 } from 'lucide-react';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { XIcon } from '../../components/ui/Icons';
 
 const TerminalPanel = lazy(() =>
   import('../workspace/Terminal').then(module => ({ default: module.TerminalPanel }))
 );
 
+export interface LogEntry {
+  id: string;
+  text: string;
+  type?: 'ok' | 'er' | 'mut' | '';
+  time?: string;
+}
+
 export interface BottomTerminalDeckProps {
   projectId?: string;
   isOpen: boolean;
-  isMaximized: boolean;
-  onToggleMaximize: () => void;
+  logs?: LogEntry[];
   onClose: () => void;
   onBusy?: (busy: boolean) => void;
 }
@@ -17,75 +23,125 @@ export interface BottomTerminalDeckProps {
 export function BottomTerminalDeck({
   projectId,
   isOpen,
-  isMaximized,
-  onToggleMaximize,
+  logs = [],
   onClose,
   onBusy = () => {},
 }: BottomTerminalDeckProps) {
-  if (!isOpen) return null;
+  const [tab, setTab] = useState<'lg' | 'tm'>('lg');
+  const [height, setHeight] = useState(240);
+  const [isDragging, setIsDragging] = useState(false);
+  const deckRef = useRef<HTMLDivElement>(null);
+  const logRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll logs
+  useEffect(() => {
+    if (logRef.current) {
+      logRef.current.scrollTop = logRef.current.scrollHeight;
+    }
+  }, [logs]);
+
+  // Handle drag resizing
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setIsDragging(true);
+    e.currentTarget.setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDragging) return;
+    const windowHeight = window.innerHeight;
+    const newHeight = Math.max(120, Math.min(windowHeight * 0.7, windowHeight - e.clientY));
+    setHeight(newHeight);
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    setIsDragging(false);
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {}
+  };
 
   return (
-    <section
-      className={`bottom-terminal-deck flex flex-col shrink-0 border-t border-[var(--border-default)] bg-[var(--bg-canvas)] z-20 select-none transition-all duration-150 ${
-        isMaximized ? 'h-[65vh]' : 'h-64 sm:h-72'
-      }`}
-      aria-label="Integrated workspace terminal"
+    <div
+      ref={deckRef}
+      className={`dk ${isOpen ? 'open' : ''} ${isDragging ? 'drag' : ''}`}
+      id="dk"
+      style={{ height: isOpen ? `${height}px` : '0px' }}
+      aria-label="Integrated workspace dock"
     >
-      {/* Terminal Deck Header */}
-      <div className="flex items-center justify-between px-3.5 py-1.5 border-b border-[var(--border-default)] bg-[var(--bg-surface-subtle)] text-xs">
-        <div className="flex items-center gap-2">
-          <TerminalIcon size={14} className="text-[var(--accent-primary)]" />
-          <span className="font-semibold text-[var(--fg-primary)] tracking-tight">
-            Terminal
-          </span>
-          <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">
-            Docker WSL2 Container
-          </span>
-          <span className="hidden sm:inline text-[11px] text-zinc-400">
-            (toggle with <kbd className="font-mono text-[10px] px-1 py-0.5 rounded bg-zinc-200/60 dark:bg-zinc-800">Ctrl+`</kbd>)
-          </span>
-        </div>
+      {/* Resizable top handle */}
+      <div
+        className="rz"
+        id="rz"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        title="Drag to resize dock"
+      />
 
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            onClick={onToggleMaximize}
-            className="p-1 rounded text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/50 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
-            title={isMaximized ? 'Restore height' : 'Maximize terminal'}
-            aria-label={isMaximized ? 'Restore height' : 'Maximize terminal'}
-          >
-            {isMaximized ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
-          </button>
-          <button
-            type="button"
-            onClick={onClose}
-            className="p-1 rounded text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-200/50 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
-            title="Close terminal"
-            aria-label="Close terminal"
-          >
-            <X size={14} />
-          </button>
-        </div>
+      {/* Dock header tab bar */}
+      <div className="dkt">
+        <button
+          className={`chip ${tab === 'lg' ? 'sel' : ''}`}
+          data-dt="lg"
+          onClick={() => setTab('lg')}
+        >
+          Agent log
+        </button>
+        <button
+          className={`chip ${tab === 'tm' ? 'sel' : ''}`}
+          data-dt="tm"
+          onClick={() => setTab('tm')}
+        >
+          Terminal
+        </button>
+        <span className="sp" />
+        <button
+          className="ib"
+          data-act="dk"
+          aria-label="Close dock"
+          onClick={onClose}
+        >
+          <XIcon size={16} />
+        </button>
       </div>
 
-      {/* Terminal Screen Container */}
-      <div className="flex-1 min-h-0 relative bg-black">
-        {!projectId ? (
-          <div className="p-8 text-center text-zinc-400 text-xs">
-            Open or attach a project folder to connect the sandboxed terminal.
-          </div>
-        ) : (
-          <Suspense
-            fallback={
-              <div className="flex items-center justify-center h-full text-zinc-400 text-xs">
-                <span>Initializing sandboxed PTY session…</span>
+      {/* Agent log tab */}
+      {tab === 'lg' && (
+        <div className="lg" id="lg" ref={logRef} data-r="GET /runs/:id/events (SSE) · read-only">
+          {logs.length === 0 ? (
+            <div className="mut">No recent run events. Run logs stream here during active turns.</div>
+          ) : (
+            logs.map(log => (
+              <div key={log.id} className={log.type || ''}>
+                {log.text}
               </div>
-            }
-          >
-            <TerminalPanel projectId={projectId} onBusy={onBusy} />
-          </Suspense>
-        )}
-      </div>
-    </section>
+            ))
+          )}
+        </div>
+      )}
+
+      {/* Terminal tab */}
+      {tab === 'tm' && (
+        <div id="tm" style={{ flex: 1, display: 'flex', flexDirection: 'column' }} data-r="terminal ticket + WS (Docker WSL2)">
+          {!projectId ? (
+            <div className="lg" id="tl">
+              <div className="mut">
+                Sandbox status comes from GET /isolation/qualifications. Attach a folder to open a live terminal.
+              </div>
+            </div>
+          ) : (
+            <Suspense
+              fallback={
+                <div className="lg">
+                  <div className="mut">Connecting to Docker WSL2 container…</div>
+                </div>
+              }
+            >
+              <TerminalPanel projectId={projectId} onBusy={onBusy} />
+            </Suspense>
+          )}
+        </div>
+      )}
+    </div>
   );
 }

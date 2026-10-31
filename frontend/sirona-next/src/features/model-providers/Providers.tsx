@@ -160,7 +160,7 @@ export function Providers({
         {labels.map(label => (
           <button
             key={label}
-            className={`px-3 py-2 text-xs font-semibold rounded-t-lg transition-all border-b-2 cursor-pointer ${
+            className={`px-3 py-2 text-xs font-semibold transition-all border-b-2 cursor-pointer ${
               tab === label
                 ? 'border-[var(--accent-primary)] text-[var(--accent-text)] bg-[var(--bg-surface-subtle)]'
                 : 'border-transparent text-[var(--fg-secondary)] hover:text-[var(--fg-primary)] hover:bg-[var(--bg-hover)]'

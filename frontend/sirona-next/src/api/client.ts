@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import {sessionSchema,conversationSchema,messageSchema,projectSchema,modelSchema,connectionSchema,providerSchema,settingsSchema,type ProviderInput} from './schemas';
+import {sessionSchema,conversationSchema,messageSchema,modelSchema,connectionSchema,providerSchema,settingsSchema,type ProviderInput} from './schemas';
 import {readSse} from './sse.mjs';
 export class ApiError extends Error {constructor(public status:number,message:string){super(message)}}
 const eventSchema=z.discriminatedUnion('type',[z.object({type:z.literal('token'),token:z.string()}),z.object({type:z.literal('done')}),z.object({type:z.literal('error'),error:z.string(),code:z.string().optional()})]);
@@ -29,17 +29,18 @@ export const api={
     })().catch(error=>{bootstrap=null;throw error;});
     return bootstrap;
   },
+  session:()=>request('/session',sessionSchema),
+  logout:()=>request('/session',z.object({success:z.boolean().optional()}).passthrough(),'DELETE'),
+  capabilities:()=>request('/capabilities',z.object({capabilities:z.record(z.string(),z.unknown())}).passthrough()),
   conversations:()=>request('/conversations?scope=standalone',z.object({sessions:z.array(conversationSchema)})),
-  projects:()=>request('/projects',z.object({projects:z.array(projectSchema)})),
-  createProject:(name:string,primaryPath?:string,description?:string)=>request('/projects',z.object({project:projectSchema}),'POST',{name,primaryPath,description}),
   browseDirectories:(path?:string)=>request(`/fs/directories${path?`?path=${encodeURIComponent(path)}`:''}`,z.object({currentPath:z.string(),parentPath:z.string().nullable(),drives:z.array(z.object({name:z.string(),path:z.string()})),quickAccess:z.array(z.object({name:z.string(),path:z.string()})),directories:z.array(z.object({name:z.string(),path:z.string()}))})),
-  projectConversations:(id:string)=>request(`/projects/${id}/conversations`,z.object({sessions:z.array(conversationSchema)})),
   messages:(id:string,signal?:AbortSignal)=>request(`/conversations/${id}/messages?limit=500`,z.object({messages:z.array(messageSchema),total:z.number()}),'GET',undefined,signal),
-  create:(title:string,modelId:string,projectId?:string)=>request(projectId?`/projects/${projectId}/conversations`:'/conversations',z.object({conversation:conversationSchema}),'POST',projectId?{title,model:modelId}:{title,modelId}),
+  create:(title:string,modelId:string)=>request('/conversations',z.object({conversation:conversationSchema}),'POST',{title,modelId}),
   rename:(id:string,title:string)=>request(`/conversations/${id}`,z.object({conversation:conversationSchema}),'PATCH',{title}),
   updateModel:(id:string,modelId:string)=>request(`/conversations/${id}`,z.object({conversation:conversationSchema}),'PATCH',{modelId}),
   remove:(id:string)=>request(`/conversations/${id}`,z.object({success:z.boolean()}),'DELETE'),
   models:()=>request('/models',z.object({models:z.array(modelSchema)})),
+  verifyModel:(modelId:string)=>request('/models/verify',z.object({verified:z.boolean()}).passthrough(),'POST',{modelId}),
   providers:()=>request('/providers',z.object({providers:z.array(providerSchema)})),
   async credentialStatus(){if(!window.sirona?.getCredentialStatus)throw new Error('Credential protection status is available only in the Sirona desktop app.');return z.object({osEncryptionAvailable:z.boolean()}).parse(await window.sirona.getCredentialStatus());},
   connections:()=>request('/provider-connections',z.object({connections:z.array(connectionSchema)})),

@@ -1,145 +1,170 @@
-import {
-  Asterisk,
-  PanelLeftClose,
-  Plus,
-  MessageSquare,
-  Settings,
-  Zap,
-  Brain,
-} from 'lucide-react';
 import type { Conversation } from '../../api/schemas';
-import { History } from './History';
+import {
+  StarIcon,
+  SideIcon,
+  PlusIcon,
+  ChatIcon,
+  FolderIcon,
+  InboxIcon,
+  BoltIcon,
+  GearIcon,
+  MoonIcon,
+  SunIcon,
+} from '../ui/Icons';
+
+export type AppPage = 'chat' | 'files' | 'inbox' | 'automations' | 'settings';
 
 export interface SidebarProps {
-  page: 'chat' | 'settings' | 'workspace' | 'automation' | 'memory';
+  page: AppPage;
   locked: boolean;
   conversations: Conversation[];
   activeConversationId?: string;
-  onNavigate: (page: 'chat' | 'settings' | 'workspace' | 'automation' | 'memory') => void;
+  pendingApprovalsCount?: number;
+  connected?: boolean;
+  theme: 'light' | 'dark';
+  loadingHistory?: boolean;
+  onNavigate: (page: AppPage) => void;
   onNewChat: () => void;
   onOpenConversation: (conversation: Conversation) => void;
   onDeleteConversation?: (conversation: Conversation) => void;
   onCollapse: () => void;
+  onToggleTheme: () => void;
 }
+
+const NAV_ITEMS: Array<{ id: AppPage; label: string; icon: typeof ChatIcon }> = [
+  { id: 'chat', label: 'Chat', icon: ChatIcon },
+  { id: 'files', label: 'Files', icon: FolderIcon },
+  { id: 'inbox', label: 'Inbox', icon: InboxIcon },
+  { id: 'automations', label: 'Automations', icon: BoltIcon },
+  { id: 'settings', label: 'Settings', icon: GearIcon },
+];
 
 export function Sidebar({
   page,
   locked,
   conversations,
   activeConversationId,
+  pendingApprovalsCount = 0,
+  connected = true,
+  theme,
+  loadingHistory = false,
   onNavigate,
   onNewChat,
   onOpenConversation,
-  onDeleteConversation,
   onCollapse,
+  onToggleTheme,
 }: SidebarProps) {
-  return (
-    <aside
-      className="sidebar flex flex-col shrink-0 w-[282px] h-[100dvh] bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 select-none antialiased transition-colors duration-150"
-      aria-label="Main navigation"
-    >
-      {/* Brand & Collapse Header */}
-      <div className="brand flex items-center gap-2.5 px-4 pt-3 pb-2.5">
-        <div className="brand-logo inline-flex items-center justify-center w-7 h-7 shrink-0 rounded-lg bg-blue-600 text-white shadow-xs">
-          <Asterisk className="w-4 h-4" strokeWidth={2.5} />
-        </div>
-        <strong className="flex-1 min-w-0 truncate text-[14.5px] font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-          Sirona
-        </strong>
-        <button
-          className="icon-button sidebar-collapse inline-flex items-center justify-center w-7 h-7 p-0 rounded-md text-zinc-400 hover:bg-zinc-200/60 dark:hover:bg-zinc-800 hover:text-zinc-700 dark:hover:text-zinc-200 transition-all cursor-pointer ml-auto"
-          aria-label="Collapse sidebar"
-          title="Collapse sidebar"
-          onClick={onCollapse}
-        >
-          <PanelLeftClose className="w-4 h-4" strokeWidth={2} />
-        </button>
-      </div>
+  const activeNavIndex = NAV_ITEMS.findIndex(item => item.id === page);
 
-      {/* New Chat Primary Action Button */}
-      <div className="px-3 pt-1 pb-2">
+  return (
+    <aside className="sb" aria-label="Main navigation">
+      <div className="sbi">
+        {/* Brand */}
+        <div className="brand">
+          <span className="logo" id="logo" aria-hidden="true">
+            <StarIcon size={16} />
+          </span>
+          <b>Sirona</b>
+          <button
+            className="ib"
+            id="col"
+            title="Collapse sidebar (Ctrl+B)"
+            aria-label="Collapse sidebar"
+            onClick={onCollapse}
+          >
+            <SideIcon size={18} />
+          </button>
+        </div>
+
+        {/* New Chat Button */}
         <button
-          className="new-chat w-full flex items-center justify-between px-3 py-2 border border-zinc-200 dark:border-zinc-700/80 rounded-lg bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-[13px] font-semibold shadow-xs hover:not-disabled:bg-zinc-100 dark:hover:not-disabled:bg-zinc-750 active:not-disabled:scale-[0.99] transition-all cursor-pointer disabled:opacity-45 disabled:cursor-not-allowed"
+          className="nc"
+          id="nc"
           disabled={locked}
           onClick={onNewChat}
+          title="New chat (Ctrl+K)"
         >
-          <div className="flex items-center gap-2">
-            <Plus className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" strokeWidth={2.5} />
-            <span>New chat</span>
-          </div>
-          <kbd className="hidden sm:inline-block text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-700/60 text-zinc-500 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-700">
-            Ctrl+K
-          </kbd>
+          <PlusIcon size={16} />
+          <span>New chat</span>
+          <kbd>Ctrl K</kbd>
         </button>
-      </div>
 
-      {/* Primary Navigation */}
-      <nav className="primary-navigation flex flex-col gap-0.5 px-3 mb-2" aria-label="Sections">
-        <button
-          className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-[13px] text-left transition-all cursor-pointer disabled:opacity-45 disabled:cursor-not-allowed ${
-            page === 'chat'
-              ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-semibold'
-              : 'bg-transparent text-zinc-600 dark:text-zinc-400 font-medium hover:not-disabled:bg-zinc-200/50 dark:hover:not-disabled:bg-zinc-800 hover:not-disabled:text-zinc-900 dark:hover:not-disabled:text-zinc-100'
-          }`}
-          aria-current={page === 'chat' ? 'page' : undefined}
-          disabled={locked}
-          onClick={() => onNavigate('chat')}
-        >
-          <MessageSquare className="w-4 h-4 shrink-0" strokeWidth={2} />
-          <span>Chat & Code</span>
-        </button>
-        <button
-          className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-[13px] text-left transition-all cursor-pointer disabled:opacity-45 disabled:cursor-not-allowed ${
-            page === 'automation'
-              ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-semibold'
-              : 'bg-transparent text-zinc-600 dark:text-zinc-400 font-medium hover:not-disabled:bg-zinc-200/50 dark:hover:not-disabled:bg-zinc-800 hover:not-disabled:text-zinc-900 dark:hover:not-disabled:text-zinc-100'
-          }`}
-          aria-current={page === 'automation' ? 'page' : undefined}
-          disabled={locked}
-          onClick={() => onNavigate('automation')}
-        >
-          <Zap className="w-4 h-4 shrink-0" strokeWidth={2} />
-          <span>Automations</span>
-        </button>
-        <button
-          className={`w-full flex items-center gap-2.5 px-2.5 py-1.5 rounded-lg text-[13px] text-left transition-all cursor-pointer disabled:opacity-45 disabled:cursor-not-allowed ${
-            page === 'memory'
-              ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-semibold'
-              : 'bg-transparent text-zinc-600 dark:text-zinc-400 font-medium hover:not-disabled:bg-zinc-200/50 dark:hover:not-disabled:bg-zinc-800 hover:not-disabled:text-zinc-900 dark:hover:not-disabled:text-zinc-100'
-          }`}
-          aria-current={page === 'memory' ? 'page' : undefined}
-          disabled={locked}
-          onClick={() => onNavigate('memory')}
-        >
-          <Brain className="w-4 h-4 shrink-0" strokeWidth={2} />
-          <span>Memory</span>
-        </button>
-      </nav>
+        {/* Primary Navigation with sliding spring indicator */}
+        <nav className="nav" id="nav" aria-label="Sections">
+          <i
+            className="ind"
+            id="ind"
+            style={{
+              transform: `translateY(${Math.max(0, activeNavIndex) * 38}px)`,
+            }}
+          />
+          {NAV_ITEMS.map(item => {
+            const Icon = item.icon;
+            const isActive = page === item.id;
+            return (
+              <button
+                key={item.id}
+                className={`ni ${isActive ? 'on' : ''}`}
+                data-p={item.id}
+                disabled={locked}
+                onClick={() => onNavigate(item.id)}
+              >
+                <Icon size={18} />
+                <span>{item.label}</span>
+                {item.id === 'inbox' && pendingApprovalsCount > 0 && (
+                  <span className="bd pop" id="bd">
+                    {pendingApprovalsCount}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </nav>
 
-      {/* History Feed */}
-      <History
-        conversations={conversations}
-        active={page === 'chat' ? activeConversationId : undefined}
-        disabled={locked}
-        onOpen={onOpenConversation}
-        onDelete={onDeleteConversation}
-      />
+        {/* Recents Conversation List */}
+        <div className="lab" data-r="GET /conversations">
+          Recents
+        </div>
+        <div className="rcs" id="rcs">
+          {loadingHistory ? (
+            <>
+              <i className="sk2" />
+              <i className="sk2" />
+              <i className="sk2" />
+            </>
+          ) : conversations.length === 0 ? (
+            <div className="px-2.5 py-2 text-xs text-[var(--t3)]">No previous chats</div>
+          ) : (
+            conversations.map((c, i) => (
+              <button
+                key={c.id}
+                className={`rc ${activeConversationId === c.id ? 'on' : ''}`}
+                style={{ animationDelay: `${i * 50}ms` }}
+                onClick={() => onOpenConversation(c)}
+                title={c.title || 'Untitled chat'}
+              >
+                {c.title || 'Untitled chat'}
+              </button>
+            ))
+          )}
+        </div>
 
-      {/* Settings Bottom Link */}
-      <div className="p-3 border-t border-zinc-200 dark:border-zinc-800">
-        <button
-          className={`settings-nav w-full flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-[13px] text-left transition-all cursor-pointer disabled:opacity-45 disabled:cursor-not-allowed ${
-            page === 'settings'
-              ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-semibold'
-              : 'bg-transparent text-zinc-600 dark:text-zinc-400 font-medium hover:not-disabled:bg-zinc-200/50 dark:hover:not-disabled:bg-zinc-800 hover:not-disabled:text-zinc-900 dark:hover:not-disabled:text-zinc-100'
-          }`}
-          aria-current={page === 'settings' ? 'page' : undefined}
-          disabled={locked}
-          onClick={() => onNavigate('settings')}
-        >
-          <Settings className="w-4 h-4 shrink-0" strokeWidth={2} />
-          <span>Settings</span>
-        </button>
+        {/* Footer */}
+        <div className="ft">
+          <span className={`dot ${connected ? '' : 'off'}`} id="cdot" />
+          <span id="conn" data-r="GET /session · /capabilities">
+            {connected ? 'Connected' : 'Connecting…'}
+          </span>
+          <button
+            className="ib"
+            id="thm"
+            title="Toggle theme"
+            aria-label="Toggle theme"
+            onClick={onToggleTheme}
+          >
+            {theme === 'dark' ? <SunIcon size={16} /> : <MoonIcon size={16} />}
+          </button>
+        </div>
       </div>
     </aside>
   );

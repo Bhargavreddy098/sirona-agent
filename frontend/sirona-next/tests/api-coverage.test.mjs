@@ -44,13 +44,12 @@ test('All 16 domain API clients are defined and correctly structured', async () 
     'workspaceApi',
     'executionApi',
     'governanceApi',
-    'intentApi',
-    'planningApi',
     'toolsApi',
     'memoryApi',
     'automationApi',
     'deploymentApi',
     'operationsApi',
+    'projectsApi',
   ];
 
   for (const clientName of expectedClients) {

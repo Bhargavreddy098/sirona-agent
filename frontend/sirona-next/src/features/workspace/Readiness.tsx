@@ -1,8 +1,0 @@
-import {useEffect,useState} from 'react';
-import {workspaceApi,type WorkspaceReadiness} from '../../api/workspace';
-import {messageOf} from './useRun';
-export function Readiness({projectId}:{projectId:string}){
- const [value,setValue]=useState<WorkspaceReadiness>(),[error,setError]=useState(''),[loading,setLoading]=useState(true),[refresh,setRefresh]=useState(0);
- useEffect(()=>{const controller=new AbortController();setLoading(true);setError('');void workspaceApi.readiness(projectId,controller.signal).then(result=>{if(!controller.signal.aborted)setValue(result);}).catch(cause=>{if(!controller.signal.aborted){setValue(undefined);setError(messageOf(cause));}}).finally(()=>{if(!controller.signal.aborted)setLoading(false);});return()=>controller.abort();},[projectId,refresh]);
- return <section className="workspace-readiness" aria-label="Workspace readiness">{loading?<p className="muted" role="status">Checking workspace prerequisites…</p>:error?<p className="muted" role="status">Readiness unavailable: {error}. Restart the updated backend if its new routes are not loaded.</p>:value&&<><dl><div><dt>Files</dt><dd>{value.files.canRead?'Read access ready':'Access required'}</dd></div><div><dt>Trusted-local Docker</dt><dd>{!value.profile.enabled?'Not activated':value.profile.qualified?'Qualified':'Qualification required'}</dd></div><div><dt>Orchestration</dt><dd>{value.orchestration.enabled?'Server enabled':'Server disabled'}</dd></div></dl><p className="muted">Readiness does not grant permission or enable execution. New operations still require their own contracts and approvals.</p></>}<button className="text-button" disabled={loading} onClick={()=>setRefresh(current=>current+1)}>Refresh readiness</button></section>;
-}

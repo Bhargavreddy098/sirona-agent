@@ -1,140 +1,87 @@
-import {
-  PanelLeftOpen,
-  PanelRightOpen,
-  PanelRightClose,
-  MoreHorizontal,
-  Trash2,
-  Sun,
-  Moon,
-  FolderGit2,
-} from 'lucide-react';
+import { SideIcon, FolderIcon, TermIcon } from '../ui/Icons';
+import type { AppPage } from './Sidebar';
 
 export interface HeaderProps {
-  page: 'chat' | 'settings' | 'workspace' | 'automation' | 'memory';
+  page: AppPage;
   sidebarVisible: boolean;
-  activeTitle?: string;
-  locked: boolean;
-  onExpandSidebar: () => void;
-  onOpenActions: () => void;
-  onDeleteChat?: () => void;
-  companionOpen?: boolean;
-  onToggleCompanion?: () => void;
   attachedProjectName?: string;
-  theme?: 'light' | 'dark';
-  onToggleTheme?: () => void;
+  terminalOpen?: boolean;
+  apiMapActive?: boolean;
+  onExpandSidebar: () => void;
+  onOpenFolder: () => void;
+  onToggleTerminal: () => void;
+  onToggleApiMap: () => void;
 }
+
+const PAGE_TITLES: Record<AppPage, string> = {
+  chat: 'Chat',
+  files: 'Chat',
+  inbox: 'Inbox',
+  automations: 'Automations',
+  settings: 'Settings',
+};
 
 export function Header({
   page,
   sidebarVisible,
-  activeTitle,
-  locked,
-  onExpandSidebar,
-  onOpenActions,
-  onDeleteChat,
-  companionOpen = false,
-  onToggleCompanion,
   attachedProjectName,
-  theme = 'light',
-  onToggleTheme,
+  terminalOpen = false,
+  apiMapActive = false,
+  onExpandSidebar,
+  onOpenFolder,
+  onToggleTerminal,
+  onToggleApiMap,
 }: HeaderProps) {
-  const sectionName =
-    page === 'settings' ? 'Settings' : page === 'workspace' ? 'Workspace' : 'Chat';
-  const detailName =
-    page === 'chat'
-      ? activeTitle ?? 'New conversation'
-      : page === 'settings'
-      ? 'Model providers'
-      : 'Project workspace';
-
   return (
-    <header className="workspace-header flex items-center gap-3 px-5 h-[52px] min-h-[52px] border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 text-[13.5px] text-zinc-800 dark:text-zinc-200 select-none transition-colors duration-150">
+    <header className="hd">
       {!sidebarVisible && (
         <button
-          className="icon-button inline-flex items-center justify-center w-8 h-8 rounded-md text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all cursor-pointer"
-          aria-label="Expand sidebar"
-          title="Expand sidebar"
+          className="ib"
+          id="exp"
+          title="Open sidebar"
+          aria-label="Open sidebar"
           onClick={onExpandSidebar}
         >
-          <PanelLeftOpen className="w-[18px] h-[18px]" strokeWidth={2} />
+          <SideIcon size={18} />
         </button>
       )}
 
-      <span className="text-zinc-500 dark:text-zinc-400 font-medium text-[13px]">{sectionName}</span>
-      <span className="breadcrumb-slash text-zinc-300 dark:text-zinc-700 text-xs">/</span>
-      <strong className="text-zinc-900 dark:text-zinc-100 font-semibold truncate max-w-[280px] text-[13.5px] tracking-tight">
-        {detailName}
-      </strong>
+      <h1 id="ttl">{PAGE_TITLES[page] || 'Chat'}</h1>
 
-      {attachedProjectName && (
-        <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 dark:bg-zinc-850 text-zinc-600 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-750">
-          <FolderGit2 className="w-3 h-3 text-blue-600 dark:text-blue-400" strokeWidth={2} />
-          <span>{attachedProjectName}</span>
-        </span>
+      {page === 'chat' && (
+        <button
+          className={`fc ${attachedProjectName ? 'on' : ''}`}
+          id="fcb"
+          data-act="att"
+          data-r="native picker → folder binding (NEW)"
+          onClick={onOpenFolder}
+          title={attachedProjectName ? `Project folder: ${attachedProjectName}` : 'Attach a local project folder'}
+        >
+          <FolderIcon size={14} />
+          <span id="ft">{attachedProjectName || 'Open folder'}</span>
+        </button>
       )}
 
-      <div className="header-chat-actions ml-auto flex items-center gap-1.5">
-        {onToggleTheme && (
-          <button
-            type="button"
-            className="inline-flex items-center justify-center w-8 h-8 rounded-md text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all cursor-pointer"
-            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-            title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-            onClick={onToggleTheme}
-          >
-            {theme === 'dark' ? (
-              <Sun className="w-[17px] h-[17px]" strokeWidth={2} />
-            ) : (
-              <Moon className="w-[17px] h-[17px]" strokeWidth={2} />
-            )}
-          </button>
-        )}
+      {page === 'chat' && (
+        <button
+          className={`ib ${terminalOpen ? 'on' : ''}`}
+          id="dkb"
+          title="Terminal (Ctrl+`)"
+          aria-label="Toggle terminal"
+          onClick={onToggleTerminal}
+        >
+          <TermIcon size={18} />
+        </button>
+      )}
 
-        {page === 'chat' && onToggleCompanion && (
-          <button
-            type="button"
-            className={`inline-flex items-center justify-center w-8 h-8 rounded-md transition-all cursor-pointer ${
-              companionOpen
-                ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-semibold'
-                : 'text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100'
-            }`}
-            aria-label={companionOpen ? 'Close workspace companion' : 'Open workspace companion'}
-            title={companionOpen ? 'Close workspace companion' : 'Open workspace companion'}
-            onClick={onToggleCompanion}
-          >
-            {companionOpen ? (
-              <PanelRightClose className="w-[18px] h-[18px]" strokeWidth={2} />
-            ) : (
-              <PanelRightOpen className="w-[18px] h-[18px]" strokeWidth={2} />
-            )}
-          </button>
-        )}
-
-        {page === 'chat' && (
-          <>
-            <button
-              className="icon-button inline-flex items-center justify-center w-8 h-8 rounded-md text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-              aria-label="Conversation actions"
-              title="Conversation actions"
-              disabled={locked}
-              onClick={onOpenActions}
-            >
-              <MoreHorizontal className="w-[18px] h-[18px]" strokeWidth={2} />
-            </button>
-            {onDeleteChat && (
-              <button
-                className="icon-button inline-flex items-center justify-center w-8 h-8 rounded-md text-zinc-400 hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-red-600 dark:hover:text-red-400 transition-all cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-                aria-label="Delete this conversation"
-                title="Delete this conversation"
-                disabled={locked}
-                onClick={onDeleteChat}
-              >
-                <Trash2 className="w-[17px] h-[17px]" strokeWidth={2} />
-              </button>
-            )}
-          </>
-        )}
-      </div>
+      <button
+        className={`bt sm ${apiMapActive ? 'p' : ''}`}
+        id="mapb"
+        title="Show which route feeds each element"
+        onClick={onToggleApiMap}
+      >
+        API map
+      </button>
     </header>
   );
 }
