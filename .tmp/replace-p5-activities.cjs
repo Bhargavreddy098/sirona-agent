@@ -1,0 +1,1 @@
+const fs=require('node:fs');const p='backend/src/orchestration/activityAdapter.ts';let old=fs.readFileSync(p,'utf8');const pos=old.indexOf('/**\n * Record effect usage');fs.writeFileSync(p,fs.readFileSync('.tmp/p5-activities-body.txt','utf8')+'\n'+old.slice(pos));

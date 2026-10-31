@@ -1,0 +1,32 @@
+{
+  "version": "p6.1",
+  "status": "candidate; Gate B approval and actual qualification required",
+  "platform": "linux/amd64",
+  "preservedP3ImageId": "sha256:7c9a2b1782ecac683ad7cad209114702d5440f10005d5da74ef6060e739cdd39",
+  "runtimeFoundation": "node@sha256:2a49bdf71e9fd965a58c1703fd9ddd205b34e5782b692a72dd1d248abb0beb43",
+  "compilerImage": "ghcr.io/webassembly/wasi-sdk@sha256:9515a0625f6ac6002aa2c285fd718cba0575b507bfaa3687ba41fea822a2bfa5",
+  "downloads": [
+    {
+      "filename": "tree-sitter-linux-x64.gz",
+      "url": "https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.7/tree-sitter-linux-x64.gz",
+      "sha256": "4367a46bc8abbb8328d6efbeb26e86807af0a3a7e462548a3924f87289ee1e9c",
+      "license": "MIT"
+    },
+    {
+      "filename": "sql-v0.3.11.tar.gz",
+      "url": "https://github.com/DerekStride/tree-sitter-sql/releases/download/v0.3.11/tree-sitter-sql-v0.3.11.tar.gz",
+      "sha256": "a97a324eae9c81ed68f6e162b9b33f8911fc6442caa2950e57c498e2460d1387",
+      "license": "MIT"
+    }
+  ],
+  "npmLock": "package-lock.json",
+  "apkLock": "apk-lock.json",
+  "networkDuringBuild": "public, integrity-locked npm package retrieval only; compiler and APK steps have network=none",
+  "networkDuringExecution": "none",
+  "qualificationRequired": [
+    "compiled SQL WASM hash and actual bounded JS/TS/SQL parsing",
+    "non-root, read-only filesystem, network denial, no secrets/host mounts, CPU/PID/memory/disk limits",
+    "real Git, ripgrep, language server and MCP calls via canonical owner/effect/receipt path",
+    "current grants, exact approval, schema drift, cancellation, revocation, actual process kill and reconciliation"
+  ]
+}

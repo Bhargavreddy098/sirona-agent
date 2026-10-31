@@ -1,0 +1,12 @@
+{
+  "shell": "Multi-pane responsive desktop IDE architecture with continuous superellipses",
+  "sidebarWidth": "clamp(240px, var(--codex-sidebar-preferred-width, 275px), min(520px, calc(100vw - 320px)))",
+  "panelGutters": "1px solid var(--border-subtle)",
+  "cornerSuperellipse": "superellipse(1.5) with corner-radius-scale: 1.25",
+  "splitPanes": [
+    "Navigation / Worktrees",
+    "Task Transcript / Agent Output",
+    "Diff / File Editor",
+    "Terminal Output"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-26",
+  "artifact": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\frontend\\sirona\\release-client\\msix-nB8uML\\Sirona.msix",
+  "bytes": 187025124,
+  "sha256": "EB07354B1D4F9B9DDE2E0C7061606749AB2C98463A7D362B46633B4043095678",
+  "identity": "Sirona.Development",
+  "publisher": "CN=Sirona.Development",
+  "architecture": "x64",
+  "signaturePresent": false,
+  "sdkPackValidation": "PASS",
+  "installUpdate": "UNVERIFIED",
+  "toolingTests": "6/6 PASS",
+  "frontendTests": "33/33 PASS",
+  "frontendBuild": "PASS",
+  "frontendLint": "PASS",
+  "toolingBuild": "PASS",
+  "toolingAuditKnownVulnerabilities": 0,
+  "backendHealthLive": true,
+  "backendHealthReady": true,
+  "productServerActivation": "NOT ADMITTED",
+  "forbiddenPackageEntries": []
+}

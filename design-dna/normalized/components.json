@@ -1,0 +1,115 @@
+{
+  "sidebar": {
+    "width": "260px",
+    "bgLight": "#f9f9f9",
+    "bgDark": "#171717",
+    "border": "0.5px solid var(--border-subtle)",
+    "shadow": "0 3px 7.5px #00000008, 0 0 16px #00000005"
+  },
+  "conversationRow": {
+    "height": "36px",
+    "borderRadius": "8px",
+    "padding": "0 10px",
+    "hoverBgLight": "rgba(0, 0, 0, 0.05)",
+    "hoverBgDark": "rgba(255, 255, 255, 0.06)",
+    "activeBgLight": "rgba(0, 0, 0, 0.08)",
+    "activeBgDark": "rgba(255, 255, 255, 0.10)"
+  },
+  "composer": {
+    "bgLight": "#ffffff",
+    "bgDark": "#2f2f2f",
+    "borderRadius": "24px",
+    "borderLight": "1px solid rgba(0, 0, 0, 0.10)",
+    "borderDark": "1px solid rgba(255, 255, 255, 0.10)",
+    "innerPadding": "10px 14px 10px 16px",
+    "sendButtonSize": "32px",
+    "sendButtonRadius": "9999px",
+    "sendButtonBg": "#0d0d0d",
+    "sendButtonDarkBg": "#ffffff",
+    "sendButtonFg": "#ffffff",
+    "sendButtonDarkFg": "#0d0d0d"
+  },
+  "userMessageBubble": {
+    "maxWidth": "min(88%, calc(100% - 80px))",
+    "borderRadius": "18px",
+    "padding": "10px 16px",
+    "bgLight": "#f4f4f4",
+    "bgDark": "#2f2f2f",
+    "textColorLight": "#0d0d0d",
+    "textColorDark": "#ffffff"
+  },
+  "assistantMessageContent": {
+    "width": "100%",
+    "padding": "4px 0",
+    "bg": "transparent",
+    "textColorLight": "#0d0d0d",
+    "textColorDark": "#ffffff"
+  },
+  "codeBlock": {
+    "bgLight": "#f9f9f9",
+    "bgDark": "#171717",
+    "borderRadius": "10px",
+    "border": "1px solid var(--border-subtle)",
+    "headerHeight": "36px",
+    "headerBgLight": "#f3f3f3",
+    "headerBgDark": "#212121",
+    "headerTextColor": "var(--text-secondary)",
+    "copyButtonSize": "28px"
+  },
+  "modelPicker": {
+    "height": "36px",
+    "borderRadius": "10px",
+    "padding": "0 12px",
+    "border": "none",
+    "hoverBgLight": "rgba(0, 0, 0, 0.05)",
+    "hoverBgDark": "rgba(255, 255, 255, 0.06)"
+  },
+  "approvalDialog": {
+    "width": "480px",
+    "radius": "16px",
+    "elevation": "0 8px 32px rgba(0, 0, 0, 0.24)",
+    "padding": "20px"
+  },
+  "toolCard": {
+    "bg": "var(--surface-secondary)",
+    "border": "1px solid var(--border-subtle)",
+    "radius": "8px",
+    "padding": "10px 12px",
+    "headerHeight": "28px",
+    "outputBg": "var(--surface-tertiary)"
+  },
+  "worktreeDropdown": {
+    "height": "28px",
+    "radius": "6px",
+    "padding": "0 8px"
+  },
+  "diffViewer": {
+    "fontFamily": "var(--font-mono)",
+    "fontSize": "12px",
+    "lineHeight": "18px",
+    "lineNumberWidth": "40px"
+  },
+  "iconSystem": {
+    "library": "Lucide React (semantic match)",
+    "defaultSize": "16px",
+    "mediumSize": "20px",
+    "largeSize": "24px",
+    "strokeWidth": "1.75px",
+    "mappings": {
+      "newConversation": "Plus",
+      "search": "Search",
+      "settings": "Settings",
+      "sidebarToggle": "PanelLeft",
+      "delete": "Trash2",
+      "attachment": "Paperclip",
+      "send": "ArrowUp",
+      "copy": "Copy",
+      "check": "Check",
+      "branch": "GitBranch",
+      "terminal": "Terminal",
+      "approval": "ShieldAlert",
+      "options": "MoreHorizontal",
+      "chevronDown": "ChevronDown"
+    }
+  }
+}

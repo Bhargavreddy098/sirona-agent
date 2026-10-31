@@ -1,0 +1,6 @@
+{
+  "provider": "google",
+  "authentication": "valid",
+  "method": "models metadata endpoint",
+  "inferenceCalls": 0
+}

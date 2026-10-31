@@ -1,0 +1,1085 @@
+{
+  "scope": "Static literal registrations; mounted-prefix interpretation requires routes/index.js and owning router. This is not live endpoint qualification.",
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/:runId/approval",
+      "file": "backend/routes/approval.routes.js",
+      "line": 15
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "file": "backend/routes/approval.routes.js",
+      "line": 16
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "file": "backend/routes/audit.routes.js",
+      "line": 7
+    },
+    {
+      "method": "POST",
+      "path": "/register",
+      "file": "backend/routes/auth.routes.js",
+      "line": 20
+    },
+    {
+      "method": "POST",
+      "path": "/login",
+      "file": "backend/routes/auth.routes.js",
+      "line": 21
+    },
+    {
+      "method": "POST",
+      "path": "/google",
+      "file": "backend/routes/auth.routes.js",
+      "line": 22
+    },
+    {
+      "method": "GET",
+      "path": "/me",
+      "file": "backend/routes/auth.routes.js",
+      "line": 23
+    },
+    {
+      "method": "POST",
+      "path": "/logout",
+      "file": "backend/routes/auth.routes.js",
+      "line": 24
+    },
+    {
+      "method": "GET",
+      "path": "/tree",
+      "file": "backend/routes/files.routes.js",
+      "line": 15
+    },
+    {
+      "method": "GET",
+      "path": "/read",
+      "file": "backend/routes/files.routes.js",
+      "line": 16
+    },
+    {
+      "method": "POST",
+      "path": "/write",
+      "file": "backend/routes/files.routes.js",
+      "line": 17
+    },
+    {
+      "method": "GET",
+      "path": "/search",
+      "file": "backend/routes/files.routes.js",
+      "line": 18
+    },
+    {
+      "method": "POST",
+      "path": "/reveal",
+      "file": "backend/routes/files.routes.js",
+      "line": 19
+    },
+    {
+      "method": "GET",
+      "path": "/status",
+      "file": "backend/routes/git.routes.js",
+      "line": 7
+    },
+    {
+      "method": "GET",
+      "path": "/diff",
+      "file": "backend/routes/git.routes.js",
+      "line": 8
+    },
+    {
+      "method": "GET",
+      "path": "/branches",
+      "file": "backend/routes/git.routes.js",
+      "line": 9
+    },
+    {
+      "method": "POST",
+      "path": "/branch/switch",
+      "file": "backend/routes/git.routes.js",
+      "line": 10
+    },
+    {
+      "method": "POST",
+      "path": "/stage",
+      "file": "backend/routes/git.routes.js",
+      "line": 11
+    },
+    {
+      "method": "POST",
+      "path": "/unstage",
+      "file": "backend/routes/git.routes.js",
+      "line": 12
+    },
+    {
+      "method": "POST",
+      "path": "/discard",
+      "file": "backend/routes/git.routes.js",
+      "line": 13
+    },
+    {
+      "method": "POST",
+      "path": "/commit",
+      "file": "backend/routes/git.routes.js",
+      "line": 14
+    },
+    {
+      "method": "GET",
+      "path": "/worktrees",
+      "file": "backend/routes/git.routes.js",
+      "line": 15
+    },
+    {
+      "method": "POST",
+      "path": "/worktree/add",
+      "file": "backend/routes/git.routes.js",
+      "line": 16
+    },
+    {
+      "method": "POST",
+      "path": "/worktree/remove",
+      "file": "backend/routes/git.routes.js",
+      "line": 17
+    },
+    {
+      "method": "GET",
+      "path": "/health/live",
+      "file": "backend/routes/health.routes.js",
+      "line": 8
+    },
+    {
+      "method": "GET",
+      "path": "/health/ready",
+      "file": "backend/routes/health.routes.js",
+      "line": 9
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "file": "backend/routes/health.routes.js",
+      "line": 10
+    },
+    {
+      "method": "GET",
+      "path": "/api/status",
+      "file": "backend/routes/health.routes.js",
+      "line": 11
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 21
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 22
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 23
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 24
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 25
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 26
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 27
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 28
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 29
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 30
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 31
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 32
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 33
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 34
+    },
+    {
+      "method": "USE",
+      "path": "/api/v1",
+      "file": "backend/routes/index.js",
+      "line": 35
+    },
+    {
+      "method": "GET",
+      "path": "/models",
+      "file": "backend/routes/models.routes.js",
+      "line": 6
+    },
+    {
+      "method": "GET",
+      "path": "/model/options",
+      "file": "backend/routes/models.routes.js",
+      "line": 7
+    },
+    {
+      "method": "GET",
+      "path": "/topology",
+      "file": "backend/routes/session.routes.js",
+      "line": 26
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "file": "backend/routes/session.routes.js",
+      "line": 29
+    },
+    {
+      "method": "POST",
+      "path": "/",
+      "file": "backend/routes/session.routes.js",
+      "line": 30
+    },
+    {
+      "method": "GET",
+      "path": "/:id",
+      "file": "backend/routes/session.routes.js",
+      "line": 31
+    },
+    {
+      "method": "PATCH",
+      "path": "/:id",
+      "file": "backend/routes/session.routes.js",
+      "line": 32
+    },
+    {
+      "method": "DELETE",
+      "path": "/:id",
+      "file": "backend/routes/session.routes.js",
+      "line": 33
+    },
+    {
+      "method": "GET",
+      "path": "/:id/messages",
+      "file": "backend/routes/session.routes.js",
+      "line": 36
+    },
+    {
+      "method": "POST",
+      "path": "/:id/chat",
+      "file": "backend/routes/session.routes.js",
+      "line": 37
+    },
+    {
+      "method": "POST",
+      "path": "/:id/branch",
+      "file": "backend/routes/session.routes.js",
+      "line": 40
+    },
+    {
+      "method": "POST",
+      "path": "/:id/rewind",
+      "file": "backend/routes/session.routes.js",
+      "line": 41
+    },
+    {
+      "method": "GET",
+      "path": "/:id/lineage",
+      "file": "backend/routes/session.routes.js",
+      "line": 42
+    },
+    {
+      "method": "GET",
+      "path": "/:id/checkpoints",
+      "file": "backend/routes/session.routes.js",
+      "line": 45
+    },
+    {
+      "method": "POST",
+      "path": "/:id/checkpoints",
+      "file": "backend/routes/session.routes.js",
+      "line": 46
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "file": "backend/routes/settings.routes.js",
+      "line": 7
+    },
+    {
+      "method": "POST",
+      "path": "/",
+      "file": "backend/routes/settings.routes.js",
+      "line": 8
+    },
+    {
+      "method": "POST",
+      "path": "/single",
+      "file": "backend/routes/settings.routes.js",
+      "line": 9
+    },
+    {
+      "method": "DELETE",
+      "path": "/:key",
+      "file": "backend/routes/settings.routes.js",
+      "line": 10
+    },
+    {
+      "method": "POST",
+      "path": "/providers/test",
+      "file": "backend/routes/settings.routes.js",
+      "line": 11
+    },
+    {
+      "method": "GET",
+      "path": "/capabilities",
+      "file": "backend/routes/tools.routes.js",
+      "line": 7
+    },
+    {
+      "method": "GET",
+      "path": "/toolsets",
+      "file": "backend/routes/tools.routes.js",
+      "line": 8
+    },
+    {
+      "method": "GET",
+      "path": "/skills",
+      "file": "backend/routes/tools.routes.js",
+      "line": 9
+    },
+    {
+      "method": "POST",
+      "path": "/execute",
+      "file": "backend/routes/tools.routes.js",
+      "line": 10
+    },
+    {
+      "method": "USE",
+      "path": "/projects/:projectId/conversations",
+      "file": "backend/routes/v1/conversations.routes.js",
+      "line": 20
+    },
+    {
+      "method": "GET",
+      "path": "/conversations",
+      "file": "backend/routes/v1/conversations.routes.js",
+      "line": 21
+    },
+    {
+      "method": "POST",
+      "path": "/conversations",
+      "file": "backend/routes/v1/conversations.routes.js",
+      "line": 26
+    },
+    {
+      "method": "PATCH",
+      "path": "/conversations/:conversationId",
+      "file": "backend/routes/v1/conversations.routes.js",
+      "line": 32
+    },
+    {
+      "method": "POST",
+      "path": "/conversations/:conversationId/turns",
+      "file": "backend/routes/v1/conversations.routes.js",
+      "line": 39
+    },
+    {
+      "method": "GET",
+      "path": "/projects/:projectId/runs",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 25
+    },
+    {
+      "method": "GET",
+      "path": "/runs/:runId",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 43
+    },
+    {
+      "method": "GET",
+      "path": "/runs/:runId/tasks",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 56
+    },
+    {
+      "method": "GET",
+      "path": "/runs/:runId/agents",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 74
+    },
+    {
+      "method": "GET",
+      "path": "/runs/:runId/effects",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 91
+    },
+    {
+      "method": "GET",
+      "path": "/runs/:runId/checkpoints",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 109
+    },
+    {
+      "method": "POST",
+      "path": "/runs/:runId/pause",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 130
+    },
+    {
+      "method": "POST",
+      "path": "/runs/:runId/resume",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 145
+    },
+    {
+      "method": "POST",
+      "path": "/runs/:runId/cancel",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 160
+    },
+    {
+      "method": "POST",
+      "path": "/effects/:effectId/reconcile",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 179
+    },
+    {
+      "method": "GET",
+      "path": "/runs/:runId/events",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 202
+    },
+    {
+      "method": "POST",
+      "path": "/goals/:goalId/runs",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 250
+    },
+    {
+      "method": "GET",
+      "path": "/runs/:runId/failures",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 271
+    },
+    {
+      "method": "GET",
+      "path": "/runs/:runId/repairs",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 284
+    },
+    {
+      "method": "POST",
+      "path": "/runs/:runId/repairs",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 297
+    },
+    {
+      "method": "POST",
+      "path": "/runs/:runId/execute",
+      "file": "backend/routes/v1/execution.routes.js",
+      "line": 311
+    },
+    {
+      "method": "GET",
+      "path": "/policies/current",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 25
+    },
+    {
+      "method": "POST",
+      "path": "/policies/revisions",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 38
+    },
+    {
+      "method": "POST",
+      "path": "/policies/:revisionId/activate",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 53
+    },
+    {
+      "method": "GET",
+      "path": "/projects/:projectId/grants",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 71
+    },
+    {
+      "method": "POST",
+      "path": "/projects/:projectId/grants",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 84
+    },
+    {
+      "method": "POST",
+      "path": "/grants/:grantId/revoke",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 102
+    },
+    {
+      "method": "POST",
+      "path": "/contract-revisions/:revisionId/approval-requests",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 119
+    },
+    {
+      "method": "GET",
+      "path": "/approvals",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 137
+    },
+    {
+      "method": "GET",
+      "path": "/approvals/:approvalId",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 154
+    },
+    {
+      "method": "POST",
+      "path": "/approvals/:approvalId/decisions",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 170
+    },
+    {
+      "method": "POST",
+      "path": "/approvals/:approvalId/revoke",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 190
+    },
+    {
+      "method": "GET",
+      "path": "/projects/:projectId/budgets",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 208
+    },
+    {
+      "method": "POST",
+      "path": "/projects/:projectId/budgets",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 221
+    },
+    {
+      "method": "POST",
+      "path": "/budgets/:accountId/reserve",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 239
+    },
+    {
+      "method": "GET",
+      "path": "/usage",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 256
+    },
+    {
+      "method": "POST",
+      "path": "/sessions/:sessionId/lease",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 276
+    },
+    {
+      "method": "DELETE",
+      "path": "/sessions/:sessionId/lease",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 294
+    },
+    {
+      "method": "GET",
+      "path": "/sessions/:sessionId/lease",
+      "file": "backend/routes/v1/governance.routes.js",
+      "line": 312
+    },
+    {
+      "method": "POST",
+      "path": "/session/bootstrap",
+      "file": "backend/routes/v1/identity.routes.js",
+      "line": 51
+    },
+    {
+      "method": "GET",
+      "path": "/session",
+      "file": "backend/routes/v1/identity.routes.js",
+      "line": 111
+    },
+    {
+      "method": "DELETE",
+      "path": "/session",
+      "file": "backend/routes/v1/identity.routes.js",
+      "line": 123
+    },
+    {
+      "method": "GET",
+      "path": "/workspaces",
+      "file": "backend/routes/v1/identity.routes.js",
+      "line": 140
+    },
+    {
+      "method": "GET",
+      "path": "/capabilities",
+      "file": "backend/routes/v1/identity.routes.js",
+      "line": 153
+    },
+    {
+      "method": "POST",
+      "path": "/conversations/:conversationId/goals",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 23
+    },
+    {
+      "method": "GET",
+      "path": "/projects/:projectId/goals",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 41
+    },
+    {
+      "method": "GET",
+      "path": "/goals/:goalId",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 59
+    },
+    {
+      "method": "POST",
+      "path": "/goals/:goalId/intent-analysis",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 76
+    },
+    {
+      "method": "GET",
+      "path": "/goals/:goalId/clarifications",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 97
+    },
+    {
+      "method": "POST",
+      "path": "/goals/:goalId/clarifications",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 115
+    },
+    {
+      "method": "POST",
+      "path": "/clarifications/:clarificationId/answers",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 133
+    },
+    {
+      "method": "POST",
+      "path": "/goals/:goalId/research",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 154
+    },
+    {
+      "method": "GET",
+      "path": "/goals/:goalId/research",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 172
+    },
+    {
+      "method": "POST",
+      "path": "/goals/:goalId/requirement-revisions",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 193
+    },
+    {
+      "method": "GET",
+      "path": "/goals/:goalId/requirement-revisions",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 212
+    },
+    {
+      "method": "GET",
+      "path": "/requirement-revisions/:revisionId",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 229
+    },
+    {
+      "method": "GET",
+      "path": "/goals/:goalId/decisions",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 246
+    },
+    {
+      "method": "POST",
+      "path": "/goals/:goalId/decisions",
+      "file": "backend/routes/v1/intent.routes.js",
+      "line": 263
+    },
+    {
+      "method": "GET",
+      "path": "/isolation/diagnostics",
+      "file": "backend/routes/v1/isolation.routes.js",
+      "line": 33
+    },
+    {
+      "method": "POST",
+      "path": "/isolation/qualify",
+      "file": "backend/routes/v1/isolation.routes.js",
+      "line": 50
+    },
+    {
+      "method": "POST",
+      "path": "/isolation/validate-path",
+      "file": "backend/routes/v1/isolation.routes.js",
+      "line": 64
+    },
+    {
+      "method": "GET",
+      "path": "/isolation/qualifications",
+      "file": "backend/routes/v1/isolation.routes.js",
+      "line": 81
+    },
+    {
+      "method": "GET",
+      "path": "/isolation/qualifications/:id",
+      "file": "backend/routes/v1/isolation.routes.js",
+      "line": 95
+    },
+    {
+      "method": "POST",
+      "path": "/goals/:goalId/plans",
+      "file": "backend/routes/v1/planning.routes.js",
+      "line": 23
+    },
+    {
+      "method": "GET",
+      "path": "/goals/:goalId/plans",
+      "file": "backend/routes/v1/planning.routes.js",
+      "line": 43
+    },
+    {
+      "method": "POST",
+      "path": "/plans/:planId/revisions",
+      "file": "backend/routes/v1/planning.routes.js",
+      "line": 60
+    },
+    {
+      "method": "GET",
+      "path": "/plan-revisions/:revisionId",
+      "file": "backend/routes/v1/planning.routes.js",
+      "line": 79
+    },
+    {
+      "method": "POST",
+      "path": "/goals/:goalId/contracts",
+      "file": "backend/routes/v1/planning.routes.js",
+      "line": 96
+    },
+    {
+      "method": "POST",
+      "path": "/contracts/:contractId/revisions",
+      "file": "backend/routes/v1/planning.routes.js",
+      "line": 114
+    },
+    {
+      "method": "GET",
+      "path": "/contracts/:contractId/revisions",
+      "file": "backend/routes/v1/planning.routes.js",
+      "line": 133
+    },
+    {
+      "method": "GET",
+      "path": "/contract-revisions/:revisionId",
+      "file": "backend/routes/v1/planning.routes.js",
+      "line": 150
+    },
+    {
+      "method": "GET",
+      "path": "/contract-revisions/:revisionId/diff",
+      "file": "backend/routes/v1/planning.routes.js",
+      "line": 163
+    },
+    {
+      "method": "POST",
+      "path": "/projects",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 22
+    },
+    {
+      "method": "GET",
+      "path": "/projects",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 42
+    },
+    {
+      "method": "GET",
+      "path": "/projects/:projectId",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 65
+    },
+    {
+      "method": "PATCH",
+      "path": "/projects/:projectId",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 82
+    },
+    {
+      "method": "POST",
+      "path": "/projects/:projectId/archive",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 101
+    },
+    {
+      "method": "POST",
+      "path": "/projects/:projectId/conversations",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 121
+    },
+    {
+      "method": "GET",
+      "path": "/projects/:projectId/conversations",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 141
+    },
+    {
+      "method": "GET",
+      "path": "/conversations/:conversationId",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 156
+    },
+    {
+      "method": "DELETE",
+      "path": "/conversations/:conversationId",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 172
+    },
+    {
+      "method": "POST",
+      "path": "/conversations/:conversationId/messages",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 189
+    },
+    {
+      "method": "GET",
+      "path": "/conversations/:conversationId/messages",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 202
+    },
+    {
+      "method": "POST",
+      "path": "/projects/:projectId/snapshots",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 221
+    },
+    {
+      "method": "GET",
+      "path": "/projects/:projectId/snapshots",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 239
+    },
+    {
+      "method": "GET",
+      "path": "/projects/:projectId/artifacts",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 258
+    },
+    {
+      "method": "GET",
+      "path": "/artifacts/:artifactId",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 273
+    },
+    {
+      "method": "GET",
+      "path": "/artifacts/:artifactId/content",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 292
+    },
+    {
+      "method": "POST",
+      "path": "/projects/:projectId/uploads",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 316
+    },
+    {
+      "method": "POST",
+      "path": "/projects/:projectId/scan",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 335
+    },
+    {
+      "method": "GET",
+      "path": "/projects/:projectId/structure",
+      "file": "backend/routes/v1/projects.routes.js",
+      "line": 351
+    },
+    {
+      "method": "GET",
+      "path": "/providers",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 69
+    },
+    {
+      "method": "GET",
+      "path": "/provider-connections",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 82
+    },
+    {
+      "method": "POST",
+      "path": "/provider-connections",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 98
+    },
+    {
+      "method": "PATCH",
+      "path": "/provider-connections/:id",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 119
+    },
+    {
+      "method": "DELETE",
+      "path": "/provider-connections/:id",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 132
+    },
+    {
+      "method": "POST",
+      "path": "/provider-connections/:id/test",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 145
+    },
+    {
+      "method": "POST",
+      "path": "/provider-connections/:id/models/refresh",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 158
+    },
+    {
+      "method": "GET",
+      "path": "/model-settings",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 171
+    },
+    {
+      "method": "PATCH",
+      "path": "/model-settings",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 184
+    },
+    {
+      "method": "GET",
+      "path": "/models",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 197
+    },
+    {
+      "method": "POST",
+      "path": "/models/verify",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 211
+    },
+    {
+      "method": "POST",
+      "path": "/conversations/:conversationId/turns",
+      "file": "backend/routes/v1/providers.routes.js",
+      "line": 240
+    },
+    {
+      "method": "GET",
+      "path": "/tools",
+      "file": "backend/routes/v1/tools.routes.js",
+      "line": 38
+    },
+    {
+      "method": "GET",
+      "path": "/tools/:toolId",
+      "file": "backend/routes/v1/tools.routes.js",
+      "line": 58
+    },
+    {
+      "method": "POST",
+      "path": "/developer-connections",
+      "file": "backend/routes/v1/tools.routes.js",
+      "line": 72
+    },
+    {
+      "method": "GET",
+      "path": "/developer-connections",
+      "file": "backend/routes/v1/tools.routes.js",
+      "line": 100
+    },
+    {
+      "method": "GET",
+      "path": "/developer-connections/:connectionId",
+      "file": "backend/routes/v1/tools.routes.js",
+      "line": 120
+    },
+    {
+      "method": "POST",
+      "path": "/developer-connections/:connectionId/qualify",
+      "file": "backend/routes/v1/tools.routes.js",
+      "line": 130
+    },
+    {
+      "method": "POST",
+      "path": "/developer-connections/:connectionId/disconnect",
+      "file": "backend/routes/v1/tools.routes.js",
+      "line": 144
+    },
+    {
+      "method": "DELETE",
+      "path": "/developer-connections/:connectionId",
+      "file": "backend/routes/v1/tools.routes.js",
+      "line": 155
+    },
+    {
+      "method": "POST",
+      "path": "/tools/invoke",
+      "file": "backend/routes/v1/tools.routes.js",
+      "line": 170
+    },
+    {
+      "method": "GET",
+      "path": "/tools/receipts/:receiptId",
+      "file": "backend/routes/v1/tools.routes.js",
+      "line": 201
+    }
+  ]
+}

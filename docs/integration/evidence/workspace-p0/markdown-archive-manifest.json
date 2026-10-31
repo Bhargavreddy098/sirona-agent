@@ -1,0 +1,190 @@
+{
+  "organizedAt": "2026-10-28T14:59:23.395Z",
+  "authorization": "Owner requested confusing Markdown moved to another folder for future agents; no permission gates changed",
+  "archiveBase": "docs/archive/pre-workspace-2026-10-28",
+  "originalSnapshot": "private/markdown-originals.json.gz",
+  "files": [
+    {
+      "original": "docs/backend/11-IMPLEMENTATION-ROADMAP.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/11-IMPLEMENTATION-ROADMAP.md",
+      "originalSha256": "8bd0ad0800f45b61bb13cfb20463783b37e62acc65bfe4ecaa5329d1ab37ddfe",
+      "archivedSha256": "f023ebbbc91f984473e1f1d7ea59c183c60cd837915d0b9bcc9b30927b291fc3",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/14-IMPLEMENTATION-STATUS.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/14-IMPLEMENTATION-STATUS.md",
+      "originalSha256": "6b7d9b954250bb7d272c06031b990f52295f6fb2a50ae43105f8ff58c06e706c",
+      "archivedSha256": "26d38e8fb3b25afe7f0599502401d36c3fce7430b51120231bfd781cb3de1afc",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/15-LOCAL-POSTGRESQL-QUALIFICATION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/15-LOCAL-POSTGRESQL-QUALIFICATION.md",
+      "originalSha256": "811f353e55da7391436179722edd79e031c2768c3c3f1ecbd8a6899667a6b6eb",
+      "archivedSha256": "83e7604d8f58c0bbc9a081a1c1d61a000fb87e48bdba8ed12caec0a999aead23",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/16-LOCAL-IDENTITY-QUALIFICATION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/16-LOCAL-IDENTITY-QUALIFICATION.md",
+      "originalSha256": "1894db0d5b0286d0f0cfbd4b293b020fcabb111614735baabf3b3240306d073d",
+      "archivedSha256": "621e1b0bcc98f552256b224c409c1d13b8acdff8de2da79b5f8069b7172fdc7d",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/17-LOCAL-PRODUCT-QUALIFICATION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/17-LOCAL-PRODUCT-QUALIFICATION.md",
+      "originalSha256": "7946a7475bf60ae441ddb013620e4f51819e77621667e867e26ad07c017ac0c7",
+      "archivedSha256": "ab604edf62878a5240d318592d42548aa81c851bf6ac651dce33debc7d1b8b84",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/18-LOCAL-GOVERNANCE-QUALIFICATION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/18-LOCAL-GOVERNANCE-QUALIFICATION.md",
+      "originalSha256": "c1b3d41bbb8221d037e3833d4bef74fbea61695dda3ebc88498737a6c28b00eb",
+      "archivedSha256": "df68292bb0cca9b8ec0913866a2a4ff157aa8ad4004e37610a38063e92f9dab4",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/19-LOCAL-PROVIDER-QUALIFICATION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/19-LOCAL-PROVIDER-QUALIFICATION.md",
+      "originalSha256": "207b5539152e4607ca663eb7b6f4221a1945235a53307bdd95ffdf1222f48cd5",
+      "archivedSha256": "a44bb15ff572e262dc6a7636144480c92ee3eaa883f9e672e70a2a9d48079602",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/20-REPOSITORY-CLEANUP.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/20-REPOSITORY-CLEANUP.md",
+      "originalSha256": "0792220441457d575c013142e3a0eab9e330da41a75d1f2cb1a108b692daf043",
+      "archivedSha256": "f5efdf32324172be23e92d5df2f4288a4814dd7225b3ef5ce5a186b42aa256af",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/21-STAGE06-COMPLETION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/21-STAGE06-COMPLETION.md",
+      "originalSha256": "f9dc709c64a369ac914fb790f7185724d15c7f776796d2f6c437139261a40e9d",
+      "archivedSha256": "eb2953551aafafe463901bdf02f3bb3c793e24a5faf4ee337d529e8494564887",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/22-FRONTEND-API-RECONCILIATION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/22-FRONTEND-API-RECONCILIATION.md",
+      "originalSha256": "c24cd803a71aacdca5d9a186c6a7f318392a75143e4dd03fba5549dc60e19769",
+      "archivedSha256": "03b4712a00728e8ab5275432991a2c38198da83c80f9d89a2d04953ad0724b89",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/23-API-RECONCILIATION-EVIDENCE.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/23-API-RECONCILIATION-EVIDENCE.md",
+      "originalSha256": "f42b5361ecbedecb98bd257722cdf8de6cd08822779ea32819d63c1ea435a035",
+      "archivedSha256": "ec307fb4819d050217a61d0c8b0603fad9c4f2b1ec47fe9f4061aa5bad013c02",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/24-STAGE07-IMPLEMENTATION-PLAN.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/24-STAGE07-IMPLEMENTATION-PLAN.md",
+      "originalSha256": "8f5c53ab24b1b7d51ae0f5234c54b44dd57083cf8e3279287b81b108d3cd4da8",
+      "archivedSha256": "330c953836b309a1a1af9a2fc79234dffc466fe2c11c7f5cef33943dd2d45cb4",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/25-LOCAL-EXECUTION-QUALIFICATION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/25-LOCAL-EXECUTION-QUALIFICATION.md",
+      "originalSha256": "9c8f5bc25f1de868c5d96848fc29e327b19a5b309b41141fa19de62709c69800",
+      "archivedSha256": "ddbfd2a92997638cbe67788b5f52ac7ec38fb72b1867d2145e8906cfb7300f68",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/backend/26-LOCAL-GATEWAY-QUALIFICATION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/backend/26-LOCAL-GATEWAY-QUALIFICATION.md",
+      "originalSha256": "d799750a8b6a675edc755d124411f6fc50cfb81079efa1761fa509b7ddca088e",
+      "archivedSha256": "fb04f8ca4e9d325c49e47a2e60a4803ab7c13dddc26e5ee3fa4a0374b88b1559",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": ".planning/PROJECT.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/.planning/PROJECT.md",
+      "originalSha256": "af5e3ab8c7d82acf2d6328fee348e73e02b386d524d4f0019c2905094688bdef",
+      "archivedSha256": "64583ffd9c023426a37c15eebb56f4e4cbba2a76f50b766771de7b42d1181244",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": ".planning/ROADMAP.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/.planning/ROADMAP.md",
+      "originalSha256": "8a109c3f84b045e3882e32481f16ed2822c609bac7229eb1b60896a10f1bae59",
+      "archivedSha256": "d815b0499068a697d519cd1805a0bb8003b4d4c8520f85345b18ae425a8ac65f",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": ".planning/STATE.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/.planning/STATE.md",
+      "originalSha256": "b36e4ac33c50456a5b5e36ff87ef78f143dece6511833b80644ab355d4daa6a0",
+      "archivedSha256": "f12e4ca336dbffcb83bebbefc5bfdbc0a19506ae36b0a13608920cb845e046f7",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/frontend/STAGE03-05-INTEGRATION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/frontend/STAGE03-05-INTEGRATION.md",
+      "originalSha256": "3db631d46712a5b91ceba7f5e54d198b27c906feab00688f3df3b162ad4e100f",
+      "archivedSha256": "dc86aba3d801d82cb858f25a0b649752adfbc6930b34e6d3ffc29b39a4c03636",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/frontend/BOARDUI-INTEGRATION.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/frontend/BOARDUI-INTEGRATION.md",
+      "originalSha256": "81bae713fb20429ade7d496e97afbd142c20ed9db37a2a0b7ddeec991f7294c0",
+      "archivedSha256": "a33796cdc83f7ff228cbc94ee6a3ec84d4943a0cdb6721175fc9d8dc08ab748e",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/frontend/ROUTE-INTEGRATION-AUDIT.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/frontend/ROUTE-INTEGRATION-AUDIT.md",
+      "originalSha256": "80111f2412008c253456d21ae3048af86ca1147ff62479074126ca0a82f5f7b2",
+      "archivedSha256": "370e25c1be344e5e5208fc91ea6a37d030776de432fff9419762e589aa6e13b5",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-27-autonomous-ai-engineering-workspace.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/superpowers/plans/2026-10-27-autonomous-ai-engineering-workspace.md",
+      "originalSha256": "b4d0a2f24ad7248840e1b5cf9430be69da237c49d1854a6def1053055b7fe906",
+      "archivedSha256": "7aa99f876e62eef1754301ba6d29ee51e86cd4f86d944a5ee1dcad6d356dc765",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-23-frontend-stages-01-06.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/superpowers/plans/2026-10-23-frontend-stages-01-06.md",
+      "originalSha256": "6d609ab6325c601d8a52318821b48cfcb23c7126a0b88ec368521992e183214e",
+      "archivedSha256": "54ec64f6833e3e943378aad8256f101c46e7bed15c7271fa27e4f72be53a579a",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-23-frontend-stages-01-06-design.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/docs/superpowers/specs/2026-10-23-frontend-stages-01-06-design.md",
+      "originalSha256": "64803fca10816e17b1c704211554904d63d60306c6a30538dd92b2523851770b",
+      "archivedSha256": "98de972a3f62c2cbd0f6308ae70a69a03ba04eeb0084b424f38bd92c2c61e41a",
+      "kind": "relocated-with-safe-redirect"
+    },
+    {
+      "original": "AGENTS.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/AGENTS-HISTORICAL.md",
+      "originalSha256": "0d035c1c94a760e00b3fb6042e1d5a8b58b0d98edaecedc41727f5788fe3453f",
+      "archivedSha256": "0ba896b9cf16a30dd94c83f7e89d8468fff84185ade597f98e466c914be9673e",
+      "kind": "snapshot-before-active-entrypoint-update"
+    },
+    {
+      "original": "GEMINI.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/GEMINI-HISTORICAL.md",
+      "originalSha256": "5433c0f8ff5beb7078c2ca7fa30b2c91a0ed8b55a667842408df4ad5b94958c7",
+      "archivedSha256": "078daac51a83774233afdcf485c01020834659bd04fbf6ad4d4220754e1819d7",
+      "kind": "snapshot-before-active-entrypoint-update"
+    },
+    {
+      "original": "README.md",
+      "archive": "docs/archive/pre-workspace-2026-10-28/README-HISTORICAL.md",
+      "originalSha256": "242f51b368ce193160377f290c19b30069eeb2a3d0915b89bb0dd2d86323ec60",
+      "archivedSha256": "0a2cc6a0c24c4fe92931250f1169ac3e665a0bf33021432267db70c0efe94ad5",
+      "kind": "snapshot-before-active-entrypoint-update"
+    }
+  ]
+}

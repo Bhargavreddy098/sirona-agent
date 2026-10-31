@@ -1,0 +1,28 @@
+npm notice run sirona@0.1.0 test
+npm notice run node --test tests/*.test.mjs
+✔ bootstrap unwraps the actual identity envelope and retains CSRF for mutations (83.8268ms)
+✔ session inspection uses canonical data without inventing an auth session id (1.7962ms)
+✔ workspace and capability collections map actual server DTOs, unknown capabilities stay unavailable (2.6572ms)
+✔ logout accepts empty 204 and clears CSRF only after confirmed revocation (3.4535ms)
+✔ problem details including conflict and unavailable remain failures (15.3643ms)
+✔ project updates send the observed version, CSRF and correlation (2.3156ms)
+✔ folder association is metadata in the installed create/update contracts (1.9997ms)
+✔ conversation list maps sessions wire collection without title-based deduplication (4.3574ms)
+✔ message projection normalizes numeric id and second-based timestamps (3.3458ms)
+✔ lease release is fenced to the acquired generation (1.5636ms)
+✔ grant TTL is milliseconds and budget decimal strings are preserved (1.6315ms)
+✔ approval decisions use the reviewed digest and explicit nonce, no auto-approval (1.1535ms)
+✔ desktop server limits host/origin/static paths and sends CSP (188.2527ms)
+✔ fixed backend proxy preserves cookie, CSRF and exact body without broad host proxying (41.3319ms)
+✔ desktop preload exposes narrow session/folder operations; navigation, popups and renderer privileges are restricted (9.1224ms)
+✔ native folder picker accepts one real directory, normalizes it, and grants metadata only (24.5938ms)
+✔ cancelled or multiple selections return no selection (1.0758ms)
+✔ folder picker rejects files and unavailable targets (10.3114ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1006.8052

@@ -1,0 +1,30 @@
+{
+  "verifiedAt": "2026-10-29T01:07:04.280Z",
+  "retiredFolderAbsent": true,
+  "activeFrontendPresent": true,
+  "frontendTypecheck": "pass",
+  "frontendLint": "pass",
+  "toolingTests": {
+    "passed": 6,
+    "failed": 1,
+    "failure": "Unresolved imports in retired backend files",
+    "failuresMatchingRecordedP1Baseline": [
+      "config/s3.js:unresolved-module",
+      "controllers/authController.js:unresolved-module",
+      "middleware/upload.js:unresolved-module",
+      "middleware/upload.js:unresolved-module",
+      "middleware/userAuth.js:unresolved-module",
+      "model/User.js:unresolved-module",
+      "routes/approval.routes.js:unresolved-module",
+      "routes/auth.routes.js:unresolved-module",
+      "routes/files.routes.js:unresolved-module",
+      "routes/session.routes.js:unresolved-module"
+    ]
+  },
+  "routeInventory": {
+    "status": "fail",
+    "compilerImport": "pass",
+    "reason": "Route inventory requires reviewed literal paths"
+  },
+  "scope": "Frontend retirement only; broader backend remediation and P2 not authorized"
+}

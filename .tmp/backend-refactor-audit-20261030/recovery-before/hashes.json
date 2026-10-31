@@ -1,0 +1,14 @@
+[
+  {
+    "path": "backend/services/releaseRecoveryService.js",
+    "sha256": "9dd4c67144b846e838d53d4aba5dafe62cffd0d58aeab400aedf9b1b2883b622"
+  },
+  {
+    "path": "backend/services/identityService.js",
+    "sha256": "640a3eb84d3d161cbf0e8c75c197276fe55dcefe7646c485b5c1327b533e9b67"
+  },
+  {
+    "path": "backend/tests/releaseRecovery.test.js",
+    "sha256": "9eb78b3c2c6ea08683a549d1b196a657dac7163783a68b7725ebe235490a460c"
+  }
+]

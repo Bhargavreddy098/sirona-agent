@@ -1,0 +1,18 @@
+{
+  "result": "passed",
+  "checks": [
+    "Real provider inference in a fresh conversation",
+    "No Sirona identity in provider response",
+    "Neutral Assistant transcript label",
+    "Compact desktop typography and no overflow"
+  ],
+  "selectedModel": "Gemini 3.5 Flash Lite",
+  "response": "I am Gemini, a large language model created by Google.",
+  "tokenEvents": 1,
+  "sizes": {
+    "message": "16px",
+    "composer": "16px",
+    "header": "15px",
+    "overflow": false
+  }
+}

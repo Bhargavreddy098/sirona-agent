@@ -1,0 +1,780 @@
+{
+  "foundation": [
+    {
+      "method": "GET",
+      "path": "/health/live",
+      "body": {
+        "status": "live"
+      }
+    },
+    {
+      "method": "HEAD",
+      "path": "/health/live",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/health/ready",
+      "body": {
+        "ready": true
+      }
+    },
+    {
+      "method": "HEAD",
+      "path": "/health/ready",
+      "body": null
+    },
+    {
+      "method": "GET",
+      "path": "/health",
+      "body": {
+        "status": "ok",
+        "service": "sirona-core",
+        "db": true
+      }
+    },
+    {
+      "method": "HEAD",
+      "path": "/health",
+      "body": null
+    }
+  ],
+  "identities": [
+    "tokenless",
+    "injected guest",
+    "bearer",
+    "cookie",
+    "worker",
+    "method override"
+  ],
+  "correlationPreserved": true,
+  "inventoryRoutes": 61,
+  "denied": [
+    {
+      "method": "GET",
+      "path": "/api/status?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/status?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/register?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/google?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/me?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/auth/me?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/topology?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/sessions/topology?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/sessions?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/fixture?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/sessions/fixture?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/sessions/fixture?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/sessions/fixture?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/fixture/messages?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/sessions/fixture/messages?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/fixture/chat?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/fixture/branch?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/fixture/rewind?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/fixture/lineage?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/sessions/fixture/lineage?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/sessions/fixture/checkpoints?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/sessions/fixture/checkpoints?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/sessions/fixture/checkpoints?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/runs/fixture/approval?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/runs?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/v1/runs?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/approvals/fixture/approval?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/approvals?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/approvals?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/files/tree?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/files/tree?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/files/read?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/files/read?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/files/write?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/files/search?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/files/search?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/files/reveal?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/git/status?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/git/status?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/git/diff?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/git/diff?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/git/branches?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/git/branches?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/git/branch/switch?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/git/stage?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/git/unstage?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/git/discard?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/git/commit?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/git/worktrees?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/git/worktrees?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/git/worktree/add?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/git/worktree/remove?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tools/capabilities?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/tools/capabilities?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/tools/toolsets?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/tools/toolsets?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/tools/skills?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/tools/skills?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/tools/execute?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/capabilities?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/v1/capabilities?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/v1/toolsets?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/v1/toolsets?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/v1/skills?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/v1/skills?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/v1/execute?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/v1/models?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/v1/model/options?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/v1/model/options?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/models?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/models?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/model/options?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/model/options?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/settings?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/settings?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/api/settings?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/settings/single?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/settings/fixture?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/settings/providers/test?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/audit?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/audit?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "GET",
+      "path": "/api/messages/search?path=fixture-target",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/messages/search?path=fixture-target",
+      "status": 503,
+      "code": null
+    },
+    {
+      "method": "POST",
+      "path": "/future/host",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tools/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tools/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tools/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tools/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tools/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tools/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tools/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/v1/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tools/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/HEALTH/live",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/health/live/",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/%68ealth/live",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "//health/live",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/health/live;tool",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/upload",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/files/download",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/notify",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/future",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/health/live",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/api/tools/execute",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "OPTIONS",
+      "path": "/socket.io/?EIO=4&transport=polling",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/health/live",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "GET",
+      "path": "/socket.io/?EIO=4&transport=polling",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    },
+    {
+      "method": "POST",
+      "path": "/socket.io/?EIO=4&transport=polling",
+      "status": 503,
+      "code": "CAPABILITY_UNAVAILABLE"
+    }
+  ],
+  "upgrade": {
+    "closed": true
+  },
+  "stats": {
+    "handlers": 0,
+    "fs": 0,
+    "process": 0,
+    "provider": 0,
+    "external": 0,
+    "cleanup": 0,
+    "productQueries": 0,
+    "future": 0,
+    "shadow": 0,
+    "connections": 0,
+    "approvals": 0,
+    "shimResolutions": 4,
+    "fsPrimitives": {
+      "readFile": 0,
+      "readFileSync": 0,
+      "writeFile": 0,
+      "writeFileSync": 0,
+      "rm": 0,
+      "rmSync": 0,
+      "rename": 0,
+      "renameSync": 0,
+      "readdirSync": 0,
+      "statSync": 0,
+      "existsSync": 0,
+      "mkdirSync": 0
+    },
+    "processPrimitives": {
+      "exec": 0,
+      "execFile": 0,
+      "spawn": 0
+    }
+  }
+}

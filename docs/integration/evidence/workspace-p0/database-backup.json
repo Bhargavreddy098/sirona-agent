@@ -1,0 +1,14 @@
+{
+  "capturedAt": "2026-10-28T14:34:15.846Z",
+  "result": "passed",
+  "operation": "pg_dump --format=custom --no-owner --no-privileges; no database writes",
+  "archive": "private/sirona.pgdump.dpapi",
+  "encryption": "Windows DPAPI CurrentUser; decrypt on the same Windows account/machine",
+  "encryptedSha256": "978296731e1c8de6583e0b1a859fbe822c29f0439db19828b7031b0f44d25699",
+  "encryptedBytes": 239222,
+  "decryptionRoundTripVerified": true,
+  "pgRestoreCatalogReadable": true,
+  "archiveEntryCount": 515,
+  "actualRestorePerformed": false,
+  "limits": "A readable archive is not a tested disaster recovery restore. Protect the Windows account; no plaintext archive was written. No backup of operator environment secrets."
+}

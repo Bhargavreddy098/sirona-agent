@@ -1,0 +1,30 @@
+✔ P3 canonical authenticated tool -> Node guest -> durable receipt -> approved native patch -> replay (17711.4797ms)
+✔ P3 canonical command denies wrong approval, cross-project root, stale fence and revoked grants (2517.0182ms)
+✔ P3 concurrent host edits survive approved patch rejection and recovery never rewrites bytes (5015.8805ms)
+✔ P3 revoking a grant during real execution stops the owned workload and prohibits replay (6635.0859ms)
+✔ P3 local Linux engine reports cgroup2 and seccomp (599.7921ms)
+✔ P3 worker uses immutable image only; no tag/fallback allowed (167.8381ms)
+✔ P3 real container is non-root and capability-dropped (1331.0556ms)
+✔ P3 rootfs read-only and network has no egress route (1724.6064ms)
+✔ P3 tmpfs hard byte cap returns ENOSPC (1118.1139ms)
+✔ P3 unknown environment names and credential aliases cannot be forwarded (1044.8355ms)
+✔ P3 foreign container IDs cannot be started/executed/stopped/removed (1.325ms)
+✔ P3 timeout kills the actual container workload, not only Docker CLI (1295.3761ms)
+✔ P3 stderr and stdout share a bounded output budget and stop workload (1198.9355ms)
+✔ P3 cancellation confirms termination (1117.0637ms)
+✔ P3 orphan cleanup requires explicit owned candidates and preserves other runs (1619.1711ms)
+✔ P3 real guest PTY receives resize and interrupt; close kills owned process tree (1161.3689ms)
+✔ P3 workspace rejects traversal, ADS, devices and Windows aliases (4.326ms)
+✔ P3 tar valid roundtrip preserves digest and bytes (16.1759ms)
+✔ P3 tar rejects links, corrupted headers, truncation, case aliases and trailing payload (6.3983ms)
+✔ P3 source snapshot excludes secrets and rejects junction/hardlink exports (20.6163ms)
+✔ P3 raw host patches require approved native/journal authority and cannot escape (5.1471ms)
+✔ P3 execution entry rejects empty identity/fence before Docker or database effects (4.351ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 54041.566

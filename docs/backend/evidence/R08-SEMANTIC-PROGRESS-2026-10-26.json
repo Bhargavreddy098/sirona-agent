@@ -1,0 +1,329 @@
+{
+  "baseline": {
+    "diagnostics": 66,
+    "files": 20
+  },
+  "steps": [
+    {
+      "step": "Installed SDK correction and production contracts",
+      "diagnostics": 38,
+      "rootFiles": 85,
+      "remaining": [
+        {
+          "event": "static.diagnostic",
+          "file": "tests/boundary.test.js",
+          "line": 24,
+          "code": 2322
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/boundary.test.js",
+          "line": 45,
+          "code": 2322
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/boundary.test.js",
+          "line": 55,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/boundary.test.js",
+          "line": 228,
+          "code": 2769
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/boundary.test.js",
+          "line": 229,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/boundary.test.js",
+          "line": 246,
+          "code": 2345
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/boundary.test.js",
+          "line": 252,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/cli.test.js",
+          "line": 10,
+          "code": 2769
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/cli.test.js",
+          "line": 11,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/config.test.js",
+          "line": 20,
+          "code": 2322
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/config.test.js",
+          "line": 27,
+          "code": 2345
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/config.test.js",
+          "line": 30,
+          "code": 2345
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/fixtures/cli-preload.js",
+          "line": 11,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/fixtures/cli-preload.js",
+          "line": 12,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/fixtures/cli-preload.js",
+          "line": 13,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/fixtures/cli-preload.js",
+          "line": 15,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/fixtures/cli-preload.js",
+          "line": 15,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/fixtures/cli-preload.js",
+          "line": 15,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/foundation.test.js",
+          "line": 40,
+          "code": 2322
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/helpers.js",
+          "line": 18,
+          "code": 2349
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/helpers.js",
+          "line": 31,
+          "code": 2769
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/helpers.js",
+          "line": 33,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/lifecycle.test.js",
+          "line": 57,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/lifecycle.test.js",
+          "line": 58,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/lifecycle.test.js",
+          "line": 93,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 15,
+          "code": 2769
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 16,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 37,
+          "code": 2367
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 38,
+          "code": 2367
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 78,
+          "code": 2322
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 108,
+          "code": 2322
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 118,
+          "code": 2722
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 124,
+          "code": 2769
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 126,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 224,
+          "code": 2722
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/providerText.test.js",
+          "line": 11,
+          "code": 2769
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/runtimeConfig.test.js",
+          "line": 86,
+          "code": 18048
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/runtimeConfig.test.js",
+          "line": 86,
+          "code": 18048
+        }
+      ]
+    },
+    {
+      "step": "Validation/test input contracts, TCP/header narrowing and fixture IPC guards",
+      "diagnostics": 10,
+      "rootFiles": 85,
+      "remaining": [
+        {
+          "event": "static.diagnostic",
+          "file": "foundation/origins.js",
+          "line": 21,
+          "code": 2339
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/helpers.js",
+          "line": 28,
+          "code": 2349
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/helpers.js",
+          "line": 39,
+          "code": 2349
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 37,
+          "code": 2367
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 38,
+          "code": 2367
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 78,
+          "code": 2322
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 108,
+          "code": 2322
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 118,
+          "code": 2722
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/production.test.js",
+          "line": 224,
+          "code": 2722
+        },
+        {
+          "event": "static.diagnostic",
+          "file": "tests/providerText.test.js",
+          "line": 11,
+          "code": 2769
+        }
+      ]
+    },
+    {
+      "step": "Remaining typed fixture states/resolvers and canonical middleware next callback",
+      "diagnostics": 1,
+      "rootFiles": 85,
+      "remaining": [
+        {
+          "file": "tests/providerText.test.js",
+          "line": 12,
+          "code": 2769,
+          "reason": "Intentional invalid method invocation needed runtime reflection rather than a statically invalid test call."
+        }
+      ]
+    },
+    {
+      "step": "Offline legacy invocation characterized through the real getter descriptor",
+      "diagnostics": 0,
+      "rootFiles": 85,
+      "remaining": []
+    }
+  ]
+}

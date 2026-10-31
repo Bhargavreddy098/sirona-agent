@@ -1,0 +1,14 @@
+✔ standalone creation persists project NULL and never creates a hidden project (481.1817ms)
+✔ authentication and CSRF remain enforced (38.7325ms)
+✔ other workspace cannot retrieve, mutate, delete, lease, or execute a standalone conversation (93.2472ms)
+✔ project history remains separate and rename preserves exact model identifiers (106.0607ms)
+✔ legacy turn still rejects missing lease and new coordinated turn rejects another holder (88.6276ms)
+✔ controlled upstream HTTP 503 preserves failed state, releases lease and retries without duplicate user prompts (3693.6936ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8617.1054

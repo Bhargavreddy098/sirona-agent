@@ -1,0 +1,20 @@
+{
+  "durations": {
+    "instant": "80ms",
+    "fast": "120ms",
+    "normal": "180ms",
+    "relaxed": "240ms",
+    "deliberate": "320ms"
+  },
+  "easings": {
+    "standard": "cubic-bezier(0.4, 0, 0.2, 1)",
+    "enter": "cubic-bezier(0.2, 0, 0, 1)",
+    "exit": "cubic-bezier(0.4, 0, 1, 1)",
+    "spring": "linear(0, .398 10%, .682 20%, .843 30%, .925 40%, .972 50%, 1.004 60%, 1.008 70%, 1.003 80%, 1)"
+  },
+  "transitions": {
+    "sidebarCollapse": "width 240ms cubic-bezier(0.4, 0, 0.2, 1)",
+    "dialogAppear": "opacity 180ms ease-out, transform 180ms cubic-bezier(0.2, 0, 0, 1)",
+    "streamingToken": "opacity 60ms linear, transform 60ms ease-out"
+  }
+}

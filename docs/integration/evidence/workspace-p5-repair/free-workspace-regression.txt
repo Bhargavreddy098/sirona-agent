@@ -1,0 +1,478 @@
+TAP version 13
+# Subtest: Migration 023: provider_connections has credential_ref, credential_status and index
+ok 1 - Migration 023: provider_connections has credential_ref, credential_status and index
+  ---
+  duration_ms: 901.0565
+  type: 'test'
+  ...
+# Subtest: CredentialResolver: new connection receives opaque reference and round-trip verified encryption
+ok 2 - CredentialResolver: new connection receives opaque reference and round-trip verified encryption
+  ---
+  duration_ms: 320.7642
+  type: 'test'
+  ...
+# Subtest: CredentialResolver: migrates legacy connection with verified round-trip and preserves history
+ok 3 - CredentialResolver: migrates legacy connection with verified round-trip and preserves history
+  ---
+  duration_ms: 22.9721
+  type: 'test'
+  ...
+# Subtest: CredentialResolver: corrupted or inaccessible secret fails closed with requires_reauth without deleting history
+ok 4 - CredentialResolver: corrupted or inaccessible secret fails closed with requires_reauth without deleting history
+  ---
+  duration_ms: 19.1342
+  type: 'test'
+  ...
+# Subtest: SecretStore: rejects predictable machine fallback when strict mode is active
+ok 5 - SecretStore: rejects predictable machine fallback when strict mode is active
+  ---
+  duration_ms: 0.7474
+  type: 'test'
+  ...
+# Subtest: Zero secret disclosure: HTTP GET /api/v1/provider-connections never returns plaintext or ciphertext
+ok 6 - Zero secret disclosure: HTTP GET /api/v1/provider-connections never returns plaintext or ciphertext
+  ---
+  duration_ms: 113.9551
+  type: 'test'
+  ...
+# Subtest: Plaintext is refused even without strict mode; migration never certifies it
+ok 7 - Plaintext is refused even without strict mode; migration never certifies it
+  ---
+  duration_ms: 21.9053
+  type: 'test'
+  ...
+# Subtest: Cross-workspace credential rotation/test/delete are denied before resolution
+ok 8 - Cross-workspace credential rotation/test/delete are denied before resolution
+  ---
+  duration_ms: 107.4567
+  type: 'test'
+  ...
+# Subtest: Migration compare-and-swap preserves a concurrent credential replacement
+ok 9 - Migration compare-and-swap preserves a concurrent credential replacement
+  ---
+  duration_ms: 21.3247
+  type: 'test'
+  ...
+# Subtest: Lost migration acknowledgement resumes from the durable binding without repeating the write
+ok 10 - Lost migration acknowledgement resumes from the durable binding without repeating the write
+  ---
+  duration_ms: 16.1213
+  type: 'test'
+  ...
+# Subtest: P5 admission: racing fourth specialist denied by real DB lock; sequential reuse and immutable assignment
+ok 11 - P5 admission: racing fourth specialist denied by real DB lock; sequential reuse and immutable assignment
+  ---
+  duration_ms: 880.2151
+  type: 'test'
+  ...
+# Subtest: P5 admission: total/deadline limits survive separate service instances
+ok 12 - P5 admission: total/deadline limits survive separate service instances
+  ---
+  duration_ms: 147.3931
+  type: 'test'
+  ...
+# Subtest: P3 canonical authenticated tool -> Node guest -> durable receipt -> approved native patch -> replay
+ok 13 - P3 canonical authenticated tool -> Node guest -> durable receipt -> approved native patch -> replay
+  ---
+  duration_ms: 11483.7972
+  type: 'test'
+  ...
+# Subtest: P3 canonical command denies wrong approval, cross-project root, stale fence and revoked grants
+ok 14 - P3 canonical command denies wrong approval, cross-project root, stale fence and revoked grants
+  ---
+  duration_ms: 1924.3743
+  type: 'test'
+  ...
+# Subtest: P3 concurrent host edits survive approved patch rejection and recovery never rewrites bytes
+ok 15 - P3 concurrent host edits survive approved patch rejection and recovery never rewrites bytes
+  ---
+  duration_ms: 3653.0757
+  type: 'test'
+  ...
+# Subtest: P3 revoking a grant during real execution stops the owned workload and prohibits replay
+ok 16 - P3 revoking a grant during real execution stops the owned workload and prohibits replay
+  ---
+  duration_ms: 4015.7173
+  type: 'test'
+  ...
+# Subtest: P3 killed control plane recovers only its persisted worker and never replays a dispatched effect
+ok 17 - P3 killed control plane recovers only its persisted worker and never replays a dispatched effect
+  ---
+  duration_ms: 4310.4741
+  type: 'test'
+  ...
+# Subtest: P3 canonical terminal requires a one-use authenticated channel and approved input; replay cannot resend
+ok 18 - P3 canonical terminal requires a one-use authenticated channel and approved input; replay cannot resend
+  ---
+  duration_ms: 4878.9926
+  type: 'test'
+  ...
+# Subtest: P3 revoked terminal identity is denied and its owned process tree is terminated
+ok 19 - P3 revoked terminal identity is denied and its owned process tree is terminated
+  ---
+  duration_ms: 13032.4819
+  type: 'test'
+  ...
+# Subtest: P3 root registration is idempotent and revocation cannot be undone by replay; activation is default-deny
+ok 20 - P3 root registration is idempotent and revocation cannot be undone by replay; activation is default-deny
+  ---
+  duration_ms: 5172.0741
+  type: 'test'
+  ...
+# Subtest: P3 local Linux engine reports cgroup2 and seccomp
+ok 21 - P3 local Linux engine reports cgroup2 and seccomp
+  ---
+  duration_ms: 1179.1938
+  type: 'test'
+  ...
+# Subtest: P3 worker uses immutable image only; no tag/fallback allowed
+ok 22 - P3 worker uses immutable image only; no tag/fallback allowed
+  ---
+  duration_ms: 228.8951
+  type: 'test'
+  ...
+# Subtest: P3 real container is non-root and capability-dropped
+ok 23 - P3 real container is non-root and capability-dropped
+  ---
+  duration_ms: 3702.1542
+  type: 'test'
+  ...
+# Subtest: P3 rootfs read-only and network has no egress route
+ok 24 - P3 rootfs read-only and network has no egress route
+  ---
+  duration_ms: 7369.8687
+  type: 'test'
+  ...
+# Subtest: P3 tmpfs hard byte cap returns ENOSPC
+ok 25 - P3 tmpfs hard byte cap returns ENOSPC
+  ---
+  duration_ms: 5440.3925
+  type: 'test'
+  ...
+# Subtest: P3 unknown environment names and credential aliases cannot be forwarded
+ok 26 - P3 unknown environment names and credential aliases cannot be forwarded
+  ---
+  duration_ms: 3429.0258
+  type: 'test'
+  ...
+# Subtest: P3 foreign container IDs cannot be started/executed/stopped/removed
+ok 27 - P3 foreign container IDs cannot be started/executed/stopped/removed
+  ---
+  duration_ms: 1.7182
+  type: 'test'
+  ...
+# Subtest: P3 a fresh independent Node container verifies exact produced bytes and rejects a bad artifact
+ok 28 - P3 a fresh independent Node container verifies exact produced bytes and rejects a bad artifact
+  ---
+  duration_ms: 5472.0623
+  type: 'test'
+  ...
+# Subtest: P3 kernel PID cap rejects excess children within the owned container
+ok 29 - P3 kernel PID cap rejects excess children within the owned container
+  ---
+  duration_ms: 4803.4611
+  type: 'test'
+  ...
+# Subtest: P3 kernel memory limit kills an over-budget guest process and preserves daemon availability
+ok 30 - P3 kernel memory limit kills an over-budget guest process and preserves daemon availability
+  ---
+  duration_ms: 10198.6153
+  type: 'test'
+  ...
+# Subtest: P3 timeout kills the actual container workload, not only Docker CLI
+ok 31 - P3 timeout kills the actual container workload, not only Docker CLI
+  ---
+  duration_ms: 1303.9654
+  type: 'test'
+  ...
+# Subtest: P3 stderr and stdout share a bounded output budget and stop workload
+ok 32 - P3 stderr and stdout share a bounded output budget and stop workload
+  ---
+  duration_ms: 969.8989
+  type: 'test'
+  ...
+# Subtest: P3 cancellation confirms termination
+ok 33 - P3 cancellation confirms termination
+  ---
+  duration_ms: 1049.0274
+  type: 'test'
+  ...
+# Subtest: P3 orphan cleanup requires explicit owned candidates and preserves other runs
+ok 34 - P3 orphan cleanup requires explicit owned candidates and preserves other runs
+  ---
+  duration_ms: 1489.1421
+  type: 'test'
+  ...
+# Subtest: P3 real guest PTY receives resize and interrupt; close kills owned process tree
+ok 35 - P3 real guest PTY receives resize and interrupt; close kills owned process tree
+  ---
+  duration_ms: 1045.9678
+  type: 'test'
+  ...
+# Subtest: run projections, control, stream and receipts enforce workspace and CSRF
+ok 36 - run projections, control, stream and receipts enforce workspace and CSRF
+  ---
+  duration_ms: 1769.5893
+  type: 'test'
+  ...
+# Subtest: internal identity requires the actual live session token; revoked session fails
+ok 37 - internal identity requires the actual live session token; revoked session fails
+  ---
+  duration_ms: 29.3662
+  type: 'test'
+  ...
+# Subtest: unauthenticated workers, foreign roots and missing contract approval fail closed
+ok 38 - unauthenticated workers, foreign roots and missing contract approval fail closed
+  ---
+  duration_ms: 40.6398
+  type: 'test'
+  ...
+# Subtest: read-only policy permits actual reads and denies mutations
+ok 39 - read-only policy permits actual reads and denies mutations
+  ---
+  duration_ms: 17.6563
+  type: 'test'
+  ...
+# Subtest: capability grants are checked again after revoke or expiry
+ok 40 - capability grants are checked again after revoke or expiry
+  ---
+  duration_ms: 22.4926
+  type: 'test'
+  ...
+# Subtest: approval nonce can only decide once under a concurrent race
+ok 41 - approval nonce can only decide once under a concurrent race
+  ---
+  duration_ms: 178.137
+  type: 'test'
+  ...
+# Subtest: invalid SSE cursor is rejected and a revoked session closes a live stream
+ok 42 - invalid SSE cursor is rejected and a revoked session closes a live stream
+  ---
+  duration_ms: 65.7608
+  type: 'test'
+  ...
+# Subtest: real pinned contract approval is revalidated for expiry, digest, run binding and revoke
+ok 43 - real pinned contract approval is revalidated for expiry, digest, run binding and revoke
+  ---
+  duration_ms: 60.1547
+  type: 'test'
+  ...
+# Subtest: developer connections are workspace scoped and host probes cannot qualify a guest
+ok 44 - developer connections are workspace scoped and host probes cannot qualify a guest
+  ---
+  duration_ms: 103.4699
+  type: 'test'
+  ...
+# Subtest: 100 concurrent writers allocate unique ordered committed events
+ok 45 - 100 concurrent writers allocate unique ordered committed events
+  ---
+  duration_ms: 1032.3321
+  type: 'test'
+  ...
+# Subtest: concurrent operation identities deduplicate and mismatched payload fails
+ok 46 - concurrent operation identities deduplicate and mismatched payload fails
+  ---
+  duration_ms: 255.5979
+  type: 'test'
+  ...
+# Subtest: dispatch crash is unknown and never redispatched; pre-dispatch retry is safe
+ok 47 - dispatch crash is unknown and never redispatched; pre-dispatch retry is safe
+  ---
+  duration_ms: 26.465
+  type: 'test'
+  ...
+# Subtest: stale lease completion and expiry are fenced; outstanding effects prevent reclaim
+ok 48 - stale lease completion and expiry are fenced; outstanding effects prevent reclaim
+  ---
+  duration_ms: 29.0113
+  type: 'test'
+  ...
+# Subtest: real keyed HTTP tool replay returns original receipt and file bytes once
+ok 49 - real keyed HTTP tool replay returns original receipt and file bytes once
+  ---
+  duration_ms: 575.2981
+  type: 'test'
+  ...
+# Subtest: SSE paginates replay and tails a new committed event with cursor
+ok 50 - SSE paginates replay and tails a new committed event with cursor
+  ---
+  duration_ms: 599.244
+  type: 'test'
+  ...
+# Subtest: P5 saver: complete SDK checkpoint, metadata, parent and writes round trip through fresh owner
+ok 51 - P5 saver: complete SDK checkpoint, metadata, parent and writes round trip through fresh owner
+  ---
+  duration_ms: 618.263
+  type: 'test'
+  ...
+# Subtest: P3 actual Windows helper changes files only when all locked preimages match
+ok 52 - P3 actual Windows helper changes files only when all locked preimages match
+  ---
+  duration_ms: 2787.2407
+  type: 'test'
+  ...
+# Subtest: P3 Windows helper refuses a hardlink without modifying either name
+ok 53 - P3 Windows helper refuses a hardlink without modifying either name
+  ---
+  duration_ms: 1273.3342
+  type: 'test'
+  ...
+# Subtest: P3 Windows helper rejects junction traversal; target bytes stay unchanged
+ok 54 - P3 Windows helper rejects junction traversal; target bytes stay unchanged
+  ---
+  duration_ms: 1357.6534
+  type: 'test'
+  ...
+# Subtest: P3 native addition preserves an existing concurrent file
+ok 55 - P3 native addition preserves an existing concurrent file
+  ---
+  duration_ms: 1232.7748
+  type: 'test'
+  ...
+# Subtest: P5 real process death: committed DB effect is reused after SIGKILL before SDK checkpoint acknowledgment
+ok 56 - P5 real process death: committed DB effect is reused after SIGKILL before SDK checkpoint acknowledgment
+  ---
+  duration_ms: 4704.6376
+  type: 'test'
+  ...
+# Subtest: P5 real process death: dispatched outcome stays unknown and is never blindly repeated
+ok 57 - P5 real process death: dispatched outcome stays unknown and is never blindly repeated
+  ---
+  duration_ms: 3654.8414
+  type: 'test'
+  ...
+# Subtest: P5 SDK/storage: actual compiled graph persists channels, pending writes and parent lineage
+ok 58 - P5 SDK/storage: actual compiled graph persists channels, pending writes and parent lineage
+  ---
+  duration_ms: 947.8076
+  type: 'test'
+  ...
+# Subtest: P5 SDK/storage: rejection and unknown verification cannot complete a graph
+ok 59 - P5 SDK/storage: rejection and unknown verification cannot complete a graph
+  ---
+  duration_ms: 226.3294
+  type: 'test'
+  ...
+# Subtest: P5 saver: namespaces, immutable IDs, BIGINT allocation, duplicate writes and corruption
+ok 60 - P5 saver: namespaces, immutable IDs, BIGINT allocation, duplicate writes and corruption
+  ---
+  duration_ms: 157.4333
+  type: 'test'
+  ...
+# Subtest: P5 security: candidate text and authenticated booleans cannot replace trusted evidence/identity
+ok 61 - P5 security: candidate text and authenticated booleans cannot replace trusted evidence/identity
+  ---
+  duration_ms: 2.9197
+  type: 'test'
+  ...
+# Subtest: P5 runtime: default-off gate cannot be bypassed with authenticated=true
+ok 62 - P5 runtime: default-off gate cannot be bypassed with authenticated=true
+  ---
+  duration_ms: 0.515
+  type: 'test'
+  ...
+# Subtest: P5 real HTTP: identity, pause/resume engine pin, cancellation and durable event replay
+ok 63 - P5 real HTTP: identity, pause/resume engine pin, cancellation and durable event replay
+  ---
+  duration_ms: 2395.3916
+  type: 'test'
+  ...
+# Subtest: P5 real lifecycle: unknown effects keep cancellation unresolved; no legacy conversion
+ok 64 - P5 real lifecycle: unknown effects keep cancellation unresolved; no legacy conversion
+  ---
+  duration_ms: 87.4331
+  type: 'test'
+  ...
+# Subtest: P5 graph rejects missing activity owners instead of running a no-op
+ok 65 - P5 graph rejects missing activity owners instead of running a no-op
+  ---
+  duration_ms: 2.0463
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: invalid internal limits reject before DB/reservation/inference
+ok 66 - P5 bounded providers: invalid internal limits reject before DB/reservation/inference
+  ---
+  duration_ms: 3.4742
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: real AI SDK HTTP request preserves exact ID, output cap, streaming and usage
+ok 67 - P5 bounded providers: real AI SDK HTTP request preserves exact ID, output cap, streaming and usage
+  ---
+  duration_ms: 389.866
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: native compatible transport caps output; ordinary calls retain unset limit
+ok 68 - P5 bounded providers: native compatible transport caps output; ordinary calls retain unset limit
+  ---
+  duration_ms: 49.7368
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: native OpenAI transport sends completion cap and preserves reported usage
+ok 69 - P5 bounded providers: native OpenAI transport sends completion cap and preserves reported usage
+  ---
+  duration_ms: 12.8538
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: native Anthropic transport sends cap and preserves final reported usage
+ok 70 - P5 bounded providers: native Anthropic transport sends cap and preserves final reported usage
+  ---
+  duration_ms: 20.7449
+  type: 'test'
+  ...
+# Subtest: Drizzle uses existing client transaction and rolls back real writes
+ok 71 - Drizzle uses existing client transaction and rolls back real writes
+  ---
+  duration_ms: 933.1066
+  type: 'test'
+  ...
+# Subtest: Zod rejects malformed tools at real HTTP boundary; valid authenticated read works
+ok 72 - Zod rejects malformed tools at real HTTP boundary; valid authenticated read works
+  ---
+  duration_ms: 617.7598
+  type: 'test'
+  ...
+# Subtest: P3 workspace rejects traversal, ADS, devices and Windows aliases
+ok 73 - P3 workspace rejects traversal, ADS, devices and Windows aliases
+  ---
+  duration_ms: 1.5976
+  type: 'test'
+  ...
+# Subtest: P3 tar valid roundtrip preserves digest and bytes
+ok 74 - P3 tar valid roundtrip preserves digest and bytes
+  ---
+  duration_ms: 7.9117
+  type: 'test'
+  ...
+# Subtest: P3 tar rejects links, corrupted headers, truncation, case aliases and trailing payload
+ok 75 - P3 tar rejects links, corrupted headers, truncation, case aliases and trailing payload
+  ---
+  duration_ms: 1.5494
+  type: 'test'
+  ...
+# Subtest: P3 source snapshot excludes secrets and rejects junction/hardlink exports
+ok 76 - P3 source snapshot excludes secrets and rejects junction/hardlink exports
+  ---
+  duration_ms: 10.5396
+  type: 'test'
+  ...
+# Subtest: P3 raw host patches require approved native/journal authority and cannot escape
+ok 77 - P3 raw host patches require approved native/journal authority and cannot escape
+  ---
+  duration_ms: 3.1882
+  type: 'test'
+  ...
+# Subtest: P3 execution entry rejects empty identity/fence before Docker or database effects
+ok 78 - P3 execution entry rejects empty identity/fence before Docker or database effects
+  ---
+  duration_ms: 2.6804
+  type: 'test'
+  ...
+1..78
+# tests 78
+# suites 0
+# pass 78
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 142188.1716

@@ -1,0 +1,152 @@
+TAP version 13
+# Subtest: P5 admission: racing fourth specialist denied by real DB lock; sequential reuse and immutable assignment
+ok 1 - P5 admission: racing fourth specialist denied by real DB lock; sequential reuse and immutable assignment
+  ---
+  duration_ms: 3049.9843
+  type: 'test'
+  ...
+# Subtest: P5 admission: total/deadline limits survive separate service instances
+ok 2 - P5 admission: total/deadline limits survive separate service instances
+  ---
+  duration_ms: 358.0455
+  type: 'test'
+  ...
+# Subtest: P5 saver: complete SDK checkpoint, metadata, parent and writes round trip through fresh owner
+ok 3 - P5 saver: complete SDK checkpoint, metadata, parent and writes round trip through fresh owner
+  ---
+  duration_ms: 1658.5625
+  type: 'test'
+  ...
+# Subtest: P5 canonical HTTP/SSE journey with controlled upstream: approvals, real guest/patch/verifier, no duplicate model calls
+ok 4 - P5 canonical HTTP/SSE journey with controlled upstream: approvals, real guest/patch/verifier, no duplicate model calls
+  ---
+  duration_ms: 30336.8798
+  type: 'test'
+  ...
+# Subtest: P5 real process death: committed DB effect is reused after SIGKILL before SDK checkpoint acknowledgment
+ok 5 - P5 real process death: committed DB effect is reused after SIGKILL before SDK checkpoint acknowledgment
+  ---
+  duration_ms: 10371.1734
+  type: 'test'
+  ...
+# Subtest: P5 real process death: dispatched outcome stays unknown and is never blindly repeated
+ok 6 - P5 real process death: dispatched outcome stays unknown and is never blindly repeated
+  ---
+  duration_ms: 8438.5553
+  type: 'test'
+  ...
+# Subtest: P5 SDK/storage: actual compiled graph persists channels, pending writes and parent lineage
+ok 7 - P5 SDK/storage: actual compiled graph persists channels, pending writes and parent lineage
+  ---
+  duration_ms: 3286.1218
+  type: 'test'
+  ...
+# Subtest: P5 SDK/storage: rejection and unknown verification cannot complete a graph
+ok 8 - P5 SDK/storage: rejection and unknown verification cannot complete a graph
+  ---
+  duration_ms: 970.9042
+  type: 'test'
+  ...
+# Subtest: P5 saver: namespaces, immutable IDs, BIGINT allocation, duplicate writes and corruption
+ok 9 - P5 saver: namespaces, immutable IDs, BIGINT allocation, duplicate writes and corruption
+  ---
+  duration_ms: 397.485
+  type: 'test'
+  ...
+# Subtest: P5 actual guest/verifier: bad candidate fails, approved correction passes in separate fresh guests
+not ok 10 - P5 actual guest/verifier: bad candidate fails, approved correction passes in separate fresh guests
+  ---
+  duration_ms: 7112.7103
+  type: 'test'
+  location: 'C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend\\dist-workspace\\tests\\orchestrationGuestVerification.test.js:9:1'
+  failureType: 'testCodeFailure'
+  error: 'Local Linux Docker is unavailable'
+  code: 'DOCKER_UNAVAILABLE'
+  stack: |-
+    qualifyHome (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/backend/dist-workspace/src/workspace/homeProfile.js:95:19)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async TestContext.<anonymous> (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/backend/dist-workspace/tests/orchestrationGuestVerification.test.js:14:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: P5 model activity: interrupted controlled transport retains unknown charges and cannot be redispatched
+ok 11 - P5 model activity: interrupted controlled transport retains unknown charges and cannot be redispatched
+  ---
+  duration_ms: 2205.5619
+  type: 'test'
+  ...
+# Subtest: P5 security: candidate text and authenticated booleans cannot replace trusted evidence/identity
+ok 12 - P5 security: candidate text and authenticated booleans cannot replace trusted evidence/identity
+  ---
+  duration_ms: 5.675
+  type: 'test'
+  ...
+# Subtest: P5 runtime: default-off gate cannot be bypassed with authenticated=true
+ok 13 - P5 runtime: default-off gate cannot be bypassed with authenticated=true
+  ---
+  duration_ms: 0.7921
+  type: 'test'
+  ...
+# Subtest: P5 local privacy: externally enabled LangChain tracing cannot capture graph content
+ok 14 - P5 local privacy: externally enabled LangChain tracing cannot capture graph content
+  ---
+  duration_ms: 0.683
+  type: 'test'
+  ...
+# Subtest: P5 real HTTP: identity, pause/resume engine pin, cancellation and durable event replay
+ok 15 - P5 real HTTP: identity, pause/resume engine pin, cancellation and durable event replay
+  ---
+  duration_ms: 2271.1173
+  type: 'test'
+  ...
+# Subtest: P5 real lifecycle: unknown effects keep cancellation unresolved; no legacy conversion
+ok 16 - P5 real lifecycle: unknown effects keep cancellation unresolved; no legacy conversion
+  ---
+  duration_ms: 64.7645
+  type: 'test'
+  ...
+# Subtest: P5 graph rejects missing activity owners instead of running a no-op
+ok 17 - P5 graph rejects missing activity owners instead of running a no-op
+  ---
+  duration_ms: 1.1174
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: invalid internal limits reject before DB/reservation/inference
+ok 18 - P5 bounded providers: invalid internal limits reject before DB/reservation/inference
+  ---
+  duration_ms: 4.5814
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: real AI SDK HTTP request preserves exact ID, output cap, streaming and usage
+ok 19 - P5 bounded providers: real AI SDK HTTP request preserves exact ID, output cap, streaming and usage
+  ---
+  duration_ms: 382.1468
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: native compatible transport caps output; ordinary calls retain unset limit
+ok 20 - P5 bounded providers: native compatible transport caps output; ordinary calls retain unset limit
+  ---
+  duration_ms: 46.2698
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: native OpenAI transport sends completion cap and preserves reported usage
+ok 21 - P5 bounded providers: native OpenAI transport sends completion cap and preserves reported usage
+  ---
+  duration_ms: 11.7538
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: native Anthropic transport sends cap and preserves final reported usage
+ok 22 - P5 bounded providers: native Anthropic transport sends cap and preserves final reported usage
+  ---
+  duration_ms: 17.8548
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 21
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 109844.7498

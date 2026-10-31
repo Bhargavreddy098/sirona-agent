@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "scope": "candidate guest npm package lock",
+  "reason": "Initial process query timed out. Bounded public advisory retry completed; guest-npm-audit.json reports zero known vulnerabilities.",
+  "installationPerformed": false,
+  "limitations": "This checks the candidate npm lock only; image/OS artifact qualification and production release remain gated."
+}

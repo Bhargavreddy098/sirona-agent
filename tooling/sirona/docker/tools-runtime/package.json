@@ -1,0 +1,11 @@
+{
+  "name": "sirona-guest-tools",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "typescript-language-server": "6.0.2",
+    "typescript": "6.0.3"
+  }
+}

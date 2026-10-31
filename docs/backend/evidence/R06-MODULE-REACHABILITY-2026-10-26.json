@@ -1,0 +1,311 @@
+{
+  "before": {
+    "event": "modules.checked",
+    "files": 81,
+    "productionReachable": [
+      "app.js",
+      "config/db.js",
+      "config/redis.js",
+      "controllers/approvalController.js",
+      "controllers/auditController.js",
+      "controllers/authController.js",
+      "controllers/chatController.js",
+      "controllers/filesController.js",
+      "controllers/gitController.js",
+      "controllers/healthController.js",
+      "controllers/modelsController.js",
+      "controllers/sessionController.js",
+      "controllers/settingsController.js",
+      "controllers/toolsController.js",
+      "foundation/bounded.js",
+      "foundation/composition.js",
+      "foundation/config.js",
+      "foundation/lifecycle.js",
+      "foundation/logger.js",
+      "foundation/origins.js",
+      "foundation/production.js",
+      "foundation/runtimeConfig.js",
+      "middleware/auditContext.js",
+      "middleware/errorHandler.js",
+      "middleware/httpBoundary.js",
+      "middleware/ownershipGuard.js",
+      "middleware/problem.js",
+      "middleware/rateLimiter.js",
+      "middleware/userAuth.js",
+      "middleware/validate.js",
+      "model/Approval.js",
+      "model/AuditLog.js",
+      "model/Checkpoint.js",
+      "model/Message.js",
+      "model/Project.js",
+      "model/Session.js",
+      "model/Setting.js",
+      "model/TurnLease.js",
+      "model/User.js",
+      "routes/approval.routes.js",
+      "routes/audit.routes.js",
+      "routes/auth.routes.js",
+      "routes/files.routes.js",
+      "routes/git.routes.js",
+      "routes/health.routes.js",
+      "routes/index.js",
+      "routes/models.routes.js",
+      "routes/session.routes.js",
+      "routes/settings.routes.js",
+      "routes/tools.routes.js",
+      "server.js",
+      "services/aiService.js",
+      "services/auditLogger.js",
+      "services/socket.js",
+      "services/turnLeaseService.js"
+    ],
+    "packages": {
+      "express": [
+        "app.js",
+        "routes/approval.routes.js",
+        "routes/audit.routes.js",
+        "routes/auth.routes.js",
+        "routes/files.routes.js",
+        "routes/git.routes.js",
+        "routes/health.routes.js",
+        "routes/index.js",
+        "routes/models.routes.js",
+        "routes/session.routes.js",
+        "routes/settings.routes.js",
+        "routes/tools.routes.js",
+        "tests/helpers.js",
+        "tests/production.test.js"
+      ],
+      "compression": [
+        "app.js"
+      ],
+      "cookie-parser": [
+        "app.js"
+      ],
+      "pg": [
+        "config/db.js"
+      ],
+      "ioredis": [
+        "config/redis.js"
+      ],
+      "dotenv": [
+        "config/s3.js",
+        "server.js"
+      ],
+      "@aws-sdk/client-s3": [
+        "config/s3.js"
+      ],
+      "jsonwebtoken": [
+        "controllers/authController.js",
+        "middleware/userAuth.js"
+      ],
+      "google-auth-library": [
+        "controllers/authController.js"
+      ],
+      "pino": [
+        "foundation/logger.js"
+      ],
+      "pino-http": [
+        "foundation/logger.js"
+      ],
+      "cors": [
+        "middleware/httpBoundary.js"
+      ],
+      "helmet": [
+        "middleware/httpBoundary.js"
+      ],
+      "rate-limiter-flexible": [
+        "middleware/rateLimiter.js"
+      ],
+      "multer": [
+        "middleware/upload.js"
+      ],
+      "multer-s3": [
+        "middleware/upload.js"
+      ],
+      "bcryptjs": [
+        "model/User.js"
+      ],
+      "joi": [
+        "routes/approval.routes.js",
+        "routes/auth.routes.js",
+        "routes/files.routes.js",
+        "routes/session.routes.js"
+      ],
+      "@google/genai": [
+        "services/aiService.js"
+      ],
+      "openai": [
+        "services/aiService.js"
+      ],
+      "@anthropic-ai/sdk": [
+        "services/aiService.js"
+      ],
+      "nodemailer": [
+        "services/emailService.js"
+      ],
+      "socket.io": [
+        "services/socket.js",
+        "tests/boundary.test.js"
+      ],
+      "@socket.io/redis-adapter": [
+        "services/socket.js"
+      ]
+    },
+    "dynamic": [],
+    "failures": []
+  },
+  "after": {
+    "event": "modules.checked",
+    "files": 84,
+    "productionReachable": [
+      "app.js",
+      "config/db.js",
+      "config/redis.js",
+      "controllers/approvalController.js",
+      "controllers/auditController.js",
+      "controllers/authController.js",
+      "controllers/chatController.js",
+      "controllers/filesController.js",
+      "controllers/gitController.js",
+      "controllers/healthController.js",
+      "controllers/modelsController.js",
+      "controllers/sessionController.js",
+      "controllers/settingsController.js",
+      "controllers/toolsController.js",
+      "foundation/bounded.js",
+      "foundation/composition.js",
+      "foundation/config.js",
+      "foundation/lifecycle.js",
+      "foundation/logger.js",
+      "foundation/origins.js",
+      "foundation/production.js",
+      "foundation/runtimeConfig.js",
+      "middleware/auditContext.js",
+      "middleware/errorHandler.js",
+      "middleware/httpBoundary.js",
+      "middleware/ownershipGuard.js",
+      "middleware/problem.js",
+      "middleware/rateLimiter.js",
+      "middleware/userAuth.js",
+      "middleware/validate.js",
+      "model/Approval.js",
+      "model/AuditLog.js",
+      "model/Checkpoint.js",
+      "model/Message.js",
+      "model/Project.js",
+      "model/Session.js",
+      "model/Setting.js",
+      "model/TurnLease.js",
+      "model/User.js",
+      "routes/approval.routes.js",
+      "routes/audit.routes.js",
+      "routes/auth.routes.js",
+      "routes/files.routes.js",
+      "routes/git.routes.js",
+      "routes/health.routes.js",
+      "routes/index.js",
+      "routes/models.routes.js",
+      "routes/session.routes.js",
+      "routes/settings.routes.js",
+      "routes/tools.routes.js",
+      "server.js",
+      "services/aiService.js",
+      "services/auditLogger.js",
+      "services/socket.js",
+      "services/turnLeaseService.js"
+    ],
+    "packages": {
+      "express": [
+        "app.js",
+        "routes/approval.routes.js",
+        "routes/audit.routes.js",
+        "routes/auth.routes.js",
+        "routes/files.routes.js",
+        "routes/git.routes.js",
+        "routes/health.routes.js",
+        "routes/index.js",
+        "routes/models.routes.js",
+        "routes/session.routes.js",
+        "routes/settings.routes.js",
+        "routes/tools.routes.js",
+        "tests/helpers.js",
+        "tests/production.test.js"
+      ],
+      "compression": [
+        "app.js"
+      ],
+      "cookie-parser": [
+        "app.js"
+      ],
+      "pg": [
+        "config/db.js"
+      ],
+      "ioredis": [
+        "config/redis.js"
+      ],
+      "dotenv": [
+        "config/s3.js",
+        "server.js"
+      ],
+      "@aws-sdk/client-s3": [
+        "config/s3.js"
+      ],
+      "jsonwebtoken": [
+        "controllers/authController.js",
+        "middleware/userAuth.js"
+      ],
+      "google-auth-library": [
+        "controllers/authController.js"
+      ],
+      "pino": [
+        "foundation/logger.js"
+      ],
+      "pino-http": [
+        "foundation/logger.js"
+      ],
+      "cors": [
+        "middleware/httpBoundary.js"
+      ],
+      "helmet": [
+        "middleware/httpBoundary.js"
+      ],
+      "rate-limiter-flexible": [
+        "middleware/rateLimiter.js"
+      ],
+      "multer": [
+        "middleware/upload.js"
+      ],
+      "multer-s3": [
+        "middleware/upload.js"
+      ],
+      "bcryptjs": [
+        "model/User.js"
+      ],
+      "joi": [
+        "routes/approval.routes.js",
+        "routes/auth.routes.js",
+        "routes/files.routes.js",
+        "routes/session.routes.js"
+      ],
+      "@google/genai": [
+        "services/aiService.js"
+      ],
+      "openai": [
+        "services/aiService.js"
+      ],
+      "@anthropic-ai/sdk": [
+        "services/aiService.js"
+      ],
+      "socket.io": [
+        "services/socket.js",
+        "tests/boundary.test.js"
+      ],
+      "@socket.io/redis-adapter": [
+        "services/socket.js"
+      ]
+    },
+    "dynamic": [],
+    "failures": []
+  }
+}

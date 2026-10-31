@@ -1,0 +1,39 @@
+{
+  "name": "sirona-next",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5178 --strictPort",
+    "build": "tsc -b && vite build",
+    "check": "tsc -b",
+    "lint": "oxlint src",
+    "test": "node --test tests/*.test.mjs",
+    "desktop": "npm run build && npm run build:electron && npm --prefix ../../backend run build:workspace && electron .",
+    "build:electron": "tsc -p tsconfig.electron.json"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@remixicon/react": "^4.9.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-markdown": "^10.1.0",
+    "rehype-highlight": "^7.0.2",
+    "remark-gfm": "^4.0.1",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.2.0",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "electron": "^43.0.0",
+    "oxlint": "^1.89.0",
+    "playwright": "^1.64.1",
+    "tailwindcss": "^4.2.0",
+    "typescript": "~7.0.2",
+    "vite": "^8.3.5"
+  }
+}

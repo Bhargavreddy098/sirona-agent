@@ -1,0 +1,24 @@
+{
+  "hover": {
+    "sidebarRow": "Background switches to alpha 5%, 3-dot action menu appears with 120ms fade-in",
+    "button": "Subtle background darken (light) or lighten (dark) with 120ms transition",
+    "iconButton": "Square 32x32 hit target, background transitions to alpha 6%, border-radius: 8px"
+  },
+  "focus": {
+    "keyboardFocusRing": "2px solid #3a83f7 with 2px offset",
+    "composerFocus": "Border becomes slightly more pronounced, no harsh browser outline, box-shadow maintains elevation"
+  },
+  "active": {
+    "buttonScale": "transform: scale(0.98) on active press with 80ms transition"
+  },
+  "selected": {
+    "sidebarRow": "Background switches to alpha 8% (light) / alpha 10% (dark), font-weight shifts to 510"
+  },
+  "disabled": {
+    "button": "Opacity 0.4, cursor: not-allowed, pointer-events: none"
+  },
+  "approvalAccept": "Instant optimistic state update, button shows checkmark spinner",
+  "fileRowHover": "Right-aligned actions appear, subtle background shift",
+  "diffInlineScrub": "Hovering over line reveals git blame and rollback icons",
+  "toolCardToggle": "Smooth 180ms height transition revealing stdout/stderr logs"
+}

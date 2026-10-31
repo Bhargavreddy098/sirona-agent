@@ -1,0 +1,15 @@
+✔ P3 canonical authenticated tool -> Node guest -> durable receipt -> approved native patch -> replay (13041.2026ms)
+✔ P3 canonical command denies wrong approval, cross-project root, stale fence and revoked grants (5757.6597ms)
+✔ P3 concurrent host edits survive approved patch rejection and recovery never rewrites bytes (4054.1701ms)
+✔ P3 revoking a grant during real execution stops the owned workload and prohibits replay (3821.8645ms)
+✔ P3 killed control plane recovers only its persisted worker and never replays a dispatched effect (4318.593ms)
+✔ P3 canonical terminal requires a one-use authenticated channel and approved input; replay cannot resend (3150.6814ms)
+✔ P3 revoked terminal identity is denied and its owned process tree is terminated (4162.8054ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 39526.8274

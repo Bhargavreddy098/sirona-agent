@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-28T16:12:27.069Z",
+  "result": "passed",
+  "documents": [
+    "docs/integration/SIRONA-WORKSPACE-P1-REPORT.md",
+    "docs/integration/SIRONA-WORKSPACE-P2-APPROVAL.md",
+    "docs/integration/SIRONA-AGENT-HANDOFF.md",
+    "docs/integration/SIRONA-WORKSPACE-LEDGER.md",
+    "AGENTS.md",
+    "README.md",
+    "GEMINI.md",
+    "docs/README.md"
+  ],
+  "links": 83,
+  "nextPhase": "P2 not approved",
+  "productionMigration": "022 not approved on working sirona",
+  "fullStatic": "39 pre-existing findings retained, zero introduced; no full-repo qualification claim"
+}

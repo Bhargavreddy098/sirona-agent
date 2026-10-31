@@ -1,0 +1,22 @@
+{
+  "text": "Sirona\nNew chat\nCtrl+K\nChat\nWorkspace\n\nNo conversations yet.\n\nSettings\nChat\n/\nNew conversation\nWhat would you like to build?\n\nChat freely with registered AI models, or attach a local project to enable workspace tools.\n\nAttach local project\nPick a local folder from your computer\nBrainstorm architecture\nDiscuss system design and best practices\nAttach folder\nMessage the selected model\nAsk\nPlan\nBuild\nGemini 2.5 Flash\ngoogle\nWorkspace Tools\nFiles\nTerminal\nPlan\nRuns\nApprovals\nWorkers\n\nChoose a project\n\nSelect an attached project to explore its files, plans, and terminal.",
+  "pageErrors": [],
+  "responses": [
+    {
+      "path": "/api/v1/model-settings",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/models",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/conversations",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects",
+      "status": 200
+    }
+  ]
+}

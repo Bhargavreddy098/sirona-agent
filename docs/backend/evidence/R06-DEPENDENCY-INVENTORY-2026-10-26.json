@@ -1,0 +1,795 @@
+{
+  "direct": [
+    {
+      "name": "@anthropic-ai/sdk",
+      "range": "^0.39.0",
+      "version": "0.39.0",
+      "license": "MIT",
+      "deprecated": null,
+      "importers": [
+        "services/aiService.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "@aws-sdk/client-s3",
+      "range": "^3.970.0",
+      "version": "3.1156.0",
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=20.0.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "config/s3.js"
+      ],
+      "active": false
+    },
+    {
+      "name": "@google/genai",
+      "range": "^2.31.0",
+      "version": "2.31.0",
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=20.0.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "services/aiService.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "@socket.io/redis-adapter",
+      "range": "^8.3.0",
+      "version": "8.3.0",
+      "license": "MIT",
+      "engines": {
+        "node": ">=10.0.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "services/socket.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "axios",
+      "range": "^1.7.9",
+      "version": "1.20.0",
+      "license": "MIT",
+      "deprecated": null,
+      "importers": [],
+      "active": false
+    },
+    {
+      "name": "bcryptjs",
+      "range": "^3.0.3",
+      "version": "3.0.3",
+      "license": "BSD-3-Clause",
+      "deprecated": null,
+      "importers": [
+        "model/User.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "compression",
+      "range": "^1.8.0",
+      "version": "1.8.2",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "app.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "cookie",
+      "range": "^1.1.1",
+      "version": "1.1.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18"
+      },
+      "deprecated": null,
+      "importers": [],
+      "active": false
+    },
+    {
+      "name": "cookie-parser",
+      "range": "^1.4.7",
+      "version": "1.4.7",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.8.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "app.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "cors",
+      "range": "^2.8.5",
+      "version": "2.8.6",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.10"
+      },
+      "deprecated": null,
+      "importers": [
+        "middleware/httpBoundary.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "dotenv",
+      "range": "^16.4.7",
+      "version": "16.6.1",
+      "license": "BSD-2-Clause",
+      "engines": {
+        "node": ">=12"
+      },
+      "deprecated": null,
+      "importers": [
+        "config/s3.js",
+        "server.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "express",
+      "range": "^5.1.0",
+      "version": "5.3.0",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 18"
+      },
+      "deprecated": null,
+      "importers": [
+        "app.js",
+        "routes/approval.routes.js",
+        "routes/audit.routes.js",
+        "routes/auth.routes.js",
+        "routes/files.routes.js",
+        "routes/git.routes.js",
+        "routes/health.routes.js",
+        "routes/index.js",
+        "routes/models.routes.js",
+        "routes/session.routes.js",
+        "routes/settings.routes.js",
+        "routes/tools.routes.js",
+        "tests/helpers.js",
+        "tests/production.test.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "express-rate-limit",
+      "range": "^8.2.1",
+      "version": "8.7.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 16"
+      },
+      "deprecated": null,
+      "importers": [],
+      "active": false
+    },
+    {
+      "name": "google-auth-library",
+      "range": "^10.5.0",
+      "version": "10.9.1",
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=18"
+      },
+      "deprecated": null,
+      "importers": [
+        "controllers/authController.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "helmet",
+      "range": "^8.1.0",
+      "version": "8.3.0",
+      "license": "MIT",
+      "engines": {
+        "node": ">=18.0.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "middleware/httpBoundary.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "ioredis",
+      "range": "^5.11.1",
+      "version": "5.11.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">=12.22.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "config/redis.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "joi",
+      "range": "^18.0.2",
+      "version": "18.3.0",
+      "license": "BSD-3-Clause",
+      "engines": {
+        "node": ">= 20"
+      },
+      "deprecated": null,
+      "importers": [
+        "routes/approval.routes.js",
+        "routes/auth.routes.js",
+        "routes/files.routes.js",
+        "routes/session.routes.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "jsonwebtoken",
+      "range": "^9.0.2",
+      "version": "9.0.3",
+      "license": "MIT",
+      "engines": {
+        "npm": ">=6",
+        "node": ">=12"
+      },
+      "deprecated": null,
+      "importers": [
+        "controllers/authController.js",
+        "middleware/userAuth.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "multer",
+      "range": "^2.0.2",
+      "version": "2.5.0",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 10.16.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "middleware/upload.js"
+      ],
+      "active": false
+    },
+    {
+      "name": "multer-s3",
+      "range": "^3.0.1",
+      "version": "3.0.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 12.0.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "middleware/upload.js"
+      ],
+      "active": false
+    },
+    {
+      "name": "openai",
+      "range": "^4.85.0",
+      "version": "4.104.0",
+      "license": "Apache-2.0",
+      "deprecated": null,
+      "importers": [
+        "services/aiService.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "pg",
+      "range": "^8.13.1",
+      "version": "8.23.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 16.0.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "config/db.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "pino",
+      "range": "10.4.0",
+      "version": "10.4.0",
+      "license": "MIT",
+      "deprecated": null,
+      "importers": [
+        "foundation/logger.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "pino-http",
+      "range": "11.0.0",
+      "version": "11.0.0",
+      "license": "MIT",
+      "deprecated": null,
+      "importers": [
+        "foundation/logger.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "rate-limiter-flexible",
+      "range": "^9.0.0",
+      "version": "9.1.1",
+      "license": "ISC",
+      "deprecated": null,
+      "importers": [
+        "middleware/rateLimiter.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "socket.io",
+      "range": "^4.8.3",
+      "version": "4.8.4",
+      "license": "MIT",
+      "engines": {
+        "node": ">=10.2.0"
+      },
+      "deprecated": null,
+      "importers": [
+        "services/socket.js",
+        "tests/boundary.test.js"
+      ],
+      "active": true
+    },
+    {
+      "name": "uuid",
+      "range": "^11.0.0",
+      "version": "11.1.1",
+      "license": "MIT",
+      "deprecated": null,
+      "importers": [],
+      "active": false
+    }
+  ],
+  "scripts": [
+    {
+      "path": "node_modules/@google/genai",
+      "version": "2.31.0",
+      "hooks": [
+        "preinstall"
+      ]
+    },
+    {
+      "path": "node_modules/protobufjs",
+      "version": "7.6.6",
+      "hooks": [
+        "postinstall"
+      ]
+    }
+  ],
+  "deprecated": [
+    {
+      "path": "node_modules/node-domexception",
+      "version": "1.0.0",
+      "notice": "Use your platform's native DOMException instead"
+    }
+  ],
+  "lockedPackages": 283,
+  "registry": [
+    {
+      "name": "@anthropic-ai/sdk",
+      "version": "0.39.0",
+      "deprecated": null,
+      "engines": null,
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "@aws-sdk/client-s3",
+      "version": "3.1156.0",
+      "deprecated": null,
+      "engines": {
+        "node": ">=20.0.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "@google/genai",
+      "version": "2.31.0",
+      "deprecated": null,
+      "engines": {
+        "node": ">=20.0.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "@socket.io/redis-adapter",
+      "version": "8.3.0",
+      "deprecated": null,
+      "engines": {
+        "node": ">=10.0.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "axios",
+      "version": "1.20.0",
+      "deprecated": null,
+      "engines": null,
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "bcryptjs",
+      "version": "3.0.3",
+      "deprecated": null,
+      "engines": null,
+      "os": null,
+      "cpu": null,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "compression",
+      "version": "1.8.2",
+      "deprecated": null,
+      "engines": {
+        "node": ">= 0.8.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "cookie",
+      "version": "1.1.1",
+      "deprecated": null,
+      "engines": {
+        "node": ">=18"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "cookie-parser",
+      "version": "1.4.7",
+      "deprecated": null,
+      "engines": {
+        "node": ">= 0.8.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "cors",
+      "version": "2.8.6",
+      "deprecated": null,
+      "engines": {
+        "node": ">= 0.10"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "dotenv",
+      "version": "16.6.1",
+      "deprecated": null,
+      "engines": {
+        "node": ">=12"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "BSD-2-Clause"
+    },
+    {
+      "name": "express",
+      "version": "5.3.0",
+      "deprecated": null,
+      "engines": {
+        "node": ">= 18"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "express-rate-limit",
+      "version": "8.7.1",
+      "deprecated": null,
+      "engines": {
+        "node": ">= 16"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "google-auth-library",
+      "version": "10.9.1",
+      "deprecated": null,
+      "engines": {
+        "node": ">=18"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "helmet",
+      "version": "8.3.0",
+      "deprecated": null,
+      "engines": {
+        "node": ">=18.0.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "ioredis",
+      "version": "5.11.1",
+      "deprecated": null,
+      "engines": {
+        "node": ">=12.22.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "joi",
+      "version": "18.3.0",
+      "deprecated": null,
+      "engines": {
+        "node": ">= 20"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "BSD-3-Clause"
+    },
+    {
+      "name": "jsonwebtoken",
+      "version": "9.0.3",
+      "deprecated": null,
+      "engines": {
+        "npm": ">=6",
+        "node": ">=12"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "multer",
+      "version": "2.5.0",
+      "deprecated": null,
+      "engines": {
+        "node": ">= 10.16.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "multer-s3",
+      "version": "3.0.1",
+      "deprecated": null,
+      "engines": {
+        "node": ">= 12.0.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "openai",
+      "version": "4.104.0",
+      "deprecated": null,
+      "engines": null,
+      "os": null,
+      "cpu": null,
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "pg",
+      "version": "8.23.1",
+      "deprecated": null,
+      "engines": {
+        "node": ">= 16.0.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "pino",
+      "version": "10.4.0",
+      "deprecated": null,
+      "engines": null,
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "pino-http",
+      "version": "11.0.0",
+      "deprecated": null,
+      "engines": null,
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "rate-limiter-flexible",
+      "version": "9.1.1",
+      "deprecated": null,
+      "engines": null,
+      "os": null,
+      "cpu": null,
+      "license": "ISC"
+    },
+    {
+      "name": "socket.io",
+      "version": "4.8.4",
+      "deprecated": null,
+      "engines": {
+        "node": ">=10.2.0"
+      },
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    },
+    {
+      "name": "uuid",
+      "version": "11.1.1",
+      "deprecated": null,
+      "engines": null,
+      "os": null,
+      "cpu": null,
+      "license": "MIT"
+    }
+  ],
+  "delta": {
+    "removed": [
+      {
+        "path": "node_modules/ansi-styles",
+        "version": "4.3.0"
+      },
+      {
+        "path": "node_modules/async",
+        "version": "2.6.4"
+      },
+      {
+        "path": "node_modules/balanced-match",
+        "version": "1.0.2"
+      },
+      {
+        "path": "node_modules/brace-expansion",
+        "version": "1.1.21"
+      },
+      {
+        "path": "node_modules/buffer-crc32",
+        "version": "0.2.13"
+      },
+      {
+        "path": "node_modules/chalk",
+        "version": "4.1.2"
+      },
+      {
+        "path": "node_modules/color-convert",
+        "version": "2.0.1"
+      },
+      {
+        "path": "node_modules/color-name",
+        "version": "1.1.4"
+      },
+      {
+        "path": "node_modules/concat-map",
+        "version": "0.0.1"
+      },
+      {
+        "path": "node_modules/fd-slicer",
+        "version": "1.1.0"
+      },
+      {
+        "path": "node_modules/fs.realpath",
+        "version": "1.0.0"
+      },
+      {
+        "path": "node_modules/geoip-lite",
+        "version": "1.4.10"
+      },
+      {
+        "path": "node_modules/geoip-lite/node_modules/iconv-lite",
+        "version": "0.6.3"
+      },
+      {
+        "path": "node_modules/geoip-lite/node_modules/ip-address",
+        "version": "5.9.4"
+      },
+      {
+        "path": "node_modules/glob",
+        "version": "7.2.3"
+      },
+      {
+        "path": "node_modules/has-flag",
+        "version": "4.0.0"
+      },
+      {
+        "path": "node_modules/inflight",
+        "version": "1.0.6"
+      },
+      {
+        "path": "node_modules/jsbn",
+        "version": "1.1.0"
+      },
+      {
+        "path": "node_modules/lazy",
+        "version": "1.0.11"
+      },
+      {
+        "path": "node_modules/lodash",
+        "version": "4.18.1"
+      },
+      {
+        "path": "node_modules/minimatch",
+        "version": "3.1.5"
+      },
+      {
+        "path": "node_modules/nodemailer",
+        "version": "7.0.13"
+      },
+      {
+        "path": "node_modules/path-is-absolute",
+        "version": "1.0.1"
+      },
+      {
+        "path": "node_modules/pend",
+        "version": "1.2.0"
+      },
+      {
+        "path": "node_modules/rimraf",
+        "version": "2.7.1"
+      },
+      {
+        "path": "node_modules/sprintf-js",
+        "version": "1.1.2"
+      },
+      {
+        "path": "node_modules/supports-color",
+        "version": "7.2.0"
+      },
+      {
+        "path": "node_modules/yauzl",
+        "version": "2.10.0"
+      }
+    ],
+    "changed": []
+  }
+}

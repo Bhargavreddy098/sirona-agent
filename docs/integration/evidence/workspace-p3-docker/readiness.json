@@ -1,0 +1,38 @@
+{
+  "inspectedAt": "2026-10-29T03:02:30.829Z",
+  "inspection": "Read-only commands; initial sandbox pipe denial resolved with approved outside-sandbox diagnostics",
+  "docker": {
+    "client": "29.4.3",
+    "server": "29.4.3",
+    "os": "linux",
+    "platform": "Docker Desktop",
+    "context": "desktop-linux",
+    "cgroupVersion": 2,
+    "memoryBytes": 4024672256,
+    "reportedSecurityOptions": [
+      "seccomp builtin",
+      "cgroupns"
+    ]
+  },
+  "wsl": {
+    "version": "2.6.3.0",
+    "kernel": "6.6.87.2-1",
+    "distributions": [
+      {
+        "name": "Ubuntu",
+        "state": "Running",
+        "version": 2
+      },
+      {
+        "name": "docker-desktop",
+        "state": "Running",
+        "version": 2
+      }
+    ]
+  },
+  "runtimeReachable": true,
+  "securityQualified": false,
+  "containersStarted": 0,
+  "imagesPulled": 0,
+  "settingsChanged": false
+}

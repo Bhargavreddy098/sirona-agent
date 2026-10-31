@@ -1,0 +1,51 @@
+✔ lint returns nonzero for a real unused-variable violation (2539.9887ms)
+✔ semantic checker rejects a JSDoc type mismatch without printing source (3823.0934ms)
+✔ module checker detects missing imports, computed production loaders and cycles (153.9895ms)
+✔ runtime verifier rejects manifest-lock and installed-version drift (409.2433ms)
+✔ verify runs every gate and returns failure if any checker fails or cannot start (7.4637ms)
+✖ production graph has no deferred packages, mail chain, test or frontend imports (14693.1591ms)
+✔ the runner returns nonzero and reports a deliberately failing isolated assertion (366.502ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 6
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23265.0754
+
+✖ failing tests:
+
+test at tests\checkers.test.js:72:1
+✖ production graph has no deferred packages, mail chain, test or frontend imports (14693.1591ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'config/s3.js:unresolved-module',
+  +   'controllers/authController.js:unresolved-module',
+  +   'middleware/upload.js:unresolved-module',
+  +   'middleware/upload.js:unresolved-module',
+  +   'middleware/userAuth.js:unresolved-module',
+  +   'model/User.js:unresolved-module',
+  +   'routes/approval.routes.js:unresolved-module',
+  +   'routes/auth.routes.js:unresolved-module',
+  +   'routes/files.routes.js:unresolved-module',
+  +   'routes/session.routes.js:unresolved-module'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/backend/tests/checkers.test.js:74:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'config/s3.js:unresolved-module', 'controllers/authController.js:unresolved-module', 'middleware/upload.js:unresolved-module', 'middleware/upload.js:unresolved-module', 'middleware/userAuth.js:unresolved-module', 'model/User.js:unresolved-module', 'routes/approval.routes.js:unresolved-module', 'routes/auth.routes.js:unresolved-module', 'routes/files.routes.js:unresolved-module', 'routes/session.routes.js:unresolved-module' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

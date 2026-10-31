@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-27",
+  "repository": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent",
+  "verdict": "STRUCTURALLY INCOMPLETE",
+  "ready": false,
+  "explicitRoutes": 200,
+  "canonicalRoutes": 139,
+  "liveRecordedHttpRequests": 414,
+  "backendTests": 614,
+  "frontendTests": 33,
+  "toolingTests": 6,
+  "productionDatabaseReadOnly": true,
+  "allTestMutationsInAuditDatabase": true,
+  "repairsImplemented": false
+}

@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-10-30T02:30:48.627Z",
+  "status": "scoped-wiring-verified",
+  "database": "sirona_workspace_p0_test_20261028",
+  "checks": {
+    "apiLifecycle": {
+      "passed": 4,
+      "failed": 0,
+      "evidence": "backend-wiring.txt"
+    },
+    "browser": {
+      "passed": 1,
+      "failed": 0,
+      "evidence": "browser-integration.json"
+    },
+    "freeP5": {
+      "passed": 22,
+      "failed": 0,
+      "evidence": "free-p5-tests.txt",
+      "upstream": "controlled local transport, not real-model inference"
+    },
+    "streamTests": {
+      "passed": 8,
+      "failed": 0,
+      "command": "npm --prefix frontend/sirona-next test"
+    },
+    "static": {
+      "backendWorkspaceBuild": "PASS",
+      "frontendBuildAndTypecheck": "PASS",
+      "frontendLint": "PASS",
+      "electronBridgeBuild": "PASS"
+    },
+    "impeccableFindings": 0
+  },
+  "paidProviderCalls": 0,
+  "migrationsApplied": 0,
+  "workingDatabaseWritesByTask": 0,
+  "productionActivation": false,
+  "p5RealProviderAcceptance": "UNVERIFIED",
+  "p6P8Completion": "NOT_CLAIMED",
+  "nativeDesktopBrokerQualification": "NOT_REQUALIFIED_BY_BROWSER",
+  "sourceHashes": "source-hashes.json",
+  "rollback": [
+    ".tmp/frontend-p1-p5-20261029/",
+    ".tmp/frontend-backend-wiring-approved-20261029/"
+  ],
+  "screenshots": [
+    "01-runs.png",
+    "02-files.png",
+    "03-files-mobile.png",
+    "04-terminal.png"
+  ],
+  "runtimeReadOnlyChecks": "runtime-readonly-checks.json"
+}

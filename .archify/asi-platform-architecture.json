@@ -1,0 +1,532 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "title": "ASI Platform Architecture 2026-10-27",
+    "legend": [
+      {
+        "label": "Trusted Component",
+        "fill": "#3b82f6",
+        "stroke": "#2563eb"
+      },
+      {
+        "label": "Trust Boundary",
+        "strokeDasharray": "4 2",
+        "stroke": "#6b7280"
+      },
+      {
+        "label": "Infrastructure Service",
+        "fill": "#10b981",
+        "stroke": "#059669"
+      },
+      {
+        "label": "External System (Untrusted)",
+        "fill": "#ef4444",
+        "stroke": "#dc2626"
+      },
+      {
+        "label": "Decision Point",
+        "fill": "#f59e0b",
+        "stroke": "#d97706"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "key": "user",
+      "label": "User",
+      "type": "roundedBox",
+      "group": "Client Layer",
+      "classes": []
+    },
+    {
+      "key": "desktop_cli",
+      "label": "Desktop\\nCLI Interface",
+      "type": "roundedBox",
+      "group": "Client Layer",
+      "classes": []
+    },
+    {
+      "key": "workspace_manager",
+      "label": "Workspace Manager",
+      "type": "roundedBox",
+      "group": "Control Plane",
+      "classes": []
+    },
+    {
+      "key": "gateway",
+      "label": "Gateway",
+      "type": "roundedBox",
+      "group": "Control Plane",
+      "classes": []
+    },
+    {
+      "key": "project_intelligence",
+      "label": "Project Intelligence",
+      "type": "roundedBox",
+      "group": "Intelligence Layer",
+      "classes": []
+    },
+    {
+      "key": "intent_engine",
+      "label": "Intent Engine",
+      "type": "roundedBox",
+      "group": "Intelligence Layer",
+      "classes": []
+    },
+    {
+      "key": "planning_layer",
+      "label": "Planning Layer",
+      "type": "roundedBox",
+      "group": "Intelligence Layer",
+      "classes": []
+    },
+    {
+      "key": "intelligence_orchestrator",
+      "label": "Intelligence\\nOrchestrator",
+      "type": "roundedBox",
+      "group": "Core Orchestration",
+      "classes": [],
+      "sizeMultiplier": 1.5
+    },
+    {
+      "key": "model_router",
+      "label": "Model Router",
+      "type": "roundedBox",
+      "group": "Execution Layer",
+      "classes": []
+    },
+    {
+      "key": "dynamic_agents",
+      "label": "Dynamic Agents",
+      "type": "roundedBox",
+      "group": "Execution Layer",
+      "classes": []
+    },
+    {
+      "key": "tool_runtime",
+      "label": "Tool Runtime",
+      "type": "roundedBox",
+      "group": "Execution Layer",
+      "classes": []
+    },
+    {
+      "key": "sandbox",
+      "label": "Sandbox Environment",
+      "type": "roundedBox",
+      "group": "Security Layer",
+      "classes": []
+    },
+    {
+      "key": "verification_engine",
+      "label": "Verification Engine",
+      "type": "roundedBox",
+      "group": "Quality Assurance",
+      "classes": []
+    },
+    {
+      "key": "artifacts_store",
+      "label": "Artifacts Storage",
+      "type": "roundedBox",
+      "group": "Persistence Layer",
+      "classes": []
+    },
+    {
+      "key": "postgresql",
+      "label": "PostgreSQL\\n(Durable Truth)",
+      "type": "database",
+      "group": "Infrastructure Layer",
+      "classes": []
+    },
+    {
+      "key": "redis_bullmq",
+      "label": "Redis/BullMQ\\n(Coordination)",
+      "type": "database",
+      "group": "Infrastructure Layer",
+      "classes": []
+    },
+    {
+      "key": "memory_store",
+      "label": "Memory Store",
+      "type": "database",
+      "group": "Infrastructure Layer",
+      "classes": []
+    },
+    {
+      "key": "observability",
+      "label": "Observability",
+      "type": "roundedBox",
+      "group": "Infrastructure Layer",
+      "classes": []
+    },
+    {
+      "key": "ai_providers",
+      "label": "AI Providers\n(Anthropic, OpenAI, Google, etc.)",
+      "type": "cloud",
+      "group": "External Systems",
+      "classes": []
+    },
+    {
+      "key": "coding_workers",
+      "label": "Coding Workers\n(Codex/Claude Code/Cline)",
+      "type": "roundedBox",
+      "group": "External Systems",
+      "classes": []
+    },
+    {
+      "key": "external_services",
+      "label": "External Services\n(GitHub, Web, Registries)",
+      "type": "cloud",
+      "group": "External Systems",
+      "classes": []
+    }
+  ],
+  "relationships": [
+    {
+      "from": "user",
+      "to": "desktop_cli",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "desktop_cli",
+      "to": "workspace_manager",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "workspace_manager",
+      "to": "gateway",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "gateway",
+      "to": "project_intelligence",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "gateway",
+      "to": "intent_engine",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "gateway",
+      "to": "planning_layer",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "project_intelligence",
+      "to": "intelligence_orchestrator",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "intent_engine",
+      "to": "intelligence_orchestrator",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "planning_layer",
+      "to": "intelligence_orchestrator",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "intelligence_orchestrator",
+      "to": "model_router",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "intelligence_orchestrator",
+      "to": "dynamic_agents",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "intelligence_orchestrator",
+      "to": "tool_runtime",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "model_router",
+      "to": "dynamic_agents",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "dynamic_agents",
+      "to": "tool_runtime",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "tool_runtime",
+      "to": "sandbox",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "sandbox",
+      "to": "verification_engine",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "verification_engine",
+      "to": "artifacts_store",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "artifacts_store",
+      "to": "user",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "postgresql",
+      "to": "workspace_manager",
+      "label": "",
+      "type": "dashed",
+      "classes": []
+    },
+    {
+      "from": "postgresql",
+      "to": "intelligence_orchestrator",
+      "label": "",
+      "type": "dashed",
+      "classes": []
+    },
+    {
+      "from": "postgresql",
+      "to": "tool_runtime",
+      "label": "",
+      "type": "dashed",
+      "classes": []
+    },
+    {
+      "from": "redis_bullmq",
+      "to": "intelligence_orchestrator",
+      "label": "",
+      "type": "dashed",
+      "classes": []
+    },
+    {
+      "from": "redis_bullmq",
+      "to": "tool_runtime",
+      "label": "",
+      "type": "dashed",
+      "classes": []
+    },
+    {
+      "from": "memory_store",
+      "to": "project_intelligence",
+      "label": "",
+      "type": "dashed",
+      "classes": []
+    },
+    {
+      "from": "memory_store",
+      "to": "intent_engine",
+      "label": "",
+      "type": "dashed",
+      "classes": []
+    },
+    {
+      "from": "observability",
+      "to": "intelligence_orchestrator",
+      "label": "",
+      "type": "dashed",
+      "classes": []
+    },
+    {
+      "from": "observability",
+      "to": "tool_runtime",
+      "label": "",
+      "type": "dashed",
+      "classes": []
+    },
+    {
+      "from": "observability",
+      "to": "sandbox",
+      "label": "",
+      "type": "dashed",
+      "classes": []
+    },
+    {
+      "from": "ai_providers",
+      "to": "model_router",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "coding_workers",
+      "to": "tool_runtime",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "external_services",
+      "to": "tool_runtime",
+      "label": "",
+      "type": "solid",
+      "classes": []
+    },
+    {
+      "from": "intelligence_orchestrator",
+      "to": "intelligence_orchestrator",
+      "label": "Questions\\nApprovals",
+      "type": "loop",
+      "classes": []
+    }
+  ],
+  "bounds": [
+    {
+      "key": "client_layer",
+      "label": "Client Layer",
+      "type": "trustBoundary",
+      "contains": ["user", "desktop_cli"],
+      "classes": []
+    },
+    {
+      "key": "control_plane",
+      "label": "Control Plane",
+      "type": "trustBoundary",
+      "contains": ["workspace_manager", "gateway"],
+      "classes": []
+    },
+    {
+      "key": "intelligence_layer",
+      "label": "Intelligence Layer",
+      "type": "trustBoundary",
+      "contains": ["project_intelligence", "intent_engine", "planning_layer"],
+      "classes": []
+    },
+    {
+      "key": "core_orchestration",
+      "label": "Core Orchestration",
+      "type": "trustBoundary",
+      "contains": ["intelligence_orchestrator"],
+      "classes": []
+    },
+    {
+      "key": "execution_layer",
+      "label": "Execution Layer",
+      "type": "trustBoundary",
+      "contains": ["model_router", "dynamic_agents", "tool_runtime"],
+      "classes": []
+    },
+    {
+      "key": "security_layer",
+      "label": "Security Layer",
+      "type": "trustBoundary",
+      "contains": ["sandbox"],
+      "classes": []
+    },
+    {
+      "key": "quality_assurance",
+      "label": "Quality Assurance",
+      "type": "trustBoundary",
+      "contains": ["verification_engine"],
+      "classes": []
+    },
+    {
+      "key": "persistence_layer",
+      "label": "Persistence Layer",
+      "type": "trustBoundary",
+      "contains": ["artifacts_store"],
+      "classes": []
+    },
+    {
+      "key": "infrastructure_layer",
+      "label": "Infrastructure Layer",
+      "type": "trustBoundary",
+      "contains": ["postgresql", "redis_bullmq", "memory_store", "observability"],
+      "classes": []
+    },
+    {
+      "key": "external_systems",
+      "label": "External Systems (Untrusted)",
+      "type": "trustBoundary",
+      "contains": ["ai_providers", "coding_workers", "external_services"],
+      "classes": []
+    }
+  ],
+  "cards": [
+    {
+      "key": "primary_flow_card",
+      "label": "Primary Flow",
+      "description": "User → Desktop/CLI → Workspace Manager → Gateway → Project Intelligence / Intent / Planning → Intelligence Orchestrator → Model Router / Dynamic Agents / Tool Runtime → Sandbox → Verification → Artifacts → User",
+      "position": {"x": 50, "y": 50},
+      "classes": []
+    },
+    {
+      "key": "security_model_card",
+      "label": "Security Model",
+      "description": "Trust boundaries isolating client, control plane, workspace, sandbox, and external systems",
+      "position": {"x": 50, "y": 150},
+      "classes": []
+    },
+    {
+      "key": "infrastructure_card",
+      "label": "Infrastructure",
+      "description": "PostgreSQL (durable truth), Redis/BullMQ (coordination), Memory Store, Observability",
+      "position": {"x": 50, "y": 250},
+      "classes": []
+    },
+    {
+      "key": "sandbox_strategy_card",
+      "label": "Sandbox Strategy",
+      "description": "Docker sandbox is the V1 default, with native and remote as future options",
+      "position": {"x": 50, "y": 350},
+      "classes": []
+    }
+  ],
+  "layout": {
+    "algorithm": "hierarchical",
+    "direction": "TB",
+    "spacing": {
+      "horizontal": 150,
+      "vertical": 100
+    }
+  },
+  "styleOverrides": {
+    "roundedBox": {
+      "rx": 8,
+      "ry": 8,
+      "padding": 12
+    },
+    "database": {
+      "shape": "cylinder"
+    },
+    "cloud": {
+      "shape": "ellipse"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-10-29T09:15:00.000Z",
+  "phase": "P4",
+  "scope": "Vercel AI SDK integration behind existing provider ports with full tool compatibility routing, reported usage persistence, timeout/throttling/interrupted-stream handling, public DTO preservation, automatic coordinator lease release, and retry without user message duplication",
+  "dependencies": {
+    "ai": "7.0.156",
+    "@ai-sdk/google": "4.0.107"
+  },
+  "modules": [
+    "backend/src/providers/modelAdapter.ts",
+    "backend/src/providers/aiSdkAdapter.ts",
+    "backend/services/aiService.js",
+    "backend/services/providerService.js",
+    "backend/services/conversationTurnCoordinator.js"
+  ],
+  "verification": {
+    "providerParitySuite": {
+      "path": "backend/tests/providerParity.test.ts",
+      "total": 13,
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "transcript": "docs/integration/evidence/workspace-p4/verified-parity-tests.txt"
+    },
+    "fullWorkspaceSuite": {
+      "command": "npm --prefix backend run test:workspace",
+      "total": 73,
+      "passed": 73,
+      "failed": 0,
+      "skipped": 0,
+      "transcript": "docs/integration/evidence/workspace-p4/verified-workspace-tests.txt"
+    },
+    "toolingSuite": {
+      "command": "npm --prefix tooling/sirona run test",
+      "total": 6,
+      "passed": 6,
+      "failed": 0
+    },
+    "backendTypecheck": {
+      "command": "npm --prefix backend run check:workspace",
+      "passed": true
+    },
+    "frontendCheck": {
+      "command": "npm --prefix frontend/sirona-next run check",
+      "passed": true
+    }
+  },
+  "evidenceArtifacts": {
+    "sourceHashes": "docs/integration/evidence/workspace-p4/source-hashes.json",
+    "liveProviderTranscript": "docs/integration/evidence/workspace-p4/live-provider-transcript.txt",
+    "cancellationStreamTranscript": "docs/integration/evidence/workspace-p4/cancellation-stream-transcript.txt",
+    "verifiedParityTests": "docs/integration/evidence/workspace-p4/verified-parity-tests.txt",
+    "verifiedWorkspaceTests": "docs/integration/evidence/workspace-p4/verified-workspace-tests.txt"
+  },
+  "acceptanceCriteriaVerified": [
+    {
+      "criterion": "Automatic Lease Release on Cancellation",
+      "status": "PASS",
+      "details": "Client cancellation mid-stream through real coordinator (coordinateTurn) triggers abort, marks message cancelled, logs aborted model call, and automatically releases single-writer turn lease in coordinator finally block without manual release; verified subsequent lease acquisition succeeds."
+    },
+    {
+      "criterion": "Controlled Failure Modes (Timeout, Throttling, Interrupted Stream)",
+      "status": "PASS",
+      "details": "Timeout mapped to 504 INFERENCE_TIMEOUT; rate limits (429/RESOURCE_EXHAUSTED) mapped to 429 RATE_LIMIT_EXCEEDED; socket/stream disconnects mapped to 502 STREAM_INTERRUPTED."
+    },
+    {
+      "criterion": "Public DTO Preservation & Server-Controlled Activation",
+      "status": "PASS",
+      "details": "Client-controlled adapter parameter removed from coordinateTurn req.body; public DTO preserved exactly ({ prompt, modelId, clientTurnId, retryOf }); adapter resolved strictly via server environment (SIRONA_PROVIDER_ADAPTER)."
+    },
+    {
+      "criterion": "Turn Retry (retryOf) Reuses User Message Without Duplication",
+      "status": "PASS",
+      "details": "Retrying a failed/cancelled turn using retryOf reuses the original user message (COUNT(role='user') remains exactly 1), completes streaming turn, records model_calls, and automatically releases lease."
+    },
+    {
+      "criterion": "Tool Compatibility Routing & Fallback",
+      "status": "PASS",
+      "details": "canHandle returns false for tool requests; AIService routes tool requests or tool message history to native Google GenAI adapter; AiSdkAdapter fails closed with 400 UNSUPPORTED_REQUEST if invoked directly with tools."
+    },
+    {
+      "criterion": "Reported Usage Persistence",
+      "status": "PASS",
+      "details": "Derived actualPromptTokens and actualCompletionTokens from SDK streamResult.usage; updated user message tokens in PostgreSQL and persisted in model_calls."
+    }
+  ],
+  "verdict": "PASS (P4 acceptance criteria completely verified with transcripts, source hashes, and zero regressions)"
+}

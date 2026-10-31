@@ -1,0 +1,26 @@
+{
+  "started": "2026-10-28T12:48:08.980Z",
+  "checks": [
+    "Restart restored real completed messages, context and cancelled/retried history",
+    "Per-conversation model restored",
+    "Real project chat streamed through existing project API",
+    "Standalone and project histories stay separate",
+    "One-time credential submission and real provider connection test",
+    "Authenticated provider model discovery populated the real selector registry",
+    "Saved provider responses never expose API key"
+  ],
+  "streams": [
+    {
+      "status": 200,
+      "tokens": 1,
+      "done": 1
+    }
+  ],
+  "screenshots": [
+    "07-electron-restart-restored.png",
+    "08-electron-project-complete.png",
+    "09-electron-provider-connected.png"
+  ],
+  "projectId": "005ec84c-087d-45ce-bf56-08231ad1f66f",
+  "result": "passed"
+}

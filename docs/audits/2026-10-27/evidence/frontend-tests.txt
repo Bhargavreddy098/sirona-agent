@@ -1,0 +1,43 @@
+npm notice run sirona@0.1.0 test
+npm notice run node --test tests/*.test.mjs
+✔ demo pauses until decision, refuses duplicate turn and stale/replayed decisions (349.5969ms)
+✔ cancellation releases a waiting demo and never reports completion (156.4752ms)
+✔ skip resolves only the pending decision; event unsubscription works (189.8735ms)
+✔ strict contracts reject unknown keys, oversized input and malformed events (0.9983ms)
+✔ preview and WebSocket targets reject files, remote URLs and credentials (1.7513ms)
+✔ event reducer scopes deltas to exact thread/message and bounds transcripts (0.494ms)
+✔ SQLite round-trip survives reopening and invalid snapshots do not overwrite history (58.8798ms)
+✔ bootstrap unwraps the actual identity envelope and retains CSRF for mutations (132.4738ms)
+✔ session inspection uses canonical data without inventing an auth session id (1.4102ms)
+✔ workspace and capability collections map actual server DTOs, unknown capabilities stay unavailable (2.4443ms)
+✔ logout accepts empty 204 and clears CSRF only after confirmed revocation (1.0728ms)
+✔ problem details including conflict and unavailable remain failures (55.2731ms)
+✔ project updates send the observed version, CSRF and correlation (5.7416ms)
+✔ folder association is metadata in the installed create/update contracts (1.5606ms)
+✔ conversation list maps sessions wire collection without title-based deduplication (2.2042ms)
+✔ message projection normalizes numeric id and second-based timestamps (11.0172ms)
+✔ lease release is fenced to the acquired generation (1.6919ms)
+✔ grant TTL is milliseconds and budget decimal strings are preserved (1.9066ms)
+✔ approval decisions use the reviewed digest and explicit nonce, no auto-approval (1.3516ms)
+✔ desktop server limits host/origin/static paths and sends CSP (419.9504ms)
+✔ fixed backend proxy preserves cookie, CSRF and exact body without broad host proxying (62.9416ms)
+✔ desktop preload exposes narrow session/folder operations; navigation, popups and renderer privileges are restricted (7.8728ms)
+✔ multi-file client documents merge without changing backend truth; local undo excludes peer edits (30.0902ms)
+✔ inference transport uses configured base, CSRF, correlation, idempotency and confirmed terminal result (86.9168ms)
+✔ interrupted, malformed and explicit error streams never report success (5.3294ms)
+✔ SSE parsing preserves durable IDs, multiline data and split UTF-8 characters (3.3177ms)
+✔ run events replay from Last-Event-ID through the same authenticated client (1.942ms)
+✔ live adapter leases before inference and releases exact generation after success (21.685ms)
+✔ stopping listening never claims cancellation or releases an in-flight lease (2.7697ms)
+✔ metadata upload remains distinct from byte transfer and artifact content stays a reference (4.6263ms)
+✔ native folder picker accepts one real directory, normalizes it, and grants metadata only (149.1075ms)
+✔ cancelled or multiple selections return no selection (0.7612ms)
+✔ folder picker rejects files and unavailable targets (10.4905ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2436.3229

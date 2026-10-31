@@ -1,0 +1,160 @@
+{
+  "baselineMethod": "Compiler host substitutes saved pre-repair JS bytes; P4 files match accepted hashes; worker reconstructed by reversing only this task additions.",
+  "beforeCount": 48,
+  "afterCount": 38,
+  "addedDiagnosticCounts": [],
+  "currentDiagnostics": [
+    {
+      "file": "config/s3.js",
+      "code": 2307
+    },
+    {
+      "file": "controllers/authController.js",
+      "code": 2307
+    },
+    {
+      "file": "middleware/upload.js",
+      "code": 2307
+    },
+    {
+      "file": "middleware/upload.js",
+      "code": 2307
+    },
+    {
+      "file": "middleware/userAuth.js",
+      "code": 2307
+    },
+    {
+      "file": "model/User.js",
+      "code": 2307
+    },
+    {
+      "file": "routes/approval.routes.js",
+      "code": 2307
+    },
+    {
+      "file": "routes/auth.routes.js",
+      "code": 2307
+    },
+    {
+      "file": "routes/files.routes.js",
+      "code": 2307
+    },
+    {
+      "file": "routes/session.routes.js",
+      "code": 2307
+    },
+    {
+      "file": "routes/v1/workspace.routes.js",
+      "code": 2339
+    },
+    {
+      "file": "routes/v1/workspace.routes.js",
+      "code": 2339
+    },
+    {
+      "file": "services/agentExecutionEngine.js",
+      "code": 2339
+    },
+    {
+      "file": "services/agentWorkerService.js",
+      "code": 2561
+    },
+    {
+      "file": "services/agentWorkerService.js",
+      "code": 2561
+    },
+    {
+      "file": "services/isolationBrokerService.js",
+      "code": 2304
+    },
+    {
+      "file": "services/isolationBrokerService.js",
+      "code": 2353
+    },
+    {
+      "file": "services/sandboxManager.js",
+      "code": 8024
+    },
+    {
+      "file": "services/sandboxManager.js",
+      "code": 2416
+    },
+    {
+      "file": "services/sandboxManager.js",
+      "code": 2416
+    },
+    {
+      "file": "services/sandboxManager.js",
+      "code": 2322
+    },
+    {
+      "file": "services/terminalGateway.js",
+      "code": 2353
+    },
+    {
+      "file": "services/toolRuntimeService.js",
+      "code": 2339
+    },
+    {
+      "file": "tests/goldenQuestion.test.js",
+      "code": 2339
+    },
+    {
+      "file": "tests/goldenQuestion.test.js",
+      "code": 2339
+    },
+    {
+      "file": "tests/goldenReactUnseen.test.js",
+      "code": 2561
+    },
+    {
+      "file": "tests/goldenUnseen.test.js",
+      "code": 2353
+    },
+    {
+      "file": "tests/helpers.js",
+      "code": 2339
+    },
+    {
+      "file": "tests/productionHardening.test.js",
+      "code": 2339
+    },
+    {
+      "file": "tests/productionHardening.test.js",
+      "code": 2339
+    },
+    {
+      "file": "tests/productionHardening.test.js",
+      "code": 2322
+    },
+    {
+      "file": "tests/productionHardening.test.js",
+      "code": 2339
+    },
+    {
+      "file": "tests/runtimeConfig.test.js",
+      "code": 2345
+    },
+    {
+      "file": "tests/runtimeConfig.test.js",
+      "code": 2345
+    },
+    {
+      "file": "tests/securityFixes.test.js",
+      "code": 2339
+    },
+    {
+      "file": "tests/securityFixes.test.js",
+      "code": 2339
+    },
+    {
+      "file": "tests/standaloneChat.test.js",
+      "code": 2769
+    },
+    {
+      "file": "tests/standaloneChat.test.js",
+      "code": 2339
+    }
+  ]
+}

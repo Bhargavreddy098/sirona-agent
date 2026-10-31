@@ -1,0 +1,31 @@
+{
+  "capturedAt": "2026-10-26T04:53:58.143Z",
+  "diagnostic": "R07-D022",
+  "file": "backend/services/aiService.js",
+  "line": 104,
+  "code": 6234,
+  "dependency": {
+    "name": "@google/genai",
+    "version": "2.31.0"
+  },
+  "installedDeclaration": {
+    "file": "backend/node_modules/@google/genai/dist/genai.d.ts",
+    "line": 6338,
+    "signature": "get text(): string | undefined"
+  },
+  "installedRuntime": {
+    "file": "backend/node_modules/@google/genai/dist/node/index.mjs",
+    "line": 2685,
+    "getterPresent": true
+  },
+  "probe": {
+    "mode": "Construct real installed SDK response with literal candidate text; call response.text() offline. No AI client, settings lookup, provider request or DB owner.",
+    "valueType": "string",
+    "callError": "TypeError"
+  },
+  "networkRequests": 0,
+  "databaseAccess": false,
+  "sourceFixApplied": false,
+  "stopInstruction": "If the behavior change belongs to Stage 02+, STOP instead.",
+  "stageDependency": "Stage 06 provider behavior; outside R07 genuine Stage 01 runtime-fix authority"
+}

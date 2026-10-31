@@ -1,0 +1,142 @@
+{
+  "semantic": {
+    "canvas": {
+      "light": {
+        "value": "#ffffff"
+      },
+      "dark": {
+        "value": "#212121"
+      }
+    },
+    "surface": {
+      "primary": {
+        "light": {
+          "value": "#ffffff"
+        },
+        "dark": {
+          "value": "#212121"
+        }
+      },
+      "secondary": {
+        "light": {
+          "value": "#f9f9f9"
+        },
+        "dark": {
+          "value": "#171717"
+        }
+      },
+      "tertiary": {
+        "light": {
+          "value": "#f3f3f3"
+        },
+        "dark": {
+          "value": "#2f2f2f"
+        }
+      }
+    },
+    "text": {
+      "primary": {
+        "light": {
+          "value": "#0d0d0d"
+        },
+        "dark": {
+          "value": "#ffffff"
+        }
+      },
+      "secondary": {
+        "light": {
+          "value": "#5d5d5d"
+        },
+        "dark": {
+          "value": "#cdcdcd"
+        }
+      },
+      "tertiary": {
+        "light": {
+          "value": "#8f8f8f"
+        },
+        "dark": {
+          "value": "#8f8f8f"
+        }
+      }
+    },
+    "border": {
+      "subtle": {
+        "light": {
+          "value": "rgba(0, 0, 0, 0.10)"
+        },
+        "dark": {
+          "value": "rgba(255, 255, 255, 0.12)"
+        }
+      },
+      "strong": {
+        "light": {
+          "value": "rgba(0, 0, 0, 0.16)"
+        },
+        "dark": {
+          "value": "rgba(255, 255, 255, 0.20)"
+        }
+      }
+    },
+    "accent": {
+      "blue": {
+        "value": "#3a83f7"
+      },
+      "green": {
+        "value": "#04bb9f"
+      },
+      "purple": {
+        "value": "#a25bff"
+      },
+      "orange": {
+        "value": "#ff8066"
+      },
+      "red": {
+        "value": "#fa423e"
+      },
+      "yellow": {
+        "value": "#ffcc38"
+      }
+    }
+  },
+  "fullPalette": {
+    "gray0": "#ffffff",
+    "gray25": "#fcfcfc",
+    "gray50": "#f9f9f9",
+    "gray75": "#f3f3f3",
+    "gray100": "#ededed",
+    "gray150": "#dfdfdf",
+    "gray200": "#cdcdcd",
+    "gray250": "#b9b9b9",
+    "gray300": "#afafaf",
+    "gray350": "#9f9f9f",
+    "gray400": "#8f8f8f",
+    "gray450": "#767676",
+    "gray500": "#5d5d5d",
+    "gray550": "#4f4f4f",
+    "gray600": "#414141",
+    "gray650": "#393939",
+    "gray700": "#303030",
+    "gray750": "#282828",
+    "gray800": "#212121",
+    "gray850": "#1c1c1c",
+    "gray900": "#181818",
+    "gray925": "#161616",
+    "gray950": "#131313",
+    "gray975": "#101010",
+    "gray1000": "#0d0d0d"
+  },
+  "alphaRamp": {
+    "alpha-01": "0.01",
+    "alpha-02": "0.02",
+    "alpha-03": "0.03",
+    "alpha-04": "0.04",
+    "alpha-05": "0.05",
+    "alpha-06": "0.06",
+    "alpha-08": "0.08",
+    "alpha-10": "0.10",
+    "alpha-12": "0.12",
+    "alpha-14": "0.14",
+    "alpha-16": "0.16"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-10-30T02:17:11.098Z",
+  "database": "sirona_workspace_p0_test_20261028",
+  "groups": [
+    "graphCheckpoint",
+    "delegationPolicy",
+    "orchestrationRecovery",
+    "orchestrationWorkflow",
+    "orchestrationGraphIntegration",
+    "providerActivityBounds",
+    "orchestrationCrash",
+    "orchestrationGuestVerification",
+    "orchestrationCanonicalJourney",
+    "orchestrationModelRecovery"
+  ],
+  "exitCode": 0,
+  "runnerError": null,
+  "inferenceCalls": 0,
+  "migrationsApplied": 0,
+  "scope": "Free transport/control/DB/guest qualification only; real-model P5 workflow remains UNVERIFIED"
+}

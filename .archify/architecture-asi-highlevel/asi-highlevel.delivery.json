@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "d85c55f3-1dfb-44b7-9bc1-70f5e556c16c",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\candidate.json",
+  "output": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.html",
+  "specification": {
+    "sha256": "114643aa00b386f0c2d61a9255d315a5a187e116c5e18e329a1200077793db87",
+    "bytes": 4265
+  },
+  "artifact": {
+    "sha256": "e94c0cc99a4ca57306953e6ee03635c985238552c3f214ac7a59af1932ce3ab0",
+    "bytes": 770959
+  }
+}

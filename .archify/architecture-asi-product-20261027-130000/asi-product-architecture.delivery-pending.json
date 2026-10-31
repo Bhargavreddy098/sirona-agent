@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "command": "deliver",
+  "status": "pending",
+  "receiptId": "f009afa7-428f-4b2a-8783-b5a983fee338",
+  "input": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-product-20261027-130000\\candidate.json",
+  "output": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-product-20261027-130000\\asi-product-architecture.html"
+}

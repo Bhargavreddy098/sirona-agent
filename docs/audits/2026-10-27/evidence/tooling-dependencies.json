@@ -1,0 +1,87 @@
+{
+  "version": "0.1.0",
+  "name": "sirona-developer-tools",
+  "dependencies": {
+    "@earendil-works/pi-tui": {
+      "version": "1.4.0",
+      "resolved": "https://registry.npmjs.org/@earendil-works/pi-tui/-/pi-tui-1.4.0.tgz",
+      "overridden": false,
+      "dependencies": {
+        "get-east-asian-width": {
+          "version": "1.6.0",
+          "resolved": "https://registry.npmjs.org/get-east-asian-width/-/get-east-asian-width-1.6.0.tgz",
+          "overridden": false
+        },
+        "marked-cjk-friendly": {
+          "version": "0.1.2",
+          "resolved": "https://registry.npmjs.org/marked-cjk-friendly/-/marked-cjk-friendly-0.1.2.tgz",
+          "overridden": false,
+          "dependencies": {
+            "marked": {
+              "version": "18.0.11"
+            }
+          }
+        },
+        "marked": {
+          "version": "18.0.11",
+          "resolved": "https://registry.npmjs.org/marked/-/marked-18.0.11.tgz",
+          "overridden": false
+        }
+      }
+    },
+    "@types/node": {
+      "version": "24.19.2",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-24.19.2.tgz",
+      "overridden": false,
+      "dependencies": {
+        "undici-types": {
+          "version": "7.24.6",
+          "resolved": "https://registry.npmjs.org/undici-types/-/undici-types-7.24.6.tgz",
+          "overridden": false
+        }
+      }
+    },
+    "commander": {
+      "version": "15.0.0",
+      "resolved": "https://registry.npmjs.org/commander/-/commander-15.0.0.tgz",
+      "overridden": false
+    },
+    "isolated-vm": {
+      "version": "7.0.1",
+      "resolved": "https://registry.npmjs.org/isolated-vm/-/isolated-vm-7.0.1.tgz",
+      "overridden": false,
+      "dependencies": {
+        "node-gyp-build": {
+          "version": "4.8.4",
+          "resolved": "https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.8.4.tgz",
+          "overridden": false
+        }
+      }
+    },
+    "typescript": {
+      "version": "6.0.3",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-6.0.3.tgz",
+      "overridden": false
+    },
+    "vscode-jsonrpc": {
+      "version": "10.0.0",
+      "resolved": "https://registry.npmjs.org/vscode-jsonrpc/-/vscode-jsonrpc-10.0.0.tgz",
+      "overridden": false
+    },
+    "vscode-languageserver-protocol": {
+      "version": "3.18.5",
+      "resolved": "https://registry.npmjs.org/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.18.5.tgz",
+      "overridden": false,
+      "dependencies": {
+        "vscode-jsonrpc": {
+          "version": "10.0.0"
+        },
+        "vscode-languageserver-types": {
+          "version": "3.18.5",
+          "resolved": "https://registry.npmjs.org/vscode-languageserver-types/-/vscode-languageserver-types-3.18.5.tgz",
+          "overridden": false
+        }
+      }
+    }
+  }
+}

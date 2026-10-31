@@ -1,0 +1,1002 @@
+[
+  {
+    "method": "GET",
+    "path": "/health/live",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/health/ready",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/health",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/status",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/session/bootstrap",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/session",
+    "status": 401
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/v1/session",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/workspaces",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/capabilities",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/1afa728f-c249-409d-9080-a20eb48e828d",
+    "status": 401
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/v1/projects/2075158f-f0f9-4280-bde1-d9c71b4e4e48",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/5f177466-3920-4c84-a554-146f11473817/archive",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/5c8f0d52-004f-4cdc-a350-b71623aedc56/conversations",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/1ac8ca43-ea53-4f0a-8b17-38ce29ea453b/conversations",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/conversations/470b289b-a70b-40c3-b831-43ec96e529f9",
+    "status": 401
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/v1/conversations/254f30c7-4bdd-4c0a-8456-300f4abfae56",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/conversations/ba2fd3c3-ce72-439d-9a84-c49a5db0f982/messages",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/conversations/fc0aa26f-fbb3-4722-ac00-524430a63d61/messages",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/aeefe413-bdab-4baf-b293-65c6924cf243/snapshots",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/9678544f-900a-41b9-ac78-54289ad9bba0/snapshots",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/9414a145-4f9b-42c9-8618-493eb329ffd1/artifacts",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/artifacts/a38e48cb-59a1-409f-b529-a957663c0a5f",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/artifacts/9aec83db-6aa4-4769-9f21-f6258fcd8a66/content",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/606b763a-44b6-4c2f-a063-93cba3190f71/uploads",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/policies/current",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/policies/revisions",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/policies/b61ed338-a6a4-4e32-8b97-ec8f165a5557/activate",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/88fe4c67-b800-4d94-9af2-4590426be733/grants",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/b24b7c22-4f94-4543-ab8a-003a447532c6/grants",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/grants/cbb1a9c4-450c-4174-b73a-f9201e0caf5f/revoke",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/contract-revisions/399ef8f8-b5fd-4cc5-993b-288a17d54a57/approval-requests",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/approvals",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/approvals/fa7c495e-90ce-4198-a560-a46cfc0298a6",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/approvals/7fceb750-5f81-4e8d-9edb-107ab8108d16/decisions",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/approvals/ec80e9ec-fa0c-4c59-9ca3-7e39db79abe7/revoke",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/9eab1aa1-bd44-4f6a-8920-f4397a3463c0/budgets",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/9f4b55fa-f9a4-44ec-9b3f-488bb51c6e5d/budgets",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/budgets/b6d71318-b7c0-4727-9f0c-ef47eb8cdf05/reserve",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/usage",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/sessions/1c5fc404-01e5-4647-a861-0fab2d2d5632/lease",
+    "status": 401
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/v1/sessions/b53fb85f-fb98-43aa-9ee1-f287cf825b38/lease",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/sessions/359c3115-b813-406e-8ae4-f0efa6d9db9a/lease",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/models",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/models/verify",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/conversations/8f777f2f-b155-4a9f-99a9-19503d24da35/turns",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/f9209506-86ff-40be-b086-bba37d5102cd/runs",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/runs/511f6b73-86c7-4250-a642-d0debd99c02e",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/runs/740c6b8a-bbf7-4411-bda2-ad5bff101ffb/tasks",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/runs/f41d3b34-9ede-4ebe-82f1-a8a14d704f7f/agents",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/runs/1e243034-87da-4215-9b12-758a71b87ebc/effects",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/runs/bb5b79db-2e21-4e8e-90ea-37437db004b6/checkpoints",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/runs/2b6e3e81-2d4b-49b9-bfad-f0d80a4a2dca/pause",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/runs/9421cccb-5155-4648-8e2c-79ae2537a47d/resume",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/runs/a5914abb-1c4d-490c-a7f5-38c36d513c94/cancel",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/effects/7604b0d7-adc2-4efb-b71a-3cfadb56019a/reconcile",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/runs/09653b5d-0f5d-43a7-a116-21267388b401/events",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/goals/6d7a1a69-6ceb-4128-bacb-adeb10354ba9/runs",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/runs/8cd04395-52ba-4120-a6b0-1feb39fcd6a1/failures",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/runs/f60b934b-17bb-4be1-b711-bf872f947c74/repairs",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/runs/abfeedeb-f9bc-4b8f-bbb6-47cc0623683b/repairs",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/conversations/583ed6d7-20ae-4678-a85d-5b09a07a38eb/goals",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/9982fa1b-e409-43f7-9f25-d53682e7e2f4/goals",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/goals/fc001649-0430-461e-b142-809ac3781367",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/goals/bf8cc882-ddf5-415b-97ca-b7f2797591ce/intent-analysis",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/goals/866f0579-8f9c-447e-bc8c-86e94828ab75/clarifications",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/goals/69bf8391-4945-49a9-ad2f-cd3939c8458c/clarifications",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/clarifications/cc62bf03-0d96-428f-9e14-dba3d4d421ab/answers",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/goals/335be2ef-3e69-4896-9fa5-52043108fd0a/research",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/goals/9d420b4a-43d5-459b-a8b2-3d3e6ac6a535/research",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/goals/575b1d56-738e-47e3-97db-573d019b0f13/requirement-revisions",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/goals/738d08a2-20b7-4218-a276-489b625b755c/requirement-revisions",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/requirement-revisions/fa4afa17-9587-401b-be7c-ab06bb310254",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/goals/8d468dde-0d8f-4349-91e4-e61cffb253dd/decisions",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/goals/6a02960f-6225-437c-9013-885fecc2f3f0/decisions",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/goals/d949d9a9-f608-44ff-a266-2f2c27336a6e/plans",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/goals/8dc4feb7-229f-425a-9ae9-476fbe25e4b8/plans",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/plans/174c657a-90bb-4c53-82ed-829c60d4b986/revisions",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/plan-revisions/cae67aec-32ef-48ee-be72-8f276e2569f6",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/goals/e04282dd-407a-4aae-9ae2-f43d398a48aa/contracts",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/contracts/a5e185ac-053c-4777-948b-5b4e045d4062/revisions",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/contracts/489c375f-4c3c-46db-9971-bfdb20e2f1fb/revisions",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/contract-revisions/e005b65a-f8b4-42eb-bcec-5c374f3946bb",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/contract-revisions/3b3d1f79-c475-42df-b920-4f60c7ca1a1b/diff",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/isolation/diagnostics",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/isolation/qualify",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/isolation/validate-path",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/isolation/qualifications",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/isolation/qualifications/ad41fb1e-7a2b-44c6-a946-93232dd82e76",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/tools",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/tools/5f7a4a88-2df8-4108-be9a-b72a569c6242",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/developer-connections",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/developer-connections",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/developer-connections/ece25089-6add-4934-8d09-93207fc00fe7",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/developer-connections/0aa9cf3b-3901-4a3d-92e7-276f27331c75/qualify",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/developer-connections/038edf47-b4da-4170-9062-7d0f0e18ed81/disconnect",
+    "status": 401
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/v1/developer-connections/7ebdaf10-9dc8-4f2d-b056-b809bfead0e3",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/tools/invoke",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/tools/receipts/d9de4c07-00e3-4ea6-8b9f-4c44ac47d009",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/runs/9acd0764-f221-4058-acba-215d2ae9f0a1/verifications",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/runs/338510e3-6ebe-4bb2-87a2-cd27edbd20f6/verifications",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/verifications/244dc65d-c283-4a0a-a2e7-d0705986e764",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/verifications/evaluations",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/2d0219c7-e4e8-469b-b2c5-bf06cee61f04/memories",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/3f1e1e27-aba9-4045-a34a-2812df24a0db/memories",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/memories/4f9ae6e1-cce7-40b3-9cb5-f160f3d6bf90",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/memories/352470ff-8ae9-4571-9883-87a0260f9380/revisions",
+    "status": 401
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/v1/memories/b6a24197-45e4-492d-bece-11543d8448ff",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/246dc8af-705b-4f19-b146-433aab116f77/memory-search",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/bd38f2f2-cd1d-47a5-87a2-a26605b467c5/knowledge-index",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/87994957-a56a-4802-a921-5ed08bafd184/knowledge/nodes",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/2d12e810-50a3-480c-9d29-47eb08768d6b/knowledge/edges",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/8e2d7e15-1c92-41fa-9a73-e7d37cfc1fc6/schedules/preview",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/30222c9b-a280-4c8c-a140-3186e1c56f6f/schedules",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/0e298829-7ad7-4d9b-bb51-b46969db6a7d/schedules",
+    "status": 401
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/v1/schedules/5397b30d-fe98-4e1a-b67f-5b187eb9bb5c",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/schedules/c0a8364e-48b1-470c-aaa9-59cbcd1267ce/pause",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/schedules/deaebb5c-afb5-4a9f-ab04-41216225c453/resume",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/schedules/d305e54f-6af6-427e-a248-fc53f405b4a4/occurrences",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/projects/bed3b53e-4a66-481e-acaf-a9ca6b7011a4/triggers",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/a964a6ab-1a1b-4e0b-a8d1-e987b4460ee1/triggers",
+    "status": 401
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/v1/triggers/6a782107-a236-4021-a07b-b1f46a430e8f",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/webhooks/ed01cf64-2906-4b52-a27f-8df1eceb9fb1",
+    "status": 404
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/projects/40f014c7-5300-4c30-b3af-69cab3a4b5d4/events",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/activity",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/notifications",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/notifications/38a40071-5bac-4422-8c13-daeb0dd9bc41/read",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/runs/24ab351b-89e0-4254-bb71-c8483b2bd719/deployment-previews",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/runs/82c7b6fb-d07b-4845-aa53-b5c9977b6e09/deployments",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/deployments/98b368c9-3474-422a-834e-09ddf455ae8a",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/deployments/6c0f87bd-29b6-4931-b486-0fb8974202e5/rollback-previews",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/deployments/a51826ed-e6fb-4b82-8d54-852da2eb2440/rollback",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/runs/223340e9-2d9f-401e-bd18-c7a3d65143d9/browser-qa-sessions",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/runs/cf6d786e-fbf4-4b54-acf1-7ec31fb5b3bc/browser-qa-sessions",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/system/release",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/system/recovery/checkpoints",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/system/recovery/checkpoints",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/system/recovery/checkpoints/871b7689-0268-4804-b495-95d4b5120553",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/system/recovery/checkpoints/0b601c53-2793-4dd5-85db-d380deee9619/rehearsal",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/system/recovery/rehearsals/1f7500e6-f0aa-4e58-a4d0-a7c3e350109f",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/v1/system/maintenance/purge",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/v1/system/diagnostics",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/register",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/google",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/sessions/topology",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/sessions",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/sessions",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/sessions/89976189-fb5c-4c82-95f2-2334f1a0c432",
+    "status": 503
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/sessions/04c9a561-4cda-4c54-8316-7282da58cecd",
+    "status": 503
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/sessions/5323ec72-e22c-4cfd-8a5d-28f898e3b8e7",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/sessions/80fa7302-5a3a-49ee-ba1f-1abbb7e3a416/messages",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/sessions/a62d9f0e-bf4f-4e6e-b4f6-cca7bfb97067/chat",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/sessions/9a98458b-6620-49ab-a6a2-083dcb21dbbf/branch",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/sessions/2ec16b63-94cb-4eee-8bfc-d0bd63080ffe/rewind",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/sessions/1963370e-0db8-4cab-88d4-cd57730865a9/lineage",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/sessions/2f6b1275-c90a-46e5-b595-a1e27dc803bb/checkpoints",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/sessions/076fd367-8dfc-4b73-9a49-c5699e4b0b6d/checkpoints",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/v1/runs/0b475017-8691-45fb-b2f1-57cf1422e2f3/approval",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/v1/runs",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/approvals/df1f5327-dca9-4d2a-a261-0ee094e03b65/approval",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/approvals",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/files/tree",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/files/read",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/files/write",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/files/search",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/files/reveal",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/git/status",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/git/diff",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/git/branches",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/git/branch/switch",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/git/stage",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/git/unstage",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/git/discard",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/git/commit",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/git/worktrees",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/git/worktree/add",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/git/worktree/remove",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/tools/capabilities",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/tools/toolsets",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/tools/skills",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/tools/execute",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/v1/capabilities",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/v1/toolsets",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/v1/skills",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/v1/execute",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/v1/models",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/v1/model/options",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/models",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/model/options",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/settings",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/settings",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/settings/single",
+    "status": 503
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/settings/5a5f0b14-0fa3-48e4-a914-f9183c7e807b",
+    "status": 503
+  },
+  {
+    "method": "POST",
+    "path": "/api/settings/providers/test",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/audit",
+    "status": 503
+  },
+  {
+    "method": "GET",
+    "path": "/api/messages/search",
+    "status": 503
+  }
+]

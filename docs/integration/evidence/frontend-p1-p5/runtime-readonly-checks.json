@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-10-30T02:32:07.830Z",
+  "probes": [
+    {
+      "url": "http://127.0.0.1:5178/",
+      "status": 200,
+      "contentType": "text/html"
+    },
+    {
+      "url": "http://127.0.0.1:5178/tests/ai-chat-fixture.html",
+      "status": 200,
+      "contentType": "text/html"
+    },
+    {
+      "url": "http://127.0.0.1:8000/health",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8"
+    }
+  ],
+  "isolatedOutstandingHomeWorkers": 0,
+  "preExistingBackendRestarted": false
+}

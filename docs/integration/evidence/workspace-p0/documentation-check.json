@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-28T15:04:58.963Z",
+  "result": "passed",
+  "checks": [
+    "All ten required technologies have phase, dependencies, scope, actual workflow acceptance and no premature completion",
+    "P0–P8 and TECH-01–TECH-10 are present in the persisted approved target",
+    "Plan/ledger/report/approval-document local links resolve",
+    "Original source rollback archive still matches all 243 captured file hashes",
+    "Source/DB rollback archives are intact and ignored by Git; no restore claim",
+    "Read-only database lineage evidence contains 21 matching migrations",
+    "Current synthetic UI captures match source manifest and saved hashes; no inference claim",
+    "Product-source preservation check passes with only authorized documentation/task edits, including owner-approved AGENTS handoff organization",
+    "Approved exact disposable DB has 21 migrations and six passing real integration tests; working DB not test target"
+  ],
+  "documents": [
+    {
+      "path": "docs/integration/SIRONA-WORKSPACE-PLAN.md",
+      "sha256": "4a48e45214bbf6b496e94697e8e91612d6a7f6d19d001cfcf65946857fe96a17"
+    },
+    {
+      "path": "docs/integration/SIRONA-WORKSPACE-LEDGER.md",
+      "sha256": "4ea88c1ce2a819f0b0d42c59397d0c770e3c1cd7ef6042e96f080f81ccb96c35"
+    },
+    {
+      "path": "docs/integration/SIRONA-WORKSPACE-P0-REPORT.md",
+      "sha256": "17221ec5c0cb47401c99979ea434b1b866eab10c873648fe96208fcbcb93a9ef"
+    },
+    {
+      "path": "docs/integration/SIRONA-WORKSPACE-P1-APPROVAL.md",
+      "sha256": "5c6e3ca81f727ae3d5f2227854520b21652b4d7d8e805157ba0d9c61fef17bc9"
+    },
+    {
+      "path": "docs/integration/SIRONA-AGENT-HANDOFF.md",
+      "sha256": "a0d7ab2041e925b372d8e5fe624ab568632ae3210cb8a5f70a8cd54234fbba4d"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "3d60daff4564174deb66e10f8d6b03c2a6da22d3aeceaecc3c8a72510588595d"
+    },
+    {
+      "path": "GEMINI.md",
+      "sha256": "48d9852dee2732a2bebb2588277d21a9d0236aaf3339ed42e01f14c58ce9849b"
+    },
+    {
+      "path": "README.md",
+      "sha256": "a6d32e2888696c9bdb3cba239b24945c97451954a43cb3ad5f9944a19cb41423"
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "851b528af8cad4fb46bf7ea82327cd22549a8c570eba2222af911e74f6122109"
+    }
+  ],
+  "phaseAcceptance": "P0 accepted; P1 protected-source/dependency/new-migration-authoring approval required before implementation"
+}

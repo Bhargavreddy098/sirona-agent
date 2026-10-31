@@ -1,0 +1,7 @@
+{"level":30,"time":1793088306296,"event":"backend.starting"}
+{"level":30,"time":1793088306399,"event":"dependency.ready","category":"database"}
+{"level":30,"time":1793088306408,"event":"dependency.ready","category":"cache"}
+{"level":30,"time":1793088307134,"event":"backend.listening"}
+AUDIT_RUNTIME_READY {"port":8012,"projectId":"2811619b-95bf-409f-8a7c-7062018212d8","fixture":"C:\\Users\\bharg\\AppData\\Local\\Temp\\sirona-audit-WiKMlo"}
+{"level":30,"time":1793089858771,"event":"backend.stopping"}
+{"level":30,"time":1793089858792,"event":"backend.stopped"}

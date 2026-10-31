@@ -1,0 +1,4257 @@
+{
+  "fixturePreparation": "Explicit SQL fixtures only; no generated-agent claim",
+  "log": [
+    {
+      "method": "POST",
+      "path": "/api/v1/session/bootstrap",
+      "status": 200,
+      "data": {
+        "data": {
+          "principalId": "9795b390-d80d-4d3b-a16e-fb49b72f552e",
+          "workspaceId": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+          "expiresAt": "2026-10-27T16:08:00.302Z",
+          "csrfToken": "[REDACTED AUDIT VALUE]"
+        },
+        "meta": {
+          "requestId": "887ed300-b6e6-42fb-8072-3ea5b34ee5a6"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/ec9542e4-5f3a-48d7-aa54-4b456c2effa1/verifications",
+      "status": 201,
+      "data": {
+        "data": {
+          "id": "0ed62a85-8ef1-448f-9d33-6c65bfc68209",
+          "runId": "ec9542e4-5f3a-48d7-aa54-4b456c2effa1",
+          "artifactId": "b5f2e3f9-4e34-45b6-8798-4ce1d731392e",
+          "artifactDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "contractRevisionId": "e0118019-d86b-457f-a88d-f83a6309adec",
+          "outcome": "pass",
+          "requiredCount": 1,
+          "passedCount": 1,
+          "failedCount": 0,
+          "unknownCount": 0,
+          "suiteRevision": "v1",
+          "verifierIdentity": "verifier-engine-v1",
+          "environmentDigest": "52e0dda9e0a89e6dd86745865410557e34b3d21afe7c9d04d0abadcc81f69346",
+          "reportArtifactId": null,
+          "criteria": [
+            {
+              "name": "Actually execute the failing test suite",
+              "reason": "Criterion verified cleanly",
+              "outcome": "pass",
+              "required": true,
+              "criterionId": "audit-required-tests",
+              "environmentDigest": "52e0dda9e0a89e6dd86745865410557e34b3d21afe7c9d04d0abadcc81f69346",
+              "evidenceArtifactId": "b5f2e3f9-4e34-45b6-8798-4ce1d731392e"
+            }
+          ],
+          "createdAt": "2026-10-27T08:08:00.385Z"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/ec9542e4-5f3a-48d7-aa54-4b456c2effa1/verifications",
+      "status": 201,
+      "data": {
+        "data": {
+          "id": "29c3f03d-e2f6-4ae0-9f4b-99a575689428",
+          "runId": "ec9542e4-5f3a-48d7-aa54-4b456c2effa1",
+          "artifactId": "b5f2e3f9-4e34-45b6-8798-4ce1d731392e",
+          "artifactDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "contractRevisionId": "e0118019-d86b-457f-a88d-f83a6309adec",
+          "outcome": "fail",
+          "requiredCount": 1,
+          "passedCount": 0,
+          "failedCount": 1,
+          "unknownCount": 0,
+          "suiteRevision": "v1",
+          "verifierIdentity": "verifier-engine-v1",
+          "environmentDigest": "52e0dda9e0a89e6dd86745865410557e34b3d21afe7c9d04d0abadcc81f69346",
+          "reportArtifactId": null,
+          "criteria": [
+            {
+              "name": "Actually execute the failing test suite",
+              "reason": "AUDIT intentional failing result",
+              "outcome": "fail",
+              "required": true,
+              "criterionId": "audit-required-tests",
+              "environmentDigest": "52e0dda9e0a89e6dd86745865410557e34b3d21afe7c9d04d0abadcc81f69346",
+              "evidenceArtifactId": "b5f2e3f9-4e34-45b6-8798-4ce1d731392e"
+            }
+          ],
+          "createdAt": "2026-10-27T08:08:00.415Z"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/ec9542e4-5f3a-48d7-aa54-4b456c2effa1/verifications",
+      "status": 201,
+      "data": {
+        "data": {
+          "id": "a37c1467-3bba-45ed-9e92-0dcc4386e4ed",
+          "runId": "ec9542e4-5f3a-48d7-aa54-4b456c2effa1",
+          "artifactId": "b5f2e3f9-4e34-45b6-8798-4ce1d731392e",
+          "artifactDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "contractRevisionId": "e0118019-d86b-457f-a88d-f83a6309adec",
+          "outcome": "unknown",
+          "requiredCount": 1,
+          "passedCount": 0,
+          "failedCount": 0,
+          "unknownCount": 1,
+          "suiteRevision": "v1",
+          "verifierIdentity": "verifier-engine-v1",
+          "environmentDigest": "52e0dda9e0a89e6dd86745865410557e34b3d21afe7c9d04d0abadcc81f69346",
+          "reportArtifactId": null,
+          "criteria": [
+            {
+              "name": "Actually execute the failing test suite",
+              "reason": "Criterion verified cleanly",
+              "outcome": "unknown",
+              "required": true,
+              "criterionId": "audit-required-tests",
+              "environmentDigest": "52e0dda9e0a89e6dd86745865410557e34b3d21afe7c9d04d0abadcc81f69346",
+              "evidenceArtifactId": "b5f2e3f9-4e34-45b6-8798-4ce1d731392e"
+            }
+          ],
+          "createdAt": "2026-10-27T08:08:00.433Z"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/7f5a563a-bb25-469b-8c17-0cccc06e3503/runs",
+      "status": 202,
+      "data": {
+        "data": {
+          "run": {
+            "id": "a173e0e5-5f76-4787-becf-c9a3275e75bd",
+            "project_id": "2811619b-95bf-409f-8a7c-7062018212d8",
+            "goal_id": "7f5a563a-bb25-469b-8c17-0cccc06e3503",
+            "contract_revision_id": "e0118019-d86b-457f-a88d-f83a6309adec",
+            "plan_revision_id": "f6629a11-e5e2-4108-8e04-ad1b29b4301f",
+            "repository_snapshot_id": null,
+            "state": "running",
+            "autonomy_mode": "readonly",
+            "epoch": "1",
+            "progress_completed_tasks": 0,
+            "progress_total_tasks": 1,
+            "budget_limit_micro_usd": "0",
+            "budget_reserved_micro_usd": "0",
+            "budget_spent_micro_usd": "0",
+            "verification_report_id": null,
+            "blockers": [],
+            "version": 1,
+            "created_at": "2026-10-27T08:08:00.452Z",
+            "updated_at": "2026-10-27T08:08:00.452Z",
+            "repair_attempts": 0,
+            "max_repair_attempts": 3,
+            "final_report_id": null
+          }
+        },
+        "meta": {
+          "requestId": "35dfe8fb-0a1b-44f9-a3ca-4625212b4733"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/a173e0e5-5f76-4787-becf-c9a3275e75bd",
+      "status": 200,
+      "data": {
+        "data": {
+          "run": {
+            "id": "a173e0e5-5f76-4787-becf-c9a3275e75bd",
+            "projectId": "2811619b-95bf-409f-8a7c-7062018212d8",
+            "goalId": "7f5a563a-bb25-469b-8c17-0cccc06e3503",
+            "contractRevisionId": "e0118019-d86b-457f-a88d-f83a6309adec",
+            "planRevisionId": "f6629a11-e5e2-4108-8e04-ad1b29b4301f",
+            "repositorySnapshotId": null,
+            "state": "running",
+            "autonomyMode": "readonly",
+            "epoch": "1",
+            "progress": {
+              "completedTasks": 0,
+              "totalTasks": 1
+            },
+            "budget": {
+              "limit": "0",
+              "reserved": "0",
+              "spent": "0"
+            },
+            "verificationReportId": null,
+            "blockers": [],
+            "version": 1,
+            "currentSequence": "1",
+            "createdAt": "2026-10-27T08:08:00.452Z",
+            "updatedAt": "2026-10-27T08:08:00.452Z"
+          }
+        },
+        "meta": {
+          "requestId": "eca91cd5-3379-45e3-bccc-3b0b4e1dc7da",
+          "currentSequence": "1"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/a173e0e5-5f76-4787-becf-c9a3275e75bd/tasks",
+      "status": 200,
+      "data": {
+        "data": {
+          "tasks": [
+            {
+              "id": "cb1e7518-621d-48c9-b7a5-2fb437c06e51",
+              "runId": "a173e0e5-5f76-4787-becf-c9a3275e75bd",
+              "stepKey": "implement_sum_endpoint",
+              "state": "pending",
+              "attempt": 0,
+              "maxAttempts": 3,
+              "deadlineAt": null,
+              "leaseEpoch": "1",
+              "dependencies": [],
+              "artifactIds": [],
+              "result": null,
+              "errorMessage": null,
+              "createdAt": "2026-10-27T08:08:00.452Z",
+              "updatedAt": "2026-10-27T08:08:00.452Z"
+            }
+          ]
+        },
+        "meta": {
+          "requestId": "d62ad660-c860-4a99-9b7a-18113c611dbd"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/a173e0e5-5f76-4787-becf-c9a3275e75bd/agents",
+      "status": 200,
+      "data": {
+        "data": {
+          "agents": []
+        },
+        "meta": {
+          "requestId": "5de7af7d-6685-4bd7-b4ac-e9d9d2ed2ae2"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/7f5a563a-bb25-469b-8c17-0cccc06e3503/clarifications",
+      "status": 201,
+      "data": {
+        "data": {
+          "clarification": {
+            "id": "a4def983-a9f2-4a24-aaf6-0d8453850d15",
+            "goalId": "7f5a563a-bb25-469b-8c17-0cccc06e3503",
+            "question": "AUDIT authentication choice: local passwords or external identity provider?",
+            "materiality": "material",
+            "options": [
+              {
+                "id": "local",
+                "label": "Local passwords"
+              },
+              {
+                "id": "external",
+                "label": "External identity provider"
+              }
+            ],
+            "answer": null,
+            "selectedOptionId": null,
+            "status": "pending",
+            "version": 1,
+            "createdAt": "2026-10-27T08:08:02.526Z",
+            "updatedAt": "2026-10-27T08:08:02.526Z"
+          }
+        },
+        "meta": {
+          "requestId": "cf1b2757-f5f1-4bbc-86a9-a1b1b758cfb4"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/clarifications/a4def983-a9f2-4a24-aaf6-0d8453850d15/answers",
+      "status": 200,
+      "data": {
+        "data": {
+          "clarification": {
+            "id": "a4def983-a9f2-4a24-aaf6-0d8453850d15",
+            "goalId": "7f5a563a-bb25-469b-8c17-0cccc06e3503",
+            "question": "AUDIT authentication choice: local passwords or external identity provider?",
+            "materiality": "material",
+            "options": [
+              {
+                "id": "local",
+                "label": "Local passwords"
+              },
+              {
+                "id": "external",
+                "label": "External identity provider"
+              }
+            ],
+            "answer": "Local passwords",
+            "selectedOptionId": "local",
+            "status": "answered",
+            "version": 2,
+            "createdAt": "2026-10-27T08:08:02.526Z",
+            "updatedAt": "2026-10-27T08:08:02.544Z"
+          }
+        },
+        "meta": {
+          "requestId": "74a95f31-7002-46d9-a5b9-430c91bc3478"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/clarifications/a4def983-a9f2-4a24-aaf6-0d8453850d15/answers",
+      "status": 409,
+      "data": {
+        "type": "about:blank",
+        "title": "Conflict",
+        "status": 409,
+        "code": "STATE_CONFLICT",
+        "detail": "Clarification is already answered",
+        "requestId": "233b2284-4d7c-4f19-802a-5094eb8d973f",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/7f5a563a-bb25-469b-8c17-0cccc06e3503/intent-analysis",
+      "status": 200,
+      "data": {
+        "data": {
+          "intentAnalysis": {
+            "id": "e8c0c0fa-57ee-4b2c-9ea6-6ac0e4df2a0b",
+            "goalId": "7f5a563a-bb25-469b-8c17-0cccc06e3503",
+            "literalRequest": "Add a GET /api/calculator/sum endpoint accepting numeric a and b; add tests and update README.",
+            "desiredOutcome": "Execute objective: Add a GET /api/calculator/sum endpoint accepting numeric a and b; add tests and update README.",
+            "constraints": [],
+            "assumptions": [
+              {
+                "key": "runtime_environment",
+                "risk": "low",
+                "statement": "Execution runs within authorized local boundaries",
+                "needsDecision": false
+              }
+            ],
+            "unknowns": [],
+            "acceptanceCandidates": [
+              {
+                "key": "completion_verification",
+                "check": "All primary criteria pass verification"
+              }
+            ],
+            "sourceRefs": [],
+            "createdAt": "2026-10-27T08:08:02.582Z"
+          }
+        },
+        "meta": {
+          "requestId": "41fa83d7-459c-4674-8c1b-69aa98bdcb89"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/contract-revisions/e0118019-d86b-457f-a88d-f83a6309adec/approval-requests",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Supplied digest does not match the immutable contract revision digest",
+        "requestId": "1cdcb1cd-b053-408d-aa8b-3bfd2416b520",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/2811619b-95bf-409f-8a7c-7062018212d8/schedules",
+      "status": 201,
+      "data": {
+        "data": {
+          "id": "42865075-c4c1-4ec9-8f93-314219adf869",
+          "projectId": "2811619b-95bf-409f-8a7c-7062018212d8",
+          "goalTemplate": {
+            "intent": "AUDIT harmless scheduled task"
+          },
+          "recurrence": "every 1s",
+          "timezone": "UTC",
+          "misfirePolicy": "latest",
+          "overlapPolicy": "skip",
+          "budgetCeilingMicroUsd": 1000,
+          "grantIds": [],
+          "nextFireAt": "2026-10-27T08:08:03.636Z",
+          "lastFiredAt": null,
+          "paused": false,
+          "pausedAt": null,
+          "pauseReason": null,
+          "version": 1,
+          "createdAt": "2026-10-27T08:08:02.638Z",
+          "updatedAt": "2026-10-27T08:08:02.638Z"
+        },
+        "meta": {
+          "requestId": "8f6ceb9f-674f-468a-8394-a0d26de2f962"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/2811619b-95bf-409f-8a7c-7062018212d8/schedules",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": "42865075-c4c1-4ec9-8f93-314219adf869",
+            "projectId": "2811619b-95bf-409f-8a7c-7062018212d8",
+            "goalTemplate": {
+              "intent": "AUDIT harmless scheduled task"
+            },
+            "recurrence": "every 1s",
+            "timezone": "UTC",
+            "misfirePolicy": "latest",
+            "overlapPolicy": "skip",
+            "budgetCeilingMicroUsd": 1000,
+            "grantIds": [],
+            "nextFireAt": "2026-10-27T08:08:03.636Z",
+            "lastFiredAt": null,
+            "paused": false,
+            "pausedAt": null,
+            "pauseReason": null,
+            "version": 1,
+            "createdAt": "2026-10-27T08:08:02.638Z",
+            "updatedAt": "2026-10-27T08:08:02.638Z"
+          }
+        ],
+        "meta": {
+          "total": 1,
+          "limit": 50,
+          "offset": 0,
+          "requestId": "81c83a61-18f1-49e6-8c0f-1a5cfc547512"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/workspaces",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+            "name": "Primary Workspace",
+            "ownerPrincipalId": "9795b390-d80d-4d3b-a16e-fb49b72f552e",
+            "status": "active"
+          },
+          {
+            "id": "2714508c-922e-4ff9-a06b-a529e522db52",
+            "name": "ws-tools-1793087887127",
+            "ownerPrincipalId": "9795b390-d80d-4d3b-a16e-fb49b72f552e",
+            "status": "active"
+          },
+          {
+            "id": "0cd7c169-13f4-444a-a979-215b2fa6a41f",
+            "name": "ws-tools-1793088082592",
+            "ownerPrincipalId": "9795b390-d80d-4d3b-a16e-fb49b72f552e",
+            "status": "active"
+          }
+        ],
+        "meta": {
+          "requestId": "31a6e0d0-95ee-4ec1-ae9e-afe2c85944c2"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/capabilities",
+      "status": 200,
+      "data": {
+        "data": {
+          "items": [
+            {
+              "name": "identity",
+              "state": "available"
+            },
+            {
+              "name": "database",
+              "state": "available"
+            },
+            {
+              "name": "health",
+              "state": "available"
+            },
+            {
+              "name": "projects",
+              "state": "available"
+            },
+            {
+              "name": "conversations",
+              "state": "available"
+            },
+            {
+              "name": "artifacts",
+              "state": "available"
+            },
+            {
+              "name": "governance",
+              "state": "available"
+            },
+            {
+              "name": "approvals",
+              "state": "available"
+            },
+            {
+              "name": "leases",
+              "state": "available"
+            },
+            {
+              "name": "budgets",
+              "state": "available"
+            },
+            {
+              "name": "models",
+              "state": "available"
+            },
+            {
+              "name": "inference",
+              "state": "available"
+            },
+            {
+              "name": "tasks",
+              "state": "available"
+            },
+            {
+              "name": "effects",
+              "state": "available"
+            },
+            {
+              "name": "checkpoints",
+              "state": "available"
+            },
+            {
+              "name": "goals",
+              "state": "available"
+            },
+            {
+              "name": "intent",
+              "state": "available"
+            },
+            {
+              "name": "clarifications",
+              "state": "available"
+            },
+            {
+              "name": "research",
+              "state": "available"
+            },
+            {
+              "name": "requirements",
+              "state": "available"
+            },
+            {
+              "name": "decisions",
+              "state": "available"
+            },
+            {
+              "name": "plans",
+              "state": "available"
+            },
+            {
+              "name": "contracts",
+              "state": "available"
+            },
+            {
+              "name": "isolation",
+              "state": "available"
+            },
+            {
+              "name": "tools",
+              "state": "available"
+            },
+            {
+              "name": "verification",
+              "state": "available"
+            },
+            {
+              "name": "execution",
+              "state": "available"
+            },
+            {
+              "name": "memory",
+              "state": "available"
+            },
+            {
+              "name": "knowledge",
+              "state": "available"
+            },
+            {
+              "name": "schedules",
+              "state": "available"
+            },
+            {
+              "name": "triggers",
+              "state": "available"
+            },
+            {
+              "name": "events",
+              "state": "available"
+            },
+            {
+              "name": "activity",
+              "state": "available"
+            },
+            {
+              "name": "notifications",
+              "state": "available"
+            },
+            {
+              "name": "deployments",
+              "state": "available"
+            },
+            {
+              "name": "browser_qa",
+              "state": "available"
+            },
+            {
+              "name": "release_recovery",
+              "state": "available"
+            },
+            {
+              "name": "operational_diagnostics",
+              "state": "available"
+            }
+          ]
+        },
+        "meta": {
+          "requestId": "3e149435-d371-46f1-8c09-60f703b4cc1c"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Project name is required",
+        "requestId": "43757552-a6a9-4582-9340-e6e7ab28ac54",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects",
+      "status": 200,
+      "data": {
+        "data": {
+          "projects": [
+            {
+              "id": "2811619b-95bf-409f-8a7c-7062018212d8",
+              "name": "AUDIT 2026-10-27 controlled project",
+              "description": null,
+              "primary_path": "C:\\Users\\bharg\\AppData\\Local\\Temp\\sirona-audit-WiKMlo\\sample-project",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:05:13.414Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:05:13.414Z"
+            },
+            {
+              "id": "9684ee5a-4c6a-4083-b182-b7a10c876476",
+              "name": "AUDIT 2026-10-27 controlled project",
+              "description": null,
+              "primary_path": "C:\\Users\\bharg\\AppData\\Local\\Temp\\sirona-audit-t1FOBA\\sample-project",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:04:01.083Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:04:01.083Z"
+            },
+            {
+              "id": "48289a28-321e-4983-9b4e-d1bf1259d7ea",
+              "name": "workflow-test-proj",
+              "description": null,
+              "primary_path": "C:\\Workspace\\WorkflowTest",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:01:29.045Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:01:29.045Z"
+            },
+            {
+              "id": "a1ffc5bb-ceb5-4c01-af43-2777d8338c3c",
+              "name": "verif-test-proj",
+              "description": null,
+              "primary_path": "C:\\Workspace\\VerifTest",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:01:26.473Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:01:26.473Z"
+            },
+            {
+              "id": "735df840-fcf0-4470-a2dc-31452731faac",
+              "name": "Automation Test Project",
+              "description": null,
+              "primary_path": "C:\\Workspace\\AutomationTest",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:01:19.653Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:01:19.653Z"
+            },
+            {
+              "id": "748c2392-2d7c-4317-b7ae-959030cdc595",
+              "name": "Turns Test Project",
+              "description": "Testing model turns",
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:01:11.468Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:01:11.468Z"
+            },
+            {
+              "id": "418ddbfa-4c4e-4b62-8757-c871391ac667",
+              "name": "Artifact and Snapshot Project",
+              "description": null,
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:01:08.806Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:01:08.806Z"
+            },
+            {
+              "id": "106c0900-9efb-4d57-a8f6-0a1e5cf9d39f",
+              "name": "Conversation Test Project",
+              "description": null,
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:01:08.677Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:01:08.677Z"
+            },
+            {
+              "id": "d075d224-3249-4898-8000-69647d17390a",
+              "name": "Memory Test Project B",
+              "description": null,
+              "primary_path": "C:\\Workspace\\MemoryTestB",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:01:00.179Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:01:00.179Z"
+            },
+            {
+              "id": "e2ac46af-a640-4c54-8588-1a36c98307d6",
+              "name": "Memory Test Project A",
+              "description": null,
+              "primary_path": "C:\\Workspace\\MemoryTestA",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:01:00.173Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:01:00.173Z"
+            },
+            {
+              "id": "525b16c9-9fa8-4223-82f7-88dbcfaf9ef4",
+              "name": "Stage 05 HTTP Project",
+              "description": null,
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:00:47.275Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:00:47.275Z"
+            },
+            {
+              "id": "4308136b-c5cd-49e1-95c9-ca05bbb40cdb",
+              "name": "Checkpoints Test Project",
+              "description": "Testing checkpoints",
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:00:45.775Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:00:45.775Z"
+            },
+            {
+              "id": "c2653438-6b2d-4df6-b554-e6e601e52a23",
+              "name": "Effects Test Project",
+              "description": "Testing effects",
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:00:45.748Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:00:45.748Z"
+            },
+            {
+              "id": "43bc37e8-4668-4acc-b937-4c1f5fd96377",
+              "name": "Execution Run Project",
+              "description": "Testing durable runs",
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:00:45.659Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:00:45.659Z"
+            },
+            {
+              "id": "0ccd11d9-215a-446d-8c33-0822a73f16a7",
+              "name": "Deployment Test Project",
+              "description": null,
+              "primary_path": "C:\\Workspace\\DeploymentTest",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T08:00:44.490Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T08:00:44.490Z"
+            },
+            {
+              "id": "ba4e0c6d-680a-4b56-9ca5-1c8dae3c5e7d",
+              "name": "workflow-test-proj",
+              "description": null,
+              "primary_path": "C:\\Workspace\\WorkflowTest",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:58:10.540Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:58:10.540Z"
+            },
+            {
+              "id": "9fd4ade3-21c0-48b8-9301-613f8236010f",
+              "name": "verif-test-proj",
+              "description": null,
+              "primary_path": "C:\\Workspace\\VerifTest",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:58:09.153Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:58:09.153Z"
+            },
+            {
+              "id": "8b4b4c87-8d3a-435e-9fd8-8af4f2ce7b3a",
+              "name": "Automation Test Project",
+              "description": null,
+              "primary_path": "C:\\Workspace\\AutomationTest",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:58:05.790Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:58:05.790Z"
+            },
+            {
+              "id": "077056d4-0b42-401b-9aa7-7cffa70a21b4",
+              "name": "Turns Test Project",
+              "description": "Testing model turns",
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:58:01.963Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:58:01.963Z"
+            },
+            {
+              "id": "a996ec1a-054a-471d-8ca1-1d6b6b978060",
+              "name": "Artifact and Snapshot Project",
+              "description": null,
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:58:00.326Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:58:00.326Z"
+            },
+            {
+              "id": "4762d9d6-0cb1-4acf-96f1-03c9c42e586b",
+              "name": "Conversation Test Project",
+              "description": null,
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:58:00.248Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:58:00.248Z"
+            },
+            {
+              "id": "6c186acd-4ba3-4be4-b4c4-7fb32cef3611",
+              "name": "Memory Test Project B",
+              "description": null,
+              "primary_path": "C:\\Workspace\\MemoryTestB",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:57:54.397Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:57:54.397Z"
+            },
+            {
+              "id": "c7586743-9aae-475a-8b16-dc171062fd2f",
+              "name": "Memory Test Project A",
+              "description": null,
+              "primary_path": "C:\\Workspace\\MemoryTestA",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:57:54.385Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:57:54.385Z"
+            },
+            {
+              "id": "5d85d47b-686d-49ce-8d53-baf5f4373b71",
+              "name": "Stage 05 HTTP Project",
+              "description": null,
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:57:46.971Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:57:46.971Z"
+            },
+            {
+              "id": "88877267-dc06-49c4-9b9d-24b247ad11e5",
+              "name": "Checkpoints Test Project",
+              "description": "Testing checkpoints",
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:57:45.164Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:57:45.164Z"
+            },
+            {
+              "id": "53193ae8-c538-492f-b485-140e8c8a9ed2",
+              "name": "Effects Test Project",
+              "description": "Testing effects",
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:57:45.125Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:57:45.125Z"
+            },
+            {
+              "id": "7557752a-c2b2-41bd-aa7c-2fe91f774468",
+              "name": "Execution Run Project",
+              "description": "Testing durable runs",
+              "primary_path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:57:45.019Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:57:45.019Z"
+            },
+            {
+              "id": "55aa50f9-f6c3-4060-b993-bab483304916",
+              "name": "Deployment Test Project",
+              "description": null,
+              "primary_path": "C:\\Workspace\\DeploymentTest",
+              "icon": "folder",
+              "color": "#1f2328",
+              "created_at": "2026-10-27T07:57:43.541Z",
+              "archived": 0,
+              "workspace_id": "b99dd57d-332e-493e-8a5f-13be8f59f453",
+              "version": 1,
+              "updated_at": "2026-10-27T07:57:43.541Z"
+            }
+          ],
+          "total": 28
+        },
+        "meta": {
+          "requestId": "566ad516-a4a9-4fd1-8879-872ae4ed21af"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/ef491280-b119-4216-a4b6-6abc557523b9",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project not found",
+        "requestId": "44d25871-2c6d-424b-a302-14ccf7da64d7",
+        "retryable": false
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/projects/6adc02ef-5fb9-46f6-be38-c2ed64374e6c",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project not found",
+        "requestId": "5a9729c3-d262-4046-9ec8-014f257307cc",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/a9b39e6f-5aad-4326-8e52-b0d7928ebb1d/archive",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project not found",
+        "requestId": "27fd248d-441d-41ad-9089-030cd0bde428",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/59db1852-af88-4ab2-b9ed-e4360a5ae5e7/conversations",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project not found",
+        "requestId": "c8645f37-d4ea-40d0-b183-545281061739",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/6db2da3b-bd58-4874-a8d7-08dbf910d8d1/conversations",
+      "status": 200,
+      "data": {
+        "data": {
+          "sessions": [],
+          "total": 0
+        },
+        "meta": {
+          "requestId": "41bfda7e-109e-4454-881d-7822fe55e8f4"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/conversations/a31c8682-18d0-4583-884e-6dceefe9b9ca",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Conversation not found",
+        "requestId": "8cd7ffc3-0404-4fb7-ab44-6c98bf52e26b",
+        "retryable": false
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/conversations/593941f2-a09f-41ad-b856-78f01f2e31b9",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Conversation not found",
+        "requestId": "6bfeb06a-f5f7-48ee-b1a6-cbbed45ca614",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/conversations/83be78b5-2229-43da-93da-4b9bf05cb40c/messages",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Valid message role is required",
+        "requestId": "c42f7829-8122-4fd1-ad8e-917d6048b3e0",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/conversations/a467e469-5efb-4d65-b548-63fea1086c8a/messages",
+      "status": 200,
+      "data": {
+        "data": {
+          "messages": [],
+          "total": 0
+        },
+        "meta": {
+          "requestId": "2fe7d7d3-facc-4aa8-aea5-1d7d7aef4595"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/d86bad01-7e99-4953-a98e-8dd981b71532/snapshots",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project not found",
+        "requestId": "4ab461a2-97cb-41e4-aa85-26a6f4c31f97",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/eaa53edd-abb1-439d-b256-5db4897a22a3/snapshots",
+      "status": 200,
+      "data": {
+        "data": {
+          "snapshots": [],
+          "total": 0
+        },
+        "meta": {
+          "requestId": "8af02ef1-16ce-4221-952c-9ceff3ac437b"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/db66a8ea-270c-4bf7-930d-d747a23001d2/artifacts",
+      "status": 200,
+      "data": {
+        "data": {
+          "artifacts": [],
+          "total": 0
+        },
+        "meta": {
+          "requestId": "65b81d53-daef-40fb-a7cc-47daa43da4c7"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/artifacts/76b139ac-ee7d-4c8a-b011-ffeeeb132b0e",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Artifact not found",
+        "requestId": "cb22e54d-5735-4916-84fb-c6ca50ec8abb",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/artifacts/b008ff4a-a1bb-44d8-bdf1-26c902e8892a/content",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Artifact not found",
+        "requestId": "6f61a633-8adb-42c2-b191-7fc7ac0b2864",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/bf9d027c-0f45-406c-9b8d-cc785c102ecd/uploads",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project not found",
+        "requestId": "56916fe5-0c16-4345-95aa-b3282946d020",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/policies/current",
+      "status": 200,
+      "data": {
+        "data": {
+          "policy": {
+            "id": "9fa67bc5-68da-400a-a346-5cbbd08df848",
+            "revision": 1,
+            "digest": "cbb42fa92cc5d2f4c57427aeecbdddf343138cf2f81097e52d9dc6d1cf304dae",
+            "rules": {
+              "budgetRules": {
+                "requireReservation": true,
+                "maxSingleActionMicroUsd": 1000000
+              },
+              "autonomyMode": "supervised",
+              "privacyRules": {
+                "denyEgress": false,
+                "allowedEgressHosts": [
+                  "127.0.0.1",
+                  "localhost",
+                  "openrouter.ai",
+                  "googleapis.com"
+                ]
+              },
+              "capabilityRules": {
+                "git": {
+                  "allowed": true,
+                  "requireApproval": false
+                },
+                "fs_read": {
+                  "allowed": true,
+                  "requireApproval": false
+                },
+                "fs_write": {
+                  "allowed": true,
+                  "requireApproval": true
+                },
+                "terminal": {
+                  "allowed": true,
+                  "requireApproval": true
+                }
+              },
+              "highImpactActions": [
+                "terminal_exec",
+                "file_write",
+                "file_delete",
+                "deploy"
+              ]
+            },
+            "active": true,
+            "created_by": null,
+            "created_at": "2026-10-27T07:57:46.864Z"
+          }
+        },
+        "meta": {
+          "requestId": "241053a1-fd6e-4e79-9a3b-32f1e941d947"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/policies/revisions",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Valid policy rules object required",
+        "requestId": "f4a967dd-5701-455b-9c1c-c9d8e719d7f5",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/policies/a0d895ac-1893-4db2-b724-7da704cf0b2a/activate",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Policy revision not found",
+        "requestId": "807f32e8-c0e3-4077-a1d0-328c7cd1d939",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/4127734f-78f7-44a4-a734-2afc4c6c0624/grants",
+      "status": 200,
+      "data": {
+        "data": {
+          "grants": []
+        },
+        "meta": {
+          "requestId": "ee54c7da-a895-43c6-aee4-72113d180f60"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/ae0a8730-1ef2-41e2-9bf5-541c91a2e584/grants",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Capability name required",
+        "requestId": "53a1e1b8-1fba-40fe-aacc-e7fb97f7d53e",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/grants/1e5fcacb-2ff3-40d0-abe1-6a11ef1e9c1e/revoke",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Grant not found or already revoked",
+        "requestId": "a8b8fc25-9acb-4e01-a715-d27469a49b77",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/contract-revisions/7f102e34-8f31-4d5c-8109-72531cdd8883/approval-requests",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Contract revision 7f102e34-8f31-4d5c-8109-72531cdd8883 not found",
+        "requestId": "b2ae2946-4e1e-4cee-b216-7e6d67c37780",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/approvals",
+      "status": 200,
+      "data": {
+        "data": {
+          "approvals": [
+            {
+              "id": "8aba4a39-e0cf-4427-9abc-3db3deb6e8f1",
+              "kind": "contract",
+              "project_id": null,
+              "contract_revision_id": "a01ef836-bda8-46fe-80f4-1e07f58d5727",
+              "effect_id": null,
+              "input_digest": "aef4f65228fc5db6c09371dc4cb048e6c4eaa6818bcae10fe30518ffd28b91d5",
+              "approver_principal_id": null,
+              "state": "approved",
+              "scope_summary": null,
+              "cost_ceiling_micro_usd": "0",
+              "consequences": null,
+              "expires_at": "2026-10-28T08:01:29.105Z",
+              "decided_at": null,
+              "consumed_at": null,
+              "created_at": "2026-10-27T08:01:29.105Z"
+            },
+            {
+              "id": "4676c385-562e-42c1-92e0-ea6fd5471ced",
+              "kind": "contract",
+              "project_id": "2557af8b-9cce-4430-b6d9-74a936f7dc08",
+              "contract_revision_id": null,
+              "effect_id": null,
+              "input_digest": "fab8ae96b45cfcf07b80d9b1d7050c61cddb42d05d9acfd4909670266f6394ca",
+              "approver_principal_id": null,
+              "state": "revoked",
+              "scope_summary": "Plan execution approval",
+              "cost_ceiling_micro_usd": "0",
+              "consequences": null,
+              "expires_at": "2026-10-28T08:00:47.212Z",
+              "decided_at": "2026-10-27T08:00:47.214Z",
+              "consumed_at": null,
+              "created_at": "2026-10-27T08:00:47.213Z"
+            },
+            {
+              "id": "1b30f772-09c8-40fb-a61b-c7e967a44a81",
+              "kind": "action",
+              "project_id": "347c1ba4-cf18-4b7f-b498-b0e4081586e9",
+              "contract_revision_id": null,
+              "effect_id": null,
+              "input_digest": "8fbddc6a44ecff926dbe1edbb021d58ad5c7c25744cd6de45ec5c87c73ed8fb9",
+              "approver_principal_id": null,
+              "state": "approved",
+              "scope_summary": "Destructive file removal",
+              "cost_ceiling_micro_usd": "0",
+              "consequences": "Cannot be undone",
+              "expires_at": "2026-10-28T08:00:47.202Z",
+              "decided_at": "2026-10-27T08:00:47.210Z",
+              "consumed_at": null,
+              "created_at": "2026-10-27T08:00:47.203Z"
+            },
+            {
+              "id": "e801e32f-f471-448d-a75c-7b1f82d55e47",
+              "kind": "deployment",
+              "project_id": "0ccd11d9-215a-446d-8c33-0822a73f16a7",
+              "contract_revision_id": null,
+              "effect_id": null,
+              "input_digest": "",
+              "approver_principal_id": "9795b390-d80d-4d3b-a16e-fb49b72f552e",
+              "state": "approved",
+              "scope_summary": "Deploy to local_process",
+              "cost_ceiling_micro_usd": "0",
+              "consequences": null,
+              "expires_at": "2026-10-28T08:00:44.541Z",
+              "decided_at": null,
+              "consumed_at": null,
+              "created_at": "2026-10-27T08:00:44.541Z"
+            },
+            {
+              "id": "2817839b-22b5-487a-bc43-7e9c483a201d",
+              "kind": "contract",
+              "project_id": null,
+              "contract_revision_id": "3c84e482-7380-4c6a-b791-34ce344681dc",
+              "effect_id": null,
+              "input_digest": "aef4f65228fc5db6c09371dc4cb048e6c4eaa6818bcae10fe30518ffd28b91d5",
+              "approver_principal_id": null,
+              "state": "approved",
+              "scope_summary": null,
+              "cost_ceiling_micro_usd": "0",
+              "consequences": null,
+              "expires_at": "2026-10-28T07:58:10.587Z",
+              "decided_at": null,
+              "consumed_at": null,
+              "created_at": "2026-10-27T07:58:10.587Z"
+            },
+            {
+              "id": "62ae25b2-e825-4d0b-8815-4e31fc3d9f10",
+              "kind": "contract",
+              "project_id": "295738df-9e53-4d5e-98e1-46b81d3a4bea",
+              "contract_revision_id": null,
+              "effect_id": null,
+              "input_digest": "fab8ae96b45cfcf07b80d9b1d7050c61cddb42d05d9acfd4909670266f6394ca",
+              "approver_principal_id": null,
+              "state": "revoked",
+              "scope_summary": "Plan execution approval",
+              "cost_ceiling_micro_usd": "0",
+              "consequences": null,
+              "expires_at": "2026-10-28T07:57:46.902Z",
+              "decided_at": "2026-10-27T07:57:46.906Z",
+              "consumed_at": null,
+              "created_at": "2026-10-27T07:57:46.904Z"
+            },
+            {
+              "id": "644e8abd-d7a5-46dd-9978-eb371f772635",
+              "kind": "action",
+              "project_id": "394886ad-c0bb-4d2b-840c-2c3e2a4f83b4",
+              "contract_revision_id": null,
+              "effect_id": null,
+              "input_digest": "8fbddc6a44ecff926dbe1edbb021d58ad5c7c25744cd6de45ec5c87c73ed8fb9",
+              "approver_principal_id": null,
+              "state": "approved",
+              "scope_summary": "Destructive file removal",
+              "cost_ceiling_micro_usd": "0",
+              "consequences": "Cannot be undone",
+              "expires_at": "2026-10-28T07:57:46.892Z",
+              "decided_at": "2026-10-27T07:57:46.901Z",
+              "consumed_at": null,
+              "created_at": "2026-10-27T07:57:46.894Z"
+            },
+            {
+              "id": "c45ee4a9-7669-47ca-a017-20096df66c64",
+              "kind": "deployment",
+              "project_id": "55aa50f9-f6c3-4060-b993-bab483304916",
+              "contract_revision_id": null,
+              "effect_id": null,
+              "input_digest": "",
+              "approver_principal_id": "9795b390-d80d-4d3b-a16e-fb49b72f552e",
+              "state": "approved",
+              "scope_summary": "Deploy to local_process",
+              "cost_ceiling_micro_usd": "0",
+              "consequences": null,
+              "expires_at": "2026-10-28T07:57:43.609Z",
+              "decided_at": null,
+              "consumed_at": null,
+              "created_at": "2026-10-27T07:57:43.609Z"
+            }
+          ],
+          "total": 8
+        },
+        "meta": {
+          "requestId": "d10820c8-8120-4fe4-8945-38f014d3a858"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/approvals/5ee4a2a5-da07-4057-9a0d-a0114a5493a9",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Approval not found",
+        "requestId": "77a38baa-f638-4db9-a664-157f8ed578eb",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/approvals/ac5ac977-46ba-4cc3-852b-a57c0f8ccb2f/decisions",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Decision must be 'approve' or 'reject'",
+        "requestId": "a1780b10-1e95-426f-9ab3-a69f5ed42b1c",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/approvals/d6c397e4-87e2-4e78-b942-9f01222ec787/revoke",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Approval not found",
+        "requestId": "a4c56085-893b-4532-968d-ed3198031167",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/82b01778-eb2f-4954-98a9-b21c725ac2f5/budgets",
+      "status": 200,
+      "data": {
+        "data": {
+          "budgets": []
+        },
+        "meta": {
+          "requestId": "12b2f67d-0fe1-4c16-aad1-1f7661d77420"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/1e0f175b-9a35-4999-96a9-011654f61cb1/budgets",
+      "status": 200,
+      "data": {
+        "data": {
+          "budget": {
+            "id": "23f421f1-8a56-4fe6-856c-9fc36627b6ee",
+            "scope_kind": "project",
+            "scope_id": "1e0f175b-9a35-4999-96a9-011654f61cb1",
+            "limit_micro_usd": "10000000",
+            "spent_micro_usd": "0",
+            "reserved_micro_usd": "0",
+            "version": 1,
+            "created_at": "2026-10-27T08:08:03.078Z",
+            "updated_at": "2026-10-27T08:08:03.078Z"
+          }
+        },
+        "meta": {
+          "requestId": "0b930c08-e1a0-4fd0-9d9c-2195885a56c5"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/budgets/7bb96d02-c762-4da0-a3e2-36572e9ae577/reserve",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Valid operationKey and positive ceiling required",
+        "requestId": "aedca851-a68e-4343-84ac-d81f2342db75",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/usage",
+      "status": 200,
+      "data": {
+        "data": {
+          "totalSpentMicroUsd": 0,
+          "totalReservedMicroUsd": 0,
+          "records": []
+        },
+        "meta": {
+          "requestId": "f2546afc-2c8c-4c7f-b9ea-223e5f5984b0"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/sessions/8768dbeb-9ff8-4278-a098-8b142da04218/lease",
+      "status": 500,
+      "data": {
+        "type": "about:blank",
+        "title": "Internal Server Error",
+        "status": 500,
+        "code": "INTERNAL_ERROR",
+        "detail": "insert or update on table \"session_turn_leases\" violates foreign key constraint \"session_turn_leases_session_id_fkey\"",
+        "requestId": "f699b89b-6423-422c-a26e-78f6067f6be1",
+        "retryable": false
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/sessions/7c996b09-b84a-447c-918d-f561c2695f0c/lease",
+      "status": 200,
+      "data": {
+        "data": {
+          "released": false
+        },
+        "meta": {
+          "requestId": "c3832951-b0c4-4772-8f55-149ad3c29bf8"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/sessions/20ce9468-067b-4820-910d-45db943a9214/lease",
+      "status": 200,
+      "data": {
+        "data": {
+          "lease": null
+        },
+        "meta": {
+          "requestId": "5a31b135-a926-457f-a504-9f21f4738c3c"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/models",
+      "status": 200,
+      "data": {
+        "data": {
+          "models": [
+            {
+              "id": "claude-3-7-sonnet-20250219",
+              "name": "Claude 3.7 Sonnet",
+              "provider": "anthropic",
+              "contextWindow": 200000,
+              "maxOutputTokens": 8192,
+              "pricing": {
+                "inputCostPerMillionMicroUsd": "3000000",
+                "outputCostPerMillionMicroUsd": "15000000"
+              },
+              "hasConfiguredApiKey": false
+            },
+            {
+              "id": "gemini-1.5-pro",
+              "name": "Gemini 1.5 Pro",
+              "provider": "google",
+              "contextWindow": 2097152,
+              "maxOutputTokens": 8192,
+              "pricing": {
+                "inputCostPerMillionMicroUsd": "1250000",
+                "outputCostPerMillionMicroUsd": "5000000"
+              },
+              "hasConfiguredApiKey": false
+            },
+            {
+              "id": "gemini-2.5-flash",
+              "name": "Gemini 2.5 Flash",
+              "provider": "google",
+              "contextWindow": 1048576,
+              "maxOutputTokens": 8192,
+              "pricing": {
+                "inputCostPerMillionMicroUsd": "100000",
+                "outputCostPerMillionMicroUsd": "400000"
+              },
+              "hasConfiguredApiKey": false
+            },
+            {
+              "id": "gemini-flash-lite-latest",
+              "name": "Gemini Flash Lite",
+              "provider": "google",
+              "contextWindow": 1048576,
+              "maxOutputTokens": 8192,
+              "pricing": {
+                "inputCostPerMillionMicroUsd": "75000",
+                "outputCostPerMillionMicroUsd": "300000"
+              },
+              "hasConfiguredApiKey": false
+            },
+            {
+              "id": "gpt-4o",
+              "name": "GPT-4o",
+              "provider": "openai",
+              "contextWindow": 128000,
+              "maxOutputTokens": 4096,
+              "pricing": {
+                "inputCostPerMillionMicroUsd": "2500000",
+                "outputCostPerMillionMicroUsd": "10000000"
+              },
+              "hasConfiguredApiKey": false
+            },
+            {
+              "id": "gpt-4o-mini",
+              "name": "GPT-4o Mini",
+              "provider": "openai",
+              "contextWindow": 128000,
+              "maxOutputTokens": 16384,
+              "pricing": {
+                "inputCostPerMillionMicroUsd": "150000",
+                "outputCostPerMillionMicroUsd": "600000"
+              },
+              "hasConfiguredApiKey": false
+            }
+          ],
+          "connections": [
+            {
+              "id": "8b020e40-8a44-4e92-8a96-b8d92cea1174",
+              "workspace_id": null,
+              "kind": "openai_compatible",
+              "name": "AUDIT unsafe URL/no real credential",
+              "base_url": "file:///audit-not-a-network-endpoint",
+              "is_active": true,
+              "updated_at": "2026-10-27T08:05:16.093Z"
+            }
+          ]
+        },
+        "meta": {
+          "requestId": "e3f9d579-360a-4a64-b143-74e7c8a1f623"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/models/verify",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Provider kind is required",
+        "requestId": "21a444f0-4a47-4109-aa5b-f842b6f36c0e",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/conversations/e4eeec78-5456-4560-a898-9d1e3b5c88c5/turns",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Prompt must not be empty",
+        "requestId": "995e54c9-65bd-48fc-a5cd-ee0f3af49d07",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/5f7232bb-a250-4a6b-a02d-373ede716b2c/runs",
+      "status": 200,
+      "data": {
+        "data": {
+          "runs": []
+        },
+        "meta": {
+          "requestId": "27cdd51d-bc2e-4472-88ce-b934e6a04a24"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/572e5d4b-36e0-4a87-a34b-d72fb1d087ba",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Run 572e5d4b-36e0-4a87-a34b-d72fb1d087ba not found",
+        "requestId": "fe6b5022-74dc-46ff-83a6-485d91da223f",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/7824979e-9b78-4c0b-995f-6892445ee9b7/tasks",
+      "status": 200,
+      "data": {
+        "data": {
+          "tasks": []
+        },
+        "meta": {
+          "requestId": "16eb3d37-3031-48a2-94a8-c5864054e53f"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/43eda6f4-9443-4a2e-b0cc-f2f6a28133fc/agents",
+      "status": 200,
+      "data": {
+        "data": {
+          "agents": []
+        },
+        "meta": {
+          "requestId": "8fd66e95-a7d9-4432-b954-144365170a3c"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/638062c4-b0cd-4e42-95a1-6931e0a5a4ce/effects",
+      "status": 200,
+      "data": {
+        "data": {
+          "effects": []
+        },
+        "meta": {
+          "requestId": "64db2cfe-0945-41b3-ad4a-b38c059891d3"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/cb02035c-d8c2-474d-ad21-9f4d97ffd97a/checkpoints",
+      "status": 200,
+      "data": {
+        "data": {
+          "checkpoints": []
+        },
+        "meta": {
+          "requestId": "37a1741c-3a53-4917-b0c9-4344a94cdca1"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/0b4e5dd4-69cc-4e50-b127-a0883ac6ae8c/pause",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Run 0b4e5dd4-69cc-4e50-b127-a0883ac6ae8c not found",
+        "requestId": "9b4159a3-8137-4c41-bc91-52185d01ba28",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/384cddb4-327f-4b68-a02c-a2a3392b499e/resume",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Run 384cddb4-327f-4b68-a02c-a2a3392b499e not found",
+        "requestId": "6e755561-9f95-4ff0-9b4a-ab13cee7d802",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/43cc9fd2-c596-419c-8cbe-5af8dac9b368/cancel",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Run 43cc9fd2-c596-419c-8cbe-5af8dac9b368 not found",
+        "requestId": "93069e6c-3c1a-42b0-84e9-05c553104ea3",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/effects/189f5e0e-b573-4797-bba6-a86c1596863c/reconcile",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Effect 189f5e0e-b573-4797-bba6-a86c1596863c not found",
+        "requestId": "b7895595-a2bd-49aa-94cd-80ca3ed6d4a2",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/6f79ba45-523f-41c9-9e73-62e672723a86/events",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Run 6f79ba45-523f-41c9-9e73-62e672723a86 not found",
+        "requestId": "3adc7917-1035-40f1-91a2-af1f2ddebf39",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/01d1e590-10fe-4a96-9cec-cadea393620a/runs",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Contract revision ID is required",
+        "requestId": "762e6c9d-162c-4daf-a8c6-9930da9ce7ff",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/32780a46-7534-4023-98cb-809f4269b4ae/failures",
+      "status": 200,
+      "data": {
+        "data": {
+          "failures": []
+        },
+        "meta": {
+          "requestId": "de74e5a2-b44b-4447-a315-ccca522bcc85"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/28a63fb5-bec4-4fcc-a882-48de5f90346d/repairs",
+      "status": 200,
+      "data": {
+        "data": {
+          "repairs": []
+        },
+        "meta": {
+          "requestId": "9f30e67d-15cb-452e-9a8c-9e0321e60bcf"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/c5a3aa39-7648-48bb-a98d-bc83435358d7/repairs",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Repair hypothesis undefined not found",
+        "requestId": "ecfdadee-7388-4ee0-8f45-ccc47ce6f36e",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/conversations/d13d8fcd-9df8-4f66-ac24-9e0b1db44167/goals",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Conversation d13d8fcd-9df8-4f66-ac24-9e0b1db44167 not found",
+        "requestId": "91a27fe5-4d9c-41ff-9fc3-e886e1b49f8c",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/44d225fb-83e9-4440-ae5c-cace93f19b4a/goals",
+      "status": 200,
+      "data": {
+        "data": {
+          "goals": []
+        },
+        "meta": {
+          "requestId": "59c41cb6-9f4c-4155-8ecc-da30b9de335b"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/goals/af607106-fb97-444c-abfa-f8e5b0d495df",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal af607106-fb97-444c-abfa-f8e5b0d495df not found",
+        "requestId": "a05c3a22-176f-42f7-98bc-2212efdc7738",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/b936b97f-b2b0-4883-af74-ef1923944f14/intent-analysis",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal b936b97f-b2b0-4883-af74-ef1923944f14 not found",
+        "requestId": "b6202853-c37a-4ddc-94b9-ebc1d4b49e58",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/goals/98b2dc13-a312-4f1d-9097-cf5584f881f9/clarifications",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal 98b2dc13-a312-4f1d-9097-cf5584f881f9 not found",
+        "requestId": "287ebebd-457e-4f2b-b6f3-c4fc104f8125",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/472fec45-9a59-4da8-a70e-6a755c420e58/clarifications",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Question is required",
+        "requestId": "31d625fd-5315-4778-a8c6-1c63b29a1f9e",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/clarifications/5305ac17-57af-4a87-ab3f-6a9bd13d5f08/answers",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Clarification 5305ac17-57af-4a87-ab3f-6a9bd13d5f08 not found",
+        "requestId": "ad019826-cefc-4e50-980a-40139f12fc86",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/ff93f710-c8e2-4b4e-b347-0fbd9e7a0d64/research",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal ff93f710-c8e2-4b4e-b347-0fbd9e7a0d64 not found",
+        "requestId": "feda6bef-73f1-4e70-b6a3-d674d3df9a46",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/goals/6ad7a641-beb1-416b-9d2c-e29e1134da1b/research",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal 6ad7a641-beb1-416b-9d2c-e29e1134da1b not found",
+        "requestId": "c04a8b05-dc3d-4c64-b862-a4aa2026e515",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/1910a2cf-eaf3-4ce7-bb77-f73d758f5bfe/requirement-revisions",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal 1910a2cf-eaf3-4ce7-bb77-f73d758f5bfe not found",
+        "requestId": "b4846db2-2462-4bb0-9fba-629f35e01ba4",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/goals/7a0993ce-f819-46cc-919f-a3f6723ebf17/requirement-revisions",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal 7a0993ce-f819-46cc-919f-a3f6723ebf17 not found",
+        "requestId": "52803530-6867-4acc-9478-8684c8ddff87",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/requirement-revisions/4df52809-cc8b-47bf-ad72-360472c3382a",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Requirement revision 4df52809-cc8b-47bf-ad72-360472c3382a not found",
+        "requestId": "69252182-3c51-4246-8aad-dce34fdffa62",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/goals/3719e27f-1657-4818-add2-d89d62ff455b/decisions",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal 3719e27f-1657-4818-add2-d89d62ff455b not found",
+        "requestId": "27de9367-1d7f-4f1b-acd9-486dd978bb09",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/5590e50c-9d09-44bc-bd0c-d31e99a07199/decisions",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal 5590e50c-9d09-44bc-bd0c-d31e99a07199 not found",
+        "requestId": "510fea6d-048a-4b54-9619-3c30aa0f9fad",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/e87cae66-2afe-4092-b940-2f78eb8db74b/plans",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal e87cae66-2afe-4092-b940-2f78eb8db74b not found",
+        "requestId": "808458da-7775-4bc1-af8a-8ff868f8fcc1",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/goals/d942533e-8f04-475e-8602-cca095d43374/plans",
+      "status": 200,
+      "data": {
+        "data": {
+          "plans": []
+        },
+        "meta": {
+          "requestId": "96edceaa-1503-4365-8de5-fe3538d1ab08"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/plans/61665948-1513-4feb-af0f-5687f76cfeeb/revisions",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Plan 61665948-1513-4feb-af0f-5687f76cfeeb not found",
+        "requestId": "52e9ea51-a24a-4854-88ad-2a6cb225817c",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/plan-revisions/095691b3-eca9-4a0d-982a-374f6939a6c1",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Plan revision 095691b3-eca9-4a0d-982a-374f6939a6c1 not found",
+        "requestId": "cdf67902-86f3-4846-b68a-b59e17743508",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/goals/84a625eb-785f-43ff-815d-95825738d6c7/contracts",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Goal 84a625eb-785f-43ff-815d-95825738d6c7 not found",
+        "requestId": "a299ca5a-ef5e-4350-9891-6373ab819444",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/contracts/5bdb8a66-25a9-4413-a0a5-aa52ffa35872/revisions",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Contract 5bdb8a66-25a9-4413-a0a5-aa52ffa35872 not found",
+        "requestId": "16cabaa2-0119-4e09-bd18-f7f1558f06ad",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/contracts/a74b6d31-15c3-4d5b-bd21-46b6a2516cca/revisions",
+      "status": 200,
+      "data": {
+        "data": {
+          "revisions": []
+        },
+        "meta": {
+          "requestId": "4f5932e1-9d82-449d-871f-9a14609026d5"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/contract-revisions/decc54fc-fe30-43c2-9caa-c01845e5b8ac",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Contract revision decc54fc-fe30-43c2-9caa-c01845e5b8ac not found",
+        "requestId": "926a1b96-2d14-461b-9720-3168cb118a2b",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/contract-revisions/e652ae66-c254-46f8-8b86-ee732fd24e94/diff",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Target comparison revision ID (against) is required",
+        "requestId": "e0a12454-3938-4d56-b28c-1cba71ac308d",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/isolation/diagnostics",
+      "status": 200,
+      "data": {
+        "data": {
+          "diagnostics": {
+            "isWindows": true,
+            "platform": "win32",
+            "arch": "x64",
+            "virtualizationFirmwareEnabled": true,
+            "hypervSupported": true,
+            "hypervEnabled": false,
+            "sandboxFeatureInstalled": false,
+            "status": "prerequisites_missing",
+            "recommendations": [
+              "Windows Sandbox feature is not enabled. Enable via 'Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM'."
+            ]
+          },
+          "latestQualification": {
+            "id": "95dd6a01-5665-40cd-b530-f8246e1baad8",
+            "status": "passed",
+            "digest": "3e8275038d057ed8f0525d632d6ed24b07cc3f539976f79bbda3079f0cd1407c",
+            "createdAt": "2026-10-27T08:00:53.512Z"
+          }
+        },
+        "meta": {
+          "requestId": "ab653f7d-8b39-4ae0-9841-935da10bcb8c"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/isolation/qualify",
+      "status": 201,
+      "data": {
+        "data": {
+          "qualification": {
+            "id": "8b011f8b-f884-4c6f-81f9-2c9fc02522b2",
+            "suiteVersion": "v1",
+            "runnerVersion": "1.0.0",
+            "environment": "win32-x64",
+            "status": "passed",
+            "prerequisites": {
+              "arch": "x64",
+              "status": "prerequisites_missing",
+              "platform": "win32",
+              "isWindows": true,
+              "hypervEnabled": false,
+              "hypervSupported": true,
+              "recommendations": [
+                "Windows Sandbox feature is not enabled. Enable via 'Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM'."
+              ],
+              "sandboxFeatureInstalled": false,
+              "virtualizationFirmwareEnabled": true
+            },
+            "adversarialResults": [
+              {
+                "name": "path_traversal_escape",
+                "passed": true,
+                "evidence": "Rejected with code: PATH_TRAVERSAL_DETECTED",
+                "description": "Path traversal attempts outside workspace are intercepted and rejected"
+              },
+              {
+                "name": "unc_path_escape",
+                "passed": true,
+                "evidence": "Rejected with code: UNC_PATH_FORBIDDEN",
+                "description": "UNC network share paths are strictly forbidden"
+              },
+              {
+                "name": "device_path_escape",
+                "passed": true,
+                "evidence": "Rejected with code: DEVICE_PATH_FORBIDDEN",
+                "description": "Windows device paths and DOS reserved devices are strictly blocked"
+              },
+              {
+                "name": "host_secret_isolation",
+                "passed": true,
+                "evidence": "Canary secret successfully quarantined from guest",
+                "description": "Host environment secrets, database credentials, and API keys are completely stripped"
+              },
+              {
+                "name": "egress_gateway_filtering",
+                "passed": true,
+                "evidence": "Metadata: METADATA_ENDPOINT_FORBIDDEN, Loopback: LOOPBACK_FORBIDDEN, Private: PRIVATE_NETWORK_FORBIDDEN",
+                "description": "Denies metadata (169.254), loopback (127.0.0.1), and RFC 1918 private IPs while permitting allowlisted domains"
+              },
+              {
+                "name": "process_tree_cancellation",
+                "passed": true,
+                "evidence": "Process tree terminated cleanly on timeout",
+                "description": "Wall-clock timeout triggers forceful termination of the owned process tree"
+              },
+              {
+                "name": "artifact_quarantine_integrity",
+                "passed": true,
+                "evidence": "SHA-256: 38f2b4143c2751dc0e10a0212331fa748d7a17e124b6a0113662ec681bb3df7e, ScanPassed: true",
+                "description": "Artifact import/export enforces path containment, SHA-256 digest preservation, and payload scan"
+              }
+            ],
+            "digest": "3e8275038d057ed8f0525d632d6ed24b07cc3f539976f79bbda3079f0cd1407c",
+            "createdAt": "2026-10-27T08:08:04.434Z"
+          }
+        },
+        "meta": {
+          "requestId": "9756adf2-9b92-4469-a216-bcec2461eb3f"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/isolation/validate-path",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "workspaceRoot and targetPath are required",
+        "requestId": "10410efa-bf06-4af0-a3d9-ce8bbb5c17a9",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/isolation/qualifications",
+      "status": 200,
+      "data": {
+        "data": {
+          "qualifications": [
+            {
+              "id": "8b011f8b-f884-4c6f-81f9-2c9fc02522b2",
+              "suiteVersion": "v1",
+              "runnerVersion": "1.0.0",
+              "environment": "win32-x64",
+              "status": "passed",
+              "digest": "3e8275038d057ed8f0525d632d6ed24b07cc3f539976f79bbda3079f0cd1407c",
+              "createdAt": "2026-10-27T08:08:04.434Z"
+            },
+            {
+              "id": "95dd6a01-5665-40cd-b530-f8246e1baad8",
+              "suiteVersion": "v1",
+              "runnerVersion": "1.0.0",
+              "environment": "win32-x64",
+              "status": "passed",
+              "digest": "3e8275038d057ed8f0525d632d6ed24b07cc3f539976f79bbda3079f0cd1407c",
+              "createdAt": "2026-10-27T08:00:53.512Z"
+            },
+            {
+              "id": "5295c717-8afd-4883-9133-1281c7a7f1b1",
+              "suiteVersion": "v1",
+              "runnerVersion": "1.0.0",
+              "environment": "win32-x64",
+              "status": "passed",
+              "digest": "3e8275038d057ed8f0525d632d6ed24b07cc3f539976f79bbda3079f0cd1407c",
+              "createdAt": "2026-10-27T07:57:51.590Z"
+            }
+          ]
+        },
+        "meta": {
+          "requestId": "f81f50bd-d867-4167-a39e-d120b8edc887"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/isolation/qualifications/2f4b1d10-b25e-4e0d-8412-756ac2e3a9e0",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Isolation qualification not found",
+        "requestId": "52d73cfe-0330-4530-9cf8-741d99a7593c",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tools",
+      "status": 200,
+      "data": {
+        "data": {
+          "items": [
+            {
+              "id": "7af06dc9-4b72-4d27-9ef6-31d1c07ba054",
+              "name": "apply_patch",
+              "description": "Apply a unified diff or patch against workspace files within containment boundary",
+              "revision": 1,
+              "inputSchema": {
+                "type": "object",
+                "required": [
+                  "patch"
+                ],
+                "properties": {
+                  "patch": {
+                    "type": "string"
+                  },
+                  "targetPath": {
+                    "type": "string"
+                  },
+                  "baseSnapshotId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "outputSchema": {
+                "type": "object",
+                "required": [
+                  "applied",
+                  "patchDigest"
+                ],
+                "properties": {
+                  "applied": {
+                    "type": "boolean"
+                  },
+                  "patchDigest": {
+                    "type": "string"
+                  },
+                  "filesChanged": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "capabilities": [
+                "workspace_mutation",
+                "patch"
+              ],
+              "risk": "workspace_mutation",
+              "timeoutMs": 20000,
+              "maxOutputBytes": 1048576,
+              "idempotency": false,
+              "cancellation": true,
+              "sandboxProfile": "hardened_local_boundary",
+              "availability": "available"
+            },
+            {
+              "id": "256baaa5-460f-4b3b-bf0d-35fefd901863",
+              "name": "execute_command",
+              "description": "Execute a bounded command inside the isolated boundary with timeout and output limits",
+              "revision": 1,
+              "inputSchema": {
+                "type": "object",
+                "required": [
+                  "command"
+                ],
+                "properties": {
+                  "cwd": {
+                    "type": "string"
+                  },
+                  "args": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "command": {
+                    "type": "string"
+                  },
+                  "timeoutMs": {
+                    "type": "number"
+                  }
+                }
+              },
+              "outputSchema": {
+                "type": "object",
+                "required": [
+                  "exitCode",
+                  "stdout",
+                  "stderr"
+                ],
+                "properties": {
+                  "stderr": {
+                    "type": "string"
+                  },
+                  "stdout": {
+                    "type": "string"
+                  },
+                  "exitCode": {
+                    "type": "number"
+                  },
+                  "timedOut": {
+                    "type": "boolean"
+                  },
+                  "durationMs": {
+                    "type": "number"
+                  }
+                }
+              },
+              "capabilities": [
+                "shell_exec",
+                "bounded_process"
+              ],
+              "risk": "workspace_mutation",
+              "timeoutMs": 30000,
+              "maxOutputBytes": 1048576,
+              "idempotency": false,
+              "cancellation": true,
+              "sandboxProfile": "hardened_local_boundary",
+              "availability": "available"
+            },
+            {
+              "id": "94b52bf3-21aa-4c7f-b2c8-8e35486b84f2",
+              "name": "list_directory",
+              "description": "List directory entries within workspace containment",
+              "revision": 1,
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "default": "."
+                  },
+                  "maxDepth": {
+                    "type": "number",
+                    "default": 2
+                  },
+                  "recursive": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                }
+              },
+              "outputSchema": {
+                "type": "object",
+                "required": [
+                  "entries"
+                ],
+                "properties": {
+                  "entries": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number"
+                        },
+                        "isDirectory": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "capabilities": [
+                "fs_read"
+              ],
+              "risk": "read",
+              "timeoutMs": 10000,
+              "maxOutputBytes": 1048576,
+              "idempotency": true,
+              "cancellation": true,
+              "sandboxProfile": "hardened_local_boundary",
+              "availability": "available"
+            },
+            {
+              "id": "d9ab5aeb-fcaa-4bdc-9f1e-cf35f39ca0a9",
+              "name": "read_file",
+              "description": "Read contents of a file within the workspace boundary with SHA-256 digest computation",
+              "revision": 1,
+              "inputSchema": {
+                "type": "object",
+                "required": [
+                  "path"
+                ],
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "encoding": {
+                    "type": "string",
+                    "default": "utf8"
+                  }
+                }
+              },
+              "outputSchema": {
+                "type": "object",
+                "required": [
+                  "content",
+                  "digest"
+                ],
+                "properties": {
+                  "bytes": {
+                    "type": "number"
+                  },
+                  "digest": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              },
+              "capabilities": [
+                "fs_read"
+              ],
+              "risk": "read",
+              "timeoutMs": 10000,
+              "maxOutputBytes": 2097152,
+              "idempotency": true,
+              "cancellation": true,
+              "sandboxProfile": "hardened_local_boundary",
+              "availability": "available"
+            },
+            {
+              "id": "8759ae27-b900-4a4d-b03e-7766bec8c679",
+              "name": "write_file",
+              "description": "Write contents to a file within the workspace boundary with quarantine scan",
+              "revision": 1,
+              "inputSchema": {
+                "type": "object",
+                "required": [
+                  "path",
+                  "content"
+                ],
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "content": {
+                    "type": "string"
+                  }
+                }
+              },
+              "outputSchema": {
+                "type": "object",
+                "required": [
+                  "path",
+                  "digest"
+                ],
+                "properties": {
+                  "path": {
+                    "type": "string"
+                  },
+                  "digest": {
+                    "type": "string"
+                  },
+                  "bytesWritten": {
+                    "type": "number"
+                  }
+                }
+              },
+              "capabilities": [
+                "fs_write",
+                "workspace_mutation"
+              ],
+              "risk": "workspace_mutation",
+              "timeoutMs": 15000,
+              "maxOutputBytes": 1048576,
+              "idempotency": false,
+              "cancellation": true,
+              "sandboxProfile": "hardened_local_boundary",
+              "availability": "available"
+            }
+          ],
+          "total": 5
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tools/726baae3-5d3c-4d1b-a566-b147a1d19533",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Tool '726baae3-5d3c-4d1b-a566-b147a1d19533' not found",
+        "requestId": "db834c8f-2366-4228-bf82-918ea9b4961f",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/developer-connections",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "Adapter 'undefined' is unsupported. Supported adapters: local_process, windows_sandbox, custom_agent",
+        "requestId": "910fa3e5-fa27-4c64-b564-db6d0602bcbf",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/developer-connections",
+      "status": 200,
+      "data": {
+        "data": {
+          "items": [
+            {
+              "id": "5c368053-1438-481b-a8f3-96d98482ed6d",
+              "workspaceId": "0cd7c169-13f4-444a-a979-215b2fa6a41f",
+              "adapterKind": "local_process",
+              "installRef": "system-node",
+              "authMethod": "local_token",
+              "requestedCapabilities": [
+                "fs_read",
+                "fs_write",
+                "shell_exec",
+                "workspace_mutation"
+              ],
+              "status": "disconnected",
+              "testProfile": "hardened_local_boundary",
+              "lastHeartbeat": "2026-10-27T08:01:22.903Z",
+              "metadata": {
+                "disconnectedAt": "2026-10-27T08:01:24.010Z",
+                "disconnectReason": "End of testing session"
+              },
+              "createdAt": "2026-10-27T08:01:22.752Z",
+              "updatedAt": "2026-10-27T08:01:24.011Z"
+            },
+            {
+              "id": "14362c24-5df5-4160-a527-0c8cf05e3d91",
+              "workspaceId": "2714508c-922e-4ff9-a06b-a529e522db52",
+              "adapterKind": "local_process",
+              "installRef": "system-node",
+              "authMethod": "local_token",
+              "requestedCapabilities": [
+                "fs_read",
+                "fs_write",
+                "shell_exec",
+                "workspace_mutation"
+              ],
+              "status": "disconnected",
+              "testProfile": "hardened_local_boundary",
+              "lastHeartbeat": "2026-10-27T07:58:07.288Z",
+              "metadata": {
+                "disconnectedAt": "2026-10-27T07:58:08.018Z",
+                "disconnectReason": "End of testing session"
+              },
+              "createdAt": "2026-10-27T07:58:07.221Z",
+              "updatedAt": "2026-10-27T07:58:08.026Z"
+            }
+          ],
+          "total": 2
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/developer-connections/0a29f3b3-1cce-4c1f-8b76-50cd6c9a1923",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Developer connection not found",
+        "requestId": "142f64c4-17c4-408e-8a25-36fd3ea51559",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/developer-connections/d436b9c7-9bda-48d5-aac8-9e834b2c465a/qualify",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Developer connection not found",
+        "requestId": "d3eea0c1-ca74-4471-9bb8-74f36eccb4ad",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/developer-connections/7b7767a3-775a-49ba-95bc-5478c58ca63e/disconnect",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Developer connection not found",
+        "requestId": "20ab0e93-7caf-419f-8ce6-e3886692aeb0",
+        "retryable": false
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/developer-connections/ba493c32-5f34-4f0f-aa2c-13e4de85b1cc",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Developer connection not found",
+        "requestId": "7b209ebb-97b3-4d3d-b167-6221a36c74a6",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/tools/invoke",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "toolName is required",
+        "requestId": "8eb117e4-22a5-4253-b593-98b300a8defd",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/tools/receipts/a23aaf98-b159-43dc-8ca6-9e609991da7b",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Tool receipt not found",
+        "requestId": "732fb7f4-63c5-4d9e-abaf-dbecb520754a",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/4ae839b8-c207-4613-adc4-ea74d86f57b6/verifications",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "artifactId is required",
+        "requestId": "feb6bdac-92cb-4a89-8b21-59a30edb631e",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/914480d9-a7b5-4d9d-87a3-9898826fc66e/verifications",
+      "status": 200,
+      "data": {
+        "data": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/verifications/6fbf711a-7414-4bc4-a999-df3b16dab09d",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Verification report 6fbf711a-7414-4bc4-a999-df3b16dab09d not found",
+        "requestId": "ebbfdaa9-1239-4349-95f1-0befb38365b1",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/verifications/evaluations",
+      "status": 201,
+      "data": {
+        "data": {
+          "id": "8f219cc7-9db5-429d-a03e-2348a04ba727",
+          "suite_revision": "v1",
+          "candidate_revision": "v1",
+          "baseline_revision": "v0",
+          "metrics": {},
+          "evidence_ref": null,
+          "created_at": "2026-10-27T08:08:04.645Z"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/9879d143-81df-45ae-94f3-acfd98eaa9f6/memories",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project 9879d143-81df-45ae-94f3-acfd98eaa9f6 not found",
+        "requestId": "5d83b877-510f-4f06-a408-995c9754a708",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/e3524ebd-442a-446a-92ef-2541e31420ca/memories",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project e3524ebd-442a-446a-92ef-2541e31420ca not found",
+        "requestId": "2f5de5d9-f49e-4619-96fe-4810477c1991",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/memories/a7a1d6ff-204b-4163-93be-7a5f51a7946c",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Memory a7a1d6ff-204b-4163-93be-7a5f51a7946c not found",
+        "requestId": "b40b31c6-803f-4d9b-9d65-bd3ae7c23305",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/memories/9137869a-8419-438e-bf64-dad77b8f670d/revisions",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Memory 9137869a-8419-438e-bf64-dad77b8f670d not found",
+        "requestId": "cca9f5a6-2c35-4699-8555-5766f7d00dbb",
+        "retryable": false
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/memories/eae34477-c927-410e-911e-3f51a31e5ac9",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Memory eae34477-c927-410e-911e-3f51a31e5ac9 not found",
+        "requestId": "4cdb200d-4ea8-4006-a506-95c48b06bcc4",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/5e5a515b-1879-418f-9def-a2668ae30b2c/memory-search",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project 5e5a515b-1879-418f-9def-a2668ae30b2c not found",
+        "requestId": "35a8ece5-1591-4e0e-b2c6-2cdb5af61a29",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/aa4c8676-05e0-4a28-8849-52e7c39c5361/knowledge-index",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project aa4c8676-05e0-4a28-8849-52e7c39c5361 not found",
+        "requestId": "ab3b98c5-317c-4e7e-bc6d-7f42e02ce689",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/c955dfd7-f3b1-45c3-879f-f54c3bbff8aa/knowledge/nodes",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project c955dfd7-f3b1-45c3-879f-f54c3bbff8aa not found",
+        "requestId": "89a0858d-9ca5-4709-ae90-07a50479661e",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/8d279e49-ed29-4c0b-b1ed-e4c2fa8875e6/knowledge/edges",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project 8d279e49-ed29-4c0b-b1ed-e4c2fa8875e6 not found",
+        "requestId": "43274c4a-8755-4e7b-9853-a94842e754cb",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/b9ff9ab0-b5e6-4c04-8a83-a0b7266d92f2/schedules/preview",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "expression is required",
+        "requestId": "d8532d0b-0c80-4592-a435-bb3f5dbffdd8",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/845d576c-a5c5-4ae8-930a-d431d34849dd/schedules",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project 845d576c-a5c5-4ae8-930a-d431d34849dd not found",
+        "requestId": "02de26e4-893f-4c8b-9406-bbf2b2ac0f80",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/1eaed01a-f373-49f0-8535-3c976f6d2197/schedules",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project 1eaed01a-f373-49f0-8535-3c976f6d2197 not found",
+        "requestId": "8d135213-763d-4131-8e13-df1d58dfb569",
+        "retryable": false
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/schedules/fdfba34f-b215-45dd-8b51-7b77186aa6e2",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Schedule fdfba34f-b215-45dd-8b51-7b77186aa6e2 not found",
+        "requestId": "c7e2481b-cd41-40ae-98c8-9d00f897ef25",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/schedules/933d1235-e3b0-4312-9333-531e45ae26a9/pause",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Schedule 933d1235-e3b0-4312-9333-531e45ae26a9 not found",
+        "requestId": "e894211b-0223-4842-9eaa-9694b95d5c51",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/schedules/58ea7de0-63cd-4f8b-b5e5-84c8102b5802/resume",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Schedule 58ea7de0-63cd-4f8b-b5e5-84c8102b5802 not found",
+        "requestId": "fb5608a9-9f48-481a-af42-d88528db3647",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/schedules/510b7390-f859-46e9-a17d-7decef81aaa7/occurrences",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Schedule 510b7390-f859-46e9-a17d-7decef81aaa7 not found",
+        "requestId": "8601f58e-71fc-45a9-9434-0ad9d4f7c6eb",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/projects/9d991506-26a6-45d7-8a63-82c339ea4fa8/triggers",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project 9d991506-26a6-45d7-8a63-82c339ea4fa8 not found",
+        "requestId": "e5eb99f6-e59d-43e2-b5f3-8bc8ac4d097b",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/7628c699-0ca8-4199-bdef-5a78ce2529ef/triggers",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project 7628c699-0ca8-4199-bdef-5a78ce2529ef not found",
+        "requestId": "75877883-78d8-47b6-afe1-1eeba09cc1cb",
+        "retryable": false
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/triggers/68adfecd-0876-410d-a1af-cbb4d4e42866",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Trigger 68adfecd-0876-410d-a1af-cbb4d4e42866 not found",
+        "requestId": "8290ab92-0a13-4683-8bab-f64ef1e8076f",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/webhooks/1bad908c-b9a2-4b9f-aba5-5bd54d5f2f9f",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Trigger 1bad908c-b9a2-4b9f-aba5-5bd54d5f2f9f not found",
+        "requestId": "86fceac0-d181-416d-8095-6ce0c511da87",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/projects/7a72333b-eb15-4b8f-bacb-fc228ac95aff/events",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Project 7a72333b-eb15-4b8f-bacb-fc228ac95aff not found",
+        "requestId": "0cf7f8eb-c645-4c55-9c8c-091beb3e967c",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/activity",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": "dbf9fce7-6b6c-4ead-a3c5-70cd1d4e936c",
+            "type": "schedule.created",
+            "projectId": "2811619b-95bf-409f-8a7c-7062018212d8",
+            "runId": null,
+            "safeSummary": "Schedule created for goal: AUDIT harmless scheduled task",
+            "traceId": "cbd0a8b1-f50e-4044-9cd4-903a1323603e",
+            "metadata": {
+              "timezone": "UTC",
+              "recurrence": "every 1s",
+              "scheduleId": "42865075-c4c1-4ec9-8f93-314219adf869"
+            },
+            "createdAt": "2026-10-27T08:08:02.640Z"
+          },
+          {
+            "id": "a4afd28c-188c-4fce-b663-fbb9cf59139e",
+            "type": "browser_qa.executed",
+            "projectId": "2811619b-95bf-409f-8a7c-7062018212d8",
+            "runId": "ec9542e4-5f3a-48d7-aa54-4b456c2effa1",
+            "safeSummary": "Browser QA session passed for URL: http://127.0.0.1:9/audit-does-not-exist (guest profile: guest-profile-16a94769-2)",
+            "traceId": "49464caa-c2b1-4387-8b12-18b757528698",
+            "metadata": {
+              "scenario": "default_smoke",
+              "sessionId": "61facd54-0687-4d2b-a213-fbcb8c585912",
+              "targetUrl": "http://127.0.0.1:9/audit-does-not-exist"
+            },
+            "createdAt": "2026-10-27T08:05:16.013Z"
+          },
+          {
+            "id": "decbf02e-698b-4530-bc80-4b22ed812aeb",
+            "type": "webhook.received",
+            "projectId": "735df840-fcf0-4470-a2dc-31452731faac",
+            "runId": null,
+            "safeSummary": "Inbound webhook received from github (delivery: deliv-unique-001)",
+            "traceId": "86453f88-5c2d-4936-a865-971b29e0e58a",
+            "metadata": {
+              "state": "processed",
+              "triggerId": "b1de90c6-8f46-4393-9970-8a6dcda38af4",
+              "deliveryId": "deliv-unique-001",
+              "payloadDigest": "b84704e92665f16d5858d5c96155bb6a05714bc39aff75f572286109d499958e"
+            },
+            "createdAt": "2026-10-27T08:01:20.399Z"
+          },
+          {
+            "id": "206df6fd-e58e-4409-8493-f87ea7e199aa",
+            "type": "trigger.created",
+            "projectId": "735df840-fcf0-4470-a2dc-31452731faac",
+            "runId": null,
+            "safeSummary": "Trigger created for source github",
+            "traceId": "bca9cf90-6b28-4c54-880d-0092f2ab7d44",
+            "metadata": {
+              "source": "github",
+              "triggerId": "b1de90c6-8f46-4393-9970-8a6dcda38af4"
+            },
+            "createdAt": "2026-10-27T08:01:20.342Z"
+          },
+          {
+            "id": "d9a89431-6fc3-484f-8986-06f9cdb6a312",
+            "type": "occurrence.started",
+            "projectId": "735df840-fcf0-4470-a2dc-31452731faac",
+            "runId": null,
+            "safeSummary": "Scheduled occurrence running for schedule e68e6d2c-eeb6-417c-848d-725dfce4b0af",
+            "traceId": "e26080cd-0a32-44ca-a28d-76ffdc095511",
+            "metadata": {
+              "scheduleId": "e68e6d2c-eeb6-417c-848d-725dfce4b0af",
+              "occurrenceId": "e73e54b4-268f-44b3-8014-69c17570ee85",
+              "scheduledFor": "2026-10-27T07:56:20.265Z"
+            },
+            "createdAt": "2026-10-27T08:01:20.303Z"
+          },
+          {
+            "id": "26c9802b-fc25-4165-bc6a-2e1f2293af0b",
+            "type": "schedule.resumed",
+            "projectId": "735df840-fcf0-4470-a2dc-31452731faac",
+            "runId": null,
+            "safeSummary": "Schedule resumed",
+            "traceId": "ed285aff-9bc4-4a15-9ead-c83f90eff774",
+            "metadata": {
+              "nextFireAt": "2026-10-28T03:00:00.000Z",
+              "scheduleId": "e68e6d2c-eeb6-417c-848d-725dfce4b0af"
+            },
+            "createdAt": "2026-10-27T08:01:20.259Z"
+          },
+          {
+            "id": "8ba80380-a827-428f-8943-186427142b47",
+            "type": "schedule.paused",
+            "projectId": "735df840-fcf0-4470-a2dc-31452731faac",
+            "runId": null,
+            "safeSummary": "Schedule paused: Manual maintenance",
+            "traceId": "b37a2372-b748-44d4-9fd4-03bcd6521983",
+            "metadata": {
+              "reason": "Manual maintenance",
+              "scheduleId": "e68e6d2c-eeb6-417c-848d-725dfce4b0af"
+            },
+            "createdAt": "2026-10-27T08:01:20.224Z"
+          },
+          {
+            "id": "d47fa659-8bd5-4a7e-9e5d-935f3c2666c3",
+            "type": "schedule.created",
+            "projectId": "735df840-fcf0-4470-a2dc-31452731faac",
+            "runId": null,
+            "safeSummary": "Schedule created for goal: Nightly build and test",
+            "traceId": "748ca950-fab7-4cbe-9959-9bd1f738efe0",
+            "metadata": {
+              "timezone": "UTC",
+              "recurrence": "0 2 * * *",
+              "scheduleId": "e68e6d2c-eeb6-417c-848d-725dfce4b0af"
+            },
+            "createdAt": "2026-10-27T08:01:20.140Z"
+          },
+          {
+            "id": "c5a7c01c-dbf4-46fb-8dee-9546e4eb2fbe",
+            "type": "browser_qa.executed",
+            "projectId": "0ccd11d9-215a-446d-8c33-0822a73f16a7",
+            "runId": "9d9ecf8d-a22e-4ad8-81c0-d018799c509f",
+            "safeSummary": "Browser QA session passed for URL: http://127.0.0.1:3000/app (guest profile: guest-profile-2b7c3bb2-3)",
+            "traceId": "a25095ee-47bf-4e14-9531-3a65d8e5d854",
+            "metadata": {
+              "scenario": "smoke_and_dom_integrity",
+              "sessionId": "6b03b84c-7874-4169-b42e-cd3a0fc82fa1",
+              "targetUrl": "http://127.0.0.1:3000/app"
+            },
+            "createdAt": "2026-10-27T08:00:44.685Z"
+          },
+          {
+            "id": "66eec63f-f9ee-4bbb-9ec0-80939de789bd",
+            "type": "deployment.rolled_back",
+            "projectId": "0ccd11d9-215a-446d-8c33-0822a73f16a7",
+            "runId": "9d9ecf8d-a22e-4ad8-81c0-d018799c509f",
+            "safeSummary": "Rollback completed: release rel-rollback-ce1c4183 active (reverted from rel-2670742a-aeb)",
+            "traceId": "97a1a442-e497-4a31-8082-75fe224062e1",
+            "metadata": {
+              "newDeploymentId": "0c3c7f70-4e15-404e-9042-bbbbeb040c1d",
+              "originalDeploymentId": "c8ff00a7-a690-4621-8bd2-af1a890563ae"
+            },
+            "createdAt": "2026-10-27T08:00:44.673Z"
+          },
+          {
+            "id": "b672b20b-9903-4dd3-8793-baecf63b6c1a",
+            "type": "deployment.active",
+            "projectId": "0ccd11d9-215a-446d-8c33-0822a73f16a7",
+            "runId": "9d9ecf8d-a22e-4ad8-81c0-d018799c509f",
+            "safeSummary": "Deployment rel-181e8541-335 is active on target local_process",
+            "traceId": "22248d18-0172-4c8c-a005-db0de94b668a",
+            "metadata": {
+              "targetRef": "local_process",
+              "deploymentId": "eb4eea7e-006e-424c-bbc5-e85207cd6943",
+              "externalReleaseId": "rel-181e8541-335"
+            },
+            "createdAt": "2026-10-27T08:00:44.652Z"
+          },
+          {
+            "id": "9e4133a1-4471-4c16-9baf-1f3d46df5bef",
+            "type": "deployment.preview_created",
+            "projectId": "0ccd11d9-215a-446d-8c33-0822a73f16a7",
+            "runId": "9d9ecf8d-a22e-4ad8-81c0-d018799c509f",
+            "safeSummary": "Deployment preview created for target: local_process",
+            "traceId": "68baa1ad-e732-4212-a603-aeea828fec83",
+            "metadata": {
+              "previewId": "8dc0e802-c589-48da-aebf-d7f361629fd4",
+              "targetRef": "local_process",
+              "inputDigest": "331a5094ef0702f6e2b8150852fabc748b843667b56894d532a032c03a62b3c7"
+            },
+            "createdAt": "2026-10-27T08:00:44.646Z"
+          },
+          {
+            "id": "58983156-0307-47a0-b644-59b4a0956117",
+            "type": "deployment.active",
+            "projectId": "0ccd11d9-215a-446d-8c33-0822a73f16a7",
+            "runId": "9d9ecf8d-a22e-4ad8-81c0-d018799c509f",
+            "safeSummary": "Deployment rel-2670742a-aeb is active on target local_process",
+            "traceId": "d568224b-b0bd-4a84-94be-266290dfb906",
+            "metadata": {
+              "targetRef": "local_process",
+              "deploymentId": "c8ff00a7-a690-4621-8bd2-af1a890563ae",
+              "externalReleaseId": "rel-2670742a-aeb"
+            },
+            "createdAt": "2026-10-27T08:00:44.629Z"
+          },
+          {
+            "id": "b2a7a0fd-b106-4b70-a2f4-7820e866a52d",
+            "type": "deployment.preview_created",
+            "projectId": "0ccd11d9-215a-446d-8c33-0822a73f16a7",
+            "runId": "9d9ecf8d-a22e-4ad8-81c0-d018799c509f",
+            "safeSummary": "Deployment preview created for target: local_process",
+            "traceId": "2dbc496d-3cbb-40d2-9988-38a149b6e2c0",
+            "metadata": {
+              "previewId": "9a4600f1-d6b6-4525-9e76-d90ba3ea4da2",
+              "targetRef": "local_process",
+              "inputDigest": "c6256ba563049346a37204096c9c7b335143eadadc405fd5236fc87c4b99da2f"
+            },
+            "createdAt": "2026-10-27T08:00:44.601Z"
+          },
+          {
+            "id": "c4099c1f-d16b-4047-a2d7-3f5ee422bcd6",
+            "type": "webhook.received",
+            "projectId": "8b4b4c87-8d3a-435e-9fd8-8af4f2ce7b3a",
+            "runId": null,
+            "safeSummary": "Inbound webhook received from github (delivery: deliv-unique-001)",
+            "traceId": "199ad03f-af66-49eb-9bd2-6062b80eb2df",
+            "metadata": {
+              "state": "processed",
+              "triggerId": "d6b13a65-8d74-44e9-9666-6434e35f6879",
+              "deliveryId": "deliv-unique-001",
+              "payloadDigest": "b84704e92665f16d5858d5c96155bb6a05714bc39aff75f572286109d499958e"
+            },
+            "createdAt": "2026-10-27T07:58:06.147Z"
+          },
+          {
+            "id": "7fbe157c-159c-4aee-82cd-2b91c6b9311f",
+            "type": "trigger.created",
+            "projectId": "8b4b4c87-8d3a-435e-9fd8-8af4f2ce7b3a",
+            "runId": null,
+            "safeSummary": "Trigger created for source github",
+            "traceId": "a4d863f6-2ec8-4146-944b-368926ab01fb",
+            "metadata": {
+              "source": "github",
+              "triggerId": "d6b13a65-8d74-44e9-9666-6434e35f6879"
+            },
+            "createdAt": "2026-10-27T07:58:06.123Z"
+          },
+          {
+            "id": "8c811965-92ca-489f-9eae-d7b5b16dbf31",
+            "type": "occurrence.started",
+            "projectId": "8b4b4c87-8d3a-435e-9fd8-8af4f2ce7b3a",
+            "runId": null,
+            "safeSummary": "Scheduled occurrence running for schedule 390eae18-7cbd-4466-a321-5d635de6a491",
+            "traceId": "be704d4a-fadd-4e9d-963f-9704425c13e0",
+            "metadata": {
+              "scheduleId": "390eae18-7cbd-4466-a321-5d635de6a491",
+              "occurrenceId": "12c64fde-05c9-4ccf-b3ae-28d4a6982d52",
+              "scheduledFor": "2026-10-27T07:53:06.093Z"
+            },
+            "createdAt": "2026-10-27T07:58:06.103Z"
+          },
+          {
+            "id": "bacd73d0-9f89-4b07-99e2-ab9d7edfae41",
+            "type": "schedule.resumed",
+            "projectId": "8b4b4c87-8d3a-435e-9fd8-8af4f2ce7b3a",
+            "runId": null,
+            "safeSummary": "Schedule resumed",
+            "traceId": "9948e2ff-de6d-4b29-9a66-fb8b5e96e782",
+            "metadata": {
+              "nextFireAt": "2026-10-28T03:00:00.000Z",
+              "scheduleId": "390eae18-7cbd-4466-a321-5d635de6a491"
+            },
+            "createdAt": "2026-10-27T07:58:06.090Z"
+          },
+          {
+            "id": "cb4c845a-e945-4f31-8f7f-578957610be2",
+            "type": "schedule.paused",
+            "projectId": "8b4b4c87-8d3a-435e-9fd8-8af4f2ce7b3a",
+            "runId": null,
+            "safeSummary": "Schedule paused: Manual maintenance",
+            "traceId": "d6e08270-cc03-43d9-9f6c-14cd50fd0d68",
+            "metadata": {
+              "reason": "Manual maintenance",
+              "scheduleId": "390eae18-7cbd-4466-a321-5d635de6a491"
+            },
+            "createdAt": "2026-10-27T07:58:06.076Z"
+          },
+          {
+            "id": "d7eeb161-59d7-4fdf-840a-0249bef688d4",
+            "type": "schedule.created",
+            "projectId": "8b4b4c87-8d3a-435e-9fd8-8af4f2ce7b3a",
+            "runId": null,
+            "safeSummary": "Schedule created for goal: Nightly build and test",
+            "traceId": "16288840-bec4-4cd6-902d-68d9fbe10b84",
+            "metadata": {
+              "timezone": "UTC",
+              "recurrence": "0 2 * * *",
+              "scheduleId": "390eae18-7cbd-4466-a321-5d635de6a491"
+            },
+            "createdAt": "2026-10-27T07:58:06.045Z"
+          },
+          {
+            "id": "a80af154-34ac-48d6-b5c9-8f2d514e6e69",
+            "type": "browser_qa.executed",
+            "projectId": "55aa50f9-f6c3-4060-b993-bab483304916",
+            "runId": "231adfbb-9265-4e23-91e4-f041915f97c4",
+            "safeSummary": "Browser QA session passed for URL: http://127.0.0.1:3000/app (guest profile: guest-profile-ebaac11c-b)",
+            "traceId": "4d357926-dab7-4249-adba-4c867388486e",
+            "metadata": {
+              "scenario": "smoke_and_dom_integrity",
+              "sessionId": "17c60b92-b4b1-45a6-a04b-16f26b35b33b",
+              "targetUrl": "http://127.0.0.1:3000/app"
+            },
+            "createdAt": "2026-10-27T07:57:43.763Z"
+          },
+          {
+            "id": "6c9cdf4d-071c-42b8-9436-c94b070eadce",
+            "type": "deployment.rolled_back",
+            "projectId": "55aa50f9-f6c3-4060-b993-bab483304916",
+            "runId": "231adfbb-9265-4e23-91e4-f041915f97c4",
+            "safeSummary": "Rollback completed: release rel-rollback-2c28c6c4 active (reverted from rel-522185ab-00a)",
+            "traceId": "451176d1-e4af-47d3-81ab-7c8c44952718",
+            "metadata": {
+              "newDeploymentId": "495178f9-9a9f-4d53-a982-2df9c6830692",
+              "originalDeploymentId": "141a3379-26cd-4e0a-b2dc-c5ed8f71ef82"
+            },
+            "createdAt": "2026-10-27T07:57:43.749Z"
+          },
+          {
+            "id": "335f068a-692d-4563-a52c-e3888a72b50c",
+            "type": "deployment.active",
+            "projectId": "55aa50f9-f6c3-4060-b993-bab483304916",
+            "runId": "231adfbb-9265-4e23-91e4-f041915f97c4",
+            "safeSummary": "Deployment rel-21032947-c33 is active on target local_process",
+            "traceId": "af7d883b-018b-4107-abd3-ec5e837ccafd",
+            "metadata": {
+              "targetRef": "local_process",
+              "deploymentId": "8fb70c06-aeb7-4663-a6eb-1efb6ce52d09",
+              "externalReleaseId": "rel-21032947-c33"
+            },
+            "createdAt": "2026-10-27T07:57:43.720Z"
+          },
+          {
+            "id": "5bd99392-283a-4466-821e-283d461484eb",
+            "type": "deployment.preview_created",
+            "projectId": "55aa50f9-f6c3-4060-b993-bab483304916",
+            "runId": "231adfbb-9265-4e23-91e4-f041915f97c4",
+            "safeSummary": "Deployment preview created for target: local_process",
+            "traceId": "81cb557e-ef63-4a1c-a370-45a235b2eb56",
+            "metadata": {
+              "previewId": "e4ddf781-33b4-417b-a8a4-2e69893d9049",
+              "targetRef": "local_process",
+              "inputDigest": "331a5094ef0702f6e2b8150852fabc748b843667b56894d532a032c03a62b3c7"
+            },
+            "createdAt": "2026-10-27T07:57:43.711Z"
+          },
+          {
+            "id": "5763eb5b-8bee-4238-980c-1eb4c7538cc7",
+            "type": "deployment.active",
+            "projectId": "55aa50f9-f6c3-4060-b993-bab483304916",
+            "runId": "231adfbb-9265-4e23-91e4-f041915f97c4",
+            "safeSummary": "Deployment rel-522185ab-00a is active on target local_process",
+            "traceId": "f7246bb4-526f-48c8-96a7-04525546e0a8",
+            "metadata": {
+              "targetRef": "local_process",
+              "deploymentId": "141a3379-26cd-4e0a-b2dc-c5ed8f71ef82",
+              "externalReleaseId": "rel-522185ab-00a"
+            },
+            "createdAt": "2026-10-27T07:57:43.695Z"
+          },
+          {
+            "id": "93b1ffea-32f8-45f3-975d-d6ccbd18c200",
+            "type": "deployment.preview_created",
+            "projectId": "55aa50f9-f6c3-4060-b993-bab483304916",
+            "runId": "231adfbb-9265-4e23-91e4-f041915f97c4",
+            "safeSummary": "Deployment preview created for target: local_process",
+            "traceId": "c96d0792-aeb0-4e63-86cb-8c6847bf3af8",
+            "metadata": {
+              "previewId": "3109d68b-a0be-4259-b68d-c047ee55dfe2",
+              "targetRef": "local_process",
+              "inputDigest": "c6256ba563049346a37204096c9c7b335143eadadc405fd5236fc87c4b99da2f"
+            },
+            "createdAt": "2026-10-27T07:57:43.666Z"
+          }
+        ],
+        "meta": {
+          "total": 26,
+          "limit": 50,
+          "offset": 0,
+          "requestId": "ed281619-00d6-49d9-8426-ed30a63dbdc5"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/notifications",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": "ca27595f-cde0-4615-9b75-7337390d3e7b",
+            "projectId": "735df840-fcf0-4470-a2dc-31452731faac",
+            "channel": "local",
+            "state": "read",
+            "summary": "Inbound webhook deliv-unique-001 (github) - processed",
+            "artifactIds": [],
+            "metadata": {
+              "state": "processed",
+              "triggerId": "b1de90c6-8f46-4393-9970-8a6dcda38af4",
+              "deliveryId": "deliv-unique-001"
+            },
+            "readAt": "2026-10-27T08:01:20.481Z",
+            "createdAt": "2026-10-27T08:01:20.401Z"
+          },
+          {
+            "id": "f1b74a33-ba36-40e6-b43a-73e4773b3fea",
+            "projectId": "735df840-fcf0-4470-a2dc-31452731faac",
+            "channel": "local",
+            "state": "unread",
+            "summary": "Schedule triggered: Nightly build and test",
+            "artifactIds": [],
+            "metadata": {
+              "scheduleId": "e68e6d2c-eeb6-417c-848d-725dfce4b0af",
+              "occurrenceId": "e73e54b4-268f-44b3-8014-69c17570ee85"
+            },
+            "readAt": null,
+            "createdAt": "2026-10-27T08:01:20.304Z"
+          },
+          {
+            "id": "5b145831-c599-46ff-b7bf-d2d5559ad25c",
+            "projectId": "0ccd11d9-215a-446d-8c33-0822a73f16a7",
+            "channel": "local",
+            "state": "unread",
+            "summary": "Deployment release rel-181e8541-335 is now active and verified healthy",
+            "artifactIds": [
+              "f0b08eec-d4ce-41b6-a34b-d082fefad11c"
+            ],
+            "metadata": {
+              "deploymentId": "eb4eea7e-006e-424c-bbc5-e85207cd6943",
+              "externalReleaseId": "rel-181e8541-335"
+            },
+            "readAt": null,
+            "createdAt": "2026-10-27T08:00:44.653Z"
+          },
+          {
+            "id": "0bd4a663-d937-4385-8aa7-b6cca4a72cf2",
+            "projectId": "0ccd11d9-215a-446d-8c33-0822a73f16a7",
+            "channel": "local",
+            "state": "unread",
+            "summary": "Deployment release rel-2670742a-aeb is now active and verified healthy",
+            "artifactIds": [
+              "f0b08eec-d4ce-41b6-a34b-d082fefad11c"
+            ],
+            "metadata": {
+              "deploymentId": "c8ff00a7-a690-4621-8bd2-af1a890563ae",
+              "externalReleaseId": "rel-2670742a-aeb"
+            },
+            "readAt": null,
+            "createdAt": "2026-10-27T08:00:44.630Z"
+          },
+          {
+            "id": "a6006bf3-2184-4471-8abc-ca9cc9c5ab94",
+            "projectId": "8b4b4c87-8d3a-435e-9fd8-8af4f2ce7b3a",
+            "channel": "local",
+            "state": "read",
+            "summary": "Inbound webhook deliv-unique-001 (github) - processed",
+            "artifactIds": [],
+            "metadata": {
+              "state": "processed",
+              "triggerId": "d6b13a65-8d74-44e9-9666-6434e35f6879",
+              "deliveryId": "deliv-unique-001"
+            },
+            "readAt": "2026-10-27T07:58:06.179Z",
+            "createdAt": "2026-10-27T07:58:06.147Z"
+          },
+          {
+            "id": "19b7e24f-c9a0-4872-9b7c-d546140594cd",
+            "projectId": "8b4b4c87-8d3a-435e-9fd8-8af4f2ce7b3a",
+            "channel": "local",
+            "state": "unread",
+            "summary": "Schedule triggered: Nightly build and test",
+            "artifactIds": [],
+            "metadata": {
+              "scheduleId": "390eae18-7cbd-4466-a321-5d635de6a491",
+              "occurrenceId": "12c64fde-05c9-4ccf-b3ae-28d4a6982d52"
+            },
+            "readAt": null,
+            "createdAt": "2026-10-27T07:58:06.104Z"
+          },
+          {
+            "id": "67273d72-da4d-411d-a56d-18301395fd72",
+            "projectId": "55aa50f9-f6c3-4060-b993-bab483304916",
+            "channel": "local",
+            "state": "unread",
+            "summary": "Deployment release rel-21032947-c33 is now active and verified healthy",
+            "artifactIds": [
+              "fde1461e-d7e6-40de-8d1d-cf1c28952328"
+            ],
+            "metadata": {
+              "deploymentId": "8fb70c06-aeb7-4663-a6eb-1efb6ce52d09",
+              "externalReleaseId": "rel-21032947-c33"
+            },
+            "readAt": null,
+            "createdAt": "2026-10-27T07:57:43.721Z"
+          },
+          {
+            "id": "3ce7eb01-8334-41a3-8ba0-12c76bbb4280",
+            "projectId": "55aa50f9-f6c3-4060-b993-bab483304916",
+            "channel": "local",
+            "state": "unread",
+            "summary": "Deployment release rel-522185ab-00a is now active and verified healthy",
+            "artifactIds": [
+              "fde1461e-d7e6-40de-8d1d-cf1c28952328"
+            ],
+            "metadata": {
+              "deploymentId": "141a3379-26cd-4e0a-b2dc-c5ed8f71ef82",
+              "externalReleaseId": "rel-522185ab-00a"
+            },
+            "readAt": null,
+            "createdAt": "2026-10-27T07:57:43.696Z"
+          }
+        ],
+        "meta": {
+          "total": 8,
+          "limit": 50,
+          "offset": 0,
+          "requestId": "6ae6f4bc-99ac-4936-aaa8-2c361673c1b4"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/notifications/2d687a67-fac5-4292-8944-10c4e2f079eb/read",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Notification 2d687a67-fac5-4292-8944-10c4e2f079eb not found",
+        "requestId": "58c1ce6b-072a-4fd2-8911-7bf54abe3152",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/f5703a43-1a9f-4142-9998-4b4992cc971e/deployment-previews",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "artifactId is required",
+        "requestId": "a04cc8bd-0a7b-437b-bd42-d361ef35bb1c",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/3b9de690-93ea-444d-8a96-651542f82fb2/deployments",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "previewId is required",
+        "requestId": "620e1bf2-6a6b-4377-b686-ef6a38806829",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/deployments/0a97fe58-2b20-4495-a06f-6c51bab03fad",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Deployment 0a97fe58-2b20-4495-a06f-6c51bab03fad not found",
+        "requestId": "682e1a3f-3817-4856-8492-da4baf90402a",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/deployments/e4bc0692-f525-4a5f-9eec-240594a5b79e/rollback-previews",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Deployment e4bc0692-f525-4a5f-9eec-240594a5b79e not found",
+        "requestId": "03115a3e-8017-4bcf-97a9-5610fabd9b2d",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/deployments/843251bb-8be7-4d56-91d8-f4d2d82b12d6/rollback",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Deployment 843251bb-8be7-4d56-91d8-f4d2d82b12d6 not found",
+        "requestId": "c48182d2-aa05-4b71-83cd-22e1f4d73172",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/runs/520d7daa-54da-44c7-bcb1-d9331136db69/browser-qa-sessions",
+      "status": 400,
+      "data": {
+        "type": "about:blank",
+        "title": "Bad Request",
+        "status": 400,
+        "code": "INVALID_INPUT",
+        "detail": "targetUrl is required",
+        "requestId": "c9c40450-2aee-486f-8d95-35429a9c1ed4",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/runs/97949315-c51d-49dd-9182-6c9b8493e757/browser-qa-sessions",
+      "status": 200,
+      "data": {
+        "data": [],
+        "meta": {
+          "requestId": "70c9280b-e799-4935-9fd4-033788ce8909"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/release",
+      "status": 200,
+      "data": {
+        "data": {
+          "id": "78d04205-365a-415d-a32c-df6125662dc4",
+          "version": "1.0.0",
+          "buildNumber": "20261027.1",
+          "channel": "stable",
+          "targetArch": "x64",
+          "releaseDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "releaseNotes": "Sirona V1 Production Release for Windows x64. Full local-first autonomous agent studio.",
+          "provenance": {
+            "signer": "sirona-production-authority",
+            "tree_hash": "sha256-d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592",
+            "reproducible": true
+          },
+          "status": "published",
+          "publishedAt": "2026-10-27T07:56:35.300Z",
+          "updateStatus": "up_to_date",
+          "verified": true
+        },
+        "meta": {
+          "requestId": "d6dc6b7b-e17e-4cd5-8e91-1fa1449c78b5"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/recovery/checkpoints",
+      "status": 201,
+      "data": {
+        "data": {
+          "id": "acdcf44a-010b-44d2-817f-46ae4e1a1d35",
+          "checkpointKind": "full_backup",
+          "storageRef": "file:///backups/sirona-full_backup-1793088485108.snap",
+          "checksum": "278851bba85b20b2cc5948387efe3c174cfc430d3badde2728692bad1a921b27",
+          "sizeBytes": 12583266,
+          "verified": true,
+          "retentionExpiresAt": "2026-11-26T08:08:05.110Z",
+          "metadata": {
+            "arch": "x64",
+            "platform": "win32",
+            "nodeVersion": "v24.19.0",
+            "stateVersion": "1.0.0",
+            "tablesCaptured": [
+              "projects",
+              "conversations",
+              "messages",
+              "artifacts",
+              "goals",
+              "plans",
+              "contracts",
+              "runs",
+              "tools",
+              "verification_reports",
+              "memories",
+              "schedules",
+              "deployments"
+            ]
+          },
+          "createdAt": "2026-10-27T08:08:05.110Z"
+        },
+        "meta": {
+          "requestId": "d6827092-6673-435d-b631-fb8c230e82b1"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/recovery/checkpoints",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": "acdcf44a-010b-44d2-817f-46ae4e1a1d35",
+            "checkpointKind": "full_backup",
+            "storageRef": "file:///backups/sirona-full_backup-1793088485108.snap",
+            "checksum": "278851bba85b20b2cc5948387efe3c174cfc430d3badde2728692bad1a921b27",
+            "sizeBytes": 12583266,
+            "verified": true,
+            "retentionExpiresAt": "2026-11-26T08:08:05.110Z",
+            "metadata": {
+              "arch": "x64",
+              "platform": "win32",
+              "nodeVersion": "v24.19.0",
+              "stateVersion": "1.0.0",
+              "tablesCaptured": [
+                "projects",
+                "conversations",
+                "messages",
+                "artifacts",
+                "goals",
+                "plans",
+                "contracts",
+                "runs",
+                "tools",
+                "verification_reports",
+                "memories",
+                "schedules",
+                "deployments"
+              ]
+            },
+            "createdAt": "2026-10-27T08:08:05.110Z"
+          },
+          {
+            "id": "c708b705-2707-4631-baf2-a25c96b9c83d",
+            "checkpointKind": "full_backup",
+            "storageRef": "file:///backups/sirona-full_backup-1793088316040.snap",
+            "checksum": "44941750de2c6342f40641615a0008b5b6106824cde60b83bdd89a6e3ea15881",
+            "sizeBytes": 12582964,
+            "verified": true,
+            "retentionExpiresAt": "2026-11-26T08:05:16.045Z",
+            "metadata": {
+              "arch": "x64",
+              "audit": true,
+              "platform": "win32",
+              "nodeVersion": "v24.19.0",
+              "stateVersion": "1.0.0",
+              "tablesCaptured": [
+                "projects",
+                "conversations",
+                "messages",
+                "artifacts",
+                "goals",
+                "plans",
+                "contracts",
+                "runs",
+                "tools",
+                "verification_reports",
+                "memories",
+                "schedules",
+                "deployments"
+              ]
+            },
+            "createdAt": "2026-10-27T08:05:16.045Z"
+          },
+          {
+            "id": "c892548c-4343-4f7c-bb6d-6b32366e04a0",
+            "checkpointKind": "full_backup",
+            "storageRef": "file:///backups/sirona-full_backup-1793088074505.snap",
+            "checksum": "d6c52d4d0e3d966b0ae3d8f41f81e5eb43b881d3ef592ca69b869d7702078f44",
+            "sizeBytes": 12583425,
+            "verified": true,
+            "retentionExpiresAt": "2026-11-26T08:01:14.506Z",
+            "metadata": {
+              "arch": "x64",
+              "trigger": "pre_release_qualification",
+              "platform": "win32",
+              "nodeVersion": "v24.19.0",
+              "stateVersion": "1.0.0",
+              "tablesCaptured": [
+                "projects",
+                "conversations",
+                "messages",
+                "artifacts",
+                "goals",
+                "plans",
+                "contracts",
+                "runs",
+                "tools",
+                "verification_reports",
+                "memories",
+                "schedules",
+                "deployments"
+              ]
+            },
+            "createdAt": "2026-10-27T08:01:14.506Z"
+          },
+          {
+            "id": "accba94c-eab3-45fa-9493-1388b2c4ca1e",
+            "checkpointKind": "full_backup",
+            "storageRef": "file:///backups/sirona-full_backup-1793087883093.snap",
+            "checksum": "173baaae8f77fa6d8339576b3c6634b341d54d2c4d63eb73de5200c1f936ae1c",
+            "sizeBytes": 12583062,
+            "verified": true,
+            "retentionExpiresAt": "2026-11-26T07:58:03.094Z",
+            "metadata": {
+              "arch": "x64",
+              "trigger": "pre_release_qualification",
+              "platform": "win32",
+              "nodeVersion": "v24.19.0",
+              "stateVersion": "1.0.0",
+              "tablesCaptured": [
+                "projects",
+                "conversations",
+                "messages",
+                "artifacts",
+                "goals",
+                "plans",
+                "contracts",
+                "runs",
+                "tools",
+                "verification_reports",
+                "memories",
+                "schedules",
+                "deployments"
+              ]
+            },
+            "createdAt": "2026-10-27T07:58:03.094Z"
+          }
+        ],
+        "meta": {
+          "requestId": "29eb0548-0e09-4c21-b67c-ddcfdcd19797"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/recovery/checkpoints/e7f08a65-5089-4885-948d-67c9d1a0fde6",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Recovery checkpoint e7f08a65-5089-4885-948d-67c9d1a0fde6 not found",
+        "requestId": "2de12f38-ae7c-404e-be5c-30f123bcf780",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/recovery/checkpoints/e9bae4c6-bbd6-43ed-81ef-121ac5efd777/rehearsal",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Recovery checkpoint e9bae4c6-bbd6-43ed-81ef-121ac5efd777 not found",
+        "requestId": "f2a42543-2ca0-4148-aa6e-3f3b99e328c7",
+        "retryable": false
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/recovery/rehearsals/8fa1b307-993d-41d0-b38d-da5b7a94e29f",
+      "status": 404,
+      "data": {
+        "type": "about:blank",
+        "title": "Not Found",
+        "status": 404,
+        "code": "NOT_FOUND",
+        "detail": "Recovery rehearsal 8fa1b307-993d-41d0-b38d-da5b7a94e29f not found",
+        "requestId": "4db78cf7-1b05-4385-94d0-9e4bc6287a18",
+        "retryable": false
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/system/maintenance/purge",
+      "status": 200,
+      "data": {
+        "data": {
+          "id": "564e9752-bd81-4b9b-83f8-d10e86cc71b1",
+          "jobKind": "dry_run_purge",
+          "purgedCount": 0,
+          "freedBytes": 0,
+          "durationMs": 1,
+          "status": "completed",
+          "executedAt": "2026-10-27T08:08:05.182Z"
+        },
+        "meta": {
+          "requestId": "01034e1c-2543-453d-bf78-f63ec8bb0a11"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/system/diagnostics",
+      "status": 200,
+      "data": {
+        "data": {
+          "status": "healthy",
+          "platform": {
+            "os": "win32",
+            "arch": "x64",
+            "nodeVersion": "v24.19.0",
+            "uptimeSeconds": 180
+          },
+          "process": {
+            "rssMb": 53,
+            "heapUsedMb": 36,
+            "heapTotalMb": 43
+          },
+          "storage": {
+            "databaseSizeBytes": 14440115,
+            "databaseSizeMb": 14,
+            "checkpointsCount": 4,
+            "appliedMigrations": 17
+          },
+          "quotas": {
+            "max_storage_mb": {
+              "value": 10240,
+              "unit": "megabytes"
+            },
+            "retention_days": {
+              "value": 30,
+              "unit": "days"
+            },
+            "max_checkpoints": {
+              "value": 50,
+              "unit": "count"
+            }
+          },
+          "security": {
+            "zeroSecretDisclosure": true,
+            "hostSecretsQuarantined": true,
+            "credentialsEncrypted": true
+          },
+          "timestamp": "2026-10-27T08:08:05.697Z"
+        },
+        "meta": {
+          "requestId": "672e3389-59c0-4a57-b3a1-d5a1a79608ce"
+        }
+      }
+    },
+    {
+      "sseError": "TimeoutError",
+      "firstChunk": ""
+    }
+  ],
+  "contractRevisionId": "e0118019-d86b-457f-a88d-f83a6309adec",
+  "digest": "d39546d170d2f2be109c45bd003a1423c219ee257c4989b76768f4388626b4f2",
+  "startedId": "a173e0e5-5f76-4787-becf-c9a3275e75bd",
+  "clarificationId": "a4def983-a9f2-4a24-aaf6-0d8453850d15"
+}

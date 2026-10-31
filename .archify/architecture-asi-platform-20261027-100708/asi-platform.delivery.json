@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "d291f5b9-6ea4-4267-b244-d4258c63483e",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-platform-20261027-100708\\candidate.json",
+  "output": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-platform-20261027-100708\\asi-platform.html",
+  "specification": {
+    "sha256": "16c739b0617b3cffcec969defa1eea5b9852bcbb038097ed334d4d049af90779",
+    "bytes": 4516
+  },
+  "artifact": {
+    "sha256": "5b1cf4713a5ff84863737b3f31706145bb55db13ae6e6b2267da8497b9b83c43",
+    "bytes": 768860
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "version": "p6.1",
+  "platform": "linux/amd64",
+  "alpine": "3.24",
+  "roots": [
+    "git=2.54.0-r0",
+    "ripgrep=15.1.0-r0"
+  ],
+  "packages": [
+    {
+      "name": "brotli-libs",
+      "version": "1.2.1-r0",
+      "license": "MIT",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/brotli-libs-1.2.1-r0.apk",
+      "filename": "brotli-libs-1.2.1-r0.apk",
+      "sha256": "62a7e37e43bbfc1f8525a00ad2125fd5897135dc93b849733884cb78ffd8e26c",
+      "indexChecksum": "Q19ILQ4/bsNv1JEDWEcsa0i+Y4hYQ=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1"
+      ]
+    },
+    {
+      "name": "c-ares",
+      "version": "1.34.9-r0",
+      "license": "MIT",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/c-ares-1.34.9-r0.apk",
+      "filename": "c-ares-1.34.9-r0.apk",
+      "sha256": "3539a3e11c1ef1516117d8179a546ac882086e94e0d78ad51d687b3fa2b3b5f2",
+      "indexChecksum": "Q17RXrqEwqOyT57+GUGh3XDItYJdI=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1"
+      ]
+    },
+    {
+      "name": "ca-certificates-bundle",
+      "version": "20261020-r0",
+      "license": "MPL-2.0 AND MIT",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/ca-certificates-bundle-20261020-r0.apk",
+      "filename": "ca-certificates-bundle-20261020-r0.apk",
+      "sha256": "bb008f6d214b6af7576324659856fb63dc8dcb4373f8345ff706388696f1254d",
+      "indexChecksum": "Q1fG5jX4aq+0bLOwFdhQWzpfYRVr0=",
+      "dependencies": []
+    },
+    {
+      "name": "git",
+      "version": "2.54.0-r0",
+      "license": "GPL-2.0-only",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/git-2.54.0-r0.apk",
+      "filename": "git-2.54.0-r0.apk",
+      "sha256": "5a2c6782774d2e891fc2fc3fdc50c3c2743b8eb2dc7cda69b6b723af2eedcf78",
+      "indexChecksum": "Q1KlCtqvgihl9rC6XaaIME3EjkW8c=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1",
+        "so:libcurl.so.4",
+        "so:libexpat.so.1",
+        "so:libpcre2-8.so.0",
+        "so:libz.so.1"
+      ]
+    },
+    {
+      "name": "libcrypto3",
+      "version": "3.5.9-r0",
+      "license": "Apache-2.0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libcrypto3-3.5.9-r0.apk",
+      "filename": "libcrypto3-3.5.9-r0.apk",
+      "sha256": "6632d758d8f5e9ea3b650fe966f23bbf9a202f8b8dceecac93da135dec5e3689",
+      "indexChecksum": "Q1HA3ulzTPIvyXzdGBkTu9cQ5t+wg=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1"
+      ]
+    },
+    {
+      "name": "libcurl",
+      "version": "8.23.0-r0",
+      "license": "curl",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libcurl-8.23.0-r0.apk",
+      "filename": "libcurl-8.23.0-r0.apk",
+      "sha256": "1f70ca404818805a6465b615bbfe84ef861488a963d7e630108ebd7fbaa51665",
+      "indexChecksum": "Q1etqr/7fR+stc096aUitDvGM3O9Q=",
+      "dependencies": [
+        "ca-certificates-bundle",
+        "so:libbrotlidec.so.1",
+        "so:libc.musl-x86_64.so.1",
+        "so:libcares.so.2",
+        "so:libcrypto.so.3",
+        "so:libidn2.so.0",
+        "so:libnghttp2.so.14",
+        "so:libpsl.so.5",
+        "so:libssl.so.3",
+        "so:libz.so.1",
+        "so:libzstd.so.1"
+      ]
+    },
+    {
+      "name": "libexpat",
+      "version": "2.9.0-r0",
+      "license": "MIT",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libexpat-2.9.0-r0.apk",
+      "filename": "libexpat-2.9.0-r0.apk",
+      "sha256": "32b127f31e0a919110a18a7f0bb3780d8fb66ba4d8d61b2d301d633f0e319d0e",
+      "indexChecksum": "Q1tugvqnkTpj2ncbvdqmrTiEIEf3g=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1"
+      ]
+    },
+    {
+      "name": "libgcc",
+      "version": "15.2.0-r5",
+      "license": "GPL-2.0-or-later AND LGPL-2.1-or-later",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libgcc-15.2.0-r5.apk",
+      "filename": "libgcc-15.2.0-r5.apk",
+      "sha256": "393dcd32629f06d7d85409c272d142d0c082772d10b87ef55ee82f47de3be637",
+      "indexChecksum": "Q1N5wVbFPgzBQOh8ecCj3SK27lFVI=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1"
+      ]
+    },
+    {
+      "name": "libidn2",
+      "version": "2.3.8-r0",
+      "license": "GPL-2.0-or-later OR LGPL-3.0-or-later",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libidn2-2.3.8-r0.apk",
+      "filename": "libidn2-2.3.8-r0.apk",
+      "sha256": "7d038ac558dde464964b033ce5126dd2eaf84cc414dc15e77c5424a321d0ebee",
+      "indexChecksum": "Q1WADRTOieFhSPTMwt90I1znrt+AA=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1",
+        "so:libunistring.so.5"
+      ]
+    },
+    {
+      "name": "libpsl",
+      "version": "0.21.5-r3",
+      "license": "MIT",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libpsl-0.21.5-r3.apk",
+      "filename": "libpsl-0.21.5-r3.apk",
+      "sha256": "ec665a344b6e887f00f0a47015cc732c3a281b69e84641dc8662ea234fde6cdb",
+      "indexChecksum": "Q1pVHd1dbLORPhofR7AvIa4Gi16Qo=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1",
+        "so:libidn2.so.0",
+        "so:libunistring.so.5"
+      ]
+    },
+    {
+      "name": "libssl3",
+      "version": "3.5.9-r0",
+      "license": "Apache-2.0",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libssl3-3.5.9-r0.apk",
+      "filename": "libssl3-3.5.9-r0.apk",
+      "sha256": "05e3393fb95aa5751ca2f9d242f659f6cff82c1cc7767cc2df4a086f7ad01877",
+      "indexChecksum": "Q1IMTJDqnSCp3ToE3q3yxsT2QjNkM=",
+      "dependencies": [
+        "libcrypto3=3.5.9-r0",
+        "so:libc.musl-x86_64.so.1",
+        "so:libcrypto.so.3"
+      ]
+    },
+    {
+      "name": "libunistring",
+      "version": "1.4.2-r0",
+      "license": "GPL-2.0-or-later OR LGPL-3.0-or-later",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/libunistring-1.4.2-r0.apk",
+      "filename": "libunistring-1.4.2-r0.apk",
+      "sha256": "3aa6030e603e34d96192742f327c0509f409c6769ce2e7b1463685dede38d714",
+      "indexChecksum": "Q19QnIAdBw+OqfdADVCTyIj/H+4C4=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1"
+      ]
+    },
+    {
+      "name": "musl",
+      "version": "1.2.6-r3",
+      "license": "MIT",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/musl-1.2.6-r3.apk",
+      "filename": "musl-1.2.6-r3.apk",
+      "sha256": "e142255d0fa397f14318996bc10378093dcc069dc3dd1b6818c8f28a789c21da",
+      "indexChecksum": "Q1dw6DBNlY3O2Y12mX356Podtcoy8=",
+      "dependencies": []
+    },
+    {
+      "name": "nghttp2-libs",
+      "version": "1.70.0-r0",
+      "license": "MIT",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/nghttp2-libs-1.70.0-r0.apk",
+      "filename": "nghttp2-libs-1.70.0-r0.apk",
+      "sha256": "f0c4014eb2f10308dcdfd84cd49c121673c7b78cb8182b6e7a1388d8ae112a3b",
+      "indexChecksum": "Q1Y70xm5rxw9PHMMlrBKiJlkaW82c=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1"
+      ]
+    },
+    {
+      "name": "pcre2",
+      "version": "10.49-r0",
+      "license": "BSD-3-Clause",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/pcre2-10.49-r0.apk",
+      "filename": "pcre2-10.49-r0.apk",
+      "sha256": "2919897914820f42a17a8d7d37df310d2dfad1c82ebe5f539cc5c765f916752a",
+      "indexChecksum": "Q17JkrALr3G7od2eIXlhP5IzrzXI0=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1"
+      ]
+    },
+    {
+      "name": "ripgrep",
+      "version": "15.1.0-r0",
+      "license": "MIT OR Unlicense",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/community/x86_64/ripgrep-15.1.0-r0.apk",
+      "filename": "ripgrep-15.1.0-r0.apk",
+      "sha256": "055b1973a5f2face005d167d874eef8a534d4b1edb20ce601e46cc253016b051",
+      "indexChecksum": "Q1R4iCCbCufx311Th0TeNT+nCc3S8=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1",
+        "so:libgcc_s.so.1",
+        "so:libpcre2-8.so.0"
+      ]
+    },
+    {
+      "name": "zlib",
+      "version": "1.3.2-r1",
+      "license": "Zlib",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/zlib-1.3.2-r1.apk",
+      "filename": "zlib-1.3.2-r1.apk",
+      "sha256": "63aeea03c15a2f9018f81805cfc8aa926bdf5cd68921f22149c2fbb5d0ee9f47",
+      "indexChecksum": "Q1T1JcjMIE+EuLTKQNs744mVjwVsY=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1"
+      ]
+    },
+    {
+      "name": "zstd-libs",
+      "version": "1.5.7-r2",
+      "license": "BSD-3-Clause OR GPL-2.0-or-later",
+      "url": "https://dl-cdn.alpinelinux.org/alpine/v3.24/main/x86_64/zstd-libs-1.5.7-r2.apk",
+      "filename": "zstd-libs-1.5.7-r2.apk",
+      "sha256": "23c6065b0049b2406441564bcf0032515a43f78e80d76fcb85535a3803ef5d4e",
+      "indexChecksum": "Q1lWnOOpfEEJ6OU93enz4b0nJhNUA=",
+      "dependencies": [
+        "so:libc.musl-x86_64.so.1"
+      ]
+    }
+  ]
+}

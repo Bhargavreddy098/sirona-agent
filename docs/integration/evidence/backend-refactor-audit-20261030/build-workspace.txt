@@ -1,0 +1,4 @@
+
+> sirona-backend@1.0.0 build:workspace
+> tsc -p tsconfig.workspace.json
+

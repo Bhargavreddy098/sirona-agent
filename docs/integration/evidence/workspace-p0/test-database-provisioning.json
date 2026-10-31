@@ -1,0 +1,38 @@
+{
+  "startedAt": "2026-10-28T14:56:14.241Z",
+  "target": "sirona_workspace_p0_test_20261028",
+  "workingDatabaseUsedForTests": false,
+  "approval": "Owner: Yes proceed following exact named P0 disposable-target and 001–021 approval request",
+  "status": "passed",
+  "created": true,
+  "migrations": [
+    "001_initial_schema.sql",
+    "002_vector_extension.sql",
+    "003_identity_sessions.sql",
+    "004_project_content_artifacts.sql",
+    "005_governance_leases_approvals.sql",
+    "006_provider_models_inference.sql",
+    "007_durable_execution_tasks_effects.sql",
+    "008_intent_research_requirements.sql",
+    "009_planning_contracts.sql",
+    "010_windows_isolation_qualification.sql",
+    "011_tool_runtime_coding_backend.sql",
+    "012_verification_engine.sql",
+    "013_killer_workflow_bounded_repair.sql",
+    "014_memory_project_intelligence.sql",
+    "015_schedules_signed_events.sql",
+    "016_browser_qa_deployment_adapter.sql",
+    "017_windows_v1_release_recovery.sql",
+    "018_runtime_recovery_execution.sql",
+    "019_conversation_turn_states.sql",
+    "020_model_connection_link.sql",
+    "021_standalone_conversations.sql"
+  ],
+  "tests": {
+    "suite": "standaloneChat.test.js",
+    "passed": 6,
+    "failed": 0,
+    "scope": "Real HTTP + PostgreSQL auth/CSRF/ownership/standalone/project separation/leases/failed upstream retry; no mock success or real provider inference claim"
+  },
+  "completedAt": "2026-10-28T14:56:28.404Z"
+}

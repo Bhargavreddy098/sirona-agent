@@ -1,0 +1,101 @@
+TAP version 13
+# Subtest: P6 actual WASM parser finds JS/TS/TSX definitions/imports and fails closed on unqualified SQL
+ok 1 - P6 actual WASM parser finds JS/TS/TSX definitions/imports and fails closed on unqualified SQL
+  ---
+  duration_ms: 2517.5006
+  type: 'test'
+  ...
+# Subtest: P6 snapshot capture actually invalidates after a source edit; watcher shutdown and revocation fail closed
+ok 2 - P6 snapshot capture actually invalidates after a source edit; watcher shutdown and revocation fail closed
+  ---
+  duration_ms: 161.6326
+  type: 'test'
+  ...
+# Subtest: P6 real PostgreSQL source context is contract-bound, source-fresh, private and revocable
+    # Subtest: real isolated fixture and Windows root registration
+    ok 1 - real isolated fixture and Windows root registration
+      ---
+      duration_ms: 9848.9338
+      type: 'test'
+      ...
+    # Subtest: source freshness, immutable replay, scope and revocation
+    ok 2 - source freshness, immutable replay, scope and revocation
+      ---
+      duration_ms: 887.8764
+      type: 'test'
+      ...
+    1..2
+ok 3 - P6 real PostgreSQL source context is contract-bound, source-fresh, private and revocable
+  ---
+  duration_ms: 10915.6956
+  type: 'test'
+  ...
+# fixture/root: 9849ms
+# initial assembly: 10275ms
+# initial validation: 10292ms
+# stable replay: 10318ms
+# stale rejection: 10352ms
+# new operation: 10720ms
+# Subtest: P6 Git is restricted to read operations with literal paths, hooks/helpers/network disabled
+ok 4 - P6 Git is restricted to read operations with literal paths, hooks/helpers/network disabled
+  ---
+  duration_ms: 6.9402
+  type: 'test'
+  ...
+# Subtest: P6 ripgrep arguments treat query literally and bound validated search results
+ok 5 - P6 ripgrep arguments treat query literally and bound validated search results
+  ---
+  duration_ms: 1.4246
+  type: 'test'
+  ...
+# Subtest: P6 real MCP SDK discovers exact schema and calls through bounded byte transport
+ok 6 - P6 real MCP SDK discovers exact schema and calls through bounded byte transport
+  ---
+  duration_ms: 83.8111
+  type: 'test'
+  ...
+# Subtest: P6 SDK rejects schema drift and does not call the tool
+ok 7 - P6 SDK rejects schema drift and does not call the tool
+  ---
+  duration_ms: 14.604
+  type: 'test'
+  ...
+# Subtest: P6 validates nested arguments and rechecks authorization before SDK dispatch
+ok 8 - P6 validates nested arguments and rechecks authorization before SDK dispatch
+  ---
+  duration_ms: 33.0677
+  type: 'test'
+  ...
+# Subtest: P6 protocol limits reject invalid data and terminate the owned channel
+ok 9 - P6 protocol limits reject invalid data and terminate the owned channel
+  ---
+  duration_ms: 1.0032
+  type: 'test'
+  ...
+# Subtest: P6 idle protocol revocation terminates the owned channel once and rejects later writes
+ok 10 - P6 idle protocol revocation terminates the owned channel once and rejects later writes
+  ---
+  duration_ms: 1008.4363
+  type: 'test'
+  ...
+# Subtest: P6 canonical HTTP context tool persists a real scoped receipt, deduplicates and denies revoked cached source
+ok 11 - P6 canonical HTTP context tool persists a real scoped receipt, deduplicates and denies revoked cached source
+  ---
+  duration_ms: 5173.5058
+  type: 'test'
+  ...
+# Subtest: P6 real task/source bundle reaches the actual provider SDK transport and replays without a duplicate call
+ok 12 - P6 real task/source bundle reaches the actual provider SDK transport and replays without a duplicate call
+  ---
+  duration_ms: 4608.255
+  type: 'test'
+  ...
+1..12
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 35283.4411

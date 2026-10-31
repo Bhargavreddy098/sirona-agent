@@ -1,0 +1,98 @@
+{
+  "verifiedAt": "2026-10-29T02:09:15.951Z",
+  "status": "scoped_phase_2_acceptance_passed",
+  "productionRollout": "not_authorized_or_applied",
+  "databaseMigrationAppliedThisPass": false,
+  "newDependencies": [],
+  "workspaceTests": {
+    "passed": 27,
+    "failed": 0,
+    "phase2": 10,
+    "phase1": 17,
+    "evidence": "completion-integration-tests.txt",
+    "vault": "explicit test double; actual OS proof is separate"
+  },
+  "regressions": {
+    "passed": 72,
+    "failed": 0,
+    "evidence": "completion-regression-tests.txt"
+  },
+  "realDesktop": {
+    "passed": 12,
+    "evidence": "real-desktop-e2e.json",
+    "actualProvider": "Google authenticated models endpoint; no inference claim"
+  },
+  "strictBackendTypes": "pass",
+  "electronTypes": "pass",
+  "scopedLint": "pass",
+  "syntax": {
+    "roots": 165,
+    "failed": 0
+  },
+  "frontend": {
+    "check": "pass",
+    "lint": "pass",
+    "build": "pass",
+    "sseTests": 5,
+    "existingBundleAdvisory": "681 KB",
+    "rendererFilesVerified": 15,
+    "rendererChanges": []
+  },
+  "desktopUnitTests": 2,
+  "migration023Sha256": "867db99fbb8b4940b15f23dd6e2698d1c946aa6bd7509793465f63d0ce3aaebd",
+  "nextPhase": "P3 blocked on inspected Home-edition host and separate approval",
+  "sourceFiles": [
+    {
+      "path": "backend/services/secretStore.js",
+      "sha256": "973b42fb42f9493440b432e6581a1effde4eb791d1bf3c1d72544ccde69b3464"
+    },
+    {
+      "path": "backend/services/providerService.js",
+      "sha256": "a9bad567b8ddf407270c234f857d9455061b08cd934526dca4cf3653958d2f60"
+    },
+    {
+      "path": "backend/src/providers/credentialResolver.ts",
+      "sha256": "068fc9a63ef93af2206003cda612cd245f8be2eb5e33143e43743b240f7d7668"
+    },
+    {
+      "path": "backend/routes/v1/providers.routes.js",
+      "sha256": "747deb1c78797fc40e8987d24a2bcb7a428835b390a59e775ed08c8c881afb4f"
+    },
+    {
+      "path": "backend/tests/credentialMigration.test.ts",
+      "sha256": "290d844e683befa6fc3b760ee471e6af362b854faa0c4ba19383b10bb937c7e9"
+    },
+    {
+      "path": "frontend/sirona-next/electron/main.cjs",
+      "sha256": "48ea49f1ae82d455db49987a1a6b29ddc73de6f60e558b816dd9012e3e70382c"
+    },
+    {
+      "path": "frontend/sirona-next/electron/security/credentialBroker.ts",
+      "sha256": "4343e54e6f5d8e70659d9f5712b036fd83baac6d7c671325b210eade9d2e4c7a"
+    },
+    {
+      "path": "frontend/sirona-next/package.json",
+      "sha256": "1a464025114108fd7fb7cbc76b076b831e0a5e7c1ae8df4901ed911007c93598"
+    },
+    {
+      "path": "frontend/sirona-next/tsconfig.electron.json",
+      "sha256": "ceba9ba938f72d7db96bfb63148d4bef35847b75e6569c5e1028c9af6584363b"
+    },
+    {
+      "path": "frontend/sirona-next/tests/desktop-credentials-e2e.mjs",
+      "sha256": "b695e2f267cc98dc84dffecfb95dcf3ef0f0d6e73a39fa7551121b6f1136b5dd"
+    },
+    {
+      "path": "frontend/sirona-next/tests/credential-app.cjs",
+      "sha256": "d6e20f88e834f7a8a7fd0166594387dbd1dea9172181ec7c045d915b049bcffd"
+    },
+    {
+      "path": "frontend/sirona-next/tests/credential-identity.ps1",
+      "sha256": "582d006d766737231c6c1b23885fa594eb5ed9a6fa3bb1dd0f8164d775ca9e02"
+    },
+    {
+      "path": "backend/migrations/023_provider_credential_references.sql",
+      "sha256": "867db99fbb8b4940b15f23dd6e2698d1c946aa6bd7509793465f63d0ce3aaebd"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-10-30T17:39:26.033Z",
+  "node": "v24.19.0",
+  "results": [
+    {
+      "command": "npm --prefix backend run check",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "npm --prefix backend run check:strict",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "npm --prefix backend run check:modules",
+      "exitCode": 1,
+      "error": null
+    },
+    {
+      "command": "npm --prefix backend run check:workspace",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "npm --prefix backend run build:workspace",
+      "exitCode": 0,
+      "error": null
+    },
+    {
+      "command": "npm --prefix backend run test:unit",
+      "exitCode": 1,
+      "error": null
+    }
+  ],
+  "notRun": [
+    {
+      "command": "npm test / npm run test:workspace / npm run verify / test:p5:free / test:p6:free",
+      "reason": "Current config/db.js selects SQLite and ignores PostgreSQL test-target configuration. Database-mutating or paid-provider suites are blocked until canonical owner and isolation guards are restored."
+    }
+  ],
+  "productionStarted": false,
+  "migrationsApplied": 0,
+  "paidInference": 0,
+  "databaseOwnerConflict": "Current SQLite substitution invalidates the previously qualified PostgreSQL baseline. Unit test attempt failed with ERR_SQLITE_ERROR unable to open database file; no successful PostgreSQL isolation/transaction/data-preservation proof is claimed."
+}

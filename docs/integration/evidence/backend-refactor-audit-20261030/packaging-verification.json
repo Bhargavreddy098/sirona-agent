@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-10-30T17:45:32.881Z",
+  "command": "node --test --test-concurrency=1 --test-timeout=45000 backend/tests/packageBoundary.test.js",
+  "exitCode": 0,
+  "error": null,
+  "dockerImageBuilt": false,
+  "dockerContextRuntimeVerified": false,
+  "databaseTestRun": false,
+  "files": [
+    {
+      "file": ".gitignore",
+      "sha256": "d98ba271b56119b99bf58147415d9a95635d36583c61e2949f7e053ef0b05e85"
+    },
+    {
+      "file": "backend/.gitignore",
+      "sha256": "ab6831b7bbc855245989e8c54050527bb42cea5135870a2542507d51be3083fd"
+    },
+    {
+      "file": "backend/.dockerignore",
+      "sha256": "8459df68d061c565976873b62897d1c6c6ca05cc92d83b5b06e8918279e5606c"
+    },
+    {
+      "file": "backend/.npmignore",
+      "sha256": "90b67a95c3073aa9eb6f6f5047e87d29396671a21730e83ac5e086538166218c"
+    },
+    {
+      "file": "backend/scripts/checkPackageBoundary.mjs",
+      "sha256": "53eb7e3523e0d5d488fc1bc3ed2c22d6a283ea405f3418bc4c5c533f0a184328"
+    },
+    {
+      "file": "backend/tests/packageBoundary.test.js",
+      "sha256": "675830263219e30d885efd34eeebd57f412dd938a4298cf8ec6aecda9c4346fc"
+    }
+  ]
+}

@@ -1,0 +1,1010 @@
+[
+  {
+    "path": "package.json",
+    "sha256": "F938D2F57760239C48264F59C8542FADD21CA54CA280A95CDFB3A3BE1D15FC2C"
+  },
+  {
+    "path": "AGENTS.md",
+    "sha256": "0D035C1C94A760E00B3FB6042E1D5A8B58B0D98EDAECEDC41727F5788FE3453F"
+  },
+  {
+    "path": "tooling/sirona\\package.json",
+    "sha256": "5C59E2322FE166CD82051EFD01DCD5954FB71B763C7825EED7451FE3EE3F25D4"
+  },
+  {
+    "path": "tooling/sirona\\tsconfig.json",
+    "sha256": "9E9AF861D817EB5C6A1C54C5093427884CB063A9F6A35E4E63733E31DCCA97DB"
+  },
+  {
+    "path": "tooling/sirona\\tests\\tooling.test.mjs",
+    "sha256": "1804EFC9A6C8F2AF640401D6CF05024FD282ADB134CE237A77B89363F43ABE63"
+  },
+  {
+    "path": "tooling/sirona\\src\\lsp.ts",
+    "sha256": "4E4D5D419A554195AB502098537BD7403D659F69EA92AFB7E6EED71EAC097FA2"
+  },
+  {
+    "path": "tooling/sirona\\src\\isolate-worker.ts",
+    "sha256": "E12DEC6595977CDE2058DA0FB632625B011B8CB4C919E8CC6E2A1F2FB78481A8"
+  },
+  {
+    "path": "tooling/sirona\\src\\health.ts",
+    "sha256": "689BBBF0281E173FEE35D356E52F356E6FC205893BFA6F59C6CA181ACA7D1ACF"
+  },
+  {
+    "path": "tooling/sirona\\src\\cli.ts",
+    "sha256": "1486F17B70E7638C82286D0BDEF2B587E6D3B3A4F23010D25C17F020E815DAF7"
+  },
+  {
+    "path": "frontend/sirona\\vite.config.ts",
+    "sha256": "160C030D6A0E650AE6E834C71B81C87D9C835FFFCB51E6D41E7B4120256FA97F"
+  },
+  {
+    "path": "frontend/sirona\\tsconfig.node.json",
+    "sha256": "87B60D40B2D62649768B3C20F30991398F241C2F51AAE579694EE2E8DCDBCF22"
+  },
+  {
+    "path": "frontend/sirona\\tsconfig.json",
+    "sha256": "770B4140BBB581E2DFD9EA9946FFC9C75A1D86BA7D2DB5F77C83E37CBDF9D808"
+  },
+  {
+    "path": "frontend/sirona\\tsconfig.app.json",
+    "sha256": "359610BBE362B75B5A3646752E68B0845D8F0B66DFE315E5801FA2775384ECCD"
+  },
+  {
+    "path": "backend\\tests\\workflow.test.js",
+    "sha256": "493986E9801DC7CE7D8569D3026CF19628B82DF7F2AD49A3543FAEA93486AC57"
+  },
+  {
+    "path": "backend\\tests\\verification.test.js",
+    "sha256": "FBE9AE041FB782B21C6938D4E006B28A56AD00CDE94A1C4BB4C1493E106B5A94"
+  },
+  {
+    "path": "backend\\tests\\tools.test.js",
+    "sha256": "1D5EAB386D4FBD970CC5010A8CA35FF767DAAC6EDF29CC7028C14A5857ADF31F"
+  },
+  {
+    "path": "backend\\tests\\schedules.test.js",
+    "sha256": "4D9E86BBDB49B470FDD042D21E65364C520EB1F6D5884D03517F3131528B574A"
+  },
+  {
+    "path": "backend\\tests\\runtimeConfig.test.js",
+    "sha256": "16A712BAC4E6DF6FC84D41B52B7966F3A81710232E920243E2CF1A4ED1258B26"
+  },
+  {
+    "path": "backend\\tests\\runner.test.js",
+    "sha256": "DB12755E43F35B6154D5331D96A127203AE6A196897AFF0402CAF1C15C8307F4"
+  },
+  {
+    "path": "backend\\tests\\routeInventory.js",
+    "sha256": "9FA92CE2DD79F9B584FC87FA13A47DCADF57E5055D3CA3D75A1AFCE3E13E66C5"
+  },
+  {
+    "path": "backend\\tests\\releaseRecovery.test.js",
+    "sha256": "9EB78B3C2C6EA08683A549D1B196A657DAC7163783A68B7725EBE235490A460C"
+  },
+  {
+    "path": "backend\\tests\\providerText.test.js",
+    "sha256": "056F2DC66F2145A9D57F83371EFBA8A38991C96CC1CB22BBFA442B458EA1B7D9"
+  },
+  {
+    "path": "backend\\tests\\providers.test.js",
+    "sha256": "6FCA71E56AC403FA0D5E689DE14BAA8956CA2172D2A3D7A87DC443748D7D35AE"
+  },
+  {
+    "path": "backend\\tests\\projects.test.js",
+    "sha256": "F38AA112D32D6112FF66976350CC93A1435BDA60B4629488CD5C828677A12BA8"
+  },
+  {
+    "path": "backend\\tests\\production.test.js",
+    "sha256": "8ACFF4052DD6FF12CEEC24600DE0B5C4A7D55AF52305A8AE18EAB7F3AC4F1D0C"
+  },
+  {
+    "path": "backend\\tests\\problemHelper.js",
+    "sha256": "FA41C21BB21F78EE892D32A630E6ACC0D6B0E278153639B86B75E604BD9E3EFB"
+  },
+  {
+    "path": "backend\\tests\\planning.test.js",
+    "sha256": "C28AE83AFFF92DCD6A96BC28B221773C2DACB900C062A82DFD19CB8CBB3ED5D3"
+  },
+  {
+    "path": "backend\\tests\\memory.test.js",
+    "sha256": "3D509E51A0FBC96E4254FC0D6EEBB67386096D3668BC936D07F33C2E40B5C84D"
+  },
+  {
+    "path": "backend\\tests\\mail.test.js",
+    "sha256": "3C2E2CBA95113E96343EF008908339CA28D2C8DEB7D5CFBAE58FB4AB1BCC9CE8"
+  },
+  {
+    "path": "backend\\tests\\lifecycle.test.js",
+    "sha256": "735C96AB36A4D2C64A9194B18A85C1DA5D4E7FE47F0F0677B1EEE51EAE2A5204"
+  },
+  {
+    "path": "backend\\tests\\isolation.test.js",
+    "sha256": "35CF0FB0ED8A7E5B799587F6BDB23FEB731DF128D964F88412A4122A6F23D5CF"
+  },
+  {
+    "path": "backend\\tests\\intent.test.js",
+    "sha256": "10EC4502121DD33E9CFD42B7AB9BD19254A3CDE667B2E08C9F716DF327902DB3"
+  },
+  {
+    "path": "backend\\tests\\identity.test.js",
+    "sha256": "93BD9C6AFD13251010655EE77EF037ABB417C24AE108088F73DDD16F58CB5133"
+  },
+  {
+    "path": "backend\\tests\\helpers.js",
+    "sha256": "244D878F2E38DAC4972B35A5E48606E7DE6F13BD47E2D278EB2A29F19B2075F0"
+  },
+  {
+    "path": "backend\\tests\\governance.test.js",
+    "sha256": "B5C895604002D307E2D15BB8571B614444C379466FCCE7958DA994046EA051A8"
+  },
+  {
+    "path": "backend\\tests\\foundation.test.js",
+    "sha256": "4EC78FF1F78476A38BC3D5D5C6A7097D7C42980C320644C01F624EA83E04CD2D"
+  },
+  {
+    "path": "frontend/sirona\\tests\\verify-package.mjs",
+    "sha256": "B3E45EC4663EF8CCE33065C0D72E7750E03A1A0A20715ABD05A0BF119AC4FC64"
+  },
+  {
+    "path": "frontend/sirona\\tests\\ui-fixture.mjs",
+    "sha256": "147D2B4139976522A20B769CF8ED2ED099CE2A2AC91D1C5BB81A980582ECF022"
+  },
+  {
+    "path": "frontend/sirona\\tests\\project-folder.test.mjs",
+    "sha256": "DA02B37D0A6360C879DDE3F670879006E5362244EBECB8459FB7AD6843C052B7"
+  },
+  {
+    "path": "frontend/sirona\\tests\\live-ui-smoke.mjs",
+    "sha256": "27A73CEEF5887B49065643D9A195D83FE39CF0A2959D361628E31C07C4D564EE"
+  },
+  {
+    "path": "frontend/sirona\\tests\\live-transport.test.mjs",
+    "sha256": "0D9FE567E6EE1F7CCFE6B7572EE198A8E63DCCB2A3C8609712E8AC90382629F8"
+  },
+  {
+    "path": "frontend/sirona\\tests\\document-session.test.mjs",
+    "sha256": "8C9F63A28956F21847CFE7A54785C33E3DE83B059775101C1FA3CE87F4070871"
+  },
+  {
+    "path": "frontend/sirona\\tests\\desktop.test.mjs",
+    "sha256": "92943F7FA45D9CB11218DFCAB43809C1BEB88359F7296A341C8AC0ADA7A6CC25"
+  },
+  {
+    "path": "frontend/sirona\\tests\\desktop-smoke.mjs",
+    "sha256": "01A1F9A81AA181F72C313F336EC052CB046C6EC9BF46560ABF1EBD1E729C2F8A"
+  },
+  {
+    "path": "frontend/sirona\\tests\\desktop-api-fixture.mjs",
+    "sha256": "425D5D0387F1FFC902AA8D5FF1BA7F484B25B96E5CA8A267772A3525997E44C1"
+  },
+  {
+    "path": "frontend/sirona\\tests\\client.test.mjs",
+    "sha256": "6A134A603483A16D58E96F370477E949735A1F519841D69FE27182C86505D64E"
+  },
+  {
+    "path": "frontend/sirona\\tests\\client-smoke.mjs",
+    "sha256": "CD6D1A9FE62BD289E249B86999F3E27C7F818FCEC3517ABC32152DEA3EA4B49A"
+  },
+  {
+    "path": "frontend/sirona\\tests\\agent-client.test.mjs",
+    "sha256": "47AB965B93935159471AEFB1DB56CEF9206B83234475C97954DE279D1E34BD88"
+  },
+  {
+    "path": "frontend/sirona\\tailwind.config.cjs",
+    "sha256": "6CE6800669144596D957881AAB383F05425D38E55AF605672172C63E88201822"
+  },
+  {
+    "path": "backend\\package.json",
+    "sha256": "64946BB432EBA9D045EED56F617C419E907A212EAC450F2EE0DED6DA15804E22"
+  },
+  {
+    "path": "backend\\tests\\fixtures\\pgDriver.js",
+    "sha256": "04EDA33C2A4E3748EB6D9BA413846677A46A7CCA3FA00651FA9D72423277F407"
+  },
+  {
+    "path": "backend\\tests\\fixtures\\cli-preload.js",
+    "sha256": "8AEB6FA118993F502125828C812B49A5195ED2A360AA863E311856FBD42EEFCE"
+  },
+  {
+    "path": "backend\\tests\\fixtures\\admission-probe.js",
+    "sha256": "BFF8031695111F41F2F3129A333AD5DA5E081C1CBD5C0C8A2027AB4BC9C73D12"
+  },
+  {
+    "path": "backend\\tests\\execution.test.js",
+    "sha256": "5BA1470390A4C2C4868A29CEAC70502418B0B15EA1EC94CC98411C94EDFC82D1"
+  },
+  {
+    "path": "backend\\tests\\deployments.test.js",
+    "sha256": "96B687E7679FFB376CD9A0A8DE870C5454F5F8F48006BB7C88E31F1350A29B81"
+  },
+  {
+    "path": "backend\\tests\\database.test.js",
+    "sha256": "68E7B280527CAAA44A7C76BCEE89B5B91D32C923EFB39639D8AAD25DEE316CA7"
+  },
+  {
+    "path": "backend\\tests\\config.test.js",
+    "sha256": "428D68BFF43D7CCEFA08AD074479C8D61A03E104EA419333D529671C4D5C987E"
+  },
+  {
+    "path": "backend\\tests\\cli.test.js",
+    "sha256": "9E4D549280352FBC01D6318882D777CC637C7E7ABD4F06CC511B40A5238E9D66"
+  },
+  {
+    "path": "backend\\tests\\checkers.test.js",
+    "sha256": "F3FE73267021F152637EBEDE2F7D30AD84424750BA2C2E99311C74C0D30CEC91"
+  },
+  {
+    "path": "backend\\tests\\boundary.test.js",
+    "sha256": "C9710B23EC72A39C61FB89EF5395DAE4863539B2C6632FF6DE39DB9AE1B13C3E"
+  },
+  {
+    "path": "backend\\tests\\admission.test.js",
+    "sha256": "3ADE1F4276FED0C614B18C7FABF78A8CC77A4BE617DE57EC98E7EA8B454A9A12"
+  },
+  {
+    "path": "backend\\model\\User.js",
+    "sha256": "ADC0AC395D1CC4EBEDCC62E971521A5F688921B0BC49DE31D862F0C334E5A73F"
+  },
+  {
+    "path": "backend\\model\\TurnLease.js",
+    "sha256": "4CBF41F4AEF2F68F443F6064D30B28D4A08A807856D9880C7506FB57CCD9BC0E"
+  },
+  {
+    "path": "backend\\model\\Setting.js",
+    "sha256": "F48E5686E74C521A7FE47222A74D306CD5B8242D45F95359D1F312C2492CC59A"
+  },
+  {
+    "path": "backend\\model\\Session.js",
+    "sha256": "90A7A8E33DE8DB32D3931E69D891608E0B9B645AC3A54A581E32B4FA78E73968"
+  },
+  {
+    "path": "backend\\model\\Project.js",
+    "sha256": "563E5A33EEFB8E584AE37C3591C136058F350B94906061ED3CA6872ED9D41376"
+  },
+  {
+    "path": "backend\\model\\Message.js",
+    "sha256": "375C3A7A5DE2477A01CD42CCEF2494D0B655354B9AA278B55BE1FB06F1370D45"
+  },
+  {
+    "path": "backend\\model\\Checkpoint.js",
+    "sha256": "BFCD72AF4DCEABBA97B7D34606E382B2B3086185ADB157BCAF2A1B20FD61E653"
+  },
+  {
+    "path": "backend\\model\\AuditLog.js",
+    "sha256": "DBFD70951B9F6F20B41B6C02D1D691C1D6AEF3B6C72106CA87F6FE4A67A06092"
+  },
+  {
+    "path": "backend\\model\\Approval.js",
+    "sha256": "495580A06E7B4EC3F8CC5414B9AB2C2F400AAF3A6DC3458E858BD97B129C6D75"
+  },
+  {
+    "path": "backend\\services\\workflowOrchestratorService.js",
+    "sha256": "6FBD8B0D37A74C0F3FD58AFF0CB28CDC7487EB0862B74E4E2F94A8BD541511A9"
+  },
+  {
+    "path": "backend\\services\\verificationService.js",
+    "sha256": "26653C7A101EA0FDC41C4BA41A079244491F26EEDA06F70CA5DC2BE76E2BBA7E"
+  },
+  {
+    "path": "backend\\services\\turnLeaseService.js",
+    "sha256": "04B97A4180AEACA321D9CA72B9DCB8DE210F7D5A8FFC8F91E9D814C0E60A42AE"
+  },
+  {
+    "path": "backend\\services\\toolRuntimeService.js",
+    "sha256": "E9F1855C372380FC96CC4335137B02226F2019F63A9A3517F8183A4AAADE7F96"
+  },
+  {
+    "path": "backend\\services\\socket.js",
+    "sha256": "ABCAFCD34FBD9024BDCAFFF66DB7FDBE6A8B4A84237F171C64958C164DA6C974"
+  },
+  {
+    "path": "backend\\services\\releaseRecoveryService.js",
+    "sha256": "9DD4C67144B846E838D53D4ABA5DAFE62CFFD0D58AEAB400AEDF9B1B2883B622"
+  },
+  {
+    "path": "backend\\services\\executionService.js",
+    "sha256": "55ED0B7CCC7F135C8CE18776CC2D2256F54C20CE555763BEF0D785F7C564C3A7"
+  },
+  {
+    "path": "backend\\services\\launcherChallenge.js",
+    "sha256": "31D0B269E86B479C9BE37727D2A4C3AD4856FAEE56A26A5A64B014F2F4490FE8"
+  },
+  {
+    "path": "backend\\services\\emailService.js",
+    "sha256": "A363C099A5E862376312DCBA29E5EEDCBE65FD80043EDBED10236B94DD866D93"
+  },
+  {
+    "path": "backend\\services\\deploymentService.js",
+    "sha256": "FAC52A344FE92F23D07194532B1B4D1BDA7D112B88656E520F8EF9B2786B042A"
+  },
+  {
+    "path": "backend\\services\\isolationBrokerService.js",
+    "sha256": "26054A44A4F199521ECACD787687EFDFB0C4B4D2D8953BAD7ED720D5AE360621"
+  },
+  {
+    "path": "backend\\services\\cacheService.js",
+    "sha256": "76EA59ED8AA2ACC51ADF4F58EEB9A59498EF3A5D82750A4711D6CD43AA636E66"
+  },
+  {
+    "path": "backend\\services\\automationService.js",
+    "sha256": "740F3B088EF312162F0410BEEAF6EA0D345EA3FD25BC0725927C193D18332A54"
+  },
+  {
+    "path": "backend\\services\\intentRequirementService.js",
+    "sha256": "F9C37B488EED330F8CDB4E93F65FC2103B46E14B34DDCDFF8D90D1E7A92EB0C6"
+  },
+  {
+    "path": "backend\\services\\auditLogger.js",
+    "sha256": "18FA062C32312A59D06DC046CD39C77D0C73A7D58B174C0960291C6E06B2FF22"
+  },
+  {
+    "path": "backend\\services\\identityService.js",
+    "sha256": "640A3EB84D3D161CBF0E8C75C197276FE55DCEFE7646C485B5C1327B533E9B67"
+  },
+  {
+    "path": "backend\\services\\aiService.js",
+    "sha256": "A1E64AA859394ACC2E6C5332C1A4BD0774F603518E9E8FCC08C7F96A2B59BE76"
+  },
+  {
+    "path": "backend\\services\\planningContractService.js",
+    "sha256": "517B0E44F7311BD85F730DB52FDDAD3D01408BB04CEB3BE745E5166088F19876"
+  },
+  {
+    "path": "backend\\services\\notificationDispatcher.js",
+    "sha256": "13061E8DBCC3EE0F75EF1BF59A94AEE611ED08E5FCE5555F054849F47F9CFC6B"
+  },
+  {
+    "path": "backend\\services\\memoryService.js",
+    "sha256": "090C42140258AA94C73B9B3D8AE3B3062E0A2695EDFFB065A2660843071A08E8"
+  },
+  {
+    "path": "backend\\services\\projectService.js",
+    "sha256": "61D6B65CB98F27F3E6B95B1C5B113F6D3235994F245E490BE18A76BFEBA16CEB"
+  },
+  {
+    "path": "backend\\services\\providerService.js",
+    "sha256": "D1541927A1D39C68EA55209E354C4B7256DD5D21BD3B1BBC6EA86C03CF9EEA12"
+  },
+  {
+    "path": "frontend/sirona\\postcss.config.cjs",
+    "sha256": "68FAC9E49F1EFAE93CBCB642ED05FD127F6CAF05ECC0686E4AAE3BE93BBDB1E0"
+  },
+  {
+    "path": "frontend/sirona\\package.json",
+    "sha256": "9E145235A00081EF219AC7EF1EE474A9E506F8A30ED197CEAB1315B9C9E2C82E"
+  },
+  {
+    "path": "backend\\server.js",
+    "sha256": "6425BCF0FF7477F4E4C20ACE07BB335B5F3651031CFB06CF9E36AC5D5229D092"
+  },
+  {
+    "path": "backend\\services\\governanceService.js",
+    "sha256": "3D7FBB5B22CA4C9EB7DC66126713D3F1367CBD459B8BCBD7EA168B695E8A1F98"
+  },
+  {
+    "path": "frontend/sirona\\src\\types\\settings.ts",
+    "sha256": "ED88958C6B79B1D23BF2990A07C0CED2DD0F72A28723491A332116282302FEA9"
+  },
+  {
+    "path": "frontend/sirona\\src\\types\\client-desktop.d.ts",
+    "sha256": "FB9F9035C2379470DEFB4F893F1F68BEFE003D8D422DE573A05A22BDF874D6D5"
+  },
+  {
+    "path": "frontend/sirona\\src\\types\\agent.ts",
+    "sha256": "2D2C096DB3CB7129AE1FD67F1CD864F49196C9AFC33A40FAA7A5F31FFA52BCC2"
+  },
+  {
+    "path": "frontend/sirona\\src\\App.css",
+    "sha256": "ACEE8098F09D0D5D8A1481A331B303D9D7CE695DEE0A16B532C4269EA1D573C3"
+  },
+  {
+    "path": "backend\\services\\queues\\emailQueue.js",
+    "sha256": "720EF70E3D7B76746B221C5B145143EC7F54BC02DC009809BC73B0DBF46C6343"
+  },
+  {
+    "path": "backend\\migrations\\runMigrations.js",
+    "sha256": "FEC647313CC1B0F218894C09BA97E1A2C630DBCB70B84D701D54F8A0ED86EAE6"
+  },
+  {
+    "path": "backend\\migrations\\017_windows_v1_release_recovery.sql",
+    "sha256": "9A3E2144CABB421655BDE4BFC3CD3B767862CBC5E75C57BD6C4E0E37004F0902"
+  },
+  {
+    "path": "backend\\migrations\\016_browser_qa_deployment_adapter.sql",
+    "sha256": "D0BA04B434F3AB337D743BECC0A3184CD59950AC6BFF035FD4A3140FA0BC1117"
+  },
+  {
+    "path": "backend\\migrations\\015_schedules_signed_events.sql",
+    "sha256": "7ED2154C4A68CEBFE66DC8F41DD62EE70639C390CC46FA2626ADB279B62EA389"
+  },
+  {
+    "path": "backend\\migrations\\014_memory_project_intelligence.sql",
+    "sha256": "B9FA6C2BD06195B44F7659BAF88825AB45D19819E3811ED83C83E286FBE25F6E"
+  },
+  {
+    "path": "backend\\migrations\\013_killer_workflow_bounded_repair.sql",
+    "sha256": "2238CAA5E914140E06BF90306C95EC9FCA378453A10BE560B7BE797AD07F07E2"
+  },
+  {
+    "path": "backend\\migrations\\012_verification_engine.sql",
+    "sha256": "DF70CF3D33C1763059343B76678856063DD92131F5E9175704A7A718A5B82E37"
+  },
+  {
+    "path": "backend\\migrations\\011_tool_runtime_coding_backend.sql",
+    "sha256": "FF4E92E346D756C08F47147B24B8731595DDF4A3F1C24FCD4BF85714EFA81DA7"
+  },
+  {
+    "path": "backend\\migrations\\010_windows_isolation_qualification.sql",
+    "sha256": "09015489BDBC27DFA058BE8282936C787F78917D3FF06130154BA7936534F76C"
+  },
+  {
+    "path": "backend\\migrations\\009_planning_contracts.sql",
+    "sha256": "ABB3A84B611AB3A8D871003E817C97BE358D3C43F19FDF5A44EF162732FD966D"
+  },
+  {
+    "path": "backend\\migrations\\008_intent_research_requirements.sql",
+    "sha256": "22550FE1DA38D7370FFBBA8E0A4D83C4D02EAE325548FCD8CF141BF3EE06AD95"
+  },
+  {
+    "path": "backend\\migrations\\007_durable_execution_tasks_effects.sql",
+    "sha256": "50DF1ECAFFFD6853515A9F9E805E38EE890568C431A0612DA1AAB2D0C578BCDA"
+  },
+  {
+    "path": "backend\\migrations\\006_provider_models_inference.sql",
+    "sha256": "EE14BB68B7C4FD7FB42197FFC6355D077142BF8C034354106FBEB8013E693EC8"
+  },
+  {
+    "path": "backend\\migrations\\005_governance_leases_approvals.sql",
+    "sha256": "4569CB710A409414F71E6F7DBE7A996A680A1381908B2654672437689EAD38F5"
+  },
+  {
+    "path": "backend\\migrations\\004_project_content_artifacts.sql",
+    "sha256": "5E2EDFE40741B5FC813E56B5FAF6C8BB6C9BD14F819F01A1E1F8A0EF9B1382BB"
+  },
+  {
+    "path": "backend\\migrations\\003_identity_sessions.sql",
+    "sha256": "5691DDB0AF2C88471AF5797C21A0EC9D2263AA8913E7C26A84EB01161F9DDF39"
+  },
+  {
+    "path": "backend\\migrations\\002_vector_extension.sql",
+    "sha256": "D320D7ED87D214B28E8BAEDED1598F914DE38CB924EE4435FB66C4295F6B942B"
+  },
+  {
+    "path": "backend\\migrations\\001_initial_schema.sql",
+    "sha256": "CAECF97EEE19E0F653D76C7A979DA7A8D01619089779E928B6D6640E91CEFA1E"
+  },
+  {
+    "path": "backend\\scripts\\verifyRuntime.js",
+    "sha256": "BD9307428C8261966D6B0640F7CDFC909A79D8CD202FEBB9A783CA492919AD72"
+  },
+  {
+    "path": "backend\\scripts\\verifyDb.js",
+    "sha256": "B2F5D2E1AEF873A4B9D44B7E812B79B54065FA5C05732C4F28C1B76CA943413F"
+  },
+  {
+    "path": "backend\\scripts\\verify.js",
+    "sha256": "8A2E26141D52C48728D80D1686594A66783901C05C22BBEF27B5ED4CD53A0243"
+  },
+  {
+    "path": "backend\\scripts\\seedSettings.js",
+    "sha256": "68C640BA0B86B3B58EF888EBF5FB5D3C07561D3B85997528C58A62A627127BF9"
+  },
+  {
+    "path": "backend\\scripts\\checkSyntax.js",
+    "sha256": "57AFA3BEEE724C5EFC84619F0246A8AE38933B6DBFF9D7D114FA60C912E5E3C1"
+  },
+  {
+    "path": "backend\\scripts\\checkStatic.js",
+    "sha256": "F51F643CB62A5A12E291FCB5D85904649A265F141EB15B4982763ADC08F62A9F"
+  },
+  {
+    "path": "backend\\scripts\\checkModules.js",
+    "sha256": "4DB5F987A36ADDCF322DEC7D83A8CD6E2A1801FA69A4F2CBF7DE4D81F511C994"
+  },
+  {
+    "path": "frontend/sirona\\scripts\\package-msix.mjs",
+    "sha256": "A90CFDDA9717F963B9B4E4FED9CED0CEE31E655C6176590C95F606EA4ED272D1"
+  },
+  {
+    "path": "frontend/sirona\\scripts\\audit-route-coverage.mjs",
+    "sha256": "8A4DB6A60884ACABBFB3206CB94267DBF998A8C9AB9754EDBD1429CAEBAE2847"
+  },
+  {
+    "path": "frontend/sirona\\src\\api\\types.ts",
+    "sha256": "A8F2B0ACA2DFB3F96A2D8D3E2D1E61E78F1EBB425CEC3047883C4464EC3AA096"
+  },
+  {
+    "path": "frontend/sirona\\src\\adapters\\http-agent.ts",
+    "sha256": "07D8935C8BCC0C470300BAF621F08C5006024A696171FD2AA54B80244C255441"
+  },
+  {
+    "path": "frontend/sirona\\src\\api\\sse.ts",
+    "sha256": "7859B2F5C6D352166BCD7FFC6F721B748838F89267BB88AD0E0AD7EBF8D41DE0"
+  },
+  {
+    "path": "frontend/sirona\\src\\adapters\\agent.ts",
+    "sha256": "72FD725943E8F8B796F545AC4CAB8F0653A49F66AAA163664875461DBE5995D5"
+  },
+  {
+    "path": "frontend/sirona\\src\\api\\client.ts",
+    "sha256": "E4D0E90DD5F3BCB50D96E4B408270C2082908E1C9543E4FD9B9326C0D6DD89EF"
+  },
+  {
+    "path": "frontend/sirona\\src\\main.tsx",
+    "sha256": "484F93F3048565A86A47E308F5A12EE27AA12F5291F3B52A4BB5DC03D887DBC7"
+  },
+  {
+    "path": "backend\\jsconfig.strict.json",
+    "sha256": "B96B698201D45D39F8E00608445BF853E8FE17B613598CC06D6A6582B4462066"
+  },
+  {
+    "path": "backend\\jsconfig.json",
+    "sha256": "E6EDA3564774AB49231324134B851D5FF71BB59553EB8CE5EBA42F6DA61C17D9"
+  },
+  {
+    "path": "frontend/sirona\\electron\\storage.ts",
+    "sha256": "7B9D5888672B2C450BE1900B554A1CF038E057BE69CBEF169BD8E34652A66FA7"
+  },
+  {
+    "path": "frontend/sirona\\electron\\static-server.mjs",
+    "sha256": "57591448DC38240E86C168BF33313720F5806427DF0AA68454F0B9383D4F700B"
+  },
+  {
+    "path": "frontend/sirona\\electron\\project-folder.mjs",
+    "sha256": "4F22F27C58F5DEBFE58DE886A74096D0A376CAF77CF63152E8F7BECB522031E7"
+  },
+  {
+    "path": "frontend/sirona\\electron\\preload.ts",
+    "sha256": "6737C85F594DAC5A4FEF2E3705B826BB6F54C4C4729196CFF8C5577E5BC8755D"
+  },
+  {
+    "path": "frontend/sirona\\electron\\preload.cjs",
+    "sha256": "CBF0124A49D2492872A3AC9451FE8E35B1914CE462117367716CA8CC45AF179A"
+  },
+  {
+    "path": "frontend/sirona\\electron\\main.ts",
+    "sha256": "1E0B35FCDB4679675126C6654FC06F188819829F211BF41CBAED3FEBE39E6468"
+  },
+  {
+    "path": "frontend/sirona\\electron\\main.mjs",
+    "sha256": "D4D5A3F457FEFE462FF371619A4ED06892C9EE4D8B145B5A684DBFB50801050B"
+  },
+  {
+    "path": "frontend/sirona\\src\\state\\LiveClientProvider.tsx",
+    "sha256": "387E629BE7DBD1AF1F50A30C0EDE017AF86AE5A60FE73E95AC5B28659CCB670C"
+  },
+  {
+    "path": "frontend/sirona\\src\\state\\events.ts",
+    "sha256": "0959393FBA1DA2397D302ED8605C79D027743E461C05C5FBFC8CF7EC295DE56E"
+  },
+  {
+    "path": "frontend/sirona\\src\\state\\document-session.ts",
+    "sha256": "AA02986D142406FE6F416E05034B4EFB56BF3C793DE894C79D89E7B2DF670A58"
+  },
+  {
+    "path": "frontend/sirona\\src\\state\\client.ts",
+    "sha256": "BF2053BD85FCCA15F662B75BA00432FED7F50C679B6F19742224E8A102C34836"
+  },
+  {
+    "path": "frontend/sirona\\src\\state\\AgentContext.ts",
+    "sha256": "C766CF3882A19F69B614EF2327C53A4839D949EAA7A81F93E0F98F9D10D87D1C"
+  },
+  {
+    "path": "frontend/sirona\\src\\state\\AgentClientProvider.tsx",
+    "sha256": "ABF92ABE8FD9299C745972CC4FAE450CABA7E98B8A7C8A03E0089164EE027FE2"
+  },
+  {
+    "path": "backend\\middleware\\ownershipGuard.js",
+    "sha256": "96C1C361F03F4392AEB478B45CB413795302F9AC63DD7F9929740A20CD6230CE"
+  },
+  {
+    "path": "backend\\middleware\\httpBoundary.js",
+    "sha256": "16BB58A9567EBD847FE50D02F5A5A83D0B53DFAEB3EC104DC97E5B4F3DA4C28A"
+  },
+  {
+    "path": "backend\\middleware\\errorHandler.js",
+    "sha256": "894CB0A8E8B5D447F9971F92A13FD5AAE5F61D5DCE474A73C63CF8D3BC46C6C9"
+  },
+  {
+    "path": "backend\\middleware\\auditContext.js",
+    "sha256": "0D68C6B45DED6D361C0EB7F0B0B109CF745D63E4477837F4BA4B1E955C256FE7"
+  },
+  {
+    "path": "backend\\middleware\\rateLimiter.js",
+    "sha256": "91C5CD0A901E9B73A17352317D02DA83EABA7775A5543DA86F2AA3A1B330AFD0"
+  },
+  {
+    "path": "backend\\middleware\\problem.js",
+    "sha256": "481C070AFFDDCF05B2B191BEF842B33CC3C85621EA8EA11993997CE0AA9889D0"
+  },
+  {
+    "path": "backend\\middleware\\sessionAuth.js",
+    "sha256": "346C0DE2F7EB00136C3E301F6A13FEABD571F2FC01AA8D78BFED11C7E6035B43"
+  },
+  {
+    "path": "backend\\middleware\\upload.js",
+    "sha256": "9AF7606BF94FD041BF49282D8BB1D27F3CAB670B2364CE8AA666584F28862354"
+  },
+  {
+    "path": "frontend/sirona\\src\\App.tsx",
+    "sha256": "1736CF122650CF6F48C081C3B68C40D4494DEEB8D2C01EDE741DD0AE688D957A"
+  },
+  {
+    "path": "frontend/sirona\\src\\client.css",
+    "sha256": "E5AF7FCFDBDFC13B9BF6DA5C45C7D958337E9BCA77FC37754E84E1042A7A9DD4"
+  },
+  {
+    "path": "backend\\middleware\\validate.js",
+    "sha256": "D0C11C7F037D5E3F3D241280273C54084E6A1CFBFDC35918743C0CE24E59D8F7"
+  },
+  {
+    "path": "backend\\middleware\\userAuth.js",
+    "sha256": "F0014959EF5D6F7193C09FE7A90E4605A5798B1AEEF4E7A40F379AB8A3B99F00"
+  },
+  {
+    "path": "backend\\routes\\health.routes.js",
+    "sha256": "CED1AF882F43EEBEE786AF8E3F5EC7DD727699870FEBAF1B12C0BC146F3F8186"
+  },
+  {
+    "path": "backend\\routes\\git.routes.js",
+    "sha256": "DE535A963EAE5AB5D77DF486605C3AC0287E672FB806B50E17E0E13111FADBF0"
+  },
+  {
+    "path": "backend\\routes\\files.routes.js",
+    "sha256": "A2DED2E133739183C9A6E10E30F9A097AA4445DD6D6CE1FAE46D31D02415555E"
+  },
+  {
+    "path": "backend\\routes\\auth.routes.js",
+    "sha256": "ADF5D61BC050351C7358AB3F709EAB7B3564775685CE0BEE1524D05D4C5EAD6A"
+  },
+  {
+    "path": "backend\\routes\\audit.routes.js",
+    "sha256": "F9AAB3D3AE74E7A8770FCA431CF64D981E125C0E70856BDEB254809379BE149E"
+  },
+  {
+    "path": "backend\\routes\\approval.routes.js",
+    "sha256": "4414E269AA73D502FFA2FB40FD544FD017FADFFA9134292794022C3C892A8EC1"
+  },
+  {
+    "path": "backend\\routes\\session.routes.js",
+    "sha256": "8D8DEF35FDB1BF215DEEEBC3B649DFF54842DC7BA6E69F45D471D9EC2B8CEAAC"
+  },
+  {
+    "path": "backend\\routes\\models.routes.js",
+    "sha256": "94FC5DD80A44834768082E914C7D6CBD45F5906130AB54CF428F33908B49EA93"
+  },
+  {
+    "path": "backend\\routes\\index.js",
+    "sha256": "EFAC601362C9653CB8D767C23184C8D7DF140193268EFD5D9AD99562575AC516"
+  },
+  {
+    "path": "backend\\routes\\settings.routes.js",
+    "sha256": "4104EB62042AFAB6AFF8EA1BD3F4EB8A94842619FF7C772BD1DCB26EAAC19624"
+  },
+  {
+    "path": "backend\\routes\\tools.routes.js",
+    "sha256": "EBF2DC67B56BA2EE0077C1E4984937340FA02747B7D7EF74FE8ECBC13BBBD925"
+  },
+  {
+    "path": "frontend/sirona\\src\\desktop.d.ts",
+    "sha256": "2BB06A0668D99593052B4AC3224C6E07EE635823E2F9B63E749290F89D3CA173"
+  },
+  {
+    "path": "frontend/sirona\\src\\index.css",
+    "sha256": "64A06C2A722BFDB358F7974806145694424EB093D34C488FAB3E7A39EEC172EC"
+  },
+  {
+    "path": "frontend/sirona\\src\\context\\useProjectContext.ts",
+    "sha256": "66DE1BD698F450A9C8D62C6AC79C6A80E3C645313D3AD0F9C5A83E133B9A3086"
+  },
+  {
+    "path": "frontend/sirona\\src\\context\\useIdentityContext.ts",
+    "sha256": "AF56682FF93DA0DC85C9AD01CA9A797D8918E338065608FCA7F09C6857B91218"
+  },
+  {
+    "path": "frontend/sirona\\src\\context\\projectContextDef.ts",
+    "sha256": "6E446BA38BF2A46EE07927CDCCE40C2BBB2F1A7B499C6712328829A867F2B63C"
+  },
+  {
+    "path": "frontend/sirona\\src\\context\\ProjectContext.tsx",
+    "sha256": "A5E7C6C4BF958C26078E439BD1226E31C735A1C92109F606FDD12FC52FF5837D"
+  },
+  {
+    "path": "frontend/sirona\\src\\context\\IdentityProvider.tsx",
+    "sha256": "20187C7145B28C7B1B2CE9B3DC670356B25A486C82E8F5BDA5A770CD5B572CDC"
+  },
+  {
+    "path": "frontend/sirona\\src\\context\\identityContextDef.ts",
+    "sha256": "93DAE6B0A3584960397FA54342D345D97EC04E948BA30D6253A96E0DD5379565"
+  },
+  {
+    "path": "backend\\foundation\\config.js",
+    "sha256": "E1D248B8CAAB33054BA80D8E285B7463F6FF2C718FB5886C5C685F28D930F6B3"
+  },
+  {
+    "path": "backend\\foundation\\composition.js",
+    "sha256": "2909474CCAE495290C2F752987CED57BFC913C8F88969E1A2D8CF6CDDF7CB635"
+  },
+  {
+    "path": "backend\\foundation\\bounded.js",
+    "sha256": "B8DD675C5977DA1D7166C4A62E0E4F76D28444E76926C45B01C69E04B7232798"
+  },
+  {
+    "path": "backend\\foundation\\admission.js",
+    "sha256": "68CB00A5B3A16781282C6D860A60AF3C1852EEF3C68CF05049346657A2E726AC"
+  },
+  {
+    "path": "backend\\foundation\\runtimeConfig.js",
+    "sha256": "B206520B0A5E5B12845F124702829A982F359BCB2EBF850B90B0E3F8B5FC05E4"
+  },
+  {
+    "path": "backend\\foundation\\production.js",
+    "sha256": "5BCE0480275AA7694332378F48EC394DA2DE696AA8AC8F3E9B1F48DE1774CF09"
+  },
+  {
+    "path": "backend\\foundation\\origins.js",
+    "sha256": "8C05716E4D37287F81B1FCDB094379A1B78917AEC75261FD97586A03FE94DB5F"
+  },
+  {
+    "path": "backend\\foundation\\logger.js",
+    "sha256": "C3A8A4E4E320C1EF134D950260EF0AB80AAE8A398A8D41529B028057984026BB"
+  },
+  {
+    "path": "backend\\foundation\\lifecycle.js",
+    "sha256": "E75402778ED2C56B2D6A366192A334F4E1AA91C7CC3CBD99AEADAF933B85C670"
+  },
+  {
+    "path": "backend\\foundation\\contracts.d.ts",
+    "sha256": "F4E26F341BFC04418945CA1B82810E2AB9A5CB85892436F98322E72EE61CE1DB"
+  },
+  {
+    "path": "backend\\app.js",
+    "sha256": "16CB9AFBC760E8678C8CC6ECA75F83E2243CA4B202271065DB835362F61B8E03"
+  },
+  {
+    "path": "frontend/sirona\\src\\lib\\cn.ts",
+    "sha256": "9B0A14F723E96163FF5A2A33E929A4EAC58551D866FBCD02323BAEE119591AD2"
+  },
+  {
+    "path": "backend\\routes\\v1\\intent.routes.js",
+    "sha256": "89E5130DE2DF649BBD584D3959024F8BA6B445A1434E80ECB23DC5979A0F3F8D"
+  },
+  {
+    "path": "backend\\routes\\v1\\identity.routes.js",
+    "sha256": "B9575B0ADDCD67E015D1A70D297104B984C871570249F74C3CD175D65298CFAA"
+  },
+  {
+    "path": "backend\\routes\\v1\\governance.routes.js",
+    "sha256": "8F87F46DE0C8BFF3C8F039766D02112F54F70F7D08EF2DEFB214699D7AE43EB8"
+  },
+  {
+    "path": "backend\\routes\\v1\\execution.routes.js",
+    "sha256": "56C0E01D83B26675364B8998308CA7125F17B8B773041DE8609431057C119180"
+  },
+  {
+    "path": "backend\\routes\\v1\\deployment.routes.js",
+    "sha256": "EF11B3409B354D509E16DB17015D8A93F8409BD22E3473479F5AFF234C5CB5C1"
+  },
+  {
+    "path": "backend\\routes\\v1\\automation.routes.js",
+    "sha256": "61689C3F12BD9213C855EC3A0E04D806DC0AAC4BE560E6DC406C9D71A720BB6B"
+  },
+  {
+    "path": "backend\\routes\\v1\\planning.routes.js",
+    "sha256": "E8236AD6493C7A178BAD1A516854E4828F594448BAAF57E1B8D4FBA9AE3DC39C"
+  },
+  {
+    "path": "backend\\routes\\v1\\memory.routes.js",
+    "sha256": "100DFDA15FFC65A16E791DDF4447B4D4F999F6F6A24C4334F550C7CC40F53BC3"
+  },
+  {
+    "path": "backend\\routes\\v1\\isolation.routes.js",
+    "sha256": "56F17311EB5AEF1A9923D5AE3DE3F0FFF5F4C49AC3BA2CE6A51B1875EA77004F"
+  },
+  {
+    "path": "backend\\routes\\v1\\projects.routes.js",
+    "sha256": "04950584DEC44564A60C60ABE616FB14F1A3A44074CE90419E2DCC28130B060A"
+  },
+  {
+    "path": "backend\\routes\\v1\\providers.routes.js",
+    "sha256": "EFAA8DD12702E2F9A17140A3A73C04707234B2E4311BC129F53548887120D2B6"
+  },
+  {
+    "path": "backend\\routes\\v1\\recovery.routes.js",
+    "sha256": "01BC883262F04ED5772C9921768F2D53A8D556690970A4EB1A157EC16C993803"
+  },
+  {
+    "path": "backend\\routes\\v1\\verification.routes.js",
+    "sha256": "62C0A47E3CCC698B7BFE1D6B104CA34AD0D15D331087B137AA07642319F49E8D"
+  },
+  {
+    "path": "backend\\routes\\v1\\tools.routes.js",
+    "sha256": "459592129FB11EB7FF2602BBC416CD8F4D2E75553E4B3BBEE09E071193643AA0"
+  },
+  {
+    "path": "backend\\config\\origins.js",
+    "sha256": "0737ECC750F53AE6F94BAB33415EEA933889B9A884681B206585BB646DB97A11"
+  },
+  {
+    "path": "backend\\config\\db.js",
+    "sha256": "88C7E5259E99F5960EC365F9C8701D99F2E76D66BB7E6B0766F200A1E45BA2F2"
+  },
+  {
+    "path": "backend\\config\\redis.js",
+    "sha256": "74C06A99F96B6BBEBD35DCF44C3474212769F44FD496AE098D0AA88CE3CE8767"
+  },
+  {
+    "path": "backend\\config\\s3.js",
+    "sha256": "6CA7EAB7960744BB13E6F57DBF8EB42168426F2B610F0147FF460C08DC9B596C"
+  },
+  {
+    "path": "frontend/sirona\\src\\hooks\\useIdentity.ts",
+    "sha256": "53FD4637285B77E8E184C29A73A1F2AFFCB0EA1FC8EB31DF2E8C7FC568F3395A"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\ConnectionsContent.tsx",
+    "sha256": "2AF410FFC8D775A1BD518A0EB6804F5D136E2FDDE3C2BC4E45E17A7C88F98908"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\GeneralContent.tsx",
+    "sha256": "2E918794062C7DB6255A9BB47DDD63C6AEA4A989C9EB44ABDCA281B8958BD6E7"
+  },
+  {
+    "path": "backend\\controllers\\toolsController.js",
+    "sha256": "0265D0BEF36F6F750FD8D8C5DBC7BB956B2C35E63E4BAF314998BE81AA1E01C4"
+  },
+  {
+    "path": "backend\\controllers\\settingsController.js",
+    "sha256": "6A3E7E30B2C3331A241EC44A78BCD741FC1CD46C71A00840E8AD89C94B8226B5"
+  },
+  {
+    "path": "backend\\controllers\\sessionController.js",
+    "sha256": "20C48ADEF51693FDDD4EF3F06BCF604077BEA3ADAD2C4646589BF9BC847B8186"
+  },
+  {
+    "path": "backend\\controllers\\modelsController.js",
+    "sha256": "82138C7C938C7A392AC660C12641A94DC8C77F7F413E90F123B8941FEBEA779A"
+  },
+  {
+    "path": "backend\\controllers\\healthController.js",
+    "sha256": "092183446321888E612303F6FAB53CDA4FD5451B1D94B22E925B4CCC49A65CAD"
+  },
+  {
+    "path": "backend\\controllers\\gitController.js",
+    "sha256": "335A7A251E2F94F81719191C2CB6DE6E636405701BAE1BCBE4663A8B432BF691"
+  },
+  {
+    "path": "backend\\controllers\\filesController.js",
+    "sha256": "F684DA29238FBFC47766645FF3CF723D82B47E2459AE383C8A7232468AD8E25C"
+  },
+  {
+    "path": "backend\\controllers\\chatController.js",
+    "sha256": "68D5E203E6B5D8D3146CD09985EBADD89D2569EB060CA31FCFC496B79FDEE403"
+  },
+  {
+    "path": "backend\\controllers\\authController.js",
+    "sha256": "04EE48F8161BB9DB22BBF8A6D222CAB94D42DC5DBA3194F47B5134E0FB60295F"
+  },
+  {
+    "path": "backend\\controllers\\auditController.js",
+    "sha256": "E7DB7B96827B3ACEFA9E29BD83DB19346EE856757F41A281587E2671E3D2B481"
+  },
+  {
+    "path": "backend\\controllers\\approvalController.js",
+    "sha256": "ABB8747F4B8403211A3602F3737342064289520B8EB95CC1A8BF3675A5DAE720"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\chat\\CommandOutput.tsx",
+    "sha256": "FC3D794084CF24CF15028625F098A5575620AD072413E9C40FB4E90429610D8B"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\chat\\InputDock.tsx",
+    "sha256": "D694A37E6B7216E02E13C15888152BCC34EE0F5192084D9D5A8E172616090986"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\ModelProvidersContent.tsx",
+    "sha256": "0C3C9A3D354A6469907A1A04E2B13CAC66E31BAA1C67BE5AE7E0F313127DFD50"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\chat\\TranscriptView.tsx",
+    "sha256": "6DA51788C890F3BBB095B22ACDEDFB81F1BDCD54578A2A71DBFA8E58DF83F9F7"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\chat\\MarkdownText.tsx",
+    "sha256": "D040A80AD5B703CC6263538EBA2542D59E4654C711FF46FCC554D14C2F06A3D9"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\PlaceholderContent.tsx",
+    "sha256": "D6102C58995652432BCDC142764C9311AABAB6D47E3FF8DD385F2BCB75955069"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\Sidebar.tsx",
+    "sha256": "205D43CBE2E2BB1D9EE829D8A5ECAA1E3347EE9235F68DB6C7CD6A7315833EAB"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\preview\\BrowserPreview.tsx",
+    "sha256": "E9F82A454B65A9B3CA5D5BD899FA8C19FF66847BC8E95DE9A1C5CB483D595600"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\Toggle.tsx",
+    "sha256": "3AF119131F0223CE33F97F9CB837EFFE8E4C2683703BDA078FD2BBFD6127A94B"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\workspace\\SironaSidebar.tsx",
+    "sha256": "F2FD8AEA544FB8C9540AECE25253BA2C030EE0389214315526A5AA84989A8DB2"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\workspace\\SironaNavRail.tsx",
+    "sha256": "F3EC979CC4E1FF77D29A1E7926F3C3EBDD62201A5C0D12BB43C8BB20A2E4EF12"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\workspace\\SironaMainView.tsx",
+    "sha256": "772F30FD94445DC4309583CEEFEBBB3974E88FAB312B4BD4886E16C7CFA7A571"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\layout\\AppLayout.tsx",
+    "sha256": "8EEFD22705CD3D66FA161FB601C3834C9E90AA2D115219C6E6998156C895C201"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\WorkflowPanels.tsx",
+    "sha256": "04BFE1F17AFA80AE56EDB0D722F081A62A5C686198503D623D8D8F4DFD69016E"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\WindowsReleaseRecoveryPanel.tsx",
+    "sha256": "4B65C994D2BA3C6481E47F87324EAF8FD94A3965845F29B9F4C935345B74B487"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\VerificationPanel.tsx",
+    "sha256": "B83981AA01B12762B7C48B8810238CE93B05C8A0B3CCB90C08AA9C15038BD31A"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\ToolInspectionPanel.tsx",
+    "sha256": "A7F0AD96150C30E3A55114DA7485BF83C25AB91A3E75057626A54E4A611EFC6E"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\SironaSettingsView.tsx",
+    "sha256": "64DC064D03B07810D8DA5E5B628404147004E1C4258D028CB269916AE5E4F9BD"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\SettingsView.tsx",
+    "sha256": "4F7DC8F4A25DF738D02E075443EC3C3FFD481EF01583A7D4C91D5BC9573E45E1"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\SchedulesEventsPanel.tsx",
+    "sha256": "40A5E32C2F39ACD54EC3510D7EFCE3300C62FF1F6C34D3A53E0F6501B4EBD9E5"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\ProductPanels.tsx",
+    "sha256": "676BFC667AF9AB169A471914F6F2BC42938D169FFE06DABE7EC6E5AFF9765532"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\ModelProvidersPanel.tsx",
+    "sha256": "F08E688A05AE48CDB4156ABA16CC07B738402EF33B7BBCF12043767C2291389B"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\MemoryKnowledgePanel.tsx",
+    "sha256": "62475E89CDBFCAB03FEDA6A7C539EAF5EFCFADC3E9A2A61F72D93E583E15C4C0"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\LiveSettings.tsx",
+    "sha256": "0D859CF6D257041A98660A6FE05E222E2E5EB4C836B51BBC0A357C8AE4786A7C"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\DeploymentBrowserQAPanel.tsx",
+    "sha256": "B3B6030AA370F43366043CE7ECD3D9B87C601D517AED4406F24BC998910B8573"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\ConversationNotes.tsx",
+    "sha256": "78CD90805E6DB0CC38E9794CCCBF5BE1D5D9039BC9FBA0D72329ACACE7300D66"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\AutonomousWorkflowPanel.tsx",
+    "sha256": "576854564214A2282148A972E882C1934ACA8A244644C6BB14E7CA740661B841"
+  },
+  {
+    "path": "frontend/sirona\\src\\components\\settings\\AssetMetadataPanel.tsx",
+    "sha256": "F9339A045D20D6296BBC73AF0ADF6D0FB8221431200C72F193D8A2822AD8CBE6"
+  }
+]

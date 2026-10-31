@@ -1,0 +1,62 @@
+{
+  "recordedAt": "2026-10-28T16:10:17.560Z",
+  "phase": "P1",
+  "scopedVerification": "passed",
+  "productionRollout": false,
+  "approval": {
+    "sourceAndDependencies": "Explicit owner P1 approval",
+    "testMigration": "Explicit owner approval: 022 only on sirona_workspace_p0_test_20261028",
+    "workingMigration": "NOT APPROVED"
+  },
+  "newIntegration": {
+    "tests": 17,
+    "passed": 17,
+    "failed": 0
+  },
+  "existingRegression": {
+    "tests": 72,
+    "passed": 72,
+    "failed": 0
+  },
+  "frontend": {
+    "check": "passed",
+    "lint": "passed",
+    "sseTests": 5,
+    "build": "passed",
+    "designChanged": false
+  },
+  "typedSource": {
+    "strictBuild": "passed",
+    "compiler": "TypeScript 6.0.3",
+    "validation": "Zod 4.6.7 under zod-v4 npm alias",
+    "database": "Drizzle 0.45.4 over existing pg transaction owner"
+  },
+  "scopedLint": "passed",
+  "syntax": {
+    "roots": 163,
+    "failed": 0
+  },
+  "dependencyVulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "fullStatic": {
+    "result": "failed-pre-existing",
+    "baseline": 43,
+    "current": 39,
+    "introduced": 0,
+    "waived": false
+  },
+  "fullRepositoryProductionQualification": false,
+  "remainingGates": [
+    "Production SQL 022 application/activation not approved",
+    "P2 protected credential scope not approved",
+    "P3 supported Hyper-V host/privileged helper required",
+    "Pre-existing legacy/static debt must be resolved in approved domain migrations or P8"
+  ],
+  "cleanup": "Only two hash-identical generated .log duplicates removed; .txt retained; no product folder removed"
+}

@@ -1,0 +1,57 @@
+{
+  "fontFamilies": {
+    "primary": "OpenAI Sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "editor": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace",
+    "terminal": "ui-monospace, Consolas, 'Courier New', monospace"
+  },
+  "weights": {
+    "normal": 400,
+    "editorMedium": 430,
+    "labelMedium": 510,
+    "headingBold": 590
+  },
+  "density": "High density (compact row heights, tabular digits)",
+  "roles": {
+    "toolExecutionRow": {
+      "fontSize": "12px",
+      "fontFamily": "var(--font-mono)",
+      "lineHeight": "18px"
+    },
+    "terminalText": {
+      "fontSize": "12px",
+      "fontFamily": "var(--font-mono)",
+      "lineHeight": "16px"
+    },
+    "diffAdded": {
+      "fontSize": "12px",
+      "fontFamily": "var(--font-mono)",
+      "color": "#04bb9f"
+    },
+    "diffDeleted": {
+      "fontSize": "12px",
+      "fontFamily": "var(--font-mono)",
+      "color": "#fa423e"
+    },
+    "worktreeDropdown": {
+      "fontSize": "12px",
+      "fontWeight": "500",
+      "lineHeight": "16px"
+    },
+    "fileTreeItem": {
+      "fontSize": "13px",
+      "fontWeight": "400",
+      "lineHeight": "18px"
+    },
+    "approvalHeading": {
+      "fontSize": "14px",
+      "fontWeight": "600",
+      "lineHeight": "20px"
+    },
+    "commandPill": {
+      "fontSize": "11px",
+      "fontWeight": "500",
+      "fontFamily": "var(--font-mono)",
+      "lineHeight": "14px"
+    }
+  }
+}

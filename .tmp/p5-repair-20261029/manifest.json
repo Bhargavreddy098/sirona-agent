@@ -1,0 +1,86 @@
+[
+  {
+    "file": "backend/src/orchestration/activityAdapter.ts",
+    "sha256": "3eaa8092dccbaa4612d5ae5f69f3cba34acfa7b049a10dd516fb23c4d73117fb"
+  },
+  {
+    "file": "backend/src/orchestration/checkpointAdapter.ts",
+    "sha256": "0d535806c26b1c83a43325482e67c82bfadfc418eb7a52df3e3912889b2ccc48"
+  },
+  {
+    "file": "backend/src/orchestration/delegationService.ts",
+    "sha256": "32dce722056fc59def164497d7c235591cea9214fc5847ef3ad7a5165313d3e9"
+  },
+  {
+    "file": "backend/src/orchestration/executionService.js",
+    "sha256": "d25fc05ba2ea473b27f393c9a17685e3d2f9033613699598db0cd76aced5dbb9"
+  },
+  {
+    "file": "backend/src/orchestration/graphContracts.ts",
+    "sha256": "f988e1c5ae41d06e7caf1dcd15ed20906205c82ffd97d68398abe5c6283bf5ce"
+  },
+  {
+    "file": "backend/src/orchestration/graphRuntime.ts",
+    "sha256": "393c09a40d8d5c4cbcea2c8c89fcf472c80ccba39b52db11c8b175972f4240ee"
+  },
+  {
+    "file": "backend/src/orchestration/workspaceGraph.ts",
+    "sha256": "f628328569af2a407f9483eca586a86503f63db80829c1d5c8e447ee6b476cb4"
+  },
+  {
+    "file": "backend/tests/delegationPolicy.test.ts",
+    "sha256": "dd5454eef3ae17c9b63c2197ce7d069cb7d38d3881b751965419f01b26750e6a"
+  },
+  {
+    "file": "backend/tests/graphCheckpoint.test.ts",
+    "sha256": "ce9e0d86e41e7c3079dae25ce37f01006f2da092d92a1899fc647ec374364a20"
+  },
+  {
+    "file": "backend/tests/orchestrationRecovery.test.ts",
+    "sha256": "7d7e3c584b7dc740a0afaf68dbe5a500b021c71916378004c1649f6bc5435fc4"
+  },
+  {
+    "file": "backend/tests/orchestrationWorkflow.test.ts",
+    "sha256": "cf7b903e5340193db575021db2f5333c7052230e88cfbecb1be53acbae1ef27e"
+  },
+  {
+    "file": "backend/services/executionService.js",
+    "sha256": "bea0c49c12700d18fd3a44f6425279752866169b643df35bdfca150a31fa5c26"
+  },
+  {
+    "file": "backend/services/workflowOrchestratorService.js",
+    "sha256": "ee429ec38ee33cc2e10171daa313e565c0801ff2bd74b2f1407e0d63bc0eb828"
+  },
+  {
+    "file": "backend/routes/v1/execution.routes.js",
+    "sha256": "5f3e6af3a13ae0c3262485259ab0d8d1ca5535cdededaea111dd92e381206897"
+  },
+  {
+    "file": "backend/foundation/production.js",
+    "sha256": "c3558ebf7c5eb929c95b84080be78591e4413e96bebfe49884d32a2109ed2003"
+  },
+  {
+    "file": "backend/package.json",
+    "sha256": "08bf7723d2d8d19d0e48f6b0adfdcea9233e4e6c1246dcd7a4436f0d51d99405"
+  },
+  {
+    "file": "backend/package-lock.json",
+    "sha256": "7a33bfcd9b84694a6b2a6284a7eb3201eb76eaecb0fed7011b51c348c2e3f59f"
+  },
+  {
+    "file": "docs/SIRONA-AGENT-HANDOFF.md",
+    "sha256": "032b4b2135fbab7ab28a71a907b689a57682ed4fabbabf9ccd893227653fcdeb"
+  },
+  {
+    "file": "docs/SIRONA-WORKSPACE-P5-REPORT.md",
+    "sha256": "f31aeb5a2a51ff927270861561e419d74fa950b520830b5d28e445a20f6a2a10"
+  },
+  {
+    "file": "docs/SIRONA-WORKSPACE-LEDGER.md",
+    "sha256": "2cc4e90a2aa4a7da5a4c30caa818274d60c7347106ee663e91381b9284088e35"
+  },
+  {
+    "file": "docs/SIRONA-WORKSPACE-TECHNOLOGY-LEDGER.md",
+    "sha256": "55895d3f872e4ba49c34335508413e8faaac3515d5d3c64716fc3923157bd488"
+  }
+]

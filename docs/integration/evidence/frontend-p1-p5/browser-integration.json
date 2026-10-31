@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-10-30T02:23:04.730Z",
+  "status": "passed",
+  "database": "sirona_workspace_p0_test_20261028",
+  "checks": [
+    "Real saved run/tasks/agent data rendered; large durable event ID received",
+    "SSE reconnect preserves decimal cursor; pause is persisted by the canonical API",
+    "Resume uses saved checkpoint/current epoch",
+    "Real root registration/grants and temporary source bytes/digest displayed",
+    "Canonical requirement/plan/contract revisions and actual repository snapshot rendered without repointing existing run pins",
+    "Existing canonical contract request/decision route exercised; no run or inference started",
+    "Wrong nonce rejected and cleared; exact valid approval decision persisted",
+    "Actual worker inventory and terminal preparation boundary shown without fabricated PTY",
+    "Actual browser xterm.js → authenticated WS → approved Docker PTY input/output; no model or host shell",
+    "Run-scoped recovery requires explicit confirmation; Escape preserves the live guest",
+    "Browser close confirmed by backend termination and lease cleanup before navigation unlock",
+    "390px workspace/files layout has no horizontal document overflow",
+    "Cancel stays usable during controlled in-flight execute transport; real cancel persisted, no inference dispatched",
+    "Session revocation automatically removes workspace controls and closes live reads"
+  ],
+  "pageErrors": [],
+  "inferenceCalls": 0,
+  "migrationsApplied": 0,
+  "limitations": [
+    "Test-only bootstrap bridge; does not requalify native credential storage",
+    "Execute response deliberately controlled and never forwarded; not model inference evidence",
+    "Guest changes are quarantined previews; terminal-close does not authorize host patch application"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "database": "sirona_workspace_p0_test_20261028",
+  "status": "approved_and_verified",
+  "created": true,
+  "allowWorkingDatabase": false,
+  "requiredBeforeProvisioning": [
+    "Explicit owner approval naming the disposable database and migrations 001–021",
+    "Confirm target does not already exist; refuse to overwrite or drop it",
+    "Use same local PostgreSQL server, new database only; no cluster/service/role changes"
+  ],
+  "guard": "Exact target name must match before every migration/test write; prevent DATABASE_URL/.env fallback to sirona",
+  "initialization": "Existing migrations 001–021 only after approval; dedicated fresh target, no production data copy",
+  "testScope": "Scoped standalone/project/auth/CSRF/ownership/lease/fault-injection tests; no paid-provider inference claimed",
+  "cleanup": "Keep dedicated target for P1; no DROP without separate owner instruction",
+  "deferral": "P0 can close with explicit owner deferral; integration tests remain unverified until approved provisioning",
+  "restore": "P0 encrypted dump is not restored into working sirona; any restore uses a separately approved new database",
+  "approval": "Owner Yes proceed following named P0 target/migrations request; no blanket protected-phase authority",
+  "verifiedSuite": "standaloneChat.test.js: 6 passed, 0 failed"
+}

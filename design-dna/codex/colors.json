@@ -1,0 +1,41 @@
+{
+  "canvas": {
+    "light": "#ffffff",
+    "dark": "#181818"
+  },
+  "sidebar": {
+    "light": "#f3f3f3",
+    "dark": "#141414"
+  },
+  "terminal": {
+    "bg": "#0d0d0d",
+    "fg": "#f9f9f9",
+    "ansiRed": "#e05555",
+    "ansiGreen": "#28a745",
+    "ansiYellow": "#d69e2e",
+    "ansiBlue": "#3182ce",
+    "ansiMagenta": "#9f7aea",
+    "ansiCyan": "#319795"
+  },
+  "diff": {
+    "addedBg": "rgba(4, 187, 159, 0.12)",
+    "addedBorder": "#04bb9f",
+    "deletedBg": "rgba(250, 66, 62, 0.12)",
+    "deletedBorder": "#fa423e",
+    "lineNumberFg": "rgba(255, 255, 255, 0.35)"
+  },
+  "git": {
+    "modified": "#e39f20",
+    "staged": "#04bb9f",
+    "untracked": "#3566f0",
+    "conflict": "#fa423e"
+  },
+  "approvalCard": {
+    "bgLight": "#ffffff",
+    "bgDark": "#212121",
+    "borderLight": "1px solid rgba(0, 0, 0, 0.14)",
+    "borderDark": "1px solid rgba(255, 255, 255, 0.14)",
+    "riskBadgeBg": "rgba(250, 66, 62, 0.12)",
+    "riskBadgeFg": "#fa423e"
+  }
+}

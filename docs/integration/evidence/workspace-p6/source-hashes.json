@@ -1,0 +1,102 @@
+{
+  "timestamp": "2026-10-30T10:25:44.441Z",
+  "scope": "Gate A source and build/test inputs; image admission unchanged; no UI files changed by this slice",
+  "files": [
+    {
+      "file": "backend/.npmrc",
+      "sha256": "3b64e070b1b3fdaf53c74b78add4e5536ce1689cf0528b845a5ec644c9506bf2"
+    },
+    {
+      "file": "backend/package-lock.json",
+      "sha256": "a6bba7aa8d39378e9d5b7181938a85296a51fd742140a8c17ba19b95fd5ef602"
+    },
+    {
+      "file": "backend/package.json",
+      "sha256": "cd8f83e8ae8df14b0bc97a9e2bfc5214a8a39eba31c10f74a92e69a8b5ccfe15"
+    },
+    {
+      "file": "backend/scripts/verifyP6Free.mjs",
+      "sha256": "83444b26dc66a29fd1e9017fa5dcee58be578a26b74015ff11c01f819bedbaf3"
+    },
+    {
+      "file": "backend/services/contextEngineService.js",
+      "sha256": "949dec4989afe5e30f60502d9b58c0045795ac6a654482f347e125314f264106"
+    },
+    {
+      "file": "backend/services/toolRuntimeService.js",
+      "sha256": "44b8c2ffc745f6083337e24ad8d3910a2520676a5c442bde112d7af53c35f55d"
+    },
+    {
+      "file": "backend/src/context/contextAssembler.ts",
+      "sha256": "7b07f78fd6546a3ca2fcf3f0208260f62feba7f1d16b076659efd7b4fd728a1d"
+    },
+    {
+      "file": "backend/src/context/contextContracts.ts",
+      "sha256": "c08a147a2537278dcb12e72400df667014fadfc2f7fbf17033b2fa488d623686"
+    },
+    {
+      "file": "backend/src/context/parserWorker.ts",
+      "sha256": "c0bb066f61469cc5e15d9fd4b7c10391547df95a63e2873ac1fce4b323c5a0b2"
+    },
+    {
+      "file": "backend/src/context/projectIndex.ts",
+      "sha256": "c35f93f13530cd523167b5d59e0033680506acaaf7440f344293a66db1423956"
+    },
+    {
+      "file": "backend/src/orchestration/activityAdapter.ts",
+      "sha256": "5c3fb9de25ebbfba6c164a695c0596ef8066aa79fc1a2101920356de53e619a5"
+    },
+    {
+      "file": "backend/src/orchestration/graphRuntime.ts",
+      "sha256": "d96c5d36507d7ac54b0dfc5dd145b5628def144501411e6a3bc25e8cdee52ac5"
+    },
+    {
+      "file": "backend/src/tools/gitAdapter.ts",
+      "sha256": "57ee14612c21d92f5405d3b4e596f75a766aa146300c8d7aa1a45c77a8c86db8"
+    },
+    {
+      "file": "backend/src/tools/guestTransport.ts",
+      "sha256": "217f9008d61e21be114893b83ddc294f2ea29c6e3e7519007f6282d7b0e1971f"
+    },
+    {
+      "file": "backend/src/tools/lspAdapter.ts",
+      "sha256": "9e7f9e9b8a907856b4bbec046d5b1c2b8955f9206d052bc81ba5eac6a152e102"
+    },
+    {
+      "file": "backend/src/tools/mcpAdapter.ts",
+      "sha256": "2370c813c7a46e9ac2c21c48315c9306d25716112bf6a139a8cbb158c0c4447a"
+    },
+    {
+      "file": "backend/src/tools/searchAdapter.ts",
+      "sha256": "226a6c6cb597b7291b51285714ea850a05d6c98c9f03ab22098c8370650bd8d4"
+    },
+    {
+      "file": "backend/src/tools/toolContracts.ts",
+      "sha256": "2d108a2056018bb60d9aaafdf392276627e2383270088cf6c50b12964ac1ab09"
+    },
+    {
+      "file": "backend/src/windows/dockerRuntime.ts",
+      "sha256": "e52989e1a6baa113e86880e44f41f9e11cd913e218beec2f4e5c968454dad516"
+    },
+    {
+      "file": "backend/tests/contextIsolation.test.ts",
+      "sha256": "20a5c6c7955747969c93c34327be74bf3e482e544f16948a4aa88ebb215bb8bb"
+    },
+    {
+      "file": "backend/tests/gitWorkspace.test.ts",
+      "sha256": "de4cd6482c574dd76a9cee17f5a5b073c4f922e3323e2a703c6a86281c25717f"
+    },
+    {
+      "file": "backend/tests/mcpAuthorization.test.ts",
+      "sha256": "dc19cdd6d869e32abe925978313c3bef0e610a2c3b410bf535433aee2832ed70"
+    },
+    {
+      "file": "backend/tests/p6CanonicalJourney.test.ts",
+      "sha256": "fc1c29ab25da5502aa3500b3c45f6f4bdfc5b9b91415d409fdd6052d761e9766"
+    },
+    {
+      "file": "backend/tsconfig.workspace.json",
+      "sha256": "9c58e4fc5aa8c08564000f7cc64f5a84e4093b096b21db49a30ce0cade01ef61"
+    }
+  ]
+}

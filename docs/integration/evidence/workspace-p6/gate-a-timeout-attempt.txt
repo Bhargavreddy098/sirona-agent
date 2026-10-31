@@ -1,0 +1,74 @@
+TAP version 13
+# Subtest: P6 actual WASM parser finds JS/TS/TSX definitions/imports and fails closed on unqualified SQL
+not ok 1 - P6 actual WASM parser finds JS/TS/TSX definitions/imports and fails closed on unqualified SQL
+  ---
+  duration_ms: 5093.1547
+  type: 'test'
+  location: 'C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend\\dist-workspace\\tests\\contextIsolation.test.js:12:1'
+  failureType: 'testCodeFailure'
+  error: 'PARSE_TIMEOUT'
+  code: 'PARSE_TIMEOUT'
+  name: 'P6Error'
+  stack: |-
+    Timeout.<anonymous> (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/backend/dist-workspace/src/context/projectIndex.js:31:108)
+    listOnTimeout (node:internal/timers:635:17)
+    process.processTimers (node:internal/timers:571:7)
+  ...
+# Subtest: P6 snapshot capture actually invalidates after a source edit; watcher shutdown and revocation fail closed
+ok 2 - P6 snapshot capture actually invalidates after a source edit; watcher shutdown and revocation fail closed
+  ---
+  duration_ms: 1362.5779
+  type: 'test'
+  ...
+# Subtest: P6 real PostgreSQL source context is contract-bound, source-fresh, private and revocable
+not ok 3 - P6 real PostgreSQL source context is contract-bound, source-fresh, private and revocable
+  ---
+  duration_ms: 49187.1637
+  type: 'test'
+  location: 'C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\backend\\dist-workspace\\tests\\contextIsolation.test.js:59:1'
+  failureType: 'testTimeoutFailure'
+  error: 'test timed out after 30000ms'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: P6 Git is restricted to read operations with literal paths, hooks/helpers/network disabled
+ok 4 - P6 Git is restricted to read operations with literal paths, hooks/helpers/network disabled
+  ---
+  duration_ms: 33.7476
+  type: 'test'
+  ...
+# Subtest: P6 ripgrep arguments treat query literally and bound validated search results
+ok 5 - P6 ripgrep arguments treat query literally and bound validated search results
+  ---
+  duration_ms: 4.3724
+  type: 'test'
+  ...
+# Subtest: P6 real MCP SDK discovers exact schema and calls through bounded byte transport
+ok 6 - P6 real MCP SDK discovers exact schema and calls through bounded byte transport
+  ---
+  duration_ms: 397.7727
+  type: 'test'
+  ...
+# Subtest: P6 SDK rejects schema drift and does not call the tool
+ok 7 - P6 SDK rejects schema drift and does not call the tool
+  ---
+  duration_ms: 154.8182
+  type: 'test'
+  ...
+# Subtest: P6 validates nested arguments and rechecks authorization before SDK dispatch
+ok 8 - P6 validates nested arguments and rechecks authorization before SDK dispatch
+  ---
+  duration_ms: 137.5294
+  type: 'test'
+  ...
+# Subtest: P6 protocol limits reject invalid data and terminate the owned channel
+ok 9 - P6 protocol limits reject invalid data and terminate the owned channel
+  ---
+  duration_ms: 3.1218
+  type: 'test'
+  ...
+# Subtest: P6 idle protocol revocation terminates the owned channel once and rejects later writes
+ok 10 - P6 idle protocol revocation terminates the owned channel once and rejects later writes
+  ---
+  duration_ms: 1025.2365
+  type: 'test'
+  ...

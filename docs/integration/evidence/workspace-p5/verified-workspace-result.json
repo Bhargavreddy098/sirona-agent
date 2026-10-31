@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-10-29T10:53:58.000Z",
+  "phase": "P5",
+  "command": "npm --prefix backend run test:workspace",
+  "totalTests": 91,
+  "passed": 91,
+  "failed": 0,
+  "skipped": 0,
+  "durationMs": 188307.09,
+  "exitCode": 0
+}

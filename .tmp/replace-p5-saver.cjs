@@ -1,0 +1,1 @@
+const fs=require('node:fs');const p='backend/src/orchestration/checkpointAdapter.ts';let text=fs.readFileSync(p,'utf8');text=text.slice(0,text.indexOf('/**\n * LangGraph BaseCheckpointSaver'));text+=fs.readFileSync('.tmp/p5-saver-body.txt','utf8');fs.writeFileSync(p,text);

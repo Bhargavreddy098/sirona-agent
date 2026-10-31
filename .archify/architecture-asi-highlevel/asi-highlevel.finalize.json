@@ -1,0 +1,1088 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-27T05:53:10.267Z",
+  "specification": {
+    "path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\candidate.json",
+    "sha256": "114643aa00b386f0c2d61a9255d315a5a187e116c5e18e329a1200077793db87",
+    "bytes": 4265
+  },
+  "artifact": {
+    "path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.html",
+    "sha256": "e94c0cc99a4ca57306953e6ee03635c985238552c3f214ac7a59af1932ce3ab0",
+    "bytes": 770959
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\bharg\\.claude\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\candidate.json",
+        "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "114643aa00b386f0c2d61a9255d315a5a187e116c5e18e329a1200077793db87",
+          "bytes": 4265
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 7881,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\bharg\\.claude\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\candidate.json",
+        "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "d85c55f3-1dfb-44b7-9bc1-70f5e556c16c",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\candidate.json",
+        "output": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.html",
+        "specification": {
+          "sha256": "114643aa00b386f0c2d61a9255d315a5a187e116c5e18e329a1200077793db87",
+          "bytes": 4265
+        },
+        "artifact": {
+          "sha256": "e94c0cc99a4ca57306953e6ee03635c985238552c3f214ac7a59af1932ce3ab0",
+          "bytes": 770959
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 415,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\bharg\\.claude\\skills\\archify\\bin\\archify.mjs",
+        "check",
+        "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.html",
+        "artifact": {
+          "sha256": "e94c0cc99a4ca57306953e6ee03635c985238552c3f214ac7a59af1932ce3ab0",
+          "bytes": 770959
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 3,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 6,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 7.024468085106383,
+            "maxBends": 4,
+            "routesOverSuggestedBends": 4,
+            "maxStretch": 1.317,
+            "routesOverSuggestedStretch": 0,
+            "minSegmentPx": 16.6,
+            "minInteriorSegmentPx": 16.6,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [
+              {
+                "left": {
+                  "from": "model-router",
+                  "to": "provider-registry",
+                  "label": "dispatch",
+                  "collectionIndex": 4,
+                  "artifactIndex": 5
+                },
+                "right": {
+                  "from": "orchestrator",
+                  "to": "task-runtime",
+                  "label": "dispatch tasks",
+                  "collectionIndex": 5,
+                  "artifactIndex": 6
+                },
+                "point": [
+                  349.99999999999994,
+                  795.9999999999999
+                ]
+              },
+              {
+                "left": {
+                  "from": "execution-runtimes",
+                  "to": "verification-engine",
+                  "label": "results/artifacts",
+                  "collectionIndex": 8,
+                  "artifactIndex": 9
+                },
+                "right": {
+                  "from": "memory-platform",
+                  "to": "data-plane",
+                  "label": "pgvector",
+                  "collectionIndex": 11,
+                  "artifactIndex": 12
+                },
+                "point": [
+                  333,
+                  1370
+                ]
+              },
+              {
+                "left": {
+                  "from": "verification-engine",
+                  "to": "orchestrator",
+                  "label": "PASS/FAIL/UNKNOWN",
+                  "collectionIndex": 9,
+                  "artifactIndex": 10
+                },
+                "right": {
+                  "from": "orchestrator",
+                  "to": "memory-platform",
+                  "label": "read/write",
+                  "collectionIndex": 10,
+                  "artifactIndex": 11
+                },
+                "point": [
+                  16,
+                  656.7272727272727
+                ],
+                "sharedNode": "orchestrator"
+              }
+            ],
+            "detours": [
+              {
+                "relationship": {
+                  "from": "orchestrator",
+                  "to": "model-router",
+                  "label": "model selection",
+                  "collectionIndex": 3,
+                  "artifactIndex": 4
+                },
+                "bends": 3,
+                "stretch": 1.183
+              },
+              {
+                "relationship": {
+                  "from": "model-router",
+                  "to": "provider-registry",
+                  "label": "dispatch",
+                  "collectionIndex": 4,
+                  "artifactIndex": 5
+                },
+                "bends": 3,
+                "stretch": 1
+              },
+              {
+                "relationship": {
+                  "from": "execution-runtimes",
+                  "to": "verification-engine",
+                  "label": "results/artifacts",
+                  "collectionIndex": 8,
+                  "artifactIndex": 9
+                },
+                "bends": 4,
+                "stretch": 1
+              },
+              {
+                "relationship": {
+                  "from": "verification-engine",
+                  "to": "orchestrator",
+                  "label": "PASS/FAIL/UNKNOWN",
+                  "collectionIndex": 9,
+                  "artifactIndex": 10
+                },
+                "bends": 4,
+                "stretch": 1.317
+              }
+            ]
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 16,
+            "emptyTopRatio": 0.009,
+            "occupiedTop": 16,
+            "viewBoxTop": 0,
+            "canvasHeight": 1748,
+            "typicalNodeHeight": 60,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "legacy-930",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 930,
+            "actualBudgetPx": 930,
+            "limit": "legacy",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": false,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "node",
+              "id": "verification-engine"
+            },
+            "minimumSourceTextPx": 7.1,
+            "minimumProjectedTextPx": 7.024468085106383,
+            "semanticTextCount": 37
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "d85c55f3-1dfb-44b7-9bc1-70f5e556c16c"
+      }
+    },
+    "browser-check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 7428,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\bharg\\.claude\\skills\\archify\\bin\\archify.mjs",
+        "browser-check",
+        "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "pass",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "d85c55f3-1dfb-44b7-9bc1-70f5e556c16c",
+        "artifact": {
+          "path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.html",
+          "sha256": "e94c0cc99a4ca57306953e6ee03635c985238552c3f214ac7a59af1932ce3ab0",
+          "bytes": 770959
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "available",
+          "executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+        },
+        "diagnostics": [],
+        "containment": {
+          "status": "pass",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": [
+            {
+              "width": 1440,
+              "height": 900,
+              "theme": "light",
+              "innerWidth": 1440,
+              "innerHeight": 900,
+              "scrollWidth": 1440,
+              "scrollHeight": 1932,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 970,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 12,
+                "headerPx": 94,
+                "diagramChromePx": 78,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1600,
+              "height": 1000,
+              "theme": "light",
+              "innerWidth": 1600,
+              "innerHeight": 1000,
+              "scrollWidth": 1600,
+              "scrollHeight": 1998,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 970,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 102,
+                "diagramChromePx": 84,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1920,
+              "height": 1080,
+              "theme": "light",
+              "innerWidth": 1920,
+              "innerHeight": 1080,
+              "scrollWidth": 1920,
+              "scrollHeight": 1998,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 970,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 102,
+                "diagramChromePx": 84,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 2048,
+              "height": 1320,
+              "theme": "light",
+              "innerWidth": 2048,
+              "innerHeight": 1320,
+              "scrollWidth": 2048,
+              "scrollHeight": 2016,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 990,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 110,
+                "diagramChromePx": 94,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 44,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            }
+          ]
+        },
+        "themeStates": {
+          "status": "pass",
+          "viewports": [
+            {
+              "width": 1440,
+              "height": 900,
+              "requestedTheme": "light",
+              "resolvedTheme": "light",
+              "ok": true
+            },
+            {
+              "width": 1600,
+              "height": 1000,
+              "requestedTheme": "light",
+              "resolvedTheme": "light",
+              "ok": true
+            },
+            {
+              "width": 1920,
+              "height": 1080,
+              "requestedTheme": "light",
+              "resolvedTheme": "light",
+              "ok": true
+            },
+            {
+              "width": 2048,
+              "height": 1320,
+              "requestedTheme": "light",
+              "resolvedTheme": "light",
+              "ok": true
+            },
+            {
+              "width": 1440,
+              "height": 900,
+              "requestedTheme": "dark",
+              "resolvedTheme": "dark",
+              "ok": true
+            },
+            {
+              "width": 2048,
+              "height": 1320,
+              "requestedTheme": "dark",
+              "resolvedTheme": "dark",
+              "ok": true
+            }
+          ]
+        },
+        "readability": {
+          "status": "pass",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": [
+            {
+              "width": 1440,
+              "height": 900,
+              "theme": "light",
+              "innerWidth": 1440,
+              "innerHeight": 900,
+              "scrollWidth": 1440,
+              "scrollHeight": 1932,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 970,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 12,
+                "headerPx": 94,
+                "diagramChromePx": 78,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1600,
+              "height": 1000,
+              "theme": "light",
+              "innerWidth": 1600,
+              "innerHeight": 1000,
+              "scrollWidth": 1600,
+              "scrollHeight": 1998,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 970,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 102,
+                "diagramChromePx": 84,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1920,
+              "height": 1080,
+              "theme": "light",
+              "innerWidth": 1920,
+              "innerHeight": 1080,
+              "scrollWidth": 1920,
+              "scrollHeight": 1998,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 970,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 102,
+                "diagramChromePx": 84,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 2048,
+              "height": 1320,
+              "theme": "light",
+              "innerWidth": 2048,
+              "innerHeight": 1320,
+              "scrollWidth": 2048,
+              "scrollHeight": 2016,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 990,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 110,
+                "diagramChromePx": 94,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 44,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            }
+          ]
+        },
+        "viewerChrome": {
+          "status": "pass",
+          "viewports": [
+            {
+              "width": 1440,
+              "height": 900,
+              "theme": "light",
+              "innerWidth": 1440,
+              "innerHeight": 900,
+              "scrollWidth": 1440,
+              "scrollHeight": 1932,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 970,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 12,
+                "headerPx": 94,
+                "diagramChromePx": 78,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1600,
+              "height": 1000,
+              "theme": "light",
+              "innerWidth": 1600,
+              "innerHeight": 1000,
+              "scrollWidth": 1600,
+              "scrollHeight": 1998,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 970,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 102,
+                "diagramChromePx": 84,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 1920,
+              "height": 1080,
+              "theme": "light",
+              "innerWidth": 1920,
+              "innerHeight": 1080,
+              "scrollWidth": 1920,
+              "scrollHeight": 1998,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 970,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 102,
+                "diagramChromePx": 84,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 54,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            },
+            {
+              "width": 2048,
+              "height": 1320,
+              "theme": "light",
+              "innerWidth": 2048,
+              "innerHeight": 1320,
+              "scrollWidth": 2048,
+              "scrollHeight": 2016,
+              "overflowX": false,
+              "overflowY": true,
+              "verticalScrollAccepted": true,
+              "overflowDisposition": "readable-vertical-scroll",
+              "readerLayout": "adaptive",
+              "readerOverflow": "authored",
+              "readerFit": "intrinsic-height",
+              "ok": true,
+              "readerWidth": 990,
+              "diagramWidth": 940,
+              "pageComposition": {
+                "bodyPaddingPx": 64,
+                "headerPx": 110,
+                "diagramChromePx": 94,
+                "svgPx": 1748,
+                "cardsPx": 0,
+                "viewBoxHeight": 1748
+              },
+              "viewBoxWidth": 940,
+              "minimumProjectedNodeTextPx": 7.1,
+              "minimumProjectedNonEdgeTextPx": 7.1,
+              "minimumProjectedEdgeTextPx": 8,
+              "minimumProjectedNodeText": "Tests / build / API / DB / security / UX / acceptance / completion",
+              "minimumProjectedNodeTextDetail": "context",
+              "minimumProjectedNodeTextOwner": {
+                "kind": "node",
+                "id": "verification-engine"
+              },
+              "minimumRequiredNodeTextPx": 6,
+              "readabilityOk": true,
+              "hasLegend": true,
+              "hasNavigationDock": true,
+              "legendDockIntersectionArea": 0,
+              "dockStageIntersectionArea": 0,
+              "dockStageGap": 10,
+              "requiredDockStageGap": 10,
+              "viewerChromeStageOk": true,
+              "viewerChromeReserve": 44,
+              "viewerChromeActive": true,
+              "viewerChromeOk": true,
+              "resolvedTheme": "light"
+            }
+          ]
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "asi-highlevel.browser-check.json",
+          "files": []
+        }
+      }
+    }
+  },
+  "diagnostics": [],
+  "evidence": {
+    "receipt": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.finalize.json",
+    "summaryReceipt": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.finalize-summary.json",
+    "browserCheckReceipt": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-highlevel\\asi-highlevel.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "finishedAt": "2026-10-27T05:53:29.687Z",
+  "durationMs": 19420,
+  "update": {
+    "status": "update_available",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.2.0",
+    "releaseNotes": "https://github.com/tt-a1i/archify/releases/tag/v3.2.0",
+    "severity": "normal",
+    "checkedAt": "2026-10-27T02:46:32.988Z",
+    "source": "cache",
+    "noticeRequired": true,
+    "noticeText": "Archify update: 3.0.1 → 3.2.0. A previous check at 2026-10-27T02:46:32.988Z found a newer release. Release notes: https://github.com/tt-a1i/archify/releases/tag/v3.2.0. The installed Skill has not changed; ask to snooze or ignore this reminder.",
+    "eventKey": "archify@sha256:70e210265c59f24dcbdf2a502ff671104b5454e7ee7d3554aecd86bad32384f5"
+  }
+}

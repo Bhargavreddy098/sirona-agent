@@ -1,0 +1,1 @@
+require('node:fs').writeFileSync('backend/src/orchestration/executionService.js',`// Compatibility export only. The canonical lifecycle owner is backend/services/executionService.js.\nexport { ExecutionService, ExecutionServiceError } from '../../services/executionService.js';\n`);

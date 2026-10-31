@@ -1,0 +1,3 @@
+npm notice run sirona-backend@1.0.0 check:static
+npm notice run node scripts/checkStatic.js
+{"event":"static.checked","rootFiles":101,"strict":false,"diagnostics":0}

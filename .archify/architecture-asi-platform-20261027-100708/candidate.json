@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "ASI Platform — High-Level Architecture",
+    "subtitle": "Windows-first, local-first autonomous digital creation platform",
+    "output": ".archify/architecture-asi-platform-20261027-100708/asi-platform.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "user", "type": "external", "label": "User", "sublabel": "Intent / approvals", "pos": [40, 300], "size": [120, 60] },
+    { "id": "intent", "type": "backend", "label": "Intent & Requirements", "sublabel": "Goal discovery", "pos": [220, 300], "size": [150, 64] },
+    { "id": "research", "type": "backend", "label": "Research Engine", "sublabel": "Verified facts", "pos": [220, 140], "size": [150, 60] },
+    { "id": "planning", "type": "backend", "label": "Planning & Build Contract", "sublabel": "20 planning layers", "pos": [430, 300], "size": [160, 64] },
+    { "id": "approval", "type": "security", "label": "Policy & Approval", "sublabel": "Autonomy modes", "pos": [650, 300], "size": [150, 64], "tag": "digest + nonce" },
+    { "id": "orchestrator", "type": "backend", "label": "Orchestrator / Runs", "sublabel": "Durable execution", "pos": [860, 300], "size": [160, 64] },
+    { "id": "modelrouter", "type": "backend", "label": "Model Router", "sublabel": "Capability-aware", "pos": [860, 140], "size": [160, 60] },
+    { "id": "memory", "type": "database", "label": "Memory & Project Intel", "sublabel": "PostgreSQL + pgvector", "pos": [860, 460], "size": [160, 64] },
+    { "id": "toolruntime", "type": "backend", "label": "Tool & Sandbox Runtime", "sublabel": "Scoped capabilities", "pos": [1080, 300], "size": [170, 64] },
+    { "id": "workers", "type": "backend", "label": "Execution Workers", "sublabel": "Codex / Claude / etc.", "pos": [1080, 460], "size": [170, 60] },
+    { "id": "verification", "type": "security", "label": "Verification Engine", "sublabel": "Evidence-backed", "pos": [1310, 300], "size": [160, 64] },
+    { "id": "deployment", "type": "cloud", "label": "Deployment", "sublabel": "Local → cloud", "pos": [1530, 300], "size": [140, 60] }
+
+
+  ],
+  "boundaries": [
+    { "kind": "security-group", "label": "Local Trust Boundary", "wraps": ["user", "intent", "research", "planning", "approval", "orchestrator", "modelrouter", "memory"] },
+    { "kind": "security-group", "label": "Execution Sandbox", "wraps": ["toolruntime", "workers"] }
+  ],
+  "connections": [
+    { "id": "user-intent", "from": "user", "to": "intent", "label": "goal", "variant": "emphasis" },
+    { "id": "research-intent", "from": "research", "to": "intent", "label": "evidence", "fromSide": "bottom", "toSide": "top" },
+    { "id": "intent-planning", "from": "intent", "to": "planning", "label": "spec" },
+    { "id": "planning-approval", "from": "planning", "to": "approval", "label": "contract" },
+    { "id": "approval-orchestrator", "from": "approval", "to": "orchestrator", "label": "approved", "variant": "security" },
+    { "id": "modelrouter-orchestrator", "from": "modelrouter", "to": "orchestrator", "label": "model", "fromSide": "bottom", "toSide": "top" },
+    { "id": "memory-orchestrator", "from": "memory", "to": "orchestrator", "label": "context", "fromSide": "top", "toSide": "bottom" },
+    { "id": "orchestrator-toolruntime", "from": "orchestrator", "to": "toolruntime", "label": "tasks" },
+    { "id": "workers-toolruntime", "from": "workers", "to": "toolruntime", "label": "execute", "fromSide": "top", "toSide": "bottom" },
+    { "id": "toolruntime-verification", "from": "toolruntime", "to": "verification", "label": "results" },
+    { "id": "verification-deployment", "from": "verification", "to": "deployment", "label": "release", "variant": "dashed" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Intelligence", "items": ["Intent → requirements → research → 20-layer planning", "Build Contract approved before execution", "Independent verification decides completion"] },
+    { "dot": "emerald", "title": "Execution", "items": ["Durable runs, tasks, effects, checkpoints", "Scoped tool runtime with sandbox isolation", "Replaceable coding-backend adapters"] },
+    { "dot": "amber", "title": "Governance", "items": ["Four autonomy modes; policy engine", "Secrets never enter model context", "Cost budgets and hard limits"] },
+    { "dot": "rose", "title": "Trust", "items": ["Local trust boundary vs execution sandbox", "Approval digests with one-time nonces", "Evidence-linked verification results"] }
+  ]
+}

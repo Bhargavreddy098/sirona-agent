@@ -1,0 +1,6 @@
+{
+  "approvalAccept": "Instant optimistic state update, button shows checkmark spinner",
+  "fileRowHover": "Right-aligned actions appear, subtle background shift",
+  "diffInlineScrub": "Hovering over line reveals git blame and rollback icons",
+  "toolCardToggle": "Smooth 180ms height transition revealing stdout/stderr logs"
+}

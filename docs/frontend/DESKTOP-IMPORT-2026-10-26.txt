@@ -1,0 +1,1 @@
+Packaged source/build bytes match; tests/operator .env excluded; backend routes resolve without startup.

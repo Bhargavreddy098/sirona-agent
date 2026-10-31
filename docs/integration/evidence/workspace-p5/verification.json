@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-10-29T10:55:00.000Z",
+  "phase": "P5",
+  "scope": "LangGraph Orchestration & Multi-Agent Workflows: bounded parent-to-specialist delegation (max 3 concurrent, max 12 total, no specialist-to-specialist delegation), PostgreSQL checkpoint saver over existing run_checkpoints table (state_data.sironaGraph namespace), independent verification and bounded repair (max 2 critique, max 2 repair), crash recovery classification, and graph workflow lifecycle.",
+  "dependencies": {
+    "@langchain/langgraph": "^0.2.1",
+    "@langchain/langgraph-checkpoint": "~0.0.4"
+  },
+  "modules": [
+    "backend/src/orchestration/graphContracts.ts",
+    "backend/src/orchestration/checkpointAdapter.ts",
+    "backend/src/orchestration/delegationService.ts",
+    "backend/src/orchestration/activityAdapter.ts",
+    "backend/src/orchestration/graphRuntime.ts",
+    "backend/src/orchestration/workspaceGraph.ts",
+    "backend/src/orchestration/executionService.js"
+  ],
+  "verification": {
+    "p5Suites": {
+      "suites": [
+        "backend/tests/graphCheckpoint.test.ts",
+        "backend/tests/delegationPolicy.test.ts",
+        "backend/tests/orchestrationRecovery.test.ts",
+        "backend/tests/orchestrationWorkflow.test.ts"
+      ],
+      "total": 18,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "transcript": "docs/integration/evidence/workspace-p5/verified-p5-tests.txt"
+    },
+    "fullWorkspaceSuite": {
+      "command": "npm --prefix backend run test:workspace",
+      "total": 91,
+      "passed": 91,
+      "failed": 0,
+      "skipped": 0,
+      "durationMs": 188307.09,
+      "transcript": "docs/integration/evidence/workspace-p5/verified-workspace-tests.txt"
+    },
+    "backendTypecheck": {
+      "command": "npm --prefix backend run check:workspace",
+      "passed": true,
+      "errors": 0
+    },
+    "frontendCheck": {
+      "command": "npm --prefix frontend/sirona-next run check",
+      "passed": true,
+      "errors": 0
+    }
+  },
+  "evidenceArtifacts": {
+    "sourceHashes": "docs/integration/evidence/workspace-p5/source-hashes.json",
+    "verifiedP5Tests": "docs/integration/evidence/workspace-p5/verified-p5-tests.txt",
+    "verifiedWorkspaceTests": "docs/integration/evidence/workspace-p5/verified-workspace-tests.txt",
+    "workspaceResult": "docs/integration/evidence/workspace-p5/verified-workspace-result.json"
+  },
+  "acceptanceCriteriaVerified": [
+    {
+      "criterion": "P5-01: LangGraph Engine Integration",
+      "status": "PASS",
+      "details": "Compiled LangGraph StateGraph instance (buildWorkspaceGraph) with StateGraph and Annotation from @langchain/langgraph. State transitions map deterministically across CHOOSE_SPECIALISTS, FANOUT, VALIDATE, CRITIQUE, APPROVAL, EXECUTE, VERIFY, and COMPLETED."
+    },
+    {
+      "criterion": "P5-02: PostgreSQL Checkpoint Saver (No Schema Changes)",
+      "status": "PASS",
+      "details": "Zero new tables or columns. Checkpoint persistence uses existing run_checkpoints table (id, run_id, sequence, epoch, state_digest, state_data, created_at). All graph metadata is embedded in state_data.sironaGraph namespace with SHA-256 state digest integrity verification. SironaPostgresSaver implements LangGraph BaseCheckpointSaver (put, getTuple, list, putWrites)."
+    },
+    {
+      "criterion": "P5-03: Bounded Parent-to-Specialist Delegation Policy",
+      "status": "PASS",
+      "details": "Enforces max 3 parallel concurrent specialists atomically (4th concurrent request denied). Sequential delegation admitted up to max 12 total tasks per run. Strict flat hierarchy: specialists cannot delegate or fan out (parent-only)."
+    },
+    {
+      "criterion": "P5-06: Independent Verification and Bounded Repair",
+      "status": "PASS",
+      "details": "Independent criteria verification rejects seeded bad candidate artifacts and accepts corrected ones. Bounded repair rounds enforced (max 2 rounds; 3rd repair attempt rejected). Recovery states classified deterministically (recoverable, blocked, unknown). Paid effect usage journaled in checkpoint without duplicate executions."
+    },
+    {
+      "criterion": "P5-07: Human Approval and Runtime Lifecycle",
+      "status": "PASS",
+      "details": "Human approval gating transitions to EXECUTE on approval and blocks into BLOCKED on denial. Runtime lifecycle (start, pause, resume, cancel, shutdown) preserves known states, rejects unauthenticated resumes, and maintains database consistency."
+    }
+  ]
+}

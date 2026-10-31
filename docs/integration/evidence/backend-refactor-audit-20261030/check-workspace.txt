@@ -1,0 +1,4 @@
+
+> sirona-backend@1.0.0 check:workspace
+> tsc -p tsconfig.workspace.json --noEmit
+

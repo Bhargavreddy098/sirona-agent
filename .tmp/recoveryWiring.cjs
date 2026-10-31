@@ -1,0 +1,4 @@
+const fs=require('node:fs');
+const file='backend/routes/v1/workspace.routes.js';let text=fs.readFileSync(file,'utf8');const old='stopped++;}res.json({data:{stopped,unresolved:rows.length-stopped,effectReplayAllowed:false}});';
+if(!text.includes(old))throw new Error('Recovery source changed');text=text.replace(old,"stopped++;}const preparationsCancelled=runId?await reconcileTerminalTasks(projectId,runId,req.session,true):0;res.json({data:{stopped,unresolved:rows.length-stopped,effectReplayAllowed:false,preparationsCancelled}});");fs.writeFileSync(file,text);
+const controller='backend/src/workspace/frontendController.ts';text=fs.readFileSync(controller,'utf8').replaceAll("t.state IN('pending','queued','running')","t.state IN('pending','queued','running','blocked')");fs.writeFileSync(controller,text);

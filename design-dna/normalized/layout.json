@@ -1,0 +1,32 @@
+{
+  "shell": {
+    "minWidth": "360px",
+    "desktopMinPreferred": "1024px",
+    "sidebar": {
+      "defaultWidth": "260px",
+      "minWidth": "240px",
+      "maxWidth": "520px",
+      "clampFormula": "clamp(240px, 275px, min(520px, calc(100vw - 320px)))"
+    },
+    "topbar": {
+      "height": "56px",
+      "paddingX": "16px"
+    },
+    "canvas": {
+      "chatMaxWidth": "768px (48rem)",
+      "developerMaxWidth": "1024px (64rem)",
+      "paddingX": "24px"
+    },
+    "composer": {
+      "maxWidth": "768px",
+      "minHeight": "52px",
+      "offsetBottom": "24px",
+      "borderRadius": "24px"
+    },
+    "splitPanes": {
+      "ideNavigation": "260px",
+      "ideTaskTranscript": "40%",
+      "ideDiffEditor": "60%"
+    }
+  }
+}

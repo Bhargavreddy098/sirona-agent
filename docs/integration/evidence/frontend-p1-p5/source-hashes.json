@@ -1,0 +1,189 @@
+{
+  "timestamp": "2026-10-30T02:30:48.604Z",
+  "sources": [
+    {
+      "file": "backend/foundation/admission.js",
+      "sha256": "ae711f3add54800ae8de3bed94df9bd6743b129c2eaafa529876069d2e1b6f03"
+    },
+    {
+      "file": "backend/package-lock.json",
+      "sha256": "a3d97964c15a9104de911fcc8dc52ea73b179fbd2c6b5c0c6c198a0876ffe618"
+    },
+    {
+      "file": "backend/package.json",
+      "sha256": "f065c6af04a4a384eda1c53d0fa5077e744b0067bc1feb21b457a9342a80c670"
+    },
+    {
+      "file": "backend/routes/v1/execution.routes.js",
+      "sha256": "caf67f2d6ceb7f3b243fc959d8301893dd6ea680245e6377b2466316f10d803d"
+    },
+    {
+      "file": "backend/routes/v1/workspace.routes.js",
+      "sha256": "ca1ca941c51607a1955cdf0588f903c34fe50c6be314fbb00f00ba49ebfc78eb"
+    },
+    {
+      "file": "backend/services/aiService.js",
+      "sha256": "71a467263ec75dc05d153ad057782b1d88bbdd7d1ca7c1a476d1e91f8b94211f"
+    },
+    {
+      "file": "backend/services/conversationTurnCoordinator.js",
+      "sha256": "e46713de219bdd8e57d44b2aa27aac83c21b95edaf3638d68f8805c5f1d53877"
+    },
+    {
+      "file": "backend/services/executionService.js",
+      "sha256": "f8298439f04d82001dbbaa594e1b7777456d10d7eb4ecc87fa5125fe0827602d"
+    },
+    {
+      "file": "backend/services/governanceService.js",
+      "sha256": "90d260cdcd2dba8b0429d192a7ea9bec8d56707c7746c70db63f2f6542ff8152"
+    },
+    {
+      "file": "backend/services/providerService.js",
+      "sha256": "cdfb570981938ce11c801f10b65c3ebc2d61a6f5d2224c83fb0941a96f1b6147"
+    },
+    {
+      "file": "backend/src/orchestration/activityAdapter.ts",
+      "sha256": "4b56903fa5d35f46b465495f775d4de9f05afefa33d58124f00f1e1ab977a242"
+    },
+    {
+      "file": "backend/src/orchestration/graphRuntime.ts",
+      "sha256": "e53d38592239cd1cd8a300beb4ace20a6662312052121e28b156bbc1122c96c8"
+    },
+    {
+      "file": "backend/src/providers/aiSdkAdapter.ts",
+      "sha256": "015b79af02d2fd99de4dfb99d93ef7568815ce44b80e653d274f1579b3ba62ca"
+    },
+    {
+      "file": "backend/src/workspace/frontendController.ts",
+      "sha256": "04751e5fa320fc71e3f670595c65a695c1137ca7a5aadf6f9501a52b2d5650eb"
+    },
+    {
+      "file": "backend/tests/frontendWorkspace.test.ts",
+      "sha256": "f489f326bff8976fc22fa03d964ef5f56a422f445d29ff5a64598b99f2e9a95c"
+    },
+    {
+      "file": "backend/tests/frontendWorkspaceBoundary.test.ts",
+      "sha256": "cfa9ce614b273b4ade5b31ec52c968bfa9b16a4c5a35f1bbe101cc5fd9c3aab0"
+    },
+    {
+      "file": "backend/tests/orchestrationCanonicalJourney.test.ts",
+      "sha256": "a89edf798b55dcb48e3ba4623816623736b30d048b75bfa550d0e6588186719d"
+    },
+    {
+      "file": "frontend/sirona-next/electron/main.cjs",
+      "sha256": "69534ea76e9d623bfa63114b8b3b12916efc0cb5b386fb6ca71e179129636e05"
+    },
+    {
+      "file": "frontend/sirona-next/electron/preload.cjs",
+      "sha256": "e81a3b99f4938c8a57a5278b80a4353f5edce52b469fadba3a67eee0e5667573"
+    },
+    {
+      "file": "frontend/sirona-next/electron/terminalProxy.cjs",
+      "sha256": "ceb604bad05e9b43384b377b8b38c7a17a1b0179bccadb623f89a127ce15d6c7"
+    },
+    {
+      "file": "frontend/sirona-next/package-lock.json",
+      "sha256": "681cef43e8b4a94ede3309d8459fce182ade16772f00c95b1682cf0935945fd9"
+    },
+    {
+      "file": "frontend/sirona-next/package.json",
+      "sha256": "ab4df3d5643f3d86e141389bcdea863c02dbdfb07cecbb7c1d1db40311dcd89d"
+    },
+    {
+      "file": "frontend/sirona-next/src/api/client.ts",
+      "sha256": "eeadebb8afde78a1b9988b2c8c00145a6c272fd0d7aa620a2a17e3a7f618fcc8"
+    },
+    {
+      "file": "frontend/sirona-next/src/api/execution.ts",
+      "sha256": "5246896b6cb59f8d3474ff711dc403e28bf29fb31015aebdb4206a4bfb615ee6"
+    },
+    {
+      "file": "frontend/sirona-next/src/api/run-events.d.mts",
+      "sha256": "12a40a2ed0cf71435a2fa8de70caef10202805688b22da91bf3cf326f164fd0f"
+    },
+    {
+      "file": "frontend/sirona-next/src/api/run-events.mjs",
+      "sha256": "b86fc877e49dba6b34cf445102999ae5c0fff745c474a0f7690b4a9aa82d5809"
+    },
+    {
+      "file": "frontend/sirona-next/src/api/schemas.ts",
+      "sha256": "c44cc08cc5084d865879ca8f1dbaf169e90cfed9e84a293c1222e2fcda7758f5"
+    },
+    {
+      "file": "frontend/sirona-next/src/api/workspace.ts",
+      "sha256": "528ee4362d629c1962983ef8fb787a52d0fac7fad9c1e2c7623f85f3bf29b13b"
+    },
+    {
+      "file": "frontend/sirona-next/src/app/App.tsx",
+      "sha256": "cdfa889b0ebd8c1bfe7c48981c7b9350283cea64437e7cd787d145c19340122b"
+    },
+    {
+      "file": "frontend/sirona-next/src/components/Dialog.tsx",
+      "sha256": "051d34395b713a64a566e2fa2058d6113620254054134810a2af916b5020a549"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/model-providers/CredentialStatus.tsx",
+      "sha256": "e9c4a96ea70a264a540b39aeb28177a7777f8851ae1a1b894ff02a7019e1aeda"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/Approvals.tsx",
+      "sha256": "c0482a2122a37807349b70d6e6c05cbecb48fb6ea34d09e4e1720e38f7f4df76"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/CodingWorkspace.tsx",
+      "sha256": "f1e9fc8082e491fe8cd09f96855bc014deb240ebb1a2d34764187c6631b8821d"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/Files.tsx",
+      "sha256": "0d2c7beabfc82fc8ce1a3a26a9e5a60a2f4e2cc6b43f51c33530c7b151030b94"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/Planning.tsx",
+      "sha256": "9ae4584a5ea26b87315ea53a44dcd15adec6e4797913127b5c2c8b40ec5bb013"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/PreparedActionReview.tsx",
+      "sha256": "560cb353cb9fc71987aad40f5de9b6891e729ef1189eba5e3fb888f4014613fd"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/Readiness.tsx",
+      "sha256": "d2a4828ea69dde5ddeb544f70471d769bd75a8e6c64079585d88ff9bf9b758e3"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/RunPreparation.tsx",
+      "sha256": "3bc478fe797846c7e8832c4040f3f3dd1f187aee8d64b556baad9411c06bbc8a"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/Runs.tsx",
+      "sha256": "302073e01578c1e4a10c1862b323e83a86038c433a71f976778736acfa29e4cd"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/Terminal.tsx",
+      "sha256": "d57d9af2936f760f9fd6720ba690c36d3bceaa644a67cbdfb1907ddd237574c9"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/useRun.ts",
+      "sha256": "17f177b4c69ac9f69f4e374b26f477ef3dfa24d924b3336a1a9b4767f012aeb1"
+    },
+    {
+      "file": "frontend/sirona-next/src/features/workspace/Workers.tsx",
+      "sha256": "b72baf14687bd86d9106dc7adc3cecd575150b98969d9ec1e3d5ed7f44e0e203"
+    },
+    {
+      "file": "frontend/sirona-next/src/main.tsx",
+      "sha256": "23f9c60ca4875e33180c6545a49afcf2a2b91c46b49adc1171df944d268893a1"
+    },
+    {
+      "file": "frontend/sirona-next/src/styles/app.css",
+      "sha256": "1b1646138cea4396127b809616541c53a3e29af31f63eb511e6d13f58eb3ac84"
+    },
+    {
+      "file": "frontend/sirona-next/src/styles/workspace.css",
+      "sha256": "76ecc42e26ad4fd655ef9c5b884be401f7f8c2985d4992d6d80583a4c34f992b"
+    },
+    {
+      "file": "frontend/sirona-next/vite.config.ts",
+      "sha256": "e41ea128bcb0a0178bee025363052bc5e456ef2b609ceeb4224a2bd51d218ee4"
+    }
+  ]
+}

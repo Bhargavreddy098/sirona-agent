@@ -1,0 +1,200 @@
+{
+  "files": 163,
+  "productionReachable": [
+    "app.js",
+    "config/db.js",
+    "config/redis.js",
+    "controllers/healthController.js",
+    "dist-workspace/src/db/schema.js",
+    "dist-workspace/src/db/transactionAdapter.js",
+    "dist-workspace/src/execution/effectJournal.js",
+    "dist-workspace/src/execution/runEventStore.js",
+    "dist-workspace/src/security/executionPolicy.js",
+    "foundation/admission.js",
+    "foundation/bounded.js",
+    "foundation/composition.js",
+    "foundation/config.js",
+    "foundation/lifecycle.js",
+    "foundation/logger.js",
+    "foundation/origins.js",
+    "foundation/production.js",
+    "foundation/runtimeConfig.js",
+    "foundation/ssrfGuard.js",
+    "middleware/auditContext.js",
+    "middleware/errorHandler.js",
+    "middleware/httpBoundary.js",
+    "middleware/problem.js",
+    "middleware/rateLimiter.js",
+    "middleware/sessionAuth.js",
+    "model/Message.js",
+    "model/Session.js",
+    "model/Setting.js",
+    "model/TurnLease.js",
+    "routes/health.routes.js",
+    "routes/index.js",
+    "routes/v1/automation.routes.js",
+    "routes/v1/conversations.routes.js",
+    "routes/v1/deployment.routes.js",
+    "routes/v1/execution.routes.js",
+    "routes/v1/governance.routes.js",
+    "routes/v1/identity.routes.js",
+    "routes/v1/intent.routes.js",
+    "routes/v1/isolation.routes.js",
+    "routes/v1/memory.routes.js",
+    "routes/v1/planning.routes.js",
+    "routes/v1/projects.routes.js",
+    "routes/v1/providers.routes.js",
+    "routes/v1/recovery.routes.js",
+    "routes/v1/tools.routes.js",
+    "routes/v1/verification.routes.js",
+    "server.js",
+    "services/agentExecutionEngine.js",
+    "services/agentWorkerService.js",
+    "services/aiService.js",
+    "services/automationService.js",
+    "services/contextEngineService.js",
+    "services/conversationAccess.js",
+    "services/conversationTurnCoordinator.js",
+    "services/deploymentService.js",
+    "services/executionService.js",
+    "services/governanceService.js",
+    "services/identityService.js",
+    "services/intentRequirementService.js",
+    "services/isolationBrokerService.js",
+    "services/launcherChallenge.js",
+    "services/memoryService.js",
+    "services/planningContractService.js",
+    "services/projectScannerService.js",
+    "services/projectService.js",
+    "services/providerService.js",
+    "services/releaseRecoveryService.js",
+    "services/sandboxManager.js",
+    "services/secretStore.js",
+    "services/socket.js",
+    "services/toolRuntimeService.js",
+    "services/turnLeaseService.js",
+    "services/verificationService.js",
+    "services/workflowOrchestratorService.js",
+    "services/workspacePathResolver.js"
+  ],
+  "packages": {
+    "express": [
+      "app.js",
+      "routes/approval.routes.js",
+      "routes/audit.routes.js",
+      "routes/auth.routes.js",
+      "routes/files.routes.js",
+      "routes/git.routes.js",
+      "routes/health.routes.js",
+      "routes/index.js",
+      "routes/models.routes.js",
+      "routes/session.routes.js",
+      "routes/settings.routes.js",
+      "routes/tools.routes.js",
+      "routes/v1/automation.routes.js",
+      "routes/v1/conversations.routes.js",
+      "routes/v1/deployment.routes.js",
+      "routes/v1/execution.routes.js",
+      "routes/v1/governance.routes.js",
+      "routes/v1/identity.routes.js",
+      "routes/v1/intent.routes.js",
+      "routes/v1/isolation.routes.js",
+      "routes/v1/memory.routes.js",
+      "routes/v1/planning.routes.js",
+      "routes/v1/projects.routes.js",
+      "routes/v1/providers.routes.js",
+      "routes/v1/recovery.routes.js",
+      "routes/v1/tools.routes.js",
+      "routes/v1/verification.routes.js",
+      "tests/helpers.js",
+      "tests/production.test.js"
+    ],
+    "compression": [
+      "app.js"
+    ],
+    "cookie-parser": [
+      "app.js"
+    ],
+    "pg": [
+      "config/db.js"
+    ],
+    "ioredis": [
+      "config/redis.js"
+    ],
+    "dotenv": [
+      "config/s3.js",
+      "server.js"
+    ],
+    "google-auth-library": [
+      "controllers/authController.js"
+    ],
+    "drizzle-orm/pg-core": [
+      "dist-workspace/src/db/schema.js"
+    ],
+    "drizzle-orm/node-postgres": [
+      "dist-workspace/src/db/transactionAdapter.js"
+    ],
+    "drizzle-orm": [
+      "dist-workspace/src/execution/effectJournal.js",
+      "dist-workspace/src/execution/runEventStore.js",
+      "dist-workspace/tests/typedDatabaseBoundary.test.js"
+    ],
+    "zod-v4": [
+      "dist-workspace/src/execution/effectJournal.js",
+      "dist-workspace/src/security/executionPolicy.js"
+    ],
+    "pino": [
+      "foundation/logger.js"
+    ],
+    "pino-http": [
+      "foundation/logger.js"
+    ],
+    "cors": [
+      "middleware/httpBoundary.js"
+    ],
+    "helmet": [
+      "middleware/httpBoundary.js"
+    ],
+    "rate-limiter-flexible": [
+      "middleware/rateLimiter.js"
+    ],
+    "typescript": [
+      "scripts/checkModules.js",
+      "scripts/checkStatic.js"
+    ],
+    "@google/genai": [
+      "services/aiService.js",
+      "tests/providerText.test.js"
+    ],
+    "openai": [
+      "services/aiService.js"
+    ],
+    "@anthropic-ai/sdk": [
+      "services/aiService.js"
+    ],
+    "socket.io": [
+      "services/socket.js",
+      "tests/boundary.test.js"
+    ],
+    "@socket.io/redis-adapter": [
+      "services/socket.js"
+    ]
+  },
+  "dynamic": [],
+  "failures": [
+    "config/s3.js:unresolved-module",
+    "controllers/authController.js:unresolved-module",
+    "middleware/upload.js:unresolved-module",
+    "middleware/upload.js:unresolved-module",
+    "middleware/userAuth.js:unresolved-module",
+    "model/User.js:unresolved-module",
+    "routes/approval.routes.js:unresolved-module",
+    "routes/auth.routes.js:unresolved-module",
+    "routes/files.routes.js:unresolved-module",
+    "routes/session.routes.js:unresolved-module",
+    "tests/routeInventory.js:unresolved-module"
+  ],
+  "activeFailures": [],
+  "activeGraphResult": "passed",
+  "fullScanResult": "failed"
+}

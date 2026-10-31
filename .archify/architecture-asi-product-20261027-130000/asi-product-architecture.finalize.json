@@ -1,0 +1,2137 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-10-27T05:51:25.416Z",
+  "specification": {
+    "path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-product-20261027-130000\\candidate.json",
+    "sha256": "fa3b3296d708133f5afc55d8c89235daa82bd43ea93b25010a773dd9ce257b57",
+    "bytes": 21769
+  },
+  "artifact": {
+    "path": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-product-20261027-130000\\asi-product-architecture.html"
+  },
+  "stages": {
+    "validate": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": null,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "C:\\Users\\bharg\\.claude\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "architecture",
+        "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-product-20261027-130000\\candidate.json",
+        "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-product-20261027-130000\\asi-product-architecture.html",
+        "--quality",
+        "showcase",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "f009afa7-428f-4b2a-8783-b5a983fee338",
+        "stage": "render",
+        "type": "architecture",
+        "input": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-product-20261027-130000\\candidate.json",
+        "output": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-product-20261027-130000\\asi-product-architecture.html",
+        "error": "Architecture layout validation failed:\n- [clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"session-manager\" (unrelated to this relationship) on segment 0 [215, 202] -> [813, 202] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"project-manager\" (unrelated to this relationship) on segment 0 [215, 202] -> [813, 202] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"workspace-manager\" (unrelated to this relationship) on segment 0 [215, 202] -> [813, 202] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"conversation-manager\" (unrelated to this relationship) on segment 2 [813, 210] -> [1410, 210] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"run-manager\" (unrelated to this relationship) on segment 2 [813, 210] -> [1410, 210] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"tool-runtime\" (unrelated to this relationship) on segment 0 [779, 812] -> [779, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"sandbox-manager\" (unrelated to this relationship) on segment 1 [779, 1136] -> [178, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"policy-security\" (unrelated to this relationship) on segment 1 [779, 1136] -> [178, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"workflow-runtime\" (unrelated to this relationship) on segment 0 [779, 812] -> [779, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"verification-engine\" (unrelated to this relationship) on segment 2 [178, 1136] -> [178, 1460] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"tool-runtime\" (unrelated to this relationship) on segment 0 [1200, 955] -> [765, 955] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"execution-runtimes\" (unrelated to this relationship) on segment 0 [1200, 955] -> [765, 955] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"workflow-runtime\" (unrelated to this relationship) on segment 1 [765, 955] -> [765, 1310] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"self-repair\" (unrelated to this relationship) on segment 2 [765, 1310] -> [330, 1310] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"decision-engine\" (unrelated to this relationship) on segment 0 [1270, 420] -> [1270, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"model-router\" (unrelated to this relationship) on segment 0 [1270, 420] -> [1270, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"provider-registry\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"provider-adapters\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"task-runtime\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"tool-runtime\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"execution-runtimes\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"worker-adapters\" (unrelated to this relationship) on segment 0 [1270, 420] -> [1270, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"sandbox-manager\" (unrelated to this relationship) on segment 2 [192, 940] -> [192, 1460] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"verification-engine\" (unrelated to this relationship) on segment 2 [192, 940] -> [192, 1460] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.\n- [composition/ambiguous-corridor] showcase architecture connections[5] \"api-gateway\" -> \"conversation-manager\" shares a 24px corridor with connections[7] \"api-gateway\" -> \"event-stream\" at [906, 210] -> [930, 210] (segments 3 and 2; minimum 8px) — adjust route/via or fromSide/toSide so distinct connections do not visually merge.\n- [composition/ambiguous-corridor] showcase architecture connections[39] \"worker-adapters\" -> \"verification-engine\" shares a 24px corridor with connections[41] \"verification-engine\" -> \"self-repair\" at [356, 1310] -> [380, 1310] (segments 2 and 3; minimum 8px) — adjust route/via or fromSide/toSide so distinct connections do not visually merge.\n- [composition/short-interior-segment] showcase architecture connections[7] \"api-gateway\" -> \"event-stream\" has a 8.4px interior segment 1 [812.5, 201.6] -> [812.5, 210] that is below the 16px interior-segment floor — move route/via points into a wider corridor or move the component so every turn has room to read.\n- Label \"scoped caps\" has only 25px between \"policy-security\" and \"sandbox-manager\"; it needs at least 79px to stay beside its route — increase that clear gap or place the connected nodes on another readable row, preserving the label.\n- Label \"pgvector retrieval\" has only 50px between \"memory-platform\" and \"data-plane\"; it needs at least 113px to stay beside its route — increase that clear gap or place the connected nodes on another readable row, preserving the label.\n- Label \"audit / traces\" has only 60px between \"observability\" and \"data-plane\"; it needs at least 94px to stay beside its route — increase that clear gap or place the connected nodes on another readable row, preserving the label.\n- [composition/label-route-clearance] showcase architecture label \"scoped caps\" on connections[35] \"policy-security\" -> \"sandbox-manager\" label \"scoped caps\" is 0px from connections[31] \"provider-adapters\" -> \"local-model-endpoints\" label \"local calls\" segment 2 [277, 1097] -> [277, 1277] (label rect [236, 1117, 63, 14]; minimum 4px) — adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel.\n- [composition/label-route-clearance] showcase architecture label \"pgvector retrieval\" on connections[44] \"memory-platform\" -> \"data-plane\" label \"pgvector retrieval\" is 0px from connections[31] \"provider-adapters\" -> \"local-model-endpoints\" label \"local calls\" segment 4 [367, 1277] -> [367, 1616] (label rect [307, 1470, 96, 14]; minimum 4px) — adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel.\n- [composition/label-route-clearance] showcase architecture label \"audit / traces\" on connections[46] \"observability\" -> \"data-plane\" label \"audit / traces\" is 0px from connections[43] \"workflow-runtime\" -> \"data-plane\" label \"persist\" segment 1 [889, 1130] -> [889, 1476] (label rect [831, 1470, 77, 14]; minimum 4px) — adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel.",
+        "diagnostics": [
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"session-manager\" (unrelated to this relationship) on segment 0 [215, 202] -> [813, 202] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 7,
+              "from": "api-gateway",
+              "to": "event-stream"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "session-manager",
+              "segmentIndex": 0,
+              "from": [
+                215,
+                201.6
+              ],
+              "to": [
+                812.5,
+                201.6
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"project-manager\" (unrelated to this relationship) on segment 0 [215, 202] -> [813, 202] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 7,
+              "from": "api-gateway",
+              "to": "event-stream"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "project-manager",
+              "segmentIndex": 0,
+              "from": [
+                215,
+                201.6
+              ],
+              "to": [
+                812.5,
+                201.6
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"workspace-manager\" (unrelated to this relationship) on segment 0 [215, 202] -> [813, 202] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 7,
+              "from": "api-gateway",
+              "to": "event-stream"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "workspace-manager",
+              "segmentIndex": 0,
+              "from": [
+                215,
+                201.6
+              ],
+              "to": [
+                812.5,
+                201.6
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"conversation-manager\" (unrelated to this relationship) on segment 2 [813, 210] -> [1410, 210] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 7,
+              "from": "api-gateway",
+              "to": "event-stream"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "conversation-manager",
+              "segmentIndex": 2,
+              "from": [
+                812.5,
+                210
+              ],
+              "to": [
+                1410,
+                210
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"run-manager\" (unrelated to this relationship) on segment 2 [813, 210] -> [1410, 210] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 7,
+              "from": "api-gateway",
+              "to": "event-stream"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "run-manager",
+              "segmentIndex": 2,
+              "from": [
+                812.5,
+                210
+              ],
+              "to": [
+                1410,
+                210
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"tool-runtime\" (unrelated to this relationship) on segment 0 [779, 812] -> [779, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 27,
+              "from": "orchestrator",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "tool-runtime",
+              "segmentIndex": 0,
+              "from": [
+                779,
+                812
+              ],
+              "to": [
+                779,
+                1136
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"sandbox-manager\" (unrelated to this relationship) on segment 1 [779, 1136] -> [178, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 27,
+              "from": "orchestrator",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "sandbox-manager",
+              "segmentIndex": 1,
+              "from": [
+                779,
+                1136
+              ],
+              "to": [
+                178,
+                1136
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"policy-security\" (unrelated to this relationship) on segment 1 [779, 1136] -> [178, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 27,
+              "from": "orchestrator",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "policy-security",
+              "segmentIndex": 1,
+              "from": [
+                779,
+                1136
+              ],
+              "to": [
+                178,
+                1136
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"workflow-runtime\" (unrelated to this relationship) on segment 0 [779, 812] -> [779, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 27,
+              "from": "orchestrator",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "workflow-runtime",
+              "segmentIndex": 0,
+              "from": [
+                779,
+                812
+              ],
+              "to": [
+                779,
+                1136
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"verification-engine\" (unrelated to this relationship) on segment 2 [178, 1136] -> [178, 1460] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 27,
+              "from": "orchestrator",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "verification-engine",
+              "segmentIndex": 2,
+              "from": [
+                178,
+                1136
+              ],
+              "to": [
+                178,
+                1460
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"tool-runtime\" (unrelated to this relationship) on segment 0 [1200, 955] -> [765, 955] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 39,
+              "from": "worker-adapters",
+              "to": "verification-engine"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "tool-runtime",
+              "segmentIndex": 0,
+              "from": [
+                1200,
+                955
+              ],
+              "to": [
+                765,
+                955
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"execution-runtimes\" (unrelated to this relationship) on segment 0 [1200, 955] -> [765, 955] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 39,
+              "from": "worker-adapters",
+              "to": "verification-engine"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "execution-runtimes",
+              "segmentIndex": 0,
+              "from": [
+                1200,
+                955
+              ],
+              "to": [
+                765,
+                955
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"workflow-runtime\" (unrelated to this relationship) on segment 1 [765, 955] -> [765, 1310] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 39,
+              "from": "worker-adapters",
+              "to": "verification-engine"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "workflow-runtime",
+              "segmentIndex": 1,
+              "from": [
+                765,
+                955
+              ],
+              "to": [
+                765,
+                1310
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"self-repair\" (unrelated to this relationship) on segment 2 [765, 1310] -> [330, 1310] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 39,
+              "from": "worker-adapters",
+              "to": "verification-engine"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "self-repair",
+              "segmentIndex": 2,
+              "from": [
+                765,
+                1310
+              ],
+              "to": [
+                330,
+                1310
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"decision-engine\" (unrelated to this relationship) on segment 0 [1270, 420] -> [1270, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 45,
+              "from": "context-retrieval",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "decision-engine",
+              "segmentIndex": 0,
+              "from": [
+                1270,
+                420
+              ],
+              "to": [
+                1270,
+                940
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"model-router\" (unrelated to this relationship) on segment 0 [1270, 420] -> [1270, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 45,
+              "from": "context-retrieval",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "model-router",
+              "segmentIndex": 0,
+              "from": [
+                1270,
+                420
+              ],
+              "to": [
+                1270,
+                940
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"provider-registry\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 45,
+              "from": "context-retrieval",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "provider-registry",
+              "segmentIndex": 1,
+              "from": [
+                1270,
+                940
+              ],
+              "to": [
+                192,
+                940
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"provider-adapters\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 45,
+              "from": "context-retrieval",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "provider-adapters",
+              "segmentIndex": 1,
+              "from": [
+                1270,
+                940
+              ],
+              "to": [
+                192,
+                940
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"task-runtime\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 45,
+              "from": "context-retrieval",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "task-runtime",
+              "segmentIndex": 1,
+              "from": [
+                1270,
+                940
+              ],
+              "to": [
+                192,
+                940
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"tool-runtime\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 45,
+              "from": "context-retrieval",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "tool-runtime",
+              "segmentIndex": 1,
+              "from": [
+                1270,
+                940
+              ],
+              "to": [
+                192,
+                940
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"execution-runtimes\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 45,
+              "from": "context-retrieval",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "execution-runtimes",
+              "segmentIndex": 1,
+              "from": [
+                1270,
+                940
+              ],
+              "to": [
+                192,
+                940
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"worker-adapters\" (unrelated to this relationship) on segment 0 [1270, 420] -> [1270, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 45,
+              "from": "context-retrieval",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "worker-adapters",
+              "segmentIndex": 0,
+              "from": [
+                1270,
+                420
+              ],
+              "to": [
+                1270,
+                940
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"sandbox-manager\" (unrelated to this relationship) on segment 2 [192, 940] -> [192, 1460] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 45,
+              "from": "context-retrieval",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "sandbox-manager",
+              "segmentIndex": 2,
+              "from": [
+                192,
+                940
+              ],
+              "to": [
+                192,
+                1460
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "clean-flow/edge-through-node",
+            "severity": "error",
+            "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"verification-engine\" (unrelated to this relationship) on segment 2 [192, 940] -> [192, 1460] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 45,
+              "from": "context-retrieval",
+              "to": "memory-platform"
+            },
+            "evidence": {
+              "obstacleKind": "component",
+              "obstacleId": "verification-engine",
+              "segmentIndex": 2,
+              "from": [
+                192,
+                940
+              ],
+              "to": [
+                192,
+                1460
+              ],
+              "clearancePx": 2
+            },
+            "supportedFixes": [
+              "adjust fromSide/toSide, set route/via, or move the component"
+            ]
+          },
+          {
+            "code": "composition/ambiguous-corridor",
+            "severity": "error",
+            "message": "[composition/ambiguous-corridor] showcase architecture connections[5] \"api-gateway\" -> \"conversation-manager\" shares a 24px corridor with connections[7] \"api-gateway\" -> \"event-stream\" at [906, 210] -> [930, 210] (segments 3 and 2; minimum 8px) — adjust route/via or fromSide/toSide so distinct connections do not visually merge.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 5,
+              "from": "api-gateway",
+              "to": "conversation-manager"
+            },
+            "evidence": {
+              "otherRelationship": {
+                "diagramType": "architecture",
+                "collection": "connections",
+                "index": 7,
+                "from": "api-gateway",
+                "to": "event-stream"
+              },
+              "overlapLengthPx": 24,
+              "minimumPx": 8,
+              "from": [
+                906,
+                210
+              ],
+              "to": [
+                930,
+                210
+              ],
+              "segmentIndex": 3,
+              "otherSegmentIndex": 2
+            },
+            "supportedFixes": [
+              "adjust route/via or fromSide/toSide so distinct connections do not visually merge"
+            ]
+          },
+          {
+            "code": "composition/ambiguous-corridor",
+            "severity": "error",
+            "message": "[composition/ambiguous-corridor] showcase architecture connections[39] \"worker-adapters\" -> \"verification-engine\" shares a 24px corridor with connections[41] \"verification-engine\" -> \"self-repair\" at [356, 1310] -> [380, 1310] (segments 2 and 3; minimum 8px) — adjust route/via or fromSide/toSide so distinct connections do not visually merge.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 39,
+              "from": "worker-adapters",
+              "to": "verification-engine"
+            },
+            "evidence": {
+              "otherRelationship": {
+                "diagramType": "architecture",
+                "collection": "connections",
+                "index": 41,
+                "from": "verification-engine",
+                "to": "self-repair"
+              },
+              "overlapLengthPx": 24,
+              "minimumPx": 8,
+              "from": [
+                356,
+                1310
+              ],
+              "to": [
+                380,
+                1310
+              ],
+              "segmentIndex": 2,
+              "otherSegmentIndex": 3
+            },
+            "supportedFixes": [
+              "adjust route/via or fromSide/toSide so distinct connections do not visually merge"
+            ]
+          },
+          {
+            "code": "composition/short-interior-segment",
+            "severity": "error",
+            "message": "[composition/short-interior-segment] showcase architecture connections[7] \"api-gateway\" -> \"event-stream\" has a 8.4px interior segment 1 [812.5, 201.6] -> [812.5, 210] that is below the 16px interior-segment floor — move route/via points into a wider corridor or move the component so every turn has room to read.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 7,
+              "from": "api-gateway",
+              "to": "event-stream"
+            },
+            "evidence": {
+              "segmentIndex": 1,
+              "position": "interior",
+              "lengthPx": 8.4,
+              "minimumPx": 16,
+              "from": [
+                812.5,
+                201.6
+              ],
+              "to": [
+                812.5,
+                210
+              ]
+            },
+            "supportedFixes": [
+              "move route/via points into a wider corridor or move the component so every turn has room to read"
+            ]
+          },
+          {
+            "code": "composition/label-route-clearance",
+            "severity": "error",
+            "message": "[composition/label-route-clearance] showcase architecture label \"scoped caps\" on connections[35] \"policy-security\" -> \"sandbox-manager\" label \"scoped caps\" is 0px from connections[31] \"provider-adapters\" -> \"local-model-endpoints\" label \"local calls\" segment 2 [277, 1097] -> [277, 1277] (label rect [236, 1117, 63, 14]; minimum 4px) — adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 35,
+              "from": "policy-security",
+              "to": "sandbox-manager"
+            },
+            "evidence": {
+              "label": "scoped caps",
+              "otherRelationship": {
+                "diagramType": "architecture",
+                "collection": "connections",
+                "index": 31,
+                "from": "provider-adapters",
+                "to": "local-model-endpoints"
+              },
+              "segmentIndex": 2,
+              "clearancePx": 0,
+              "minimumPx": 4,
+              "labelRect": {
+                "relation": {
+                  "from": "policy-security",
+                  "to": "sandbox-manager",
+                  "label": "scoped caps",
+                  "variant": "security"
+                },
+                "relationIndex": 35,
+                "label": "scoped caps",
+                "x": 236.1,
+                "y": 1117,
+                "width": 62.8,
+                "height": 14,
+                "lx": 267.5,
+                "ly": 1127
+              },
+              "from": [
+                277,
+                1097
+              ],
+              "to": [
+                277,
+                1277
+              ]
+            },
+            "supportedFixes": [
+              "adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel"
+            ]
+          },
+          {
+            "code": "composition/label-route-clearance",
+            "severity": "error",
+            "message": "[composition/label-route-clearance] showcase architecture label \"pgvector retrieval\" on connections[44] \"memory-platform\" -> \"data-plane\" label \"pgvector retrieval\" is 0px from connections[31] \"provider-adapters\" -> \"local-model-endpoints\" label \"local calls\" segment 4 [367, 1277] -> [367, 1616] (label rect [307, 1470, 96, 14]; minimum 4px) — adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 44,
+              "from": "memory-platform",
+              "to": "data-plane"
+            },
+            "evidence": {
+              "label": "pgvector retrieval",
+              "otherRelationship": {
+                "diagramType": "architecture",
+                "collection": "connections",
+                "index": 31,
+                "from": "provider-adapters",
+                "to": "local-model-endpoints"
+              },
+              "segmentIndex": 4,
+              "clearancePx": 0,
+              "minimumPx": 4,
+              "labelRect": {
+                "relation": {
+                  "from": "memory-platform",
+                  "to": "data-plane",
+                  "label": "pgvector retrieval",
+                  "variant": "default"
+                },
+                "relationIndex": 44,
+                "label": "pgvector retrieval",
+                "x": 306.8,
+                "y": 1470,
+                "width": 96.39999999999999,
+                "height": 14,
+                "lx": 355,
+                "ly": 1480
+              },
+              "from": [
+                367,
+                1277
+              ],
+              "to": [
+                367,
+                1616
+              ]
+            },
+            "supportedFixes": [
+              "adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel"
+            ]
+          },
+          {
+            "code": "composition/label-route-clearance",
+            "severity": "error",
+            "message": "[composition/label-route-clearance] showcase architecture label \"audit / traces\" on connections[46] \"observability\" -> \"data-plane\" label \"audit / traces\" is 0px from connections[43] \"workflow-runtime\" -> \"data-plane\" label \"persist\" segment 1 [889, 1130] -> [889, 1476] (label rect [831, 1470, 77, 14]; minimum 4px) — adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "index": 46,
+              "from": "observability",
+              "to": "data-plane"
+            },
+            "evidence": {
+              "label": "audit / traces",
+              "otherRelationship": {
+                "diagramType": "architecture",
+                "collection": "connections",
+                "index": 43,
+                "from": "workflow-runtime",
+                "to": "data-plane"
+              },
+              "segmentIndex": 1,
+              "clearancePx": 0,
+              "minimumPx": 4,
+              "labelRect": {
+                "relation": {
+                  "from": "observability",
+                  "to": "data-plane",
+                  "label": "audit / traces",
+                  "variant": "dashed"
+                },
+                "relationIndex": 46,
+                "label": "audit / traces",
+                "x": 831.4,
+                "y": 1470,
+                "width": 77.2,
+                "height": 14,
+                "lx": 870,
+                "ly": 1480
+              },
+              "from": [
+                889,
+                1130
+              ],
+              "to": [
+                889,
+                1476
+              ]
+            },
+            "supportedFixes": [
+              "adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel"
+            ]
+          },
+          {
+            "code": "composition/label-gap",
+            "severity": "error",
+            "message": "Label \"scoped caps\" has only 25px between \"policy-security\" and \"sandbox-manager\"; it needs at least 79px to stay beside its route — increase that clear gap or place the connected nodes on another readable row, preserving the label.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "from": "policy-security",
+              "to": "sandbox-manager"
+            },
+            "evidence": {
+              "clearGapPx": 25,
+              "minimumGapPx": 79,
+              "labelWidthPx": 62.8,
+              "obstacles": [
+                "sandbox-manager",
+                "policy-security"
+              ]
+            },
+            "supportedFixes": [
+              "increase the clear gap between the connected nodes to at least 79px",
+              "reposition the connected nodes together while preserving the full relationship label"
+            ]
+          },
+          {
+            "code": "composition/label-gap",
+            "severity": "error",
+            "message": "Label \"pgvector retrieval\" has only 50px between \"memory-platform\" and \"data-plane\"; it needs at least 113px to stay beside its route — increase that clear gap or place the connected nodes on another readable row, preserving the label.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "from": "memory-platform",
+              "to": "data-plane"
+            },
+            "evidence": {
+              "clearGapPx": 50,
+              "minimumGapPx": 113,
+              "labelWidthPx": 96.39999999999999,
+              "obstacles": [
+                "memory-platform",
+                "data-plane"
+              ]
+            },
+            "supportedFixes": [
+              "increase the clear gap between the connected nodes to at least 113px",
+              "reposition the connected nodes together while preserving the full relationship label"
+            ]
+          },
+          {
+            "code": "composition/label-gap",
+            "severity": "error",
+            "message": "Label \"audit / traces\" has only 60px between \"observability\" and \"data-plane\"; it needs at least 94px to stay beside its route — increase that clear gap or place the connected nodes on another readable row, preserving the label.",
+            "subject": {
+              "diagramType": "architecture",
+              "collection": "connections",
+              "from": "observability",
+              "to": "data-plane"
+            },
+            "evidence": {
+              "clearGapPx": 60,
+              "minimumGapPx": 94,
+              "labelWidthPx": 77.2,
+              "obstacles": [
+                "data-plane",
+                "observability"
+              ]
+            },
+            "supportedFixes": [
+              "increase the clear gap between the connected nodes to at least 94px",
+              "reposition the connected nodes together while preserving the full relationship label"
+            ]
+          }
+        ],
+        "provenance": "absent",
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      },
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "not-run",
+      "execution": "blocked-by-validate"
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"session-manager\" (unrelated to this relationship) on segment 0 [215, 202] -> [813, 202] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 7,
+        "from": "api-gateway",
+        "to": "event-stream"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "session-manager",
+        "segmentIndex": 0,
+        "from": [
+          215,
+          201.6
+        ],
+        "to": [
+          812.5,
+          201.6
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"project-manager\" (unrelated to this relationship) on segment 0 [215, 202] -> [813, 202] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 7,
+        "from": "api-gateway",
+        "to": "event-stream"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "project-manager",
+        "segmentIndex": 0,
+        "from": [
+          215,
+          201.6
+        ],
+        "to": [
+          812.5,
+          201.6
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"workspace-manager\" (unrelated to this relationship) on segment 0 [215, 202] -> [813, 202] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 7,
+        "from": "api-gateway",
+        "to": "event-stream"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "workspace-manager",
+        "segmentIndex": 0,
+        "from": [
+          215,
+          201.6
+        ],
+        "to": [
+          812.5,
+          201.6
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"conversation-manager\" (unrelated to this relationship) on segment 2 [813, 210] -> [1410, 210] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 7,
+        "from": "api-gateway",
+        "to": "event-stream"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "conversation-manager",
+        "segmentIndex": 2,
+        "from": [
+          812.5,
+          210
+        ],
+        "to": [
+          1410,
+          210
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[7] \"api-gateway\" -> \"event-stream\" crosses component \"run-manager\" (unrelated to this relationship) on segment 2 [813, 210] -> [1410, 210] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 7,
+        "from": "api-gateway",
+        "to": "event-stream"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "run-manager",
+        "segmentIndex": 2,
+        "from": [
+          812.5,
+          210
+        ],
+        "to": [
+          1410,
+          210
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"tool-runtime\" (unrelated to this relationship) on segment 0 [779, 812] -> [779, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 27,
+        "from": "orchestrator",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "tool-runtime",
+        "segmentIndex": 0,
+        "from": [
+          779,
+          812
+        ],
+        "to": [
+          779,
+          1136
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"sandbox-manager\" (unrelated to this relationship) on segment 1 [779, 1136] -> [178, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 27,
+        "from": "orchestrator",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "sandbox-manager",
+        "segmentIndex": 1,
+        "from": [
+          779,
+          1136
+        ],
+        "to": [
+          178,
+          1136
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"policy-security\" (unrelated to this relationship) on segment 1 [779, 1136] -> [178, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 27,
+        "from": "orchestrator",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "policy-security",
+        "segmentIndex": 1,
+        "from": [
+          779,
+          1136
+        ],
+        "to": [
+          178,
+          1136
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"workflow-runtime\" (unrelated to this relationship) on segment 0 [779, 812] -> [779, 1136] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 27,
+        "from": "orchestrator",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "workflow-runtime",
+        "segmentIndex": 0,
+        "from": [
+          779,
+          812
+        ],
+        "to": [
+          779,
+          1136
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[27] \"orchestrator\" -> \"memory-platform\" crosses component \"verification-engine\" (unrelated to this relationship) on segment 2 [178, 1136] -> [178, 1460] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 27,
+        "from": "orchestrator",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "verification-engine",
+        "segmentIndex": 2,
+        "from": [
+          178,
+          1136
+        ],
+        "to": [
+          178,
+          1460
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"tool-runtime\" (unrelated to this relationship) on segment 0 [1200, 955] -> [765, 955] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 39,
+        "from": "worker-adapters",
+        "to": "verification-engine"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "tool-runtime",
+        "segmentIndex": 0,
+        "from": [
+          1200,
+          955
+        ],
+        "to": [
+          765,
+          955
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"execution-runtimes\" (unrelated to this relationship) on segment 0 [1200, 955] -> [765, 955] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 39,
+        "from": "worker-adapters",
+        "to": "verification-engine"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "execution-runtimes",
+        "segmentIndex": 0,
+        "from": [
+          1200,
+          955
+        ],
+        "to": [
+          765,
+          955
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"workflow-runtime\" (unrelated to this relationship) on segment 1 [765, 955] -> [765, 1310] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 39,
+        "from": "worker-adapters",
+        "to": "verification-engine"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "workflow-runtime",
+        "segmentIndex": 1,
+        "from": [
+          765,
+          955
+        ],
+        "to": [
+          765,
+          1310
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[39] \"worker-adapters\" -> \"verification-engine\" crosses component \"self-repair\" (unrelated to this relationship) on segment 2 [765, 1310] -> [330, 1310] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 39,
+        "from": "worker-adapters",
+        "to": "verification-engine"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "self-repair",
+        "segmentIndex": 2,
+        "from": [
+          765,
+          1310
+        ],
+        "to": [
+          330,
+          1310
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"decision-engine\" (unrelated to this relationship) on segment 0 [1270, 420] -> [1270, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 45,
+        "from": "context-retrieval",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "decision-engine",
+        "segmentIndex": 0,
+        "from": [
+          1270,
+          420
+        ],
+        "to": [
+          1270,
+          940
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"model-router\" (unrelated to this relationship) on segment 0 [1270, 420] -> [1270, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 45,
+        "from": "context-retrieval",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "model-router",
+        "segmentIndex": 0,
+        "from": [
+          1270,
+          420
+        ],
+        "to": [
+          1270,
+          940
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"provider-registry\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 45,
+        "from": "context-retrieval",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "provider-registry",
+        "segmentIndex": 1,
+        "from": [
+          1270,
+          940
+        ],
+        "to": [
+          192,
+          940
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"provider-adapters\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 45,
+        "from": "context-retrieval",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "provider-adapters",
+        "segmentIndex": 1,
+        "from": [
+          1270,
+          940
+        ],
+        "to": [
+          192,
+          940
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"task-runtime\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 45,
+        "from": "context-retrieval",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "task-runtime",
+        "segmentIndex": 1,
+        "from": [
+          1270,
+          940
+        ],
+        "to": [
+          192,
+          940
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"tool-runtime\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 45,
+        "from": "context-retrieval",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "tool-runtime",
+        "segmentIndex": 1,
+        "from": [
+          1270,
+          940
+        ],
+        "to": [
+          192,
+          940
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"execution-runtimes\" (unrelated to this relationship) on segment 1 [1270, 940] -> [192, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 45,
+        "from": "context-retrieval",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "execution-runtimes",
+        "segmentIndex": 1,
+        "from": [
+          1270,
+          940
+        ],
+        "to": [
+          192,
+          940
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"worker-adapters\" (unrelated to this relationship) on segment 0 [1270, 420] -> [1270, 940] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 45,
+        "from": "context-retrieval",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "worker-adapters",
+        "segmentIndex": 0,
+        "from": [
+          1270,
+          420
+        ],
+        "to": [
+          1270,
+          940
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"sandbox-manager\" (unrelated to this relationship) on segment 2 [192, 940] -> [192, 1460] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 45,
+        "from": "context-retrieval",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "sandbox-manager",
+        "segmentIndex": 2,
+        "from": [
+          192,
+          940
+        ],
+        "to": [
+          192,
+          1460
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "clean-flow/edge-through-node",
+      "severity": "error",
+      "message": "[clean-flow/edge-through-node] architecture connections[45] \"context-retrieval\" -> \"memory-platform\" crosses component \"verification-engine\" (unrelated to this relationship) on segment 2 [192, 940] -> [192, 1460] (2px clearance) — adjust fromSide/toSide, set route/via, or move the component.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 45,
+        "from": "context-retrieval",
+        "to": "memory-platform"
+      },
+      "evidence": {
+        "obstacleKind": "component",
+        "obstacleId": "verification-engine",
+        "segmentIndex": 2,
+        "from": [
+          192,
+          940
+        ],
+        "to": [
+          192,
+          1460
+        ],
+        "clearancePx": 2
+      },
+      "supportedFixes": [
+        "adjust fromSide/toSide, set route/via, or move the component"
+      ]
+    },
+    {
+      "code": "composition/ambiguous-corridor",
+      "severity": "error",
+      "message": "[composition/ambiguous-corridor] showcase architecture connections[5] \"api-gateway\" -> \"conversation-manager\" shares a 24px corridor with connections[7] \"api-gateway\" -> \"event-stream\" at [906, 210] -> [930, 210] (segments 3 and 2; minimum 8px) — adjust route/via or fromSide/toSide so distinct connections do not visually merge.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 5,
+        "from": "api-gateway",
+        "to": "conversation-manager"
+      },
+      "evidence": {
+        "otherRelationship": {
+          "diagramType": "architecture",
+          "collection": "connections",
+          "index": 7,
+          "from": "api-gateway",
+          "to": "event-stream"
+        },
+        "overlapLengthPx": 24,
+        "minimumPx": 8,
+        "from": [
+          906,
+          210
+        ],
+        "to": [
+          930,
+          210
+        ],
+        "segmentIndex": 3,
+        "otherSegmentIndex": 2
+      },
+      "supportedFixes": [
+        "adjust route/via or fromSide/toSide so distinct connections do not visually merge"
+      ]
+    },
+    {
+      "code": "composition/ambiguous-corridor",
+      "severity": "error",
+      "message": "[composition/ambiguous-corridor] showcase architecture connections[39] \"worker-adapters\" -> \"verification-engine\" shares a 24px corridor with connections[41] \"verification-engine\" -> \"self-repair\" at [356, 1310] -> [380, 1310] (segments 2 and 3; minimum 8px) — adjust route/via or fromSide/toSide so distinct connections do not visually merge.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 39,
+        "from": "worker-adapters",
+        "to": "verification-engine"
+      },
+      "evidence": {
+        "otherRelationship": {
+          "diagramType": "architecture",
+          "collection": "connections",
+          "index": 41,
+          "from": "verification-engine",
+          "to": "self-repair"
+        },
+        "overlapLengthPx": 24,
+        "minimumPx": 8,
+        "from": [
+          356,
+          1310
+        ],
+        "to": [
+          380,
+          1310
+        ],
+        "segmentIndex": 2,
+        "otherSegmentIndex": 3
+      },
+      "supportedFixes": [
+        "adjust route/via or fromSide/toSide so distinct connections do not visually merge"
+      ]
+    },
+    {
+      "code": "composition/short-interior-segment",
+      "severity": "error",
+      "message": "[composition/short-interior-segment] showcase architecture connections[7] \"api-gateway\" -> \"event-stream\" has a 8.4px interior segment 1 [812.5, 201.6] -> [812.5, 210] that is below the 16px interior-segment floor — move route/via points into a wider corridor or move the component so every turn has room to read.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 7,
+        "from": "api-gateway",
+        "to": "event-stream"
+      },
+      "evidence": {
+        "segmentIndex": 1,
+        "position": "interior",
+        "lengthPx": 8.4,
+        "minimumPx": 16,
+        "from": [
+          812.5,
+          201.6
+        ],
+        "to": [
+          812.5,
+          210
+        ]
+      },
+      "supportedFixes": [
+        "move route/via points into a wider corridor or move the component so every turn has room to read"
+      ]
+    },
+    {
+      "code": "composition/label-route-clearance",
+      "severity": "error",
+      "message": "[composition/label-route-clearance] showcase architecture label \"scoped caps\" on connections[35] \"policy-security\" -> \"sandbox-manager\" label \"scoped caps\" is 0px from connections[31] \"provider-adapters\" -> \"local-model-endpoints\" label \"local calls\" segment 2 [277, 1097] -> [277, 1277] (label rect [236, 1117, 63, 14]; minimum 4px) — adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 35,
+        "from": "policy-security",
+        "to": "sandbox-manager"
+      },
+      "evidence": {
+        "label": "scoped caps",
+        "otherRelationship": {
+          "diagramType": "architecture",
+          "collection": "connections",
+          "index": 31,
+          "from": "provider-adapters",
+          "to": "local-model-endpoints"
+        },
+        "segmentIndex": 2,
+        "clearancePx": 0,
+        "minimumPx": 4,
+        "labelRect": {
+          "relation": {
+            "from": "policy-security",
+            "to": "sandbox-manager",
+            "label": "scoped caps",
+            "variant": "security"
+          },
+          "relationIndex": 35,
+          "label": "scoped caps",
+          "x": 236.1,
+          "y": 1117,
+          "width": 62.8,
+          "height": 14,
+          "lx": 267.5,
+          "ly": 1127
+        },
+        "from": [
+          277,
+          1097
+        ],
+        "to": [
+          277,
+          1277
+        ]
+      },
+      "supportedFixes": [
+        "adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel"
+      ]
+    },
+    {
+      "code": "composition/label-route-clearance",
+      "severity": "error",
+      "message": "[composition/label-route-clearance] showcase architecture label \"pgvector retrieval\" on connections[44] \"memory-platform\" -> \"data-plane\" label \"pgvector retrieval\" is 0px from connections[31] \"provider-adapters\" -> \"local-model-endpoints\" label \"local calls\" segment 4 [367, 1277] -> [367, 1616] (label rect [307, 1470, 96, 14]; minimum 4px) — adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 44,
+        "from": "memory-platform",
+        "to": "data-plane"
+      },
+      "evidence": {
+        "label": "pgvector retrieval",
+        "otherRelationship": {
+          "diagramType": "architecture",
+          "collection": "connections",
+          "index": 31,
+          "from": "provider-adapters",
+          "to": "local-model-endpoints"
+        },
+        "segmentIndex": 4,
+        "clearancePx": 0,
+        "minimumPx": 4,
+        "labelRect": {
+          "relation": {
+            "from": "memory-platform",
+            "to": "data-plane",
+            "label": "pgvector retrieval",
+            "variant": "default"
+          },
+          "relationIndex": 44,
+          "label": "pgvector retrieval",
+          "x": 306.8,
+          "y": 1470,
+          "width": 96.39999999999999,
+          "height": 14,
+          "lx": 355,
+          "ly": 1480
+        },
+        "from": [
+          367,
+          1277
+        ],
+        "to": [
+          367,
+          1616
+        ]
+      },
+      "supportedFixes": [
+        "adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel"
+      ]
+    },
+    {
+      "code": "composition/label-route-clearance",
+      "severity": "error",
+      "message": "[composition/label-route-clearance] showcase architecture label \"audit / traces\" on connections[46] \"observability\" -> \"data-plane\" label \"audit / traces\" is 0px from connections[43] \"workflow-runtime\" -> \"data-plane\" label \"persist\" segment 1 [889, 1130] -> [889, 1476] (label rect [831, 1470, 77, 14]; minimum 4px) — adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "index": 46,
+        "from": "observability",
+        "to": "data-plane"
+      },
+      "evidence": {
+        "label": "audit / traces",
+        "otherRelationship": {
+          "diagramType": "architecture",
+          "collection": "connections",
+          "index": 43,
+          "from": "workflow-runtime",
+          "to": "data-plane"
+        },
+        "segmentIndex": 1,
+        "clearancePx": 0,
+        "minimumPx": 4,
+        "labelRect": {
+          "relation": {
+            "from": "observability",
+            "to": "data-plane",
+            "label": "audit / traces",
+            "variant": "dashed"
+          },
+          "relationIndex": 46,
+          "label": "audit / traces",
+          "x": 831.4,
+          "y": 1470,
+          "width": 77.2,
+          "height": 14,
+          "lx": 870,
+          "ly": 1480
+        },
+        "from": [
+          889,
+          1130
+        ],
+        "to": [
+          889,
+          1476
+        ]
+      },
+      "supportedFixes": [
+        "adjust labelAt, labelDx, labelDy, or labelSegment; otherwise adjust the other relationship route/via/channel"
+      ]
+    },
+    {
+      "code": "composition/label-gap",
+      "severity": "error",
+      "message": "Label \"scoped caps\" has only 25px between \"policy-security\" and \"sandbox-manager\"; it needs at least 79px to stay beside its route — increase that clear gap or place the connected nodes on another readable row, preserving the label.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "from": "policy-security",
+        "to": "sandbox-manager"
+      },
+      "evidence": {
+        "clearGapPx": 25,
+        "minimumGapPx": 79,
+        "labelWidthPx": 62.8,
+        "obstacles": [
+          "sandbox-manager",
+          "policy-security"
+        ]
+      },
+      "supportedFixes": [
+        "increase the clear gap between the connected nodes to at least 79px",
+        "reposition the connected nodes together while preserving the full relationship label"
+      ]
+    },
+    {
+      "code": "composition/label-gap",
+      "severity": "error",
+      "message": "Label \"pgvector retrieval\" has only 50px between \"memory-platform\" and \"data-plane\"; it needs at least 113px to stay beside its route — increase that clear gap or place the connected nodes on another readable row, preserving the label.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "from": "memory-platform",
+        "to": "data-plane"
+      },
+      "evidence": {
+        "clearGapPx": 50,
+        "minimumGapPx": 113,
+        "labelWidthPx": 96.39999999999999,
+        "obstacles": [
+          "memory-platform",
+          "data-plane"
+        ]
+      },
+      "supportedFixes": [
+        "increase the clear gap between the connected nodes to at least 113px",
+        "reposition the connected nodes together while preserving the full relationship label"
+      ]
+    },
+    {
+      "code": "composition/label-gap",
+      "severity": "error",
+      "message": "Label \"audit / traces\" has only 60px between \"observability\" and \"data-plane\"; it needs at least 94px to stay beside its route — increase that clear gap or place the connected nodes on another readable row, preserving the label.",
+      "subject": {
+        "diagramType": "architecture",
+        "collection": "connections",
+        "from": "observability",
+        "to": "data-plane"
+      },
+      "evidence": {
+        "clearGapPx": 60,
+        "minimumGapPx": 94,
+        "labelWidthPx": 77.2,
+        "obstacles": [
+          "data-plane",
+          "observability"
+        ]
+      },
+      "supportedFixes": [
+        "increase the clear gap between the connected nodes to at least 94px",
+        "reposition the connected nodes together while preserving the full relationship label"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-product-20261027-130000\\asi-product-architecture.finalize.json",
+    "summaryReceipt": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\.archify\\architecture-asi-product-20261027-130000\\asi-product-architecture.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "validate",
+  "finishedAt": "2026-10-27T05:51:32.020Z",
+  "durationMs": 6603,
+  "update": {
+    "status": "update_available",
+    "installedVersion": "3.0.1",
+    "availableVersion": "3.2.0",
+    "releaseNotes": "https://github.com/tt-a1i/archify/releases/tag/v3.2.0",
+    "severity": "normal",
+    "checkedAt": "2026-10-27T02:46:32.988Z",
+    "source": "cache",
+    "noticeRequired": true,
+    "noticeText": "Archify update: 3.0.1 → 3.2.0. A previous check at 2026-10-27T02:46:32.988Z found a newer release. Release notes: https://github.com/tt-a1i/archify/releases/tag/v3.2.0. The installed Skill has not changed; ask to snooze or ignore this reminder.",
+    "eventKey": "archify@sha256:70e210265c59f24dcbdf2a502ff671104b5454e7ee7d3554aecd86bad32384f5"
+  }
+}

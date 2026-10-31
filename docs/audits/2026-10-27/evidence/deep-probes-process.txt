@@ -1,0 +1,1 @@
+{"requests":152,"verification":[{"status":201,"outcome":"pass"},{"status":201,"outcome":"fail"},{"status":201,"outcome":"unknown"},{"status":400},{"status":200}],"runStart":202,"startedId":"a173e0e5-5f76-4787-becf-c9a3275e75bd","clarificationId":"a4def983-a9f2-4a24-aaf6-0d8453850d15"}

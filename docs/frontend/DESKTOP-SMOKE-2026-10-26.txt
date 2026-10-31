@@ -1,0 +1,8 @@
+npm notice run sirona@0.1.0 desktop:smoke
+npm notice run electron tests/desktop-smoke.mjs
+
+smoke: initializing test-only service owner
+smoke: importing actual desktop entry
+smoke: desktop entry initialized
+smoke: actual window created
+smoke: built frontend loaded

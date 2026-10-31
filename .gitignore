@@ -7,9 +7,18 @@ dist-*/
 build/
 *.tsbuildinfo
 *.log
+.env
+.env.*
+!.env.example
 .DS_Store
 Thumbs.db
 
 release/
 *.exe
+
+# Local third-party agent tooling; pinned setup lives beside the checkout.
+/tooling/agent-scripts/
+
+# Audited source archive contains local environment configuration; never commit it.
+/backend.zip
 

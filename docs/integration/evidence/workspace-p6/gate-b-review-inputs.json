@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-10-30T10:06:20.721Z",
+  "status": "proposed; not approved; image not built or admitted",
+  "files": [
+    {
+      "file": "tooling/sirona/docker/tools-worker.Dockerfile",
+      "sha256": "3d126a0b8cecae7ba295f973a000758f6cef372e210d431a0913acc381782a50"
+    },
+    {
+      "file": "tooling/sirona/docker/prepare-tools-context.mjs",
+      "sha256": "f5fef38f2b55859b470ff7b300b3574d24968fd86a535f27be006c6cdbf438b3"
+    },
+    {
+      "file": "tooling/sirona/docker/tools-runtime/artifacts.json",
+      "sha256": "f0051e08975d927b7ce01cb67333c71ced9d50259b6395a97285dbb344b73b94"
+    },
+    {
+      "file": "tooling/sirona/docker/tools-runtime/apk-lock.json",
+      "sha256": "86145f1205e1533c04b9be3041c160aff9628b2507b413118d65268cabb3d502"
+    },
+    {
+      "file": "tooling/sirona/docker/tools-runtime/package.json",
+      "sha256": "2b919b691b29b58a07df1b9bfdce3c14d4116ec48b2feddea0ba3f7e4da1c56e"
+    },
+    {
+      "file": "tooling/sirona/docker/tools-runtime/package-lock.json",
+      "sha256": "df8bd2c87dde620a312534bf41d6501e2731473c0a1197dc289606c418e72d55"
+    },
+    {
+      "file": "tooling/sirona/docker/tools-runtime/server.mjs",
+      "sha256": "0ed7b82e0ccaf1bea5c575775d9d80df619da8a4c879f9d095e810f8d1ea4bf5"
+    }
+  ]
+}

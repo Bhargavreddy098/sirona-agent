@@ -1,0 +1,12 @@
+import {useRef,useState} from 'react';
+import {executionApi,type Approval} from '../../api/execution';
+import {Dialog} from '../../components/Dialog';
+import {ApprovalDecision} from './Approvals';
+import {messageOf} from './useRun';
+export type PreparedAction={runId:string;eventSequence:string;inputDigest:string;summary:string;command?:string[]};
+export function PreparedActionReview({action,onClose,onDecided}:{action:PreparedAction;onClose:()=>void;onDecided:(state:'approved'|'rejected',approvalId:string)=>void}){
+ const [proof,setProof]=useState<{approval:Approval;nonce:string}>(),[busy,setBusy]=useState(false),[error,setError]=useState(''),[lost,setLost]=useState(false);const lock=useRef(false),requestKey=useRef(crypto.randomUUID());
+ const request=async()=>{if(lock.current)return;lock.current=true;setBusy(true);setError('');try{const value=await executionApi.preparedApproval(action.runId,action.eventSequence,requestKey.current);if(value.approval.input_digest!==action.inputDigest)throw new Error('The returned proof does not match the reviewed action.');setProof(value);}catch(cause){setError(messageOf(cause));setLost(true);}finally{lock.current=false;setBusy(false);}};
+ if(proof)return <ApprovalDecision approval={proof.approval} initialNonce={proof.nonce} onClose={()=>{setProof(undefined);onClose();}} onSaved={state=>{onDecided(state,proof.approval.id);setProof(undefined);}}/>;
+ return <Dialog open dismissible={!busy} onClose={onClose} title="Review prepared action"><p>{action.summary}</p>{action.command&&<pre className="prepared-command" tabIndex={0}>{JSON.stringify(action.command,null,2)}</pre>}<code className="digest">{action.inputDigest}</code><p className="muted">The backend rechecks the current action, run epoch, permissions and owner. A proof is returned once and expires; it is never saved in this browser.</p>{error&&<p role="alert" className="notice error">{error}</p>}{lost&&<p className="muted">If a proof was already issued but its response was lost, explicitly requesting a new proof revokes the older pending request. An already approved action must be inspected before proceeding.</p>}<div className="dialog-actions"><button className="secondary" disabled={busy} onClick={onClose}>Go back</button><button className="primary" disabled={busy} onClick={()=>{if(lost)requestKey.current=crypto.randomUUID();void request();}}>{busy?'Checking prepared action…':lost?'Request a new review proof':'Request exact review proof'}</button></div></Dialog>;
+}

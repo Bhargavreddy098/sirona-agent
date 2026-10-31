@@ -1,0 +1,14 @@
+npm warn cleanup Failed to remove some directories [
+npm warn cleanup   [
+npm warn cleanup     '\\\\?\\C:\\Users\\bharg\\AppData\\Local\\Packages\\sandbox.{***}\\AC\\Temp\\sirona-audit-install-d06f3140c7d94c5eb15df335cb046bf8\\node_modules',
+npm warn cleanup     [Error: EPERM: operation not permitted, rmdir 'C:\Users\bharg\AppData\Local\Packages\sandbox.{***}\AC\Temp\sirona-audit-install-d06f3140c7d94c5eb15df335cb046bf8\node_modules\ioredis'] {
+npm warn cleanup       errno: -4048,
+npm warn cleanup       code: 'EPERM',
+npm warn cleanup       syscall: 'rmdir',
+npm warn cleanup       path: 'C:\\Users\\bharg\\AppData\\Local\\Packages\\sandbox.{***}\\AC\\Temp\\sirona-audit-install-d06f3140c7d94c5eb15df335cb046bf8\\node_modules\\ioredis'
+npm warn cleanup     }
+npm warn cleanup   ]
+npm warn cleanup ]
+npm error code ENOTCACHED
+npm error request to https://registry.npmjs.org/xtend/-/xtend-4.0.2.tgz failed: cache mode is 'only-if-cached' but no cached response is available.
+npm error A complete log of this run can be found in: C:\Users\bharg\AppData\Local\Packages\sandbox.{***}\AC\npm-cache\_logs\2026-10-27T08_19_29_831Z-debug-0.log

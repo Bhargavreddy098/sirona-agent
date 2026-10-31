@@ -1,0 +1,206 @@
+{
+  "text": "Sirona\nNew chat\nChat\nWorkspace\n\nNo conversations yet.\n\nSettings\nWorkspace\n/\nProject workspace\nProject workspace\n\nInspect real project files, saved execution and approval records.\n\nProject\nChoose a project\nP1 real workspace\nFiles\nRead access ready\nTrusted-local Docker\nQualified\nOrchestration\nServer disabled\n\nReadiness does not grant permission or enable execution. New operations still require their own contracts and approvals.\n\nRefresh readiness\nRuns\nPlanning\nFiles\nApprovals\nTerminal\nWorkers\nPlanning\n\nInspect saved goals, layered plans and immutable contract revisions.\n\nRefresh planning\nGoal\nChoose a saved goal\nInspect a trusted local project\nInspect a trusted local project\n\nactive · Server autonomy mode: supervised\n\nPlan revision 1\n44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a\nLayers\n{\n  \"requirements\": [\n    \"Inspect source\"\n  ],\n  \"verification\": [\n    \"Read the verified result\"\n  ],\n  \"implementation\": [\n    \"Review the exact file\"\n  ]\n}\nSteps\n[]\nActive contract revision 1\nPrepare this contract’s run\n\nPreparation pins a saved snapshot and budget. It does not call a model or bypass backend qualification. Execution is a separate action in Runs.\n\nContract document is missing required sections The request outcome is not confirmed; review saved approvals before requesting another proof.\n\nSaved repository snapshot\nChoose a completed snapshot\n10/29/2026, 11:10:24 PM · a4308316d57c\nMaximum run cost (USD)\nReview contract approval\nPrepare approved run\nReview this contract revision\n\nRequest a one-time proof for this exact contract, then explicitly approve or reject it. Requesting a proof alone does not approve execution.\n\n44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a\n\nContract revision 1 · Inspect a trusted local project\n\nContract document is missing required sections The request outcome is not confirmed; review saved approvals before requesting another proof.\n\nGo back\nRequest review proof",
+  "pageErrors": [],
+  "responses": [
+    {
+      "path": "/api/v1/model-settings",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/conversations",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/models",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects/85e62a2d-f462-438d-a4e4-09484a414755/runs",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects/85e62a2d-f462-438d-a4e4-09484a414755/workspace-readiness",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/tasks",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/agents",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/events",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/verifications",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/effects",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/checkpoints",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/agents",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/tasks",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/effects",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/checkpoints",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/verifications",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/events",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/pause",
+      "status": 202
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/tasks",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/agents",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/checkpoints",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/effects",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/verifications",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects/85e62a2d-f462-438d-a4e4-09484a414755/runs",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/effects",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/agents",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/checkpoints",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/tasks",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/verifications",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/resume",
+      "status": 202
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/tasks",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/agents",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/checkpoints",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/effects",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/runs/764d52a5-7c04-476a-8898-4ed3fd84a58e/verifications",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects/85e62a2d-f462-438d-a4e4-09484a414755/runs",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects/85e62a2d-f462-438d-a4e4-09484a414755/grants",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects/85e62a2d-f462-438d-a4e4-09484a414755/files",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects/85e62a2d-f462-438d-a4e4-09484a414755/file",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects/85e62a2d-f462-438d-a4e4-09484a414755/goals",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/goals/3a56a4bd-3451-485a-8f82-d820024dbbdd/plans",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/contract-revisions/a4c41ca5-4700-4927-bf03-2abdac1b75e9",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/projects/85e62a2d-f462-438d-a4e4-09484a414755/snapshots",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/contract-revisions/a4c41ca5-4700-4927-bf03-2abdac1b75e9/approval-requests",
+      "status": 400
+    }
+  ]
+}

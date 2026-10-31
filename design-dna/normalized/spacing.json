@@ -1,0 +1,28 @@
+{
+  "baseUnit": "4px (0.25rem)",
+  "scale": {
+    "0": "0px",
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px",
+    "5": "20px",
+    "6": "24px",
+    "8": "32px",
+    "10": "40px",
+    "12": "48px",
+    "16": "64px",
+    "20": "80px",
+    "24": "96px"
+  },
+  "components": {
+    "sidebarPadding": "12px",
+    "sidebarItemGap": "4px",
+    "sidebarItemPadding": "8px 10px",
+    "messageVerticalGap": "24px",
+    "composerInnerPadding": "10px 14px 10px 16px",
+    "codeBlockPadding": "14px 16px",
+    "modalPadding": "24px",
+    "tooltipPadding": "6px 10px"
+  }
+}

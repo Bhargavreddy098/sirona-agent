@@ -1,0 +1,2 @@
+const {chromium}=require('C:/Users/bharg/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+(async()=>{const b=await chromium.launch({executablePath:'C:/Users/bharg/AppData/Local/ms-playwright/chromium-1248/chrome-win64/chrome.exe',headless:true});try{const p=await b.newPage();await p.goto('http://127.0.0.1:5174/');console.log(await p.locator('.new-chat').evaluate(el=>({font:getComputedStyle(el).fontFamily,weight:getComputedStyle(el).fontWeight})));}finally{await b.close()}})();

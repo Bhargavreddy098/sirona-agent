@@ -1,0 +1,9 @@
+{
+  "format": "sirona-source-snapshot-v1",
+  "archive": "private/source-snapshot.json.gz",
+  "sha256": "4f2e2824de70ad5c9cf8057c2abac90d73fe5f62ef289aebdbcc9869326355dc",
+  "fileCount": 243,
+  "roundTripVerified": true,
+  "containsEnvironmentFiles": false,
+  "restorePolicy": "Inspect manifest, select exact approved paths, verify current changes, never bulk overwrite the checkout"
+}
