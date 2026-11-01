@@ -1,16 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="background-color: var(--v2-background-bg-deep, #fafafa); height: 100%;">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet" />
-    <title>Sirona</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, interactive-widget=resizes-content, viewport-fit=cover"
+    />
+    <title data-sm>Sirona</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#fafafa" />
+    <script id="oc-theme-preload-script" src="/oc-theme-preload.js"></script>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body
+    class="antialiased overscroll-none font-(family-name:--font-family-text) text-[13px] font-[440] overflow-hidden bg-v2-background-bg-deep"
+    style="height: 100%; min-height: 100%; margin: 0; padding: 0;"
+  >
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" class="flex flex-col h-screen h-dvh bg-v2-background-bg-deep p-px" style="height: 100vh; min-height: 100vh; width: 100%;"></div>
+    <script src="/src/entry.tsx" type="module"></script>
   </body>
 </html>

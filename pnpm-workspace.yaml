@@ -1,3 +1,13 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+
+allowBuilds:
+  '@google/genai': true
+  '@ibm/plex': true
+  '@tailwindcss/oxide': true
+  esbuild: true
+  isolated-vm: true
+  protobufjs: true
+  tree-sitter-javascript: true
+  tree-sitter-typescript: true
