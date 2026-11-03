@@ -25,3 +25,6 @@ release/
 .tmp/
 docs.zip
 
+# Spec Kit / OpenCode agent folder may contain credentials or local agent state.
+/.opencode/
+

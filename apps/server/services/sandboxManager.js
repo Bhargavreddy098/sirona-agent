@@ -424,6 +424,14 @@ export class SandboxManager {
       return new HostExecutionBackend(true);
     }
 
+    // 2. Explicit opt-in host execution. Takes priority over Docker availability so
+    //    the flag means "use host execution" rather than "host only when Docker is
+    //    down." Re-enable Docker-only by unsetting the flag. Sandbox/WSL2 code is
+    //    preserved untouched.
+    if (process.env.SIRONA_HOST_EXECUTION === 'true') {
+      return new HostExecutionBackend(true);
+    }
+
     if(prefer && prefer!=='docker')throw new SandboxError('SANDBOX_UNAVAILABLE',503,'Only the approved Docker broker may execute project commands');
     const docker=new DockerSandboxBackend();if((await docker.checkHealth()).available)return docker;
     throw new SandboxError('SANDBOX_UNAVAILABLE',503,'Local Docker is unavailable; no WSL or host execution fallback is permitted');

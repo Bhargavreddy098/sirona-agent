@@ -3,8 +3,8 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "allowJs": true,
@@ -13,25 +13,9 @@
     "skipLibCheck": true,
     "noEmit": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "@opencode/ui/*": ["../../packages/ui/src/*"],
-      "@opencode/ui": ["../../packages/ui/src/index.ts"],
-      "@opencode/session-ui/*": ["../../packages/session-ui/src/*"],
-      "@opencode/session-ui": ["../../packages/session-ui/src/index.ts"],
-      "@opencode/util/*": ["../../packages/util/src/*"],
-      "@opencode/util": ["../../packages/util/src/index.ts"],
-      "@opencode/client/*": ["../../packages/client/src/*"],
-      "@opencode/client": ["../../packages/client/src/index.ts"],
-      "@opencode/schema/*": ["../../packages/schema/src/*"],
-      "@opencode/schema": ["../../packages/schema/src/index.ts"],
-      "@opencode/protocol/*": ["../../packages/protocol/src/*"],
-      "@opencode/protocol": ["../../packages/protocol/src/index.ts"],
-      "@opencode/plugin/*": ["../../packages/plugin/src/*"],
-      "@opencode/plugin": ["../../packages/plugin/src/index.ts"],
-      "@opencode/gui-plugins/*": ["../../packages/gui-plugins/src/*"],
-      "@opencode/gui-plugins": ["../../packages/gui-plugins/src/index.ts"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"],
-  "exclude": ["dist", "node_modules", "src-react-backup"]
+  "exclude": ["dist", "node_modules", "src-react-backup", "src-solid-backup"]
 }

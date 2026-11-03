@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import solidPlugin from 'vite-plugin-solid';
+import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,13 +8,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [
-    solidPlugin(),
+    react(),
     tailwindcss(),
   ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@sentry/solid': path.resolve(__dirname, './src/sentry-stub.ts'),
     },
   },
   server: {

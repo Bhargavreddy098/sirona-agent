@@ -38,6 +38,50 @@ function server(){
   const sessionMessages=new Map();
   const sseClients=new Set();
 
+  // Dynamic Provider & Model Registry (Beam Free removed)
+  const localProviders = new Map([
+    ['anthropic', {
+      id: 'anthropic',
+      name: 'Anthropic',
+      type: 'anthropic',
+      status: 'active',
+      models: ['Claude 3.5 Sonnet']
+    }],
+    ['google', {
+      id: 'google',
+      name: 'Google Gemini',
+      type: 'google',
+      status: 'active',
+      models: ['Gemini 2.5 Pro']
+    }]
+  ]);
+
+  const localModels = new Map([
+    ['claude-3-5-sonnet', {
+      id: 'claude-3-5-sonnet',
+      modelID: 'claude-3-5-sonnet-latest',
+      providerID: 'anthropic',
+      provider: 'Anthropic',
+      name: 'Claude 3.5 Sonnet',
+      desc: 'Top-tier agentic coding and reasoning model',
+      badge: 'Pro',
+      isDefault: true,
+      limit: { context: 200000, output: 8192 }
+    }],
+    ['gemini-2.5-pro', {
+      id: 'gemini-2.5-pro',
+      modelID: 'gemini-2.5-pro',
+      providerID: 'google',
+      provider: 'Google Gemini',
+      name: 'Gemini 2.5 Pro',
+      desc: 'Ultra-long context window with multimodal analysis',
+      badge: 'Pro',
+      isDefault: false,
+      limit: { context: 1000000, output: 64000 }
+    }]
+  ]);
+  let currentDefaultModel = 'Claude 3.5 Sonnet';
+
   function broadcastSse(eventData) {
     const payload = `data: ${JSON.stringify(eventData)}\n\n`;
     for (const client of sseClients) {
@@ -250,90 +294,191 @@ function server(){
       return;
     }
 
-    // OpenCode model providers
-    if(req.url.startsWith('/api/provider')){
+    // OpenCode model providers CRUD
+    if(req.url === '/api/provider' || req.url.startsWith('/api/provider?')){
+      if (req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => { body += chunk; });
+        req.on('end', () => {
+          try {
+            const parsed = JSON.parse(body || '{}');
+            const id = parsed.id || (parsed.name || 'custom').toLowerCase().replace(/[^a-z0-9]/g, '-') + '-' + Date.now().toString(36).slice(-4);
+            const providerObj = {
+              id,
+              name: parsed.name || 'Custom Provider',
+              type: parsed.type || 'openai_compatible',
+              baseUrl: parsed.baseUrl || '',
+              apiKey: parsed.apiKey ? '••••••••' : '',
+              status: 'active',
+              models: []
+            };
+
+            let modelsList = [];
+            if (Array.isArray(parsed.models)) {
+              modelsList = parsed.models;
+            } else if (typeof parsed.models === 'string' && parsed.models.trim()) {
+              modelsList = parsed.models.split(',').map(m => m.trim()).filter(Boolean);
+            } else if (parsed.modelName) {
+              modelsList = [parsed.modelName.trim()];
+            }
+
+            if (modelsList.length === 0) {
+              modelsList = [parsed.name || 'Custom Model'];
+            }
+
+            providerObj.models = modelsList;
+            localProviders.set(id, providerObj);
+
+            // Register models in localModels
+            for (const mName of modelsList) {
+              const modelId = id + ':' + mName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+              localModels.set(modelId, {
+                id: modelId,
+                modelID: mName,
+                providerID: id,
+                provider: providerObj.name,
+                name: mName,
+                desc: `Custom model via ${providerObj.name}`,
+                badge: 'Custom',
+                isDefault: false,
+                limit: { context: 128000, output: 4096 }
+              });
+            }
+
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({ ok: true, data: providerObj, models: Array.from(localModels.values()) }));
+          } catch (e) {
+            res.writeHead(400, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
       res.writeHead(200, {'Content-Type': 'application/json'});
       res.end(JSON.stringify({
         location: { directory: workspaceRoot },
-        data: [
-          { id: 'opencode', name: 'OpenCode', activation: 'auto', package: '' },
-          { id: 'google', name: 'Google Gemini', activation: 'auto', package: '' },
-          { id: 'anthropic', name: 'Anthropic', activation: 'auto', package: '' }
-        ]
+        data: Array.from(localProviders.values())
       }));
       return;
+    }
+
+    if(req.url.startsWith('/api/provider/')){
+      if (req.method === 'DELETE') {
+        const providerId = req.url.split('/api/provider/')[1]?.split('?')[0];
+        if (providerId) {
+          localProviders.delete(providerId);
+          for (const [mId, mObj] of localModels.entries()) {
+            if (mObj.providerID === providerId) {
+              localModels.delete(mId);
+            }
+          }
+          const remaining = Array.from(localModels.values());
+          if (remaining.length > 0 && !remaining.some(m => m.name === currentDefaultModel)) {
+            currentDefaultModel = remaining[0].name;
+            remaining[0].isDefault = true;
+          }
+        }
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify({ ok: true }));
+        return;
+      }
     }
 
     // OpenCode default model
     if(req.url.startsWith('/api/model/default')){
+      if (req.method === 'PUT' || req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => { body += chunk; });
+        req.on('end', () => {
+          try {
+            const parsed = JSON.parse(body || '{}');
+            const target = parsed.name || parsed.id;
+            const found = Array.from(localModels.values()).find(m => m.name === target || m.id === target);
+            if (found) {
+              currentDefaultModel = found.name;
+              for (const m of localModels.values()) {
+                m.isDefault = (m.id === found.id);
+              }
+            }
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({ ok: true, defaultModel: currentDefaultModel }));
+          } catch {
+            res.writeHead(400, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({ error: 'Invalid payload' }));
+          }
+        });
+        return;
+      }
+
+      const def = Array.from(localModels.values()).find(m => m.name === currentDefaultModel) || Array.from(localModels.values())[0];
       res.writeHead(200, {'Content-Type': 'application/json'});
       res.end(JSON.stringify({
         location: { directory: workspaceRoot },
-        data: {
-          id: 'beam-free',
-          modelID: 'beam-free',
-          providerID: 'opencode',
-          name: 'Beam Free',
-          capabilities: { temperature: true, reasoning: true, attachments: true, tools: true, input: ['text', 'image'], output: ['text'] },
-          variants: [],
-          time: { released: 0 },
-          cost: [],
-          status: 'active',
-          enabled: true,
-          limit: { context: 200000, output: 32000 }
-        }
+        data: def || null,
+        model: def || null
       }));
       return;
     }
 
-    // OpenCode models
-    if(req.url.startsWith('/api/model')){
+    // OpenCode models CRUD
+    if(req.url === '/api/model' || req.url.startsWith('/api/model?')){
+      if (req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => { body += chunk; });
+        req.on('end', () => {
+          try {
+            const parsed = JSON.parse(body || '{}');
+            const id = (parsed.id || parsed.name || 'custom').toLowerCase().replace(/[^a-z0-9]/g, '-');
+            const modelObj = {
+              id,
+              modelID: parsed.modelID || parsed.name,
+              providerID: parsed.providerID || 'custom',
+              provider: parsed.provider || 'Custom',
+              name: parsed.name || 'Custom Model',
+              desc: parsed.desc || 'Custom configured model',
+              badge: parsed.badge || 'Custom',
+              isDefault: false,
+              limit: { context: 128000, output: 4096 }
+            };
+            localModels.set(id, modelObj);
+            res.writeHead(200, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({ ok: true, data: modelObj }));
+          } catch (e) {
+            res.writeHead(400, {'Content-Type': 'application/json'});
+            res.end(JSON.stringify({ error: e.message }));
+          }
+        });
+        return;
+      }
+
       res.writeHead(200, {'Content-Type': 'application/json'});
       res.end(JSON.stringify({
         location: { directory: workspaceRoot },
-        data: [
-          {
-            id: 'beam-free',
-            modelID: 'beam-free',
-            providerID: 'opencode',
-            name: 'Beam Free',
-            capabilities: { temperature: true, reasoning: true, attachments: true, tools: true, input: ['text', 'image'], output: ['text'] },
-            variants: [],
-            time: { released: 0 },
-            cost: [],
-            status: 'active',
-            enabled: true,
-            limit: { context: 200000, output: 32000 }
-          },
-          {
-            id: 'gemini-2.5-pro',
-            modelID: 'gemini-2.5-pro',
-            providerID: 'google',
-            name: 'Gemini 2.5 Pro',
-            capabilities: { temperature: true, reasoning: true, attachments: true, tools: true, input: ['text', 'image'], output: ['text'] },
-            variants: [],
-            time: { released: 0 },
-            cost: [],
-            status: 'active',
-            enabled: true,
-            limit: { context: 1000000, output: 64000 }
-          },
-          {
-            id: 'claude-3-5-sonnet-latest',
-            modelID: 'claude-3-5-sonnet-latest',
-            providerID: 'anthropic',
-            name: 'Claude 3.5 Sonnet',
-            capabilities: { temperature: true, reasoning: true, attachments: true, tools: true, input: ['text', 'image'], output: ['text'] },
-            variants: [],
-            time: { released: 0 },
-            cost: [],
-            status: 'active',
-            enabled: true,
-            limit: { context: 200000, output: 8192 }
-          }
-        ]
+        data: Array.from(localModels.values())
       }));
       return;
+    }
+
+    if(req.url.startsWith('/api/model/')){
+      if (req.method === 'DELETE') {
+        const modelId = decodeURIComponent(req.url.split('/api/model/')[1]?.split('?')[0] || '');
+        if (modelId) {
+          localModels.delete(modelId);
+          // Also try finding by name
+          for (const [mId, mObj] of localModels.entries()) {
+            if (mObj.name === modelId) localModels.delete(mId);
+          }
+          const remaining = Array.from(localModels.values());
+          if (remaining.length > 0 && !remaining.some(m => m.name === currentDefaultModel)) {
+            currentDefaultModel = remaining[0].name;
+            remaining[0].isDefault = true;
+          }
+        }
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify({ ok: true }));
+        return;
+      }
     }
 
     // OpenCode usage limits
@@ -482,18 +627,26 @@ function server(){
             type: 'user'
           };
 
+          let requestedModel = currentDefaultModel;
+          try {
+            const parsed = JSON.parse(body);
+            if (parsed.model) requestedModel = parsed.model;
+          } catch {}
+          const matchedModel = Array.from(localModels.values()).find(m => m.name === requestedModel || m.id === requestedModel) || Array.from(localModels.values())[0];
+          const activeModelName = matchedModel ? matchedModel.name : requestedModel;
+
           const assistantMsgId = 'msg-' + crypto.randomUUID();
           const assistantMsg = {
             id: assistantMsgId,
             sessionID: sessionId,
             type: 'assistant',
             agent: 'default',
-            model: { id: 'beam-free', providerID: 'opencode' },
+            model: { id: matchedModel ? matchedModel.id : requestedModel, name: activeModelName, providerID: matchedModel ? matchedModel.providerID : 'custom' },
             time: { created: Date.now(), completed: Date.now() },
             content: [
               {
                 type: 'text',
-                text: `I've received your request: "${promptText}". I am ready to help you analyze, plan, and edit code across your project workspace.`
+                text: `I've received your request: "${promptText}". I am ready to help you analyze, plan, and edit code using ${activeModelName}.`
               }
             ],
             finish: 'stop'

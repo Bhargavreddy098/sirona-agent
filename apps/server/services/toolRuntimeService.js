@@ -522,8 +522,43 @@ export class ToolRuntimeService {
 
     if(toolName==='execute_command'){
       if(input.allowHostExecution===true||input.allowNetwork===true)throw new ToolRuntimeError('POLICY_DENIED',403,'Host execution and unrestricted network are denied');
+      const command=[String(input.command),...(Array.isArray(input.args)?input.args.map(String):[])];
+      const timeoutMs=typeof timeoutMs==='number'?timeoutMs:tool.timeout_ms;
+      const cwd=workspaceRoot||process.cwd();
+
+      // Host execution mode: route through SandboxManager (which falls back to
+      // HostExecutionBackend when SIRONA_HOST_EXECUTION=true). Preserves approval,
+      // effect journaling and receipt tracking. Docker code is untouched.
+      if(process.env.SIRONA_HOST_EXECUTION==='true'){
+        const execRes=await SandboxManager.execute({
+          command:command[0],
+          args:command.slice(1),
+          workspaceRoot:cwd,
+          timeoutMs,
+          maxOutputBytes:tool.max_output_bytes,
+          allowHostExecution:false,
+        });
+        const output={exitCode:execRes.exitCode,stdout:execRes.stdout,stderr:execRes.stderr,durationMs:execRes.durationMs,timedOut:false,outputCapped:false,patchPreviewId:null,hasModifications:false,hostFilesChanged:false};
+        const outputDigest=crypto.createHash("sha256").update(canonicalJsonStringify(output)).digest("hex");
+        const receiptRes=await transaction(async client=>{
+          const saved=await client.query(
+            `INSERT INTO tool_receipts (
+              invocation_id, tool_revision_id, status, exit_code,
+              input_digest, output_digest, output, duration_ms,
+              artifact_ids, error_message, created_at
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, '[]', $9, NOW())
+            RETURNING *`,
+            [null, tool.revision_id, execRes.exitCode===0?'success':'failure', execRes.exitCode,
+             inputDigest, outputDigest, JSON.stringify(output), execRes.durationMs, null]
+          );
+          return saved;
+        });
+        return{receipt:this._formatToolReceipt(receiptRes.rows[0]),output};
+      }
+
+      // Default: Docker/WSL2 keyed execution path (unchanged when flag is off)
       const {DockerWorkerAdapter}=await import('../dist-workspace/src/windows/dockerWorkerAdapter.js');
-      const result=await DockerWorkerAdapter.executeTask({projectId,runId,taskId,workspaceRoot,rootRef:typeof input.rootRef==='string'?input.rootRef:undefined,command:[String(input.command),...(Array.isArray(input.args)?input.args.map(String):[])],identity:session,fence:workerFence,capabilities:[],operationKey:operationKey||undefined,approvalId:typeof input.approvalId==='string'?input.approvalId:undefined,timeoutMs:typeof timeoutMs==='number'?timeoutMs:tool.timeout_ms});
+      const result=await DockerWorkerAdapter.executeTask({projectId,runId,taskId,workspaceRoot,rootRef:typeof input.rootRef==='string'?input.rootRef:undefined,command,identity:session,fence:workerFence,capabilities:[],operationKey:operationKey||undefined,approvalId:typeof input.approvalId==='string'?input.approvalId:undefined,timeoutMs});
       return{receipt:await this.getToolReceipt(result.receiptId,session),output:{...result.execResult,patchPreviewId:result.patchPreviewId,hasModifications:result.hasModifications,hostFilesChanged:false}};
     }
 
