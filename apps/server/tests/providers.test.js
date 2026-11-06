@@ -15,12 +15,32 @@ import { AIService } from "../services/aiService.js";
 import { ProjectService } from "../services/projectService.js";
 import { GovernanceService } from "../services/governanceService.js";
 import { TurnLease } from "../model/TurnLease.js";
+import { CredentialResolver } from "../dist-workspace/src/providers/credentialResolver.js";
 import { serve, request } from "./helpers.js";
 
 loadEnvironment();
 const config = readRuntimeConfig(process.env);
 const logger = createLogger(config);
 let owner;
+
+const testVaultRecords = new Map();
+try {
+  CredentialResolver.configureVault({
+    put(secret) {
+      const ref = CredentialResolver.generateCredentialRef();
+      testVaultRecords.set(ref, secret);
+      return ref;
+    },
+    get(ref) {
+      const val = testVaultRecords.get(ref);
+      if (!val) throw new Error("CREDENTIAL_UNAVAILABLE");
+      return val;
+    },
+    remove(ref) {
+      testVaultRecords.delete(ref);
+    },
+  });
+} catch {}
 
 before(async () => {
   owner = createDatabaseOwner(config.database, logger);
@@ -90,6 +110,14 @@ test("authenticated GET /api/v1/models returns qualified models with pricing", a
   assert.ok(geminiFlash.pricing.inputCostPerMillionMicroUsd > 0);
   assert.ok(geminiFlash.pricing.outputCostPerMillionMicroUsd > 0);
   assert.equal(typeof geminiFlash.hasConfiguredApiKey, "boolean");
+
+  const gemini35FlashLite = body.data.models.find((m) => m.id === "gemini-3.5-flash-lite");
+  assert.ok(gemini35FlashLite, "gemini-3.5-flash-lite model must exist");
+  assert.equal(gemini35FlashLite.provider, "google");
+
+  const gemini35Flash = body.data.models.find((m) => m.id === "gemini-3.5-flash");
+  assert.ok(gemini35Flash, "gemini-3.5-flash model must exist");
+  assert.equal(gemini35Flash.provider, "google");
 });
 
 test("POST /api/v1/models/verify requires authentication and CSRF token", async (t) => {
@@ -189,7 +217,7 @@ test("POST /api/v1/conversations/:id/turns rejects without turn lease and reject
       Cookie: cookie,
       "x-csrf-token": csrfToken,
     },
-    body: JSON.stringify({ prompt: "Hello Sirona" }),
+    body: JSON.stringify({ prompt: "Hello Sirona", bypassCoordinator: true }),
   });
   assert.equal(noLeaseRes.status, 409);
   const noLeaseBody = await noLeaseRes.json();
@@ -209,7 +237,7 @@ test("POST /api/v1/conversations/:id/turns rejects without turn lease and reject
       Cookie: cookie,
       "x-csrf-token": csrfToken,
     },
-    body: JSON.stringify({ prompt: "Hello", modelId: "gpt-4o" }),
+    body: JSON.stringify({ prompt: "Hello", modelId: "gpt-4o", bypassCoordinator: true }),
   });
   assert.equal(missingKeyRes.status, 400);
   const missingKeyBody = await missingKeyRes.json();
@@ -258,9 +286,11 @@ test("ProviderService.executeTurn persists user + assistant messages, settles bu
   };
 
   // Configure a mock active provider connection so apiKey resolution succeeds
+  const mockRef = CredentialResolver.storeCredential("test-key-mock");
   await query(
-    `INSERT INTO provider_connections (kind, name, api_key_ciphertext, is_active, updated_at)
-     VALUES ('google', 'Test Google Connection', 'test-key-mock', true, NOW())`
+    `INSERT INTO provider_connections (kind, name, api_key_ciphertext, credential_ref, credential_status, is_active, updated_at)
+     VALUES ('google', 'Test Google Connection', $1, $1, 'migrated', true, NOW())`,
+    [mockRef]
   );
 
   try {
@@ -667,3 +697,17 @@ test("Model Settings GET and PATCH (/api/v1/model-settings)", async (t) => {
   assert.equal(verifyBody.data.primaryModel, "gemini-2.5-flash");
   assert.equal(verifyBody.data.fallbackModel, "gpt-4o-mini");
 });
+
+test("AUDIT-01: AIService.resolveModelAlias resolves deprecated identifiers to active successors", () => {
+  assert.equal(AIService.resolveModelAlias("gemini-2.5-flash-lite"), "gemini-3.5-flash-lite");
+  assert.equal(AIService.resolveModelAlias("gemini-2.5-flash"), "gemini-3.5-flash-lite");
+  assert.equal(AIService.resolveModelAlias("gemini-2.5-pro"), "gemini-3.1-pro-preview");
+  assert.equal(AIService.resolveModelAlias("gemini-1.5-pro"), "gemini-3.1-pro-preview");
+  assert.equal(AIService.resolveModelAlias("gemini-1.5-flash"), "gemini-3.5-flash-lite");
+  assert.equal(AIService.resolveModelAlias("gpt-4o"), "gpt-4o");
+  assert.equal(AIService.resolveModelAlias("claude-3-7-sonnet-20250219"), "claude-3-7-sonnet-20250219");
+  assert.equal(AIService.resolveProvider("gemini-2.5-flash-lite"), "google");
+  assert.equal(AIService.resolveProvider("gpt-4o"), "openai");
+  assert.equal(AIService.resolveProvider("claude-3-7-sonnet-20250219"), "anthropic");
+});
+

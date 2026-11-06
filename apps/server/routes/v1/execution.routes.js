@@ -26,6 +26,9 @@ const executionScopeMiddleware = async(req,res,next)=>{
     }
     if(req.params.goalId){
       validate(uuidSchema,req.params.goalId);
+      if (req.method === "POST" && !req.body?.contractRevisionId) {
+        return next();
+      }
       projectId=(await query("SELECT project_id FROM goals WHERE id=$1",[req.params.goalId])).rows[0]?.project_id;
       if(!projectId) return sendProblem(req,res,404,`Goal ${req.params.goalId} not found`);
     }
@@ -348,6 +351,23 @@ router.post("/conversations/:conversationId/runs", sessionAuth(), async (req, re
     }
     const conv = convRes.rows[0];
 
+    if (!conv.project_id) {
+      return sendProblem(
+        req,
+        res,
+        400,
+        "Agent execution runs require a project workspace. Associate the conversation with a project first.",
+        "PROJECT_REQUIRED"
+      );
+    }
+
+    if (req.session?.workspaceId) {
+      const projRes = await query("SELECT id, workspace_id FROM projects WHERE id = $1", [conv.project_id]);
+      if (projRes.rows.length === 0 || (projRes.rows[0].workspace_id && projRes.rows[0].workspace_id !== req.session.workspaceId)) {
+        return sendProblem(req, res, 404, "Project not found or not owned by workspace");
+      }
+    }
+
     const run = await transaction(async (client) => {
       const runSql = `
         INSERT INTO runs (
@@ -358,7 +378,7 @@ router.post("/conversations/:conversationId/runs", sessionAuth(), async (req, re
       `;
       const runRes = await client.query(runSql, [
         conv.id,
-        conv.project_id || null,
+        conv.project_id,
         autonomyMode,
         Number(budgetCeilingMicroUsd || 0),
       ]);

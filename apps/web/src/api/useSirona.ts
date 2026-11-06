@@ -44,7 +44,8 @@ export function useProviders() {
         setConnections(cRes.value.data);
       }
       if (mRes.status === "fulfilled" && mRes.value?.data) {
-        setModels(mRes.value.data);
+        const raw = (mRes.value.data as any)?.models || (Array.isArray(mRes.value.data) ? mRes.value.data : []);
+        setModels(raw);
       }
     } catch {
     } finally {
@@ -89,7 +90,10 @@ export function useProjects() {
     setLoading(true);
     try {
       const res = await sironaApi.projects.list();
-      if (res?.data) setProjects(res.data);
+      if (res?.data) {
+        const list = (res.data as any).projects || (Array.isArray(res.data) ? res.data : []);
+        setProjects(list);
+      }
     } catch {
     } finally {
       setLoading(false);

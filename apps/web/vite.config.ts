@@ -21,25 +21,18 @@ export default defineConfig({
     port: 5178,
     strictPort: true,
     proxy: {
-      '/api/v1': {
-        target: 'http://127.0.0.1:5176',
-        changeOrigin: true,
-        ws: true,
-      },
       '/api': {
-        target: 'http://127.0.0.1:5176',
+        target: 'http://127.0.0.1:8000',
         changeOrigin: true,
-        ws: true,
+      },
+      '/health': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
       },
     },
   },
-  worker: {
-    format: 'es',
-  },
   build: {
     outDir: 'dist',
-    minify: false,
-    sourcemap: false,
-    target: 'esnext',
+    emptyOutDir: true,
   },
 });

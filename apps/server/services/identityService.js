@@ -97,7 +97,10 @@ export async function verifySession(rawSessionToken) {
 
   if (!row) return null;
   if (row.revoked_at) return null;
-  if (new Date(row.expires_at).getTime() < Date.now()) return null;
+  const expiresAtIso = String(row.expires_at).includes("T")
+    ? (String(row.expires_at).endsWith("Z") ? row.expires_at : `${row.expires_at}Z`)
+    : `${String(row.expires_at).replace(" ", "T")}Z`;
+  if (new Date(expiresAtIso).getTime() < Date.now()) return null;
 
   return {
     sessionId: row.id,

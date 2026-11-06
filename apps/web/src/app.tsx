@@ -23,7 +23,9 @@ export const App: React.FC = () => {
     | "about"
   >("appearance");
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [selectedModel, setSelectedModel] = useState("Claude 3.5 Sonnet");
+  const [selectedModel, setSelectedModel] = useState("Gemini 3.5 Flash Lite");
+  const [selectedModelId, setSelectedModelId] = useState("gemini-3.5-flash-lite");
+  const [availableModels, setAvailableModels] = useState<any[]>([]);
   const [isModelPickerOpen, setIsModelPickerOpen] = useState(false);
   const [theme, setTheme] = useState<"system" | "light" | "dark">("light");
   const [sessionId, setSessionId] = useState<string>("session-default");
@@ -64,55 +66,39 @@ export const App: React.FC = () => {
     // Bootstrap v1 session
     sironaApi.identity.bootstrap().catch(() => {});
 
-    // Fetch default model
+    // Fetch registered models from canonical provider gateway
     sironaApi.providers
       .models()
       .then((res) => {
-        if (res?.data && res.data.length > 0) {
-          const valid = res.data.filter((m: any) => m.name !== "Beam Free" && m.id !== "beam-free");
-          if (valid.length > 0) {
-            const def = valid.find((m: any) => m.isDefault) || valid[0];
-            setSelectedModel(def.name);
+        const list = res?.data?.models || (Array.isArray(res?.data) ? res.data : []);
+        if (Array.isArray(list) && list.length > 0) {
+          const clean = list.filter((m: any) => m.name !== "Beam Free" && m.id !== "beam-free");
+          setAvailableModels(clean);
+          const currentValid = clean.find((m: any) => m.id === selectedModelId || m.name === selectedModel);
+          if (!currentValid) {
+            const ready = clean.find((m: any) => m.hasConfiguredApiKey) || clean[0];
+            if (ready) {
+              setSelectedModel(ready.name);
+              setSelectedModelId(ready.id);
+            }
           }
         }
       })
-      .catch(() => {
-        fetch("/api/model/default")
-          .then((res) => (res.ok ? res.json() : null))
-          .then((data) => {
-            if (data?.model?.name && data.model.name !== "Beam Free") {
-              setSelectedModel(data.model.name);
-            }
-          })
-          .catch(() => {});
-      });
+      .catch(() => {});
 
     // Fetch active or recent sessions
     sironaApi.conversations
       .list()
       .then((res) => {
-        if (res?.data && Array.isArray(res.data) && res.data.length > 0) {
-          setSessionsList(res.data);
-          const first = res.data[0];
+        const sessions = res?.data || [];
+        if (Array.isArray(sessions) && sessions.length > 0) {
+          setSessionsList(sessions);
+          const first = sessions[0];
           setSessionId(first.id);
           setSessionTitle(first.title || "Session");
-        } else {
-          throw new Error("No v1 conversations");
         }
       })
-      .catch(() => {
-        fetch("/api/session")
-          .then((res) => (res.ok ? res.json() : null))
-          .then((data) => {
-            if (data?.data && Array.isArray(data.data) && data.data.length > 0) {
-              setSessionsList(data.data);
-              const first = data.data[0];
-              setSessionId(first.id);
-              setSessionTitle(first.title || "Session");
-            }
-          })
-          .catch(() => {});
-      });
+      .catch(() => {});
   }, []);
 
   const parseMessageContent = (raw: any): string => {
@@ -139,15 +125,20 @@ export const App: React.FC = () => {
 
   // Fetch messages when sessionId changes
   useEffect(() => {
-    if (!sessionId) return;
-    fetch(`/api/session/${sessionId}/message`)
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data?.data && Array.isArray(data.data)) {
-          const loaded: MessageItem[] = data.data.map((m: any) => ({
-            id: m.id || Math.random().toString(),
+    if (!sessionId || sessionId.startsWith("session-")) {
+      setMessages([]);
+      return;
+    }
+    sironaApi.conversations
+      .messages(sessionId)
+      .then((res) => {
+        const list = res?.data || [];
+        if (Array.isArray(list)) {
+          const loaded: MessageItem[] = list.map((m: any) => ({
+            id: String(m.id || Math.random()),
             role: m.role === "assistant" ? "assistant" : "user",
-            content: parseMessageContent(m.parts || m.content),
+            content: parseMessageContent(m.content),
+            timestamp: m.created_at ? new Date(m.created_at).getTime() : Date.now(),
           }));
           setMessages(loaded);
         }
@@ -155,8 +146,10 @@ export const App: React.FC = () => {
       .catch(() => {});
   }, [sessionId]);
 
-  // Handle sending a message
+  // Handle sending a message through the Canonical Gateway
   const handleSendMessage = async (text: string) => {
+    if (!text.trim() || isSending) return;
+
     const userMsgId = `msg-${Date.now()}`;
     const userMsg: MessageItem = {
       id: userMsgId,
@@ -165,49 +158,85 @@ export const App: React.FC = () => {
       timestamp: Date.now(),
     };
 
-    setMessages((prev) => [...prev, userMsg]);
+    const replyId = `reply-${Date.now()}`;
+    const assistantMsg: MessageItem = {
+      id: replyId,
+      role: "assistant",
+      content: "",
+      timestamp: Date.now(),
+    };
+
+    setMessages((prev) => [...prev, userMsg, assistantMsg]);
     setIsSending(true);
 
     try {
-      const res = await fetch(`/api/session/${sessionId}/prompt`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: text, model: selectedModel }),
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        const assistantText =
-          data?.reply ||
-          data?.content ||
-          data?.text ||
-          `Task received. Sirona is processing your request using ${selectedModel}.`;
-
-        const assistantMsg: MessageItem = {
-          id: `reply-${Date.now()}`,
-          role: "assistant",
-          content: assistantText,
-          timestamp: Date.now(),
-        };
-        setMessages((prev) => [...prev, assistantMsg]);
-      } else {
-        // Fallback response for offline or free desktop mode
-        const fallbackMsg: MessageItem = {
-          id: `reply-${Date.now()}`,
-          role: "assistant",
-          content: `Sirona received: "${text}" with ${selectedModel}. Workspace is active.`,
-          timestamp: Date.now(),
-        };
-        setMessages((prev) => [...prev, fallbackMsg]);
+      // 1. Ensure a valid canonical conversation exists
+      let currentConvId = sessionId;
+      if (!currentConvId || currentConvId.startsWith("session-")) {
+        const createRes = await sironaApi.conversations.create({
+          title: text.length > 25 ? `${text.slice(0, 25)}…` : text,
+          modelId: selectedModelId || "gemini-2.5-flash-lite",
+        });
+        const created = (createRes as any)?.data?.conversation;
+        if (created?.id) {
+          currentConvId = created.id;
+          setSessionId(created.id);
+          setSessionTitle(created.title || "Chat");
+          setSessionsList((prev) => [
+            { id: created.id, title: created.title || "Chat" },
+            ...prev.filter((s) => s.id !== sessionId),
+          ]);
+        }
       }
-    } catch {
-      const fallbackMsg: MessageItem = {
-        id: `reply-${Date.now()}`,
-        role: "assistant",
-        content: `Sirona completed action for: "${text}"`,
-        timestamp: Date.now(),
-      };
-      setMessages((prev) => [...prev, fallbackMsg]);
+
+      // 2. Stream turn via Gateway SSE
+      let accumulated = "";
+      await new Promise<void>((resolve, reject) => {
+        sironaApi.conversations.streamTurns(
+          currentConvId,
+          {
+            prompt: text,
+            modelId: selectedModelId || "gemini-2.5-flash-lite",
+          },
+          {
+            onToken: (chunk) => {
+              accumulated += chunk;
+              setMessages((prev) =>
+                prev.map((m) => (m.id === replyId ? { ...m, content: accumulated } : m))
+              );
+            },
+            onError: (err) => {
+              const msg = err?.message || String(err);
+              setMessages((prev) =>
+                prev.map((m) =>
+                  m.id === replyId
+                    ? {
+                        ...m,
+                        content: accumulated
+                          ? `${accumulated}\n\n[Gateway Notice: ${msg}]`
+                          : `⚠️ ${msg}`,
+                      }
+                    : m
+                )
+              );
+              reject(err);
+            },
+            onDone: () => {
+              resolve();
+            },
+          }
+        );
+      });
+    } catch (err: any) {
+      console.warn("[Gateway stream failed]:", err?.message);
+      const msg = err?.message || String(err);
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === replyId && !m.content
+            ? { ...m, content: `⚠️ Failed to start turn: ${msg}` }
+            : m
+        )
+      );
     } finally {
       setIsSending(false);
     }
@@ -238,20 +267,24 @@ export const App: React.FC = () => {
   }, []);
 
   const handleNewSession = async () => {
-    const newId = `session-${Date.now()}`;
-    setSessionId(newId);
-    setSessionTitle("Session");
-    setMessages([]);
-    setSessionsList((prev) => [{ id: newId, title: "Session" }, ...prev]);
-    setIsSettingsOpen(false);
-
     try {
-      await fetch("/api/session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: newId, title: "Session" }),
+      const conv = await sironaApi.conversations.create({
+        title: "New chat",
+        modelId: selectedModelId || "gemini-2.5-flash-lite",
       });
-    } catch {}
+      const newId = (conv as any)?.data?.conversation?.id || `session-${Date.now()}`;
+      setSessionId(newId);
+      setSessionTitle("New chat");
+      setMessages([]);
+      setSessionsList((prev) => [{ id: newId, title: "New chat" }, ...prev]);
+    } catch {
+      const newId = `session-${Date.now()}`;
+      setSessionId(newId);
+      setSessionTitle("Session");
+      setMessages([]);
+      setSessionsList((prev) => [{ id: newId, title: "Session" }, ...prev]);
+    }
+    setIsSettingsOpen(false);
   };
 
   return (
@@ -278,7 +311,20 @@ export const App: React.FC = () => {
           pointerEvents: isSettingsOpen ? "none" : "auto",
         }}
       >
-        <Titlebar />
+        <Titlebar
+          sidebarOpen={sidebarOpen}
+          onToggleSidebar={() => setSidebarOpen((o) => !o)}
+          selectedModel={selectedModel}
+          onOpenModelPicker={() => setIsModelPickerOpen(true)}
+          onOpenSettings={() => {
+            setSettingsTab("providers");
+            setIsSettingsOpen(true);
+          }}
+          theme={theme}
+          onToggleTheme={() => applyTheme(theme === "dark" ? "light" : "dark")}
+          activeSessionTitle={sessionTitle}
+          isBackendConnected={true}
+        />
 
         <div className="relative flex flex-1 min-h-0 min-w-0 flex-row">
           <Sidebar
@@ -326,19 +372,18 @@ export const App: React.FC = () => {
         selectedModel={selectedModel}
         onModelChange={(model) => {
           setSelectedModel(model);
-          fetch("/api/model/default", {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: model }),
-          }).catch(() => {});
+          const found = availableModels.find((m) => m.name === model || m.id === model);
+          if (found) setSelectedModelId(found.id);
+          sironaApi.providers.saveSettings({ primaryModel: found?.id || model, defaultModel: found?.id || model }).catch(() => {});
         }}
         onRefreshModels={() => {
-          fetch("/api/model/default")
-            .then((res) => (res.ok ? res.json() : null))
-            .then((data) => {
-              if (data?.model?.name) setSelectedModel(data.model.name);
-            })
-            .catch(() => {});
+          sironaApi.providers.models().then((res) => {
+            const list = res?.data?.models || (Array.isArray(res?.data) ? res.data : []);
+            if (Array.isArray(list) && list.length > 0) {
+              const clean = list.filter((m: any) => m.name !== "Beam Free" && m.id !== "beam-free");
+              setAvailableModels(clean);
+            }
+          }).catch(() => {});
         }}
       />
 
@@ -347,7 +392,17 @@ export const App: React.FC = () => {
         isOpen={isModelPickerOpen}
         onClose={() => setIsModelPickerOpen(false)}
         selectedModel={selectedModel}
-        onSelectModel={(model) => setSelectedModel(model)}
+        availableModels={availableModels}
+        onSelectModel={(modelName, modelId) => {
+          setSelectedModel(modelName);
+          if (modelId) {
+            setSelectedModelId(modelId);
+          } else {
+            const found = availableModels.find((m) => m.name === modelName);
+            if (found) setSelectedModelId(found.id);
+          }
+          sironaApi.providers.saveSettings({ primaryModel: modelId || modelName, defaultModel: modelId || modelName }).catch(() => {});
+        }}
         onOpenProviderSettings={() => {
           setSettingsTab("providers");
           setIsModelPickerOpen(false);

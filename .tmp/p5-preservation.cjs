@@ -1,9 +1,0 @@
-const fs=require('node:fs'),crypto=require('node:crypto');
-(async()=>{require('../backend/server.js').loadEnvironment();const config=require('../backend/foundation/runtimeConfig.js').readRuntimeConfig(process.env);const {createDatabaseOwner}=require('../backend/config/db.js');const states=[];
-for(const target of [null,'sirona_workspace_p0_test_20261028']){
- const cfg={...config.database,options:'-c default_transaction_read_only=on',query_timeout:5000};
- if(target){if(cfg.connectionString){const url=new URL(cfg.connectionString);url.pathname='/'+target;cfg.connectionString=url.toString();}else cfg.database=target;}
- const owner=createDatabaseOwner(cfg,{event:()=>{}});try{await owner.initialize();const c=await owner.pool.connect();try{await c.query('BEGIN READ ONLY');const database=(await c.query('SELECT current_database() AS name')).rows[0].name;const migrations=(await c.query('SELECT filename,checksum FROM schema_migrations ORDER BY filename')).rows;states.push({database,readOnly:(await c.query('SHOW transaction_read_only')).rows[0].transaction_read_only,migrationCount:migrations.length,migrationJournalDigest:crypto.createHash('sha256').update(JSON.stringify(migrations)).digest('hex')});}finally{await c.query('ROLLBACK');c.release();}}finally{await owner.close();}
-}
-const result={timestamp:new Date().toISOString(),states,workingFlags:{orchestration:process.env.SIRONA_ORCHESTRATION_ENABLED==='true',trustedLocalDocker:process.env.SIRONA_TRUSTED_LOCAL_DOCKER_ENABLED==='true'},migrationsAppliedByThisTask:0,workingDatabaseWritesByThisTask:0};fs.writeFileSync('docs/integration/evidence/workspace-p5-repair/database-preservation.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result));
-})().catch(e=>{console.log(JSON.stringify({preservationCheck:'blocked',code:e.code??'UNAVAILABLE'}));process.exitCode=1;});

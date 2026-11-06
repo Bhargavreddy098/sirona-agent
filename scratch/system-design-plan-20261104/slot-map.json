@@ -1,0 +1,1207 @@
+[
+  {
+    "index": 0,
+    "path": "/w:document/w:body/w:p[1]",
+    "text": ""
+  },
+  {
+    "index": 1,
+    "path": "/w:document/w:body/w:p[2]",
+    "text": ""
+  },
+  {
+    "index": 2,
+    "path": "/w:document/w:body/w:p[3]",
+    "text": ""
+  },
+  {
+    "index": 3,
+    "path": "/w:document/w:body/w:p[4]",
+    "text": ""
+  },
+  {
+    "index": 4,
+    "path": "/w:document/w:body/w:p[5]",
+    "text": ""
+  },
+  {
+    "index": 5,
+    "path": "/w:document/w:body/w:p[6]",
+    "text": ""
+  },
+  {
+    "index": 6,
+    "path": "/w:document/w:body/w:p[7]",
+    "text": ""
+  },
+  {
+    "index": 7,
+    "path": "/w:document/w:body/w:p[8]",
+    "text": ""
+  },
+  {
+    "index": 8,
+    "path": "/w:document/w:body/w:p[9]",
+    "text": "System Name"
+  },
+  {
+    "index": 9,
+    "path": "/w:document/w:body/w:p[10]",
+    "text": "Title of Proposal"
+  },
+  {
+    "index": 10,
+    "path": "/w:document/w:body/w:p[11]",
+    "text": ""
+  },
+  {
+    "index": 11,
+    "path": "/w:document/w:body/w:p[12]",
+    "text": ""
+  },
+  {
+    "index": 12,
+    "path": "/w:document/w:body/w:p[13]",
+    "text": ""
+  },
+  {
+    "index": 13,
+    "path": "/w:document/w:body/w:p[14]",
+    "text": ""
+  },
+  {
+    "index": 14,
+    "path": "/w:document/w:body/w:p[15]",
+    "text": ""
+  },
+  {
+    "index": 15,
+    "path": "/w:document/w:body/w:p[16]",
+    "text": ""
+  },
+  {
+    "index": 16,
+    "path": "/w:document/w:body/w:p[17]",
+    "text": ""
+  },
+  {
+    "index": 17,
+    "path": "/w:document/w:body/w:p[18]",
+    "text": ""
+  },
+  {
+    "index": 18,
+    "path": "/w:document/w:body/w:p[19]",
+    "text": ""
+  },
+  {
+    "index": 19,
+    "path": "/w:document/w:body/w:p[20]",
+    "text": ""
+  },
+  {
+    "index": 20,
+    "path": "/w:document/w:body/w:tbl[1]/w:tr/w:tc[1]/w:p[1]",
+    "text": "STATUS"
+  },
+  {
+    "index": 21,
+    "path": "/w:document/w:body/w:tbl[1]/w:tr/w:tc[1]/w:p[2]",
+    "text": "[Draft / Proposed / Approved]"
+  },
+  {
+    "index": 22,
+    "path": "/w:document/w:body/w:tbl[1]/w:tr/w:tc[2]/w:p",
+    "text": ""
+  },
+  {
+    "index": 23,
+    "path": "/w:document/w:body/w:tbl[1]/w:tr/w:tc[3]/w:p[1]",
+    "text": "OWNER"
+  },
+  {
+    "index": 24,
+    "path": "/w:document/w:body/w:tbl[1]/w:tr/w:tc[3]/w:p[2]",
+    "text": "[Team Name]"
+  },
+  {
+    "index": 25,
+    "path": "/w:document/w:body/w:tbl[1]/w:tr/w:tc[4]/w:p",
+    "text": ""
+  },
+  {
+    "index": 26,
+    "path": "/w:document/w:body/w:tbl[1]/w:tr/w:tc[5]/w:p[1]",
+    "text": "LAST UPDATED"
+  },
+  {
+    "index": 27,
+    "path": "/w:document/w:body/w:tbl[1]/w:tr/w:tc[5]/w:p[2]",
+    "text": "[Month, DD, YYYY]"
+  },
+  {
+    "index": 28,
+    "path": "/w:document/w:body/w:p[21]",
+    "text": ""
+  },
+  {
+    "index": 29,
+    "path": "/w:document/w:body/w:tbl[2]/w:tr[1]/w:tc[1]/w:p",
+    "text": "Authors"
+  },
+  {
+    "index": 30,
+    "path": "/w:document/w:body/w:tbl[2]/w:tr[1]/w:tc[2]/w:p",
+    "text": "[Name(s)]"
+  },
+  {
+    "index": 31,
+    "path": "/w:document/w:body/w:tbl[2]/w:tr[2]/w:tc[1]/w:p",
+    "text": "Reviewers"
+  },
+  {
+    "index": 32,
+    "path": "/w:document/w:body/w:tbl[2]/w:tr[2]/w:tc[2]/w:p",
+    "text": "[Reviewer names, roles, or groups]"
+  },
+  {
+    "index": 33,
+    "path": "/w:document/w:body/w:tbl[2]/w:tr[3]/w:tc[1]/w:p",
+    "text": "Related docs"
+  },
+  {
+    "index": 34,
+    "path": "/w:document/w:body/w:tbl[2]/w:tr[3]/w:tc[2]/w:p",
+    "text": "[Link to related docs]"
+  },
+  {
+    "index": 35,
+    "path": "/w:document/w:body/w:tbl[2]/w:tr[4]/w:tc[1]/w:p",
+    "text": "Scope"
+  },
+  {
+    "index": 36,
+    "path": "/w:document/w:body/w:tbl[2]/w:tr[4]/w:tc[2]/w:p",
+    "text": "[One-sentence description of what this design covers]"
+  },
+  {
+    "index": 37,
+    "path": "/w:document/w:body/w:p[22]",
+    "text": "1.  Abstract"
+  },
+  {
+    "index": 38,
+    "path": "/w:document/w:body/w:p[23]",
+    "text": "[Summarize the proposed system, the problem it solves, and the intended outcome. Describe the core design at a high level, including the main boundaries, dependencies, and guarantees. Keep this section concise enough that a reviewer can understand the proposal without reading the full document.]"
+  },
+  {
+    "index": 39,
+    "path": "/w:document/w:body/w:p[24]",
+    "text": "[Describe the workloads and constraints this design must support. Clarify what the proposal does not attempt to solve, the assumptions it relies on, and the most important operational or implementation boundaries.]"
+  },
+  {
+    "index": 40,
+    "path": "/w:document/w:body/w:p[25]",
+    "text": ""
+  },
+  {
+    "index": 41,
+    "path": "/w:document/w:body/w:p[26]",
+    "text": "2.  Goals and Non-Goals"
+  },
+  {
+    "index": 42,
+    "path": "/w:document/w:body/w:tbl[3]/w:tr[1]/w:tc[1]/w:p",
+    "text": "Goals"
+  },
+  {
+    "index": 43,
+    "path": "/w:document/w:body/w:tbl[3]/w:tr[1]/w:tc[2]/w:p",
+    "text": "Non-goals"
+  },
+  {
+    "index": 44,
+    "path": "/w:document/w:body/w:tbl[3]/w:tr[2]/w:tc[1]/w:p",
+    "text": "[Goal 1: measurable outcome this design must achieve]"
+  },
+  {
+    "index": 45,
+    "path": "/w:document/w:body/w:tbl[3]/w:tr[2]/w:tc[2]/w:p",
+    "text": "[Non-goal 1: explicitly excluded capability or outcome]"
+  },
+  {
+    "index": 46,
+    "path": "/w:document/w:body/w:tbl[3]/w:tr[3]/w:tc[1]/w:p",
+    "text": "[Goal 2: reliability, scale, security, or user outcome]"
+  },
+  {
+    "index": 47,
+    "path": "/w:document/w:body/w:tbl[3]/w:tr[3]/w:tc[2]/w:p",
+    "text": "[Non-goal 2: adjacent problem deferred to a later phase]"
+  },
+  {
+    "index": 48,
+    "path": "/w:document/w:body/w:tbl[3]/w:tr[4]/w:tc[1]/w:p",
+    "text": "[Goal 3: required platform, policy, or operational capability]"
+  },
+  {
+    "index": 49,
+    "path": "/w:document/w:body/w:tbl[3]/w:tr[4]/w:tc[2]/w:p",
+    "text": "[Non-goal 3: unsupported workflow, audience, or interface]"
+  },
+  {
+    "index": 50,
+    "path": "/w:document/w:body/w:tbl[3]/w:tr[5]/w:tc[1]/w:p",
+    "text": "[Goal 4: rollout, reversibility, or blast-radius constraint]"
+  },
+  {
+    "index": 51,
+    "path": "/w:document/w:body/w:tbl[3]/w:tr[5]/w:tc[2]/w:p",
+    "text": "[Non-goal 4: guarantee the design cannot or will not provide]"
+  },
+  {
+    "index": 52,
+    "path": "/w:document/w:body/w:p[27]",
+    "text": ""
+  },
+  {
+    "index": 53,
+    "path": "/w:document/w:body/w:p[28]",
+    "text": "3.  Background and Problem Statement"
+  },
+  {
+    "index": 54,
+    "path": "/w:document/w:body/w:p[29]",
+    "text": "[Describe the current state, the specific problem, and why the existing approach is no longer sufficient. Include relevant scale, reliability, security, cost, or developer-experience constraints, and explain the impact of leaving the problem unresolved.]"
+  },
+  {
+    "index": 55,
+    "path": "/w:document/w:body/w:p[30]",
+    "text": "[Explain the proposed system boundary and the major responsibilities on each side. Name the primary components, how they interact, and which inputs determine behavior. State the key design principle or invariant that should guide implementation and review.]"
+  },
+  {
+    "index": 56,
+    "path": "/w:document/w:body/w:p[31]",
+    "text": "4.  Proposed Architecture"
+  },
+  {
+    "index": 57,
+    "path": "/w:document/w:body/w:p[32]",
+    "text": ""
+  },
+  {
+    "index": 58,
+    "path": "/w:document/w:body/w:p[33]",
+    "text": ""
+  },
+  {
+    "index": 59,
+    "path": "/w:document/w:body/w:p[34]",
+    "text": "Figure 1. [Proposed System Architecture]."
+  },
+  {
+    "index": 60,
+    "path": "/w:document/w:body/w:p[35]",
+    "text": ""
+  },
+  {
+    "index": 61,
+    "path": "/w:document/w:body/w:p[36]",
+    "text": "Core components"
+  },
+  {
+    "index": 62,
+    "path": "/w:document/w:body/w:p[37]",
+    "text": ""
+  },
+  {
+    "index": 63,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[1]/w:tc[1]/w:p",
+    "text": "Component"
+  },
+  {
+    "index": 64,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[1]/w:tc[2]/w:p",
+    "text": "Responsibility"
+  },
+  {
+    "index": 65,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[1]/w:tc[3]/w:p",
+    "text": "Primary storage"
+  },
+  {
+    "index": 66,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[1]/w:tc[4]/w:p",
+    "text": "Failure behavior"
+  },
+  {
+    "index": 67,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[2]/w:tc[1]/w:p",
+    "text": "[Component A]"
+  },
+  {
+    "index": 68,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[2]/w:tc[2]/w:p",
+    "text": "[Describe its responsibility, inputs, and outputs.]"
+  },
+  {
+    "index": 69,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[2]/w:tc[3]/w:p",
+    "text": "[Primary datastore or dependency]"
+  },
+  {
+    "index": 70,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[2]/w:tc[4]/w:p",
+    "text": "[Describe behavior when this component fails.]"
+  },
+  {
+    "index": 71,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[3]/w:tc[1]/w:p",
+    "text": "[Component B]"
+  },
+  {
+    "index": 72,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[3]/w:tc[2]/w:p",
+    "text": "[Describe the core decision or processing responsibility.]"
+  },
+  {
+    "index": 73,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[3]/w:tc[3]/w:p",
+    "text": "[Configuration, policy, or metadata store]"
+  },
+  {
+    "index": 74,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[3]/w:tc[4]/w:p",
+    "text": "[Describe fail-open, fail-closed, or fallback behavior.]"
+  },
+  {
+    "index": 75,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[4]/w:tc[1]/w:p",
+    "text": "[Component C]"
+  },
+  {
+    "index": 76,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[4]/w:tc[2]/w:p",
+    "text": "[Describe downstream execution and response handling.]"
+  },
+  {
+    "index": 77,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[4]/w:tc[3]/w:p",
+    "text": "[Queue, cache, adapter, or service dependency]"
+  },
+  {
+    "index": 78,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[4]/w:tc[4]/w:p",
+    "text": "[Describe timeout, retry, and terminal failure behavior.]"
+  },
+  {
+    "index": 79,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[5]/w:tc[1]/w:p",
+    "text": "[Component D]"
+  },
+  {
+    "index": 80,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[5]/w:tc[2]/w:p",
+    "text": "[Describe durable state, audit, or lifecycle responsibilities.]"
+  },
+  {
+    "index": 81,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[5]/w:tc[3]/w:p",
+    "text": "[Primary operational datastore]"
+  },
+  {
+    "index": 82,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[5]/w:tc[4]/w:p",
+    "text": "[Describe write failure and recovery behavior.]"
+  },
+  {
+    "index": 83,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[6]/w:tc[1]/w:p",
+    "text": "[Component E]"
+  },
+  {
+    "index": 84,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[6]/w:tc[2]/w:p",
+    "text": "[Describe metrics, logs, traces, and alerting responsibilities.]"
+  },
+  {
+    "index": 85,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[6]/w:tc[3]/w:p",
+    "text": "[Telemetry and analytics backend]"
+  },
+  {
+    "index": 86,
+    "path": "/w:document/w:body/w:tbl[4]/w:tr[6]/w:tc[4]/w:p",
+    "text": "[Describe degraded-mode monitoring and escalation.]"
+  },
+  {
+    "index": 87,
+    "path": "/w:document/w:body/w:p[38]",
+    "text": ""
+  },
+  {
+    "index": 88,
+    "path": "/w:document/w:body/w:p[39]",
+    "text": ""
+  },
+  {
+    "index": 89,
+    "path": "/w:document/w:body/w:p[40]",
+    "text": "5.  Request Lifecycle"
+  },
+  {
+    "index": 90,
+    "path": "/w:document/w:body/w:p[41]",
+    "text": "[Describe how a request, event, or job enters the system and identify the required inputs.]"
+  },
+  {
+    "index": 91,
+    "path": "/w:document/w:body/w:p[42]",
+    "text": "[Describe validation, authentication, authorization, and normalization at the system boundary.]"
+  },
+  {
+    "index": 92,
+    "path": "/w:document/w:body/w:p[43]",
+    "text": "[Describe which configuration, policy, state, or dependency data is loaded before processing.]"
+  },
+  {
+    "index": 93,
+    "path": "/w:document/w:body/w:p[44]",
+    "text": "[Describe the primary decision or processing step and the output it produces.]"
+  },
+  {
+    "index": 94,
+    "path": "/w:document/w:body/w:p[45]",
+    "text": "[Describe which durable state must be written before side effects or downstream execution begin.]"
+  },
+  {
+    "index": 95,
+    "path": "/w:document/w:body/w:p[46]",
+    "text": "[Describe downstream calls, retries, timeouts, budget limits, and terminal conditions.]"
+  },
+  {
+    "index": 96,
+    "path": "/w:document/w:body/w:p[47]",
+    "text": "[Describe final state updates, the response or output, and the metrics, logs, and traces emitted.]"
+  },
+  {
+    "index": 97,
+    "path": "/w:document/w:body/w:p[48]",
+    "text": ""
+  },
+  {
+    "index": 98,
+    "path": "/w:document/w:body/w:p[49]",
+    "text": "6.  API and Data Contracts"
+  },
+  {
+    "index": 99,
+    "path": "/w:document/w:body/w:p[50]",
+    "text": "Primary data contract"
+  },
+  {
+    "index": 100,
+    "path": "/w:document/w:body/w:p[51]",
+    "text": ""
+  },
+  {
+    "index": 101,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[1]/w:tc[1]/w:p",
+    "text": "Field"
+  },
+  {
+    "index": 102,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[1]/w:tc[2]/w:p",
+    "text": "Type"
+  },
+  {
+    "index": 103,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[1]/w:tc[3]/w:p",
+    "text": "Required"
+  },
+  {
+    "index": 104,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[1]/w:tc[4]/w:p",
+    "text": "Description"
+  },
+  {
+    "index": 105,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[2]/w:tc[1]/w:p",
+    "text": "field_name_1"
+  },
+  {
+    "index": 106,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[2]/w:tc[2]/w:p",
+    "text": "[Type]"
+  },
+  {
+    "index": 107,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[2]/w:tc[3]/w:p",
+    "text": "[Yes / No]"
+  },
+  {
+    "index": 108,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[2]/w:tc[4]/w:p",
+    "text": "[Describe meaning, validation, ownership, and lifecycle.]"
+  },
+  {
+    "index": 109,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[3]/w:tc[1]/w:p",
+    "text": "field_name_2"
+  },
+  {
+    "index": 110,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[3]/w:tc[2]/w:p",
+    "text": "[Type]"
+  },
+  {
+    "index": 111,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[3]/w:tc[3]/w:p",
+    "text": "[Yes / No]"
+  },
+  {
+    "index": 112,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[3]/w:tc[4]/w:p",
+    "text": "[Describe the source and permitted values.]"
+  },
+  {
+    "index": 113,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[4]/w:tc[1]/w:p",
+    "text": "field_name_3"
+  },
+  {
+    "index": 114,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[4]/w:tc[2]/w:p",
+    "text": "[Type]"
+  },
+  {
+    "index": 115,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[4]/w:tc[3]/w:p",
+    "text": "[Yes / No]"
+  },
+  {
+    "index": 116,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[4]/w:tc[4]/w:p",
+    "text": "[Describe versioning or compatibility requirements.]"
+  },
+  {
+    "index": 117,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[5]/w:tc[1]/w:p",
+    "text": "field_name_4"
+  },
+  {
+    "index": 118,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[5]/w:tc[2]/w:p",
+    "text": "[Type]"
+  },
+  {
+    "index": 119,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[5]/w:tc[3]/w:p",
+    "text": "[Yes / No]"
+  },
+  {
+    "index": 120,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[5]/w:tc[4]/w:p",
+    "text": "[Describe relationship to other identifiers or records.]"
+  },
+  {
+    "index": 121,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[6]/w:tc[1]/w:p",
+    "text": "field_name_5"
+  },
+  {
+    "index": 122,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[6]/w:tc[2]/w:p",
+    "text": "[Type]"
+  },
+  {
+    "index": 123,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[6]/w:tc[3]/w:p",
+    "text": "[Yes / No]"
+  },
+  {
+    "index": 124,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[6]/w:tc[4]/w:p",
+    "text": "[Describe privacy, retention, or audit constraints.]"
+  },
+  {
+    "index": 125,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[7]/w:tc[1]/w:p",
+    "text": "field_name_6"
+  },
+  {
+    "index": 126,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[7]/w:tc[2]/w:p",
+    "text": "[Type]"
+  },
+  {
+    "index": 127,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[7]/w:tc[3]/w:p",
+    "text": "[Yes / No]"
+  },
+  {
+    "index": 128,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[7]/w:tc[4]/w:p",
+    "text": "[Describe array, object, or nested structure semantics.]"
+  },
+  {
+    "index": 129,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[8]/w:tc[1]/w:p",
+    "text": "field_name_7"
+  },
+  {
+    "index": 130,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[8]/w:tc[2]/w:p",
+    "text": "[Type]"
+  },
+  {
+    "index": 131,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[8]/w:tc[3]/w:p",
+    "text": "[Yes / No]"
+  },
+  {
+    "index": 132,
+    "path": "/w:document/w:body/w:tbl[5]/w:tr[8]/w:tc[4]/w:p",
+    "text": "[Describe how this field affects system behavior.]"
+  },
+  {
+    "index": 133,
+    "path": "/w:document/w:body/w:p[52]",
+    "text": ""
+  },
+  {
+    "index": 134,
+    "path": "/w:document/w:body/w:p[53]",
+    "text": "Contract guarantees"
+  },
+  {
+    "index": 135,
+    "path": "/w:document/w:body/w:p[54]",
+    "text": ""
+  },
+  {
+    "index": 136,
+    "path": "/w:document/w:body/w:p[55]",
+    "text": "[State the ordering, durability, or validation guarantee that must hold before execution.]"
+  },
+  {
+    "index": 137,
+    "path": "/w:document/w:body/w:p[56]",
+    "text": "[State how writes, attempts, or events are identified and ordered.]"
+  },
+  {
+    "index": 138,
+    "path": "/w:document/w:body/w:p[57]",
+    "text": "[State which versions, identifiers, or inputs must be captured for audit and replay.]"
+  },
+  {
+    "index": 139,
+    "path": "/w:document/w:body/w:p[58]",
+    "text": "[State what this data is and is not a source of truth for.]"
+  },
+  {
+    "index": 140,
+    "path": "/w:document/w:body/w:p[59]",
+    "text": "The versioned schema or interface definition is published at "
+  },
+  {
+    "index": 141,
+    "path": "/w:document/w:body/w:p[60]",
+    "text": "[Link to interface or schema] and update it with each contract release."
+  },
+  {
+    "index": 142,
+    "path": "/w:document/w:body/w:p[61]",
+    "text": ""
+  },
+  {
+    "index": 143,
+    "path": "/w:document/w:body/w:p[62]",
+    "text": "7. Consistency, Idempotency, and Replay"
+  },
+  {
+    "index": 144,
+    "path": "/w:document/w:body/w:p[63]",
+    "text": ""
+  },
+  {
+    "index": 145,
+    "path": "/w:document/w:body/w:p[64]",
+    "text": "[Explain the consistency, idempotency, replay, ordering, or concurrency guarantees required by this design. Distinguish client-facing guarantees from internal analysis or recovery behavior, and identify where duplicate work or partial failure is acceptable.]"
+  },
+  {
+    "index": 146,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[1]/w:tc[1]/w:p",
+    "text": "Scenario"
+  },
+  {
+    "index": 147,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[1]/w:tc[2]/w:p",
+    "text": "Expected behavior"
+  },
+  {
+    "index": 148,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[1]/w:tc[3]/w:p",
+    "text": "Reasoning"
+  },
+  {
+    "index": 149,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[2]/w:tc[1]/w:p",
+    "text": "[Duplicate, replayed, or repeated input]"
+  },
+  {
+    "index": 150,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[2]/w:tc[2]/w:p",
+    "text": "[Describe the stable response and state transition.]"
+  },
+  {
+    "index": 151,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[2]/w:tc[3]/w:p",
+    "text": "[Explain how duplicate work or side effects are prevented.]"
+  },
+  {
+    "index": 152,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[3]/w:tc[1]/w:p",
+    "text": "[Required write or dependency fails]"
+  },
+  {
+    "index": 153,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[3]/w:tc[2]/w:p",
+    "text": "[Describe the error, retryability, and side-effect behavior.]"
+  },
+  {
+    "index": 154,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[3]/w:tc[3]/w:p",
+    "text": "[Explain why the failure mode is safe and observable.]"
+  },
+  {
+    "index": 155,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[4]/w:tc[1]/w:p",
+    "text": "[Timeout, partial failure, or downstream error]"
+  },
+  {
+    "index": 156,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[4]/w:tc[2]/w:p",
+    "text": "[Describe retry, fallback, and budget behavior.]"
+  },
+  {
+    "index": 157,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[4]/w:tc[3]/w:p",
+    "text": "[Explain how auditability and consistency are maintained.]"
+  },
+  {
+    "index": 158,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[5]/w:tc[1]/w:p",
+    "text": "[Configuration changes during execution]"
+  },
+  {
+    "index": 159,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[5]/w:tc[2]/w:p",
+    "text": "[Describe which version remains authoritative.]"
+  },
+  {
+    "index": 160,
+    "path": "/w:document/w:body/w:tbl[6]/w:tr[5]/w:tc[3]/w:p",
+    "text": "[Explain how mid-request behavior changes are prevented.]"
+  },
+  {
+    "index": 161,
+    "path": "/w:document/w:body/w:p[65]",
+    "text": ""
+  },
+  {
+    "index": 162,
+    "path": "/w:document/w:body/w:p[66]",
+    "text": "8. Security and Privacy Considerations"
+  },
+  {
+    "index": 163,
+    "path": "/w:document/w:body/w:p[67]",
+    "text": ""
+  },
+  {
+    "index": 164,
+    "path": "/w:document/w:body/w:p[68]",
+    "text": "[Describe authentication, authorization, and tenant or data-boundary requirements.]"
+  },
+  {
+    "index": 165,
+    "path": "/w:document/w:body/w:p[69]",
+    "text": "[Describe data minimization, sensitive payload handling, and logging restrictions.]"
+  },
+  {
+    "index": 166,
+    "path": "/w:document/w:body/w:p[70]",
+    "text": "[Describe credential, secret, key, and certificate storage and access requirements.]"
+  },
+  {
+    "index": 167,
+    "path": "/w:document/w:body/w:p[71]",
+    "text": "[Describe safe defaults for administrative, replay, migration, and debugging tools.]"
+  },
+  {
+    "index": 168,
+    "path": "/w:document/w:body/w:p[72]",
+    "text": "[Describe retention, deletion, residency, privacy, and audit requirements.]"
+  },
+  {
+    "index": 169,
+    "path": "/w:document/w:body/w:p[73]",
+    "text": ""
+  },
+  {
+    "index": 170,
+    "path": "/w:document/w:body/w:p[74]",
+    "text": ""
+  },
+  {
+    "index": 171,
+    "path": "/w:document/w:body/w:p[75]",
+    "text": "9.  Operational Readiness"
+  },
+  {
+    "index": 172,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[1]/w:tc[1]/w:p",
+    "text": "Signal"
+  },
+  {
+    "index": 173,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[1]/w:tc[2]/w:p",
+    "text": "SLO or alert"
+  },
+  {
+    "index": 174,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[1]/w:tc[3]/w:p",
+    "text": "Owner"
+  },
+  {
+    "index": 175,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[1]/w:tc[4]/w:p",
+    "text": "Launch gate"
+  },
+  {
+    "index": 176,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[2]/w:tc[1]/w:p",
+    "text": "[Success or completion rate]"
+  },
+  {
+    "index": 177,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[2]/w:tc[2]/w:p",
+    "text": "[Target, measurement window, and page threshold]"
+  },
+  {
+    "index": 178,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[2]/w:tc[3]/w:p",
+    "text": "[Owning team]"
+  },
+  {
+    "index": 179,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[2]/w:tc[4]/w:p",
+    "text": "[Required / Recommended]"
+  },
+  {
+    "index": 180,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[3]/w:tc[1]/w:p",
+    "text": "[Latency or processing time]"
+  },
+  {
+    "index": 181,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[3]/w:tc[2]/w:p",
+    "text": "[Percentile target, alert threshold, and duration]"
+  },
+  {
+    "index": 182,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[3]/w:tc[3]/w:p",
+    "text": "[Owning team]"
+  },
+  {
+    "index": 183,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[3]/w:tc[4]/w:p",
+    "text": "[Required / Recommended]"
+  },
+  {
+    "index": 184,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[4]/w:tc[1]/w:p",
+    "text": "[Fallback, retry, or error rate]"
+  },
+  {
+    "index": 185,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[4]/w:tc[2]/w:p",
+    "text": "[Warning and paging thresholds by workload class]"
+  },
+  {
+    "index": 186,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[4]/w:tc[3]/w:p",
+    "text": "[Owning team]"
+  },
+  {
+    "index": 187,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[4]/w:tc[4]/w:p",
+    "text": "[Required / Recommended]"
+  },
+  {
+    "index": 188,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[5]/w:tc[1]/w:p",
+    "text": "[Configuration or deployment drift]"
+  },
+  {
+    "index": 189,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[5]/w:tc[2]/w:p",
+    "text": "[Condition that indicates unsafe divergence]"
+  },
+  {
+    "index": 190,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[5]/w:tc[3]/w:p",
+    "text": "[Owning team]"
+  },
+  {
+    "index": 191,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[5]/w:tc[4]/w:p",
+    "text": "[Required / Recommended]"
+  },
+  {
+    "index": 192,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[6]/w:tc[1]/w:p",
+    "text": "[Recovery, replay, or integrity check]"
+  },
+  {
+    "index": 193,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[6]/w:tc[2]/w:p",
+    "text": "[Synthetic or sampled validation cadence and target]"
+  },
+  {
+    "index": 194,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[6]/w:tc[3]/w:p",
+    "text": "[Owning team]"
+  },
+  {
+    "index": 195,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[6]/w:tc[4]/w:p",
+    "text": "[Required / Recommended]"
+  },
+  {
+    "index": 196,
+    "path": "/w:document/w:body/w:tbl[7]/w:tr[7]/w:tc/w:p",
+    "text": "Rollout constraint: [Describe dry-run, canary, feature-flag, validation, rollback, and promotion requirements before production launch.]"
+  },
+  {
+    "index": 197,
+    "path": "/w:document/w:body/w:p[76]",
+    "text": ""
+  },
+  {
+    "index": 198,
+    "path": "/w:document/w:body/w:p[77]",
+    "text": "10. Alternatives Considered"
+  },
+  {
+    "index": 199,
+    "path": "/w:document/w:body/w:p[78]",
+    "text": ""
+  },
+  {
+    "index": 200,
+    "path": "/w:document/w:body/w:p[79]",
+    "text": ""
+  },
+  {
+    "index": 201,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[1]/w:tc[1]/w:p",
+    "text": "Alternative"
+  },
+  {
+    "index": 202,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[1]/w:tc[2]/w:p",
+    "text": "Why it was considered"
+  },
+  {
+    "index": 203,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[1]/w:tc[3]/w:p",
+    "text": "Why it was not selected"
+  },
+  {
+    "index": 204,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[2]/w:tc[1]/w:p",
+    "text": "[Alternative 1]"
+  },
+  {
+    "index": 205,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[2]/w:tc[2]/w:p",
+    "text": "[Describe the main benefit or reason to consider it.]"
+  },
+  {
+    "index": 206,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[2]/w:tc[3]/w:p",
+    "text": "[Describe the decisive tradeoff or unmet requirement.]"
+  },
+  {
+    "index": 207,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[3]/w:tc[1]/w:p",
+    "text": "[Alternative 2]"
+  },
+  {
+    "index": 208,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[3]/w:tc[2]/w:p",
+    "text": "[Describe the relevant capability or simplicity.]"
+  },
+  {
+    "index": 209,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[3]/w:tc[3]/w:p",
+    "text": "[Describe added complexity, risk, cost, or scope.]"
+  },
+  {
+    "index": 210,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[4]/w:tc[1]/w:p",
+    "text": "[Alternative 3]"
+  },
+  {
+    "index": 211,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[4]/w:tc[2]/w:p",
+    "text": "[Describe the potential performance or product benefit.]"
+  },
+  {
+    "index": 212,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[4]/w:tc[3]/w:p",
+    "text": "[Describe explainability, maturity, or operational concerns.]"
+  },
+  {
+    "index": 213,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[5]/w:tc[1]/w:p",
+    "text": "[Alternative 4]"
+  },
+  {
+    "index": 214,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[5]/w:tc[2]/w:p",
+    "text": "[Describe the consistency or implementation appeal.]"
+  },
+  {
+    "index": 215,
+    "path": "/w:document/w:body/w:tbl[8]/w:tr[5]/w:tc[3]/w:p",
+    "text": "[Describe the technical boundary that makes it unsuitable.]"
+  },
+  {
+    "index": 216,
+    "path": "/w:document/w:body/w:p[80]",
+    "text": ""
+  },
+  {
+    "index": 217,
+    "path": "/w:document/w:body/w:p[81]",
+    "text": "11. Open Questions"
+  },
+  {
+    "index": 218,
+    "path": "/w:document/w:body/w:p[82]",
+    "text": "[Open question 1: identify a decision that requires reviewer input before implementation.]"
+  },
+  {
+    "index": 219,
+    "path": "/w:document/w:body/w:p[83]",
+    "text": "[Open question 2: identify an unresolved product, policy, or operational constraint.]"
+  },
+  {
+    "index": 220,
+    "path": "/w:document/w:body/w:p[84]",
+    "text": "[Open question 3: identify a scale, deployment, or regional design choice.]"
+  },
+  {
+    "index": 221,
+    "path": "/w:document/w:body/w:p[85]",
+    "text": "[Open question 4: identify an ownership, access-control, or tooling decision.]"
+  },
+  {
+    "index": 222,
+    "path": "/w:document/w:body/w:p[86]",
+    "text": ""
+  },
+  {
+    "index": 223,
+    "path": "/w:document/w:body/w:p[87]",
+    "text": "12. Decision and Next Steps"
+  },
+  {
+    "index": 224,
+    "path": "/w:document/w:body/w:p[88]",
+    "text": "[State the recommended decision and summarize the implementation sequence. Name the first milestone, the validation or dry-run stage, the initial production audience, and the conditions that must be met before broader rollout.]"
+  },
+  {
+    "index": 225,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[1]/w:tc[1]/w:p",
+    "text": "Milestone"
+  },
+  {
+    "index": 226,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[1]/w:tc[2]/w:p",
+    "text": "Deliverable"
+  },
+  {
+    "index": 227,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[1]/w:tc[3]/w:p",
+    "text": "Exit criteria"
+  },
+  {
+    "index": 228,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[2]/w:tc[1]/w:p",
+    "text": "M1"
+  },
+  {
+    "index": 229,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[2]/w:tc[2]/w:p",
+    "text": "[Foundational implementation or dry-run capability]"
+  },
+  {
+    "index": 230,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[2]/w:tc[3]/w:p",
+    "text": "[Measurable evidence that the foundation works safely]"
+  },
+  {
+    "index": 231,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[3]/w:tc[1]/w:p",
+    "text": "M2"
+  },
+  {
+    "index": 232,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[3]/w:tc[2]/w:p",
+    "text": "[Validation, tooling, migration, or audit capability]"
+  },
+  {
+    "index": 233,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[3]/w:tc[3]/w:p",
+    "text": "[Acceptance test or reconstruction criteria]"
+  },
+  {
+    "index": 234,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[4]/w:tc[1]/w:p",
+    "text": "M3"
+  },
+  {
+    "index": 235,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[4]/w:tc[2]/w:p",
+    "text": "[Limited production rollout]"
+  },
+  {
+    "index": 236,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[4]/w:tc[3]/w:p",
+    "text": "[Stability period and severity threshold]"
+  },
+  {
+    "index": 237,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[5]/w:tc[1]/w:p",
+    "text": "M4"
+  },
+  {
+    "index": 238,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[5]/w:tc[2]/w:p",
+    "text": "[Broader customer or workload rollout]"
+  },
+  {
+    "index": 239,
+    "path": "/w:document/w:body/w:tbl[9]/w:tr[5]/w:tc[3]/w:p",
+    "text": "[SLOs met, rollback tested, and approvals complete]"
+  },
+  {
+    "index": 240,
+    "path": "/w:document/w:body/w:p[89]",
+    "text": ""
+  }
+]

@@ -1,7 +1,0 @@
-import {useEffect,useState} from 'react';
-import {api} from '../../api/client';
-export function CredentialStatus(){
-  const [available,setAvailable]=useState<boolean>(),[error,setError]=useState(''),[refresh,setRefresh]=useState(0),[loading,setLoading]=useState(true);
-  useEffect(()=>{let active=true;setLoading(true);setError('');void api.credentialStatus().then(result=>{if(active)setAvailable(result.osEncryptionAvailable);}).catch(cause=>{if(active){setAvailable(undefined);setError(cause instanceof Error?cause.message:'Could not inspect credential protection');}}).finally(()=>{if(active)setLoading(false);});return()=>{active=false;};},[refresh]);
-  return <section className="registry-section" aria-label="Credential protection"><h2>Credential protection</h2><p className="muted">New API keys are submitted once through the desktop credential boundary. The renderer cannot read saved keys. Existing legacy credentials are not converted automatically.</p>{loading?<p role="status">Checking Windows credential protection…</p>:error?<p className="notice" role="status">{error}</p>:<p className="notice" role="status">{available?'Windows OS encryption is available for new credential writes.':'Windows OS encryption is unavailable. New secret writes must remain blocked.'}</p>}<button className="secondary" disabled={loading} onClick={()=>setRefresh(value=>value+1)}>Recheck credential protection</button></section>;
-}

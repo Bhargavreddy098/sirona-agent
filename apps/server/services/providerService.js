@@ -148,7 +148,7 @@ export class ProviderService {
     const withoutSlash = cleanId.replace(/\//g, "");
 
     const res = await query(
-      `SELECT m.*, pc.base_url, pc.api_key_ciphertext, to_jsonb(pc)->>'credential_ref' as credential_ref, to_jsonb(pc)->>'credential_status' as credential_status, pc.is_active as conn_is_active
+      `SELECT m.*, pc.base_url, pc.api_key_ciphertext, pc.credential_ref, pc.credential_status, pc.is_active as conn_is_active
        FROM models m
        LEFT JOIN provider_connections pc ON pc.id = m.provider_connection_id
        WHERE m.id = $1 
@@ -302,15 +302,13 @@ export class ProviderService {
       }
     }
 
-    // No schema mutation here: old databases carry the same opaque ref in the existing column.
-    const hasMetadata = (await query("SELECT EXISTS(SELECT 1 FROM information_schema.columns WHERE table_schema=current_schema() AND table_name='provider_connections' AND column_name='credential_ref') AS present")).rows[0].present;
+    // In SQLite-only architecture, credential metadata columns are canonical on provider_connections.
     const ref = apiKey?.trim() ? CredentialResolver.storeCredential(apiKey.trim()) : null;
-    const columns = hasMetadata ? ', credential_ref, credential_status, credential_migrated_at' : '';
-    const extra = hasMetadata ? ", $5::text, $7, CASE WHEN $5::text IS NULL THEN NULL ELSE NOW() END" : '';
-    const values = [workspaceId, normalizedKind, name || normalizedKind, baseUrl || null, ref, isActive !== false];
-    if (hasMetadata) values.push(ref ? 'migrated' : 'none');
+    const columns = ', credential_ref, credential_status, credential_migrated_at';
+    const extra = ", $5, $7, CASE WHEN $5 IS NULL THEN NULL ELSE datetime('now') END";
+    const values = [workspaceId, normalizedKind, name || normalizedKind, baseUrl || null, ref, isActive !== false, ref ? 'migrated' : 'none'];
     const res = await query(
-      `INSERT INTO provider_connections (workspace_id,kind,name,base_url,api_key_ciphertext,is_active${columns}) VALUES ($1,$2,$3,$4,$5::text,$6${extra}) RETURNING *`, values);
+      `INSERT INTO provider_connections (workspace_id,kind,name,base_url,api_key_ciphertext,is_active${columns}) VALUES ($1,$2,$3,$4,$5,$6${extra}) RETURNING *`, values);
 
     return CredentialResolver.sanitize(res.rows[0]);
   }
@@ -535,19 +533,19 @@ export class ProviderService {
   static async getModelSettings() {
     const raw = await Setting.get("model_settings");
     const settings = typeof raw === "object" && raw !== null ? raw : {};
-    const primaryModel = settings.primaryModel || (await Setting.get("primary_model")) || "gemini-2.5-flash";
+    const primaryModel = settings.primaryModel || (await Setting.get("primary_model")) || "gemini-3.5-flash-lite";
     const fallbackModel = settings.fallbackModel || (await Setting.get("fallback_model")) || "gpt-4o";
     const auxiliaryModels = settings.auxiliaryModels || (await Setting.get("auxiliary_models")) || {
       fast: "gemini-flash-lite-latest",
-      reasoning: "gemini-1.5-pro",
+      reasoning: "gemini-3.1-pro-preview",
       embedding: "text-embedding-004",
     };
     return {
-      primaryModel: typeof primaryModel === "string" ? primaryModel : "gemini-2.5-flash",
+      primaryModel: typeof primaryModel === "string" ? primaryModel : "gemini-3.5-flash-lite",
       fallbackModel: typeof fallbackModel === "string" ? fallbackModel : "gpt-4o",
       auxiliaryModels: typeof auxiliaryModels === "object" && auxiliaryModels !== null ? auxiliaryModels : {
         fast: "gemini-flash-lite-latest",
-        reasoning: "gemini-1.5-pro",
+        reasoning: "gemini-3.1-pro-preview",
         embedding: "text-embedding-004",
       },
     };
@@ -739,6 +737,9 @@ export class ProviderService {
 
     // Upsert discovered models into PostgreSQL models table
     const CANONICAL_PROVIDERS = {
+      "gemini-3.5-flash-lite": "google",
+      "gemini-3.5-flash": "google",
+      "gemini-3.1-pro-preview": "google",
       "gemini-2.5-flash": "google",
       "gemini-1.5-pro": "google",
       "gemini-flash-lite-latest": "google",
@@ -850,7 +851,7 @@ export class ProviderService {
   static async executeTurn({
     conversationId,
     prompt,
-    modelId = "gemini-3.5-flash",
+    modelId = "gemini-3.5-flash-lite",
     onToken = () => {},
     actorId: _actorId = null,
     signal = null,

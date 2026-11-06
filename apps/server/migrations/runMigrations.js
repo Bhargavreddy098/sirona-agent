@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export async function runMigrations() {
-  console.log("🚀 Starting Sirona PostgreSQL migrations...");
+  console.log("🚀 Starting Sirona SQLite migrations...");
   loadEnvironment();
   const config = readRuntimeConfig(process.env);
   const logger = createLogger(config);
@@ -23,19 +23,14 @@ export async function runMigrations() {
     const client = await owner.pool.connect();
 
     try {
-      // 1. Ensure migrations tracking table exists with checksum column
+      // 1. Ensure migrations tracking table exists with checksum column in SQLite
       await client.query(`
         CREATE TABLE IF NOT EXISTS schema_migrations (
-          id SERIAL PRIMARY KEY,
-          filename VARCHAR(255) UNIQUE NOT NULL,
-          checksum VARCHAR(64),
-          applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          filename TEXT UNIQUE NOT NULL,
+          checksum TEXT,
+          applied_at TEXT NOT NULL DEFAULT (datetime('now'))
         );
-      `);
-
-      await client.query(`
-        ALTER TABLE schema_migrations 
-        ADD COLUMN IF NOT EXISTS checksum VARCHAR(64);
       `);
 
       // 2. Discover .sql migration files in deterministic alphabetical order
@@ -57,13 +52,18 @@ export async function runMigrations() {
         if (checkRes.rows.length === 0) {
           console.log(`📦 Applying migration: ${file}...`);
           await client.query("BEGIN");
-          await client.query(sql);
-          await client.query(
-            "INSERT INTO schema_migrations (filename, checksum) VALUES ($1, $2)",
-            [file, checksum]
-          );
-          await client.query("COMMIT");
-          console.log(`✅ Applied migration: ${file} (checksum: ${checksum.slice(0, 8)})`);
+          try {
+            await client.query(sql);
+            await client.query(
+              "INSERT INTO schema_migrations (filename, checksum) VALUES ($1, $2)",
+              [file, checksum]
+            );
+            await client.query("COMMIT");
+            console.log(`✅ Applied migration: ${file} (checksum: ${checksum.slice(0, 8)})`);
+          } catch (err) {
+            await client.query("ROLLBACK");
+            throw err;
+          }
         } else {
           const recorded = checkRes.rows[0];
           if (!recorded.checksum) {
@@ -73,7 +73,12 @@ export async function runMigrations() {
             );
             console.log(`⏩ Migration already applied: ${file} (backfilled checksum: ${checksum.slice(0, 8)})`);
           } else if (recorded.checksum !== checksum) {
-            console.warn(`⚠️ Warning: Migration file ${file} checksum mismatch! Recorded: ${recorded.checksum.slice(0, 8)}, Current: ${checksum.slice(0, 8)}`);
+            // FAIL CLOSED POLICY: Checksum mismatch aborts migration immediately
+            throw new Error(
+              `CRITICAL: Migration checksum mismatch on ${file}!\n` +
+              `Recorded: ${recorded.checksum.slice(0, 8)}, Current: ${checksum.slice(0, 8)}\n` +
+              `Aborting migration to prevent database corruption.`
+            );
           } else {
             console.log(`⏩ Migration already applied: ${file} (checksum verified: ${checksum.slice(0, 8)})`);
           }
@@ -82,7 +87,7 @@ export async function runMigrations() {
 
       console.log("🎉 All migrations applied and verified successfully!");
     } finally {
-      client.release();
+      client.release?.();
     }
   } catch (error) {
     console.error("❌ Migration failed:", error.message);

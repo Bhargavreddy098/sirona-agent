@@ -44,7 +44,7 @@ router.patch('/conversations/:conversationId',sessionAuth(),handle(async(req,res
   reply(req,res,{conversation:result.rows[0]});
 }));
 router.post('/conversations/:conversationId/turns',sessionAuth(),handle(async(req,res,next)=>{
-  if(req.body?.coordinateLease!==true)return next();
+  if(req.body?.bypassCoordinator===true)return next();
   await coordinateTurn(req,res);
 }));
 export default router;

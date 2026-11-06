@@ -53,10 +53,10 @@ test('project history remains separate and rename preserves exact model identifi
 });
 test('legacy turn still rejects missing lease and new coordinated turn rejects another holder',async t=>{
   const base=await serve(t,app()),identity=await login(base),conversation=await create(base,identity);
-  const noLease=await request(base,`/api/v1/conversations/${conversation.id}/turns`,{method:'POST',headers:headers(identity),body:JSON.stringify({prompt:'Lease enforcement test'})});assert.equal(noLease.status,409);
+  const noLease=await request(base,`/api/v1/conversations/${conversation.id}/turns`,{method:'POST',headers:headers(identity),body:JSON.stringify({prompt:'Lease enforcement test',bypassCoordinator:true})});assert.equal(noLease.status,409);
   const model=(await query('SELECT id FROM models WHERE is_available=true LIMIT 1')).rows[0];assert.ok(model,'A canonical registry model is required');
   const lease=await TurnLease.acquire(conversation.id,'standalone-test-other-holder',90);assert.ok(lease.acquired);
-  const blocked=await request(base,`/api/v1/conversations/${conversation.id}/turns`,{method:'POST',headers:headers(identity),body:JSON.stringify({prompt:'Do not execute',modelId:model.id,clientTurnId:crypto.randomUUID(),coordinateLease:true})});assert.equal(blocked.status,409);
+  const blocked=await request(base,`/api/v1/conversations/${conversation.id}/turns`,{method:'POST',headers:headers(identity),body:JSON.stringify({prompt:'Do not execute',modelId:model.id,clientTurnId:crypto.randomUUID()})});assert.equal(blocked.status,409);
   assert.equal((await query('SELECT COUNT(*)::int AS count FROM messages WHERE session_id=$1',[conversation.id])).rows[0].count,0);
 });
 test('controlled upstream HTTP 503 preserves failed state, releases lease and retries without duplicate user prompts',async t=>{
@@ -71,7 +71,7 @@ test('controlled upstream HTTP 503 preserves failed state, releases lease and re
   try{
     await Setting.set('model_settings',{primaryModel:modelId,fallbackModel:modelId});
     const prompt='Controlled failure qualification; no model output is expected';
-    await query("INSERT INTO messages(session_id,role,content,status) SELECT $1,'user','Historical test prompt '||n,'completed' FROM generate_series(1,31)n",[conversation.id]);
+    for(let n=1;n<=31;n++){await query("INSERT INTO messages(session_id,role,content,status)VALUES($1,'user','Historical test prompt '||$2,'completed')",[conversation.id,n]);}
     const firstId=crypto.randomUUID();
     const first=await request(base,`/api/v1/conversations/${conversation.id}/turns`,{method:'POST',headers:{...headers(identity),Accept:'text/event-stream'},body:JSON.stringify({prompt,modelId,clientTurnId:firstId,coordinateLease:true})});
     assert.equal(first.status,200);
@@ -83,4 +83,10 @@ test('controlled upstream HTTP 503 preserves failed state, releases lease and re
     const retry=await request(base,`/api/v1/conversations/${conversation.id}/turns`,{method:'POST',headers:{...headers(identity),Accept:'text/event-stream'},body:JSON.stringify({prompt,modelId,clientTurnId:crypto.randomUUID(),coordinateLease:true,retryOf:String(failed.at(-1).id)})});assert.match(await retry.text(),/HTTP 503/);
     const count=(await query("SELECT COUNT(*)::int AS total FROM messages WHERE session_id=$1 AND role='user' AND content=$2",[conversation.id,prompt])).rows[0].total;assert.equal(count,1);
   }finally{await Setting.set('model_settings',original);}
+});
+test('standard turn execution without coordinateLease coordinates and executes with single-writer lease',async t=>{
+  const base=await serve(t,app()),identity=await login(base),conversation=await create(base,identity);
+  const model=(await query('SELECT id FROM models WHERE is_available=true LIMIT 1')).rows[0];assert.ok(model,'A canonical registry model is required');
+  const res=await request(base,`/api/v1/conversations/${conversation.id}/turns`,{method:'POST',headers:{...headers(identity),Accept:'text/event-stream'},body:JSON.stringify({prompt:'Standard turn without coordinateLease flag',modelId:model.id})});
+  assert.equal(res.status,200);
 });

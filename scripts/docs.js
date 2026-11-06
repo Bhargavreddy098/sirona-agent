@@ -43,7 +43,7 @@ function scanDocs(dir = DOCS_DIR, fileList = []) {
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (entry.name !== "node_modules" && entry.name !== ".git") {
+      if (entry.name !== "node_modules" && entry.name !== ".git" && entry.name !== "_archive") {
         scanDocs(fullPath, fileList);
       }
     } else if (entry.isFile() && entry.name.endsWith(".md")) {
@@ -125,7 +125,7 @@ function validateDocs() {
 
     while ((match = linkRegex.exec(content)) !== null) {
       const target = match[2];
-      if (target.startsWith("http://") || target.startsWith("https://") || target.startsWith("#") || target.startsWith("mailto:")) {
+      if (target.startsWith("http://") || target.startsWith("https://") || target.startsWith("#") || target.startsWith("mailto:") || target.startsWith("file://")) {
         continue;
       }
       

@@ -5,8 +5,9 @@
   "type": "module",
   "description": "Sirona Local-First Autonomous Developer Workspace",
   "scripts": {
-    "build": "npm --prefix packages/contracts run build && npm --prefix apps/desktop run build && npm --prefix apps/web run build && npm --prefix apps/cli run build",
-    "check": "npm --prefix packages/contracts run check && npm --prefix apps/server run check && npm --prefix apps/web run check && npm --prefix apps/desktop run check",
+    "start": "npm run web:dev",
+    "build": "npm --prefix packages/contracts run build && npm --prefix apps/web run build && npm --prefix apps/cli run build",
+    "check": "npm --prefix packages/contracts run check && npm --prefix apps/server run check && npm --prefix apps/web run check",
     "lint": "npm --prefix apps/web run lint",
     "test": "npm --prefix packages/contracts test && npm --prefix apps/server run test:p6:free && npm --prefix apps/web test && npm --prefix apps/cli test",
     "test:contracts": "npm --prefix packages/contracts test",
@@ -17,9 +18,6 @@
     "server:start": "npm --prefix apps/server run start",
     "web:dev": "npm --prefix apps/web run dev",
     "web:build": "npm --prefix apps/web run build",
-    "desktop:build": "npm --prefix apps/desktop run build",
-    "desktop:start": "npm --prefix apps/desktop run start",
-    "desktop:dev": "npm --prefix apps/desktop run dev",
     "cli:build": "npm --prefix apps/cli run build",
     "cli:test": "npm --prefix apps/cli test"
   },

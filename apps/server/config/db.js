@@ -1,52 +1,48 @@
-import pg from "pg";
 import * as sqliteDb from "./sqliteDb.js";
 
 let active;
 export let pool;
 
-export function createDatabaseOwner(config, logger, Pool = pg.Pool) {
-  if (process.env.SIRONA_DB_DRIVER === "sqlite" && Pool === pg.Pool) {
-    const owner = sqliteDb.createDatabaseOwner(config, logger);
-    const origInit = owner.initialize;
-    owner.initialize = async () => {
-      await origInit();
+export function createDatabaseOwner(config, logger, Pool) {
+  if (Pool) {
+    const ownedPool = new Pool(config);
+    let stopped = false;
+    let closing;
+    ownedPool.on?.("error", () => logger?.event?.("dependency.error", { category: "database", code: "RESOURCE_FAILED" }));
+    const owner = {
+      isCustom: true,
+      pool: ownedPool,
+      async ready() {
+        if (stopped) return false;
+        try {
+          const result = await ownedPool.query("SELECT 1 AS alive");
+          return !stopped && result.rows[0]?.alive === 1;
+        } catch {
+          return false;
+        }
+      },
+      async initialize() {
+        if (!await owner.ready()) {
+          throw Object.assign(new Error("Required dependency is unavailable"), { code: "DEPENDENCY_UNREADY" });
+        }
+      },
+      close() {
+        if (!closing) {
+          stopped = true;
+          closing = Promise.resolve().then(() => ownedPool.end?.()).finally(() => {
+            if (active === owner) {
+              active = undefined;
+              pool = undefined;
+            }
+          });
+        }
+        return closing;
+      },
     };
     return owner;
   }
 
-  const ownedPool = new Pool(config);
-  let stopped = false;
-  let closing;
-  ownedPool.on?.("error", () => logger?.event?.("dependency.error", { category: "database", code: "RESOURCE_FAILED" }));
-  const owner = {
-    pool: ownedPool,
-    async ready() {
-      if (stopped) return false;
-      try {
-        const result = await ownedPool.query("SELECT 1 AS alive");
-        return !stopped && result.rows[0]?.alive === 1;
-      } catch {
-        return false;
-      }
-    },
-    async initialize() {
-      if (!await owner.ready()) {
-        throw Object.assign(new Error("Required dependency is unavailable"), { code: "DEPENDENCY_UNREADY" });
-      }
-    },
-    close() {
-      if (!closing) {
-        stopped = true;
-        closing = Promise.resolve().then(() => ownedPool.end?.()).finally(() => {
-          if (active === owner) {
-            active = undefined;
-            pool = undefined;
-          }
-        });
-      }
-      return closing;
-    },
-  };
+  const owner = sqliteDb.createDatabaseOwner(config, logger);
   return owner;
 }
 
@@ -58,53 +54,55 @@ export function activateDatabaseOwner(owner) {
 
 function requirePool() {
   if (!pool) {
-    // If not yet explicitly initialized in standalone/scripts, allow sqlite fallback if configured
-    if (process.env.SIRONA_DB_DRIVER === "sqlite") {
-      return sqliteDb.pool;
-    }
-    throw Object.assign(new Error("Database owner is not initialized"), { code: "RESOURCE_FAILED" });
+    return sqliteDb.pool;
   }
   return pool;
 }
 
 export function query(text, params = []) {
-  if (process.env.SIRONA_DB_DRIVER === "sqlite" && !active) {
-    return sqliteDb.query(text, params);
+  if (active?.isCustom) {
+    return requirePool().query(text, params);
   }
-  return requirePool().query(text, params);
+  return sqliteDb.query(text, params);
 }
 
 export function getClient() {
-  if (process.env.SIRONA_DB_DRIVER === "sqlite" && !active) {
-    return sqliteDb.getClient();
+  if (active?.isCustom) {
+    return requirePool().connect();
   }
-  return requirePool().connect();
+  return sqliteDb.getClient();
 }
 
 export async function transaction(callback) {
-  if (process.env.SIRONA_DB_DRIVER === "sqlite" && !active) {
-    return sqliteDb.transaction(callback);
+  if (active?.isCustom) {
+    const client = await getClient();
+    try {
+      await client.query("BEGIN");
+      const result = await callback(client);
+      await client.query("COMMIT");
+      return result;
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release?.();
+    }
   }
-  const client = await getClient();
-  try {
-    await client.query("BEGIN");
-    const result = await callback(client);
-    await client.query("COMMIT");
-    return result;
-  } catch (error) {
-    await client.query("ROLLBACK");
-    throw error;
-  } finally {
-    client.release?.();
-  }
+  return sqliteDb.transaction(callback);
 }
 
 export function checkPostgresConnection() {
-  return active ? active.ready() : Promise.resolve(false);
+  return active ? active.ready() : Promise.resolve(true);
 }
 
 export function closePool() {
-  return active ? active.close() : Promise.resolve();
+  if (active) {
+    const p = active.close();
+    active = undefined;
+    pool = undefined;
+    return p;
+  }
+  return Promise.resolve();
 }
 
 export { pool as default };

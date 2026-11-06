@@ -135,6 +135,20 @@ router.delete("/session", sessionAuth({ requireCsrf: true }), async (req, res, n
   }
 });
 
+// 4. List Workspaces for Authenticated Session
+router.get("/workspaces", sessionAuth({ requireCsrf: false }), async (req, res, next) => {
+  try {
+    const { query } = await import("../../config/db.js");
+    const wsRes = await query("SELECT * FROM workspaces WHERE owner_principal_id = $1", [req.session.principalId]);
+    res.status(200).json({
+      data: wsRes.rows,
+      meta: { requestId: req.requestId },
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // 5. System Capabilities Projection
 router.get("/capabilities", sessionAuth({ requireCsrf: false }), (req, res) => {
   const capabilities = getCapabilities();

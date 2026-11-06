@@ -43,9 +43,10 @@ apps/web/
 
 ## 3. Relevant Canonical Technical Documentation
 
-- **Model Gateway & Routing**: [`docs/subsystems/model-gateway.md`](../../docs/subsystems/model-gateway.md) & [`docs/model-gateway/routing.md`](../../docs/model-gateway/routing.md)
-- **Agent Loop & ReAct Concept**: [`docs/concepts/agent-loop.md`](../../docs/concepts/agent-loop.md)
-- **Workspace Filesystem**: [`docs/subsystems/workspace-filesystem.md`](../../docs/subsystems/workspace-filesystem.md)
+- **Frontend Canvas & UI**: [`docs/features/frontend-canvas-and-ui/SPEC.md`](../../docs/features/frontend-canvas-and-ui/SPEC.md)
+- **Model Gateway & Routing**: [`docs/features/model-providers-and-gateway/SPEC.md`](../../docs/features/model-providers-and-gateway/SPEC.md) & [`docs/reference/providers/routing.md`](../../docs/reference/providers/routing.md)
+- **Agent Runtime & Loop**: [`docs/features/agent-runtime-and-loop/SPEC.md`](../../docs/features/agent-runtime-and-loop/SPEC.md)
+- **Workspace Filesystem**: [`docs/features/workspace-and-filesystem/SPEC.md`](../../docs/features/workspace-and-filesystem/SPEC.md)
 
 ---
 

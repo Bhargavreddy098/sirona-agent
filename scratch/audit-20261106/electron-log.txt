@@ -1,0 +1,14 @@
+[Sirona] Desktop authenticated session established
+AUDIT_WINDOW_CREATED
+(electron) 'console-message' arguments are deprecated and will be removed. Please use Event<WebContentsConsoleMessageEventParams> object instead.
+[RENDERER:warning] %cElectron Security Warning (Insecure Content-Security-Policy) font-weight: bold; This renderer process has either no Content Security
+  Policy set or a policy with "unsafe-eval" enabled. This exposes users of
+  this app to unnecessary security risks.
+
+For more information and help, consult
+https://electronjs.org/docs/tutorial/security.
+This warning will not show up
+once the app is packaged. (node:electron/js2c/sandbox_bundle:2)
+AUDIT_BEFORE_QUIT
+Debugger ending on ws://127.0.0.1:62101/16ce2e3e-9c15-4ee8-bcf6-fe0c27b01fb9
+For help, see: https://nodejs.org/learn/getting-started/debugging

@@ -359,7 +359,11 @@ export class ExecutionService {
       );
 
       for (const task of candRes.rows) {
-        const deps = Array.isArray(task.dependencies) ? task.dependencies : [];
+        let deps = task.dependencies;
+        if (typeof deps === "string") {
+          try { deps = JSON.parse(deps); } catch { deps = []; }
+        }
+        if (!Array.isArray(deps)) deps = [];
         const isEligible = deps.every((dep) => completedSteps.has(dep));
 
         if (isEligible) {
@@ -618,6 +622,7 @@ export class ExecutionService {
     return {
       id: r.id,
       projectId: r.project_id,
+      sessionId: r.session_id,
       goalId: r.goal_id,
       contractRevisionId: r.contract_revision_id,
       planRevisionId: r.plan_revision_id,
@@ -644,6 +649,19 @@ export class ExecutionService {
   }
 
   static _formatTask(t) {
+    if (!t) return null;
+    let deps = t.dependencies;
+    if (typeof deps === "string") {
+      try { deps = JSON.parse(deps); } catch { deps = []; }
+    }
+    let artifacts = t.artifact_ids;
+    if (typeof artifacts === "string") {
+      try { artifacts = JSON.parse(artifacts); } catch { artifacts = []; }
+    }
+    let res = t.result;
+    if (typeof res === "string") {
+      try { res = JSON.parse(res); } catch {}
+    }
     return {
       id: t.id,
       runId: t.run_id,
@@ -653,9 +671,9 @@ export class ExecutionService {
       maxAttempts: t.max_attempts,
       deadlineAt: t.deadline_at,
       leaseEpoch: String(t.lease_epoch),
-      dependencies: t.dependencies || [],
-      artifactIds: t.artifact_ids || [],
-      result: t.result,
+      dependencies: deps || [],
+      artifactIds: artifacts || [],
+      result: res,
       errorMessage: t.error_message,
       createdAt: t.created_at,
       updatedAt: t.updated_at,

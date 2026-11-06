@@ -104,7 +104,7 @@ export class AgentWorkerService {
         workspaceRoot: rootDir,
         prompt: stepDef?.description || stepDef?.title || `Implement task step: ${task.step_key}`,
         contextPack,
-        model: "gemini-3.5-flash",
+        model: "gemini-2.5-flash-lite",
         toolExecutor: invoke,
         modelExecutor,
       });
@@ -402,7 +402,7 @@ Inspect the code files using 'read_file', identify the bug causing the failure, 
         projectId,
         workspaceRoot: rootDir,
         prompt: repairPrompt,
-        model: "gemini-3.5-flash",
+        model: "gemini-2.5-flash-lite",
         modelExecutor,
         maxTurns: 8,
       });

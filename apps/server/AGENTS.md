@@ -42,11 +42,11 @@ apps/server/
 
 ## 3. Relevant Canonical Technical Documentation
 
-- **Model Gateway & Providers**: [`docs/subsystems/model-gateway.md`](../../docs/subsystems/model-gateway.md)
-- **Agent Runtime & Execution**: [`docs/subsystems/agent-runtime.md`](../../docs/subsystems/agent-runtime.md)
-- **Tool Execution & Sandbox**: [`docs/subsystems/tool-execution.md`](../../docs/subsystems/tool-execution.md)
-- **Approvals & Governance**: [`docs/subsystems/approvals-and-governance.md`](../../docs/subsystems/approvals-and-governance.md)
-- **Sessions & Persistence**: [`docs/subsystems/sessions-and-persistence.md`](../../docs/subsystems/sessions-and-persistence.md)
+- **Model Gateway & Providers**: [`docs/features/model-providers-and-gateway/SPEC.md`](../../docs/features/model-providers-and-gateway/SPEC.md)
+- **Agent Runtime & Execution**: [`docs/features/agent-runtime-and-loop/SPEC.md`](../../docs/features/agent-runtime-and-loop/SPEC.md)
+- **Tool Execution & Sandbox**: [`docs/features/tool-execution-and-sandbox/SPEC.md`](../../docs/features/tool-execution-and-sandbox/SPEC.md)
+- **Approvals & Governance**: [`docs/features/approvals-and-governance/SPEC.md`](../../docs/features/approvals-and-governance/SPEC.md)
+- **Sessions & Persistence**: [`docs/features/sessions-and-persistence/SPEC.md`](../../docs/features/sessions-and-persistence/SPEC.md)
 
 ---
 

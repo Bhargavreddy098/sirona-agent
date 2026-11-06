@@ -1,1 +1,0 @@
-const fs=require('node:fs');for(const [n,s] of [['delegationPolicy','delegation'],['graphCheckpoint','checkpoint'],['orchestrationRecovery','recovery'],['orchestrationWorkflow','workflow']])fs.copyFileSync('.tmp/p5-'+s+'-tests.txt','backend/tests/'+n+'.test.ts');

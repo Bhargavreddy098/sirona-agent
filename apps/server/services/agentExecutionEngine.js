@@ -62,7 +62,7 @@ export class AgentExecutionEngine {
     contextPack = null,
     allowedTools = ["read_file", "write_file", "list_directory", "execute_command", "apply_patch", "propose_task_completion"],
     maxTurns = 12,
-    model = "gemini-3.5-flash",
+    model = "gemini-2.5-flash-lite",
     toolExecutor = null,
     modelExecutor = null,
     onProgress = null,

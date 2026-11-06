@@ -1,38 +1,34 @@
-# Sirona P0-P8 - current work packet
+# Sirona Engineering Documentation Hub
 
-Read [root AGENTS.md](../AGENTS.md), then the [current handoff](SIRONA-AGENT-HANDOFF.md), [master plan](SIRONA-WORKSPACE-PLAN.md), [execution ledger](SIRONA-WORKSPACE-LEDGER.md) and [technology ledger](SIRONA-WORKSPACE-TECHNOLOGY-LEDGER.md). Actual source, exact owner approvals and matching evidence determine current status; document presence is not permission or completion.
+Welcome to Sirona's canonical, spec-driven engineering documentation system.
 
-## Phase documents
+---
 
-| Phase | Scope | Current documents |
-| --- | --- | --- |
-| P0 | Baseline and preservation | [Report](SIRONA-WORKSPACE-P0-REPORT.md) |
-| P1 | Typed execution reliability | [Scope](SIRONA-WORKSPACE-P1-APPROVAL.md), [report](SIRONA-WORKSPACE-P1-REPORT.md) |
-| P2 | Protected provider credentials | [Scope](SIRONA-WORKSPACE-P2-APPROVAL.md), [report](SIRONA-WORKSPACE-P2-REPORT.md) |
-| P3 | Trusted-local Docker + WSL2 Home profile | [Profile plan](SIRONA-WORKSPACE-P3-DOCKER-PLAN.md), [corrected report](SIRONA-WORKSPACE-P3-REPORT.md) |
-| P4 | Vercel AI SDK | [Scope](SIRONA-WORKSPACE-P4-APPROVAL.md), [report](SIRONA-WORKSPACE-P4-REPORT.md) |
-| P5 | LangGraph and bounded specialists | [Implementation plan](SIRONA-WORKSPACE-P5-IMPLEMENTATION-PLAN.md), [approval gates](SIRONA-WORKSPACE-P5-APPROVAL.md) |
-| P6 | MCP and code intelligence | P6 section of the [master plan](SIRONA-WORKSPACE-PLAN.md); separate future scope/approval required |
-| P7 | Workspace UI integrations | P7 section of the [master plan](SIRONA-WORKSPACE-PLAN.md); separate future scope/approval required |
-| P8 | Release/recovery qualification | P8 section of the [master plan](SIRONA-WORKSPACE-PLAN.md); separate future scope/approval required |
+## 1. Mandatory Reading Order for AI Agents & Developers
 
-The roadmap is named P0-P8: it contains the baseline P0 plus eight implementation phases P1-P8. No missing phase file is manufactured as a completed plan.
+Before inspecting or altering any source code, every agent must follow this strict reading sequence:
 
-## Continuing with another agent
+```mermaid
+graph LR
+    Step1["1. Root AGENTS.md & Active STOP Rules"] --> Step2["2. docs/architecture/ (System & LLD)"]
+    Step2 --> Step3["3. docs/features/<domain>/ (SPEC & CONTRACTS)"]
+    Step3 --> Step4["4. docs/features/<domain>/ (GUIDE & VERIFY)"]
+```
 
-The later owner-approved P1–P5 frontend/backend slice is described in the [wiring approval](SIRONA-FRONTEND-BACKEND-WIRING-APPROVAL.md) and [verified wiring report](SIRONA-FRONTEND-BACKEND-WIRING-REPORT.md). This is a bounded exception for its listed surfaces/APIs, not approval of remaining P6–P8 or production activation.
+1. **Governance & STOP Rules**: [`docs/governance/ACTIVE-STOP-RULES.md`](governance/ACTIVE-STOP-RULES.md) (All active freeze, database, and approval gates).
+2. **Authority Hierarchy & ADRs**: [`docs/governance/DOCUMENTATION-AUTHORITY-HIERARCHY.md`](governance/DOCUMENTATION-AUTHORITY-HIERARCHY.md) & [`docs/governance/ARCHITECTURE-DECISION-REGISTRY.md`](governance/ARCHITECTURE-DECISION-REGISTRY.md) (Authority precedence, canonical `ADR-xxx` decisions).
+3. **System Architecture**: [`docs/architecture/SYSTEM-ARCHITECTURE.md`](architecture/SYSTEM-ARCHITECTURE.md) (Monorepo boundaries, containment, IPC).
+4. **Low-Level Design**: [`docs/architecture/LOW-LEVEL-DESIGN.md`](architecture/LOW-LEVEL-DESIGN.md) (Services, DB schemas, turn leases).
+5. **Feature Guidance**: [`docs/features/`](features/) (Dedicated `SPEC.md`, `CONTRACTS.md`, `IMPLEMENTATION-GUIDE.md`, and `VERIFICATION.md` for each domain).
+6. **Active Roadmap**: [`docs/engineering/IMPLEMENTATION-ROADMAP.md`](engineering/IMPLEMENTATION-ROADMAP.md) (P1–P8 progression).
 
-Use the [external-agent guide](SIRONA-EXTERNAL-AGENT-GUIDE.md). For P5, use the current implementation plan and gates above; the earlier invalid draft is archived. Do not infer implementation authorization from proposed approval text. Keep SQL application and production activation separately gated.
+---
 
-## Supporting rules and dated evidence
+## 2. Canonical Active Directories
 
-[Supporting documentation](../sironadocs/README.md) contains the normative architecture/security/API library as well as clearly separated historical material. Root AGENTS.md still determines which normative documents must be read. Archives are not current assignments.
-
-Non-Markdown evidence, guarded runners, JSON contracts and private rollback material remain in their original folders so their executable paths and accepted proof are preserved. Older embedded paths in immutable evidence resolve through [the relocation map](../sironadocs/relocation-map.json). Never overwrite accepted evidence simply to repair a historical path.
-
-
-## Per-feature end-to-end engineering workflow (documentation proposal)
-
-For a new feature or route, start with [the complete end-to-end feature workflow](FEATURE-END-TO-END-WORKFLOW.md), copy [the feature specification template](FEATURE-SPEC-TEMPLATE.md) into `docs/features/`, and use [the agent inspection/implementation prompts](FEATURE-AGENT-EXECUTION-PROMPT.md) only with the required explicit approval. For reliable discovery, see the [proposed root AGENTS.md integration](FEATURE-ROOT-AGENTS-INTEGRATION.md) and manually reconcile it with your actual root instructions. A [worked Run verification summary example](features/FEATURE-EXAMPLE-VERIFICATION-SUMMARY.md) traces UI → typed client → backend route/service → canonical state → UI.
-
-These added guides **do not change** any P0–P8 approvals or current STOP, do not grant authority to modify source or data, and do not resolve the reported SQLite/PostgreSQL database-owner conflict. The current `AGENTS.md`, handoff, owner decisions, and live source still govern. The example is not a requested implementation.
+- **[`docs/architecture/`](architecture/)**: Authoritative system architecture, low-level service design, component topologies, and runtime flows.
+- **[`docs/features/`](features/)**: Self-contained, spec-driven feature guidance folders for every platform capability.
+- **[`docs/engineering/`](engineering/)**: Real codebase audit, gap analysis, and dependency-ordered implementation roadmap.
+- **[`docs/governance/`](governance/)**: Enforced STOP rules, documentation authority hierarchy, and risk approval ledgers.
+- **[`docs/reference/`](reference/)**: Complete 148-route API surface catalog, migration 001–024 database schemas, and vendor provider manuals.
+- **`docs/_archive/legacy/` (unavailable in this checkout)**: Non-authoritative archive of historical phase plans, ledgers, and obsolete scaffolds.

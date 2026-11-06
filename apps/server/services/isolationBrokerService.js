@@ -2,7 +2,7 @@
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
-import { spawn, execSync } from "child_process";
+import { spawn, execSync, spawnSync } from "child_process";
 import { query } from "../config/db.js";
 import { WorkspacePathResolver } from "./workspacePathResolver.js";
 
@@ -618,16 +618,17 @@ export class IsolationBrokerService {
     ]);
 
     const row = res.rows[0];
+    const toIso = (v) => (v instanceof Date ? v.toISOString() : new Date(v || Date.now()).toISOString());
     return {
       id: row.id,
       suiteVersion: row.suite_version,
       runnerVersion: row.runner_version,
       environment: row.environment,
       status: row.status,
-      prerequisites: row.prerequisites,
-      adversarialResults: row.adversarial_results,
+      prerequisites: typeof row.prerequisites === "string" ? JSON.parse(row.prerequisites) : row.prerequisites,
+      adversarialResults: typeof row.adversarial_results === "string" ? JSON.parse(row.adversarial_results) : row.adversarial_results,
       digest: row.digest,
-      createdAt: row.created_at.toISOString(),
+      createdAt: toIso(row.created_at),
     };
   }
 
@@ -645,6 +646,7 @@ export class IsolationBrokerService {
    * }>>}
    */
   static async listQualifications(limit = 20) {
+    const toIso = (v) => (v instanceof Date ? v.toISOString() : new Date(v || Date.now()).toISOString());
     const sql = `
       SELECT id, suite_version, runner_version, environment, status, digest, created_at
       FROM isolation_qualifications
@@ -659,7 +661,7 @@ export class IsolationBrokerService {
       environment: r.environment,
       status: r.status,
       digest: r.digest,
-      createdAt: r.created_at.toISOString(),
+      createdAt: toIso(r.created_at),
     }));
   }
 
@@ -679,6 +681,7 @@ export class IsolationBrokerService {
    * } | null>}
    */
   static async getQualification(qualificationId) {
+    const toIso = (v) => (v instanceof Date ? v.toISOString() : new Date(v || Date.now()).toISOString());
     const sql = `
       SELECT id, suite_version, runner_version, environment, status, prerequisites, adversarial_results, digest, created_at
       FROM isolation_qualifications
@@ -693,10 +696,10 @@ export class IsolationBrokerService {
       runnerVersion: r.runner_version,
       environment: r.environment,
       status: r.status,
-      prerequisites: r.prerequisites,
-      adversarialResults: r.adversarial_results,
+      prerequisites: typeof r.prerequisites === "string" ? JSON.parse(r.prerequisites) : r.prerequisites,
+      adversarialResults: typeof r.adversarial_results === "string" ? JSON.parse(r.adversarial_results) : r.adversarial_results,
       digest: r.digest,
-      createdAt: r.created_at.toISOString(),
+      createdAt: toIso(r.created_at),
     };
   }
 
@@ -710,6 +713,7 @@ export class IsolationBrokerService {
    * } | null>}
    */
   static async getLatestQualification() {
+    const toIso = (v) => (v instanceof Date ? v.toISOString() : new Date(v || Date.now()).toISOString());
     const sql = `
       SELECT id, status, digest, created_at
       FROM isolation_qualifications
@@ -723,7 +727,7 @@ export class IsolationBrokerService {
       id: r.id,
       status: r.status,
       digest: r.digest,
-      createdAt: r.created_at.toISOString(),
+      createdAt: toIso(r.created_at),
     };
   }
 }

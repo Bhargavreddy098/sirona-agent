@@ -3,7 +3,7 @@ import path from 'node:path';
 import {createRequire} from 'node:module';
 import {z} from 'zod-v4';
 import type {TransactionClient} from '../db/transactionAdapter.js';
-import {ExecutionBoundaryError,identitySchema,requireProjectIdentity,requireToolGrants,requireRunApproval,validate,uuidSchema} from '../security/executionPolicy.js';
+import {ExecutionBoundaryError,identitySchema,requireProjectIdentity,requireToolGrants,requireRunApproval,validate,uuidSchema,parseResourceScope,normalizePath} from '../security/executionPolicy.js';
 import {HOME_PROFILE,requireHomeProfile,requireRoot,readArtifact,digest} from './homeProfile.js';
 import {computeStateDigest} from '../orchestration/checkpointAdapter.js';
 import {commandSchema,orchestrationSettingsSchema} from '../orchestration/graphContracts.js';
@@ -56,7 +56,10 @@ export async function workspaceReadiness(projectId:string,identity:unknown){
   try{await requireHomeProfile(c);}catch(error){if(!(error instanceof ExecutionBoundaryError))throw error;profileReason=error.code;}
   try{await requireToolGrants(c,projectId,['fs_read'],project.primary_path);}catch(error){if(!(error instanceof ExecutionBoundaryError))throw error;fileReason=error.code;}
   try{await requireToolGrants(c,projectId,['fs_read','shell_exec','bounded_process'],project.primary_path);await policy(c);}catch(error){if(!(error instanceof ExecutionBoundaryError))throw error;terminalReason=error.code;}
-  const roots=(await c.query("SELECT id,expires_at,resource_scope FROM capability_grants WHERE project_id=$1 AND capability='workspace_root' AND revoked_at IS NULL AND expires_at>NOW()",[projectId])).rows.filter((row:any)=>row.resource_scope?.profile===HOME_PROFILE&&row.resource_scope?.workspaceRoot===path.resolve(project.primary_path));
+  const roots=(await c.query("SELECT id,expires_at,resource_scope FROM capability_grants WHERE project_id=$1 AND capability='workspace_root' AND revoked_at IS NULL AND expires_at>NOW()",[projectId])).rows.filter((row:any)=>{
+    const scope = parseResourceScope(row.resource_scope);
+    return scope.profile===HOME_PROFILE && typeof scope.workspaceRoot==='string' && normalizePath(scope.workspaceRoot)===normalizePath(project.primary_path);
+  });
   const workers=(await c.query("SELECT id,status,metadata FROM isolation_workers WHERE metadata->>'profile'=$1 AND status IN('running','provisioning','unknown') LIMIT 2",[HOME_PROFILE])).rows;
   const preparationRows=(await c.query("SELECT t.id,t.run_id,r.epoch,r.state AS run_state,t.result->'sironaTerminalPreparation' AS preparation FROM tasks t JOIN runs r ON r.id=t.run_id WHERE r.project_id=$1 AND t.step_key LIKE 'ui:terminal:%' AND t.result->'sironaTerminalPreparation'->>'sessionId'=$2 AND t.result->'sironaTerminalPreparation'->>'principalId'=$3 AND t.state IN('pending','queued','running','blocked') ORDER BY t.created_at DESC LIMIT 10",[projectId,actor.sessionId,actor.principalId])).rows;
   const preparations=[];

@@ -9,6 +9,43 @@ export const uuidSchema=z.uuid();
 export const identitySchema=z.object({principalId:z.uuid(),workspaceId:z.uuid(),sessionId:z.uuid(),rawSessionToken:z.string().min(32).max(256)}).passthrough();
 export const fenceSchema=z.object({holder:z.string().min(1).max(100),runEpoch:z.coerce.bigint().positive(),leaseEpoch:z.coerce.bigint().positive()});
 export const toolRequestSchema=z.object({toolName:z.string().min(1).max(64),input:z.record(z.string(),z.unknown()),workspaceRoot:z.string().min(1).optional(),projectId:z.uuid().optional(),connectionId:z.uuid().optional(),runId:z.uuid().optional(),taskId:z.uuid().optional(),timeoutMs:z.number().int().positive().max(600000).optional()}).passthrough();
+export interface ResourceScope {
+  workspaceRoot?: string;
+  profile?: string;
+  registrationKey?: string;
+  [key: string]: unknown;
+}
+export const resourceScopeSchema = z.object({
+  workspaceRoot: z.string().min(1).optional(),
+  profile: z.string().min(1).optional(),
+  registrationKey: z.string().min(1).optional(),
+}).passthrough();
+export function parseResourceScope(raw: unknown): ResourceScope {
+  if (raw === null || raw === undefined) {
+    return {};
+  }
+  let parsed: unknown = raw;
+  if (typeof raw === 'string') {
+    const trimmed = raw.trim();
+    if (!trimmed) {
+      return {};
+    }
+    try {
+      parsed = JSON.parse(trimmed);
+    } catch {
+      throw new ExecutionBoundaryError('INVALID_GRANT_SCOPE', 403, 'Corrupted or invalid grant resource scope JSON');
+    }
+  }
+  if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
+    throw new ExecutionBoundaryError('INVALID_GRANT_SCOPE', 403, 'Grant resource scope must be an object');
+  }
+  const result = resourceScopeSchema.safeParse(parsed);
+  if (!result.success) {
+    throw new ExecutionBoundaryError('INVALID_GRANT_SCOPE', 403, 'Invalid grant resource scope format');
+  }
+  return result.data;
+}
+export const normalizePath = (value: string) => process.platform === 'win32' ? path.resolve(value).toLowerCase() : path.resolve(value);
 export function validate<T>(schema:z.ZodType<T>,value:unknown):T{const parsed=schema.safeParse(value);if(!parsed.success)throw new ExecutionBoundaryError('INVALID_INPUT',400,'Invalid execution request');return parsed.data;}
 export async function requireProjectIdentity(client:TransactionClient,projectId:string,identity:unknown){
   const session=validate(identitySchema,identity);
@@ -18,11 +55,14 @@ export async function requireProjectIdentity(client:TransactionClient,projectId:
 }
 export async function requireToolGrants(client:TransactionClient,projectId:string,capabilities:string[],workspaceRoot:string){
   const project=(await client.query('SELECT primary_path FROM projects WHERE id=$1 FOR SHARE',[projectId])).rows[0];
-  const normalize=(value:string)=>process.platform==='win32'?path.resolve(value).toLowerCase():path.resolve(value);
-  if(!project?.primary_path||normalize(project.primary_path)!==normalize(workspaceRoot))throw new ExecutionBoundaryError('WORKSPACE_ROOT_MISMATCH',403,'Workspace root does not match project authority');
+  if(!project?.primary_path||normalizePath(project.primary_path)!==normalizePath(workspaceRoot))throw new ExecutionBoundaryError('WORKSPACE_ROOT_MISMATCH',403,'Workspace root does not match project authority');
   const grants=(await client.query(`SELECT capability,resource_scope FROM capability_grants WHERE project_id=$1 AND revoked_at IS NULL AND expires_at>NOW() AND capability=ANY($2::text[]) FOR SHARE`,[projectId,[...capabilities,'*']])).rows;
   for(const capability of capabilities){
-    const allowed=grants.some(grant=>(grant.capability===capability||grant.capability==='*')&&typeof grant.resource_scope?.workspaceRoot==='string'&&normalize(grant.resource_scope.workspaceRoot)===normalize(workspaceRoot));
+    const allowed=grants.some((grant: any)=>{
+      if (grant.capability !== capability && grant.capability !== '*') return false;
+      const scope = parseResourceScope(grant.resource_scope);
+      return typeof scope.workspaceRoot === 'string' && normalizePath(scope.workspaceRoot) === normalizePath(workspaceRoot);
+    });
     if(!allowed)throw new ExecutionBoundaryError('REVOKED_GRANT',403,'Scoped capability grant is missing, expired or revoked');
   }
 }

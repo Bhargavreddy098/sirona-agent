@@ -1,0 +1,98 @@
+npm notice run @sirona/desktop@1.0.0 test
+npm notice run node --test tests/*.test.mjs
+▶ Desktop Static Server & Reverse Proxy (apps/desktop/src/server.cjs)
+  ✖ Forbidden origin is rejected with 403 (34.032ms)
+  ✖ Allowed origin serves static index.html or fallback (46.7776ms)
+  ✖ Offline service worker stub is served at /sw.js (2.8239ms)
+  ✖ Canonical /health/live calls are cleanly reverse-proxied to backend (14.073ms)
+  ✖ SSE stream through reverse proxy sets X-Accel-Buffering: no (2.0999ms)
+  ✖ Unsupported HTTP methods on static routes return 405 (188.9375ms)
+✖ Desktop Static Server & Reverse Proxy (apps/desktop/src/server.cjs) (462.7311ms)
+ℹ tests 6
+ℹ suites 1
+ℹ pass 0
+ℹ fail 6
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1189.1888
+
+✖ failing tests:
+
+test at tests\desktopServer.test.mjs:56:3
+✖ Forbidden origin is rejected with 403 (34.032ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53575
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53575
+    }
+  }
+
+test at tests\desktopServer.test.mjs:63:3
+✖ Allowed origin serves static index.html or fallback (46.7776ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53575
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53575
+    }
+  }
+
+test at tests\desktopServer.test.mjs:73:3
+✖ Offline service worker stub is served at /sw.js (2.8239ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53575
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53575
+    }
+  }
+
+test at tests\desktopServer.test.mjs:83:3
+✖ Canonical /health/live calls are cleanly reverse-proxied to backend (14.073ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53575
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53575
+    }
+  }
+
+test at tests\desktopServer.test.mjs:92:3
+✖ SSE stream through reverse proxy sets X-Accel-Buffering: no (2.0999ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53575
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53575
+    }
+  }
+
+test at tests\desktopServer.test.mjs:103:3
+✖ Unsupported HTTP methods on static routes return 405 (188.9375ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:53575
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1864:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 53575
+    }
+  }

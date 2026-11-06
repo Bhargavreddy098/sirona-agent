@@ -51,10 +51,18 @@ export function readRuntimeConfig(env) {
     if (!url.username || !url.password || url.pathname.length < 2) invalid();
     host = url.hostname;
     database.connectionString = env.DATABASE_URL;
-  } else {
+  } else if (env.PGHOST !== undefined) {
     host = text(env.PGHOST);
     Object.assign(database, { host, port: integer(env.PGPORT, 5432, 1, 65535),
       database: text(env.PGDATABASE), user: text(env.PGUSER), password: text(env.PGPASSWORD) });
+  } else {
+    // Default to canonical SQLite-only persistence
+    database.driver = "sqlite";
+    database.path = env.SIRONA_DB_PATH !== undefined ? text(env.SIRONA_DB_PATH) : "./data/sirona.db";
+    database.busyTimeout = integer(env.SIRONA_SQLITE_BUSY_TIMEOUT_MS, 5000, 100, 60000);
+    database.cacheSizeMb = integer(env.SIRONA_SQLITE_CACHE_MB, 64, 1, 1024);
+    database.walMode = true;
+    host = "localhost";
   }
   // Off-host PostgreSQL is never silently sent cleartext credentials.
   if (!["localhost", "127.0.0.1", "[::1]", "::1"].includes(host) && !tls) invalid();

@@ -107,15 +107,45 @@ export const SettingsScreen: React.FC<SettingsModalProps> = ({
   const loadProvidersAndModels = async () => {
     setIsLoadingTab(true);
     try {
-      const [pRes, mRes] = await Promise.allSettled([
-        fetch("/api/provider").then((r) => (r.ok ? r.json() : null)),
-        fetch("/api/model").then((r) => (r.ok ? r.json() : null)),
+      const [pRes, cRes, mRes] = await Promise.allSettled([
+        sironaApi.providers.providers(),
+        sironaApi.providers.connections(),
+        sironaApi.providers.models(),
       ]);
-      if (pRes.status === "fulfilled" && pRes.value?.data && Array.isArray(pRes.value.data)) {
-        setProvidersList(pRes.value.data);
-      }
-      if (mRes.status === "fulfilled" && mRes.value?.data && Array.isArray(mRes.value.data)) {
-        const clean = mRes.value.data.filter((m: any) => m.name !== "Beam Free" && m.id !== "beam-free");
+
+      const conns =
+        cRes.status === "fulfilled" && cRes.value?.data
+          ? Array.isArray(cRes.value.data)
+            ? cRes.value.data
+            : (cRes.value.data as any)?.connections || []
+          : [];
+
+      // Include active environment-based provider
+      const allProviders = [
+        {
+          id: "google-env",
+          name: "Google Gemini",
+          type: "google",
+          baseUrl: "https://generativelanguage.googleapis.com",
+          isActive: true,
+          configuredFrom: "environment",
+        },
+        ...conns.map((c: any) => ({
+          id: c.id,
+          name: c.name,
+          type: c.kind || "openai_compatible",
+          baseUrl: c.baseUrl || c.base_url,
+          isActive: c.isActive !== false,
+          configuredFrom: "vault",
+        })),
+      ];
+      setProvidersList(allProviders);
+
+      if (mRes.status === "fulfilled" && mRes.value?.data) {
+        const raw =
+          (mRes.value.data as any)?.models ||
+          (Array.isArray(mRes.value.data) ? mRes.value.data : []);
+        const clean = raw.filter((m: any) => m.name !== "Beam Free" && m.id !== "beam-free");
         setModelsList(clean);
       }
     } catch {} finally {
@@ -132,57 +162,45 @@ export const SettingsScreen: React.FC<SettingsModalProps> = ({
     setProviderError("");
     setIsSavingProvider(true);
     try {
-      const res = await fetch("/api/provider", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: newProviderName.trim(),
-          type: newProviderType,
-          baseUrl: newProviderBaseUrl.trim(),
-          apiKey: newProviderApiKey.trim(),
-          models: newProviderModels.trim()
-            ? newProviderModels.split(",").map((m) => m.trim()).filter(Boolean)
-            : [newProviderName.trim()],
-        }),
+      await sironaApi.providers.saveConnection({
+        name: newProviderName.trim(),
+        kind: newProviderType,
+        baseUrl: newProviderBaseUrl.trim() || undefined,
+        apiKey: newProviderApiKey.trim() || undefined,
       });
-      if (res.ok) {
-        setIsAddingProvider(false);
-        setNewProviderName("");
-        setNewProviderBaseUrl("");
-        setNewProviderApiKey("");
-        setNewProviderModels("");
-        await loadProvidersAndModels();
-        onRefreshModels?.();
-      } else {
-        const err = await res.json().catch(() => ({}));
-        setProviderError(err.error || "Failed to save provider");
-      }
+      setIsAddingProvider(false);
+      setNewProviderName("");
+      setNewProviderBaseUrl("");
+      setNewProviderApiKey("");
+      setNewProviderModels("");
+      await loadProvidersAndModels();
+      onRefreshModels?.();
     } catch (err: any) {
-      setProviderError(err.message || "Failed to save provider");
+      setProviderError(err.message || "Failed to save provider connection");
     } finally {
       setIsSavingProvider(false);
     }
   };
 
   const handleDeleteProvider = async (id: string, name: string) => {
-    if (!window.confirm(`Remove provider "${name}" and its associated models?`)) return;
+    if (id === "google-env") {
+      alert("Google Gemini is configured via environment variable (GEMINI_API_KEY) in apps/server/.env");
+      return;
+    }
+    if (!window.confirm(`Remove provider "${name}"?`)) return;
     try {
-      const res = await fetch(`/api/provider/${id}`, { method: "DELETE" });
-      if (res.ok) {
-        await loadProvidersAndModels();
-        onRefreshModels?.();
-      }
+      await sironaApi.providers.removeConnection(id);
+      await loadProvidersAndModels();
+      onRefreshModels?.();
     } catch {}
   };
 
   const handleDeleteModel = async (id: string, name: string) => {
     if (!window.confirm(`Remove model "${name}"?`)) return;
     try {
-      const res = await fetch(`/api/model/${encodeURIComponent(id)}`, { method: "DELETE" });
-      if (res.ok) {
-        await loadProvidersAndModels();
-        onRefreshModels?.();
-      }
+      await sironaApi.providers.removeConnection(id).catch(() => {});
+      await loadProvidersAndModels();
+      onRefreshModels?.();
     } catch {}
   };
 
@@ -190,21 +208,9 @@ export const SettingsScreen: React.FC<SettingsModalProps> = ({
     e?.preventDefault();
     if (!newModelInput.trim()) return;
     try {
-      const res = await fetch("/api/model", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: newModelInput.trim(),
-          provider: "Custom",
-          providerID: "custom",
-          badge: "Custom",
-        }),
-      });
-      if (res.ok) {
-        setNewModelInput("");
-        await loadProvidersAndModels();
-        onRefreshModels?.();
-      }
+      setNewModelInput("");
+      await loadProvidersAndModels();
+      onRefreshModels?.();
     } catch {}
   };
 
@@ -225,8 +231,9 @@ export const SettingsScreen: React.FC<SettingsModalProps> = ({
       setIsLoadingTab(true);
       sironaApi.tools
         .tools()
-        .then((res) => {
-          if (res?.data) setToolsList(res.data);
+        .then((res: any) => {
+          const list = Array.isArray(res?.data) ? res.data : (res?.data?.items || []);
+          setToolsList(list);
         })
         .catch(() => {
           setToolsList([
@@ -241,13 +248,12 @@ export const SettingsScreen: React.FC<SettingsModalProps> = ({
       setIsLoadingTab(true);
       sironaApi.projects
         .list()
-        .then((res) => {
-          if (res?.data) setProjectsList(res.data);
+        .then((res: any) => {
+          const list = res?.data?.projects || (Array.isArray(res?.data) ? res.data : []);
+          setProjectsList(list);
         })
         .catch(() => {
-          setProjectsList([
-            { id: "personal-agent", name: "personal -agent", canonical: "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent", vcs: "git" },
-          ]);
+          setProjectsList([]);
         })
         .finally(() => setIsLoadingTab(false));
     } else if (activeTab === "notifications") {
@@ -803,11 +809,7 @@ export const SettingsScreen: React.FC<SettingsModalProps> = ({
                         key={model.id || model.name}
                         onClick={() => {
                           onModelChange(model.name);
-                          fetch("/api/model/default", {
-                            method: "PUT",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ name: model.name }),
-                          }).catch(() => {});
+                          sironaApi.providers.saveSettings({ primaryModel: model.id || model.name, defaultModel: model.id || model.name }).catch(() => {});
                         }}
                         className={`flex items-center justify-between p-4 rounded-xl border-2 transition-all cursor-pointer ${
                           selectedModel === model.name
@@ -818,12 +820,22 @@ export const SettingsScreen: React.FC<SettingsModalProps> = ({
                         <div className="space-y-1 min-w-0 flex-1">
                           <div className="flex items-center gap-2">
                             <span className="font-semibold text-[14px] text-v2-text-text-base truncate">{model.name}</span>
+                            <span className="text-[11px] font-mono text-v2-text-text-faint">({model.id})</span>
                             <span className="text-[11px] px-2 py-0.5 rounded-full bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 font-medium shrink-0">
                               {model.provider || "Custom"}
                             </span>
+                            {model.hasConfiguredApiKey ? (
+                              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-semibold border border-emerald-500/20">
+                                Ready
+                              </span>
+                            ) : (
+                              <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-medium border border-amber-500/20">
+                                Key Required
+                              </span>
+                            )}
                           </div>
                           <p className="text-[12px] text-v2-text-text-muted truncate">
-                            {model.desc || `Context window: ${model.limit?.context ? (model.limit.context / 1000) + 'k' : '128k'}`}
+                            {model.contextWindow ? `Context window: ${(model.contextWindow / 1000).toFixed(0)}k tokens` : `Context window: 128k tokens`}
                           </p>
                         </div>
                         <div className="flex items-center gap-2 shrink-0 ms-3">
@@ -1132,7 +1144,7 @@ export const SettingsScreen: React.FC<SettingsModalProps> = ({
                 </div>
 
                 <div className="space-y-3">
-                  {toolsList.map((t: any) => (
+                  {(Array.isArray(toolsList) ? toolsList : []).map((t: any) => (
                     <div
                       key={t.id}
                       className="flex items-center justify-between p-4 rounded-xl border border-v2-border-border-base bg-v2-background-bg-base"

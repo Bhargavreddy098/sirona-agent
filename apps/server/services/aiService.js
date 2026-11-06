@@ -12,7 +12,25 @@ import { Setting } from "../model/Setting.js";
    - Official Anthropic SDK (@anthropic-ai/sdk)
    ===================================================================== */
 
+export const MODEL_ALIASES = {
+  // Google Gemini upstream deprecation migrations
+  "gemini-2.5-flash-lite": "gemini-3.5-flash-lite",
+  "gemini-2.5-flash": "gemini-3.5-flash-lite",
+  "gemini-2.5-pro": "gemini-3.1-pro-preview",
+  "gemini-1.5-pro": "gemini-3.1-pro-preview",
+  "gemini-1.5-flash": "gemini-3.5-flash-lite",
+};
+
+export function resolveModelAlias(modelId) {
+  if (!modelId) return "gemini-3.5-flash-lite";
+  return MODEL_ALIASES[modelId] || modelId;
+}
+
 export class AIService {
+  static resolveModelAlias(modelId) {
+    return resolveModelAlias(modelId);
+  }
+
   static async getApiKey(provider) {
     const p = (provider || "").toLowerCase();
     // 1. Check desktop_settings in PostgreSQL
@@ -55,8 +73,9 @@ export class AIService {
   /**
    * Determine provider based on model identifier
    */
-  static resolveProvider(modelName = "gemini-3-flash-preview") {
-    const lower = modelName.toLowerCase();
+  static resolveProvider(modelName = "gemini-3.5-flash-lite") {
+    const resolved = resolveModelAlias(modelName);
+    const lower = (resolved || "").toLowerCase();
     if (lower.startsWith("gpt") || lower.startsWith("o1") || lower.startsWith("o3")) {
       return "openai";
     }
@@ -146,7 +165,7 @@ export class AIService {
    * Execute chat completion turn with streaming token & reasoning callbacks
    */
   static async streamTurn({
-    model = "gemini-3.5-flash",
+    model = "gemini-2.5-flash-lite",
     systemPrompt = "You are Sirona, an expert autonomous developer agent.",
     messages = [],
     reasoningEffort = "medium",
@@ -291,7 +310,7 @@ export class AIService {
         config.tools = this.formatToolsForGemini(tools);
       }
 
-      let activeModel = nativeChat ? model : ((model === "gemini-2.5-flash" || model === "gemini-3-flash-preview" || model === "gemini-2.5-pro" || model === "gemini-1.5-pro" || model === "gemini-1.5-flash") ? "gemini-3.5-flash" : (model || "gemini-3.5-flash"));
+      let activeModel = resolveModelAlias(model || "gemini-3.5-flash-lite");
 
       const maxRetries = maxTokens===undefined ? 4 : 0;
       let attempt = 0;
@@ -362,11 +381,6 @@ export class AIService {
         } catch (callErr) {
           if(signal?.aborted)throw Object.assign(new Error('Inference aborted by client'),{name:'AbortError'});
           const errMsg = callErr?.message || "";
-          if (!nativeChat && (callErr?.status === 404 || errMsg.includes("404") || errMsg.includes("not found") || errMsg.includes("no longer available")) && activeModel !== "gemini-3.5-flash") {
-            console.log(`[AIService] Model ${activeModel} unavailable, retrying with gemini-3.5-flash`);
-            activeModel = "gemini-3.5-flash";
-            continue;
-          }
           const isRateLimit = callErr?.status === 429 || errMsg.includes("429") || errMsg.includes("RESOURCE_EXHAUSTED") || errMsg.includes("Quota exceeded");
           if (isRateLimit && attempt < maxRetries) {
             attempt++;

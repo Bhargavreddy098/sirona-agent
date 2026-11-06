@@ -34,8 +34,165 @@ async function requireProjectOwnership(req, res, next) {
 }
 
 // ==========================================
-// 1. Conversation Endpoints
+// 1. Project Endpoints
 // ==========================================
+
+// POST /api/v1/projects
+router.post("/projects", sessionAuth(), async (req, res) => {
+  try {
+    const { name, description, primaryPath, directory } = req.body || {};
+    const workspaceId = req.body?.workspaceId || req.session?.workspaceId || null;
+    const project = await ProjectService.createProject({
+      workspaceId,
+      name,
+      description,
+      primaryPath: primaryPath || directory || null,
+    });
+    return res.status(201).json({
+      data: {
+        project: {
+          ...project,
+          canonical: project.primary_path || project.canonical || "",
+        },
+      },
+      meta: { requestId: req.requestId, version: project.version },
+    });
+  } catch (err) {
+    return handleError(req, res, err);
+  }
+});
+
+// GET /api/v1/projects
+router.get("/projects", sessionAuth({ requireCsrf: false }), async (req, res) => {
+  try {
+    const workspaceId = req.session?.workspaceId || null;
+    const includeArchived = req.query.includeArchived === "true";
+    const limit = parseInt(String(req.query.limit || "50"), 10);
+    const offset = parseInt(String(req.query.offset || "0"), 10);
+
+    const { projects, total } = await ProjectService.getProjects({
+      workspaceId,
+      includeArchived,
+      limit,
+      offset,
+    });
+    const formattedProjects = (projects || []).map((p) => ({
+      ...p,
+      canonical: p.primary_path || p.canonical || "",
+    }));
+    return res.status(200).json({
+      data: { projects: formattedProjects, total },
+      meta: { requestId: req.requestId },
+    });
+  } catch (err) {
+    return handleError(req, res, err);
+  }
+});
+
+// GET /api/v1/projects/:projectId
+router.get("/projects/:projectId", sessionAuth({ requireCsrf: false }), requireProjectOwnership, async (req, res) => {
+  const project = {
+    ...req.project,
+    canonical: req.project.primary_path || req.project.canonical || "",
+  };
+  return res.status(200).json({
+    data: { project },
+    meta: { requestId: req.requestId, version: project.version },
+  });
+});
+
+// PATCH /api/v1/projects/:projectId (Optimistic Locking via If-Match)
+router.patch("/projects/:projectId", sessionAuth(), requireProjectOwnership, async (req, res) => {
+  try {
+    const rawIfMatch = req.headers["if-match"];
+    const expectedVersion = typeof rawIfMatch === "string" ? rawIfMatch : null;
+    const updates = { ...(req.body || {}) };
+    if (updates.directory && !updates.primary_path) {
+      updates.primary_path = updates.directory;
+    }
+    const project = await ProjectService.updateProject(
+      req.params.projectId,
+      updates,
+      expectedVersion,
+      req.session.workspaceId
+    );
+    return res.status(200).json({
+      data: {
+        project: {
+          ...project,
+          canonical: project.primary_path || project.canonical || "",
+        },
+      },
+      meta: { requestId: req.requestId, version: project.version },
+    });
+  } catch (err) {
+    return handleError(req, res, err);
+  }
+});
+
+// POST /api/v1/projects/:projectId/archive
+router.post("/projects/:projectId/archive", sessionAuth(), requireProjectOwnership, async (req, res) => {
+  try {
+    const project = await ProjectService.archiveProject(
+      req.params.projectId,
+      req.body?.reason || "user_archived",
+      req.session.workspaceId
+    );
+    return res.status(200).json({
+      data: {
+        project: {
+          ...project,
+          canonical: project.primary_path || project.canonical || "",
+        },
+      },
+      meta: { requestId: req.requestId },
+    });
+  } catch (err) {
+    return handleError(req, res, err);
+  }
+});
+
+// ==========================================
+// 2. Conversation Endpoints
+// ==========================================
+
+// POST /api/v1/projects/:projectId/conversations
+router.post("/projects/:projectId/conversations", sessionAuth(), requireProjectOwnership, async (req, res) => {
+  try {
+    const { title, model, systemPrompt } = req.body || {};
+    const userId = req.session?.principalId || null;
+    const conversation = await ProjectService.createConversation(
+      req.params.projectId,
+      { title, model, systemPrompt, userId },
+      req.session?.workspaceId
+    );
+    return res.status(201).json({
+      data: { conversation },
+      meta: { requestId: req.requestId },
+    });
+  } catch (err) {
+    return handleError(req, res, err);
+  }
+});
+
+// GET /api/v1/projects/:projectId/conversations
+router.get("/projects/:projectId/conversations", sessionAuth({ requireCsrf: false }), requireProjectOwnership, async (req, res) => {
+  try {
+    const limit = parseInt(String(req.query.limit || "50"), 10);
+    const offset = parseInt(String(req.query.offset || "0"), 10);
+    const result = await ProjectService.getConversations(
+      req.params.projectId,
+      { limit, offset },
+      req.session?.workspaceId
+    );
+    return res.status(200).json({
+      data: result,
+      meta: { requestId: req.requestId },
+    });
+  } catch (err) {
+    return handleError(req, res, err);
+  }
+});
 
 // GET /api/v1/conversations/:conversationId
 router.get("/conversations/:conversationId", sessionAuth({ requireCsrf: false }), async (req, res) => {

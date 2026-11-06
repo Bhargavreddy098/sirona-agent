@@ -11,11 +11,33 @@ export async function reconcileTurns(id) {
 }
 
 export async function coordinateTurn(req,res) {
-  const {prompt,modelId,clientTurnId,retryOf,projectId}=req.body;
+  let {prompt,modelId,clientTurnId,retryOf,projectId}=req.body || {};
   const id=req.params.conversationId;
-  if(typeof prompt!=='string'||!prompt.trim()||prompt.length>100000||typeof modelId!=='string'||!modelId.trim()||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(clientTurnId??'')) throw conversationError(400,'Prompt, registry modelId and UUID clientTurnId are required');
+  if(typeof prompt!=='string'||!prompt.trim()||prompt.length>100000) throw conversationError(400,'Prompt is required and must be non-empty string under 100000 characters');
+
+  if(!modelId) {
+    const sessionRes=await query('SELECT model,project_id FROM sessions WHERE id=$1',[id]);
+    if(sessionRes.rows.length && sessionRes.rows[0].model) {
+      modelId=sessionRes.rows[0].model;
+      if(!projectId && sessionRes.rows[0].project_id) {
+        projectId=sessionRes.rows[0].project_id;
+      }
+    }
+  }
+
+  if(typeof modelId!=='string'||!modelId.trim()) throw conversationError(400,'Select an exact registered model identifier');
+
+  if(!clientTurnId) {
+    clientTurnId=crypto.randomUUID();
+  } else if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(clientTurnId)) {
+    throw conversationError(400,'UUID clientTurnId must be a valid UUID');
+  }
+
   const model=await ProviderService.getModelById(modelId);
-  if(!model||model.id!==modelId)throw conversationError(400,'Select an exact registered model identifier');
+  if(!model||(model.id!==modelId && model.name!==modelId))throw conversationError(400,'Select an exact registered model identifier');
+  const canonicalModelId = model.id;
+
+  const isSse = req.headers.accept?.includes('text/event-stream') || req.body?.stream === true;
   let token,renewal=Promise.resolve(),timer;
   const ownerId=`desktop:${crypto.randomUUID()}`;
   const controller=new AbortController();
@@ -27,7 +49,10 @@ export async function coordinateTurn(req,res) {
     // Every request gets a distinct holder; the existing transactional lease is the writer lock.
     // Do not reserve a pool connection for the stream: that can starve concurrent conversations.
     try {token=await SessionTurnLeaseRegistry.acquireLease(id,{ownerId,ttlSeconds:90});}
-    catch(error){if(error.code==='23505')throw conversationError(409,'Another turn acquired this conversation.','TURN_LEASE_CONFLICT');throw error;}
+    catch(error){
+      if(error.code==='23505'||error.status===409||error.code==='TURN_LEASE_CONFLICT')throw conversationError(409,'Another turn acquired this conversation.','TURN_LEASE_CONFLICT');
+      throw error;
+    }
     const previous=await query('SELECT role,status,content FROM messages WHERE session_id=$1 AND client_turn_id=$2 ORDER BY id',[id,clientTurnId]);
     if(previous.rows.length) {
       throw conversationError(409,'This request was already recorded. Reopen its saved result or explicitly retry the failed turn.');
@@ -46,22 +71,64 @@ export async function coordinateTurn(req,res) {
     },20000);
     res.on('close',close);
     if(res.destroyed)controller.abort();
-    res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-cache, no-transform','X-Accel-Buffering':'no'});
-    res.flushHeaders();
-    const heartbeat=setInterval(()=>{if(!res.destroyed)res.write(': heartbeat\n\n');},10000);
+
+    let heartbeat;
+    if(isSse) {
+      res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-cache, no-transform','X-Accel-Buffering':'no'});
+      res.flushHeaders?.();
+      heartbeat=setInterval(()=>{if(!res.destroyed)res.write(': heartbeat\n\n');},10000);
+    }
+
     try {
-      await query('UPDATE sessions SET model=$2,project_id=COALESCE($3,project_id),last_activity_at=NOW() WHERE id=$1',[id,modelId,projectId||null]);
+      await query('UPDATE sessions SET model=$2,project_id=COALESCE($3,project_id),last_activity_at=NOW() WHERE id=$1',[id,canonicalModelId,projectId||null]);
       const adapter=process.env.SIRONA_PROVIDER_ADAPTER;
-      const result=await ProviderService.executeTurn({conversationId:id,prompt,modelId,actorId:req.session.principalId,leaseOwner:ownerId,clientTurnId,retryUserMessageId,nativeChat:true,signal:controller.signal,onToken:token=>emit({type:'token',token}),adapter,projectId});
-      completed=true;emit({type:'done',...result});
+      const collectedTokens=[];
+      const result=await ProviderService.executeTurn({
+        conversationId:id,
+        prompt,
+        modelId:canonicalModelId,
+        actorId:req.session?.principalId,
+        leaseOwner:ownerId,
+        clientTurnId,
+        retryUserMessageId,
+        nativeChat:true,
+        signal:controller.signal,
+        onToken:token=>{
+          if(isSse) {
+            emit({type:'token',token});
+          } else {
+            collectedTokens.push(token);
+          }
+        },
+        adapter,
+        projectId
+      });
+      completed=true;
+      if(isSse) {
+        emit({type:'done',...result});
+      } else {
+        return res.status(200).json({
+          data:{
+            ...result,
+            tokens:collectedTokens,
+          },
+          meta:{requestId:req.requestId}
+        });
+      }
     } catch(error) {
-      const detail=error.status===503?'The model provider is unavailable (HTTP 503). Retry this turn or choose another configured model.':error.status===429?'The model provider rate limit was reached (HTTP 429). Wait for its reset or choose another model.':error.status===401?'Provider authentication failed (HTTP 401). Update the connection in Model Providers.':error.message;
-      emit({type:'error',error:detail,code:error.code??'TURN_FAILED',status:error.status??500});
-    } finally {clearInterval(heartbeat);}
+      if(isSse) {
+        const detail=error.status===503?'The model provider is unavailable (HTTP 503). Retry this turn or choose another configured model.':error.status===429?'The model provider rate limit was reached (HTTP 429). Wait for its reset or choose another model.':error.status===401?'Provider authentication failed (HTTP 401). Update the connection in Model Providers.':error.message;
+        emit({type:'error',error:detail,code:error.code??'TURN_FAILED',status:error.status??500});
+      } else {
+        throw error;
+      }
+    } finally {
+      if(heartbeat) clearInterval(heartbeat);
+    }
   } finally {
     clearInterval(timer);await renewal;
     res.off('close',close);
     if(token)await SessionTurnLeaseRegistry.releaseLease(id,{ownerId,generation:token.generation}).catch(()=>{});
-    if(res.headersSent&&!res.destroyed&&!res.writableEnded)res.end();
+    if(isSse&&res.headersSent&&!res.destroyed&&!res.writableEnded)res.end();
   }
 }

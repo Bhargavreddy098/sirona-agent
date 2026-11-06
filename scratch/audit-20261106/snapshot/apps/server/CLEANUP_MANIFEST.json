@@ -1,0 +1,84 @@
+{
+  "source_archive": "backend.zip",
+  "date": "2026-10-28",
+  "retired_source_files": [
+    "routes/approval.routes.js",
+    "routes/audit.routes.js",
+    "routes/auth.routes.js",
+    "routes/files.routes.js",
+    "routes/git.routes.js",
+    "routes/models.routes.js",
+    "routes/session.routes.js",
+    "routes/settings.routes.js",
+    "routes/tools.routes.js",
+    "controllers/approvalController.js",
+    "controllers/auditController.js",
+    "controllers/authController.js",
+    "controllers/chatController.js",
+    "controllers/filesController.js",
+    "controllers/gitController.js",
+    "controllers/modelsController.js",
+    "controllers/sessionController.js",
+    "controllers/settingsController.js",
+    "controllers/toolsController.js",
+    "middleware/ownershipGuard.js",
+    "middleware/userAuth.js",
+    "middleware/validate.js",
+    "model/Approval.js",
+    "model/AuditLog.js",
+    "model/Checkpoint.js",
+    "model/Project.js",
+    "model/User.js",
+    "config/origins.js",
+    "config/s3.js",
+    "middleware/upload.js",
+    "services/auditLogger.js",
+    "services/cacheService.js",
+    "services/emailService.js",
+    "services/notificationDispatcher.js",
+    "services/queues/emailQueue.js"
+  ],
+  "retired_test_files": [
+    "tests/mail.test.js"
+  ],
+  "excluded_sensitive_files": [
+    ".env"
+  ],
+  "modified_files": [
+    "routes/index.js",
+    "tests/database.test.js",
+    "tests/fixtures/admission-probe.js",
+    "tests/admission.test.js",
+    "package.json",
+    "package-lock.json"
+  ],
+  "preserved": [
+    "routes/v1/",
+    "foundation/",
+    "migrations/",
+    "services/agentExecutionEngine.js",
+    "services/aiService.js",
+    "services/providerService.js",
+    "services/turnLeaseService.js"
+  ],
+  "retired_npm_direct_dependencies": [
+    "@aws-sdk/client-s3",
+    "axios",
+    "bcryptjs",
+    "cookie",
+    "express-rate-limit",
+    "google-auth-library",
+    "joi",
+    "jsonwebtoken",
+    "multer",
+    "multer-s3",
+    "uuid"
+  ],
+  "verification": {
+    "javascript_syntax": "115 files checked, 0 failures",
+    "backend_test_runner": "1 test passed, 0 failed",
+    "static_guards": "35 retired source paths absent; canonical routes retained; .env excluded; package-lock dependencies synchronized",
+    "full_backend_e2e_tests": "NOT RUN: dependencies and PostgreSQL/provider services unavailable",
+    "external_frontend_tool_dependency": "Legacy backend lint/AST scripts still reference frontend/sirona/node_modules"
+  }
+}

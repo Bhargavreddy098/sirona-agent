@@ -1,0 +1,31 @@
+npm notice run @sirona/web@0.1.0 test
+npm notice run node --test tests/*.test.mjs
+✔ Route coverage manifest exists and covers all 170 inventory endpoints (12.6998ms)
+✔ All 16 domain API clients are defined and correctly structured (4.3761ms)
+▶ Phase 7: Monaco Editor & Diff Review Store
+  ✔ detectLanguage maps file extensions to correct Monaco language identifiers (3.3078ms)
+  ✔ opening tabs manages active selection and avoids duplicate tab entries (4.3751ms)
+  ✔ openDiff populates active diff and initial file selection (0.7131ms)
+✔ Phase 7: Monaco Editor & Diff Review Store (11.6285ms)
+▶ Phase 7: Accept and Reject Interaction Workflows
+  ✔ Accept workflow submits approval then invokes atomic patch apply with Idempotency-Key (1.0291ms)
+  ✔ Reject workflow records rejection in DB and executes zero filesystem writes (0.55ms)
+  ✔ Handles BASE_SNAPSHOT_MISMATCH (409) without corrupting workspace state (0.6479ms)
+  ✔ Handles WORKSPACE_BUSY (409) when advisory lock is held by another process (0.6633ms)
+✔ Phase 7: Accept and Reject Interaction Workflows (4.3022ms)
+✔ run SSE preserves named events, split UTF-8 and 64-bit decimal cursors (96.6499ms)
+✔ run SSE discards replayed IDs and comments without inventing events (2.0189ms)
+✔ run SSE rejects malformed cursor, oversized payload and named server errors (29.5581ms)
+✔ SSE handles split JSON, CRLF, comments, and multiple events (85.7118ms)
+✔ SSE rejects missing completion rather than claiming success (1.8024ms)
+✔ SSE propagates a backend error (0.9912ms)
+✔ SSE respects cancellation (1.2092ms)
+✔ SSE preserves Unicode when a UTF-8 character spans network chunks (3.7142ms)
+ℹ tests 17
+ℹ suites 2
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 597.4945

@@ -60,7 +60,6 @@
     "helmet": "^8.1.0",
     "ioredis": "^5.11.1",
     "openai": "^4.85.0",
-    "pg": "^8.13.1",
     "pino": "10.4.0",
     "pino-http": "11.0.0",
     "rate-limiter-flexible": "^9.0.0",
@@ -79,7 +78,6 @@
   "packageManager": "npm@12.0.2",
   "devDependencies": {
     "@types/node": "24.19.2",
-    "@types/pg": "8.23.1",
     "typescript": "6.0.3"
   }
 }

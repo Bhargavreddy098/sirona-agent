@@ -102,14 +102,24 @@ async function request<T>(path: string, config: RequestConfig = {}): Promise<T> 
 // 1. Identity, Session & Workspace
 // -------------------------------------------------------------
 export const identityApi = {
-  bootstrap: (body: { challenge?: string; clientNonce?: string } = {}) =>
-    request<{ data: { principalId: string; workspaceId: string; csrfToken: string } }>(
+  bootstrap: async (body: { challenge?: string; clientNonce?: string } = {}) => {
+    if (typeof (window as any)?.sirona?.bootstrap === "function") {
+      try {
+        const data = await (window as any).sirona.bootstrap();
+        if (data?.csrfToken) setCsrfToken(data.csrfToken);
+        return { data };
+      } catch (err) {
+        console.warn("[Sirona] Desktop bootstrap fallback:", err);
+      }
+    }
+    return request<{ data: { principalId: string; workspaceId: string; csrfToken: string } }>(
       "/api/v1/session/bootstrap",
       { method: "POST", body }
     ).then((res) => {
       if (res?.data?.csrfToken) setCsrfToken(res.data.csrfToken);
       return res;
-    }),
+    });
+  },
   session: () =>
     request<{ data: { principalId: string; workspaceId: string } }>("/api/v1/session"),
   logout: () =>
@@ -124,26 +134,36 @@ export const identityApi = {
 // 2. Conversations & Messaging
 // -------------------------------------------------------------
 export const conversationsApi = {
-  list: () =>
-    request<{ data: Array<{ id: string; title: string; model?: string; updatedAt: number }> }>(
-      "/api/v1/conversations"
-    ),
-  create: (body: { title?: string; model?: string; projectId?: string }) =>
-    request<{ data: { id: string; title: string; model?: string } }>("/api/v1/conversations", {
-      method: "POST",
-      body,
+  list: (scope: string = "standalone") =>
+    request<{ data: { sessions: Array<{ id: string; title: string; model?: string; last_activity_at?: string; created_at?: string }> } | Array<{ id: string; title: string; model?: string }> }>(
+      `/api/v1/conversations?scope=${scope}`
+    ).then((res) => {
+      // Normalize whether server replied with { sessions: [...] } or array
+      const sessions = (res as any)?.data?.sessions || (Array.isArray(res?.data) ? res.data : []);
+      return { data: sessions };
     }),
+  create: (body: { title?: string; modelId?: string; model?: string; projectId?: string }) => {
+    const payload = {
+      title: body.title || "New chat",
+      modelId: body.modelId || body.model || "gemini-2.5-flash-lite",
+      projectId: body.projectId || null,
+    };
+    return request<{ data: { conversation: { id: string; title: string; model?: string } } }>("/api/v1/conversations", {
+      method: "POST",
+      body: payload,
+    });
+  },
   get: (id: string) =>
     request<{ data: { id: string; title: string; model?: string } }>(`/api/v1/conversations/${id}`),
-  update: (id: string, body: { title?: string; model?: string }) =>
+  update: (id: string, body: { title?: string; model?: string; modelId?: string }) =>
     request<{ data: { id: string; title: string; model?: string } }>(`/api/v1/conversations/${id}`, {
       method: "PATCH",
-      body,
+      body: { title: body.title, modelId: body.modelId || body.model },
     }),
   remove: (id: string) =>
     request<{ ok: boolean }>(`/api/v1/conversations/${id}`, { method: "DELETE" }),
   messages: (id: string) =>
-    request<{ data: Array<{ id: string; role: string; content: string; createdAt: number }> }>(
+    request<{ data: Array<{ id: string; role: string; content: string; status?: string; created_at?: string; createdAt?: number }> }>(
       `/api/v1/conversations/${id}/messages`
     ),
   postMessage: (id: string, body: { content: string; role?: string }) =>
@@ -153,14 +173,28 @@ export const conversationsApi = {
     ),
   streamTurns: (
     id: string,
-    body: { prompt: string; model?: string },
+    body: { prompt: string; model?: string; modelId?: string; clientTurnId?: string; projectId?: string },
     callbacks: {
       onToken?: (text: string) => void;
       onError?: (err: any) => void;
-      onDone?: () => void;
+      onDone?: (result?: any) => void;
     }
   ) => {
     const controller = new AbortController();
+    const effectiveTurnId =
+      body.clientTurnId ||
+      (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+        ? crypto.randomUUID()
+        : "00000000-0000-4000-8000-" + Date.now().toString().padStart(12, "0").slice(-12));
+
+    const payload = {
+      coordinateLease: true,
+      prompt: body.prompt,
+      modelId: body.modelId || body.model || "gemini-2.5-flash-lite",
+      clientTurnId: effectiveTurnId,
+      projectId: body.projectId || null,
+    };
+
     fetch(`/api/v1/conversations/${id}/turns`, {
       method: "POST",
       headers: {
@@ -168,30 +202,51 @@ export const conversationsApi = {
         Accept: "text/event-stream",
         ...(csrfTokenCache ? { "X-CSRF-Token": csrfTokenCache } : {}),
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(payload),
       signal: controller.signal,
       credentials: "include",
     })
       .then(async (res) => {
-        if (!res.ok) throw new Error(`Turn stream failed: ${res.status}`);
+        if (!res.ok) {
+          let errDetail = `Turn stream failed with status ${res.status}`;
+          try {
+            const errJson = await res.json();
+            errDetail = errJson?.detail || errJson?.error || errJson?.title || errDetail;
+          } catch {}
+          throw new Error(errDetail);
+        }
         const reader = res.body?.getReader();
         if (!reader) return;
         const decoder = new TextDecoder();
+        let buffer = "";
+
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-          const chunk = decoder.decode(value);
-          const lines = chunk.split("\n");
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n");
+          buffer = lines.pop() || "";
+
           for (const line of lines) {
-            if (line.startsWith("data: ")) {
-              const dataStr = line.slice(6).trim();
+            const trimmed = line.trim();
+            if (!trimmed || trimmed.startsWith(":")) continue; // heartbeat or empty
+            if (trimmed.startsWith("data: ")) {
+              const dataStr = trimmed.slice(6).trim();
               if (dataStr === "[DONE]") {
                 callbacks.onDone?.();
                 return;
               }
               try {
                 const parsed = JSON.parse(dataStr);
-                callbacks.onToken?.(parsed.delta || parsed.text || "");
+                if (parsed.type === "token") {
+                  callbacks.onToken?.(parsed.token || "");
+                } else if (parsed.type === "done") {
+                  callbacks.onDone?.(parsed);
+                } else if (parsed.type === "error") {
+                  callbacks.onError?.(new Error(parsed.error || "Turn execution failed"));
+                } else if (parsed.delta || parsed.text) {
+                  callbacks.onToken?.(parsed.delta || parsed.text || "");
+                }
               } catch {
                 callbacks.onToken?.(dataStr);
               }
@@ -212,20 +267,20 @@ export const conversationsApi = {
 // -------------------------------------------------------------
 export const projectsApi = {
   list: () =>
-    request<{ data: Array<{ id: string; name: string; canonical: string; updatedAt: number }> }>(
+    request<{ data: { projects: Array<{ id: string; name: string; canonical: string; primary_path?: string; updatedAt?: number }>; total: number } }>(
       "/api/v1/projects"
     ),
-  create: (body: { name: string; directory: string }) =>
-    request<{ data: { id: string; name: string } }>("/api/v1/projects", { method: "POST", body }),
+  create: (body: { name: string; directory?: string; primaryPath?: string; description?: string }) =>
+    request<{ data: { project: { id: string; name: string; canonical?: string; primary_path?: string } } }>("/api/v1/projects", { method: "POST", body }),
   get: (id: string) =>
-    request<{ data: { id: string; name: string; canonical: string } }>(`/api/v1/projects/${id}`),
-  update: (id: string, body: { name?: string; directory?: string }) =>
-    request<{ data: { id: string; name: string } }>(`/api/v1/projects/${id}`, {
+    request<{ data: { project: { id: string; name: string; canonical: string; primary_path?: string } } }>(`/api/v1/projects/${id}`),
+  update: (id: string, body: { name?: string; directory?: string; primary_path?: string; description?: string }) =>
+    request<{ data: { project: { id: string; name: string } } }>(`/api/v1/projects/${id}`, {
       method: "PATCH",
       body,
     }),
   archive: (id: string) =>
-    request<{ ok: boolean }>(`/api/v1/projects/${id}/archive`, { method: "POST" }),
+    request<{ data: { project: any } }>(`/api/v1/projects/${id}/archive`, { method: "POST" }),
   conversations: (id: string) =>
     request<{ data: Array<{ id: string; title: string }> }>(`/api/v1/projects/${id}/conversations`),
   snapshots: (id: string) =>
@@ -469,18 +524,36 @@ export const governanceApi = {
 // -------------------------------------------------------------
 export const providersApi = {
   providers: () =>
-    request<{ data: Array<{ id: string; name: string; enabled: boolean; configured: boolean }> }>(
+    request<{ data: { providers: Array<{ id: string; name: string }> } | Array<{ id: string; name: string }> }>(
       "/api/v1/providers"
-    ),
+    ).then((res) => {
+      const providers = (res as any)?.data?.providers || (Array.isArray(res?.data) ? res.data : []);
+      return { data: providers };
+    }),
   connections: () =>
-    request<{ data: Array<{ id: string; providerId: string; name: string; active: boolean }> }>(
+    request<{ data: { connections: Array<{ id: string; kind: string; name: string; baseUrl?: string; isActive: boolean; hasApiKey: boolean }> } | Array<any> }>(
       "/api/v1/provider-connections"
-    ),
-  saveConnection: (body: { providerId: string; name: string; apiKey: string; baseUrl?: string }) =>
-    request<{ data: { id: string; providerId: string; name: string } }>(
+    ).then((res) => {
+      const connections = (res as any)?.data?.connections || (Array.isArray(res?.data) ? res.data : []);
+      return { data: connections };
+    }),
+  saveConnection: async (body: { kind?: string; providerId?: string; name: string; apiKey?: string; baseUrl?: string; isActive?: boolean }) => {
+    const payload = {
+      kind: body.kind || body.providerId || "openai_compatible",
+      name: body.name,
+      apiKey: body.apiKey,
+      baseUrl: body.baseUrl,
+      isActive: body.isActive !== false,
+    };
+    if (typeof (window as any)?.sirona?.saveConnection === "function") {
+      const connection = await (window as any).sirona.saveConnection(payload);
+      return { data: { connection } };
+    }
+    return request<{ data: { connection: any } }>(
       "/api/v1/provider-connections",
-      { method: "POST", body }
-    ),
+      { method: "POST", body: payload }
+    );
+  },
   updateConnection: (id: string, body: { name?: string; apiKey?: string; active?: boolean }) =>
     request<{ data: { id: string; name: string } }>(`/api/v1/provider-connections/${id}`, {
       method: "PATCH",
@@ -499,13 +572,13 @@ export const providersApi = {
       { method: "POST" }
     ),
   settings: () =>
-    request<{ data: { defaultModel: string; temperature?: number; reasoningEffort?: string } }>(
+    request<{ data: { defaultModel?: string; primaryModel?: string; temperature?: number; reasoningEffort?: string } }>(
       "/api/v1/model-settings"
     ),
-  saveSettings: (body: { defaultModel?: string; temperature?: number; reasoningEffort?: string }) =>
+  saveSettings: (body: { defaultModel?: string; primaryModel?: string; temperature?: number; reasoningEffort?: string }) =>
     request<{ ok: boolean }>("/api/v1/model-settings", { method: "PATCH", body }),
   models: () =>
-    request<{ data: Array<{ id: string; name: string; provider: string; isDefault?: boolean }> }>(
+    request<{ data: { models: Array<{ id: string; name: string; provider: string; hasConfiguredApiKey: boolean; isDefault?: boolean; contextWindow?: number }>; connections: any[] } }>(
       "/api/v1/models"
     ),
   verifyModel: (body: { modelId: string }) =>
@@ -520,9 +593,12 @@ export const providersApi = {
 // -------------------------------------------------------------
 export const toolsApi = {
   tools: () =>
-    request<{ data: Array<{ id: string; name: string; description: string; requiresApproval: boolean }> }>(
+    request<{ data: { items?: Array<{ id: string; name: string; description: string; requiresApproval: boolean }>; total?: number } | Array<any> }>(
       "/api/v1/tools"
-    ),
+    ).then((res) => {
+      const items = (res as any)?.data?.items || (Array.isArray(res?.data) ? res.data : []);
+      return { data: items };
+    }),
   tool: (id: string) =>
     request<{ data: { id: string; name: string; schema: any } }>(`/api/v1/tools/${id}`),
   invokeTool: (body: { toolId: string; arguments: any; projectId?: string }) =>

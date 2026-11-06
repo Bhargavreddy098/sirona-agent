@@ -2,19 +2,31 @@ import { DatabaseSync } from 'node:sqlite';
 import path from 'node:path';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
+
+const moduleDir = path.dirname(fileURLToPath(import.meta.url));
+const serverRootDir = path.resolve(moduleDir, '..');
 
 let db = null;
 let activeOwner = null;
 
 export function getDbPath() {
-  if (process.env.SIRONA_DB_PATH) return process.env.SIRONA_DB_PATH;
-  const baseDir = process.env.APPDATA
-    ? path.join(process.env.APPDATA, 'SironaNext')
-    : path.join(process.cwd(), 'data');
-  if (!fs.existsSync(baseDir)) {
-    fs.mkdirSync(baseDir, { recursive: true });
+  let target;
+  if (process.env.SIRONA_DB_PATH) {
+    target = path.isAbsolute(process.env.SIRONA_DB_PATH)
+      ? process.env.SIRONA_DB_PATH
+      : path.resolve(serverRootDir, process.env.SIRONA_DB_PATH);
+  } else {
+    const baseDir = process.env.APPDATA
+      ? path.join(process.env.APPDATA, 'SironaNext')
+      : path.join(serverRootDir, 'data');
+    target = path.join(baseDir, 'sirona.db');
   }
-  return path.join(baseDir, 'sirona.db');
+  const dir = path.dirname(target);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  return target;
 }
 
 export function initDatabase() {
@@ -242,10 +254,13 @@ export function initDatabase() {
       id TEXT PRIMARY KEY DEFAULT ${UUID_EXPR},
       project_id TEXT REFERENCES projects(id) ON DELETE CASCADE,
       filename TEXT NOT NULL,
-      mime_type TEXT,
-      size_bytes INTEGER NOT NULL DEFAULT 0,
-      storage_path TEXT NOT NULL,
-      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+      media_type TEXT NOT NULL DEFAULT 'application/octet-stream',
+      byte_size INTEGER NOT NULL DEFAULT 0,
+      digest TEXT,
+      status TEXT NOT NULL DEFAULT 'pending',
+      storage_path TEXT DEFAULT '',
+      created_at TEXT NOT NULL DEFAULT (datetime('now')),
+      completed_at TEXT
     );
 
     -- 11. Governance, Grants & Budgets
@@ -264,6 +279,7 @@ export function initDatabase() {
       capability TEXT NOT NULL,
       resource_scope TEXT NOT NULL,
       expires_at TEXT NOT NULL,
+      revoked_at TEXT,
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
 
@@ -652,6 +668,19 @@ export function initDatabase() {
       status TEXT NOT NULL DEFAULT 'completed',
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
+
+    CREATE TABLE IF NOT EXISTS knowledge.context_bundles (
+      id TEXT PRIMARY KEY DEFAULT ${UUID_EXPR},
+      project_id TEXT NOT NULL,
+      run_id TEXT,
+      task_id TEXT,
+      digest TEXT NOT NULL,
+      source_revision_refs TEXT NOT NULL DEFAULT '[]',
+      token_estimate INTEGER NOT NULL DEFAULT 0,
+      classification TEXT NOT NULL DEFAULT 'internal',
+      bundle_data TEXT NOT NULL DEFAULT '{}',
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
   `);
 
   // Safe schema evolutions for existing databases
@@ -660,10 +689,58 @@ export function initDatabase() {
   try { db.exec('ALTER TABLE sessions ADD COLUMN chat_scope TEXT NOT NULL DEFAULT "project";'); } catch {}
   try { db.exec('ALTER TABLE messages ADD COLUMN client_turn_id TEXT;'); } catch {}
   try { db.exec('ALTER TABLE messages ADD COLUMN status TEXT DEFAULT "completed";'); } catch {}
+  try {
+    const upCols = db.prepare("PRAGMA table_info(uploads)").all();
+    const mediaTypeCol = upCols.find(c => c.name === 'media_type');
+    if (!mediaTypeCol) {
+      db.exec("PRAGMA foreign_keys = OFF;");
+      db.exec(`
+        CREATE TABLE uploads_rebuild (
+          id TEXT PRIMARY KEY DEFAULT ${UUID_EXPR},
+          project_id TEXT REFERENCES projects(id) ON DELETE CASCADE,
+          filename TEXT NOT NULL,
+          media_type TEXT NOT NULL DEFAULT 'application/octet-stream',
+          byte_size INTEGER NOT NULL DEFAULT 0,
+          digest TEXT,
+          status TEXT NOT NULL DEFAULT 'pending',
+          storage_path TEXT DEFAULT '',
+          created_at TEXT NOT NULL DEFAULT (datetime('now')),
+          completed_at TEXT
+        );
+      `);
+      try {
+        db.exec(`
+          INSERT INTO uploads_rebuild (id, project_id, filename, media_type, byte_size, storage_path, created_at)
+          SELECT id, project_id, filename, COALESCE(mime_type, 'application/octet-stream'), COALESCE(size_bytes, 0), COALESCE(storage_path, ''), created_at
+          FROM uploads;
+        `);
+      } catch {}
+      db.exec("DROP TABLE uploads;");
+      db.exec("ALTER TABLE uploads_rebuild RENAME TO uploads;");
+      db.exec("CREATE INDEX IF NOT EXISTS idx_uploads_project ON uploads(project_id, created_at DESC);");
+      db.exec("PRAGMA foreign_keys = ON;");
+    }
+  } catch {}
+
+  // Register session_valid function for compatibility
+  try {
+    db.function('session_valid', (sessionId) => {
+      if (!sessionId) return 0;
+      const row = db.prepare("SELECT expires_at, revoked_at FROM auth_sessions WHERE id = ?").get(String(sessionId));
+      if (!row || row.revoked_at) return 0;
+      const expires = String(row.expires_at).includes("T")
+        ? (String(row.expires_at).endsWith("Z") ? row.expires_at : `${row.expires_at}Z`)
+        : `${String(row.expires_at).replace(" ", "T")}Z`;
+      return (new Date(expires).getTime() > Date.now()) ? 1 : 0;
+    });
+  } catch {}
 
   // Seed baseline models
   const seedModels = [
     ['auto', 'openai_compatible', 'Auto', 128000, 8192, 0, 0],
+    ['gemini-3.5-flash-lite', 'google', 'Gemini 3.5 Flash Lite', 1048576, 8192, 75000, 300000],
+    ['gemini-3.5-flash', 'google', 'Gemini 3.5 Flash', 1048576, 8192, 100000, 400000],
+    ['gemini-3.1-pro-preview', 'google', 'Gemini 3.1 Pro', 2097152, 8192, 1250000, 5000000],
     ['gemini-2.5-flash', 'google', 'Gemini 2.5 Flash', 1048576, 8192, 100000, 400000],
     ['gemini-1.5-pro', 'google', 'Gemini 1.5 Pro', 2097152, 8192, 1250000, 5000000],
     ['gemini-flash-lite-latest', 'google', 'Gemini Flash Lite', 1048576, 8192, 75000, 300000],
@@ -681,6 +758,11 @@ export function initDatabase() {
   for (const m of seedModels) {
     insertModel.run(...m);
   }
+
+  // Ensure modern verified models exist and legacy discontinued models are marked unavailable
+  try {
+    db.prepare("UPDATE models SET is_available = 0 WHERE id = 'gemini-1.5-pro'").run();
+  } catch {}
 
   // Seed initial model settings if absent
   db.prepare(`
@@ -712,7 +794,15 @@ export function initDatabase() {
  * Translates PostgreSQL-specific syntax into SQLite equivalents.
  */
 export function translateSql(sql) {
-  let s = sql;
+  if (typeof sql === "object" && sql !== null) {
+    sql = sql.text || sql.sql || String(sql);
+  }
+  let s = typeof sql === "string" ? sql : String(sql || "");
+  // Handle PostgreSQL JSONB ? existence operator before parameter translation
+  s = s.replace(/(\b[a-zA-Z0-9_.]+\b)\s*\?\s*'([^']+)'/g, "json_extract($1, '$.$2') IS NOT NULL");
+  // Handle PostgreSQL = ANY($N::type[]) before parameter translation
+  s = s.replace(/([a-zA-Z0-9_.]+)\s*=\s*ANY\s*\(\s*\$(\d+)(?:::[\w\[\]]+)?\s*\)/gi, "$1 IN (SELECT value FROM json_each(\$$2))");
+  s = s.replace(/([a-zA-Z0-9_.]+)\s*=\s*ANY\s*\(\s*\?(\d+)(?:::[\w\[\]]+)?\s*\)/gi, "$1 IN (SELECT value FROM json_each(?$2))");
   // Convert Postgres positional parameter notation ($1, $2, ...) to SQLite numbered params (?1, ?2, ...)
   s = s.replace(/\$(\d+)/g, '?$1');
   // Handle UPDATE table alias syntax (PostgreSQL UPDATE tablename alias SET -> SQLite UPDATE tablename AS alias SET)
@@ -720,10 +810,36 @@ export function translateSql(sql) {
   // Strip PostgreSQL advisory/table locks and session settings
   s = s.replace(/\bLOCK TABLE\b[^;]+;/gi, '');
   s = s.replace(/\bSET LOCAL\b[^;]+;/gi, '');
+  // Custom functions
+  s = s.replace(/control\.session_valid\(/gi, "session_valid(");
   // Date and Time functions
-  s = s.replace(/\bNOW\(\)/gi, "datetime('now')");
-  s = s.replace(/NOW\(\)\s*\+\s*\(\s*\?(\d+)\s*\*\s*INTERVAL\s*'1 second'\s*\)/gi, "datetime('now', '+' || ?$1 || ' seconds')");
-  s = s.replace(/\bCURRENT_TIMESTAMP\b/gi, "datetime('now')");
+  s = s.replace(/NOW\(\)\s*\+\s*\(\s*\?(\d+)\s*\*\s*INTERVAL\s*'1 second'\s*\)/gi, "strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '+' || ?$1 || ' seconds')");
+  s = s.replace(/NOW\(\)\s*\+\s*INTERVAL\s*'([^']+)'/gi, "strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '+$1')");
+  s = s.replace(/datetime\('now'\)\s*\+\s*INTERVAL\s*'([^']+)'/gi, "strftime('%Y-%m-%dT%H:%M:%SZ', 'now', '+$1')");
+  s = s.replace(/\bNOW\(\)/gi, "strftime('%Y-%m-%dT%H:%M:%SZ', 'now')");
+  s = s.replace(/\bCURRENT_TIMESTAMP\b/gi, "strftime('%Y-%m-%dT%H:%M:%SZ', 'now')");
+  // Handle PostgreSQL INSERT ... VALUES (..., default, ...)
+  s = s.replace(/\bINSERT\s+INTO\s+([^\s(]+)\s*\(([^)]+)\)\s*VALUES\s*\(([^)]+)\)/gi, (match, table, colsStr, valsStr) => {
+    const cols = colsStr.split(',').map(c => c.trim().replace(/^["`]|["`]$/g, ''));
+    const vals = valsStr.split(',').map(v => v.trim());
+    if (cols.length === vals.length && vals.some(v => v.toLowerCase() === 'default')) {
+      const newVals = vals.map((v, i) => {
+        if (v.toLowerCase() === 'default') {
+          const col = cols[i].toLowerCase();
+          if (col === 'id') {
+            return "(lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))),2) || '-a' || substr(lower(hex(randomblob(2))),2) || '-' || lower(hex(randomblob(6))))";
+          }
+          if (col === 'created_at' || col === 'updated_at' || col === 'started_at' || col === 'completed_at') {
+            return "strftime('%Y-%m-%dT%H:%M:%SZ', 'now')";
+          }
+          return "NULL";
+        }
+        return v;
+      });
+      return `INSERT INTO ${table} (${colsStr}) VALUES (${newVals.join(', ')})`;
+    }
+    return match;
+  });
   // Identity and UUID functions
   s = s.replace(/\bgen_random_uuid\(\)/gi, "(lower(hex(randomblob(4))) || '-' || lower(hex(randomblob(2))) || '-4' || substr(lower(hex(randomblob(2))),2) || '-a' || substr(lower(hex(randomblob(2))),2) || '-' || lower(hex(randomblob(6))))");
   // Comparison operators
@@ -734,16 +850,14 @@ export function translateSql(sql) {
   s = s.replace(/\bGREATEST\(/gi, 'MAX(');
   s = s.replace(/\bLEAST\(/gi, 'MIN(');
   s = s.replace(/\bEXTRACT\s*\(\s*EPOCH\s+FROM\s+([^)]+)\)/gi, "(strftime('%s', $1))");
-  // Type casts (e.g. ::text, ::jsonb, ::uuid)
-  s = s.replace(/::[a-zA-Z_]+/g, '');
+  // Type casts (e.g. ::text, ::jsonb, ::uuid, ::text[], ::uuid[])
+  s = s.replace(/::[a-zA-Z_]+(?:\[\])?/g, '');
   // Text search functions
   s = s.replace(/to_tsvector\([^)]+\)/gi, "''");
   s = s.replace(/ts_headline\([^)]+\)/gi, "content");
   s = s.replace(/search_vector\s*@@\s*plainto_tsquery\([^)]+\)/gi, "(content LIKE '%' || ?1 || '%')");
   // Row locking constructs (SQLite operates single-writer at db level)
-  s = s.replace(/\bFOR UPDATE\s+SKIP LOCKED\b/gi, '');
-  s = s.replace(/\bFOR UPDATE\b/gi, '');
-  s = s.replace(/\bFOR SHARE\b/gi, '');
+  s = s.replace(/\bFOR\s+(?:UPDATE|SHARE|NO\s+KEY\s+UPDATE|KEY\s+SHARE)(?:\s+OF\s+[a-zA-Z0-9_,\s]+)?(?:\s+SKIP\s+LOCKED|\s+NOWAIT)?/gi, '');
   return s;
 }
 
@@ -769,8 +883,13 @@ function normalizeParams(params) {
  * Returns { rows: [...], rowCount: number }
  */
 export async function query(text, params = []) {
+  let queryText = text;
+  if (typeof text === "object" && text !== null) {
+    params = text.values || text.params || params;
+    queryText = text.text || text.sql || String(text);
+  }
   const database = initDatabase();
-  const translated = translateSql(text);
+  const translated = translateSql(queryText);
   const normalized = normalizeParams(params);
 
   try {
@@ -798,6 +917,13 @@ export async function query(text, params = []) {
     if (isSelect || hasReturning) {
       const stmt = database.prepare(translated);
       const rows = stmt.all(...normalized);
+      if (typeof queryText === "string" && /\bcontrol\.session_valid\b/i.test(queryText)) {
+        for (const row of rows) {
+          if ("valid" in row) {
+            row.valid = Boolean(row.valid);
+          }
+        }
+      }
       return { rows, rowCount: rows.length };
     }
 

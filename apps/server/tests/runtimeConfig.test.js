@@ -19,12 +19,24 @@ test("runtime configuration has bounded immutable defaults and optional cache di
   assert.equal(config.logLevel, "info"); assert.equal(config.database.ssl, false);
   assert.ok(Object.isFrozen(config)); assert.ok(Object.isFrozen(config.database));
 });
+test("SQLite-only configuration is used as default when DATABASE_URL is not set", () => {
+  const config = readRuntimeConfig({ NODE_ENV: "production" });
+  assert.equal(config.database.driver, "sqlite");
+  assert.equal(config.database.path, "./data/sirona.db");
+  assert.equal(config.database.walMode, true);
+  assert.equal(config.database.busyTimeout, 5000);
+});
+test("custom SIRONA_DB_PATH is respected", () => {
+  const config = readRuntimeConfig({ NODE_ENV: "production", SIRONA_DB_PATH: "custom/path.db" });
+  assert.equal(config.database.driver, "sqlite");
+  assert.equal(config.database.path, "custom/path.db");
+});
 test("explicit individual PostgreSQL credentials and verified TLS are accepted", () => {
   const config = readRuntimeConfig({ PGHOST: "127.0.0.1", PGDATABASE: "fixture", PGUSER: "fixture", PGPASSWORD: "CANARY_SECRET", PGPORT: "5433", PGSSL: "true" });
   assert.equal(config.database.port, 5433); assert.deepEqual(config.database.ssl, { rejectUnauthorized: true });
 });
 for (const overrides of [
-  { DATABASE_URL: undefined }, { DATABASE_URL: "CANARY_SECRET" }, { DATABASE_URL: "postgresql://localhost/fixture" },
+  { DATABASE_URL: "CANARY_SECRET" }, { DATABASE_URL: "postgresql://localhost/fixture" },
   { DATABASE_URL: "postgresql://u:p@localhost/" }, { DATABASE_URL: "postgresql://u:p@evil.test/fixture" },
   { DATABASE_URL: "postgresql://u:p@localhost/fixture?sslmode=no-verify" },
   { PGSSL: "TRUE" }, { PGSSL: "true", PGSSL_REJECT_UNAUTHORIZED: "false" }, { PGSSL: "true", DATABASE_SSL: "false" },

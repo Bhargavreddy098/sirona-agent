@@ -4,9 +4,10 @@ const codes = { 400: "INVALID_INPUT", 401: "UNAUTHENTICATED", 403: "POLICY_DENIE
   409: "STATE_CONFLICT", 412: "VERSION_MISMATCH", 413: "PAYLOAD_TOO_LARGE", 422: "DOMAIN_INVALID",
   428: "PRECONDITION_REQUIRED", 429: "RATE_LIMITED", 503: "CAPABILITY_UNAVAILABLE" };
 
-export function sendProblem(req, res, status, detail) {
+export function sendProblem(req, res, status, detail, explicitCode = null) {
+  const code = explicitCode || (codes[status] ?? "INTERNAL_ERROR");
   const body = { type: "about:blank", title: STATUS_CODES[status], status,
-    code: codes[status] ?? "INTERNAL_ERROR", detail, requestId: req.requestId,
+    code, detail, requestId: req.requestId,
     retryable: status === 429 || status === 503 };
   res.statusCode = status;
   res.setHeader("Content-Type", "application/problem+json; charset=utf-8");

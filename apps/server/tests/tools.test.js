@@ -17,6 +17,7 @@ import { canonicalJsonStringify } from "../services/toolRuntimeService.js";
 import { serve, request } from "./helpers.js";
 
 loadEnvironment();
+process.env.SIRONA_HOST_EXECUTION = "true";
 const config = readRuntimeConfig(process.env);
 const logger = createLogger(config);
 let owner;
@@ -74,12 +75,7 @@ test("Stage 11: Tool Runtime & One Coding Backend", async (t) => {
     [`ws-tools-${Date.now()}`, userId]
   );
   const workspaceId = wsRes.rows[0].id;
-
-  const projRes = await query(
-    "INSERT INTO projects (workspace_id, name, primary_path) VALUES ($1, $2, $3) RETURNING id",
-    [workspaceId, "tool-test-proj", "/tmp/tool-test-proj"]
-  );
-  const projectId = projRes.rows[0].id;
+  await query("UPDATE auth_sessions SET workspace_id = $1", [workspaceId]);
 
   // Setup temporary isolated workspace directory
   const tempWorkspaceRoot = fs.mkdtempSync(path.join(os.tmpdir(), "sirona-test-workspace-"));
@@ -90,6 +86,12 @@ test("Stage 11: Tool Runtime & One Coding Backend", async (t) => {
       // Ignore cleanup error
     }
   });
+
+  const projRes = await query(
+    "INSERT INTO projects (workspace_id, name, primary_path) VALUES ($1, $2, $3) RETURNING id",
+    [workspaceId, "tool-test-proj", tempWorkspaceRoot]
+  );
+  const projectId = projRes.rows[0].id;
 
   // ==========================================
   // 1. Authentication & CSRF
@@ -510,7 +512,7 @@ test("Stage 11: Tool Runtime & One Coding Backend", async (t) => {
     // Create new project with revoked grant
     const revProjRes = await query(
       "INSERT INTO projects (workspace_id, name, primary_path) VALUES ($1, $2, $3) RETURNING id",
-      [workspaceId, "revoked-grant-proj", "/tmp/revoked-grant-proj"]
+      [workspaceId, "revoked-grant-proj", tempWorkspaceRoot]
     );
     const revProjectId = revProjRes.rows[0].id;
 

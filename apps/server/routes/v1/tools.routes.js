@@ -3,9 +3,27 @@ import { Router } from "express";
 import { sessionAuth } from "../../middleware/sessionAuth.js";
 import { sendProblem } from "../../middleware/problem.js";
 import { ToolRuntimeService, ToolRuntimeError } from "../../services/toolRuntimeService.js";
+import { query } from "../../config/db.js";
 
 const router = Router();
-router.use("/developer-connections/:connectionId",sessionAuth(),async(req,res,next)=>{try{validate(uuidSchema,req.params.connectionId);const connection=await ToolRuntimeService.getDeveloperConnection(req.params.connectionId);if(connection.workspaceId!==req.session.workspaceId)return sendProblem(req,res,403,"Connection belongs to another workspace");next();}catch(error){handleError(req,res,error);}});
+
+async function isWorkspaceAuthorized(session, targetWorkspaceId) {
+  if (!targetWorkspaceId || targetWorkspaceId === session.workspaceId) return true;
+  const res = await query("SELECT id FROM workspaces WHERE id = $1 AND owner_principal_id = $2", [targetWorkspaceId, session.principalId]);
+  return res.rows.length > 0;
+}
+
+router.use("/developer-connections/:connectionId", sessionAuth(), async (req, res, next) => {
+  try {
+    validate(uuidSchema, req.params.connectionId);
+    const connection = await ToolRuntimeService.getDeveloperConnection(req.params.connectionId);
+    const authorized = await isWorkspaceAuthorized(req.session, connection.workspaceId);
+    if (!authorized) return sendProblem(req, res, 403, "Connection belongs to another workspace");
+    next();
+  } catch (error) {
+    handleError(req, res, error);
+  }
+});
 
 function handleError(req, res, err) {
   if (err instanceof ToolRuntimeError) {
@@ -83,9 +101,11 @@ router.post("/developer-connections", sessionAuth({ requireCsrf: true }), async 
       metadata,
     } = req.body || {};
 
-    if(workspaceId && workspaceId!==req.session.workspaceId)return sendProblem(req,res,403,"Connection belongs to another workspace");
+    const targetWsId = workspaceId || req.session.workspaceId;
+    const authorized = await isWorkspaceAuthorized(req.session, targetWsId);
+    if (!authorized) return sendProblem(req, res, 403, "Connection belongs to another workspace");
     const connection = await ToolRuntimeService.createDeveloperConnection({
-      workspaceId: req.session.workspaceId,
+      workspaceId: targetWsId,
       adapterKind,
       installRef,
       authMethod,
@@ -102,8 +122,10 @@ router.post("/developer-connections", sessionAuth({ requireCsrf: true }), async 
 // GET /api/v1/developer-connections
 router.get("/developer-connections", sessionAuth({ requireCsrf: false }), async (req, res) => {
   try {
-    if(req.query.workspaceId && req.query.workspaceId!==req.session.workspaceId)return sendProblem(req,res,403,"Connection belongs to another workspace");
-    const workspaceId = req.session.workspaceId;
+    const targetWsId = req.query.workspaceId ? String(req.query.workspaceId) : req.session.workspaceId;
+    const authorized = await isWorkspaceAuthorized(req.session, targetWsId);
+    if (!authorized) return sendProblem(req, res, 403, "Connection belongs to another workspace");
+    const workspaceId = targetWsId;
     const status = typeof req.query.status === "string" ? req.query.status : null;
     const limit = Math.min(Math.max(parseInt(String(req.query.limit || "50"), 10) || 50, 1), 100);
     const offset = Math.max(parseInt(String(req.query.offset || "0"), 10) || 0, 0);

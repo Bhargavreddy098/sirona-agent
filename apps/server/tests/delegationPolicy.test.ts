@@ -4,6 +4,7 @@ import {approvedP5Fixture} from './helpers/p5-fixture.js';
 import {legacy} from './typedDatabaseBoundary.test.js';
 import {DurableDelegation} from '../src/orchestration/delegationService.js';
 test('P5 admission: racing fourth specialist denied by real DB lock; sequential reuse and immutable assignment',async t=>{
+ await legacy.query("UPDATE agent_sessions SET state='idle' WHERE role='p5_specialist' AND state='active'");
  const f=await approvedP5Fixture(t),service=new DurableDelegation(legacy);
  const request=(key:string)=>({...f,key,purpose:'bounded test assignment',modelId:'test-only-model'});
  const results=await Promise.allSettled([0,1,2,3].map(i=>service.admit(request('race-'+i))));
@@ -18,6 +19,7 @@ test('P5 admission: racing fourth specialist denied by real DB lock; sequential 
  assert.equal((await service.admit(request('sequential'))).replay,false);
  await assert.rejects(service.admit({...request('nested'),parentId:admitted[1].agentId}),{code:'DELEGATION_FORBIDDEN'});
  await assert.rejects(service.admit({...request('spoof'),identity:{authenticated:true}}),{code:'INVALID_INPUT'});
+ await legacy.query("UPDATE agent_sessions SET state='idle' WHERE run_id=$1",[f.runId]);
 });
 test('P5 admission: total/deadline limits survive separate service instances',async t=>{
  const f=await approvedP5Fixture(t);

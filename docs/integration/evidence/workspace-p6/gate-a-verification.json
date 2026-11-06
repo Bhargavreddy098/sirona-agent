@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-31T11:44:01.933Z",
+  "timestamp": "2026-11-05T02:19:30.836Z",
   "scope": "Gate A only; no guest/SQL/LSP/ripgrep/Git runtime qualification claimed",
   "database": "sirona_workspace_p0_test_20261028",
   "groups": [
@@ -8,7 +8,7 @@
     "gitWorkspace",
     "p6CanonicalJourney"
   ],
-  "exitCode": 0,
+  "exitCode": 1,
   "runnerError": null,
   "paidCalls": 0,
   "migrationsApplied": 0,

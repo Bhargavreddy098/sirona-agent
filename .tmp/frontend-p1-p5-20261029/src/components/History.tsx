@@ -1,7 +1,0 @@
-import type {Conversation} from '../api/schemas';
-function activity(value:Conversation['last_activity_at']){if(value==null)return null;const date=new Date(typeof value==='number'?(value<1e12?value*1000:value):value);return Number.isFinite(date.getTime())?date:null;}
-export function History({conversations,active,disabled,onOpen}:{conversations:Conversation[];active?:string;disabled:boolean;onOpen:(conversation:Conversation)=>void}){
-  const today=new Date(),yesterday=new Date();yesterday.setDate(today.getDate()-1);
-  const groups=Map.groupBy(conversations,conversation=>{const date=activity(conversation.last_activity_at);return date?.toDateString()===today.toDateString()?'Today':date?.toDateString()===yesterday.toDateString()?'Yesterday':'Earlier';});
-  return <div className="history">{[...groups].map(([label,items])=><section key={label}><h2 className="history-label">{label}</h2>{items.map(conversation=><button key={conversation.id} aria-current={active===conversation.id?'page':undefined} disabled={disabled} title={conversation.title} onClick={()=>onOpen(conversation)}><span>{conversation.title}</span>{activity(conversation.last_activity_at)&&<time>{activity(conversation.last_activity_at)!.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',hour12:false})}</time>}</button>)}</section>)}{!conversations.length&&<><h2 className="history-label">Your chats</h2><p>Your standalone conversations will appear here.</p></>}</div>;
-}

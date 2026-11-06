@@ -110,7 +110,11 @@ export class GovernanceService {
       "SELECT * FROM policy_revisions WHERE active = true ORDER BY revision DESC LIMIT 1"
     );
     if (res.rows.length > 0) {
-      return res.rows[0];
+      const p = res.rows[0];
+      if (typeof p.rules === "string") {
+        try { p.rules = JSON.parse(p.rules); } catch {}
+      }
+      return p;
     }
 
     // Initialize default revision 1 if empty
@@ -122,7 +126,11 @@ export class GovernanceService {
        RETURNING *`,
       [digest, JSON.stringify(rules)]
     );
-    return initRes.rows[0];
+    const p = initRes.rows[0];
+    if (p && typeof p.rules === "string") {
+      try { p.rules = JSON.parse(p.rules); } catch {}
+    }
+    return p;
   }
 
   /**
@@ -143,7 +151,11 @@ export class GovernanceService {
       RETURNING *
     `;
     const res = await query(sql, [nextRev, digest, JSON.stringify(rules), createdBy]);
-    return res.rows[0];
+    const p = res.rows[0];
+    if (p && typeof p.rules === "string") {
+      try { p.rules = JSON.parse(p.rules); } catch {}
+    }
+    return p;
   }
 
   /**
@@ -496,10 +508,16 @@ export class GovernanceService {
       }
 
       const acc = accRes.rows[0];
-      const spent = BigInt(acc.spent_micro_usd || 0);
-      const reserved = BigInt(acc.reserved_micro_usd || 0);
-      const limit = BigInt(acc.limit_micro_usd || 0);
-      const ceiling = BigInt(ceilingMicroUsd);
+      const toBigInt = (val) => {
+        if (typeof val === "bigint") return val;
+        if (!val) return 0n;
+        const str = String(val).trim().split(".")[0];
+        return BigInt(str || 0);
+      };
+      const spent = toBigInt(acc.spent_micro_usd);
+      const reserved = toBigInt(acc.reserved_micro_usd);
+      const limit = toBigInt(acc.limit_micro_usd);
+      const ceiling = toBigInt(ceilingMicroUsd);
 
       // Check existing reservation with same key
       const existRes = await client.query(

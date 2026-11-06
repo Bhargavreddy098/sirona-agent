@@ -13,7 +13,8 @@ export class CredentialResolver{
   static resolveCredential(row:Connection|null|undefined):{apiKey:string|null;status:CredentialStatus;credentialRef:string|null;error?:string}{
     const ref=row?.credential_ref||(row?.api_key_ciphertext?.startsWith('cred:v1:')?row.api_key_ciphertext:null)||null;
     if(!row)return{apiKey:null,status:'none',credentialRef:null};
-    if(row.credential_status==='requires_reauth'||row.is_active===false)return{apiKey:null,status:'requires_reauth',credentialRef:ref,error:'Credential unavailable; re-authentication required'};
+    const isInactive=row.is_active===false||(row as any).is_active===0||(row as any).is_active==='0';
+    if(row.credential_status==='requires_reauth'||isInactive)return{apiKey:null,status:'requires_reauth',credentialRef:ref,error:'Credential unavailable; re-authentication required'};
     if(!ref&&!row.api_key_ciphertext)return{apiKey:null,status:'none',credentialRef:null};
     try{
       if(ref){if(!reference.test(ref)||!this.vault)throw new Error();return{apiKey:this.vault.get(ref),status:'migrated',credentialRef:ref};}
@@ -42,6 +43,8 @@ export class CredentialResolver{
   static sanitize(row:any){
     const ref=row.credential_ref||(row.api_key_ciphertext?.startsWith('cred:v1:')?row.api_key_ciphertext:null)||null;
     const hasKey=Boolean(row.has_api_key||row.api_key_ciphertext||ref);
-    return{id:row.id,workspaceId:row.workspace_id||null,kind:row.kind,name:row.name,baseUrl:row.base_url||null,isActive:row.is_active!==false,hasApiKey:hasKey,credentialRef:ref,credentialStatus:row.credential_status||(ref?'migrated':hasKey?'legacy':'none'),credentialMigratedAt:row.credential_migrated_at||null,createdAt:row.created_at,updatedAt:row.updated_at};
+    const baseUrl=row.base_url||row.baseUrl||null;
+    const isActive=!(row.is_active===false||row.is_active===0||row.is_active==='0');
+    return{id:row.id,workspaceId:row.workspace_id||row.workspaceId||null,kind:row.kind,name:row.name,baseUrl,base_url:baseUrl,isActive,hasApiKey:hasKey,credentialRef:ref,credentialStatus:row.credential_status||(ref?'migrated':hasKey?'legacy':'none'),credentialMigratedAt:row.credential_migrated_at||null,createdAt:row.created_at,updatedAt:row.updated_at};
   }
 }

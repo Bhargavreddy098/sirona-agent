@@ -35,9 +35,11 @@ packages/contracts/
 
 ## 3. Relevant Canonical Technical Documentation
 
-- **Model Gateway & Providers**: [`docs/subsystems/model-gateway.md`](../../docs/subsystems/model-gateway.md)
-- **Agent Runtime & Execution**: [`docs/subsystems/agent-runtime.md`](../../docs/subsystems/agent-runtime.md)
-- **Sessions & Persistence**: [`docs/subsystems/sessions-and-persistence.md`](../../docs/subsystems/sessions-and-persistence.md)
+- **Model Gateway Contracts**: [`docs/features/model-providers-and-gateway/CONTRACTS.md`](../../docs/features/model-providers-and-gateway/CONTRACTS.md)
+- **Agent Runtime Contracts**: [`docs/features/agent-runtime-and-loop/CONTRACTS.md`](../../docs/features/agent-runtime-and-loop/CONTRACTS.md)
+- **Tool Execution & Sandbox Contracts**: [`docs/features/tool-execution-and-sandbox/CONTRACTS.md`](../../docs/features/tool-execution-and-sandbox/CONTRACTS.md)
+- **Sessions & Persistence Contracts**: [`docs/features/sessions-and-persistence/CONTRACTS.md`](../../docs/features/sessions-and-persistence/CONTRACTS.md)
+- **System Architecture & Data DTOs**: [`docs/architecture/SYSTEM-ARCHITECTURE.md`](../../docs/architecture/SYSTEM-ARCHITECTURE.md)
 
 ---
 

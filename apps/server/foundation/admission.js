@@ -102,6 +102,8 @@ export function stage06Admission(req, res, next) {
 // Stage 07 qualified capability surface (health + identity + projects + governance + provider models + durable runs/tasks/effects/SSE)
 export const stage07Patterns = Object.freeze([
   ...stage06Patterns,
+  Object.freeze({ pattern: /^\/api\/v1\/conversations\/[0-9a-f-]{36}\/runs$/, methods: Object.freeze(["GET", "HEAD", "POST"]) }),
+  Object.freeze({ pattern: /^\/api\/v1\/runs$/, methods: Object.freeze(["GET", "HEAD"]) }),
   Object.freeze({ pattern: /^\/api\/v1\/projects\/[0-9a-f-]{36}\/runs$/, methods: Object.freeze(["GET", "HEAD"]) }),
   Object.freeze({ pattern: /^\/api\/v1\/runs\/[0-9a-f-]{36}$/, methods: Object.freeze(["GET", "HEAD"]) }),
   Object.freeze({ pattern: /^\/api\/v1\/runs\/[0-9a-f-]{36}\/tasks$/, methods: Object.freeze(["GET", "HEAD"]) }),

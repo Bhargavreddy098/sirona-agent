@@ -1,1 +1,0 @@
-const fs=require('node:fs');const p='backend/src/orchestration/workspaceGraph.ts';let s=fs.readFileSync(p,'utf8');const start=s.indexOf('// LangGraph Annotation');const end=s.indexOf('// Initialize a new opted-in graph run');s=s.slice(0,start)+fs.readFileSync('.tmp/p5-graph-body.txt','utf8')+'\n'+s.slice(end);fs.writeFileSync(p,s);

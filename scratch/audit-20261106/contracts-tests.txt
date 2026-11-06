@@ -1,0 +1,35 @@
+npm notice run @sirona/contracts@1.0.0 test
+npm notice run npm run build && node --test tests/contracts.test.ts
+npm warn Unknown env config "global-ignore-file". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> @sirona/contracts@1.0.0 build
+> tsc -p tsconfig.json
+
+▶ Contracts - API Schemas
+  ✔ uuidSchema validates UUIDs correctly (4.5443ms)
+  ✔ problemDetailsSchema enforces RFC 7807 structure (2.4903ms)
+  ✔ paginationParamsSchema provides safe defaults (0.9401ms)
+  ✔ successEnvelope wraps arbitrary schemas (1.4464ms)
+✔ Contracts - API Schemas (12.8741ms)
+▶ Contracts - Core Domain Models
+  ✔ conversationSchema and messageSchema parse correctly (1.4531ms)
+  ✔ runSchema parses lifecycle run state (1.0187ms)
+  ✔ approvalSchema validates cost ceiling and digests (1.8467ms)
+✔ Contracts - Core Domain Models (5.7855ms)
+▶ Contracts - Execution & Security Fences
+  ✔ executionFenceSchema requires server-owned fencing token (0.8248ms)
+  ✔ toolExecutionRequest and receipt validation (1.2327ms)
+  ✔ applyPreview schemas validate diff preview lifecycle (0.7473ms)
+✔ Contracts - Execution & Security Fences (4.1597ms)
+▶ Contracts - Events & SSE Streaming
+  ✔ runEventSchema parses streaming lifecycle events (1.9963ms)
+  ✔ chatStreamChunkSchema parses token and tool chunks (0.4805ms)
+✔ Contracts - Events & SSE Streaming (3.5214ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 477.9977
