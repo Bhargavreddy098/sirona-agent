@@ -1,0 +1,26 @@
+# Sensitive local configuration must never enter a Docker build context.
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+
+.git
+**/.git
+node_modules
+**/node_modules
+scratch
+.tmp
+**/*.log
+**/*.zip
+**/*.db
+**/*.db-*
+**/*.sqlite
+**/*.sqlite-*
+**/*.sqlite3
+**/*.sqlite3-*
+**/*.pem
+**/*.key
+**/*.pfx
+**/*.p12

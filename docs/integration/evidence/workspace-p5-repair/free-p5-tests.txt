@@ -1,0 +1,162 @@
+TAP version 13
+# Subtest: P5 admission: racing fourth specialist denied by real DB lock; sequential reuse and immutable assignment
+ok 1 - P5 admission: racing fourth specialist denied by real DB lock; sequential reuse and immutable assignment
+  ---
+  duration_ms: 1062.7746
+  type: 'test'
+  ...
+# Subtest: P5 admission: total/deadline limits survive separate service instances
+ok 2 - P5 admission: total/deadline limits survive separate service instances
+  ---
+  duration_ms: 33.3051
+  type: 'test'
+  ...
+# Subtest: P5 saver: complete SDK checkpoint, metadata, parent and writes round trip through fresh owner
+ok 3 - P5 saver: complete SDK checkpoint, metadata, parent and writes round trip through fresh owner
+  ---
+  duration_ms: 687.0703
+  type: 'test'
+  ...
+# Subtest: P5 canonical HTTP/SSE journey with controlled upstream: approvals, real guest/patch/verifier, no duplicate model calls
+not ok 4 - P5 canonical HTTP/SSE journey with controlled upstream: approvals, real guest/patch/verifier, no duplicate model calls
+  ---
+  duration_ms: 3191.0667
+  type: 'test'
+  location: 'C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\apps\\server\\dist-workspace\\tests\\orchestrationCanonicalJourney.test.js:18:1'
+  failureType: 'testCodeFailure'
+  error: 'Local Linux Docker is unavailable'
+  code: 'DOCKER_UNAVAILABLE'
+  stack: |-
+    qualifyHome (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/apps/server/dist-workspace/src/workspace/homeProfile.js:95:19)
+    async file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/apps/server/dist-workspace/tests/orchestrationCanonicalJourney.test.js:60:13
+    async approvedP5Fixture (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/apps/server/dist-workspace/tests/helpers/p5-fixture.js:4:92)
+    async TestContext.<anonymous> (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/apps/server/dist-workspace/tests/orchestrationCanonicalJourney.test.js:56:13)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: P5 real process death: committed DB effect is reused after SIGKILL before SDK checkpoint acknowledgment
+ok 5 - P5 real process death: committed DB effect is reused after SIGKILL before SDK checkpoint acknowledgment
+  ---
+  duration_ms: 9621.6298
+  type: 'test'
+  ...
+# Subtest: P5 real process death: dispatched outcome stays unknown and is never blindly repeated
+ok 6 - P5 real process death: dispatched outcome stays unknown and is never blindly repeated
+  ---
+  duration_ms: 6627.1622
+  type: 'test'
+  ...
+# Subtest: P5 SDK/storage: actual compiled graph persists channels, pending writes and parent lineage
+ok 7 - P5 SDK/storage: actual compiled graph persists channels, pending writes and parent lineage
+  ---
+  duration_ms: 1344.3963
+  type: 'test'
+  ...
+# Subtest: P5 SDK/storage: rejection and unknown verification cannot complete a graph
+ok 8 - P5 SDK/storage: rejection and unknown verification cannot complete a graph
+  ---
+  duration_ms: 84.7721
+  type: 'test'
+  ...
+# Subtest: P5 saver: namespaces, immutable IDs, BIGINT allocation, duplicate writes and corruption
+ok 9 - P5 saver: namespaces, immutable IDs, BIGINT allocation, duplicate writes and corruption
+  ---
+  duration_ms: 12.4469
+  type: 'test'
+  ...
+# Subtest: P5 actual guest/verifier: bad candidate fails, approved correction passes in separate fresh guests
+not ok 10 - P5 actual guest/verifier: bad candidate fails, approved correction passes in separate fresh guests
+  ---
+  duration_ms: 2535.6732
+  type: 'test'
+  location: 'C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\apps\\server\\dist-workspace\\tests\\orchestrationGuestVerification.test.js:9:1'
+  failureType: 'testCodeFailure'
+  error: 'Local Linux Docker is unavailable'
+  code: 'DOCKER_UNAVAILABLE'
+  stack: |-
+    qualifyHome (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/apps/server/dist-workspace/src/workspace/homeProfile.js:95:19)
+    async TestContext.<anonymous> (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/apps/server/dist-workspace/tests/orchestrationGuestVerification.test.js:14:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: P5 model activity: interrupted controlled transport retains unknown charges and cannot be redispatched
+ok 11 - P5 model activity: interrupted controlled transport retains unknown charges and cannot be redispatched
+  ---
+  duration_ms: 1669.5126
+  type: 'test'
+  ...
+# Subtest: P5 security: candidate text and authenticated booleans cannot replace trusted evidence/identity
+ok 12 - P5 security: candidate text and authenticated booleans cannot replace trusted evidence/identity
+  ---
+  duration_ms: 3.0314
+  type: 'test'
+  ...
+# Subtest: P5 runtime: default-off gate cannot be bypassed with authenticated=true
+ok 13 - P5 runtime: default-off gate cannot be bypassed with authenticated=true
+  ---
+  duration_ms: 0.7963
+  type: 'test'
+  ...
+# Subtest: P5 local privacy: externally enabled LangChain tracing cannot capture graph content
+ok 14 - P5 local privacy: externally enabled LangChain tracing cannot capture graph content
+  ---
+  duration_ms: 0.7127
+  type: 'test'
+  ...
+# Subtest: P5 real HTTP: identity, pause/resume engine pin, cancellation and durable event replay
+ok 15 - P5 real HTTP: identity, pause/resume engine pin, cancellation and durable event replay
+  ---
+  duration_ms: 1759.4194
+  type: 'test'
+  ...
+# Subtest: P5 real lifecycle: unknown effects keep cancellation unresolved; no legacy conversion
+ok 16 - P5 real lifecycle: unknown effects keep cancellation unresolved; no legacy conversion
+  ---
+  duration_ms: 40.2822
+  type: 'test'
+  ...
+# Subtest: P5 graph rejects missing activity owners instead of running a no-op
+ok 17 - P5 graph rejects missing activity owners instead of running a no-op
+  ---
+  duration_ms: 1.7591
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: invalid internal limits reject before DB/reservation/inference
+ok 18 - P5 bounded providers: invalid internal limits reject before DB/reservation/inference
+  ---
+  duration_ms: 8.4669
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: real AI SDK HTTP request preserves exact ID, output cap, streaming and usage
+ok 19 - P5 bounded providers: real AI SDK HTTP request preserves exact ID, output cap, streaming and usage
+  ---
+  duration_ms: 696.8913
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: native compatible transport caps output; ordinary calls retain unset limit
+ok 20 - P5 bounded providers: native compatible transport caps output; ordinary calls retain unset limit
+  ---
+  duration_ms: 40.6377
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: native OpenAI transport sends completion cap and preserves reported usage
+ok 21 - P5 bounded providers: native OpenAI transport sends completion cap and preserves reported usage
+  ---
+  duration_ms: 9.7212
+  type: 'test'
+  ...
+# Subtest: P5 bounded providers: native Anthropic transport sends cap and preserves final reported usage
+ok 22 - P5 bounded providers: native Anthropic transport sends cap and preserves final reported usage
+  ---
+  duration_ms: 19.7802
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 20
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 53188.3333

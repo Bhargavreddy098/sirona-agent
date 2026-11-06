@@ -1,0 +1,704 @@
+{
+  "bodyStyle": {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(0, 0, 0)",
+    "width": "1440px",
+    "height": "0px"
+  },
+  "htmlStyle": {
+    "bg": "rgb(250, 250, 250)",
+    "theme": "oc-2",
+    "colorScheme": "light"
+  },
+  "rootTree": {
+    "tag": "DIV",
+    "id": "root",
+    "className": "flex flex-col h-dvh bg-v2-background-bg-deep p-px",
+    "rect": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 0
+    },
+    "display": "flex",
+    "visibility": "visible",
+    "opacity": "1",
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "color": "rgb(0, 0, 0)",
+    "childrenCount": 2,
+    "children": [
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "relative bg-v2-background-bg-deep flex-1 min-h-0 min-w-0 flex flex-col select-none [&_input]:select-text [&_textarea]:select-text [&_[contenteditable]]:select-text",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 0
+        },
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "childrenCount": 2,
+        "children": [
+          {
+            "tag": "HEADER",
+            "id": "",
+            "className": "shrink-0 relative flex flex-row h-9 bg-v2-background-bg-deep overflow-visible",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 0,
+              "height": 0
+            },
+            "display": "none",
+            "visibility": "visible",
+            "opacity": "1",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(0, 0, 0)",
+            "childrenCount": 1,
+            "children": [
+              {
+                "tag": "DIV",
+                "id": "",
+                "className": "h-full flex-1 overflow-hidden flex flex-row items-center gap-1.5 px-2 md:pe-3 pt-[max(0px,calc(8px-env(safe-area-inset-top,0px)))]",
+                "rect": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 0,
+                  "height": 0
+                },
+                "display": "flex",
+                "visibility": "visible",
+                "opacity": "1",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "color": "rgb(0, 0, 0)",
+                "childrenCount": 1,
+                "children": [
+                  {
+                    "tag": "DIV",
+                    "id": "",
+                    "className": "flex-1",
+                    "rect": {
+                      "x": 0,
+                      "y": 0,
+                      "width": 0,
+                      "height": 0
+                    },
+                    "display": "block",
+                    "visibility": "visible",
+                    "opacity": "1",
+                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                    "color": "rgb(0, 0, 0)",
+                    "childrenCount": 0,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tag": "DIV",
+            "id": "",
+            "className": "relative flex flex-1 min-h-0 min-w-0 flex-row",
+            "rect": {
+              "x": 0,
+              "y": 0,
+              "width": 1440,
+              "height": 0
+            },
+            "display": "flex",
+            "visibility": "visible",
+            "opacity": "1",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(0, 0, 0)",
+            "childrenCount": 3,
+            "children": [
+              {
+                "tag": "ASIDE",
+                "id": "vertical-tabs-sidebar",
+                "className": "relative z-10 h-full min-h-0 shrink-0",
+                "rect": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 276,
+                  "height": 0
+                },
+                "display": "block",
+                "visibility": "visible",
+                "opacity": "1",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "color": "rgb(0, 0, 0)",
+                "childrenCount": 3,
+                "children": [
+                  {
+                    "tag": "DIV",
+                    "id": "",
+                    "className": "absolute inset-0 overflow-hidden [contain:layout_style_paint]",
+                    "rect": {
+                      "x": 0,
+                      "y": 0,
+                      "width": 276,
+                      "height": 0
+                    },
+                    "display": "block",
+                    "visibility": "visible",
+                    "opacity": "1",
+                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                    "color": "rgb(0, 0, 0)",
+                    "childrenCount": 2,
+                    "children": [
+                      {
+                        "tag": "DIV",
+                        "id": "",
+                        "className": "pointer-events-none absolute inset-y-0 end-0 bg-v2-background-bg-deep shadow-[var(--v2-elevation-floating)]",
+                        "rect": {
+                          "x": 0,
+                          "y": 0,
+                          "width": 0,
+                          "height": 0
+                        },
+                        "display": "none",
+                        "visibility": "visible",
+                        "opacity": "1",
+                        "backgroundColor": "rgba(0, 0, 0, 0)",
+                        "color": "rgb(0, 0, 0)",
+                        "childrenCount": 0,
+                        "children": []
+                      },
+                      {
+                        "tag": "DIV",
+                        "id": "",
+                        "className": "absolute inset-y-0 end-0 contain-strict will-change-[opacity] flex min-h-0 flex-col bg-v2-background-bg-deep pe-2.5 ps-4.5 pb-[var(--shell-bottom-inset,8px)] pt-[var(--shell-top-inset,8px)]",
+                        "rect": {
+                          "x": 0,
+                          "y": 0,
+                          "width": 276,
+                          "height": 10
+                        },
+                        "display": "flex",
+                        "visibility": "visible",
+                        "opacity": "1",
+                        "backgroundColor": "rgba(0, 0, 0, 0)",
+                        "color": "rgb(0, 0, 0)",
+                        "childrenCount": 1,
+                        "children": [
+                          {
+                            "tag": "DIV",
+                            "id": "",
+                            "className": "flex size-full min-h-0 flex-col",
+                            "rect": {
+                              "x": 0,
+                              "y": 0,
+                              "width": 276,
+                              "height": 0
+                            },
+                            "display": "flex",
+                            "visibility": "visible",
+                            "opacity": "1",
+                            "backgroundColor": "rgba(0, 0, 0, 0)",
+                            "color": "rgb(0, 0, 0)",
+                            "childrenCount": 4,
+                            "children": [
+                              {
+                                "tag": "DIV",
+                                "id": "",
+                                "className": "flex w-full shrink-0 gap-2 items-start pt-2.5 pb-1",
+                                "rect": {
+                                  "x": 0,
+                                  "y": 0,
+                                  "width": 276,
+                                  "height": 32
+                                },
+                                "display": "flex",
+                                "visibility": "visible",
+                                "opacity": "1",
+                                "backgroundColor": "rgba(0, 0, 0, 0)",
+                                "color": "rgb(0, 0, 0)",
+                                "childrenCount": 2,
+                                "children": [
+                                  {
+                                    "tag": "DIV",
+                                    "id": "",
+                                    "className": "min-w-0 flex-1",
+                                    "rect": {
+                                      "x": 0,
+                                      "y": 0,
+                                      "width": 240,
+                                      "height": 28
+                                    },
+                                    "display": "block",
+                                    "visibility": "visible",
+                                    "opacity": "1",
+                                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                                    "color": "rgb(0, 0, 0)",
+                                    "childrenCount": 1,
+                                    "children": [
+                                      null
+                                    ]
+                                  },
+                                  {
+                                    "tag": "DIV",
+                                    "id": "",
+                                    "className": "-me-0.5 flex shrink-0",
+                                    "rect": {
+                                      "x": 248,
+                                      "y": 0,
+                                      "width": 28,
+                                      "height": 28
+                                    },
+                                    "display": "flex",
+                                    "visibility": "visible",
+                                    "opacity": "1",
+                                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                                    "color": "rgb(0, 0, 0)",
+                                    "childrenCount": 1,
+                                    "children": [
+                                      null
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tag": "DIV",
+                                "id": "",
+                                "className": "flex w-full shrink-0 flex-col gap-1",
+                                "rect": {
+                                  "x": 0,
+                                  "y": 32,
+                                  "width": 276,
+                                  "height": 60
+                                },
+                                "display": "flex",
+                                "visibility": "visible",
+                                "opacity": "1",
+                                "backgroundColor": "rgba(0, 0, 0, 0)",
+                                "color": "rgb(0, 0, 0)",
+                                "childrenCount": 2,
+                                "children": [
+                                  {
+                                    "tag": "BUTTON",
+                                    "id": "",
+                                    "className": "group flex h-7 w-full shrink-0 items-center gap-1.5 rounded-[6px] ps-1.5 pe-2 text-[13px] leading-4 text-v2-text-text-faint",
+                                    "rect": {
+                                      "x": 0,
+                                      "y": 32,
+                                      "width": 276,
+                                      "height": 28
+                                    },
+                                    "display": "flex",
+                                    "visibility": "visible",
+                                    "opacity": "1",
+                                    "backgroundColor": "rgb(250, 250, 250)",
+                                    "color": "rgb(128, 128, 128)",
+                                    "childrenCount": 3,
+                                    "children": [
+                                      null,
+                                      null,
+                                      null
+                                    ]
+                                  },
+                                  {
+                                    "tag": "BUTTON",
+                                    "id": "contextmenu-cl-1-trigger",
+                                    "className": "group flex h-7 w-full shrink-0 items-center gap-1.5 rounded-[6px] ps-1.5 pe-2 text-[13px] leading-4 text-v2-text-text-faint hover:text-v2-text-text-base",
+                                    "rect": {
+                                      "x": 0,
+                                      "y": 64,
+                                      "width": 276,
+                                      "height": 28
+                                    },
+                                    "display": "flex",
+                                    "visibility": "visible",
+                                    "opacity": "1",
+                                    "backgroundColor": "rgb(250, 250, 250)",
+                                    "color": "rgb(128, 128, 128)",
+                                    "childrenCount": 3,
+                                    "children": [
+                                      null,
+                                      null,
+                                      null
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tag": "DIV",
+                                "id": "",
+                                "className": "h-4 w-full shrink-0",
+                                "rect": {
+                                  "x": 0,
+                                  "y": 92,
+                                  "width": 276,
+                                  "height": 16
+                                },
+                                "display": "block",
+                                "visibility": "visible",
+                                "opacity": "1",
+                                "backgroundColor": "rgba(0, 0, 0, 0)",
+                                "color": "rgb(0, 0, 0)",
+                                "childrenCount": 0,
+                                "children": []
+                              },
+                              {
+                                "tag": "DIV",
+                                "id": "",
+                                "className": "flex min-h-0 flex-1 flex-col gap-1",
+                                "rect": {
+                                  "x": 0,
+                                  "y": 108,
+                                  "width": 276,
+                                  "height": 0
+                                },
+                                "display": "flex",
+                                "visibility": "visible",
+                                "opacity": "1",
+                                "backgroundColor": "rgba(0, 0, 0, 0)",
+                                "color": "rgb(0, 0, 0)",
+                                "childrenCount": 1,
+                                "children": [
+                                  {
+                                    "tag": "DIV",
+                                    "id": "",
+                                    "className": "relative min-w-0 min-h-0 overflow-hidden",
+                                    "rect": {
+                                      "x": 0,
+                                      "y": 108,
+                                      "width": 276,
+                                      "height": 0
+                                    },
+                                    "display": "flex",
+                                    "visibility": "visible",
+                                    "opacity": "1",
+                                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                                    "color": "rgb(0, 0, 0)",
+                                    "childrenCount": 1,
+                                    "children": [
+                                      null
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tag": "DIV",
+                    "id": "",
+                    "className": "absolute inset-0 z-20 hidden",
+                    "rect": {
+                      "x": 0,
+                      "y": 0,
+                      "width": 0,
+                      "height": 0
+                    },
+                    "display": "none",
+                    "visibility": "visible",
+                    "opacity": "1",
+                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                    "color": "rgb(0, 0, 0)",
+                    "childrenCount": 0,
+                    "children": []
+                  },
+                  {
+                    "tag": "DIV",
+                    "id": "",
+                    "className": "-end-1",
+                    "rect": {
+                      "x": 272,
+                      "y": 0,
+                      "width": 8,
+                      "height": 0
+                    },
+                    "display": "block",
+                    "visibility": "visible",
+                    "opacity": "1",
+                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                    "color": "rgb(0, 0, 0)",
+                    "childrenCount": 0,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "tag": "MAIN",
+                "id": "",
+                "className": "flex-1 min-h-0 min-w-0 overflow-x-hidden flex flex-col items-start contain-content",
+                "rect": {
+                  "x": 276,
+                  "y": 0,
+                  "width": 1164,
+                  "height": 0
+                },
+                "display": "flex",
+                "visibility": "visible",
+                "opacity": "1",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "color": "rgb(0, 0, 0)",
+                "childrenCount": 1,
+                "children": [
+                  {
+                    "tag": "DIV",
+                    "id": "",
+                    "className": "relative flex size-full min-h-0 min-w-0 flex-col",
+                    "rect": {
+                      "x": 276,
+                      "y": 0,
+                      "width": 1164,
+                      "height": 0
+                    },
+                    "display": "flex",
+                    "visibility": "visible",
+                    "opacity": "1",
+                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                    "color": "rgb(0, 0, 0)",
+                    "childrenCount": 1,
+                    "children": [
+                      {
+                        "tag": "DIV",
+                        "id": "",
+                        "className": "flex size-full min-h-0 min-w-0 flex-col",
+                        "rect": {
+                          "x": 276,
+                          "y": 0,
+                          "width": 1164,
+                          "height": 0
+                        },
+                        "display": "flex",
+                        "visibility": "visible",
+                        "opacity": "1",
+                        "backgroundColor": "rgba(0, 0, 0, 0)",
+                        "color": "rgb(0, 0, 0)",
+                        "childrenCount": 1,
+                        "children": [
+                          {
+                            "tag": "DIV",
+                            "id": "",
+                            "className": "relative size-full overflow-hidden flex flex-col",
+                            "rect": {
+                              "x": 276,
+                              "y": 0,
+                              "width": 1164,
+                              "height": 0
+                            },
+                            "display": "flex",
+                            "visibility": "visible",
+                            "opacity": "1",
+                            "backgroundColor": "rgba(0, 0, 0, 0)",
+                            "color": "rgb(0, 0, 0)",
+                            "childrenCount": 1,
+                            "children": [
+                              {
+                                "tag": "DIV",
+                                "id": "",
+                                "className": "flex-1 min-h-0 flex flex-col gap-2 px-[var(--shell-inline-inset,8px)] pb-[var(--shell-bottom-inset,8px)] pt-[var(--shell-top-inset,8px)]",
+                                "rect": {
+                                  "x": 276,
+                                  "y": 0,
+                                  "width": 1164,
+                                  "height": 0
+                                },
+                                "display": "flex",
+                                "visibility": "visible",
+                                "opacity": "1",
+                                "backgroundColor": "rgba(0, 0, 0, 0)",
+                                "color": "rgb(0, 0, 0)",
+                                "childrenCount": 1,
+                                "children": [
+                                  {
+                                    "tag": "DIV",
+                                    "id": "",
+                                    "className": "@container relative flex flex-col min-h-0 h-full flex-1",
+                                    "rect": {
+                                      "x": 276,
+                                      "y": 0,
+                                      "width": 1164,
+                                      "height": 0
+                                    },
+                                    "display": "flex",
+                                    "visibility": "visible",
+                                    "opacity": "1",
+                                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                                    "color": "rgb(0, 0, 0)",
+                                    "childrenCount": 1,
+                                    "children": [
+                                      null
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tag": "DIV",
+                "id": "",
+                "className": "absolute top-[calc(var(--shell-top-inset,8px)+10px)] start-[calc(var(--shell-inline-inset,8px)+10px)] z-40 flex shrink-0 justify-end",
+                "rect": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 32,
+                  "height": 28
+                },
+                "display": "flex",
+                "visibility": "visible",
+                "opacity": "1",
+                "backgroundColor": "rgba(0, 0, 0, 0)",
+                "color": "rgb(0, 0, 0)",
+                "childrenCount": 1,
+                "children": [
+                  {
+                    "tag": "DIV",
+                    "id": "",
+                    "className": "flex shrink-0 pe-1",
+                    "rect": {
+                      "x": 0,
+                      "y": 0,
+                      "width": 32,
+                      "height": 28
+                    },
+                    "display": "flex",
+                    "visibility": "visible",
+                    "opacity": "1",
+                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                    "color": "rgb(0, 0, 0)",
+                    "childrenCount": 1,
+                    "children": [
+                      {
+                        "tag": "DIV",
+                        "id": "",
+                        "className": "shrink-0 [app-region:no-drag]",
+                        "rect": {
+                          "x": 0,
+                          "y": 0,
+                          "width": 28,
+                          "height": 28
+                        },
+                        "display": "flex",
+                        "visibility": "visible",
+                        "opacity": "1",
+                        "backgroundColor": "rgba(0, 0, 0, 0)",
+                        "color": "rgb(0, 0, 0)",
+                        "childrenCount": 1,
+                        "children": [
+                          {
+                            "tag": "BUTTON",
+                            "id": "",
+                            "className": "shrink-0",
+                            "rect": {
+                              "x": 0,
+                              "y": 0,
+                              "width": 28,
+                              "height": 28
+                            },
+                            "display": "flex",
+                            "visibility": "visible",
+                            "opacity": "0",
+                            "backgroundColor": "rgba(0, 0, 0, 0)",
+                            "color": "rgb(128, 128, 128)",
+                            "childrenCount": 1,
+                            "children": [
+                              {
+                                "tag": "SPAN",
+                                "id": "",
+                                "className": "relative flex",
+                                "rect": {
+                                  "x": 6,
+                                  "y": 6,
+                                  "width": 16,
+                                  "height": 16
+                                },
+                                "display": "flex",
+                                "visibility": "visible",
+                                "opacity": "1",
+                                "backgroundColor": "rgba(0, 0, 0, 0)",
+                                "color": "rgb(128, 128, 128)",
+                                "childrenCount": 2,
+                                "children": [
+                                  {
+                                    "tag": "svg",
+                                    "id": "",
+                                    "className": {},
+                                    "rect": {
+                                      "x": 6,
+                                      "y": 6,
+                                      "width": 16,
+                                      "height": 16
+                                    },
+                                    "display": "block",
+                                    "visibility": "visible",
+                                    "opacity": "1",
+                                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                                    "color": "rgb(128, 128, 128)",
+                                    "childrenCount": 1,
+                                    "children": [
+                                      null
+                                    ]
+                                  },
+                                  {
+                                    "tag": "SPAN",
+                                    "id": "",
+                                    "className": "absolute inset-0 flex",
+                                    "rect": {
+                                      "x": 6,
+                                      "y": 6,
+                                      "width": 16,
+                                      "height": 16
+                                    },
+                                    "display": "flex",
+                                    "visibility": "visible",
+                                    "opacity": "0",
+                                    "backgroundColor": "rgba(0, 0, 0, 0)",
+                                    "color": "rgb(128, 128, 128)",
+                                    "childrenCount": 1,
+                                    "children": [
+                                      null
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "id": "",
+        "className": "",
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 1440,
+          "height": 0
+        },
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "color": "rgb(0, 0, 0)",
+        "childrenCount": 0,
+        "children": []
+      }
+    ]
+  },
+  "fullHTML": "<div id=\"root\" class=\"flex flex-col h-dvh bg-v2-background-bg-deep p-px\" data-opencode-mounted=\"\" data-standalone=\"false\"><div class=\"relative bg-v2-background-bg-deep flex-1 min-h-0 min-w-0 flex flex-col select-none [&amp;_input]:select-text [&amp;_textarea]:select-text [&amp;_[contenteditable]]:select-text\" style=\"--shell-inline-inset: 8px; --shell-top-inset: 8px; --shell-bottom-inset: max(0px, calc(8px - var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px))));\"><header data-slot=\"titlebar-v2\" data-tauri-drag-region=\"\" hidden=\"\" class=\"shrink-0 relative flex flex-row h-9 bg-v2-background-bg-deep overflow-visible\" style=\"height: calc(28px + max(8px, env(safe-area-inset-top, 0px))); padding-top: env(safe-area-inset-top, 0px); padding-bottom: 0px; padding-left: 0px;\"><div class=\"h-full flex-1 overflow-hidden flex flex-row items-center gap-1.5 px-2 md:pe-3 pt-[max(0px,calc(8px-env(safe-area-inset-top,0px)))]\"><div class=\"flex-1\"></div></div></header><div class=\"relative flex flex-1 min-h-0 min-w-0 flex-row\"><aside id=\"vertical-tabs-sidebar\" data-slot=\"vertical-tabs-sidebar\" class=\"relative z-10 h-full min-h-0 shrink-0\" data-state=\"open\" style=\"--sidebar-peek-width: 276px; width: 276px;\"><div data-slot=\"vertical-tabs-panel\" class=\"absolute inset-0 overflow-hidden [contain:layout_style_paint]\"><div data-slot=\"vertical-tabs-peek-surface\" aria-hidden=\"true\" class=\"pointer-events-none absolute inset-y-0 end-0 bg-v2-background-bg-deep shadow-[var(--v2-elevation-floating)]\" style=\"width: 276px;\"></div><div data-slot=\"vertical-tabs-mount\" class=\"absolute inset-y-0 end-0 contain-strict will-change-[opacity] flex min-h-0 flex-col bg-v2-background-bg-deep pe-2.5 ps-4.5 pb-[var(--shell-bottom-inset,8px)] pt-[var(--shell-top-inset,8px)]\" style=\"padding-bottom: max(10px, var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px))); width: 276px;\"><div class=\"flex size-full min-h-0 flex-col\"><div data-slot=\"sidebar-header\" class=\"flex w-full shrink-0 gap-2 items-start pt-2.5 pb-1\" data-tauri-drag-region=\"\" data-home=\"\"><div class=\"min-w-0 flex-1\"><button type=\"button\" data-titlebar-tab-action=\"\" data-action=\"vertical-tabs-home\" class=\"group flex h-7 w-full shrink-0 items-center gap-1.5 rounded-[6px] ps-1.5 pe-2 text-[13px] leading-4 text-v2-text-text-faint hover:text-v2-text-text-base data-[state=pressed]:text-v2-text-text-base\" aria-label=\"Home\" aria-pressed=\"false\"><svg class=\"shrink-0\" data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-grid-plus\"></use></svg><span class=\"min-w-0 truncate\">Home</span><span class=\"ms-auto hidden min-w-0 truncate text-v2-text-text-faint group-hover:block group-focus-visible:block\" aria-hidden=\"true\"><bdi dir=\"ltr\">Ctrl+B</bdi></span></button></div><div class=\"-me-0.5 flex shrink-0\"><div data-closed=\"\" data-component=\"tooltip-v2-trigger\" type=\"button\" class=\"shrink-0 [app-region:no-drag]\"><button type=\"button\" aria-label=\"Toggle sidebar\" aria-expanded=\"true\" aria-controls=\"vertical-tabs-sidebar\" data-component=\"icon-button-v2\" data-size=\"large\" data-variant=\"ghost-muted\" class=\"shrink-0\"><span class=\"relative flex\"><svg data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-layout-left-full\"></use></svg></span></button></div></div></div><div class=\"flex w-full shrink-0 flex-col gap-1\"><button type=\"button\" data-titlebar-tab-action=\"\" data-action=\"vertical-tabs-search\" class=\"group flex h-7 w-full shrink-0 items-center gap-1.5 rounded-[6px] ps-1.5 pe-2 text-[13px] leading-4 text-v2-text-text-faint\"><svg class=\"shrink-0\" data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-magnifying-glass\"></use></svg><span class=\"min-w-0 truncate\">Search sessions</span><span class=\"ms-auto hidden min-w-0 truncate text-v2-text-text-faint group-hover:block group-focus-visible:block\" aria-hidden=\"true\"><bdi dir=\"ltr\">Ctrl+Shift+F</bdi></span></button><button data-closed=\"\" id=\"contextmenu-cl-1-trigger\" type=\"button\" data-titlebar-tab-action=\"true\" data-action=\"vertical-tabs-new-session\" class=\"group flex h-7 w-full shrink-0 items-center gap-1.5 rounded-[6px] ps-1.5 pe-2 text-[13px] leading-4 text-v2-text-text-faint hover:text-v2-text-text-base\" aria-label=\"New session\"><svg class=\"shrink-0\" data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-edit\"></use></svg><span class=\"min-w-0 truncate\">New session</span><span class=\"ms-auto hidden min-w-0 truncate text-v2-text-text-faint group-hover:block group-focus-visible:block\" aria-hidden=\"true\"><bdi dir=\"ltr\">Ctrl+T</bdi></span></button></div><div class=\"h-4 w-full shrink-0\" aria-hidden=\"true\"></div><div class=\"flex min-h-0 flex-1 flex-col gap-1\"><div class=\"relative min-w-0 min-h-0 overflow-hidden\" data-slot=\"vertical-tabs\" data-orientation=\"vertical\"><div class=\"flex min-w-0 no-scrollbar [app-region:no-drag] max-h-full flex-col overflow-y-auto overflow-x-hidden\" data-slot=\"vertical-tabs-scroll\" style=\"--vertical-tabs-fade-top: 0px; --vertical-tabs-fade-bottom: 16px;\"><div data-titlebar-tab-list=\"\" class=\"flex w-full min-w-0 flex-col items-stretch\" data-orientation=\"vertical\"><div data-titlebar-tab-slot=\"\" class=\"relative flex w-full shrink-0\" data-tab-key=\"draft:77fd90a8-b75c-49f0-8cad-9bdea47130d2\" data-active=\"true\" data-orientation=\"vertical\"><div data-titlebar-tab=\"\" data-slot=\"titlebar-tab-item\" class=\"group relative flex h-7 w-full min-w-0 flex-row items-center gap-1.5 overflow-hidden rounded-[6px] px-1.5 [container-type:inline-size] whitespace-nowrap\" data-orientation=\"vertical\" data-active=\"true\" data-dragging=\"false\" data-state=\"pressed\"><a data-slot=\"tab-link\" data-titlebar-tab-link=\"\" class=\"flex h-full min-w-0 flex-1 flex-row items-center gap-1.5 text-[13px] font-medium text-v2-text-text-faint group-data-[active='true']:text-v2-text-text-base [-webkit-user-drag:none]\" draggable=\"false\" href=\"/new-session?draftId=77fd90a8-b75c-49f0-8cad-9bdea47130d2\"><span class=\"flex size-4 shrink-0 items-center justify-center\"><svg class=\"text-v2-icon-icon-muted group-data-[active='true']:text-v2-icon-icon-base\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><path d=\"M9.00002 13.5H14M2.60419 10.9167V13.3958H5.08335L13.3959 5.08333L10.9167 2.60416L2.60419 10.9167Z\" stroke=\"currentColor\"></path></svg></span><span data-titlebar-tab-title=\"\" class=\"min-w-0 flex-1 overflow-hidden text-clip whitespace-nowrap outline-none leading-4\">Session</span></a><div data-slot=\"tab-close\"><button type=\"button\" aria-label=\"Close tab\" data-component=\"icon-button-v2\" data-size=\"small\" data-variant=\"ghost-muted\" class=\"hover-reveal relative z-10\"><svg data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-xmark-small\"></use></svg></button></div></div></div></div></div></div></div></div></div></div><div class=\"absolute inset-0 z-20 hidden\"></div><div data-component=\"resize-handle\" data-direction=\"horizontal\" data-edge=\"end\" class=\"-end-1\"></div></aside><main class=\"flex-1 min-h-0 min-w-0 overflow-x-hidden flex flex-col items-start contain-content\" style=\"padding-top: 0px; padding-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px)); --settings-bottom-inset: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));\"><div class=\"relative flex size-full min-h-0 min-w-0 flex-col\"><div class=\"flex size-full min-h-0 min-w-0 flex-col\"><div class=\"relative size-full overflow-hidden flex flex-col\"><div class=\"flex-1 min-h-0 flex flex-col gap-2 px-[var(--shell-inline-inset,8px)] pb-[var(--shell-bottom-inset,8px)] pt-[var(--shell-top-inset,8px)]\"><div class=\"@container relative flex flex-col min-h-0 h-full flex-1\"><div data-component=\"new-session\" class=\"relative isolate flex-1 min-h-0 overflow-hidden rounded-[10px] bg-v2-background-bg-base shadow-[var(--v2-elevation-raised)]\"><div data-slot=\"session-dropzone-blur\" class=\"pointer-events-none absolute inset-0 z-[79] rounded-[inherit] opacity-0 transition-[opacity,backdrop-filter] duration-200 ease-[cubic-bezier(0.215,0.61,0.355,1)] data-[visible=true]:opacity-100 data-[visible=true]:backdrop-blur-[1.5px] data-[visible=true]:will-change-[opacity,backdrop-filter] motion-reduce:transition-none\" style=\"-webkit-mask-image:linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 28%, black 72%, transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right, transparent 0%, black 25%, black 75%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 28%, black 72%, transparent 100%);mask-composite:intersect\" data-visible=\"false\"></div><div class=\"absolute inset-x-0 top-[25.375%] flex justify-center px-6\"><div class=\"w-full max-w-[880px] px-0\"><div data-component=\"new-session-wordmark\" aria-hidden=\"true\" class=\"pointer-events-none mx-auto w-full max-w-[720px] text-v2-background-bg-inverse\"><div data-slot=\"wordmark-box\" class=\"relative mx-auto aspect-[234/42] w-4/5\"><div class=\"absolute\" style=\"left: 9px; top: -63px; width: 702px; height: 126px;\"><div data-slot=\"wordmark-flat\" class=\"absolute inset-0\"><svg viewBox=\"0 0 234 42\" fill=\"none\" class=\"block size-full overflow-visible\"><g transform=\"translate(12 36) scale(1 1) translate(-12 -36)\" style=\"opacity: 1;\"><g class=\"opacity-[0.16]\"><path fill=\"var(--icon-weak-base)\" d=\"M18 30H6V18H18V30Z\"></path><path d=\"M18 12H6V30H18V12ZM24 36H0V6H24V36Z\" fill=\"var(--icon-base)\"></path></g></g><g transform=\"translate(42 36) scale(1 1) translate(-42 -36)\" style=\"opacity: 1;\"><g class=\"opacity-[0.16]\"><path fill=\"var(--icon-weak-base)\" d=\"M48 30H36V18H48V30Z\"></path><path d=\"M36 30H48V12H36V30ZM54 36H36V42H30V6H54V36Z\" fill=\"var(--icon-base)\"></path></g></g><g transform=\"translate(72 36) scale(1 1) translate(-72 -36)\" style=\"opacity: 1;\"><g class=\"opacity-[0.16]\"><path fill=\"var(--icon-weak-base)\" d=\"M84 24V30H66V24H84Z\"></path><path d=\"M84 24H66V30H84V36H60V6H84V24ZM66 18H78V12H66V18Z\" fill=\"var(--icon-base)\"></path></g></g><g transform=\"translate(102 36) scale(1 1) translate(-102 -36)\" style=\"opacity: 1;\"><g class=\"opacity-[0.16]\"><path fill=\"var(--icon-weak-base)\" d=\"M108 36H96V18H108V36Z\"></path><path d=\"M108 12H96V36H90V6H108V12ZM114 36H108V12H114V36Z\" fill=\"var(--icon-base)\"></path></g></g><g transform=\"translate(132 36) scale(1 1) translate(-132 -36)\" style=\"opacity: 1;\"><g class=\"opacity-[0.16]\"><path fill=\"var(--icon-weak-base)\" d=\"M144 30H126V18H144V30Z\"></path><path d=\"M144 12H126V30H144V36H120V6H144V12Z\" fill=\"var(--icon-strong-base)\"></path></g></g><g transform=\"translate(162 36) scale(1 1) translate(-162 -36)\" style=\"opacity: 1;\"><g class=\"opacity-[0.16]\"><path fill=\"var(--icon-weak-base)\" d=\"M168 30H156V18H168V30Z\"></path><path d=\"M168 12H156V30H168V12ZM174 36H150V6H174V36Z\" fill=\"var(--icon-strong-base)\"></path></g></g><g transform=\"translate(192 36) scale(1 1) translate(-192 -36)\" style=\"opacity: 1;\"><g class=\"opacity-[0.16]\"><path fill=\"var(--icon-weak-base)\" d=\"M198 30H186V18H198V30Z\"></path><path d=\"M198 12H186V30H198V12ZM204 36H180V6H198V0H204V36Z\" fill=\"var(--icon-strong-base)\"></path></g></g><g transform=\"translate(222 36) scale(1 1) translate(-222 -36)\" style=\"opacity: 1;\"><g class=\"opacity-[0.16]\"><path fill=\"var(--icon-weak-base)\" d=\"M234 24V30H216V24H234Z\"></path><path d=\"M216 12V18H228V12H216ZM234 24H216V30H234V36H210V6H234V24Z\" fill=\"var(--icon-strong-base)\"></path></g><rect x=\"224.6\" y=\"8.6\" width=\"3.8\" height=\"3.8\" fill=\"var(--v2-background-bg-base)\" style=\"opacity:0\"></rect></g></svg><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 234 42\" fill=\"none\" class=\"wordmark-shimmer absolute inset-0 size-full\"><g><path d=\"M18 30H6V18H18V30Z\" fill=\"var(--icon-weak-base)\"></path><path d=\"M18 12H6V30H18V12ZM24 36H0V6H24V36Z\" fill=\"var(--icon-base)\"></path><path d=\"M48 30H36V18H48V30Z\" fill=\"var(--icon-weak-base)\"></path><path d=\"M36 30H48V12H36V30ZM54 36H36V42H30V6H54V36Z\" fill=\"var(--icon-base)\"></path><path d=\"M84 24V30H66V24H84Z\" fill=\"var(--icon-weak-base)\"></path><path d=\"M84 24H66V30H84V36H60V6H84V24ZM66 18H78V12H66V18Z\" fill=\"var(--icon-base)\"></path><path d=\"M108 36H96V18H108V36Z\" fill=\"var(--icon-weak-base)\"></path><path d=\"M108 12H96V36H90V6H108V12ZM114 36H108V12H114V36Z\" fill=\"var(--icon-base)\"></path><path d=\"M144 30H126V18H144V30Z\" fill=\"var(--icon-weak-base)\"></path><path d=\"M144 12H126V30H144V36H120V6H144V12Z\" fill=\"var(--icon-strong-base)\"></path><path d=\"M168 30H156V18H168V30Z\" fill=\"var(--icon-weak-base)\"></path><path d=\"M168 12H156V30H168V12ZM174 36H150V6H174V36Z\" fill=\"var(--icon-strong-base)\"></path><path d=\"M198 30H186V18H198V30Z\" fill=\"var(--icon-weak-base)\"></path><path d=\"M198 12H186V30H198V12ZM204 36H180V6H198V0H204V36Z\" fill=\"var(--icon-strong-base)\"></path><path d=\"M234 24V30H216V24H234Z\" fill=\"var(--icon-weak-base)\"></path><path d=\"M216 12V18H228V12H216ZM234 24H216V30H234V36H210V6H234V24Z\" fill=\"var(--icon-strong-base)\"></path></g></svg></div><svg data-slot=\"wordmark-lodger\" viewBox=\"0 0 234 42\" class=\"absolute inset-0 size-full overflow-visible\"><line stroke=\"var(--lodger-body)\" stroke-linecap=\"round\" style=\"opacity:0\"></line><g style=\"opacity:0\"><polygon points=\"-1.9,-1.9 1.9,-1.9 3.6,0.5 -0.2,0.5\" fill=\"var(--lodger-side)\"></polygon><polygon points=\"1.9,-1.9 3.6,0.5 3.6,4.3 1.9,1.9\" fill=\"var(--lodger-side)\"></polygon><rect x=\"-1.9\" y=\"-1.9\" width=\"3.8\" height=\"3.8\" rx=\"0.45\" fill=\"var(--lodger-eye)\"></rect></g><g transform=\"translate(222 21) rotate(0 0 -5) scale(1 1)\"><rect x=\"-6\" y=\"-10\" width=\"12\" height=\"10\" rx=\"1.5\" fill=\"var(--lodger-body)\" style=\"opacity:0\"></rect><g style=\"opacity:0\" transform=\"translate(0 -6) scale(1 1) translate(0 6)\"><g data-slot=\"lodger-blink\"><rect x=\"-3.5\" y=\"-7.3\" width=\"2\" height=\"2.6\" rx=\"0.5\" fill=\"var(--lodger-eye)\"></rect><rect x=\"1.5\" y=\"-7.3\" width=\"2\" height=\"2.6\" rx=\"0.5\" fill=\"var(--lodger-eye)\"></rect></g></g></g></svg><div data-slot=\"wordmark-lodger-grip\" class=\"pointer-events-auto absolute cursor-grab touch-none active:cursor-grabbing\" style=\"left: 91.0256%; top: 19.0476%; width: 7.69231%; height: 33.3333%;\"></div></div></div></div><div class=\"mt-8 flex flex-col gap-3\"><div data-slot=\"new-session-composer\" class=\"flex flex-col gap-1\"><div class=\"relative z-10\"><div class=\"flex flex-col gap-3\"><div class=\"relative size-full flex flex-col gap-0 \"><input type=\"file\" multiple=\"\" class=\"hidden\"><form data-component=\"composer\" class=\"group/composer relative w-full overflow-clip rounded-xl bg-v2-background-bg-base shadow-[var(--v2-elevation-raised)]\"><div data-slot=\"composer-content\" class=\"min-h-0\" style=\"--composer-fade-bottom: 0px;\"><div data-component=\"composer-scroll\" data-scrollable=\"\" class=\"relative overflow-y-auto max-h-[180px]\"><div data-component=\"composer-editor\" role=\"textbox\" aria-multiline=\"true\" autocomplete=\"off\" class=\"relative z-10 block w-full whitespace-pre-wrap bg-transparent ps-4 pe-[var(--composer-scroll-end)] pt-4 pb-2 text-[13px] font-[440] leading-5 text-v2-text-text-base focus:outline-none [&amp;_[data-mention=file]]:text-syntax-property [&amp;_[data-mention=agent]]:text-syntax-type [&amp;_[data-mention=reference]]:text-syntax-keyword\" style=\"text-align: start; unicode-bidi: plaintext;\" aria-label=\"Prompt\" dir=\"auto\" contenteditable=\"true\" autocapitalize=\"sentences\" autocorrect=\"on\" spellcheck=\"true\"></div><div class=\"pointer-events-none absolute inset-x-0 top-0 ps-4 pe-[var(--composer-scroll-end)] pt-4 text-[13px] font-[440] leading-5 text-v2-text-text-faint\" style=\"text-align: start; unicode-bidi: plaintext;\" dir=\"auto\">Ask anything, / for commands, @ for context…</div></div></div><div class=\"flex h-11 shrink-0 items-center px-2\"><div class=\"flex shrink-0 items-center\" aria-hidden=\"false\" style=\"opacity: 1; pointer-events: auto; transition: opacity 200ms;\"><div data-closed=\"\" data-component=\"tooltip-v2-trigger\" type=\"button\"><button type=\"button\" id=\"dropdownmenu-cl-4-trigger\" aria-haspopup=\"true\" aria-expanded=\"false\" data-closed=\"\" data-action=\"composer-attach\" aria-label=\"Add images and files\" data-component=\"icon-button-v2\" data-size=\"large\" data-variant=\"ghost-muted\"><svg data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-plus\"></use></svg></button></div></div><div data-slot=\"composer-controls\" class=\"ms-1 me-3 h-full min-w-0 flex-1 overflow-x-auto overscroll-x-contain no-scrollbar\" data-overflow-start=\"false\" data-overflow-end=\"false\" aria-hidden=\"false\" style=\"opacity: 1; pointer-events: auto; transition: opacity 200ms;\"><div class=\"flex h-full w-max min-w-full items-center gap-0.5\"><div data-closed=\"\" data-component=\"tooltip-v2-trigger\" type=\"button\"><button type=\"button\" data-action=\"composer-model\" data-control-type=\"dialog\" data-component=\"button-v2\" data-size=\"normal\" data-variant=\"ghost-muted\" class=\"min-w-0 max-w-[60cqw] justify-start ![font-weight:440]\" style=\"height: 28px;\"><span class=\"flex min-w-0 whitespace-nowrap leading-4\"><bdi class=\"min-w-0 truncate\">Beam Free</bdi></span><span class=\"-ml-0.5 -mr-1 flex shrink-0\"><svg data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-chevron-down\"></use></svg></span></button></div></div></div><div data-slot=\"composer-actions\" class=\"flex shrink-0 items-center\"><button type=\"button\" disabled=\"\" data-disabled=\"\" data-action=\"composer-submit\" aria-busy=\"false\" aria-label=\"Send\" data-component=\"icon-button-v2\" data-size=\"normal\" data-variant=\"submit\" class=\"size-7 rounded-md p-[6px]\"><svg data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-arrow-up\"></use></svg></button></div></div></form></div></div></div><div class=\"relative flex min-h-9 min-w-0 items-center gap-3 ps-2 pe-1.5 text-[13px] font-[440] leading-[var(--line-height-compact)] tracking-[-0.04px]\"><div class=\"flex min-w-0 max-w-full flex-wrap items-center gap-x-0 gap-y-1 py-1.5\"><div class=\"flex min-w-0 max-w-full items-center\"><div data-closed=\"\" data-component=\"tooltip-v2-trigger\" type=\"button\" class=\"flex min-w-0\"><button type=\"button\" data-action=\"prompt-project\" aria-haspopup=\"dialog\" class=\"flex h-7 items-center gap-1.5 rounded-sm text-start ps-1.5 pe-2 text-v2-text-text-muted transition-colors hover:bg-v2-overlay-simple-overlay-hover hover:text-v2-text-text-base focus-visible:bg-v2-overlay-simple-overlay-hover focus-visible:text-v2-text-text-base focus-visible:outline-none min-w-0\" aria-description=\"Choose project\"><div data-component=\"project-avatar-v2\" class=\"shrink-0\"><div data-slot=\"project-avatar-surface\" data-variant=\"gray\">p</div></div><span class=\"min-w-0 truncate\">personal -agent</span></button></div><span data-component=\"slash\" aria-hidden=\"true\" style=\"--slash-gap: 2px;\"></span><div data-closed=\"\" data-component=\"tooltip-v2-trigger\" type=\"button\" class=\"flex min-w-12 shrink-[1000]\"><button type=\"button\" data-action=\"prompt-worktree\" aria-haspopup=\"dialog\" class=\"flex h-7 items-center gap-1.5 rounded-sm text-start ps-1.5 pe-2 text-v2-text-text-muted transition-colors hover:bg-v2-overlay-simple-overlay-hover hover:text-v2-text-text-base focus-visible:bg-v2-overlay-simple-overlay-hover focus-visible:text-v2-text-text-base focus-visible:outline-none min-w-0\" aria-description=\"Choose worktree\"><svg class=\"shrink-0 text-v2-icon-icon-muted\" data-slot=\"icon-svg\" width=\"14\" height=\"14\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-monitor\"></use></svg><span class=\"min-w-0 truncate\">Local</span><span data-slot=\"workspace-onboarding-dot\" aria-hidden=\"true\" class=\"size-1.5 shrink-0 rounded-full bg-v2-text-text-accent\"></span></button></div></div><div data-closed=\"\" data-component=\"tooltip-v2-trigger\" type=\"button\" class=\"flex min-w-0 max-w-[220px]\"><div class=\"flex h-7 min-w-0 max-w-[220px] items-center gap-1.5 ps-1.5 pe-2 text-v2-text-text-faint\"><svg class=\"shrink-0 text-v2-icon-icon-muted\" data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-branch\"></use></svg><span dir=\"auto\" class=\"min-w-0 truncate\">main</span></div></div></div><div class=\"flex min-w-0 flex-1 justify-end pe-1.5 @max-[560px]:hidden\" style=\"min-width: min(50%, 195px);\"><div data-closed=\"\" data-component=\"tooltip-v2-trigger\" type=\"button\" class=\"flex min-w-0 flex-1\"><span class=\"flex min-w-0 flex-1 items-center justify-end\" dir=\"ltr\"><span data-slot=\"new-session-location-path\" class=\"min-w-0 cursor-text select-text overflow-hidden whitespace-nowrap text-v2-text-text-faint [direction:rtl] [text-align:end]\"><bdi dir=\"ltr\">C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent</bdi></span></span></div></div></div></div></div></div></div></div></div></div></div></div></div></main><div data-slot=\"collapsed-sidebar-toggle\" class=\"absolute top-[calc(var(--shell-top-inset,8px)+10px)] start-[calc(var(--shell-inline-inset,8px)+10px)] z-40 flex shrink-0 justify-end\" inert=\"\" style=\"width: 32px;\"><div class=\"flex shrink-0 pe-1\"><div data-closed=\"\" data-component=\"tooltip-v2-trigger\" type=\"button\" class=\"shrink-0 [app-region:no-drag]\"><button type=\"button\" aria-label=\"Toggle sidebar\" aria-expanded=\"true\" aria-controls=\"vertical-tabs-sidebar\" data-component=\"icon-button-v2\" data-size=\"large\" data-variant=\"ghost-muted\" class=\"shrink-0\" style=\"opacity: 0;\"><span class=\"relative flex\"><svg data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\" style=\"opacity: 1;\"><use href=\"#opencode-v2-icon-layout-left-full\"></use></svg><span class=\"absolute inset-0 flex\" style=\"opacity: 0;\"><svg data-slot=\"icon-svg\" width=\"16\" height=\"16\" viewBox=\"0 0 20 20\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" aria-hidden=\"true\"><use href=\"#opencode-v2-icon-layout-left\"></use></svg></span></span></button></div></div></div></div></div><div data-component=\"dialog-stack\"></div></div>"
+}

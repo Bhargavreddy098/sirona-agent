@@ -1,0 +1,6 @@
+{
+  "extends": "./jsconfig.json",
+  "compilerOptions": { "strict": true },
+  "include": ["foundation/config.js", "foundation/origins.js"],
+  "exclude": ["node_modules"]
+}

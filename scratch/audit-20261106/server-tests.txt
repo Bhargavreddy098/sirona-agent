@@ -1,0 +1,500 @@
+TAP version 13
+# Subtest: configuration defaults are deterministic and immutable
+ok 1 - configuration defaults are deterministic and immutable
+  ---
+  duration_ms: 5.6561
+  type: 'test'
+  ...
+# Subtest: explicit valid listener configuration is accepted
+ok 2 - explicit valid listener configuration is accepted
+  ---
+  duration_ms: 0.3823
+  type: 'test'
+  ...
+# Subtest: invalid port "0" is rejected without value disclosure
+ok 3 - invalid port "0" is rejected without value disclosure
+  ---
+  duration_ms: 0.6428
+  type: 'test'
+  ...
+# Subtest: invalid port "-1" is rejected without value disclosure
+ok 4 - invalid port "-1" is rejected without value disclosure
+  ---
+  duration_ms: 0.2282
+  type: 'test'
+  ...
+# Subtest: invalid port "65536" is rejected without value disclosure
+ok 5 - invalid port "65536" is rejected without value disclosure
+  ---
+  duration_ms: 0.2852
+  type: 'test'
+  ...
+# Subtest: invalid port "8000garbage" is rejected without value disclosure
+ok 6 - invalid port "8000garbage" is rejected without value disclosure
+  ---
+  duration_ms: 0.2367
+  type: 'test'
+  ...
+# Subtest: invalid port "" is rejected without value disclosure
+ok 7 - invalid port "" is rejected without value disclosure
+  ---
+  duration_ms: 0.2753
+  type: 'test'
+  ...
+# Subtest: invalid port "CANARY_SECRET" is rejected without value disclosure
+ok 8 - invalid port "CANARY_SECRET" is rejected without value disclosure
+  ---
+  duration_ms: 0.2483
+  type: 'test'
+  ...
+# Subtest: invalid port 8000 is rejected without value disclosure
+ok 9 - invalid port 8000 is rejected without value disclosure
+  ---
+  duration_ms: 0.2719
+  type: 'test'
+  ...
+# Subtest: unsupported environment is rejected
+ok 10 - unsupported environment is rejected
+  ---
+  duration_ms: 0.5295
+  type: 'test'
+  ...
+# Subtest: missing HTTP owners fail construction rather than invent working services
+ok 11 - missing HTTP owners fail construction rather than invent working services
+  ---
+  duration_ms: 0.4572
+  type: 'test'
+  ...
+# Subtest: missing health owners and invalid deadlines fail construction
+ok 12 - missing health owners and invalid deadlines fail construction
+  ---
+  duration_ms: 0.4841
+  type: 'test'
+  ...
+# Subtest: importing the active entrypoint and factory opens no network connection
+ok 13 - importing the active entrypoint and factory opens no network connection
+  ---
+  duration_ms: 4701.1237
+  type: 'test'
+  ...
+# Subtest: invalid actual CLI configuration exits nonzero before loading production dependencies
+ok 14 - invalid actual CLI configuration exits nonzero before loading production dependencies
+  ---
+  duration_ms: 1970.9484
+  type: 'test'
+  ...
+# Subtest: invalid CLI transport configuration ASI_HOST fails before external owners
+ok 15 - invalid CLI transport configuration ASI_HOST fails before external owners
+  ---
+  duration_ms: 1791.8471
+  type: 'test'
+  ...
+# Subtest: invalid CLI transport configuration ALLOWED_ORIGINS fails before external owners
+ok 16 - invalid CLI transport configuration ALLOWED_ORIGINS fails before external owners
+  ---
+  duration_ms: 1325.5706
+  type: 'test'
+  ...
+# Subtest: unauthenticated requests to conversation runs return 401
+ok 17 - unauthenticated requests to conversation runs return 401
+  ---
+  duration_ms: 120.4778
+  type: 'test'
+  ...
+# Subtest: conversation run creation without CSRF token returns 403
+ok 18 - conversation run creation without CSRF token returns 403
+  ---
+  duration_ms: 97.4238
+  type: 'test'
+  ...
+# Subtest: QA-BUG-04: standalone conversation run rejected with 400 PROJECT_REQUIRED
+ok 19 - QA-BUG-04: standalone conversation run rejected with 400 PROJECT_REQUIRED
+  ---
+  duration_ms: 28.5244
+  type: 'test'
+  ...
+# Subtest: QA-BUG-04: project-bound conversation starts run and lists runs without 503
+not ok 20 - QA-BUG-04: project-bound conversation starts run and lists runs without 503
+  ---
+  duration_ms: 14.5002
+  type: 'test'
+  location: 'C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\scratch\\audit-20261106\\snapshot\\apps\\server\\tests\\conversationRuns.test.js:120:1'
+  failureType: 'testCodeFailure'
+  error: 'table projects has no column named version'
+  code: 'ERR_SQLITE_ERROR'
+  stack: |-
+    Module.query (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/scratch/audit-20261106/snapshot/apps/server/config/sqliteDb.js:918:29)
+    query (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/scratch/audit-20261106/snapshot/apps/server/config/db.js:66:19)
+    ProjectService.createProject (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/scratch/audit-20261106/snapshot/apps/server/services/projectService.js:77:23)
+    TestContext.<anonymous> (file:///C:/Users/bharg/OneDrive/Desktop/personal%20-agent/scratch/audit-20261106/snapshot/apps/server/tests/conversationRuns.test.js:125:40)
+    process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: the runner returns nonzero and reports a deliberately failing isolated assertion
+ok 21 - the runner returns nonzero and reports a deliberately failing isolated assertion
+  ---
+  duration_ms: 206.581
+  type: 'test'
+  ...
+# Subtest: runtime configuration has bounded immutable defaults and optional cache disabled
+ok 22 - runtime configuration has bounded immutable defaults and optional cache disabled
+  ---
+  duration_ms: 3.6335
+  type: 'test'
+  ...
+# Subtest: SQLite-only configuration is used as default when DATABASE_URL is not set
+ok 23 - SQLite-only configuration is used as default when DATABASE_URL is not set
+  ---
+  duration_ms: 0.4131
+  type: 'test'
+  ...
+# Subtest: custom SIRONA_DB_PATH is respected
+ok 24 - custom SIRONA_DB_PATH is respected
+  ---
+  duration_ms: 0.3587
+  type: 'test'
+  ...
+# Subtest: explicit individual PostgreSQL credentials and verified TLS are accepted
+ok 25 - explicit individual PostgreSQL credentials and verified TLS are accepted
+  ---
+  duration_ms: 1.194
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["DATABASE_URL"] fails without disclosure
+ok 26 - invalid runtime config ["DATABASE_URL"] fails without disclosure
+  ---
+  duration_ms: 1.2119
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["DATABASE_URL"] fails without disclosure
+ok 27 - invalid runtime config ["DATABASE_URL"] fails without disclosure
+  ---
+  duration_ms: 0.2688
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["DATABASE_URL"] fails without disclosure
+ok 28 - invalid runtime config ["DATABASE_URL"] fails without disclosure
+  ---
+  duration_ms: 0.279
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["DATABASE_URL"] fails without disclosure
+ok 29 - invalid runtime config ["DATABASE_URL"] fails without disclosure
+  ---
+  duration_ms: 0.2532
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["DATABASE_URL"] fails without disclosure
+ok 30 - invalid runtime config ["DATABASE_URL"] fails without disclosure
+  ---
+  duration_ms: 0.2962
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["PGSSL"] fails without disclosure
+ok 31 - invalid runtime config ["PGSSL"] fails without disclosure
+  ---
+  duration_ms: 0.4245
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["PGSSL","PGSSL_REJECT_UNAUTHORIZED"] fails without disclosure
+ok 32 - invalid runtime config ["PGSSL","PGSSL_REJECT_UNAUTHORIZED"] fails without disclosure
+  ---
+  duration_ms: 0.2325
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["PGSSL","DATABASE_SSL"] fails without disclosure
+ok 33 - invalid runtime config ["PGSSL","DATABASE_SSL"] fails without disclosure
+  ---
+  duration_ms: 0.2475
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["PGPORT","DATABASE_URL","PGHOST","PGDATABASE","PGUSER","PGPASSWORD"] fails without disclosure
+ok 34 - invalid runtime config ["PGPORT","DATABASE_URL","PGHOST","PGDATABASE","PGUSER","PGPASSWORD"] fails without disclosure
+  ---
+  duration_ms: 0.2051
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["PGPOOL_MAX"] fails without disclosure
+ok 35 - invalid runtime config ["PGPOOL_MAX"] fails without disclosure
+  ---
+  duration_ms: 0.1691
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["PGCONN_TIMEOUT"] fails without disclosure
+ok 36 - invalid runtime config ["PGCONN_TIMEOUT"] fails without disclosure
+  ---
+  duration_ms: 0.1613
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["PGIDLE_TIMEOUT"] fails without disclosure
+ok 37 - invalid runtime config ["PGIDLE_TIMEOUT"] fails without disclosure
+  ---
+  duration_ms: 0.1534
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["ASI_STARTUP_TIMEOUT_MS"] fails without disclosure
+ok 38 - invalid runtime config ["ASI_STARTUP_TIMEOUT_MS"] fails without disclosure
+  ---
+  duration_ms: 0.1255
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["ASI_SHUTDOWN_TIMEOUT_MS"] fails without disclosure
+ok 39 - invalid runtime config ["ASI_SHUTDOWN_TIMEOUT_MS"] fails without disclosure
+  ---
+  duration_ms: 0.1206
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["ASI_READINESS_TIMEOUT_MS"] fails without disclosure
+ok 40 - invalid runtime config ["ASI_READINESS_TIMEOUT_MS"] fails without disclosure
+  ---
+  duration_ms: 0.1194
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["LOG_LEVEL"] fails without disclosure
+ok 41 - invalid runtime config ["LOG_LEVEL"] fails without disclosure
+  ---
+  duration_ms: 0.1521
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["LOG_LEVEL"] fails without disclosure
+ok 42 - invalid runtime config ["LOG_LEVEL"] fails without disclosure
+  ---
+  duration_ms: 0.1275
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["DEBUG_SQL"] fails without disclosure
+ok 43 - invalid runtime config ["DEBUG_SQL"] fails without disclosure
+  ---
+  duration_ms: 0.1327
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["DEBUG_REDIS"] fails without disclosure
+ok 44 - invalid runtime config ["DEBUG_REDIS"] fails without disclosure
+  ---
+  duration_ms: 0.1277
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["REDIS_URL"] fails without disclosure
+ok 45 - invalid runtime config ["REDIS_URL"] fails without disclosure
+  ---
+  duration_ms: 0.2126
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["REDIS_URL"] fails without disclosure
+ok 46 - invalid runtime config ["REDIS_URL"] fails without disclosure
+  ---
+  duration_ms: 0.1576
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["REDIS_URL"] fails without disclosure
+ok 47 - invalid runtime config ["REDIS_URL"] fails without disclosure
+  ---
+  duration_ms: 0.1542
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["REDIS_URL"] fails without disclosure
+ok 48 - invalid runtime config ["REDIS_URL"] fails without disclosure
+  ---
+  duration_ms: 0.1887
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["REDIS_HOST","REDIS_PORT"] fails without disclosure
+ok 49 - invalid runtime config ["REDIS_HOST","REDIS_PORT"] fails without disclosure
+  ---
+  duration_ms: 0.1642
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["REDIS_PASSWORD"] fails without disclosure
+ok 50 - invalid runtime config ["REDIS_PASSWORD"] fails without disclosure
+  ---
+  duration_ms: 0.1587
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["RATE_LIMIT_POINTS"] fails without disclosure
+ok 51 - invalid runtime config ["RATE_LIMIT_POINTS"] fails without disclosure
+  ---
+  duration_ms: 0.1486
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["RATE_LIMIT_DURATION"] fails without disclosure
+ok 52 - invalid runtime config ["RATE_LIMIT_DURATION"] fails without disclosure
+  ---
+  duration_ms: 0.1389
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["PGHOST"] fails without disclosure
+ok 53 - invalid runtime config ["PGHOST"] fails without disclosure
+  ---
+  duration_ms: 0.1301
+  type: 'test'
+  ...
+# Subtest: invalid runtime config ["REDIS_URL","REDIS_HOST"] fails without disclosure
+ok 54 - invalid runtime config ["REDIS_URL","REDIS_HOST"] fails without disclosure
+  ---
+  duration_ms: 0.1486
+  type: 'test'
+  ...
+# Subtest: off-host dependencies require TLS and retain certificate verification
+ok 55 - off-host dependencies require TLS and retain certificate verification
+  ---
+  duration_ms: 0.2139
+  type: 'test'
+  ...
+# Subtest: production does not implicitly load the developer environment file
+ok 56 - production does not implicitly load the developer environment file
+  ---
+  duration_ms: 0.2118
+  type: 'test'
+  ...
+# Subtest: explicit environment file respects existing values and missing file fails safely
+ok 57 - explicit environment file respects existing values and missing file fails safely
+  ---
+  duration_ms: 2.5806
+  type: 'test'
+  ...
+# Subtest: database driver owner uses only SELECT 1, propagates failures and closes once
+ok 58 - database driver owner uses only SELECT 1, propagates failures and closes once
+  ---
+  duration_ms: 0.662
+  type: 'test'
+  ...
+# Subtest: database unready/throwing driver cannot report ready; close failure is visible
+ok 59 - database unready/throwing driver cannot report ready; close failure is visible
+  ---
+  duration_ms: 0.5607
+  type: 'test'
+  ...
+# Subtest: Redis factory has no import-time connect, uses explicit initialization and bounded no-retry ownership
+ok 60 - Redis factory has no import-time connect, uses explicit initialization and bounded no-retry ownership
+  ---
+  duration_ms: 0.5391
+  type: 'test'
+  ...
+# Subtest: logger strictly allowlists event/context fields rather than serializing arbitrary errors/config
+ok 61 - logger strictly allowlists event/context fields rather than serializing arbitrary errors/config
+  ---
+  duration_ms: 3.2425
+  type: 'test'
+  ...
+# Subtest: application limiter owns and clears its actual expiry timers on repeated close
+ok 62 - application limiter owns and clears its actual expiry timers on repeated close
+  ---
+  duration_ms: 20.451
+  type: 'test'
+  ...
+# Subtest: Capability Grants & Resource Scope Deserialization (SQLite / Postgres Compatibility)
+    # Subtest: parseResourceScope unit tests
+        # Subtest: 1. Valid SQLite JSON string grant parses correctly
+        ok 1 - 1. Valid SQLite JSON string grant parses correctly
+          ---
+          duration_ms: 2.9017
+          type: 'test'
+          ...
+        # Subtest: 2. Valid object grant (Postgres JSONB) passes through cleanly
+        ok 2 - 2. Valid object grant (Postgres JSONB) passes through cleanly
+          ---
+          duration_ms: 0.2725
+          type: 'test'
+          ...
+        # Subtest: 3. Invalid JSON string throws INVALID_GRANT_SCOPE (403)
+        ok 3 - 3. Invalid JSON string throws INVALID_GRANT_SCOPE (403)
+          ---
+          duration_ms: 0.6054
+          type: 'test'
+          ...
+        # Subtest: 4. Non-object JSON (array, primitive) throws INVALID_GRANT_SCOPE (403)
+        ok 4 - 4. Non-object JSON (array, primitive) throws INVALID_GRANT_SCOPE (403)
+          ---
+          duration_ms: 0.3276
+          type: 'test'
+          ...
+        # Subtest: 5. Null or undefined returns empty object safely
+        ok 5 - 5. Null or undefined returns empty object safely
+          ---
+          duration_ms: 0.8891
+          type: 'test'
+          ...
+        1..5
+    ok 1 - parseResourceScope unit tests
+      ---
+      duration_ms: 6.0316
+      type: 'suite'
+      ...
+    # Subtest: normalizePath tests
+        # Subtest: 10. Windows canonical path handling normalizes casing and separators
+        ok 1 - 10. Windows canonical path handling normalizes casing and separators
+          ---
+          duration_ms: 0.2619
+          type: 'test'
+          ...
+        1..1
+    ok 2 - normalizePath tests
+      ---
+      duration_ms: 0.4671
+      type: 'suite'
+      ...
+    # Subtest: requireRoot & requireToolGrants with SQLite storage
+        # Subtest: Valid SQLite JSON string grant enables requireRoot and requireToolGrants
+        ok 1 - Valid SQLite JSON string grant enables requireRoot and requireToolGrants
+          ---
+          duration_ms: 1.9648
+          type: 'test'
+          ...
+        # Subtest: Missing workspaceRoot in grant throws WORKSPACE_ROOT_MISMATCH (403)
+        ok 2 - Missing workspaceRoot in grant throws WORKSPACE_ROOT_MISMATCH (403)
+          ---
+          duration_ms: 0.8769
+          type: 'test'
+          ...
+        # Subtest: Wrong workspaceRoot in grant throws WORKSPACE_ROOT_MISMATCH (403)
+        ok 3 - Wrong workspaceRoot in grant throws WORKSPACE_ROOT_MISMATCH (403)
+          ---
+          duration_ms: 0.9583
+          type: 'test'
+          ...
+        # Subtest: Wrong project or grant reference throws WORKSPACE_ROOT_MISMATCH (403)
+        ok 4 - Wrong project or grant reference throws WORKSPACE_ROOT_MISMATCH (403)
+          ---
+          duration_ms: 0.6773
+          type: 'test'
+          ...
+        # Subtest: Revoked grant throws WORKSPACE_ROOT_MISMATCH (403)
+        ok 5 - Revoked grant throws WORKSPACE_ROOT_MISMATCH (403)
+          ---
+          duration_ms: 0.5158
+          type: 'test'
+          ...
+        # Subtest: Expired grant throws WORKSPACE_ROOT_MISMATCH (403)
+        ok 6 - Expired grant throws WORKSPACE_ROOT_MISMATCH (403)
+          ---
+          duration_ms: 0.4041
+          type: 'test'
+          ...
+        # Subtest: requireToolGrants enforces valid scope and revokes access on wrong path
+        ok 7 - requireToolGrants enforces valid scope and revokes access on wrong path
+          ---
+          duration_ms: 1.3446
+          type: 'test'
+          ...
+        1..7
+    ok 3 - requireRoot & requireToolGrants with SQLite storage
+      ---
+      duration_ms: 7.6959
+      type: 'suite'
+      ...
+    1..3
+ok 63 - Capability Grants & Resource Scope Deserialization (SQLite / Postgres Compatibility)
+  ---
+  duration_ms: 17.5655
+  type: 'suite'
+  ...
+1..63
+# tests 75
+# suites 4
+# pass 74
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 23263.2541

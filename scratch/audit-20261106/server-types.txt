@@ -1,0 +1,2 @@
+npm notice run @sirona/server@1.0.0 check:workspace
+npm notice run tsc -p tsconfig.workspace.json --noEmit

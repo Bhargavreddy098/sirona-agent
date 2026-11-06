@@ -1,0 +1,19 @@
+{
+  "checked_at": "2026-11-04",
+  "artifact": "docs/engineering/SIRONA-SYSTEM-DESIGN-REVIEW.docx",
+  "renderer": "Microsoft Word PDF export; Poppler rasterization",
+  "pages": 7,
+  "visually_reviewed_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "visual_result": "PASS: no observed clipping, overlaps, broken tables or missing content",
+  "template_fidelity": "Reference hash unchanged and section geometry preserved; see package-verification.json",
+  "documentation_validation": "FAIL: two existing links to missing docs/_archive/legacy in docs/INDEX.md and docs/README.md",
+  "product_tests": "NOT_RUN: documentation-only task"
+}

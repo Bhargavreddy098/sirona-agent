@@ -1,0 +1,13 @@
+{
+  "referenceSha256": "13504f6c221a42c1726460a9e865e563355539ff97d702d6c9b2267b4b261d76",
+  "changedParts": [
+    "word/footer1.xml",
+    "word/footnotes.xml",
+    "word/settings.xml",
+    "word/document.xml",
+    "word/media/image1.png"
+  ],
+  "preserveOnlyPartsUnchanged": true,
+  "sectionGeometryUnchanged": true,
+  "output": "C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\docs\\engineering\\SIRONA-SYSTEM-DESIGN-REVIEW.docx"
+}

@@ -1,0 +1,63 @@
+AUDIT_WRAPPER_READY
+App threw an error during load
+Error: Cannot find module 'zod'
+Require stack:
+- C:\Users\bharg\OneDrive\Desktop\personal -agent\scratch\audit-20261106\snapshot\apps\desktop\src\main.cjs
+- C:\Users\bharg\OneDrive\Desktop\personal -agent\scratch\audit-20261106\electron-entry.cjs
+    at node:internal/modules/cjs/loader:1571:15
+    at Module._resolveFilename (node:electron/js2c/browser_init:2:145256)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1125:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1149:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1176:12)
+    at node:internal/modules/cjs/loader:1348:5
+    at Module._load (node:electron/js2c/node_init:2:18263)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:268:19)
+    at Module.require (node:internal/modules/cjs/loader:1681:12)
+    at require (node:internal/modules/helpers:157:16)
+AUDIT_STARTUP_ERROR {"title":"A JavaScript error occurred in the main process","message":"Uncaught Exception:\nError: Cannot find module 'zod'\nRequire stack:\n- C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\scratch\\audit-20261106\\snapshot\\apps\\desktop\\src\\main.cjs\n- C:\\Users\\bharg\\OneDrive\\Desktop\\personal -agent\\scratch\\audit-20261106\\electron-entry.cjs\n    at node:internal/modules/cjs/loader:1571:15\n    at Module._resolveFilename (node:electron/js2c/browser_init:2:145256)\n    at wrapResolveFilename (node:internal/modules/cjs/loader:1125:27)\n    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1149:10)\n    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1176:12)\n    at node:internal/modules/cjs/loader:1348:5\n    at Module._load (node:electron/js2c/node_init:2:18263)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:268:19)\n    at Module.require (node:internal/modules/cjs/loader:1681:12)\n    at require (node:internal/modules/helpers:157:16)"}
+AUDIT_ELECTRON_READY
+AUDIT_BEFORE_QUIT
+AUDIT_WRAPPER_READY
+AUDIT_MAIN_REQUIRED
+AUDIT_ELECTRON_READY
+(node:26192) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `electron --trace-deprecation ...` to show where the warning was created)
+AUDIT_BEFORE_QUIT
+AUDIT_WRAPPER_READY
+AUDIT_MAIN_REQUIRED
+AUDIT_ELECTRON_READY
+AUDIT_FETCH_START http://127.0.0.1:8000/health/live
+AUDIT_FETCH_FAILED fetch failed
+(node:4240) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `electron --trace-deprecation ...` to show where the warning was created)
+[Sirona] Desktop authenticated session established
+AUDIT_WINDOW_CREATED
+(electron) 'console-message' arguments are deprecated and will be removed. Please use Event<WebContentsConsoleMessageEventParams> object instead.
+[RENDERER:warning] %cElectron Security Warning (Insecure Content-Security-Policy) font-weight: bold; This renderer process has either no Content Security
+  Policy set or a policy with "unsafe-eval" enabled. This exposes users of
+  this app to unnecessary security risks.
+
+For more information and help, consult
+https://electronjs.org/docs/tutorial/security.
+This warning will not show up
+once the app is packaged. (node:electron/js2c/sandbox_bundle:2)
+AUDIT_BEFORE_QUIT
+AUDIT_WRAPPER_READY
+AUDIT_MAIN_REQUIRED
+AUDIT_ELECTRON_READY
+AUDIT_FETCH_START http://127.0.0.1:8000/health/live
+AUDIT_FETCH_FAILED fetch failed
+(node:8088) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `electron --trace-deprecation ...` to show where the warning was created)
+[Sirona] Desktop authenticated session established
+AUDIT_WINDOW_CREATED
+(electron) 'console-message' arguments are deprecated and will be removed. Please use Event<WebContentsConsoleMessageEventParams> object instead.
+[RENDERER:warning] %cElectron Security Warning (Insecure Content-Security-Policy) font-weight: bold; This renderer process has either no Content Security
+  Policy set or a policy with "unsafe-eval" enabled. This exposes users of
+  this app to unnecessary security risks.
+
+For more information and help, consult
+https://electronjs.org/docs/tutorial/security.
+This warning will not show up
+once the app is packaged. (node:electron/js2c/sandbox_bundle:2)
+AUDIT_BEFORE_QUIT

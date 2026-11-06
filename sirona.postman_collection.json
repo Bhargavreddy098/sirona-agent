@@ -1,0 +1,302 @@
+{
+  "info": {
+    "_postman_id": "sirona-backend-v1-collection",
+    "name": "Sirona Backend API (Verified Endpoints)",
+    "description": "Postman Collection for verified Sirona Backend endpoints (Health, Auth/Session, Capabilities, Workspaces, Projects, Conversations, Providers, and Tools).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    },
+    {
+      "key": "csrfToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Health & Status",
+      "item": [
+        {
+          "name": "Health Liveness",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/health/live",
+              "host": ["{{baseUrl}}"],
+              "path": ["health", "live"]
+            }
+          }
+        },
+        {
+          "name": "Health Readiness",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/health/ready",
+              "host": ["{{baseUrl}}"],
+              "path": ["health", "ready"]
+            }
+          }
+        },
+        {
+          "name": "Health Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Authentication & Session",
+      "item": [
+        {
+          "name": "Bootstrap Session (Login)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res && res.data && res.data.csrfToken) {",
+                  "    pm.collectionVariables.set('csrfToken', res.data.csrfToken);",
+                  "    console.log('CSRF Token saved:', res.data.csrfToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/session/bootstrap",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "session", "bootstrap"]
+            }
+          }
+        },
+        {
+          "name": "Get Current Session",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/session",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "session"]
+            }
+          }
+        },
+        {
+          "name": "Get Capabilities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/capabilities",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "capabilities"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Workspaces & Projects",
+      "item": [
+        {
+          "name": "List Workspaces",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/workspaces",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "workspaces"]
+            }
+          }
+        },
+        {
+          "name": "List Projects",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/projects",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "projects"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Conversations & Chat",
+      "item": [
+        {
+          "name": "List Standalone Conversations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/conversations?scope=standalone",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "conversations"],
+              "query": [
+                {
+                  "key": "scope",
+                  "value": "standalone"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. AI Providers & Models",
+      "item": [
+        {
+          "name": "List Providers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/providers",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "providers"]
+            }
+          }
+        },
+        {
+          "name": "Get Model Settings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/model-settings",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "model-settings"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Tools & Isolation",
+      "item": [
+        {
+          "name": "List Registered Tools",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/tools",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "tools"]
+            }
+          }
+        },
+        {
+          "name": "Get Isolation Diagnostics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Host",
+                "value": "127.0.0.1:8000"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/isolation/diagnostics",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "isolation", "diagnostics"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

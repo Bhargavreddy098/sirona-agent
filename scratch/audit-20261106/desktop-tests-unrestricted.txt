@@ -1,0 +1,18 @@
+npm notice run @sirona/desktop@1.0.0 test
+npm notice run node --test tests/*.test.mjs
+▶ Desktop Static Server & Reverse Proxy (apps/desktop/src/server.cjs)
+  ✔ Forbidden origin is rejected with 403 (86.15ms)
+  ✔ Allowed origin serves static index.html or fallback (14.0739ms)
+  ✔ Offline service worker stub is served at /sw.js (11.5871ms)
+  ✔ Canonical /health/live calls are cleanly reverse-proxied to backend (23.0061ms)
+  ✔ SSE stream through reverse proxy sets X-Accel-Buffering: no (7.6327ms)
+  ✔ Unsupported HTTP methods on static routes return 405 (10.9693ms)
+✔ Desktop Static Server & Reverse Proxy (apps/desktop/src/server.cjs) (200.1444ms)
+ℹ tests 6
+ℹ suites 1
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 570.2936

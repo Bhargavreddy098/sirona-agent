@@ -1,0 +1,11 @@
+npm notice run sirona-agent-workspace@1.0.0 check
+npm notice run npm --prefix packages/contracts run check && npm --prefix apps/server run check && npm --prefix apps/web run check && npm --prefix apps/desktop run check
+npm notice run @sirona/contracts@1.0.0 check
+npm notice run tsc -p tsconfig.json --noEmit
+npm notice run @sirona/server@1.0.0 check
+npm notice run node scripts/checkSyntax.js
+{ event: 'syntax.checked', files: 276, failed: 0 }
+npm notice run @sirona/web@0.1.0 check
+npm notice run tsc --noEmit
+npm notice run @sirona/desktop@1.0.0 check
+npm notice run tsc -p tsconfig.json --noEmit

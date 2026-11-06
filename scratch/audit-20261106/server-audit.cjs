@@ -1,0 +1,11 @@
+const {spawnSync}=require('node:child_process');
+const fs=require('node:fs'),path=require('node:path');
+const env={};for(const k of ['SystemRoot','WINDIR','PATH','TEMP','TMP','USERPROFILE','COMSPEC','LOCALAPPDATA'])if(process.env[k])env[k]=process.env[k];
+env.NODE_ENV='test';env.SIRONA_ORCHESTRATION_ENABLED='false';env.SIRONA_TRUSTED_LOCAL_DOCKER_ENABLED='false';env.LOG_LEVEL='silent';
+env.APPDATA=path.join(__dirname,'server-test-profile');env.SIRONA_DB_PATH=path.join(env.APPDATA,'sirona.db');fs.mkdirSync(env.APPDATA,{recursive:true});
+const files=['config','runner','runtimeConfig','conversationRuns','workspaceCapabilityGrants'];
+const result=spawnSync(process.execPath,['--test','--test-reporter=tap','--test-concurrency=1','--test-timeout=30000',...files.map(n=>'tests/'+n+'.test.js')],{cwd:path.join(__dirname,'snapshot/apps/server'),env,encoding:'utf8',timeout:180000,maxBuffer:4*1024*1024,windowsHide:true});
+fs.writeFileSync(path.join(__dirname,'server-tests.txt'),(result.stdout||'')+(result.stderr||''));
+console.log(JSON.stringify({exitCode:result.status,error:result.error?.message,files}));
+console.log((result.stdout||'').split('\n').filter(l=>/^# (tests|pass|fail|cancelled|skipped)|^not ok|^  error:/.test(l)).join('\n'));
+process.exitCode=result.status??1;

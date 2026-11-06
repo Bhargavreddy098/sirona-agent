@@ -1,0 +1,33 @@
+{
+  "name": "sirona-agent-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sirona Local-First Autonomous Developer Workspace",
+  "scripts": {
+    "start": "npm run desktop:start",
+    "build": "npm --prefix packages/contracts run build && npm --prefix apps/desktop run build && npm --prefix apps/web run build && npm --prefix apps/cli run build",
+    "check": "npm --prefix packages/contracts run check && npm --prefix apps/server run check && npm --prefix apps/web run check && npm --prefix apps/desktop run check",
+    "lint": "npm --prefix apps/web run lint",
+    "test": "npm --prefix packages/contracts test && npm --prefix apps/server run test:p6:free && npm --prefix apps/web test && npm --prefix apps/cli test",
+    "test:contracts": "npm --prefix packages/contracts test",
+    "test:server": "npm --prefix apps/server run test:p6:free",
+    "test:web": "npm --prefix apps/web test",
+    "test:cli": "npm --prefix apps/cli test",
+    "server:dev": "npm --prefix apps/server run dev",
+    "server:start": "npm --prefix apps/server run start",
+    "web:dev": "npm --prefix apps/web run dev",
+    "web:build": "npm --prefix apps/web run build",
+    "desktop:build": "npm --prefix apps/desktop run build",
+    "desktop:start": "npm --prefix apps/desktop run start",
+    "desktop:dev": "npm --prefix apps/desktop run dev",
+    "cli:build": "npm --prefix apps/cli run build",
+    "cli:test": "npm --prefix apps/cli test"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.0",
+    "typescript": "^5.7.0",
+    "nock": "^13.5.5"
+  },
+  "packageManager": "pnpm@12.6.0"
+}

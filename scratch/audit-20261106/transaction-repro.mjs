@@ -1,0 +1,18 @@
+import path from 'node:path';
+import fs from 'node:fs';
+import {fileURLToPath} from 'node:url';
+const root=path.dirname(fileURLToPath(import.meta.url));
+process.env.SIRONA_DB_PATH=path.join(root,'transaction-test/sirona.db');
+const {query,transaction}=await import('./snapshot/apps/server/config/sqliteDb.js');
+await query('CREATE TABLE audit_transaction_probe (id TEXT PRIMARY KEY)');
+let signalInserted,signalRelease;
+const inserted=new Promise(r=>signalInserted=r),release=new Promise(r=>signalRelease=r);
+const a=transaction(async c=>{await c.query("INSERT INTO audit_transaction_probe (id) VALUES ('must_rollback')");signalInserted();await release;throw new Error('Deliberate A rollback');}).catch(e=>e.message);
+await inserted;
+await transaction(async c=>{await c.query("INSERT INTO audit_transaction_probe (id) VALUES ('may_commit')");});
+signalRelease();
+const outcome=await a;
+const rows=(await query('SELECT id FROM audit_transaction_probe ORDER BY id')).rows;
+const result={outcome,rows,rollbackFailed:rows.some(r=>r.id==='must_rollback'),description:'Concurrent transaction B commits transaction A despite A subsequently throwing; all data is disposable audit data'};
+fs.writeFileSync(path.join(root,'transaction-repro.json'),JSON.stringify(result,null,2));
+console.log(JSON.stringify(result,null,2));

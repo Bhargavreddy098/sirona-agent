@@ -1,0 +1,13 @@
+{
+  "outcome": "Deliberate A rollback",
+  "rows": [
+    {
+      "id": "may_commit"
+    },
+    {
+      "id": "must_rollback"
+    }
+  ],
+  "rollbackFailed": true,
+  "description": "Concurrent transaction B commits transaction A despite A subsequently throwing; all data is disposable audit data"
+}

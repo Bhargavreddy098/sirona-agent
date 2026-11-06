@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* Refined Soft-Edge Desktop Design Tokens */
+  --color-app-bg: var(--app-bg);
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-panel-bg: var(--panel-bg);
+  --color-surface-bg: var(--surface-bg);
+  --color-surface-hover: var(--surface-hover);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-active: var(--border-active);
+
+  /* v2 Legacy Design Token Bindings */
+  --color-v2-background-bg-deep: var(--v2-background-bg-deep);
+  --color-v2-background-bg-base: var(--v2-background-bg-base);
+  --color-v2-background-bg-inverse: var(--v2-background-bg-inverse);
+  --color-v2-text-text-primary: var(--v2-text-text-primary);
+  --color-v2-text-text-base: var(--v2-text-text-base);
+  --color-v2-text-text-muted: var(--v2-text-text-muted);
+  --color-v2-text-text-faint: var(--v2-text-text-faint);
+  --color-v2-text-text-inverse: var(--v2-text-text-inverse);
+  --color-v2-border-border-base: var(--v2-border-border-base);
+  --color-v2-border-border-strong: var(--v2-border-border-strong);
+  --color-v2-surface-surface-raised: var(--v2-surface-surface-raised);
+  --color-v2-surface-surface-active: var(--v2-surface-surface-active);
+  --color-v2-overlay-simple-overlay-hover: var(--v2-overlay-simple-overlay-hover);
+  --color-v2-overlay-simple-overlay-selected: var(--v2-overlay-simple-overlay-selected);
+  --color-v2-icon-icon-muted: var(--v2-text-text-muted);
+}
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 4.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 4.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+
+    /* Soft-Edge Radius System */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --radius: 10px;
+
+    /* Refined Soft-Edge Desktop Design Tokens (Dark UI Default) */
+    --app-bg: #09090b;
+    --sidebar-bg: #111113;
+    --panel-bg: #0c0c0e;
+    --surface-bg: #17171b;
+    --surface-hover: #202024;
+
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-active: rgba(255, 255, 255, 0.13);
+
+    --shadow-panel: 0 4px 20px rgba(0, 0, 0, 0.18);
+    --shadow-floating: 0 12px 40px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(255, 255, 255, 0.05);
+
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'IBM Plex Mono', Menlo, Monaco, Consolas, monospace;
+
+    /* Legacy and component v2 design tokens (Dark Mode Default) */
+    --v2-background-bg-deep: var(--app-bg);
+    --v2-background-bg-base: var(--panel-bg);
+    --v2-background-bg-inverse: #fafafa;
+    --v2-text-text-primary: #fafafa;
+    --v2-text-text-base: #f4f4f5;
+    --v2-text-text-muted: #a1a1aa;
+    --v2-text-text-faint: #71717a;
+    --v2-text-text-inverse: #09090b;
+    --v2-border-border-base: #1f1f23;
+    --v2-border-border-strong: #2e2e34;
+    --v2-surface-surface-raised: var(--surface-bg);
+    --v2-surface-surface-active: var(--surface-hover);
+    --v2-overlay-simple-overlay-hover: rgba(255, 255, 255, 0.05);
+    --v2-overlay-simple-overlay-selected: rgba(255, 255, 255, 0.1);
+    --v2-elevation-raised: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+
+    /* Refined Surface Palette (Light fallback) */
+    --app-bg: #f8fafc;
+    --sidebar-bg: #f1f5f9;
+    --panel-bg: #ffffff;
+    --surface-bg: #f8fafc;
+    --surface-hover: #eef2f6;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-active: rgba(0, 0, 0, 0.16);
+    --shadow-panel: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --shadow-floating: 0 10px 30px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+
+    --v2-background-bg-deep: var(--app-bg);
+    --v2-background-bg-base: var(--panel-bg);
+    --v2-background-bg-inverse: #0f172a;
+    --v2-text-text-primary: #0f172a;
+    --v2-text-text-base: #1e293b;
+    --v2-text-text-muted: #64748b;
+    --v2-text-text-faint: #94a3b8;
+    --v2-text-text-inverse: #ffffff;
+    --v2-border-border-base: #e2e8f0;
+    --v2-border-border-strong: #cbd5e1;
+    --v2-surface-surface-raised: #f1f5f9;
+    --v2-surface-surface-active: #e2e8f0;
+    --v2-overlay-simple-overlay-hover: rgba(0, 0, 0, 0.05);
+    --v2-overlay-simple-overlay-selected: rgba(0, 0, 0, 0.09);
+    --v2-elevation-raised: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 4.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 4.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+
+    /* Refined Soft-Edge Desktop Design Tokens (Dark Mode) */
+    --app-bg: #09090b;
+    --sidebar-bg: #111113;
+    --panel-bg: #0c0c0e;
+    --surface-bg: #17171b;
+    --surface-hover: #202024;
+
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-active: rgba(255, 255, 255, 0.13);
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+
+    --shadow-panel: 0 4px 20px rgba(0, 0, 0, 0.18);
+    --shadow-floating: 0 12px 40px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(255, 255, 255, 0.05);
+
+    /* Legacy and component v2 design tokens (Dark Mode) */
+    --v2-background-bg-deep: var(--app-bg);
+    --v2-background-bg-base: var(--panel-bg);
+    --v2-background-bg-inverse: #fafafa;
+    --v2-text-text-primary: #fafafa;
+    --v2-text-text-base: #f4f4f5;
+    --v2-text-text-muted: #a1a1aa;
+    --v2-text-text-faint: #71717a;
+    --v2-text-text-inverse: #09090b;
+    --v2-border-border-base: #1f1f23;
+    --v2-border-border-strong: #2e2e34;
+    --v2-surface-surface-raised: var(--surface-bg);
+    --v2-surface-surface-active: var(--surface-hover);
+    --v2-overlay-simple-overlay-hover: rgba(255, 255, 255, 0.05);
+    --v2-overlay-simple-overlay-selected: rgba(255, 255, 255, 0.1);
+    --v2-elevation-raised: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+  }
+
+  * {
+    border-color: var(--border-subtle);
+  }
+
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    background-color: var(--app-bg);
+    color: hsl(var(--foreground));
+    transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Custom scrollbars with soft pill edges */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
